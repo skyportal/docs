@@ -1,5 +1,7 @@
+./_sources/dev.md.txt
 ./_sources/index.rst.txt
-./_sources/install.md.txt
+./_sources/setup.md.txt
+./_sources/usage.md.txt
 ./_static/ajax-loader.gif
 ./_static/basic.css
 ./_static/comment-bright.png
@@ -34,9 +36,11 @@
 ./_static/up-pressed.png
 ./_static/up.png
 ./_static/websupport.js
+./dev.html
 ./genindex.html
 ./index.html
-./install.html
 ./objects.inv
 ./search.html
 ./searchindex.js
+./setup.html
+./usage.html
