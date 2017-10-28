@@ -197,10 +197,6 @@
 </li>
 <li><p class="first">Initialize the database with <code class="docutils literal"><span class="pre">make</span> <span class="pre">db_init</span></code> (also tests that your permissions have been properly configured)</p>
 </li>
-<li><p class="first">Install Python and JavaScript dependencies with <code class="docutils literal"><span class="pre">make_dependencies</span></code></p>
-</li>
-<li><p class="first">#TODO Add test data into the database</p>
-</li>
 <li><p class="first">Run <code class="docutils literal"><span class="pre">make</span></code> to start the server and navigate to <code class="docutils literal"><span class="pre">localhost:5000</span></code></p>
 </li>
 </ul>
@@ -208,8 +204,9 @@
 <div class="section" id="configuration">
 <span id="configuration"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Copy <code class="docutils literal"><span class="pre">config.yaml.example</span></code> to <code class="docutils literal"><span class="pre">config.yaml</span></code> and customize.  #TODO renaming this? also, no need to copy (FWIW, I think this is currently broken; we don’t read <code class="docutils literal"><span class="pre">config.yaml</span></code> 😕 )</li>
-<li>#TODO How to configure User #0 as admin</li>
+<li>Copy <code class="docutils literal"><span class="pre">config.yaml.defaults</span></code> to <code class="docutils literal"><span class="pre">config.yaml</span></code> and customize.</li>
+<li>Create admin user: <code class="docutils literal"><span class="pre">from</span> <span class="pre">skyportal.model_util</span> <span class="pre">import</span> <span class="pre">add_super_user;</span> <span class="pre">add_super_user('testuser&#64;cesium-ml.org')</span></code></li>
+<li>Optionally, add test data into the database: <code class="docutils literal"><span class="pre">python</span> <span class="pre">skyportal/model_util.py</span></code> (also initializes <code class="docutils literal"><span class="pre">testuser&#64;cesium-ml.org</span></code> as an admin)</li>
 <li>If you want other users to be able to access the server:<ul>
 <li>#TODO Serve on 127.0.0.1 instead of 0.0.0.0 unless debug login is disabled?</li>
 <li>Provide Google auth credentials, obtained as described in the config file.</li>
