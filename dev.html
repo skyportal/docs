@@ -175,7 +175,7 @@
 <li>To run all tests: <code class="docutils literal"><span class="pre">make</span> <span class="pre">test</span></code></li>
 <li>To run a single test: <code class="docutils literal"><span class="pre">./tools/test_frontend.py</span> <span class="pre">skportal/tests/frontend/&lt;test_file&gt;.py::test_&lt;specific_test&gt;</span></code></li>
 </ul>
-<p>On Linux, the tests can be run in &quot;headless&quot; mode (no browser display):</p>
+<p>On Linux, the tests can be run in “headless” mode (no browser display):</p>
 <ul class="simple">
 <li>Install xfvb (<code class="docutils literal"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">xfvb</span></code>)</li>
 <li><code class="docutils literal"><span class="pre">make</span> <span class="pre">test_headless</span></code></li>
@@ -220,8 +220,8 @@ make use of include:</p>
 <li><a class="reference external" href="http://docs.sqlalchemy.org/en/latest/orm/extensions/associationproxy.html">Association proxies</a>: shortcut to some attribute of a related object; e.g., <code class="docutils literal"><span class="pre">User.permissions</span></code> instead of <code class="docutils literal"><span class="pre">[a.id</span> <span class="pre">for</span> <span class="pre">a</span> <span class="pre">in</span> <span class="pre">User.acls]</span></code></li>
 <li><a class="reference external" href="http://docs.sqlalchemy.org/en/latest/orm/loading_relationships.html">Joined loads</a>: this allows for a single query to also include child/related objects; often used in handlers when we know that information about related objects will also be needed.</li>
 <li><code class="docutils literal"><span class="pre">to_json()</span></code>: often from a handler we return an ORM object, which gets converted to JSON via <code class="docutils literal"><span class="pre">json_util.to_json(obj.to_dict())</span></code>. This also includes the attributes of any children that were loaded via <code class="docutils literal"><span class="pre">joinedload</span></code> or by accessing them directly. For example:<ul>
-<li><code class="docutils literal"><span class="pre">User.query.first().to_dict()</span></code> will not contain information about the user's permissions</li>
-<li><code class="docutils literal"><span class="pre">u</span> <span class="pre">=</span> <span class="pre">User.query.first();</span> <span class="pre">u.acls;</span> <span class="pre">u.to_dict()</span></code> does include a list of the user's ACLs</li>
+<li><code class="docutils literal"><span class="pre">User.query.first().to_dict()</span></code> will not contain information about the user’s permissions</li>
+<li><code class="docutils literal"><span class="pre">u</span> <span class="pre">=</span> <span class="pre">User.query.first();</span> <span class="pre">u.acls;</span> <span class="pre">u.to_dict()</span></code> does include a list of the user’s ACLs</li>
 </ul>
 </li>
 </ul>
