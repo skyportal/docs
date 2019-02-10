@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Developer notes &mdash; skyportal vUndefined documentation</title>
+  <title>Developer notes &mdash; skyportal 1.0.0dev0 documentation</title>
   
 
   
@@ -37,9 +37,9 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="skyportal vUndefined documentation" href="index.html"/>
-        <link rel="next" title="Usage" href="usage.html"/>
-        <link rel="prev" title="Setup" href="setup.html"/> 
+    <link rel="top" title="skyportal 1.0.0dev0 documentation" href="index.html"/>
+        <link rel="next" title="How to Contribute" href="contributing.html"/>
+        <link rel="prev" title="Usage" href="usage.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                vUndefined
+                1.0.0dev0
               </div>
             
           
@@ -94,6 +94,7 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Developer notes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#debugging">Debugging</a></li>
@@ -102,7 +103,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#docker-images">Docker images</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How to Contribute</a></li>
 </ul>
 
             
@@ -170,8 +171,7 @@
 <span id="testing"></span><h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
 <p>To execute the test suite:</p>
 <ul class="simple">
-<li>Install ChromeDriver from <a class="reference external" href="https://sites.google.com/a/chromium.org/chromedriver/home">https://sites.google.com/a/chromium.org/chromedriver/home</a></li>
-<li>Install Chrome or Chromium</li>
+<li>Install geckodriver and Firefox</li>
 <li>To run all tests: <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code></li>
 <li>To run a single test: <code class="docutils literal notranslate"><span class="pre">./tools/test_frontend.py</span> <span class="pre">skportal/tests/frontend/&lt;test_file&gt;.py::test_&lt;specific_test&gt;</span></code></li>
 </ul>
@@ -252,10 +252,10 @@ make use of include:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="contributing.html" class="btn btn-neutral float-right" title="How to Contribute" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="setup.html" class="btn btn-neutral" title="Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="usage.html" class="btn btn-neutral" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -286,7 +286,7 @@ make use of include:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'vUndefined',
+            VERSION:'1.0.0dev0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

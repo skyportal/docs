@@ -1,0 +1,339 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Summary &mdash; skyportal 1.0.0dev0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../../_static/output_cells.css" type="text/css" />
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="skyportal 1.0.0dev0 documentation" href="../../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> skyportal
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.0dev0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../dev.html">Developer notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">How to Contribute</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">skyportal</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+      <li>Summary</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <hr class="docutils" />
+<p>title: ‘SkyPortal: An Astronomical Data Platform’
+tags:</p>
+<ul class="simple">
+<li>Python</li>
+<li>web</li>
+<li>astronomy</li>
+<li>time-series</li>
+<li>visualization</li>
+<li>analysis</li>
+<li>data
+authors:</li>
+<li>name: Stéfan J. van der Walt
+orcid: 0000-0001-9276-1891
+affiliation: 1</li>
+<li>name: Arien Crellin-Quick
+orcid: 0000-0002-7183-0410
+affiliation: 2</li>
+<li>name: Joshua S. Bloom
+orcid: 0000-0002-7777-216X
+affiliation: 2
+affiliations:</li>
+<li>name: Berkeley Institute for Data Science, University of California, Berkeley
+index: 1</li>
+<li>name: Department of Astronomy, University of California, Berkeley
+index: 2
+date: 7 February 2019
+bibliography: paper.bib</li>
+</ul>
+<hr class="docutils" />
+<div class="section" id="summary">
+<span id="summary"></span><h1>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h1>
+<p>SkyPortal is a web application that stores and interactively displays
+astronomical datasets for annotation, analysis, and discovery. It is
+designed to be modular and extensible, so it can be customized for
+various scientific use cases.  It is released under the Modified BSD
+license.</p>
+<p>SkyPortal was designed with time-series survey data from
+the <a class="reference external" href="https://www.ztf.caltech.edu">Zwicky Transient Facility</a>, and
+eventually
+<a class="reference external" href="https://www.lsst.org">The Large Synoptic Survey Telescope</a>, in mind.</p>
+<p>By default, it aims to provide a useful, rich user experience, including
+light curves of named astronomical events/transients, spectra, live chat, and links to other surveys.
+But the intent, ultimately, is for the frontend to be modified to best
+suit the specific scientific problem at hand. The current UI/UX was inspired by that developed for the Palomar Transient Factory (PTF) Marshal [&#64;Law09].</p>
+</div>
+<div class="section" id="architecture">
+<span id="architecture"></span><h1>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h1>
+<p>SkyPortal builds on top
+of <a class="reference external" href="https://github.com/cesium-ml/baselayer">baselayer</a>, a customizable
+scientific web application platform developed by the same authors as
+part of the Cesium-ML time-series project
+[&#64;brett_naul-proc-scipy-2016]. Baselayer provides SkyPortal with
+authentication (via OAuth, Google, etc.), websockets (to communicate between the
+Python backend and the JavaScript frontend), and the scaffolding for
+managing microservices and routing incoming requests via Nginx.</p>
+<p>The application has a Python backend (running the Tornado web server),
+with a React &amp; Redux frontend.  <a class="reference external" href="https://reactjs.org/">React</a> was chosen because of its clean
+component design, and <a class="reference external" href="https://redux.js.org/">Redux</a> provides the application logic that
+renders these components appropriately, given the application state.</p>
+<p>For machine users, SkyPortal provides a token-based API, meaning that
+all of its data can be queried and modified by scripts without using
+the browser frontend.</p>
+<p>Importantly, the application is able to provide graphical renditions
+of datasets, using the <a class="reference external" href="https://bokeh.pydata.org">Bokeh</a> library.  In
+the default version of SkyPortal, this functionality is used to
+render, e.g., spectra, with the ability to toggle color bands and
+element spectra, or to adjust redshift.</p>
+<p>The platform also has the ability to perform
+distributed computation via <a class="reference external" href="https://dask.org/">Dask</a>.</p>
+<p>SkyPortal implements two types of security: group based, and Access
+Control List (ACL) based.  Group based security determines which users
+have access to which sources (data objects), each of which is
+associated with one or more group.  The members of these groups can be
+changed by the administrator.  ACL based security deals with user
+roles, which determine, regardless of data source, which pages a user
+can access.</p>
+<p>SkyPortal is designed to be employed on systems of varying scale: a
+laptop, local server, or hosted infrastructure.  We support packaging
+the entire application into a <a class="reference external" href="https://www.docker.com/">Docker</a> container, which can then be
+deployed to the cloud.  An example deployment, using <a class="reference external" href="https://kubernetes.io/">Kubernetes</a>, is
+provided.</p>
+<p>Integration testing is done upon every commit, using Travis-CI, by
+automating the Firefox browser
+with
+<a class="reference external" href="https://firefox-source-docs.mozilla.org/testing/geckodriver/geckodriver/">GeckoDriver</a>.
+This ensures that the entire user experience—from logging in to making
+API requests—keeps working correctly.</p>
+</div>
+<div class="section" id="future-work">
+<span id="future-work"></span><h1>Future work<a class="headerlink" href="#future-work" title="Permalink to this headline">¶</a></h1>
+<p>In the next version of SkyPortal, we intend to support loading sources in
+real-time from astronomical surveys, typically by
+ingesting <a class="reference external" href="https://kafka.apache.org/">Kafka</a> streams.  We also plan to
+add the ability to publish processed sub-streams, creating
+so-called “brokers” [&#64;Swinbank14].  Finally, it will be possible to customize views
+(from the web interface), and for developers to easily add and modify
+user-interface components.</p>
+</div>
+<div class="section" id="conclusion">
+<span id="conclusion"></span><h1>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h1>
+<p>SkyPortal is an extensible data platform for astronomy.  It is
+currently being used to analyze data from various sky surveys, with
+the potential to aid many more astronomers in their data processing
+and visualization needs.  It is actively developed and maintained, and
+the authors welcome and encourage collaboration.</p>
+<p><img alt="SkyPortal source rendering. Featured are thumbnails, light curve plot, spectrogram, live chat, and links to various sky surveys." src="../../_images/screenshot-2019-02.png" /></p>
+</div>
+<div class="section" id="acknowledgements">
+<span id="acknowledgements"></span><h1>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">¶</a></h1>
+<p>We thank M. Kasliwal and D. Goldstein for helpful discussions and insights during the prototyping and build-out phases of this project. This work was supported by a Gordon and Betty Moore Foundation Data-Driven Discovery grant.</p>
+</div>
+<div class="section" id="references">
+<span id="references"></span><h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, The skyportal Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.0.0dev0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
