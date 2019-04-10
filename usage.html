@@ -99,6 +99,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#adding-roles-to-users">Adding roles to users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#adding-users-to-groups">Adding users to groups</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#connecting-streams-and-groups">Connecting streams and groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#important-makefile-targets">Important Makefile targets</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="dev.html">Developer notes</a></li>
@@ -196,6 +197,38 @@
 <li>Not yet implemented</li>
 </ul>
 </div>
+<div class="section" id="important-makefile-targets">
+<span id="important-makefile-targets"></span><h2>Important Makefile targets<a class="headerlink" href="#important-makefile-targets" title="Permalink to this headline">¶</a></h2>
+<p>General:</p>
+<ul class="simple">
+<li>help : Describe make targets</li>
+</ul>
+<p>DB preparation:</p>
+<ul class="simple">
+<li>db_init : Create database</li>
+<li>db_clear : Drop and re-create DB</li>
+</ul>
+<p>Launching:</p>
+<ul class="simple">
+<li>run : Launch the web application</li>
+<li>log : Tail all log files</li>
+</ul>
+<p>Testing:</p>
+<ul class="simple">
+<li>test : Launch web app &amp; execute frontend tests</li>
+<li>test_headless : (Linux only) The above, but without a visible
+browser</li>
+</ul>
+<p>Development:</p>
+<ul class="simple">
+<li>lint : Run ESLint on all files.  Installs ESLint if necessary.</li>
+<li>lint-unix : Same as above, but outputs in a format that most text
+editors can parse</li>
+<li>lint-githook : Install a Git pre-commit hook that lints staged
+chunks (this is done automatically when you lint
+for the first time).</li>
+</ul>
+</div>
 </div>
 
 
@@ -252,7 +285,7 @@
       <script type="text/javascript" src="_static/jquery.js"></script>
       <script type="text/javascript" src="_static/underscore.js"></script>
       <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="_static/language_data.js"></script>
 
   
 
