@@ -17,44 +17,37 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/output_cells.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="skyportal 1.0.0dev0 documentation" href="index.html"/>
-        <link rel="next" title="Developer notes" href="dev.html"/>
-        <link rel="prev" title="Setup" href="setup.html"/> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/output_cells.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="API" href="api.html" />
+    <link rel="prev" title="Setup" href="setup.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -102,6 +95,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#important-makefile-targets">Important Makefile targets</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dev.html">Developer notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">How to Contribute</a></li>
 </ul>
@@ -115,7 +109,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">skyportal</a>
@@ -123,9 +117,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -166,85 +161,84 @@
            <div itemprop="articleBody">
             
   <div class="section" id="usage">
-<span id="usage"></span><h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="permissions">
-<span id="permissions"></span><h2>Permissions<a class="headerlink" href="#permissions" title="Permalink to this headline">¶</a></h2>
+<h2>Permissions<a class="headerlink" href="#permissions" title="Permalink to this headline">¶</a></h2>
 <p>Access to resources in Skyportal is controlled in two ways:</p>
 <ul class="simple">
-<li><em>Roles</em> are sets of site-wide permissions (<em>ACLs</em>) that allow a user to perform certain actions: e.g, create a new user, upload spectra, post comments, etc.</li>
-<li><em>Groups</em> are sets of sources that are accessible to members of that group<ul>
-<li>Members can also be made an <em>admin</em> of the group, which gives them group-specific permissions to add new users, etc.</li>
-<li>The same source source can belong to multiple groups</li>
+<li><p><em>Roles</em> are sets of site-wide permissions (<em>ACLs</em>) that allow a user to perform certain actions: e.g, create a new user, upload spectra, post comments, etc.</p></li>
+<li><p><em>Groups</em> are sets of sources that are accessible to members of that group</p>
+<ul>
+<li><p>Members can also be made an <em>admin</em> of the group, which gives them group-specific permissions to add new users, etc.</p></li>
+<li><p>The same source source can belong to multiple groups</p></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="section" id="adding-roles-to-users">
-<span id="adding-roles-to-users"></span><h2>Adding roles to users<a class="headerlink" href="#adding-roles-to-users" title="Permalink to this headline">¶</a></h2>
+<h2>Adding roles to users<a class="headerlink" href="#adding-roles-to-users" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>User permissions can be managed on the <code class="docutils literal notranslate"><span class="pre">/users/</span></code> page  # TODO not fully implemented</li>
+<li><p>User permissions can be managed on the <code class="docutils literal notranslate"><span class="pre">/users/</span></code> page  # TODO not fully implemented</p></li>
 </ul>
 </div>
 <div class="section" id="adding-users-to-groups">
-<span id="adding-users-to-groups"></span><h2>Adding users to groups<a class="headerlink" href="#adding-users-to-groups" title="Permalink to this headline">¶</a></h2>
+<h2>Adding users to groups<a class="headerlink" href="#adding-users-to-groups" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Groups membership can be managed on the <code class="docutils literal notranslate"><span class="pre">/groups/</span></code> page  # TODO not fully implemented</li>
+<li><p>Groups membership can be managed on the <code class="docutils literal notranslate"><span class="pre">/groups/</span></code> page  # TODO not fully implemented</p></li>
 </ul>
 </div>
 <div class="section" id="connecting-streams-and-groups">
-<span id="connecting-streams-and-groups"></span><h2>Connecting streams and groups<a class="headerlink" href="#connecting-streams-and-groups" title="Permalink to this headline">¶</a></h2>
+<h2>Connecting streams and groups<a class="headerlink" href="#connecting-streams-and-groups" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Not yet implemented</li>
+<li><p>Not yet implemented</p></li>
 </ul>
 </div>
 <div class="section" id="important-makefile-targets">
-<span id="important-makefile-targets"></span><h2>Important Makefile targets<a class="headerlink" href="#important-makefile-targets" title="Permalink to this headline">¶</a></h2>
+<h2>Important Makefile targets<a class="headerlink" href="#important-makefile-targets" title="Permalink to this headline">¶</a></h2>
 <p>General:</p>
 <ul class="simple">
-<li>help : Describe make targets</li>
+<li><p>help : Describe make targets</p></li>
 </ul>
 <p>DB preparation:</p>
 <ul class="simple">
-<li>db_init : Create database</li>
-<li>db_clear : Drop and re-create DB</li>
+<li><p>db_init : Create database</p></li>
+<li><p>db_clear : Drop and re-create DB</p></li>
 </ul>
 <p>Launching:</p>
 <ul class="simple">
-<li>run : Launch the web application</li>
-<li>log : Tail all log files</li>
+<li><p>run : Launch the web application</p></li>
+<li><p>log : Tail all log files</p></li>
 </ul>
 <p>Testing:</p>
 <ul class="simple">
-<li>test : Launch web app &amp; execute frontend tests</li>
-<li>test_headless : (Linux only) The above, but without a visible
-browser</li>
+<li><p>test : Launch web app &amp; execute frontend tests</p></li>
+<li><p>test_headless : (Linux only) The above, but without a visible
+browser</p></li>
 </ul>
 <p>Development:</p>
 <ul class="simple">
-<li>lint : Run ESLint on all files.  Installs ESLint if necessary.</li>
-<li>lint-unix : Same as above, but outputs in a format that most text
-editors can parse</li>
-<li>lint-githook : Install a Git pre-commit hook that lints staged
+<li><p>lint : Run ESLint on all files.  Installs ESLint if necessary.</p></li>
+<li><p>lint-unix : Same as above, but outputs in a format that most text
+editors can parse</p></li>
+<li><p>lint-githook : Install a Git pre-commit hook that lints staged
 chunks (this is done automatically when you lint
-for the first time).</li>
+for the first time).</p></li>
 </ul>
 </div>
 </div>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="dev.html" class="btn btn-neutral float-right" title="Developer notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="api.html" class="btn btn-neutral float-right" title="API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="setup.html" class="btn btn-neutral" title="Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="setup.html" class="btn btn-neutral float-left" title="Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -253,11 +247,11 @@ for the first time).</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, The skyportal Team.
+        &copy; Copyright 2017, The skyportal Team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -270,37 +264,15 @@ for the first time).</li>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'1.0.0dev0',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="_static/language_data.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

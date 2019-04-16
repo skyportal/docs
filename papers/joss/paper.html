@@ -17,42 +17,35 @@
   
 
   
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="../../_static/output_cells.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="../../genindex.html"/>
-        <link rel="search" title="Search" href="../../search.html"/>
-    <link rel="top" title="skyportal 1.0.0dev0 documentation" href="../../index.html"/> 
-
-  
-  <script src="../../_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/output_cells.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -93,6 +86,7 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../setup.html">Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../dev.html">Developer notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">How to Contribute</a></li>
 </ul>
@@ -106,7 +100,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../index.html">skyportal</a>
@@ -114,9 +108,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -160,34 +155,34 @@
 <p>title: ‘SkyPortal: An Astronomical Data Platform’
 tags:</p>
 <ul class="simple">
-<li>Python</li>
-<li>web</li>
-<li>astronomy</li>
-<li>time-series</li>
-<li>visualization</li>
-<li>analysis</li>
-<li>data
-authors:</li>
-<li>name: Stéfan J. van der Walt
+<li><p>Python</p></li>
+<li><p>web</p></li>
+<li><p>astronomy</p></li>
+<li><p>time-series</p></li>
+<li><p>visualization</p></li>
+<li><p>analysis</p></li>
+<li><p>data
+authors:</p></li>
+<li><p>name: Stéfan J. van der Walt
 orcid: 0000-0001-9276-1891
-affiliation: 1</li>
-<li>name: Arien Crellin-Quick
+affiliation: 1</p></li>
+<li><p>name: Arien Crellin-Quick
 orcid: 0000-0002-7183-0410
-affiliation: 2</li>
-<li>name: Joshua S. Bloom
+affiliation: 2</p></li>
+<li><p>name: Joshua S. Bloom
 orcid: 0000-0002-7777-216X
 affiliation: 2
-affiliations:</li>
-<li>name: Berkeley Institute for Data Science, University of California, Berkeley
-index: 1</li>
-<li>name: Department of Astronomy, University of California, Berkeley
+affiliations:</p></li>
+<li><p>name: Berkeley Institute for Data Science, University of California, Berkeley
+index: 1</p></li>
+<li><p>name: Department of Astronomy, University of California, Berkeley
 index: 2
 date: 7 February 2019
-bibliography: paper.bib</li>
+bibliography: paper.bib</p></li>
 </ul>
 <hr class="docutils" />
 <div class="section" id="summary">
-<span id="summary"></span><h1>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h1>
+<h1>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h1>
 <p>SkyPortal is a web application that stores and interactively displays
 astronomical datasets for annotation, analysis, and discovery. It is
 designed to be modular and extensible, so it can be customized for
@@ -203,7 +198,7 @@ But the intent, ultimately, is for the frontend to be modified to best
 suit the specific scientific problem at hand. The current UI/UX was inspired by that developed for the Palomar Transient Factory (PTF) Marshal [&#64;Law09].</p>
 </div>
 <div class="section" id="architecture">
-<span id="architecture"></span><h1>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h1>
+<h1>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h1>
 <p>SkyPortal builds on top
 of <a class="reference external" href="https://github.com/cesium-ml/baselayer">baselayer</a>, a customizable
 scientific web application platform developed by the same authors as
@@ -246,7 +241,7 @@ This ensures that the entire user experience—from logging in to making
 API requests—keeps working correctly.</p>
 </div>
 <div class="section" id="future-work">
-<span id="future-work"></span><h1>Future work<a class="headerlink" href="#future-work" title="Permalink to this headline">¶</a></h1>
+<h1>Future work<a class="headerlink" href="#future-work" title="Permalink to this headline">¶</a></h1>
 <p>In the next version of SkyPortal, we intend to support loading sources in
 real-time from astronomical surveys, typically by
 ingesting <a class="reference external" href="https://kafka.apache.org/">Kafka</a> streams.  We also plan to
@@ -256,27 +251,25 @@ so-called “brokers” [&#64;Swinbank14].  Finally, it will be possible to cust
 user-interface components.</p>
 </div>
 <div class="section" id="conclusion">
-<span id="conclusion"></span><h1>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h1>
+<h1>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h1>
 <p>SkyPortal is an extensible data platform for astronomy.  It is
 currently being used to analyze data from various sky surveys, with
 the potential to aid many more astronomers in their data processing
 and visualization needs.  It is actively developed and maintained, and
 the authors welcome and encourage collaboration.</p>
-<p><img alt="SkyPortal source rendering. Featured are thumbnails, light curve plot, spectrogram, live chat, and links to various sky surveys." src="../../_images/screenshot-2019-02.png" /></p>
+<p><img alt="../../_images/screenshot-2019-02.png" src="../../_images/screenshot-2019-02.png" />SkyPortal source rendering. Featured are thumbnails, light curve plot, spectrogram, live chat, and links to various sky surveys.</p>
 </div>
 <div class="section" id="acknowledgements">
-<span id="acknowledgements"></span><h1>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">¶</a></h1>
+<h1>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">¶</a></h1>
 <p>We thank M. Kasliwal and D. Goldstein for helpful discussions and insights during the prototyping and build-out phases of this project. This work was supported by a Gordon and Betty Moore Foundation Data-Driven Discovery grant.</p>
 </div>
 <div class="section" id="references">
-<span id="references"></span><h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
+<h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -285,11 +278,11 @@ the authors welcome and encourage collaboration.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, The skyportal Team.
+        &copy; Copyright 2017, The skyportal Team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -302,37 +295,15 @@ the authors welcome and encourage collaboration.</p>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../../',
-            VERSION:'1.0.0dev0',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../../_static/jquery.js"></script>
-      <script type="text/javascript" src="../../_static/underscore.js"></script>
-      <script type="text/javascript" src="../../_static/doctools.js"></script>
-      <script type="text/javascript" src="../../_static/language_data.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../../_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>

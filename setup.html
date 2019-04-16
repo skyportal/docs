@@ -17,44 +17,37 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-  
-    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  
-
-  
-    <link rel="stylesheet" href="_static/output_cells.css" type="text/css" />
-  
-
-  
-        <link rel="index" title="Index"
-              href="genindex.html"/>
-        <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="skyportal 1.0.0dev0 documentation" href="index.html"/>
-        <link rel="next" title="Usage" href="usage.html"/>
-        <link rel="prev" title="Skyportal" href="index.html"/> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/output_cells.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Usage" href="usage.html" />
+    <link rel="prev" title="Skyportal" href="index.html" /> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -99,6 +92,7 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dev.html">Developer notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">How to Contribute</a></li>
 </ul>
@@ -112,7 +106,7 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+      <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">skyportal</a>
@@ -120,9 +114,10 @@
       </nav>
 
 
-      
       <div class="wy-nav-content">
+        
         <div class="rst-content">
+        
           
 
 
@@ -163,25 +158,20 @@
            <div itemprop="articleBody">
             
   <div class="section" id="setup">
-<span id="setup"></span><h1>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h1>
+<h1>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="installation">
-<span id="installation"></span><h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p class="first">A Python 3.6 or later installation is required</p>
-</li>
-<li><p class="first">Install the following dependencies:</p>
+<li><p>A Python 3.6 or later installation is required</p></li>
+<li><p>Install the following dependencies:</p>
 <ul>
-<li><p class="first">Supervisor (v&gt;=3.0b2)</p>
-</li>
-<li><p class="first">NGINX (v&gt;=1.7)</p>
-</li>
-<li><p class="first">PostgreSQL (v&gt;=9.6)</p>
-</li>
-<li><p class="first">Node.JS/npm (v&gt;=5.8.0)</p>
-</li>
-<li><p class="first">On macOS:</p>
+<li><p>Supervisor (v&gt;=3.0b2)</p></li>
+<li><p>NGINX (v&gt;=1.7)</p></li>
+<li><p>PostgreSQL (v&gt;=9.6)</p></li>
+<li><p>Node.JS/npm (v&gt;=5.8.0)</p></li>
+<li><p>On macOS:</p>
 <ul>
-<li><p class="first">Clone the repo and start the virtual env:</p>
+<li><p>Clone the repo and start the virtual env:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">skyportal</span><span class="o">/</span><span class="n">skyportal</span><span class="o">.</span><span class="n">git</span>
 <span class="n">cd</span> <span class="n">skyportal</span><span class="o">/</span>
 <span class="n">virtualenv</span> <span class="n">skyportal_env</span>
@@ -189,31 +179,30 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">If using <a class="reference external" href="http://brew.sh/">Homebrew</a>: <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">supervisor</span> <span class="pre">nginx</span> <span class="pre">postgresql</span> <span class="pre">node</span></code></p>
+<li><p>If using <a class="reference external" href="http://brew.sh/">Homebrew</a>: <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">supervisor</span> <span class="pre">nginx</span> <span class="pre">postgresql</span> <span class="pre">node</span></code></p>
 <ul class="simple">
-<li>If running the test suite, <code class="docutils literal notranslate"><span class="pre">geckodriver</span></code> is also needed: <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">geckodriver</span></code></li>
+<li><p>If running the test suite, <code class="docutils literal notranslate"><span class="pre">geckodriver</span></code> is also needed: <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">geckodriver</span></code></p></li>
 </ul>
 </li>
-<li><p class="first">Start the postgresql server:</p>
+<li><p>Start the postgresql server:</p>
 <ul class="simple">
-<li>to start automatically at login: <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">services</span> <span class="pre">start</span> <span class="pre">postgresql</span></code></li>
-<li>to start manually: <code class="docutils literal notranslate"><span class="pre">pg_ctl</span> <span class="pre">-D</span> <span class="pre">/usr/local/var/postgres</span> <span class="pre">start</span></code></li>
+<li><p>to start automatically at login: <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">services</span> <span class="pre">start</span> <span class="pre">postgresql</span></code></p></li>
+<li><p>to start manually: <code class="docutils literal notranslate"><span class="pre">pg_ctl</span> <span class="pre">-D</span> <span class="pre">/usr/local/var/postgres</span> <span class="pre">start</span></code></p></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p class="first">On Linux:</p>
+<li><p>On Linux:</p>
 <ul>
-<li><p class="first">Using <code class="docutils literal notranslate"><span class="pre">apt</span></code>: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">nginx</span> <span class="pre">supervisor</span> <span class="pre">postgresql</span> <span class="pre">libpq-dev</span> <span class="pre">npm</span> <span class="pre">nodejs-legacy</span></code></p>
-</li>
-<li><p class="first">It may be necessary to configure your database permissions: at the end of your <code class="docutils literal notranslate"><span class="pre">pg_hba.conf</span></code> (typically in <code class="docutils literal notranslate"><span class="pre">/etc/postgresql/9.6/main</span></code>), add the following lines and restart PostgreSQL (<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">postgresql</span> <span class="pre">restart</span></code>):</p>
+<li><p>Using <code class="docutils literal notranslate"><span class="pre">apt</span></code>: <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">nginx</span> <span class="pre">supervisor</span> <span class="pre">postgresql</span> <span class="pre">libpq-dev</span> <span class="pre">npm</span> <span class="pre">nodejs-legacy</span></code></p></li>
+<li><p>It may be necessary to configure your database permissions: at the end of your <code class="docutils literal notranslate"><span class="pre">pg_hba.conf</span></code> (typically in <code class="docutils literal notranslate"><span class="pre">/etc/postgresql/9.6/main</span></code>), add the following lines and restart PostgreSQL (<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">postgresql</span> <span class="pre">restart</span></code>):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">local</span> <span class="nb">all</span> <span class="n">postgres</span> <span class="n">peer</span>
 <span class="n">local</span> <span class="n">skyportal</span> <span class="n">skyportal</span> <span class="n">trust</span>
 <span class="n">local</span> <span class="n">skyportal_test</span> <span class="n">skyportal</span> <span class="n">trust</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">If running the test suite, install <code class="docutils literal notranslate"><span class="pre">geckodriver</span></code>:</p>
+<li><p>If running the test suite, install <code class="docutils literal notranslate"><span class="pre">geckodriver</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>GECKO_VER=0.24.0
 wget https://github.com/mozilla/geckodriver/releases/download/v${GECKO_VER}/geckodriver-v${GECKO_VER}-linux64.tar.gz
 sudo tar -xzf geckodriver-v${GECKO_VER}-linux64.tar.gz -C /usr/local/bin
@@ -227,33 +216,30 @@ geckodriver --version
 </li>
 </ul>
 </li>
-<li><p class="first">Initialize the database with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_init</span></code> (also tests that your permissions have been properly configured)</p>
-</li>
-<li><p class="first">Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code> to start the server and navigate to <code class="docutils literal notranslate"><span class="pre">localhost:5000</span></code></p>
-</li>
+<li><p>Initialize the database with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_init</span></code> (also tests that your permissions have been properly configured)</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code> to start the server and navigate to <code class="docutils literal notranslate"><span class="pre">localhost:5000</span></code></p></li>
 </ul>
 </div>
 <div class="section" id="configuration">
-<span id="configuration"></span><h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Copy <code class="docutils literal notranslate"><span class="pre">config.yaml.defaults</span></code> to <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> and customize.</li>
-<li>Create admin user: <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">skyportal.model_util</span> <span class="pre">import</span> <span class="pre">add_super_user;</span> <span class="pre">add_super_user('testuser&#64;cesium-ml.org')</span></code></li>
-<li>Optionally, add test data into the database: <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">skyportal/model_util.py</span></code> (also initializes <code class="docutils literal notranslate"><span class="pre">testuser&#64;cesium-ml.org</span></code> as an admin)</li>
-<li>If you want other users to be able to access the server:<ul>
-<li>#TODO Serve on 127.0.0.1 instead of 0.0.0.0 unless debug login is disabled?</li>
-<li>Provide Google auth credentials, obtained as described in the config file.</li>
+<li><p>Copy <code class="docutils literal notranslate"><span class="pre">config.yaml.defaults</span></code> to <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> and customize.</p></li>
+<li><p>Create admin user: <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">skyportal.model_util</span> <span class="pre">import</span> <span class="pre">add_super_user;</span> <span class="pre">add_super_user('testuser&#64;cesium-ml.org')</span></code></p></li>
+<li><p>Optionally, add test data into the database: <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">load_demo_data</span></code> (also initializes <code class="docutils literal notranslate"><span class="pre">testuser&#64;cesium-ml.org</span></code> as an admin)</p></li>
+<li><p>If you want other users to be able to access the server:</p>
+<ul>
+<li><p>#TODO Serve on 127.0.0.1 instead of 0.0.0.0 unless debug login is disabled?</p></li>
+<li><p>Provide Google auth credentials, obtained as described in the config file.</p></li>
 </ul>
 </li>
-<li>Under <code class="docutils literal notranslate"><span class="pre">app</span></code>, modify the <code class="docutils literal notranslate"><span class="pre">secret-key</span></code> as described in the config file.</li>
+<li><p>Under <code class="docutils literal notranslate"><span class="pre">app</span></code>, modify the <code class="docutils literal notranslate"><span class="pre">secret-key</span></code> as described in the config file.</p></li>
 </ul>
 </div>
 </div>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
+           
           </div>
           <footer>
   
@@ -262,7 +248,7 @@ geckodriver --version
         <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Skyportal" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Skyportal" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -271,11 +257,11 @@ geckodriver --version
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2017, The skyportal Team.
+        &copy; Copyright 2017, The skyportal Team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -288,37 +274,15 @@ geckodriver --version
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'./',
-            VERSION:'1.0.0dev0',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="_static/jquery.js"></script>
-      <script type="text/javascript" src="_static/underscore.js"></script>
-      <script type="text/javascript" src="_static/doctools.js"></script>
-      <script type="text/javascript" src="_static/language_data.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-  
-
-  
-  
   <script type="text/javascript">
       jQuery(function () {
-          SphinxRtdTheme.StickyNav.enable();
+          SphinxRtdTheme.Navigation.enable(true);
       });
   </script>
+
+  
+  
+    
    
 
 </body>
