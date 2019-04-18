@@ -34,6 +34,7 @@
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/output_cells.css" type="text/css" />
+    <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 </head>
@@ -84,6 +85,7 @@
             
             
               <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../setup.html">Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
@@ -207,10 +209,12 @@ part of the Cesium-ML time-series project
 authentication (via OAuth, Google, etc.), websockets (to communicate between the
 Python backend and the JavaScript frontend), and the scaffolding for
 managing microservices and routing incoming requests via Nginx.</p>
+<p><img alt="../../_images/architecture1.png" src="../../_images/architecture1.png" />SkyPortal architecture. Each technological component is chosen to be efficient and scalable, and is applied exactly for the purpose it was built.</p>
 <p>The application has a Python backend (running the Tornado web server),
 with a React &amp; Redux frontend.  <a class="reference external" href="https://reactjs.org/">React</a> was chosen because of its clean
 component design, and <a class="reference external" href="https://redux.js.org/">Redux</a> provides the application logic that
 renders these components appropriately, given the application state.</p>
+<p><img alt="../../_images/frontend1.png" src="../../_images/frontend1.png" />Frontend architecture. Components are rendered by React, and application logic is driven by Redux.</p>
 <p>For machine users, SkyPortal provides a token-based API, meaning that
 all of its data can be queried and modified by scripts without using
 the browser frontend.</p>
