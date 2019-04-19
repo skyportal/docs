@@ -228,10 +228,11 @@ virtual environment.</p>
 <ol class="simple">
 <li><p>Configure your database permissions.</p></li>
 </ol>
-<p>At the end of <code class="docutils literal notranslate"><span class="pre">pg_hba.conf</span></code> (typically located in <code class="docutils literal notranslate"><span class="pre">/etc/postgresql/&lt;postgres-version&gt;/main</span></code>), add the following lines:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">local</span> <span class="nb">all</span> <span class="n">postgres</span> <span class="n">peer</span>
-<span class="n">local</span> <span class="n">skyportal</span> <span class="n">skyportal</span> <span class="n">trust</span>
-<span class="n">local</span> <span class="n">skyportal_test</span> <span class="n">skyportal</span> <span class="n">trust</span>
+<p>In <code class="docutils literal notranslate"><span class="pre">pg_hba.conf</span></code> (typically located in
+<code class="docutils literal notranslate"><span class="pre">/etc/postgresql/&lt;postgres-version&gt;/main</span></code>), insert the following lines
+<em>before</em> any other <code class="docutils literal notranslate"><span class="pre">host</span></code> lines:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">host</span> <span class="n">skyportal</span> <span class="n">skyportal</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="o">/</span><span class="mi">32</span> <span class="n">trust</span>
+<span class="n">host</span> <span class="n">skyportal_test</span> <span class="n">skyportal</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="o">/</span><span class="mi">32</span> <span class="n">trust</span>
 </pre></div>
 </div>
 <p>Restart PostgreSQL:</p>
