@@ -251,7 +251,9 @@ virtual environment.</p>
 <div class="section" id="launch">
 <h2>Launch<a class="headerlink" href="#launch" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
-<li><p>Initialize the database with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_init</span></code> (this only needs to happen once).</p></li>
+<li><p>Initialize the database with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_init</span></code> (this only needs to
+happen once).</p></li>
+<li><p>Copy <code class="docutils literal notranslate"><span class="pre">config.yaml.defaults</span></code> to <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>.</p></li>
 <li><p>If you want some test data to play with, run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">load_demo_data</span></code>.</p></li>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">log</span></code> to monitor the service and, in a separate window, <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code> to start the server.</p></li>
 </ol>
@@ -259,11 +261,10 @@ virtual environment.</p>
 </div>
 <div class="section" id="additional-configuration">
 <h2>Additional Configuration<a class="headerlink" href="#additional-configuration" title="Permalink to this headline">¶</a></h2>
-<p>The configuration file lives in <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>; start by copying
-<code class="docutils literal notranslate"><span class="pre">config.yaml.defaults</span></code> to <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>.  The configuration file is
-meant to be self-documenting.</p>
-<p>Load the file into an editor, and change <code class="docutils literal notranslate"><span class="pre">app:secret-key</span></code> to a unique
-value.</p>
+<p>The configuration file lives in <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>, and is meant to be
+self-documenting.  Please modify as you see fit.</p>
+<p><strong>Before deploying this on a public server</strong> change <code class="docutils literal notranslate"><span class="pre">app:secret-key</span></code>
+to a unique value.</p>
 <div class="section" id="authentication">
 <h3>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h3>
 <p>By default, the server allows anyone to log in (even if it presents a
