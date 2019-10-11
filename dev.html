@@ -172,11 +172,24 @@
 <li><p>To run all tests: <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code></p></li>
 <li><p>To run a single test: <code class="docutils literal notranslate"><span class="pre">./tools/test_frontend.py</span> <span class="pre">skportal/tests/frontend/&lt;test_file&gt;.py::test_&lt;specific_test&gt;</span></code></p></li>
 </ul>
+<p>This fires up the test server and runs that test.  To make things
+faster you can also run the test server separately:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">run_testing</span>   <span class="c1"># fire up the server with `test_conf.yaml`</span>
+
+<span class="n">pytest</span> <span class="n">skyportal</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">api</span>  <span class="c1"># test api</span>
+<span class="n">pytest</span> <span class="n">skyportal</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">frontend</span><span class="o">/</span><span class="n">test_user</span><span class="o">.</span><span class="n">py</span>  <span class="c1"># run subset of frontend tests</span>
+</pre></div>
+</div>
 <p>On Linux, the tests can be run in “headless” mode (no browser display):</p>
 <ul class="simple">
 <li><p>Install xfvb (<code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">xfvb</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test_headless</span></code></p></li>
 </ul>
+<p>Or, as described above, launch the test server with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run_testing</span></code>, and then call</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xvfb</span><span class="o">-</span><span class="n">run</span> <span class="n">pytest</span> <span class="n">skyportal</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">frontend</span><span class="o">/</span><span class="n">test_user</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>It is not noticeably faster to run the test suite headlessly.</p>
 </div>
 <div class="section" id="debugging">
 <h2>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
