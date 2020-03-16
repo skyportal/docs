@@ -525,7 +525,7 @@
 <span class="k">def</span> <span class="nf">test_random_string_generator_button</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
     <span class="n">uuid_re_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;[0-9a-fA-F]</span><span class="si">{8}</span><span class="s1">\-[0-9a-fA-F]</span><span class="si">{4}</span><span class="s1">\-[0-9a-fA-F]</span><span class="si">{4}</span><span class="s1">\-[0-9a-fA-F]</span><span class="si">{4}</span><span class="s1">\-[0-9a-fA-F]</span><span class="si">{12}</span><span class="s1">&#39;</span>
 
-    <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;/become_user/</span><span class="si">{user.id}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;/become_user/</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/profile&#39;</span><span class="p">)</span>
 
     <span class="c1"># Check that default value of &quot;null&quot; is displayed initially</span>
