@@ -37,8 +37,8 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="API" href="api.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="setup.html" /> 
+    <link rel="next" title="&lt;no title&gt;" href="contributing.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="dev.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -157,67 +157,57 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <p># Usage</p>
-<p>## Permissions</p>
-<p>Access to resources in Skyportal is controlled in two ways:</p>
-<ul class="simple">
-<li><p><em>Roles</em> are sets of site-wide permissions (<em>ACLs</em>) that allow a user to perform certain actions: e.g, create a new user, upload spectra, post comments, etc.</p></li>
-<li><dl class="simple">
-<dt><em>Groups</em> are sets of sources that are accessible to members of that group</dt><dd><ul>
-<li><p>Members can also be made an <em>admin</em> of the group, which gives them group-specific permissions to add new users, etc.</p></li>
-<li><p>The same source source can belong to multiple groups</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-<p>## Adding roles to users</p>
-<ul class="simple">
-<li><p>User permissions can be managed on the <cite>/users/</cite> page (click through from profile)</p></li>
-</ul>
-<p>## Adding users to groups</p>
-<ul class="simple">
-<li><p>Groups membership can be managed on the <cite>/groups/</cite> page (click through from profile)</p></li>
-</ul>
-<p>## Important Makefile targets</p>
-<p>General:</p>
-<ul class="simple">
-<li><p>help : Describe make targets</p></li>
-</ul>
-<p>DB preparation:</p>
-<ul class="simple">
-<li><p>db_init : Create database</p></li>
-<li><p>db_clear : Drop and re-create DB</p></li>
-</ul>
-<p>Launching:</p>
-<ul class="simple">
-<li><p>run : Launch the web application</p></li>
-<li><p>log : Tail all log files</p></li>
-</ul>
-<p>Testing:</p>
-<ul class="simple">
-<li><p>test : Launch web app &amp; execute frontend tests</p></li>
-<li><dl class="simple">
-<dt>test_headless<span class="classifier">(Linux only) The above, but without a visible</span></dt><dd><p>browser</p>
-</dd>
-</dl>
-</li>
-</ul>
-<p>Development:</p>
-<ul class="simple">
-<li><p>lint : Run ESLint on all files.  Installs ESLint if necessary.</p></li>
-<li><dl class="simple">
-<dt>lint-unix<span class="classifier">Same as above, but outputs in a format that most text</span></dt><dd><p>editors can parse</p>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt>lint-githook<span class="classifier">Install a Git pre-commit hook that lints staged</span></dt><dd><p>chunks (this is done automatically when you lint
-for the first time).</p>
-</dd>
-</dl>
-</li>
-</ul>
+  <p># Deployment</p>
+<p>SkyPortal can be deployed either with or without using Docker.
+Without Docker, all services (such as the database) need to be running
+locally, as described in [setup](setup).</p>
+<p>More commonly, production deployment will use Docker images.  Here, we
+discuss how to deploy via
+[docker-compose](<a class="reference external" href="https://docs.docker.com/compose/">https://docs.docker.com/compose/</a>), but much of the
+same information applies when using Kubernetes, for which we have an
+[example deployment](<a class="reference external" href="https://github.com/skyportal/deploy">https://github.com/skyportal/deploy</a>).</p>
+<p>## Building the Docker images</p>
+<p>The first step is to obtain the images to launch.  We deploy
+[SkyPortal images](<a class="reference external" href="https://hub.docker.com/r/skyportal/web">https://hub.docker.com/r/skyportal/web</a>) to Docker
+Hub from time to time, which you can fetch using:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">skyportal/web</span>
+<span class="pre">`</span></code></p>
+<p>Otherwise, you may build the images from scratch:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">make</span> <span class="pre">docker-local</span>
+<span class="pre">`</span></code></p>
+<p>## Starting containers</p>
+<p>Next, we deploy two containers: <cite>web</cite> (the SkyPortal application) and
+<cite>db</cite> (the PostgreSQL server).  The database is stored in a local
+docker volume called <cite>skyportal_dbdata</cite> (see <cite>docker volume ls</cite>).</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">docker-compose</span> <span class="pre">up</span> <span class="pre">-d</span>
+<span class="pre">`</span></code></p>
+<p>Once both services are up and running, you may browse to SkyPortal at <cite>http://localhost:9000</cite>.</p>
+<p>## Handling problems</p>
+<p>You can see which containers are running with <cite>docker-compose ps</cite>.</p>
+<p>Inspect the logs for the running containers using:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">docker-compose</span> <span class="pre">logs</span> <span class="pre">web</span>
+<span class="pre">docker-compose</span> <span class="pre">logs</span> <span class="pre">db</span>
+<span class="pre">`</span></code></p>
+<p>(Or, follow the logs with <cite>docker-compose logs -f db</cite>.)</p>
+<p>## Adding test data</p>
+<p>To add some test data to play with, run:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">docker-compose</span> <span class="pre">run</span> <span class="pre">web</span> <span class="pre">bash</span> <span class="pre">-c</span> <span class="pre">'source</span> <span class="pre">/skyportal_env/bin/activate</span> <span class="pre">&amp;&amp;</span> <span class="pre">make</span> <span class="pre">load_demo_data'</span>
+<span class="pre">`</span></code></p>
+<p>## Stopping the deployment</p>
+<p>You may stop both containers using:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">docker-compose</span> <span class="pre">stop</span>
+<span class="pre">`</span></code></p>
+<p>Or stop and remove them using:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">docker-compose</span> <span class="pre">down</span>
+<span class="pre">`</span></code></p>
+<p>This does not affect data, which lives in the <cite>./dbdata</cite> directory.</p>
 
 
            </div>
@@ -227,10 +217,10 @@ for the first time).</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="api.html" class="btn btn-neutral float-right" title="API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="contributing.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="setup.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="dev.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

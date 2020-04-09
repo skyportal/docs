@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Setup &mdash; skyportal 0.9.dev0 documentation</title>
+  <title>&lt;no title&gt; &mdash; skyportal 0.9.dev0 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Usage" href="usage.html" />
-    <link rel="prev" title="About" href="about.html" /> 
+    <link rel="next" title="&lt;no title&gt;" href="usage.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="about.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,27 +86,15 @@
               
             
             
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Setup</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#source-download-python-environment">Source download, Python environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installation-macos">Installation: MacOS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installation-debian-based-linux">Installation: Debian-based Linux</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#launch">Launch</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#additional-configuration">Additional Configuration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#authentication">Authentication</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#creating-an-administrative-user">Creating an administrative user</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#test-data">Test data</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+              <ul>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dev.html">Developer notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="contributing.html">How to Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="adding_features.html">Adding new features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_features.html">};</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_features.html#id6">}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_features.html#id9">};</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_features.html#id24">};</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_features.html#id27">};</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_features.html#id30">};</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_features.html#id51">}</a></li>
 </ul>
 
             
@@ -152,7 +140,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Setup</li>
+      <li>&lt;no title&gt;</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -169,10 +157,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="setup">
-<h1>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="dependencies">
-<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
+  <p># Setup</p>
+<p>## Dependencies</p>
 <p>SkyPortal requires the following software to be installed.  We show
 how to install them on MacOS and Debian-based systems below.</p>
 <ul class="simple">
@@ -182,123 +168,107 @@ how to install them on MacOS and Debian-based systems below.</p>
 <li><p>PostgreSQL (v&gt;=9.6)</p></li>
 <li><p>Node.JS/npm (v&gt;=5.8.0)</p></li>
 </ul>
-</div>
-<div class="section" id="source-download-python-environment">
-<h2>Source download, Python environment<a class="headerlink" href="#source-download-python-environment" title="Permalink to this headline">¶</a></h2>
-<p>Clone the <a class="reference external" href="https://github.com/skyportal/skyportal">SkyPortal repository</a> and start a new
+<p>## Source download, Python environment</p>
+<p>Clone the [SkyPortal repository](<a class="reference external" href="https://github.com/skyportal/skyportal">https://github.com/skyportal/skyportal</a>) and start a new
 virtual environment.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">skyportal</span><span class="o">/</span><span class="n">skyportal</span><span class="o">.</span><span class="n">git</span>
-<span class="n">cd</span> <span class="n">skyportal</span><span class="o">/</span>
-<span class="n">virtualenv</span> <span class="n">skyportal_env</span>
-<span class="n">source</span> <span class="n">skyportal_env</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
-</pre></div>
-</div>
-<p>(You can also use <code class="docutils literal notranslate"><span class="pre">conda</span></code> or <code class="docutils literal notranslate"><span class="pre">pipenv</span></code> to create your environment.)</p>
-</div>
-<div class="section" id="installation-macos">
-<h2>Installation: MacOS<a class="headerlink" href="#installation-macos" title="Permalink to this headline">¶</a></h2>
-<p>These instructions assume that you have <a class="reference external" href="http://brew.sh/">Homebrew</a> installed.</p>
-<ol class="simple">
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">git</span> <span class="pre">clone</span> <span class="pre">https://github.com/skyportal/skyportal.git</span>
+<span class="pre">cd</span> <span class="pre">skyportal/</span>
+<span class="pre">virtualenv</span> <span class="pre">skyportal_env</span>
+<span class="pre">source</span> <span class="pre">skyportal_env/bin/activate</span>
+<span class="pre">`</span></code></p>
+<p>(You can also use <cite>conda</cite> or <cite>pipenv</cite> to create your environment.)</p>
+<p>## Installation: MacOS</p>
+<p>These instructions assume that you have [Homebrew](<a class="reference external" href="http://brew.sh/">http://brew.sh/</a>) installed.</p>
+<ol class="arabic simple">
 <li><p>Install dependencies</p></li>
 </ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">supervisor</span> <span class="n">nginx</span> <span class="n">postgresql</span> <span class="n">node</span>
-</pre></div>
-</div>
-<ol class="simple">
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">brew</span> <span class="pre">install</span> <span class="pre">supervisor</span> <span class="pre">nginx</span> <span class="pre">postgresql</span> <span class="pre">node</span>
+<span class="pre">`</span></code></p>
+<ol class="arabic simple" start="2">
 <li><p>Start the PostgreSQL server:</p></li>
 </ol>
-<ul class="simple">
-<li><p>To start automatically at login: <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">services</span> <span class="pre">start</span> <span class="pre">postgresql</span></code></p></li>
-<li><p>To start manually: <code class="docutils literal notranslate"><span class="pre">pg_ctl</span> <span class="pre">-D</span> <span class="pre">/usr/local/var/postgres</span> <span class="pre">start</span></code></p></li>
+<blockquote>
+<div><ul class="simple">
+<li><p>To start automatically at login: <cite>brew services start postgresql</cite></p></li>
+<li><p>To start manually: <cite>pg_ctl -D /usr/local/var/postgres start</cite></p></li>
 </ul>
-<ol class="simple">
+</div></blockquote>
+<ol class="arabic simple" start="3">
 <li><p>To run the test suite, you’ll need Geckodriver:</p></li>
 </ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">geckodriver</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="installation-debian-based-linux">
-<h2>Installation: Debian-based Linux<a class="headerlink" href="#installation-debian-based-linux" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">brew</span> <span class="pre">install</span> <span class="pre">geckodriver</span>
+<span class="pre">`</span></code></p>
+<p>## Installation: Debian-based Linux</p>
+<ol class="arabic simple">
 <li><p>Install dependencies</p></li>
 </ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">nginx</span> <span class="n">supervisor</span> <span class="n">postgresql</span> <span class="n">libpq</span><span class="o">-</span><span class="n">dev</span> <span class="n">nodejs</span>
-</pre></div>
-</div>
-<ol class="simple">
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">nginx</span> <span class="pre">supervisor</span> <span class="pre">postgresql</span> <span class="pre">libpq-dev</span> <span class="pre">nodejs</span>
+<span class="pre">`</span></code></p>
+<ol class="arabic simple" start="2">
 <li><p>Configure your database permissions.</p></li>
 </ol>
-<p>In <code class="docutils literal notranslate"><span class="pre">pg_hba.conf</span></code> (typically located in
-<code class="docutils literal notranslate"><span class="pre">/etc/postgresql/&lt;postgres-version&gt;/main</span></code>), insert the following lines
-<em>before</em> any other <code class="docutils literal notranslate"><span class="pre">host</span></code> lines:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">host</span> <span class="n">skyportal</span> <span class="n">skyportal</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="o">/</span><span class="mi">32</span> <span class="n">trust</span>
-<span class="n">host</span> <span class="n">skyportal_test</span> <span class="n">skyportal</span> <span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="o">/</span><span class="mi">32</span> <span class="n">trust</span>
-</pre></div>
-</div>
-<p>In some PostgreSQL installations, the default TCP port may be different from the 5432 value assumed in our default configuration file values. To remedy this, you can either edit your config.yaml file to reflect your system’s PostgreSQL default port, or update your system-wide config to use port 5432 by editing /etc/postgresql/12/main/postgresql.conf (replace “12” with your installed version number) and changing the line <code class="docutils literal notranslate"><span class="pre">port</span> <span class="pre">=</span> <span class="pre">XXXX</span></code> (where “XXXX” is whatever the system default was) to <code class="docutils literal notranslate"><span class="pre">port</span> <span class="pre">=</span> <span class="pre">5432</span></code>.</p>
+<p>In <cite>pg_hba.conf</cite> (typically located in
+<cite>/etc/postgresql/&lt;postgres-version&gt;/main</cite>), insert the following lines
+<em>before</em> any other <cite>host</cite> lines:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">host</span> <span class="pre">skyportal</span> <span class="pre">skyportal</span> <span class="pre">127.0.0.1/32</span> <span class="pre">trust</span>
+<span class="pre">host</span> <span class="pre">skyportal_test</span> <span class="pre">skyportal</span> <span class="pre">127.0.0.1/32</span> <span class="pre">trust</span>
+<span class="pre">`</span></code></p>
+<p>In some PostgreSQL installations, the default TCP port may be different from the 5432 value assumed in our default configuration file values. To remedy this, you can either edit your config.yaml file to reflect your system’s PostgreSQL default port, or update your system-wide config to use port 5432 by editing /etc/postgresql/12/main/postgresql.conf (replace “12” with your installed version number) and changing the line <cite>port = XXXX</cite> (where “XXXX” is whatever the system default was) to <cite>port = 5432</cite>.</p>
 <p>Restart PostgreSQL:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">service</span> <span class="n">postgresql</span> <span class="n">restart</span>
-</pre></div>
-</div>
-<ol class="simple">
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">sudo</span> <span class="pre">service</span> <span class="pre">postgresql</span> <span class="pre">restart</span>
+<span class="pre">`</span></code></p>
+<ol class="arabic simple" start="3">
 <li><p>To run the test suite, you’ll need Geckodriver:</p></li>
 </ol>
 <ul class="simple">
-<li><p>Download the latest version from https://github.com/mozilla/geckodriver/releases/</p></li>
+<li><p>Download the latest version from <a class="reference external" href="https://github.com/mozilla/geckodriver/releases/">https://github.com/mozilla/geckodriver/releases/</a></p></li>
 <li><p>Extract the binary to somewhere on your path</p></li>
-<li><p>Ensure it runs with <code class="docutils literal notranslate"><span class="pre">geckodriver</span> <span class="pre">--version</span></code></p></li>
+<li><p>Ensure it runs with <cite>geckodriver –version</cite></p></li>
 </ul>
-</div>
-<div class="section" id="launch">
-<h2>Launch<a class="headerlink" href="#launch" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
-<li><p>Initialize the database with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_init</span></code> (this only needs to
+<p>## Launch</p>
+<ol class="arabic simple">
+<li><p>Initialize the database with <cite>make db_init</cite> (this only needs to
 happen once).</p></li>
-<li><p>Copy <code class="docutils literal notranslate"><span class="pre">config.yaml.defaults</span></code> to <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>.</p></li>
-<li><p>If you want some test data to play with, run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">load_demo_data</span></code>.</p></li>
-<li><p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">log</span></code> to monitor the service and, in a separate window, <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code> to start the server.</p></li>
 </ol>
-<p>Direct your browser to http://localhost:5000.</p>
-</div>
-<div class="section" id="additional-configuration">
-<h2>Additional Configuration<a class="headerlink" href="#additional-configuration" title="Permalink to this headline">¶</a></h2>
-<p>The configuration file lives in <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>, and is meant to be
+<p>2. Copy <cite>config.yaml.defaults</cite> to <cite>config.yaml</cite>.
+2. If you want some test data to play with, run <cite>make load_demo_data</cite>.
+3. Run <cite>make log</cite> to monitor the service and, in a separate window, <cite>make run</cite> to start the server.</p>
+<p>Direct your browser to <a class="reference external" href="http://localhost:5000">http://localhost:5000</a>.</p>
+<p>## Additional Configuration</p>
+<p>The configuration file lives in <cite>config.yaml</cite>, and is meant to be
 self-documenting.  Please modify as you see fit.</p>
-<p><strong>Before deploying this on a public server</strong> change <code class="docutils literal notranslate"><span class="pre">app:secret-key</span></code>
+<p><strong>Before deploying this on a public server</strong> change <cite>app:secret-key</cite>
 to a unique value.</p>
 <p>If you want to use a different configuration file, you may launch any
 of the SkyPortal commands with the FLAGS environment variable set:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FLAGS</span><span class="o">=</span><span class="s2">&quot;--config=myconfig.yaml&quot;</span> <span class="n">make</span> <span class="n">run</span>
-</pre></div>
-</div>
-<div class="section" id="authentication">
-<h3>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">FLAGS=&quot;--config=myconfig.yaml&quot;</span> <span class="pre">make</span> <span class="pre">run</span>
+<span class="pre">`</span></code></p>
+<p>### Authentication</p>
 <p>By default, the server allows anyone to log in (even if it presents a
 login screen).  If you are running a public-facing instance of
 SkyPortal, you should enable multi-user login by adding Google
-credentials to the <code class="docutils literal notranslate"><span class="pre">server:auth</span></code> section of the configuration file.</p>
-</div>
-<div class="section" id="creating-an-administrative-user">
-<h3>Creating an administrative user<a class="headerlink" href="#creating-an-administrative-user" title="Permalink to this headline">¶</a></h3>
+credentials to the <cite>server:auth</cite> section of the configuration file.</p>
+<p>### Creating an administrative user</p>
 <p>By default, no user has permission to perform system administration.
 You can add a user with such permissions by running the following from
 Python:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skyportal.model_util</span> <span class="kn">import</span> <span class="n">add_super_user</span>
-<span class="n">add_super_user</span><span class="p">(</span><span class="s1">&#39;testuser@cesium-ml.org&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="test-data">
-<h3>Test data<a class="headerlink" href="#test-data" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">from</span> <span class="pre">skyportal.model_util</span> <span class="pre">import</span> <span class="pre">add_super_user</span>
+<span class="pre">add_super_user('testuser&#64;cesium-ml.org')</span>
+<span class="pre">`</span></code></p>
+<p>### Test data</p>
 <p>By default, SkyPortal contains no data.  You can ingest some sample light curves by running</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">load_demo_data</span>
-</pre></div>
-</div>
-<p>This also adds <code class="docutils literal notranslate"><span class="pre">testuser&#64;cesium-ml.org</span></code> as an administrator.</p>
-</div>
-</div>
-</div>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">make</span> <span class="pre">load_demo_data</span>
+<span class="pre">`</span></code></p>
+<p>This also adds <cite>testuser&#64;cesium-ml.org</cite> as an administrator.</p>
 
 
            </div>
@@ -308,10 +278,10 @@ Python:</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="usage.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="about.html" class="btn btn-neutral float-left" title="About" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="about.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

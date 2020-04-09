@@ -1,12 +1,8 @@
-./_images/architecture.png
-./_images/architecture1.png
-./_images/frontend.png
-./_images/frontend1.png
-./_images/screenshot-2019-02.png
 ./_sources/about.md.txt
 ./_sources/adding_features.md.txt
 ./_sources/api.rst.txt
 ./_sources/contributing.md.txt
+./_sources/deploy.md.txt
 ./_sources/dev.md.txt
 ./_sources/index.rst.txt
 ./_sources/papers/joss/paper.md.txt
@@ -69,6 +65,7 @@
 ./adding_features.html
 ./api.html
 ./contributing.html
+./deploy.html
 ./dev.html
 ./genindex.html
 ./index.html

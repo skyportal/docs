@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Summary &mdash; skyportal 0.9.dev0 documentation</title>
+  <title>&lt;no title&gt; &mdash; skyportal 0.9.dev0 documentation</title>
   
 
   
@@ -85,13 +85,14 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../setup.html">Setup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../dev.html">Developer notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">How to Contribute</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../adding_features.html">Adding new features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../adding_features.html">};</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../adding_features.html#id6">}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../adding_features.html#id9">};</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../adding_features.html#id24">};</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../adding_features.html#id27">};</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../adding_features.html#id30">};</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../adding_features.html#id51">}</a></li>
 </ul>
 
             
@@ -137,7 +138,7 @@
     
       <li><a href="../../index.html">Docs</a> &raquo;</li>
         
-      <li>Summary</li>
+      <li>&lt;no title&gt;</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -154,18 +155,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <hr class="docutils" />
-<p>title: ‘SkyPortal: An Astronomical Data Platform’
+  <p>—
+title: ‘SkyPortal: An Astronomical Data Platform’
 tags:</p>
-<ul class="simple">
+<blockquote>
+<div><ul class="simple">
 <li><p>Python</p></li>
 <li><p>web</p></li>
 <li><p>astronomy</p></li>
 <li><p>time-series</p></li>
 <li><p>visualization</p></li>
 <li><p>analysis</p></li>
-<li><p>data
-authors:</p></li>
+<li><p>data</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>authors:</dt><dd><ul class="simple">
 <li><p>name: Stéfan J. van der Walt
 orcid: 0000-0001-9276-1891
 affiliation: 1</p></li>
@@ -174,58 +179,59 @@ orcid: 0000-0002-7183-0410
 affiliation: 2</p></li>
 <li><p>name: Joshua S. Bloom
 orcid: 0000-0002-7777-216X
-affiliation: 2
-affiliations:</p></li>
+affiliation: 2</p></li>
+</ul>
+</dd>
+<dt>affiliations:</dt><dd><ul class="simple">
 <li><p>name: Berkeley Institute for Data Science, University of California, Berkeley
 index: 1</p></li>
 <li><p>name: Department of Astronomy, University of California, Berkeley
-index: 2
-date: 7 February 2019
-bibliography: paper.bib</p></li>
+index: 2</p></li>
 </ul>
-<hr class="docutils" />
-<div class="section" id="summary">
-<h1>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h1>
+</dd>
+</dl>
+<p>date: 7 February 2019
+bibliography: paper.bib
+—</p>
+<p># Summary</p>
 <p>SkyPortal is a web application that stores and interactively displays
 astronomical datasets for annotation, analysis, and discovery. It is
 designed to be modular and extensible, so it can be customized for
 various scientific use cases.  It is released under the Modified BSD
 license.</p>
 <p>SkyPortal was designed with time-series survey data from
-the <a class="reference external" href="https://www.ztf.caltech.edu">Zwicky Transient Facility</a>, and
+the [Zwicky Transient Facility](<a class="reference external" href="https://www.ztf.caltech.edu">https://www.ztf.caltech.edu</a>), and
 eventually
-<a class="reference external" href="https://www.lsst.org">The Large Synoptic Survey Telescope</a>, in mind.</p>
+[The Large Synoptic Survey Telescope](<a class="reference external" href="https://www.lsst.org">https://www.lsst.org</a>), in mind.</p>
 <p>By default, it aims to provide a useful, rich user experience, including
 light curves of named astronomical events/transients, spectra, live chat, and links to other surveys.
 But the intent, ultimately, is for the frontend to be modified to best
 suit the specific scientific problem at hand. The current UI/UX was inspired by that developed for the Palomar Transient Factory (PTF) Marshal [&#64;Law09].</p>
-</div>
-<div class="section" id="architecture">
-<h1>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h1>
+<p># Architecture</p>
 <p>SkyPortal builds on top
-of <a class="reference external" href="https://github.com/cesium-ml/baselayer">baselayer</a>, a customizable
+of [baselayer](<a class="reference external" href="https://github.com/cesium-ml/baselayer">https://github.com/cesium-ml/baselayer</a>), a customizable
 scientific web application platform developed by the same authors as
 part of the Cesium-ML time-series project
 [&#64;brett_naul-proc-scipy-2016]. Baselayer provides SkyPortal with
 authentication (via OAuth, Google, etc.), websockets (to communicate between the
 Python backend and the JavaScript frontend), and the scaffolding for
 managing microservices and routing incoming requests via Nginx.</p>
-<p><img alt="SkyPortal architecture. Each technological component is chosen to be efficient and scalable, and is applied exactly for the purpose it was built." src="../../_images/architecture1.png" /></p>
+<p>![SkyPortal architecture. Each technological component is chosen to be efficient and scalable, and is applied exactly for the purpose it was built.](architecture.png)</p>
 <p>The application has a Python backend (running the Tornado web server),
-with a React &amp; Redux frontend.  <a class="reference external" href="https://reactjs.org/">React</a> was chosen because of its clean
-component design, and <a class="reference external" href="https://redux.js.org/">Redux</a> provides the application logic that
+with a React &amp; Redux frontend.  [React](<a class="reference external" href="https://reactjs.org/">https://reactjs.org/</a>) was chosen because of its clean
+component design, and [Redux](<a class="reference external" href="https://redux.js.org/">https://redux.js.org/</a>) provides the application logic that
 renders these components appropriately, given the application state.</p>
-<p><img alt="Frontend architecture. Components are rendered by React, and application logic is driven by Redux." src="../../_images/frontend1.png" /></p>
+<p>![Frontend architecture. Components are rendered by React, and application logic is driven by Redux.](frontend.png)</p>
 <p>For machine users, SkyPortal provides a token-based API, meaning that
 all of its data can be queried and modified by scripts without using
 the browser frontend.</p>
 <p>Importantly, the application is able to provide graphical renditions
-of datasets, using the <a class="reference external" href="https://bokeh.pydata.org">Bokeh</a> library.  In
+of datasets, using the [Bokeh](<a class="reference external" href="https://bokeh.pydata.org">https://bokeh.pydata.org</a>) library.  In
 the default version of SkyPortal, this functionality is used to
 render, e.g., spectra, with the ability to toggle color bands and
 element spectra, or to adjust redshift.</p>
 <p>The platform also has the ability to perform
-distributed computation via <a class="reference external" href="https://dask.org/">Dask</a>.</p>
+distributed computation via [Dask](<a class="reference external" href="https://dask.org/">https://dask.org/</a>).</p>
 <p>SkyPortal implements two types of security: group based, and Access
 Control List (ACL) based.  Group based security determines which users
 have access to which sources (data objects), each of which is
@@ -235,42 +241,33 @@ roles, which determine, regardless of data source, which pages a user
 can access.</p>
 <p>SkyPortal is designed to be employed on systems of varying scale: a
 laptop, local server, or hosted infrastructure.  We support packaging
-the entire application into a <a class="reference external" href="https://www.docker.com/">Docker</a> container, which can then be
-deployed to the cloud.  An example deployment, using <a class="reference external" href="https://kubernetes.io/">Kubernetes</a>, is
+the entire application into a [Docker](<a class="reference external" href="https://www.docker.com/">https://www.docker.com/</a>) container, which can then be
+deployed to the cloud.  An example deployment, using [Kubernetes](<a class="reference external" href="https://kubernetes.io/">https://kubernetes.io/</a>), is
 provided.</p>
 <p>Integration testing is done upon every commit, using Travis-CI, by
 automating the Firefox browser
 with
-<a class="reference external" href="https://firefox-source-docs.mozilla.org/testing/geckodriver/geckodriver/">GeckoDriver</a>.
+[GeckoDriver](<a class="reference external" href="https://firefox-source-docs.mozilla.org/testing/geckodriver/geckodriver/">https://firefox-source-docs.mozilla.org/testing/geckodriver/geckodriver/</a>).
 This ensures that the entire user experience—from logging in to making
 API requests—keeps working correctly.</p>
-</div>
-<div class="section" id="future-work">
-<h1>Future work<a class="headerlink" href="#future-work" title="Permalink to this headline">¶</a></h1>
+<p># Future work</p>
 <p>In the next version of SkyPortal, we intend to support loading sources in
 real-time from astronomical surveys, typically by
-ingesting <a class="reference external" href="https://kafka.apache.org/">Kafka</a> streams.  We also plan to
+ingesting [Kafka](<a class="reference external" href="https://kafka.apache.org/">https://kafka.apache.org/</a>) streams.  We also plan to
 add the ability to publish processed sub-streams, creating
 so-called “brokers” [&#64;Swinbank14].  Finally, it will be possible to customize views
 (from the web interface), and for developers to easily add and modify
 user-interface components.</p>
-</div>
-<div class="section" id="conclusion">
-<h1>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h1>
+<p># Conclusion</p>
 <p>SkyPortal is an extensible data platform for astronomy.  It is
 currently being used to analyze data from various sky surveys, with
 the potential to aid many more astronomers in their data processing
 and visualization needs.  It is actively developed and maintained, and
 the authors welcome and encourage collaboration.</p>
-<p><img alt="SkyPortal source rendering. Featured are thumbnails, light curve plot, spectrogram, live chat, and links to various sky surveys." src="../../_images/screenshot-2019-02.png" /></p>
-</div>
-<div class="section" id="acknowledgements">
-<h1>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permalink to this headline">¶</a></h1>
+<p>![SkyPortal source rendering. Featured are thumbnails, light curve plot, spectrogram, live chat, and links to various sky surveys.](screenshot-2019-02.png)</p>
+<p># Acknowledgements</p>
 <p>We thank M. Kasliwal and D. Goldstein for helpful discussions and insights during the prototyping and build-out phases of this project. This work was supported by a Gordon and Betty Moore Foundation Data-Driven Discovery grant.</p>
-</div>
-<div class="section" id="references">
-<h1>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h1>
-</div>
+<p># References</p>
 
 
            </div>
