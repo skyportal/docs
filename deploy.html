@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>&lt;no title&gt; &mdash; skyportal 0.9.dev0 documentation</title>
+  <title>Deployment &mdash; skyportal 0.9.dev0 documentation</title>
   
 
   
@@ -37,8 +37,8 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="contributing.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="dev.html" /> 
+    <link rel="next" title="How to Contribute" href="contributing.html" />
+    <link rel="prev" title="Developer notes" href="dev.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,15 +86,22 @@
               
             
             
-              <ul>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="adding_features.html">};</a></li>
-<li class="toctree-l1"><a class="reference internal" href="adding_features.html#id6">}</a></li>
-<li class="toctree-l1"><a class="reference internal" href="adding_features.html#id9">};</a></li>
-<li class="toctree-l1"><a class="reference internal" href="adding_features.html#id24">};</a></li>
-<li class="toctree-l1"><a class="reference internal" href="adding_features.html#id27">};</a></li>
-<li class="toctree-l1"><a class="reference internal" href="adding_features.html#id30">};</a></li>
-<li class="toctree-l1"><a class="reference internal" href="adding_features.html#id51">}</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Developer notes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Deployment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#building-the-docker-images">Building the Docker images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#starting-containers">Starting containers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#handling-problems">Handling problems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#adding-test-data">Adding test data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#stopping-the-deployment">Stopping the deployment</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_features.html">Adding new features</a></li>
 </ul>
 
             
@@ -140,7 +147,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>&lt;no title&gt;</li>
+      <li>Deployment</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -157,57 +164,69 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <p># Deployment</p>
+  <div class="section" id="deployment">
+<h1>Deployment<a class="headerlink" href="#deployment" title="Permalink to this headline">¶</a></h1>
 <p>SkyPortal can be deployed either with or without using Docker.
 Without Docker, all services (such as the database) need to be running
-locally, as described in [setup](setup).</p>
+locally, as described in <a class="reference internal" href="setup.html"><span class="doc">setup</span></a>.</p>
 <p>More commonly, production deployment will use Docker images.  Here, we
 discuss how to deploy via
-[docker-compose](<a class="reference external" href="https://docs.docker.com/compose/">https://docs.docker.com/compose/</a>), but much of the
+<a class="reference external" href="https://docs.docker.com/compose/">docker-compose</a>, but much of the
 same information applies when using Kubernetes, for which we have an
-[example deployment](<a class="reference external" href="https://github.com/skyportal/deploy">https://github.com/skyportal/deploy</a>).</p>
-<p>## Building the Docker images</p>
+<a class="reference external" href="https://github.com/skyportal/deploy">example deployment</a>.</p>
+<div class="section" id="building-the-docker-images">
+<h2>Building the Docker images<a class="headerlink" href="#building-the-docker-images" title="Permalink to this headline">¶</a></h2>
 <p>The first step is to obtain the images to launch.  We deploy
-[SkyPortal images](<a class="reference external" href="https://hub.docker.com/r/skyportal/web">https://hub.docker.com/r/skyportal/web</a>) to Docker
+<a class="reference external" href="https://hub.docker.com/r/skyportal/web">SkyPortal images</a> to Docker
 Hub from time to time, which you can fetch using:</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">docker</span> <span class="pre">pull</span> <span class="pre">skyportal/web</span>
-<span class="pre">`</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">pull</span> <span class="n">skyportal</span><span class="o">/</span><span class="n">web</span>
+</pre></div>
+</div>
 <p>Otherwise, you may build the images from scratch:</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">make</span> <span class="pre">docker-local</span>
-<span class="pre">`</span></code></p>
-<p>## Starting containers</p>
-<p>Next, we deploy two containers: <cite>web</cite> (the SkyPortal application) and
-<cite>db</cite> (the PostgreSQL server).  The database is stored in a local
-docker volume called <cite>skyportal_dbdata</cite> (see <cite>docker volume ls</cite>).</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">docker-compose</span> <span class="pre">up</span> <span class="pre">-d</span>
-<span class="pre">`</span></code></p>
-<p>Once both services are up and running, you may browse to SkyPortal at <cite>http://localhost:9000</cite>.</p>
-<p>## Handling problems</p>
-<p>You can see which containers are running with <cite>docker-compose ps</cite>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">docker</span><span class="o">-</span><span class="n">local</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="starting-containers">
+<h2>Starting containers<a class="headerlink" href="#starting-containers" title="Permalink to this headline">¶</a></h2>
+<p>Next, we deploy two containers: <code class="docutils literal notranslate"><span class="pre">web</span></code> (the SkyPortal application) and
+<code class="docutils literal notranslate"><span class="pre">db</span></code> (the PostgreSQL server).  The database is stored in a local
+docker volume called <code class="docutils literal notranslate"><span class="pre">skyportal_dbdata</span></code> (see <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">volume</span> <span class="pre">ls</span></code>).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">up</span> <span class="o">-</span><span class="n">d</span>
+</pre></div>
+</div>
+<p>Once both services are up and running, you may browse to SkyPortal at <code class="docutils literal notranslate"><span class="pre">http://localhost:9000</span></code>.</p>
+</div>
+<div class="section" id="handling-problems">
+<h2>Handling problems<a class="headerlink" href="#handling-problems" title="Permalink to this headline">¶</a></h2>
+<p>You can see which containers are running with <code class="docutils literal notranslate"><span class="pre">docker-compose</span> <span class="pre">ps</span></code>.</p>
 <p>Inspect the logs for the running containers using:</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">docker-compose</span> <span class="pre">logs</span> <span class="pre">web</span>
-<span class="pre">docker-compose</span> <span class="pre">logs</span> <span class="pre">db</span>
-<span class="pre">`</span></code></p>
-<p>(Or, follow the logs with <cite>docker-compose logs -f db</cite>.)</p>
-<p>## Adding test data</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">logs</span> <span class="n">web</span>
+<span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">logs</span> <span class="n">db</span>
+</pre></div>
+</div>
+<p>(Or, follow the logs with <code class="docutils literal notranslate"><span class="pre">docker-compose</span> <span class="pre">logs</span> <span class="pre">-f</span> <span class="pre">db</span></code>.)</p>
+</div>
+<div class="section" id="adding-test-data">
+<h2>Adding test data<a class="headerlink" href="#adding-test-data" title="Permalink to this headline">¶</a></h2>
 <p>To add some test data to play with, run:</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">docker-compose</span> <span class="pre">run</span> <span class="pre">web</span> <span class="pre">bash</span> <span class="pre">-c</span> <span class="pre">'source</span> <span class="pre">/skyportal_env/bin/activate</span> <span class="pre">&amp;&amp;</span> <span class="pre">make</span> <span class="pre">load_demo_data'</span>
-<span class="pre">`</span></code></p>
-<p>## Stopping the deployment</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">run</span> <span class="n">web</span> <span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;source /skyportal_env/bin/activate &amp;&amp; make load_demo_data&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="stopping-the-deployment">
+<h2>Stopping the deployment<a class="headerlink" href="#stopping-the-deployment" title="Permalink to this headline">¶</a></h2>
 <p>You may stop both containers using:</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">docker-compose</span> <span class="pre">stop</span>
-<span class="pre">`</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">stop</span>
+</pre></div>
+</div>
 <p>Or stop and remove them using:</p>
-<p><code class="docutils literal notranslate"><span class="pre">`</span>
-<span class="pre">docker-compose</span> <span class="pre">down</span>
-<span class="pre">`</span></code></p>
-<p>This does not affect data, which lives in the <cite>./dbdata</cite> directory.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">down</span>
+</pre></div>
+</div>
+<p>This does not affect data, which lives in the <code class="docutils literal notranslate"><span class="pre">./dbdata</span></code> directory.</p>
+</div>
+</div>
 
 
            </div>
@@ -217,10 +236,10 @@ docker volume called <cite>skyportal_dbdata</cite> (see <cite>docker volume ls</
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="contributing.html" class="btn btn-neutral float-right" title="&lt;no title&gt;" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="contributing.html" class="btn btn-neutral float-right" title="How to Contribute" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="dev.html" class="btn btn-neutral float-left" title="&lt;no title&gt;" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="dev.html" class="btn btn-neutral float-left" title="Developer notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
