@@ -558,7 +558,7 @@
         <span class="o">...</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">push_all</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;skyportal/REFRESH_SOURCE&#39;</span><span class="p">,</span>
-                      <span class="n">payload</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;source_id&#39;</span><span class="p">:</span> <span class="n">comment</span><span class="o">.</span><span class="n">source_id</span><span class="p">})</span>
+                      <span class="n">payload</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;obj_id&#39;</span><span class="p">:</span> <span class="n">comment</span><span class="o">.</span><span class="n">obj_id</span><span class="p">})</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 </pre></div>
@@ -583,10 +583,10 @@
   <span class="kr">const</span> <span class="p">{</span> <span class="nx">source</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">getState</span><span class="p">();</span>
 
   <span class="k">if</span> <span class="p">(</span><span class="nx">actionType</span> <span class="o">===</span> <span class="nx">REFRESH_SOURCE</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kr">const</span> <span class="nx">loaded_source_id</span> <span class="o">=</span> <span class="nx">source</span> <span class="o">?</span> <span class="nx">source</span><span class="p">.</span><span class="nx">id</span> <span class="o">:</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="kr">const</span> <span class="nx">loaded_obj_id</span> <span class="o">=</span> <span class="nx">source</span> <span class="o">?</span> <span class="nx">source</span><span class="p">.</span><span class="nx">id</span> <span class="o">:</span> <span class="kc">null</span><span class="p">;</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">loaded_source_id</span> <span class="o">===</span> <span class="nx">payload</span><span class="p">.</span><span class="nx">source_id</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">dispatch</span><span class="p">(</span><span class="nx">fetchSource</span><span class="p">(</span><span class="nx">loaded_source_id</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">loaded_obj_id</span> <span class="o">===</span> <span class="nx">payload</span><span class="p">.</span><span class="nx">obj_id</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">dispatch</span><span class="p">(</span><span class="nx">fetchSource</span><span class="p">(</span><span class="nx">loaded_obj_id</span><span class="p">));</span>
     <span class="p">}</span>
   <span class="p">}</span>
 <span class="p">});</span>
