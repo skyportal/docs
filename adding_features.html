@@ -1,8 +1,7 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8">
   
@@ -12,12 +11,19 @@
   
 
   
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/output_cells.css" type="text/css" />
+
+  
   
   
   
 
   
-  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -29,11 +35,6 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/output_cells.css" type="text/css" />
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -51,7 +52,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> skyportal
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> skyportal
           
 
           
@@ -78,6 +79,7 @@
           
         </div>
 
+        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -115,6 +117,7 @@
             
           
         </div>
+        
       </div>
     </nav>
 
@@ -153,7 +156,7 @@
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="index.html">Docs</a> &raquo;</li>
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
         
       <li>Adding new features</li>
     
@@ -520,7 +523,7 @@
 </div>
 <p>Error responses with informative messages should be returned when a request contains invalid data, if the user doesn’t have access to the requested resource, or if an exception is caught during the handling of the request.</p>
 <p>After adding the relevant import lines to <code class="docutils literal notranslate"><span class="pre">skyportal/handlers/api/__init__.py</span></code> and <code class="docutils literal notranslate"><span class="pre">skyportal/app_server.py</span></code> to import our new <code class="docutils literal notranslate"><span class="pre">RandomStringHandler</span></code> into the <code class="docutils literal notranslate"><span class="pre">app_server</span></code> module, we then add an element to our endpoint &amp; handler mapping list (see the <code class="docutils literal notranslate"><span class="pre">handlers</span></code> assignment statement in the <code class="docutils literal notranslate"><span class="pre">make_app</span></code> function defined in <code class="docutils literal notranslate"><span class="pre">skyportal/app_server.py</span></code>) to map the associated API endpoint to the new handler class. The elements of this list are tuples consisting of a regex string describing the matching URL pattern, and the handler object: <code class="docutils literal notranslate"><span class="pre">(r'/api/random_string',</span> <span class="pre">RandomStringHandler)</span></code>. After defining our handler and mapping it to the API endpoint in our application, we can now expect any authenticated GET requests to <code class="docutils literal notranslate"><span class="pre">&lt;base_URL&gt;/api/random_string</span></code> to return with a successful response containing a new random string in the JSON body.</p>
-<p>We can now fire up SkyPortal to try out our new feature by running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code> (run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">log</span></code> in another terminal to monitor the logs). After we see in the logs that the compiling and bundling our JavaScript sources (you’ll see “bundle.js”), navigate to wherever you’ve configured the app to run (localhost:5000 by default), perform a hard refresh to bypass outdated cache, and you can see our component is rendering and behaving as expected.</p>
+<p>We can now fire up SkyPortal to try out our new feature by running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code> (run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">log</span></code> in another terminal to monitor the logs). After we see in the logs that the compiling and bundling our JavaScript sources (you’ll see “main.bundle.js”), navigate to wherever you’ve configured the app to run (localhost:5000 by default), perform a hard refresh to bypass outdated cache, and you can see our component is rendering and behaving as expected.</p>
 <p>Now our new feature should be fully implemented, and we’ll add a test to make sure it’s working as expected. We use Selenium in our front-end tests; we’ll use that to make sure a UUID string appears after (and not before) we click the button. This test assumes we’ve rendered our new component inside the <code class="docutils literal notranslate"><span class="pre">Profile</span></code> component, which is rendered when a user navigates to <code class="docutils literal notranslate"><span class="pre">/profile</span></code> (this is arbitrary - adjust these to reflect whichever location you choose to render your component).</p>
 <p><code class="docutils literal notranslate"><span class="pre">skyportal/tests/frontend/test_random_string.py</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
@@ -658,11 +661,19 @@
 
   <div role="contentinfo">
     <p>
+        
         &copy; Copyright 2017, The skyportal Team
 
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -673,7 +684,6 @@
 
   </div>
   
-
 
   <script type="text/javascript">
       jQuery(function () {
