@@ -1,0 +1,295 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Data loader &mdash; skyportal 0.9.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/output_cells.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="How to Contribute" href="contributing.html" />
+    <link rel="prev" title="Deployment" href="deploy.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> skyportal
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9.dev0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Developer notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">Deployment</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data loader</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#files">Files</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_features.html">Adding new features</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">skyportal</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Data loader</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="data-loader">
+<h1>Data loader<a class="headerlink" href="#data-loader" title="Permalink to this headline">¶</a></h1>
+<p>To populate SkyPortal with initial data, use <code class="docutils literal notranslate"><span class="pre">tools/data_loader.py</span></code>.
+This is also used when doing <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">load_seed_data</span></code> and <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">load_demo_data</span></code>.</p>
+<p>The data loader reads a data file in YAML format.  This YAML files
+matches the SkyPortal API: each entry corresponds to an API endpoint,
+and contains a list of objects to post (see <code class="docutils literal notranslate"><span class="pre">data/db_demo.yaml</span></code> for an
+example).</p>
+<div class="section" id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
+<p>The attributes of a posted object can be saved as references:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Program</span> <span class="n">A</span>
+    <span class="n">group_admins</span><span class="p">:</span>
+      <span class="o">-</span> <span class="n">testadmin</span><span class="nd">@cesium</span><span class="o">-</span><span class="n">ml</span><span class="o">.</span><span class="n">org</span>
+    <span class="o">=</span><span class="nb">id</span><span class="p">:</span> <span class="n">program_A</span>
+</pre></div>
+</div>
+<p>Here, the <code class="docutils literal notranslate"><span class="pre">id</span></code> field of the created group is stored as <code class="docutils literal notranslate"><span class="pre">program_A</span></code>.
+This can now be used when, e.g., posting a telescope:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">telescope</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">name</span><span class="p">:</span> <span class="n">Palomar</span> <span class="mf">1.5</span><span class="n">m</span>
+    <span class="n">nickname</span><span class="p">:</span> <span class="n">P60</span>
+    <span class="n">lat</span><span class="p">:</span> <span class="mf">33.3633675</span>
+    <span class="n">lon</span><span class="p">:</span> <span class="o">-</span><span class="mf">116.8361345</span>
+    <span class="n">elevation</span><span class="p">:</span> <span class="mi">1870</span>
+    <span class="n">diameter</span><span class="p">:</span> <span class="mf">1.5</span>
+    <span class="n">skycam_link</span><span class="p">:</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">bianca</span><span class="o">.</span><span class="n">palomar</span><span class="o">.</span><span class="n">caltech</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">allsky</span><span class="o">/</span><span class="n">AllSkyCurrentImage</span><span class="o">.</span><span class="n">JPG</span>
+    <span class="n">group_ids</span><span class="p">:</span>
+      <span class="o">-</span> <span class="o">=</span><span class="n">program_A</span>
+</pre></div>
+</div>
+<p>Endpoints can also contain references:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span><span class="o">/=</span><span class="n">program_A</span><span class="o">/</span><span class="n">users</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">username</span><span class="p">:</span> <span class="n">viewonlyuser</span><span class="nd">@cesium</span><span class="o">-</span><span class="n">ml</span><span class="o">.</span><span class="n">org</span>
+    <span class="n">admin</span><span class="p">:</span> <span class="n">false</span>
+</pre></div>
+</div>
+<p>Here, the endpoint will become, e.g., <code class="docutils literal notranslate"><span class="pre">groups/6/users</span></code>.</p>
+</div>
+<div class="section" id="files">
+<h2>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h2>
+<p>Lists of objects to post can be loaded through a top-level file entry:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">telescope</span><span class="p">:</span>
+  <span class="n">file</span><span class="p">:</span> <span class="n">telescopes</span><span class="o">.</span><span class="n">yaml</span>
+</pre></div>
+</div>
+<p>If objects reference <code class="docutils literal notranslate"><span class="pre">png</span></code> files, those will be read in and posted as
+b64-encoded bytes:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">thumbnail</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">obj_id</span><span class="p">:</span> <span class="mi">14</span><span class="n">gqr</span>
+    <span class="n">ttype</span><span class="p">:</span> <span class="n">new</span>
+    <span class="n">data</span><span class="p">:</span>
+      <span class="n">file</span><span class="p">:</span> <span class="o">../</span><span class="n">skyportal</span><span class="o">/</span><span class="n">tests</span><span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="mi">14</span><span class="n">gqr_new</span><span class="o">.</span><span class="n">png</span>
+</pre></div>
+</div>
+<p>CSV files are read as columns, each of which becomes an entry in the
+posted object:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">photometry</span><span class="p">:</span>
+  <span class="o">-</span> <span class="n">obj_id</span><span class="p">:</span> <span class="mi">14</span><span class="n">gqr_unsaved_copy</span>
+    <span class="n">file</span><span class="p">:</span> <span class="n">phot</span><span class="o">.</span><span class="n">csv</span>
+    <span class="n">group_ids</span><span class="p">:</span>
+      <span class="o">-</span> <span class="o">=</span><span class="n">program_A</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">phot.csv</span></code> has columns <code class="docutils literal notranslate"><span class="pre">filter</span></code>, <code class="docutils literal notranslate"><span class="pre">mjd</span></code>, etc., so each of those
+would become an entry in the posted object, each with a list of
+values.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="contributing.html" class="btn btn-neutral float-right" title="How to Contribute" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="deploy.html" class="btn btn-neutral float-left" title="Deployment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2017, The skyportal Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

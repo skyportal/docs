@@ -7,6 +7,7 @@
 ./_sources/adding_features.md.txt
 ./_sources/api.rst.txt
 ./_sources/contributing.md.txt
+./_sources/data_loader.md.txt
 ./_sources/deploy.md.txt
 ./_sources/dev.md.txt
 ./_sources/index.rst.txt
@@ -101,6 +102,7 @@
 ./adding_features.html
 ./api.html
 ./contributing.html
+./data_loader.html
 ./deploy.html
 ./dev.html
 ./genindex.html
