@@ -99,7 +99,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#database">Database</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#standards">Standards</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#docker-images">Docker images</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#debugging-github-actions">Debugging GitHub Actions</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="deploy.html">Deployment</a></li>
@@ -259,15 +258,6 @@ make use of include:</p>
 <div class="section" id="docker-images">
 <h2>Docker images<a class="headerlink" href="#docker-images" title="Permalink to this headline">¶</a></h2>
 <p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docker-images</span></code> to build and push to Docker hub.</p>
-</div>
-<div class="section" id="debugging-github-actions">
-<h2>Debugging GitHub Actions<a class="headerlink" href="#debugging-github-actions" title="Permalink to this headline">¶</a></h2>
-<p>You can insert the following step to debug your workflow:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span>  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Setup tmate session</span>
-    <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mxschmitt/action-tmate@v2</span>
-</pre></div>
-</div>
-<p>It will print a command that you can use to SSH into the runner.</p>
 </div>
 </div>
 
