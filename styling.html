@@ -1,0 +1,382 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Styling components &mdash; skyportal 0.9.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/output_cells.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Adding new features" href="adding_features.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> skyportal
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9.dev0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Developer notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_loader.html">Data loader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_features.html">Adding new features</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Styling components</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#components">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sizes">Sizes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#style-props-on-box">Style props on Box</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#responsive-design">Responsive Design</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#grid-system">Grid system</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#do-s-and-don-ts">Do’s and don’ts</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">skyportal</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Styling components</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="styling-components">
+<h1>Styling components<a class="headerlink" href="#styling-components" title="Permalink to this headline">¶</a></h1>
+<p>SkyPortal is built on top of <a class="reference external" href="https://material-ui.com/">Material UI</a>
+(MUI).  We have evaluated several styling systems, including inline
+styles, CSS Modules, and Styled Components, and have settled on using
+<a class="reference external" href="https://material-ui.com/styles/basics/#hook-api">MUI’s style hooks API</a>.</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">makeStyles</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@material-ui/core/styles&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>MUI provides <code class="docutils literal notranslate"><span class="pre">makeStyles</span></code>, which takes in JSS (JavaScript Style
+Sheets) and returns a CSS provider <a class="reference external" href="https://reactjs.org/docs/hooks-reference.html">hook</a>:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">useStyles</span> <span class="o">=</span> <span class="nx">makeStyles</span><span class="p">({</span>
+  <span class="nx">root</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">border</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">padding</span><span class="o">:</span> <span class="s1">&#39;1rem&#39;</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>The resulting <code class="docutils literal notranslate"><span class="pre">useStyles</span></code> can then be used inside of a component:</p>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="kr">import</span> <span class="nx">Button</span> <span class="nx">from</span> <span class="s1">&#39;@material-ui/core/Button&#39;</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">MyButton</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">classes</span> <span class="o">=</span> <span class="nx">useStyles</span><span class="p">();</span>
+  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">Button</span> <span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="nx">classes</span><span class="p">.</span><span class="nx">root</span><span class="p">}&gt;</span><span class="nx">Click</span> <span class="nx">Me</span><span class="p">&lt;/</span><span class="nt">Button</span><span class="p">&gt;;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It is possible to make nested definitions:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">useStyles</span> <span class="o">=</span> <span class="nx">makeStyles</span><span class="p">({</span>
+  <span class="nx">root</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;&amp; p&#39;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;&amp; span&#39;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;blue&#39;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>This is done via the
+<a class="reference external" href="http://lesscss.org/features/#parent-selectors-feature"><code class="docutils literal notranslate"><span class="pre">&amp;</span></code> selector</a>:
+<code class="docutils literal notranslate"><span class="pre">&amp;p</span></code> is a <code class="docutils literal notranslate"><span class="pre">p</span></code> element on <code class="docutils literal notranslate"><span class="pre">root</span></code> here.</p>
+<p>You can also <a class="reference external" href="https://material-ui.com/styles/basics/#adapting-based-on-props">parameterize <code class="docutils literal notranslate"><span class="pre">makeStyles</span></code></a>.</p>
+<div class="section" id="components">
+<h2>Components<a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h2>
+<p>Please refer to the <a class="reference external" href="https://material-ui.com/components/box/">MUI component
+docs</a> for available
+components and their props and CSS styles.</p>
+</div>
+<div class="section" id="sizes">
+<h2>Sizes<a class="headerlink" href="#sizes" title="Permalink to this headline">¶</a></h2>
+<p>All sizes should be specified using <code class="docutils literal notranslate"><span class="pre">rem</span></code>, which stands for “root
+element”—i.e., <code class="docutils literal notranslate"><span class="pre">1.5rem</span></code> would be 1.5 times the size of the font-size
+specified in the root HTML element.</p>
+</div>
+<div class="section" id="style-props-on-box">
+<h2>Style props on Box<a class="headerlink" href="#style-props-on-box" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">makeStyles</span></code> is preferred in general, but for simple formatting you
+may use <a class="reference external" href="https://material-ui.com/system/basics/#all-inclusive">style
+props</a> on <code class="docutils literal notranslate"><span class="pre">Box</span></code>
+containers:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Box</span> <span class="n">m</span><span class="o">=</span><span class="p">{</span><span class="mi">2</span><span class="n">rem</span><span class="p">}</span> <span class="o">/&gt;</span>
+</pre></div>
+</div>
+<p>See also “Grid system” below.</p>
+</div>
+<div class="section" id="responsive-design">
+<h2>Responsive Design<a class="headerlink" href="#responsive-design" title="Permalink to this headline">¶</a></h2>
+<p>MUI uses
+<a class="reference external" href="https://material-ui.com/customization/breakpoints">breakpoints</a>
+as a convenient way of writing CSS media queries.</p>
+<p>Breakpoints understand the following pre-defined screen sizes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">xs</span></code> (extra-small): 0px or larger</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sm</span></code> (small): 600px or larger</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">md</span></code> (medium): 960px or larger</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lg</span></code> (large): 1280px or larger</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xl</span></code> (extra-large): 1920px or larger</p></li>
+</ul>
+<p>While MUI supports several breakpoint operators (<code class="docutils literal notranslate"><span class="pre">up</span></code>, <code class="docutils literal notranslate"><span class="pre">down</span></code>, <code class="docutils literal notranslate"><span class="pre">only</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">between</span></code>), because of confusing logic we only use <code class="docutils literal notranslate"><span class="pre">up</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">theme.breakpoints.up(sm)</span></code>: targets screen sizes <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">small</span></code></p></li>
+</ul>
+<p>Use it as follows:</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">useStyles</span> <span class="o">=</span> <span class="nx">makeStyles</span><span class="p">({</span>
+  <span class="nx">root</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="nx">theme</span><span class="p">.</span><span class="nx">breakpoints</span><span class="p">.</span><span class="nx">up</span><span class="p">(</span><span class="s1">&#39;md&#39;</span><span class="p">)]</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>You may customize media-queries using the
+<a class="reference external" href="https://material-ui.com/components/use-media-query"><code class="docutils literal notranslate"><span class="pre">useMediaQuery</span></code></a>
+hook.</p>
+<div class="section" id="grid-system">
+<h3>Grid system<a class="headerlink" href="#grid-system" title="Permalink to this headline">¶</a></h3>
+<p>For positioning components on a page, MUI provides a <a class="reference external" href="https://material-ui.com/components/grid/">12-column grid
+layout</a>.</p>
+<p>There are two <code class="docutils literal notranslate"><span class="pre">Grid</span></code> types: <code class="docutils literal notranslate"><span class="pre">container</span></code> (outer element) and <code class="docutils literal notranslate"><span class="pre">item</span></code>
+(inner elements).</p>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">container</span> <span class="na">spacing</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="nx">rem</span><span class="p">}&gt;</span>
+  <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="o">=</span><span class="p">{</span><span class="mi">4</span><span class="p">}&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mi">1</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="o">=</span><span class="p">{</span><span class="mi">4</span><span class="p">}&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mi">2</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="o">=</span><span class="p">{</span><span class="mi">4</span><span class="p">}&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mi">3</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">xs</span></code> above refers to <code class="docutils literal notranslate"><span class="pre">xs</span></code>, the breakpoint from the previous
+section.  In other words, this split of cells will be used from <code class="docutils literal notranslate"><span class="pre">xs</span></code>
+and up.
+<a class="reference external" href="https://material-ui.com/components/grid/#grid-with-breakpoints">Multiple breakpoints</a>
+can be specified.</p>
+<p>You can also leave the value of <code class="docutils literal notranslate"><span class="pre">xs</span></code> blank, in which case elements are automatically spaced:</p>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">container</span> <span class="na">spacing</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="nx">rem</span><span class="p">}&gt;</span>
+  <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mi">1</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="o">=</span><span class="p">{</span><span class="mi">6</span><span class="p">}&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mi">2</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mi">3</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="do-s-and-don-ts">
+<h2>Do’s and don’ts<a class="headerlink" href="#do-s-and-don-ts" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Do not use inline styles</p>
+<p>When a list of components are rendered with inline styles, you cannot
+easily use the web developer tools to modify all of their CSS at the
+same time (editing one will edit just one instance, instead of all).</p>
+<p>Inline styles are spread all over the place, so it is harder to
+hunt down.</p>
+<p>Inline CSS also does not support media queries for responsive design.</p>
+</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="adding_features.html" class="btn btn-neutral float-left" title="Adding new features" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2017, The skyportal Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

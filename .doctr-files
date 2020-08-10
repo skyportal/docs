@@ -13,6 +13,7 @@
 ./_sources/index.rst.txt
 ./_sources/papers/joss/paper.md.txt
 ./_sources/setup.md.txt
+./_sources/styling.md.txt
 ./_sources/usage.md.txt
 ./_static/basic.css
 ./_static/css/badge_only.css
@@ -112,4 +113,5 @@
 ./search.html
 ./searchindex.js
 ./setup.html
+./styling.html
 ./usage.html
