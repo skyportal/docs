@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Skyportal &mdash; skyportal 0.9.dev0 documentation</title>
+  <title>SkyPortal &mdash; skyportal 0.9.dev0 documentation</title>
   
 
   
@@ -35,10 +35,9 @@
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
     
-    <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="About" href="about.html" /> 
+    <link rel="next" title="System Architecture" href="design.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -52,9 +51,12 @@
           
 
           
-            <a href="#" class="icon icon-home" alt="Documentation Home"> skyportal
+            <a href="#">
           
 
+          
+            
+            <img src="_static/skyportal_logo_docs.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -88,7 +90,7 @@
             
             
               <ul>
-<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">System Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
@@ -144,7 +146,7 @@
     
       <li><a href="#" class="icon icon-home"></a> &raquo;</li>
         
-      <li>Skyportal</li>
+      <li>SkyPortal</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -162,10 +164,57 @@
            <div itemprop="articleBody">
             
   <div class="section" id="skyportal">
-<h1>Skyportal<a class="headerlink" href="#skyportal" title="Permalink to this headline">¶</a></h1>
+<h1>SkyPortal<a class="headerlink" href="#skyportal" title="Permalink to this headline">¶</a></h1>
+<p>SkyPortal is a standalone, extensible, API-first web application that
+can be used to serve public and/or private astronomical data on infrastructure
+that you manage. Tired of managing observations of thousands of sources for
+you and your group in Google Docs? Got a new astronomical survey you’d
+like to serve to the public and don’t want build and maintain a
+website yourself? Want a place to manage requests for observations
+during an upcoming observing run? Sometimes work in a mobile/tablet
+environment? Then this project may be for you!</p>
+<p><a class="reference external" href="https://github.com/skyportal/skyportal"><img alt="github" src="https://img.shields.io/badge/GitHub-skyportal%2Fskyportal-blue" /></a> <a class="reference external" href="https://github.com/skyportal/skyportal/LICENSE.txt"><img alt="license" src="https://img.shields.io/badge/License-BSD%203--Clause-blue.svg" /></a> <a class="reference external" href="https://github.com/skyportal/skyportal/workflows/Test%20SkyPortal/badge.svg"><img alt="joss" src="http://joss.theoj.org/papers/10.21105/joss.01247/status.svg" /></a></p>
+<img alt="SkyPortal" src="_images/skyportal_responsive.png" />
+<p>SkyPortal is a fully open-source portal to manage and collaborate on
+time-domain sources and events. On the backend, it has been designed
+to ingest and store millions of events per night from disparate
+discovery streams. The frontend allows searching by source properties,
+source-level summary pages, synchronous and asynchronous source-level
+communication, and group and user management.</p>
+<p>By design SkyPortal makes use of hierarchical access control,
+frontend/backend abstractions with strong API contracts, elastic
+scaling, modern CI/CD practices, logging for auditability and
+traceability, and documentation meant to foster extensibility. It is
+built to run at the individual laptop level, in on-premise clusters,
+or in the cloud. The initial use cases were developed in close
+consultation with other time-domain practitioners and studying and
+using proprietary portals.</p>
+</div>
+<div class="section" id="quick-start">
+<h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h1>
+<p>To launch a demo instance of SkyPortal, first <a class="reference external" href="https://github.com/skyportal/skyportal">clone the source code from
+GitHub</a>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone git@github.com:skyportal/skyportal.git
+</pre></div>
+</div>
+<p>then install the <a class="reference external" href="./setup.html#dependencies">system dependencies</a>. From the
+<code class="docutils literal notranslate"><span class="pre">skyportal</span></code> directory, run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ make run
+</pre></div>
+</div>
+<p>When the terminal shows <code class="docutils literal notranslate"><span class="pre">Server</span> <span class="pre">at:</span> <span class="pre">http://localhost:5000</span></code>, open another
+terminal, navigate to the <code class="docutils literal notranslate"><span class="pre">skyportal</span></code> directory, and run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ make load_demo_data
+</pre></div>
+</div>
+<p>to populate the database with sample data. To access the running, populated
+skyportal instance, navigate your browser to: <code class="docutils literal notranslate"><span class="pre">http://localhost:5000</span></code>.</p>
+</div>
+<div class="section" id="user-guide">
+<h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">System Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
@@ -178,6 +227,22 @@
 </ul>
 </div>
 </div>
+<div class="section" id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
+<p>SkyPortal is released under the BSD license.  We encourage you to
+modify it, reuse it, and contribute changes back for the benefit of
+others.  We follow standard open source development practices: changes
+are submitted as pull requests and, once they pass the test suite,
+reviewed by the team before inclusion.  Please also see
+<a class="reference external" href="./contributing.html">our contributing guide</a>.</p>
+</div>
+<div class="section" id="acknowledgments">
+<h1>Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permalink to this headline">¶</a></h1>
+<p>We thank the Gordon and Betty Moore Foundation for a
+<a class="reference external" href="https://www.moore.org/grant-detail?grantId=GBMF9122">Software SkyPortal grant</a>,
+which partially covered the cost of the development of this project.</p>
+<a class="reference external image-reference" href="https://www.moore.org/grant-detail?grantId=GBMF9122"><img alt="Moore Foundation Logo" src="https://www.moore.org/content/images/logo-light.png" /></a>
+</div>
 
 
            </div>
@@ -187,7 +252,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="about.html" class="btn btn-neutral float-right" title="About" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="design.html" class="btn btn-neutral float-right" title="System Architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>
