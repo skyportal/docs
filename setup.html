@@ -98,6 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#installation-macos">Installation: MacOS</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installation-debian-based-linux">Installation: Debian-based Linux</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#launch">Launch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#additional-configuration">Additional Configuration</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#authentication">Authentication</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#creating-an-administrative-user">Creating an administrative user</a></li>
@@ -231,7 +232,7 @@ virtual environment.</p>
 <ol class="simple">
 <li><p>Install dependencies</p></li>
 </ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">nginx</span> <span class="n">supervisor</span> <span class="n">postgresql</span> <span class="n">libpq</span><span class="o">-</span><span class="n">dev</span> <span class="n">nodejs</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">nginx</span> <span class="n">supervisor</span> <span class="n">postgresql</span> <span class="n">libpq</span><span class="o">-</span><span class="n">dev</span> <span class="n">npm</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span>
 </pre></div>
 </div>
 <ol class="simple">
@@ -264,10 +265,18 @@ virtual environment.</p>
 <li><p>Initialize the database with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_init</span></code> (this only needs to
 happen once).</p></li>
 <li><p>Copy <code class="docutils literal notranslate"><span class="pre">config.yaml.defaults</span></code> to <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>.</p></li>
-<li><p>If you want some test data to play with, run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">load_demo_data</span></code>.</p></li>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">log</span></code> to monitor the service and, in a separate window, <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code> to start the server.</p></li>
+<li><p>Direct your browser to <code class="docutils literal notranslate"><span class="pre">http://localhost:5000</span></code>.</p></li>
+<li><p>If you want some test data to play with, run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">load_demo_data</span></code> (do this while the server is running!).</p></li>
+<li><p>Change users by navigating to <code class="docutils literal notranslate"><span class="pre">http://localhost:5000/become_user/&lt;#&gt;</span></code> where # is a number from 1-5.
+Different users have different privileges and can see more or less of the demo data.</p></li>
 </ol>
-<p>Direct your browser to http://localhost:5000.</p>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">¶</a></h2>
+<p>If you have trouble getting the demo data try doing</p>
+<p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_clear</span> <span class="pre">&amp;&amp;</span> <span class="pre">make</span> <span class="pre">db_init</span> <span class="pre">&amp;&amp;</span> <span class="pre">make</span> <span class="pre">run</span></code></p>
+<p>and then, from a different window, do <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">load_demo_data</span></code>.</p>
 </div>
 <div class="section" id="additional-configuration">
 <h2>Additional Configuration<a class="headerlink" href="#additional-configuration" title="Permalink to this headline">¶</a></h2>
