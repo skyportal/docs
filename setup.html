@@ -31,6 +31,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -52,12 +53,9 @@
           
 
           
-            <a href="index.html">
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> skyportal
           
 
-          
-            
-            <img src="_static/skyportal_logo_docs.png" class="logo" alt="Logo"/>
           
           </a>
 
@@ -115,6 +113,7 @@
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">How to Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_features.html">Adding new features</a></li>
 <li class="toctree-l1"><a class="reference internal" href="styling.html">Styling components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database Schema</a></li>
 </ul>
 
             
@@ -226,6 +225,12 @@ virtual environment.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">geckodriver</span>
 </pre></div>
 </div>
+<ol class="simple">
+<li><p>To build the docs, you’ll need graphviz:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">graphviz</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="installation-debian-based-linux">
 <h2>Installation: Debian-based Linux<a class="headerlink" href="#installation-debian-based-linux" title="Permalink to this headline">¶</a></h2>
@@ -258,6 +263,12 @@ virtual environment.</p>
 <li><p>Extract the binary to somewhere on your path</p></li>
 <li><p>Ensure it runs with <code class="docutils literal notranslate"><span class="pre">geckodriver</span> <span class="pre">--version</span></code></p></li>
 </ul>
+<ol class="simple">
+<li><p>To build the docs, you’ll need graphviz:</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">graphviz</span><span class="o">-</span><span class="n">dev</span> <span class="n">graphviz</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="launch">
 <h2>Launch<a class="headerlink" href="#launch" title="Permalink to this headline">¶</a></h2>
@@ -338,7 +349,7 @@ Python:</p>
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020 The SkyPortal Team
+        &copy; Copyright 2020, The SkyPortal Team
 
     </p>
   </div>
