@@ -1029,44 +1029,29 @@ robotic instrument.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>allocation</strong></dt><dd><p>Allocation associated with this request.</p>
-</dd>
+<dt><strong>allocation</strong></dt><dd></dd>
+<dt><strong>allocation_id</strong></dt><dd></dd>
 <dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
 </dd>
-<dt><strong>editable</strong></dt><dd><p>Whether the request can be modified after it is submitted.</p>
-</dd>
-<dt><strong>end_date</strong></dt><dd><p>UTC timestamp indicating when the request expires.</p>
-</dd>
-<dt><strong>exposure_time</strong></dt><dd><p>Exposure time of the follow-up observations [sec].</p>
-</dd>
-<dt><strong>filters</strong></dt><dd><p>Filters requested for Photometry.</p>
-</dd>
+<dt><strong>http_requests</strong></dt><dd></dd>
 <dt><strong>id</strong></dt><dd><p>Unique object identifier.</p>
 </dd>
-<dt><strong>instrument</strong></dt><dd><p>Instrument on which follow-up was requested.</p>
-</dd>
-<dt><strong>instrument_id</strong></dt><dd><p>ID of the Instrument on which follow-up was requested.</p>
-</dd>
+<dt><strong>instrument</strong></dt><dd></dd>
 <dt><strong>modified</strong></dt><dd><p>UTC time the object’s row was last modified in the database.</p>
 </dd>
 <dt><strong>obj</strong></dt><dd><p>The target Obj.</p>
 </dd>
 <dt><strong>obj_id</strong></dt><dd><p>ID of the target Obj.</p>
 </dd>
-<dt><strong>photometry</strong></dt><dd><p>Photometry produced by this followup request.</p>
+<dt><strong>payload</strong></dt><dd><p>Content of the followup request.</p>
 </dd>
-<dt><strong>priority</strong></dt><dd><p>Priority of the request (1 = lowest, 5 = highest).</p>
-</dd>
+<dt><strong>photometry</strong></dt><dd></dd>
 <dt><strong>requester</strong></dt><dd><p>The User who requested the follow-up.</p>
 </dd>
 <dt><strong>requester_id</strong></dt><dd><p>ID of the User who requested the follow-up.</p>
 </dd>
-<dt><strong>spectra</strong></dt><dd><p>Spectra produced by this followup request.</p>
-</dd>
-<dt><strong>start_date</strong></dt><dd><p>UTC timestamp indicating when the request becomes active.</p>
-</dd>
-<dt><strong>status</strong></dt><dd><p>Status of the request.</p>
-</dd>
+<dt><strong>spectra</strong></dt><dd></dd>
+<dt><strong>status</strong></dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -1083,8 +1068,8 @@ robotic instrument.</p>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.FollowupRequest.is_owned_by" title="skyportal.models.FollowupRequest.is_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code></a>(user_or_token)</p></td>
+<td><p>Return a boolean indicating whether a FollowupRequest belongs to an allocation that is accessible to the given user or token.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
 <td><p>Serialize this object to a Python dictionary.</p></td>
@@ -1092,39 +1077,9 @@ robotic instrument.</p>
 </tbody>
 </table>
 <dl class="py attribute">
-<dt id="skyportal.models.FollowupRequest.allocation">
-<code class="sig-name descname">allocation</code><a class="headerlink" href="#skyportal.models.FollowupRequest.allocation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Allocation associated with this request.</p>
-</dd></dl>
-
-<dl class="py attribute">
 <dt id="skyportal.models.FollowupRequest.created_at">
 <code class="sig-name descname">created_at</code><a class="headerlink" href="#skyportal.models.FollowupRequest.created_at" title="Permalink to this definition">¶</a></dt>
 <dd><p>UTC time of insertion of object’s row into the database.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="skyportal.models.FollowupRequest.editable">
-<code class="sig-name descname">editable</code><a class="headerlink" href="#skyportal.models.FollowupRequest.editable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Whether the request can be modified after it is submitted.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="skyportal.models.FollowupRequest.end_date">
-<code class="sig-name descname">end_date</code><a class="headerlink" href="#skyportal.models.FollowupRequest.end_date" title="Permalink to this definition">¶</a></dt>
-<dd><p>UTC timestamp indicating when the request expires.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="skyportal.models.FollowupRequest.exposure_time">
-<code class="sig-name descname">exposure_time</code><a class="headerlink" href="#skyportal.models.FollowupRequest.exposure_time" title="Permalink to this definition">¶</a></dt>
-<dd><p>Exposure time of the follow-up observations [sec].</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="skyportal.models.FollowupRequest.filters">
-<code class="sig-name descname">filters</code><a class="headerlink" href="#skyportal.models.FollowupRequest.filters" title="Permalink to this definition">¶</a></dt>
-<dd><p>Filters requested for Photometry.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -1133,16 +1088,26 @@ robotic instrument.</p>
 <dd><p>Unique object identifier.</p>
 </dd></dl>
 
-<dl class="py attribute">
-<dt id="skyportal.models.FollowupRequest.instrument">
-<code class="sig-name descname">instrument</code><a class="headerlink" href="#skyportal.models.FollowupRequest.instrument" title="Permalink to this definition">¶</a></dt>
-<dd><p>Instrument on which follow-up was requested.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="skyportal.models.FollowupRequest.instrument_id">
-<code class="sig-name descname">instrument_id</code><a class="headerlink" href="#skyportal.models.FollowupRequest.instrument_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>ID of the Instrument on which follow-up was requested.</p>
+<dl class="py method">
+<dt id="skyportal.models.FollowupRequest.is_owned_by">
+<code class="sig-name descname">is_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.FollowupRequest.is_owned_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a boolean indicating whether a FollowupRequest belongs to
+an allocation that is accessible to the given user or token.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>user_or_token: `baselayer.app.models.User` or `baselayer.app.models.Token`</strong></dt><dd><p>The User or Token to check.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>owned: bool</dt><dd><p>Whether the FollowupRequest belongs to an Allocation that is
+accessible to the given user or token.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py attribute">
@@ -1164,15 +1129,9 @@ robotic instrument.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="skyportal.models.FollowupRequest.photometry">
-<code class="sig-name descname">photometry</code><a class="headerlink" href="#skyportal.models.FollowupRequest.photometry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Photometry produced by this followup request.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="skyportal.models.FollowupRequest.priority">
-<code class="sig-name descname">priority</code><a class="headerlink" href="#skyportal.models.FollowupRequest.priority" title="Permalink to this definition">¶</a></dt>
-<dd><p>Priority of the request (1 = lowest, 5 = highest).</p>
+<dt id="skyportal.models.FollowupRequest.payload">
+<code class="sig-name descname">payload</code><a class="headerlink" href="#skyportal.models.FollowupRequest.payload" title="Permalink to this definition">¶</a></dt>
+<dd><p>Content of the followup request.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -1185,24 +1144,6 @@ robotic instrument.</p>
 <dt id="skyportal.models.FollowupRequest.requester_id">
 <code class="sig-name descname">requester_id</code><a class="headerlink" href="#skyportal.models.FollowupRequest.requester_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>ID of the User who requested the follow-up.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="skyportal.models.FollowupRequest.spectra">
-<code class="sig-name descname">spectra</code><a class="headerlink" href="#skyportal.models.FollowupRequest.spectra" title="Permalink to this definition">¶</a></dt>
-<dd><p>Spectra produced by this followup request.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="skyportal.models.FollowupRequest.start_date">
-<code class="sig-name descname">start_date</code><a class="headerlink" href="#skyportal.models.FollowupRequest.start_date" title="Permalink to this definition">¶</a></dt>
-<dd><p>UTC timestamp indicating when the request becomes active.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="skyportal.models.FollowupRequest.status">
-<code class="sig-name descname">status</code><a class="headerlink" href="#skyportal.models.FollowupRequest.status" title="Permalink to this definition">¶</a></dt>
-<dd><p>Status of the request.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1356,6 +1297,9 @@ must have access to all of the <cite>Group</cite>’s data <a href="#id3"><span 
 <dt class="field-odd">Attributes</dt>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>allocations</strong></dt><dd></dd>
+<dt><strong>api_class</strong></dt><dd></dd>
+<dt><strong>api_classname</strong></dt><dd><p>Name of the instrument’s API class.</p>
+</dd>
 <dt><strong>band</strong></dt><dd><p>The spectral band covered by the instrument (e.g., Optical, IR).</p>
 </dd>
 <dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
@@ -1365,8 +1309,6 @@ must have access to all of the <cite>Group</cite>’s data <a href="#id3"><span 
 <dt><a class="reference internal" href="#skyportal.models.Instrument.does_spectroscopy" title="skyportal.models.Instrument.does_spectroscopy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">does_spectroscopy</span></code></a></dt><dd><p>Return a boolean indicating whether the instrument is capable of performing spectroscopy.</p>
 </dd>
 <dt><strong>filters</strong></dt><dd><p>List of filters on the instrument (if any).</p>
-</dd>
-<dt><strong>followup_requests</strong></dt><dd><p>The robotic follow-up requests made on this instrument.</p>
 </dd>
 <dt><strong>id</strong></dt><dd><p>Unique object identifier.</p>
 </dd>
@@ -1411,6 +1353,12 @@ must have access to all of the <cite>Group</cite>’s data <a href="#id3"><span 
 </tbody>
 </table>
 <dl class="py attribute">
+<dt id="skyportal.models.Instrument.api_classname">
+<code class="sig-name descname">api_classname</code><a class="headerlink" href="#skyportal.models.Instrument.api_classname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the instrument’s API class.</p>
+</dd></dl>
+
+<dl class="py attribute">
 <dt id="skyportal.models.Instrument.band">
 <code class="sig-name descname">band</code><a class="headerlink" href="#skyportal.models.Instrument.band" title="Permalink to this definition">¶</a></dt>
 <dd><p>The spectral band covered by the instrument (e.g., Optical, IR).</p>
@@ -1440,12 +1388,6 @@ performing spectroscopy.</p>
 <dt id="skyportal.models.Instrument.filters">
 <code class="sig-name descname">filters</code><a class="headerlink" href="#skyportal.models.Instrument.filters" title="Permalink to this definition">¶</a></dt>
 <dd><p>List of filters on the instrument (if any).</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="skyportal.models.Instrument.followup_requests">
-<code class="sig-name descname">followup_requests</code><a class="headerlink" href="#skyportal.models.Instrument.followup_requests" title="Permalink to this definition">¶</a></dt>
-<dd><p>The robotic follow-up requests made on this instrument.</p>
 </dd></dl>
 
 <dl class="py attribute">
