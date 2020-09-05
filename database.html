@@ -762,7 +762,9 @@ to return to the user.</p>
 </dd>
 <dt><strong>attachment_type</strong></dt><dd><p>Attachment extension, (e.g., pdf, png).</p>
 </dd>
-<dt><strong>author</strong></dt><dd><p>User.username or Token.id of the Comment’s author.</p>
+<dt><strong>author</strong></dt><dd><p>Comment’s author.</p>
+</dd>
+<dt><strong>author_id</strong></dt><dd><p>ID of the Comment author’s User instance.</p>
 </dd>
 <dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
 </dd>
@@ -838,7 +840,13 @@ to return to the user.</p>
 <dl class="py attribute">
 <dt id="skyportal.models.Comment.author">
 <code class="sig-name descname">author</code><a class="headerlink" href="#skyportal.models.Comment.author" title="Permalink to this definition">¶</a></dt>
-<dd><p>User.username or Token.id of the Comment’s author.</p>
+<dd><p>Comment’s author.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Comment.author_id">
+<code class="sig-name descname">author_id</code><a class="headerlink" href="#skyportal.models.Comment.author_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>ID of the Comment author’s User instance.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -3895,6 +3903,7 @@ specified User (or Token instance, if a token is passed).</p>
 </dd>
 <dt><strong>assignments</strong></dt><dd><p>Objs the User has assigned to ObservingRuns.</p>
 </dd>
+<dt><strong>comments</strong></dt><dd></dd>
 <dt><strong>contact_email</strong></dt><dd><p>The phone number at which the user prefers to receive communications.</p>
 </dd>
 <dt><strong>contact_phone</strong></dt><dd><p>The email at which the user prefers to receive communications.</p>
