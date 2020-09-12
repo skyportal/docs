@@ -186,7 +186,7 @@ styles, CSS Modules, and Styled Components, and have settled on using
 Sheets) and returns a CSS provider <a class="reference external" href="https://reactjs.org/docs/hooks-reference.html">hook</a>:</p>
 <div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">useStyles</span> <span class="o">=</span> <span class="nx">makeStyles</span><span class="p">({</span>
   <span class="nx">root</span><span class="o">:</span> <span class="p">{</span>
-    <span class="nx">border</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">border</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">padding</span><span class="o">:</span> <span class="s1">&#39;1rem&#39;</span><span class="p">,</span>
   <span class="p">},</span>
 <span class="p">});</span>
@@ -280,15 +280,15 @@ hook.</p>
 layout</a>.</p>
 <p>There are two <code class="docutils literal notranslate"><span class="pre">Grid</span></code> types: <code class="docutils literal notranslate"><span class="pre">container</span></code> (outer element) and <code class="docutils literal notranslate"><span class="pre">item</span></code>
 (inner elements).</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">container</span> <span class="na">spacing</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="nx">rem</span><span class="p">}&gt;</span>
-  <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="o">=</span><span class="p">{</span><span class="mi">4</span><span class="p">}&gt;</span>
-    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mi">1</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">container</span> <span class="na">spacing</span><span class="o">=</span><span class="p">{</span><span class="mf">1</span><span class="nx">rem</span><span class="p">}&gt;</span>
+  <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="o">=</span><span class="p">{</span><span class="mf">4</span><span class="p">}&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mf">1</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
   <span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="o">=</span><span class="p">{</span><span class="mi">4</span><span class="p">}&gt;</span>
-    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mi">2</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="o">=</span><span class="p">{</span><span class="mf">4</span><span class="p">}&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mf">2</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
   <span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="o">=</span><span class="p">{</span><span class="mi">4</span><span class="p">}&gt;</span>
-    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mi">3</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="o">=</span><span class="p">{</span><span class="mf">4</span><span class="p">}&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mf">3</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span>
 </pre></div>
 </div>
@@ -298,15 +298,15 @@ and up.
 <a class="reference external" href="https://material-ui.com/components/grid/#grid-with-breakpoints">Multiple breakpoints</a>
 can be specified.</p>
 <p>You can also leave the value of <code class="docutils literal notranslate"><span class="pre">xs</span></code> blank, in which case elements are automatically spaced:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">container</span> <span class="na">spacing</span><span class="o">=</span><span class="p">{</span><span class="mi">1</span><span class="nx">rem</span><span class="p">}&gt;</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">container</span> <span class="na">spacing</span><span class="o">=</span><span class="p">{</span><span class="mf">1</span><span class="nx">rem</span><span class="p">}&gt;</span>
   <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mi">1</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mf">1</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
   <span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="o">=</span><span class="p">{</span><span class="mi">6</span><span class="p">}&gt;</span>
-    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mi">2</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="o">=</span><span class="p">{</span><span class="mf">6</span><span class="p">}&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mf">2</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
   <span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mi">3</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mf">3</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span>
 </pre></div>
 </div>
