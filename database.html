@@ -2689,6 +2689,8 @@ dispersive element.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
 <dd class="field-odd"><dl class="simple">
+<dt><strong>altdata</strong></dt><dd><p>Miscellaneous alternative metadata.</p>
+</dd>
 <dt><strong>assignment</strong></dt><dd></dd>
 <dt><strong>assignment_id</strong></dt><dd></dd>
 <dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
@@ -2717,6 +2719,10 @@ dispersive element.</p>
 </dd>
 <dt><strong>origin</strong></dt><dd><p>Origin of the spectrum.</p>
 </dd>
+<dt><strong>original_file_filename</strong></dt><dd><p>Original file name that was passed to upload the spectrum.</p>
+</dd>
+<dt><strong>original_file_string</strong></dt><dd><p>Content of original file that was passed to upload the spectrum.</p>
+</dd>
 <dt><strong>wavelengths</strong></dt><dd><p>Wavelengths of the spectrum [Angstrom].</p>
 </dd>
 </dl>
@@ -2732,7 +2738,7 @@ dispersive element.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Spectrum.from_ascii" title="skyportal.models.Spectrum.from_ascii"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_ascii</span></code></a>(filename, obj_id, instrument_id, …)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Spectrum.from_ascii" title="skyportal.models.Spectrum.from_ascii"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_ascii</span></code></a>(file, obj_id, instrument_id, …)</p></td>
 <td><p>Generate a <cite>Spectrum</cite> from an ascii file.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
@@ -2746,6 +2752,12 @@ dispersive element.</p>
 </tr>
 </tbody>
 </table>
+<dl class="py attribute">
+<dt id="skyportal.models.Spectrum.altdata">
+<code class="sig-name descname">altdata</code><a class="headerlink" href="#skyportal.models.Spectrum.altdata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Miscellaneous alternative metadata.</p>
+</dd></dl>
+
 <dl class="py attribute">
 <dt id="skyportal.models.Spectrum.created_at">
 <code class="sig-name descname">created_at</code><a class="headerlink" href="#skyportal.models.Spectrum.created_at" title="Permalink to this definition">¶</a></dt>
@@ -2766,23 +2778,33 @@ dispersive element.</p>
 
 <dl class="py method">
 <dt id="skyportal.models.Spectrum.from_ascii">
-<em class="property">classmethod </em><code class="sig-name descname">from_ascii</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em>, <em class="sig-param"><span class="n">obj_id</span></em>, <em class="sig-param"><span class="n">instrument_id</span></em>, <em class="sig-param"><span class="n">observed_at</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Spectrum.from_ascii" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">from_ascii</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em>, <em class="sig-param"><span class="n">obj_id</span></em>, <em class="sig-param"><span class="n">instrument_id</span></em>, <em class="sig-param"><span class="n">observed_at</span></em>, <em class="sig-param"><span class="n">wave_column</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">flux_column</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">fluxerr_column</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Spectrum.from_ascii" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a <cite>Spectrum</cite> from an ascii file.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>filename</strong><span class="classifier">str</span></dt><dd><p>The name of the ASCII file containing the spectrum.</p>
+<dd class="field-odd"><dl>
+<dt><strong>file</strong><span class="classifier">str or file-like object</span></dt><dd><p>Name or handle of the ASCII file containing the spectrum.</p>
 </dd>
-<dt><strong>obj_id</strong><span class="classifier">str</span></dt><dd><p>The name of the Spectrum’s Obj.</p>
+<dt><strong>obj_id</strong><span class="classifier">str</span></dt><dd><p>The id of the Obj that this Spectrum is of, if not present
+in the ASCII header.</p>
 </dd>
-<dt><strong>instrument_id</strong><span class="classifier">int</span></dt><dd><p>ID of the Instrument with which this Spectrum was acquired.</p>
+<dt><strong>instrument_id</strong><span class="classifier">int</span></dt><dd><p>ID of the Instrument with which this Spectrum was acquired,
+if not present in the ASCII header.</p>
 </dd>
-<dt><strong>observed_at</strong><span class="classifier">string or datetime</span></dt><dd><p>Median UTC ISO time stamp of the exposure or exposures in which the Spectrum was acquired.”</p>
+<dt><strong>observed_at</strong><span class="classifier">string or datetime</span></dt><dd><p>Median UTC ISO time stamp of the exposure or exposures in which
+the Spectrum was acquired, if not present in the ASCII header.</p>
 </dd>
-</dl>
+<dt><strong>wave_column: integer, optional</strong></dt><dd><p>The 0-based index of the ASCII column corresponding to the wavelength
+values of the spectrum (default 0).</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl>
+<dt><strong>flux_column: integer, optional</strong></dt><dd><p>The 0-based index of the ASCII column corresponding to the flux
+values of the spectrum (default 1).</p>
+</dd>
+<dt><strong>fluxerr_column: integer or None, optional</strong></dt><dd><p>The 0-based index of the ASCII column corresponding to the flux error
+values of the spectrum (default None).</p>
+</dd>
+<dt><strong>Returns</strong></dt><dd></dd>
+<dt><strong>——-</strong></dt><dd></dd>
 <dt><strong>spec</strong><span class="classifier"><cite>skyportal.models.Spectrum</cite></span></dt><dd><p>The Spectrum generated from the ASCII file.</p>
 </dd>
 </dl>
@@ -2842,6 +2864,18 @@ dispersive element.</p>
 <dt id="skyportal.models.Spectrum.origin">
 <code class="sig-name descname">origin</code><a class="headerlink" href="#skyportal.models.Spectrum.origin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Origin of the spectrum.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Spectrum.original_file_filename">
+<code class="sig-name descname">original_file_filename</code><a class="headerlink" href="#skyportal.models.Spectrum.original_file_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Original file name that was passed to upload the spectrum.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Spectrum.original_file_string">
+<code class="sig-name descname">original_file_string</code><a class="headerlink" href="#skyportal.models.Spectrum.original_file_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Content of original file that was passed to upload the spectrum.</p>
 </dd></dl>
 
 <dl class="py attribute">
