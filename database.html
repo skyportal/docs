@@ -1684,6 +1684,8 @@ entities, namely Source and Candidate.</p>
 </dd>
 <dt><strong>modified</strong></dt><dd><p>UTC time the object’s row was last modified in the database.</p>
 </dd>
+<dt><strong>obj_notifications</strong></dt><dd><p>Notifications regarding the object sent out by users</p>
+</dd>
 <dt><strong>offset</strong></dt><dd><p>Offset from nearest static object [arcsec].</p>
 </dd>
 <dt><strong>origin</strong></dt><dd><p>Origin of the object.</p>
@@ -2077,6 +2079,12 @@ rather than the redshift.</p>
 <dt id="skyportal.models.Obj.modified">
 <code class="sig-name descname">modified</code><a class="headerlink" href="#skyportal.models.Obj.modified" title="Permalink to this definition">¶</a></dt>
 <dd><p>UTC time the object’s row was last modified in the database.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Obj.obj_notifications">
+<code class="sig-name descname">obj_notifications</code><a class="headerlink" href="#skyportal.models.Obj.obj_notifications" title="Permalink to this definition">¶</a></dt>
+<dd><p>Notifications regarding the object sent out by users</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -4208,6 +4216,8 @@ specified User (or Token instance, if a token is passed).</p>
 <dt><strong>roles</strong></dt><dd><p>The roles assumed by this user.</p>
 </dd>
 <dt><strong>saved_sources</strong></dt><dd></dd>
+<dt><strong>source_notifications</strong></dt><dd><p>Source notifications the User has sent out.</p>
+</dd>
 <dt><strong>sources</strong></dt><dd><p>The Sources accessible to this User.</p>
 </dd>
 <dt><strong>streams</strong></dt><dd><p>The Streams this User has access to.</p>
@@ -4373,6 +4383,12 @@ authenticated.</p>
 <dt id="baselayer.app.models.User.roles">
 <code class="sig-name descname">roles</code><a class="headerlink" href="#baselayer.app.models.User.roles" title="Permalink to this definition">¶</a></dt>
 <dd><p>The roles assumed by this user.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="baselayer.app.models.User.source_notifications">
+<code class="sig-name descname">source_notifications</code><a class="headerlink" href="#baselayer.app.models.User.source_notifications" title="Permalink to this definition">¶</a></dt>
+<dd><p>Source notifications the User has sent out.</p>
 </dd></dl>
 
 <dl class="py attribute">
