@@ -317,6 +317,156 @@ SkyPortal and baselayer classes that are mapped to database tables.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt id="skyportal.models.Annotation">
+<em class="property">class </em><code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">Annotation</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Annotation" title="Permalink to this definition">¶</a></dt>
+<dd><p>A sortable/searchable Annotation made by a filter or other robot, with a set of data as JSON</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>author</strong></dt><dd><p>Annotation’s author.</p>
+</dd>
+<dt><strong>author_id</strong></dt><dd><p>ID of the Annotation author’s User instance.</p>
+</dd>
+<dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
+</dd>
+<dt><strong>data</strong></dt><dd><p>Searchable data in JSON format</p>
+</dd>
+<dt><strong>groups</strong></dt><dd><p>Groups that can see the annotation.</p>
+</dd>
+<dt><strong>id</strong></dt><dd><p>Unique object identifier.</p>
+</dd>
+<dt><strong>modified</strong></dt><dd><p>UTC time the object’s row was last modified in the database.</p>
+</dd>
+<dt><strong>obj</strong></dt><dd><p>The Annotation’s Obj.</p>
+</dd>
+<dt><strong>obj_id</strong></dt><dd><p>ID of the Annotation’s Obj.</p>
+</dd>
+<dt><strong>origin</strong></dt><dd><p>What generated the annotation, e.g., <cite>Kowalski</cite>. One annotation with multiple fields from each origin is allowed.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
+<td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Annotation.get_if_owned_by" title="skyportal.models.Annotation.get_if_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code></a>(ident, user[, options])</p></td>
+<td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<td><p>Serialize this object to a Python dictionary.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 75%" />
+<col style="width: 25%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>construct_author_info_dict</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt id="skyportal.models.Annotation.author">
+<code class="sig-name descname">author</code><a class="headerlink" href="#skyportal.models.Annotation.author" title="Permalink to this definition">¶</a></dt>
+<dd><p>Annotation’s author.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Annotation.author_id">
+<code class="sig-name descname">author_id</code><a class="headerlink" href="#skyportal.models.Annotation.author_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>ID of the Annotation author’s User instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Annotation.created_at">
+<code class="sig-name descname">created_at</code><a class="headerlink" href="#skyportal.models.Annotation.created_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC time of insertion of object’s row into the database.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Annotation.data">
+<code class="sig-name descname">data</code><a class="headerlink" href="#skyportal.models.Annotation.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Searchable data in JSON format</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="skyportal.models.Annotation.get_if_owned_by">
+<em class="property">classmethod </em><code class="sig-name descname">get_if_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ident</span></em>, <em class="sig-param"><span class="n">user</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Annotation.get_if_owned_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an object from the database if the requesting User or Token
+has access to read the object. If the requesting User or Token does not
+have access, raise an AccessError.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>ident</strong><span class="classifier">integer or string</span></dt><dd><p>Primary key of the requested object.</p>
+</dd>
+<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
+</dd>
+<dt><strong>options</strong><span class="classifier">list of <a href="#id1"><span class="problematic" id="id2">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>obj</strong><span class="classifier">baselayer.app.models.Base</span></dt><dd><p>The requested entity.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Annotation.groups">
+<code class="sig-name descname">groups</code><a class="headerlink" href="#skyportal.models.Annotation.groups" title="Permalink to this definition">¶</a></dt>
+<dd><p>Groups that can see the annotation.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Annotation.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#skyportal.models.Annotation.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unique object identifier.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Annotation.modified">
+<code class="sig-name descname">modified</code><a class="headerlink" href="#skyportal.models.Annotation.modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC time the object’s row was last modified in the database.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Annotation.obj">
+<code class="sig-name descname">obj</code><a class="headerlink" href="#skyportal.models.Annotation.obj" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Annotation’s Obj.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Annotation.obj_id">
+<code class="sig-name descname">obj_id</code><a class="headerlink" href="#skyportal.models.Annotation.obj_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>ID of the Annotation’s Obj.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Annotation.origin">
+<code class="sig-name descname">origin</code><a class="headerlink" href="#skyportal.models.Annotation.origin" title="Permalink to this definition">¶</a></dt>
+<dd><p>What generated the annotation, e.g., <cite>Kowalski</cite>. One annotation with multiple fields from each origin is allowed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt id="skyportal.models.ArrayOfEnum">
 <em class="property">class </em><code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">ArrayOfEnum</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">item_type</span></em>, <em class="sig-param"><span class="n">as_tuple</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">dimensions</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">zero_indexes</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.ArrayOfEnum" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
@@ -874,7 +1024,7 @@ have access, raise an AccessError.</p>
 </dd>
 <dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
 </dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id1"><span class="problematic" id="id2">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
+<dt><strong>options</strong><span class="classifier">list of <a href="#id3"><span class="problematic" id="id4">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
 </dd>
 </dl>
 </dd>
@@ -1186,7 +1336,7 @@ accessible to the given user or token.</p>
 targets for data sharing requests. `Photometry</cite> and <cite>Spectra</cite> shared with
 a <cite>Group</cite> will be visible to all its members. <cite>Group`s maintain specific
 `Stream</cite> permissions. In order for a <cite>User</cite> to join a <cite>Group</cite>, the <cite>User</cite>
-must have access to all of the <cite>Group</cite>’s data <a href="#id3"><span class="problematic" id="id4">`</span></a>Stream`s.</p>
+must have access to all of the <cite>Group</cite>’s data <a href="#id5"><span class="problematic" id="id6">`</span></a>Stream`s.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
 <dd class="field-odd"><dl class="simple">
@@ -1633,6 +1783,8 @@ entities, namely Source and Candidate.</p>
 <dt><strong>altdata</strong></dt><dd><p>Misc. alternative metadata stored in JSON format, e.g. <cite>{‘gaia’: {‘info’: {‘Teff’: 5780}}}</cite></p>
 </dd>
 <dt><strong>angular_diameter_distance</strong></dt><dd></dd>
+<dt><strong>annotations</strong></dt><dd><p>Auto-annotations posted about the object.</p>
+</dd>
 <dt><strong>assignments</strong></dt><dd><p>Assignments of the object to classical observing runs.</p>
 </dd>
 <dt><strong>candidates</strong></dt><dd><p>Instances in which this Obj passed a group’s filter.</p>
@@ -1740,28 +1892,31 @@ entities, namely Source and Candidate.</p>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_classifications_owned_by" title="skyportal.models.Obj.get_classifications_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_classifications_owned_by</span></code></a>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_annotations_owned_by" title="skyportal.models.Obj.get_annotations_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_annotations_owned_by</span></code></a>(user_or_token)</p></td>
+<td><p>Query the database and return the Annotations on this Obj that are accessible to any of the User or Token owner’s accessible Groups.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_classifications_owned_by" title="skyportal.models.Obj.get_classifications_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_classifications_owned_by</span></code></a>(user_or_token)</p></td>
 <td><p>Query the database and return the Classifications on this Obj that are accessible to any of the User or Token owner’s accessible Groups.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_comments_owned_by" title="skyportal.models.Obj.get_comments_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_comments_owned_by</span></code></a>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_comments_owned_by" title="skyportal.models.Obj.get_comments_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_comments_owned_by</span></code></a>(user_or_token)</p></td>
 <td><p>Query the database and return the Comments on this Obj that are accessible to any of the User or Token owner’s accessible Groups.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_if_owned_by" title="skyportal.models.Obj.get_if_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code></a>(user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_if_owned_by" title="skyportal.models.Obj.get_if_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code></a>(user_or_token[, options])</p></td>
 <td><p>Return an Obj from the database if the Obj is either a Source or a Candidate in at least one of the requesting User or Token owner’s accessible Groups.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_photometry_owned_by_user" title="skyportal.models.Obj.get_photometry_owned_by_user"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_photometry_owned_by_user</span></code></a>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_photometry_owned_by_user" title="skyportal.models.Obj.get_photometry_owned_by_user"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_photometry_owned_by_user</span></code></a>(user_or_token)</p></td>
 <td><p>Query the database and return the Photometry for this Obj that is shared with any of the User or Token owner’s accessible Groups.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_spectra_owned_by" title="skyportal.models.Obj.get_spectra_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_spectra_owned_by</span></code></a>(user_or_token)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_spectra_owned_by" title="skyportal.models.Obj.get_spectra_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_spectra_owned_by</span></code></a>(user_or_token)</p></td>
 <td><p>Query the database and return the Spectra for this Obj that are shared with any of the User or Token owner’s accessible Groups.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
 <td><p>Serialize this object to a Python dictionary.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">within</span></code>(other, radius)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">within</span></code>(other, radius)</p></td>
 <td><p>Test if this point is within a given radius of another point.</p></td>
 </tr>
 </tbody>
@@ -1828,6 +1983,12 @@ zero degrees.</p>
 </dl>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Obj.annotations">
+<code class="sig-name descname">annotations</code><a class="headerlink" href="#skyportal.models.Obj.annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Auto-annotations posted about the object.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -1921,6 +2082,27 @@ zero degrees.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt id="skyportal.models.Obj.get_annotations_owned_by">
+<code class="sig-name descname">get_annotations_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_annotations_owned_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query the database and return the Annotations on this Obj that are accessible
+to any of the User or Token owner’s accessible Groups.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>annotation_list</strong><span class="classifier">list of <cite>skyportal.models.Annotation</cite></span></dt><dd><p>The accessible annotations attached to this Obj.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt id="skyportal.models.Obj.get_classifications_owned_by">
 <code class="sig-name descname">get_classifications_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_classifications_owned_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query the database and return the Classifications on this Obj that are accessible
@@ -1976,7 +2158,7 @@ If the Obj does not exist, return <cite>None</cite>.</p>
 </dd>
 <dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
 </dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id5"><span class="problematic" id="id6">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
+<dt><strong>options</strong><span class="classifier">list of <a href="#id7"><span class="problematic" id="id8">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
 </dd>
 </dl>
 </dd>
@@ -3450,13 +3632,34 @@ If the Obj does not exist, return <cite>None</cite>.</p>
 </dd>
 <dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
 </dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id7"><span class="problematic" id="id8">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
+<dt><strong>options</strong><span class="classifier">list of <a href="#id9"><span class="problematic" id="id10">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl>
 <dt><strong>obj</strong><span class="classifier"><cite>skyportal.models.Obj</cite></span></dt><dd><p>The requested Obj.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="skyportal.models.get_obj_annotations_owned_by">
+<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">get_obj_annotations_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_obj_annotations_owned_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Query the database and return the Annotations on this Obj that are accessible
+to any of the User or Token owner’s accessible Groups.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>annotation_list</strong><span class="classifier">list of <cite>skyportal.models.Annotation</cite></span></dt><dd><p>The accessible annotations attached to this Obj.</p>
 </dd>
 </dl>
 </dd>
@@ -3519,7 +3722,7 @@ If the Obj does not exist, return <cite>None</cite>.</p>
 </dd>
 <dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
 </dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id9"><span class="problematic" id="id10">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
+<dt><strong>options</strong><span class="classifier">list of <a href="#id11"><span class="problematic" id="id12">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
 </dd>
 </dl>
 </dd>
@@ -3569,7 +3772,7 @@ If the Obj does not exist, return <cite>None</cite>.</p>
 </dd>
 <dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
 </dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id11"><span class="problematic" id="id12">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
+<dt><strong>options</strong><span class="classifier">list of <a href="#id13"><span class="problematic" id="id14">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
 </dd>
 </dl>
 </dd>
@@ -4214,6 +4417,7 @@ specified User (or Token instance, if a token is passed).</p>
 </dd>
 <dt><a class="reference internal" href="#baselayer.app.models.User.acls" title="baselayer.app.models.User.acls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">acls</span></code></a></dt><dd><p>List of the user’s ACLs.</p>
 </dd>
+<dt><strong>annotations</strong></dt><dd></dd>
 <dt><strong>assignments</strong></dt><dd><p>Objs the User has assigned to ObservingRuns.</p>
 </dd>
 <dt><strong>comments</strong></dt><dd></dd>
