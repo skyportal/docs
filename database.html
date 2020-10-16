@@ -2586,8 +2586,6 @@ astroplan.FixedTarget.</p>
 <dl class="field-list">
 <dt class="field-odd">Attributes</dt>
 <dd class="field-odd"><dl>
-<dt><strong>alert_id</strong></dt><dd><p>ID of the alert from which this Photometry was extracted (if any).</p>
-</dd>
 <dt><strong>altdata</strong></dt><dd><p>Arbitrary metadata in JSON format..</p>
 </dd>
 <dt><strong>assignment</strong></dt><dd></dd>
@@ -2615,6 +2613,8 @@ astroplan.FixedTarget.</p>
 <dt><strong>followup_request_id</strong></dt><dd></dd>
 <dt><strong>groups</strong></dt><dd><p>Groups that can access this Photometry.</p>
 </dd>
+<dt><strong>hash</strong></dt><dd><p>SHA1 hash of the posted Photometry + metadata. Used for de-duplication in PUT requests.</p>
+</dd>
 <dt><strong>id</strong></dt><dd><p>Unique object identifier.</p>
 </dd>
 <dt><strong>instrument</strong></dt><dd><p>Instrument that took this Photometry.</p>
@@ -2634,6 +2634,8 @@ astroplan.FixedTarget.</p>
 <dt><strong>obj</strong></dt><dd><p>The Photometry’s Obj.</p>
 </dd>
 <dt><strong>obj_id</strong></dt><dd><p>ID of the Photometry’s Obj.</p>
+</dd>
+<dt><strong>origin</strong></dt><dd><p>Origin from which this Photometry was extracted (if any).</p>
 </dd>
 <dt><strong>original_user_data</strong></dt><dd><p>Original data passed by the user through the PhotometryHandler.POST API or the PhotometryHandler.PUT API. The schema of this JSON validates under either schema.PhotometryFlux or schema.PhotometryMag (depending on how the data was passed).</p>
 </dd>
@@ -2671,12 +2673,6 @@ astroplan.FixedTarget.</p>
 </tr>
 </tbody>
 </table>
-<dl class="py attribute">
-<dt id="skyportal.models.Photometry.alert_id">
-<code class="sig-name descname">alert_id</code><a class="headerlink" href="#skyportal.models.Photometry.alert_id" title="Permalink to this definition">¶</a></dt>
-<dd><p>ID of the alert from which this Photometry was extracted (if any).</p>
-</dd></dl>
-
 <dl class="py attribute">
 <dt id="skyportal.models.Photometry.altdata">
 <code class="sig-name descname">altdata</code><a class="headerlink" href="#skyportal.models.Photometry.altdata" title="Permalink to this definition">¶</a></dt>
@@ -2723,6 +2719,12 @@ astroplan.FixedTarget.</p>
 <dt id="skyportal.models.Photometry.groups">
 <code class="sig-name descname">groups</code><a class="headerlink" href="#skyportal.models.Photometry.groups" title="Permalink to this definition">¶</a></dt>
 <dd><p>Groups that can access this Photometry.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Photometry.hash">
+<code class="sig-name descname">hash</code><a class="headerlink" href="#skyportal.models.Photometry.hash" title="Permalink to this definition">¶</a></dt>
+<dd><p>SHA1 hash of the posted Photometry + metadata. Used for de-duplication in PUT requests.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -2783,6 +2785,12 @@ astroplan.FixedTarget.</p>
 <dt id="skyportal.models.Photometry.obj_id">
 <code class="sig-name descname">obj_id</code><a class="headerlink" href="#skyportal.models.Photometry.obj_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>ID of the Photometry’s Obj.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Photometry.origin">
+<code class="sig-name descname">origin</code><a class="headerlink" href="#skyportal.models.Photometry.origin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Origin from which this Photometry was extracted (if any).</p>
 </dd></dl>
 
 <dl class="py attribute">
