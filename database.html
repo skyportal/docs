@@ -2952,7 +2952,7 @@ dispersive element.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Spectrum.from_ascii" title="skyportal.models.Spectrum.from_ascii"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_ascii</span></code></a>(file, obj_id, instrument_id, …)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Spectrum.from_ascii" title="skyportal.models.Spectrum.from_ascii"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_ascii</span></code></a>(file[, obj_id, instrument_id, …])</p></td>
 <td><p>Generate a <cite>Spectrum</cite> from an ascii file.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
@@ -2992,7 +2992,7 @@ dispersive element.</p>
 
 <dl class="py method">
 <dt id="skyportal.models.Spectrum.from_ascii">
-<em class="property">classmethod </em><code class="sig-name descname">from_ascii</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em>, <em class="sig-param"><span class="n">obj_id</span></em>, <em class="sig-param"><span class="n">instrument_id</span></em>, <em class="sig-param"><span class="n">observed_at</span></em>, <em class="sig-param"><span class="n">wave_column</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">flux_column</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">fluxerr_column</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Spectrum.from_ascii" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="sig-name descname">from_ascii</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em>, <em class="sig-param"><span class="n">obj_id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">instrument_id</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">observed_at</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">wave_column</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">flux_column</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">fluxerr_column</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Spectrum.from_ascii" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a <cite>Spectrum</cite> from an ascii file.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters</dt>
