@@ -2454,6 +2454,12 @@ astroplan.FixedTarget.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.ObservingRun.rise_time" title="skyportal.models.ObservingRun.rise_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rise_time</span></code></a>(target_or_targets)</p></td>
+<td><p>The rise time of the specified targets as an astropy.time.Time.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.ObservingRun.set_time" title="skyportal.models.ObservingRun.set_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_time</span></code></a>(target_or_targets)</p></td>
+<td><p>The set time of the specified targets as an astropy.time.Time.</p></td>
+</tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
 <td><p>Serialize this object to a Python dictionary.</p></td>
 </tr>
@@ -2535,6 +2541,18 @@ astroplan.FixedTarget.</p>
 <dt id="skyportal.models.ObservingRun.pi">
 <code class="sig-name descname">pi</code><a class="headerlink" href="#skyportal.models.ObservingRun.pi" title="Permalink to this definition">¶</a></dt>
 <dd><p>The name(s) of the PI(s) of this run.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="skyportal.models.ObservingRun.rise_time">
+<code class="sig-name descname">rise_time</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_or_targets</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.ObservingRun.rise_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>The rise time of the specified targets as an astropy.time.Time.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="skyportal.models.ObservingRun.set_time">
+<code class="sig-name descname">set_time</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">target_or_targets</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.ObservingRun.set_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>The set time of the specified targets as an astropy.time.Time.</p>
 </dd></dl>
 
 <dl class="py attribute">
