@@ -633,10 +633,10 @@
         <li><a href="database.html#skyportal.models.Thumbnail.id">(skyportal.models.Thumbnail attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="database.html#baselayer.app.models.SlugifiedStr.impl">impl (baselayer.app.models.SlugifiedStr attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="database.html#skyportal.models.Instrument">Instrument (class in skyportal.models)</a>
 </li>
       <li><a href="database.html#skyportal.models.Allocation.instrument">instrument (skyportal.models.Allocation attribute)</a>
@@ -669,6 +669,14 @@
 </li>
       <li><a href="database.html#baselayer.app.models.User.is_authenticated">is_authenticated() (baselayer.app.models.User method)</a>
 </li>
+      <li><a href="database.html#skyportal.models.is_modifiable_by">is_modifiable_by() (in module skyportal.models)</a>
+
+      <ul>
+        <li><a href="database.html#skyportal.models.Photometry.is_modifiable_by">(skyportal.models.Photometry method)</a>
+</li>
+        <li><a href="database.html#skyportal.models.Spectrum.is_modifiable_by">(skyportal.models.Spectrum method)</a>
+</li>
+      </ul></li>
       <li><a href="database.html#baselayer.app.models.Token.is_owned_by">is_owned_by() (baselayer.app.models.Token method)</a>
 
       <ul>
@@ -876,12 +884,12 @@
         <li><a href="database.html#skyportal.models.Thumbnail.obj_id">(skyportal.models.Thumbnail attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="database.html#skyportal.models.Obj.obj_notifications">obj_notifications (skyportal.models.Obj attribute)</a>
 </li>
       <li><a href="database.html#skyportal.models.Spectrum.observed_at">observed_at (skyportal.models.Spectrum attribute)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="database.html#skyportal.models.Telescope.observer">observer() (skyportal.models.Telescope property)</a>
 </li>
       <li><a href="database.html#skyportal.models.ObservingRun.observers">observers (skyportal.models.ObservingRun attribute)</a>
@@ -919,9 +927,21 @@
       <li><a href="database.html#skyportal.models.Photometry.original_user_data">original_user_data (skyportal.models.Photometry attribute)</a>
 </li>
       <li><a href="database.html#skyportal.models.ObservingRun.owner">owner (skyportal.models.ObservingRun attribute)</a>
+
+      <ul>
+        <li><a href="database.html#skyportal.models.Photometry.owner">(skyportal.models.Photometry attribute)</a>
 </li>
+        <li><a href="database.html#skyportal.models.Spectrum.owner">(skyportal.models.Spectrum attribute)</a>
+</li>
+      </ul></li>
       <li><a href="database.html#skyportal.models.ObservingRun.owner_id">owner_id (skyportal.models.ObservingRun attribute)</a>
+
+      <ul>
+        <li><a href="database.html#skyportal.models.Photometry.owner_id">(skyportal.models.Photometry attribute)</a>
 </li>
+        <li><a href="database.html#skyportal.models.Spectrum.owner_id">(skyportal.models.Spectrum attribute)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -933,6 +953,8 @@
       <li><a href="database.html#skyportal.models.FollowupRequest.payload">payload (skyportal.models.FollowupRequest attribute)</a>
 </li>
       <li><a href="database.html#baselayer.app.models.User.permissions">permissions() (baselayer.app.models.User property)</a>
+</li>
+      <li><a href="database.html#baselayer.app.models.User.photometry">photometry (baselayer.app.models.User attribute)</a>
 </li>
       <li><a href="database.html#skyportal.models.Photometry">Photometry (class in skyportal.models)</a>
 </li>
@@ -1069,13 +1091,15 @@
         <li><a href="database.html#skyportal.models.ObservingRun.sources">(skyportal.models.ObservingRun attribute)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="database.html#skyportal.models.SourceView">SourceView (class in skyportal.models)</a>
 </li>
-      <li><a href="database.html#skyportal.models.ClassicalAssignment.spectra">spectra (skyportal.models.ClassicalAssignment attribute)</a>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="database.html#baselayer.app.models.User.spectra">spectra (baselayer.app.models.User attribute)</a>
 
       <ul>
+        <li><a href="database.html#skyportal.models.ClassicalAssignment.spectra">(skyportal.models.ClassicalAssignment attribute)</a>
+</li>
         <li><a href="database.html#skyportal.models.Group.spectra">(skyportal.models.Group attribute)</a>
 </li>
         <li><a href="database.html#skyportal.models.Instrument.spectra">(skyportal.models.Instrument attribute)</a>

@@ -2657,6 +2657,10 @@ astroplan.FixedTarget.</p>
 </dd>
 <dt><strong>original_user_data</strong></dt><dd><p>Original data passed by the user through the PhotometryHandler.POST API or the PhotometryHandler.PUT API. The schema of this JSON validates under either schema.PhotometryFlux or schema.PhotometryMag (depending on how the data was passed).</p>
 </dd>
+<dt><strong>owner</strong></dt><dd><p>The User who uploaded the photometry.</p>
+</dd>
+<dt><strong>owner_id</strong></dt><dd><p>ID of the User who uploaded the photometry.</p>
+</dd>
 <dt><strong>ra</strong></dt><dd></dd>
 <dt><strong>ra_unc</strong></dt><dd><p>Uncertainty of ra position [arcsec]</p>
 </dd>
@@ -2680,13 +2684,16 @@ astroplan.FixedTarget.</p>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Photometry.is_modifiable_by" title="skyportal.models.Photometry.is_modifiable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_modifiable_by</span></code></a>(user)</p></td>
+<td><p>Return a boolean indicating whether an object point can be modified or deleted by a given user.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
 <td><p>Serialize this object to a Python dictionary.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">within</span></code>(other, radius)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">within</span></code>(other, radius)</p></td>
 <td><p>Test if this point is within a given radius of another point.</p></td>
 </tr>
 </tbody>
@@ -2757,6 +2764,27 @@ astroplan.FixedTarget.</p>
 <dd><p>ID of the Instrument that took this Photometry.</p>
 </dd></dl>
 
+<dl class="py method">
+<dt id="skyportal.models.Photometry.is_modifiable_by">
+<code class="sig-name descname">is_modifiable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Photometry.is_modifiable_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a boolean indicating whether an object point can be modified or
+deleted by a given user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>user: `baselayer.app.models.User`</strong></dt><dd><p>The User to check.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>owned: bool</dt><dd><p>Whether the Object can be modified by the User.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py attribute">
 <dt id="skyportal.models.Photometry.iso">
 <code class="sig-name descname">iso</code><a class="headerlink" href="#skyportal.models.Photometry.iso" title="Permalink to this definition">¶</a></dt>
@@ -2809,6 +2837,18 @@ astroplan.FixedTarget.</p>
 <dt id="skyportal.models.Photometry.original_user_data">
 <code class="sig-name descname">original_user_data</code><a class="headerlink" href="#skyportal.models.Photometry.original_user_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Original data passed by the user through the PhotometryHandler.POST API or the PhotometryHandler.PUT API. The schema of this JSON validates under either schema.PhotometryFlux or schema.PhotometryMag (depending on how the data was passed).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Photometry.owner">
+<code class="sig-name descname">owner</code><a class="headerlink" href="#skyportal.models.Photometry.owner" title="Permalink to this definition">¶</a></dt>
+<dd><p>The User who uploaded the photometry.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Photometry.owner_id">
+<code class="sig-name descname">owner_id</code><a class="headerlink" href="#skyportal.models.Photometry.owner_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>ID of the User who uploaded the photometry.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -2955,6 +2995,10 @@ dispersive element.</p>
 </dd>
 <dt><strong>original_file_string</strong></dt><dd><p>Content of original file that was passed to upload the spectrum.</p>
 </dd>
+<dt><strong>owner</strong></dt><dd><p>The User who uploaded the spectrum.</p>
+</dd>
+<dt><strong>owner_id</strong></dt><dd><p>ID of the User who uploaded the spectrum.</p>
+</dd>
 <dt><strong>wavelengths</strong></dt><dd><p>Wavelengths of the spectrum [Angstrom].</p>
 </dd>
 </dl>
@@ -2976,10 +3020,13 @@ dispersive element.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Spectrum.is_modifiable_by" title="skyportal.models.Spectrum.is_modifiable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_modifiable_by</span></code></a>(user)</p></td>
+<td><p>Return a boolean indicating whether an object point can be modified or deleted by a given user.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
 <td><p>Serialize this object to a Python dictionary.</p></td>
 </tr>
 </tbody>
@@ -3068,6 +3115,27 @@ values of the spectrum (default None).</p>
 <dd><p>ID of the Instrument that acquired the Spectrum.</p>
 </dd></dl>
 
+<dl class="py method">
+<dt id="skyportal.models.Spectrum.is_modifiable_by">
+<code class="sig-name descname">is_modifiable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Spectrum.is_modifiable_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a boolean indicating whether an object point can be modified or
+deleted by a given user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>user: `baselayer.app.models.User`</strong></dt><dd><p>The User to check.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>owned: bool</dt><dd><p>Whether the Object can be modified by the User.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py attribute">
 <dt id="skyportal.models.Spectrum.modified">
 <code class="sig-name descname">modified</code><a class="headerlink" href="#skyportal.models.Spectrum.modified" title="Permalink to this definition">¶</a></dt>
@@ -3108,6 +3176,18 @@ values of the spectrum (default None).</p>
 <dt id="skyportal.models.Spectrum.original_file_string">
 <code class="sig-name descname">original_file_string</code><a class="headerlink" href="#skyportal.models.Spectrum.original_file_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Content of original file that was passed to upload the spectrum.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Spectrum.owner">
+<code class="sig-name descname">owner</code><a class="headerlink" href="#skyportal.models.Spectrum.owner" title="Permalink to this definition">¶</a></dt>
+<dd><p>The User who uploaded the spectrum.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Spectrum.owner_id">
+<code class="sig-name descname">owner_id</code><a class="headerlink" href="#skyportal.models.Spectrum.owner_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>ID of the User who uploaded the spectrum.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -3859,6 +3939,27 @@ if it does not exist, return an empty list.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt id="skyportal.models.is_modifiable_by">
+<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">is_modifiable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">user</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.is_modifiable_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a boolean indicating whether an object point can be modified or
+deleted by a given user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>user: `baselayer.app.models.User`</strong></dt><dd><p>The User to check.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>owned: bool</dt><dd><p>Whether the Object can be modified by the User.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt id="skyportal.models.is_owned_by">
 <code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">is_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.is_owned_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p>
@@ -4473,6 +4574,8 @@ specified User (or Token instance, if a token is passed).</p>
 </dd>
 <dt><a class="reference internal" href="#baselayer.app.models.User.permissions" title="baselayer.app.models.User.permissions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">permissions</span></code></a></dt><dd><p>List of the names of the user’s ACLs.</p>
 </dd>
+<dt><strong>photometry</strong></dt><dd><p>Photometry uploaded by this User.</p>
+</dd>
 <dt><strong>preferences</strong></dt><dd><p>The user’s application settings.</p>
 </dd>
 <dt><strong>roles</strong></dt><dd><p>The roles assumed by this user.</p>
@@ -4481,6 +4584,8 @@ specified User (or Token instance, if a token is passed).</p>
 <dt><strong>source_notifications</strong></dt><dd><p>Source notifications the User has sent out.</p>
 </dd>
 <dt><strong>sources</strong></dt><dd><p>The Sources accessible to this User.</p>
+</dd>
+<dt><strong>spectra</strong></dt><dd><p>Spectra uploaded by this User.</p>
 </dd>
 <dt><strong>streams</strong></dt><dd><p>The Streams this User has access to.</p>
 </dd>
@@ -4636,6 +4741,12 @@ authenticated.</p>
 </dd></dl>
 
 <dl class="py attribute">
+<dt id="baselayer.app.models.User.photometry">
+<code class="sig-name descname">photometry</code><a class="headerlink" href="#baselayer.app.models.User.photometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Photometry uploaded by this User.</p>
+</dd></dl>
+
+<dl class="py attribute">
 <dt id="baselayer.app.models.User.preferences">
 <code class="sig-name descname">preferences</code><a class="headerlink" href="#baselayer.app.models.User.preferences" title="Permalink to this definition">¶</a></dt>
 <dd><p>The user’s application settings.</p>
@@ -4657,6 +4768,12 @@ authenticated.</p>
 <dt id="baselayer.app.models.User.sources">
 <code class="sig-name descname">sources</code><a class="headerlink" href="#baselayer.app.models.User.sources" title="Permalink to this definition">¶</a></dt>
 <dd><p>The Sources accessible to this User.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="baselayer.app.models.User.spectra">
+<code class="sig-name descname">spectra</code><a class="headerlink" href="#baselayer.app.models.User.spectra" title="Permalink to this definition">¶</a></dt>
+<dd><p>Spectra uploaded by this User.</p>
 </dd></dl>
 
 <dl class="py attribute">
