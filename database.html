@@ -4558,7 +4558,7 @@ specified User (or Token instance, if a token is passed).</p>
 <dd class="field-odd"><dl class="simple">
 <dt><a class="reference internal" href="#baselayer.app.models.User.accessible_groups" title="baselayer.app.models.User.accessible_groups"><code class="xref py py-obj docutils literal notranslate"><span class="pre">accessible_groups</span></code></a></dt><dd><p>Return the list of Groups a User or Token has access to.</p>
 </dd>
-<dt><a class="reference internal" href="#baselayer.app.models.User.acls" title="baselayer.app.models.User.acls"><code class="xref py py-obj docutils literal notranslate"><span class="pre">acls</span></code></a></dt><dd><p>List of the user’s ACLs.</p>
+<dt><strong>acls</strong></dt><dd><p>ACLs granted to user, separate from role-level ACLs</p>
 </dd>
 <dt><strong>annotations</strong></dt><dd></dd>
 <dt><strong>assignments</strong></dt><dd><p>Objs the User has assigned to ObservingRuns.</p>
@@ -4588,7 +4588,7 @@ specified User (or Token instance, if a token is passed).</p>
 </dd>
 <dt><strong>observing_runs</strong></dt><dd><p>Observing Runs this User has created.</p>
 </dd>
-<dt><a class="reference internal" href="#baselayer.app.models.User.permissions" title="baselayer.app.models.User.permissions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">permissions</span></code></a></dt><dd><p>List of the names of the user’s ACLs.</p>
+<dt><a class="reference internal" href="#baselayer.app.models.User.permissions" title="baselayer.app.models.User.permissions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">permissions</span></code></a></dt><dd><p>List of the names of all of the user’s ACLs (role-level + individual).</p>
 </dd>
 <dt><strong>photometry</strong></dt><dd><p>Photometry uploaded by this User.</p>
 </dd>
@@ -4652,10 +4652,10 @@ Users or Token owners, this corresponds to the Groups they are a member of.
 For System Admins, this corresponds to all Groups.</p>
 </dd></dl>
 
-<dl class="py method">
+<dl class="py attribute">
 <dt id="baselayer.app.models.User.acls">
-<em class="property">property </em><code class="sig-name descname">acls</code><a class="headerlink" href="#baselayer.app.models.User.acls" title="Permalink to this definition">¶</a></dt>
-<dd><p>List of the user’s ACLs.</p>
+<code class="sig-name descname">acls</code><a class="headerlink" href="#baselayer.app.models.User.acls" title="Permalink to this definition">¶</a></dt>
+<dd><p>ACLs granted to user, separate from role-level ACLs</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -4753,7 +4753,7 @@ authenticated.</p>
 <dl class="py method">
 <dt id="baselayer.app.models.User.permissions">
 <em class="property">property </em><code class="sig-name descname">permissions</code><a class="headerlink" href="#baselayer.app.models.User.permissions" title="Permalink to this definition">¶</a></dt>
-<dd><p>List of the names of the user’s ACLs.</p>
+<dd><p>List of the names of all of the user’s ACLs (role-level + individual).</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -4820,6 +4820,60 @@ authenticated.</p>
 <dt id="baselayer.app.models.User.username">
 <code class="sig-name descname">username</code><a class="headerlink" href="#baselayer.app.models.User.username" title="Permalink to this definition">¶</a></dt>
 <dd><p>The user’s username.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="baselayer.app.models.UserACL">
+<em class="property">class </em><code class="sig-prename descclassname">baselayer.app.models.</code><code class="sig-name descname">UserACL</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserACL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Join table mapping Users to ACLs</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>acl</strong></dt><dd></dd>
+<dt><strong>acl_id</strong></dt><dd></dd>
+<dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
+</dd>
+<dt><strong>id</strong></dt><dd></dd>
+<dt><strong>modified</strong></dt><dd><p>UTC time the object’s row was last modified in the database.</p>
+</dd>
+<dt><strong>user</strong></dt><dd></dd>
+<dt><strong>user_id</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
+<td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<td><p>Serialize this object to a Python dictionary.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt id="baselayer.app.models.UserACL.created_at">
+<code class="sig-name descname">created_at</code><a class="headerlink" href="#baselayer.app.models.UserACL.created_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC time of insertion of object’s row into the database.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="baselayer.app.models.UserACL.modified">
+<code class="sig-name descname">modified</code><a class="headerlink" href="#baselayer.app.models.UserACL.modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC time the object’s row was last modified in the database.</p>
 </dd></dl>
 
 </dd></dl>
