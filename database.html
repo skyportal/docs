@@ -1919,7 +1919,7 @@ entities, namely Source and Candidate.</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_photometry_owned_by_user" title="skyportal.models.Obj.get_photometry_owned_by_user"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_photometry_owned_by_user</span></code></a>(user_or_token)</p></td>
 <td><p>Query the database and return the Photometry for this Obj that is shared with any of the User or Token owner’s accessible Groups.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_spectra_owned_by" title="skyportal.models.Obj.get_spectra_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_spectra_owned_by</span></code></a>(user_or_token)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_spectra_owned_by" title="skyportal.models.Obj.get_spectra_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_spectra_owned_by</span></code></a>(user_or_token[, options])</p></td>
 <td><p>Query the database and return the Spectra for this Obj that are shared with any of the User or Token owner’s accessible Groups.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
@@ -2219,7 +2219,7 @@ with any of the User or Token owner’s accessible Groups.</p>
 
 <dl class="py method">
 <dt id="skyportal.models.Obj.get_spectra_owned_by">
-<code class="sig-name descname">get_spectra_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_spectra_owned_by" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">get_spectra_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">()</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_spectra_owned_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query the database and return the Spectra for this Obj that are shared
 with any of the User or Token owner’s accessible Groups.</p>
 <dl class="field-list">
@@ -2228,6 +2228,8 @@ with any of the User or Token owner’s accessible Groups.</p>
 <dt><strong>obj_id</strong><span class="classifier">string</span></dt><dd><p>The ID of the Obj to look up.</p>
 </dd>
 <dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
+</dd>
+<dt><strong>options</strong><span class="classifier">list of <a href="#id9"><span class="problematic" id="id10">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
 </dd>
 </dl>
 </dd>
@@ -3762,7 +3764,7 @@ If the Obj does not exist, return <cite>None</cite>.</p>
 </dd>
 <dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
 </dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id9"><span class="problematic" id="id10">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
+<dt><strong>options</strong><span class="classifier">list of <a href="#id11"><span class="problematic" id="id12">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
 </dd>
 </dl>
 </dd>
@@ -3852,7 +3854,7 @@ If the Obj does not exist, return <cite>None</cite>.</p>
 </dd>
 <dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
 </dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id11"><span class="problematic" id="id12">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
+<dt><strong>options</strong><span class="classifier">list of <a href="#id13"><span class="problematic" id="id14">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
 </dd>
 </dl>
 </dd>
@@ -3902,7 +3904,7 @@ If the Obj does not exist, return <cite>None</cite>.</p>
 </dd>
 <dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
 </dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id13"><span class="problematic" id="id14">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
+<dt><strong>options</strong><span class="classifier">list of <a href="#id15"><span class="problematic" id="id16">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
 </dd>
 </dl>
 </dd>
@@ -3917,7 +3919,7 @@ If the Obj does not exist, return <cite>None</cite>.</p>
 
 <dl class="py function">
 <dt id="skyportal.models.get_spectra_owned_by">
-<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">get_spectra_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_spectra_owned_by" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">get_spectra_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">()</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_spectra_owned_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query the database and return the Spectra for this Obj that are shared
 with any of the User or Token owner’s accessible Groups.</p>
 <dl class="field-list">
@@ -3926,6 +3928,8 @@ with any of the User or Token owner’s accessible Groups.</p>
 <dt><strong>obj_id</strong><span class="classifier">string</span></dt><dd><p>The ID of the Obj to look up.</p>
 </dd>
 <dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
+</dd>
+<dt><strong>options</strong><span class="classifier">list of <a href="#id17"><span class="problematic" id="id18">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
 </dd>
 </dl>
 </dd>
