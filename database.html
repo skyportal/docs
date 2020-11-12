@@ -2401,6 +2401,7 @@ astroplan.FixedTarget.</p>
 </dd>
 <dt><strong>calendar_date</strong></dt><dd><p>The Local Calendar date of this Run.</p>
 </dd>
+<dt><strong>calendar_noon</strong></dt><dd></dd>
 <dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
 </dd>
 <dt><strong>group</strong></dt><dd><p>The Group associated with this Run.</p>
@@ -2424,18 +2425,6 @@ astroplan.FixedTarget.</p>
 <dt><strong>pi</strong></dt><dd><p>The name(s) of the PI(s) of this run.</p>
 </dd>
 <dt><strong>sources</strong></dt><dd><p>The targets [Objs] for this run.</p>
-</dd>
-<dt><a class="reference internal" href="#skyportal.models.ObservingRun.sunrise" title="skyportal.models.ObservingRun.sunrise"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sunrise</span></code></a></dt><dd><p>The UTC timestamp of Sunrise on this run.</p>
-</dd>
-<dt><a class="reference internal" href="#skyportal.models.ObservingRun.sunset" title="skyportal.models.ObservingRun.sunset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sunset</span></code></a></dt><dd><p>The UTC timestamp of Sunset on this run.</p>
-</dd>
-<dt><a class="reference internal" href="#skyportal.models.ObservingRun.twilight_evening_astronomical" title="skyportal.models.ObservingRun.twilight_evening_astronomical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">twilight_evening_astronomical</span></code></a></dt><dd><p>The UTC timestamp of evening astronomical (-18 degree) twilight on this run.</p>
-</dd>
-<dt><a class="reference internal" href="#skyportal.models.ObservingRun.twilight_evening_nautical" title="skyportal.models.ObservingRun.twilight_evening_nautical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">twilight_evening_nautical</span></code></a></dt><dd><p>The UTC timestamp of evening nautical (-12 degree) twilight on this run.</p>
-</dd>
-<dt><a class="reference internal" href="#skyportal.models.ObservingRun.twilight_morning_astronomical" title="skyportal.models.ObservingRun.twilight_morning_astronomical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">twilight_morning_astronomical</span></code></a></dt><dd><p>The UTC timestamp of morning astronomical (-18 degree) twilight on this run.</p>
-</dd>
-<dt><a class="reference internal" href="#skyportal.models.ObservingRun.twilight_morning_nautical" title="skyportal.models.ObservingRun.twilight_morning_nautical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">twilight_morning_nautical</span></code></a></dt><dd><p>The UTC timestamp of morning nautical (-12 degree) twilight on this run.</p>
 </dd>
 </dl>
 </dd>
@@ -2561,42 +2550,6 @@ astroplan.FixedTarget.</p>
 <dt id="skyportal.models.ObservingRun.sources">
 <code class="sig-name descname">sources</code><a class="headerlink" href="#skyportal.models.ObservingRun.sources" title="Permalink to this definition">¶</a></dt>
 <dd><p>The targets [Objs] for this run.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="skyportal.models.ObservingRun.sunrise">
-<em class="property">property </em><code class="sig-name descname">sunrise</code><a class="headerlink" href="#skyportal.models.ObservingRun.sunrise" title="Permalink to this definition">¶</a></dt>
-<dd><p>The UTC timestamp of Sunrise on this run.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="skyportal.models.ObservingRun.sunset">
-<em class="property">property </em><code class="sig-name descname">sunset</code><a class="headerlink" href="#skyportal.models.ObservingRun.sunset" title="Permalink to this definition">¶</a></dt>
-<dd><p>The UTC timestamp of Sunset on this run.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="skyportal.models.ObservingRun.twilight_evening_astronomical">
-<em class="property">property </em><code class="sig-name descname">twilight_evening_astronomical</code><a class="headerlink" href="#skyportal.models.ObservingRun.twilight_evening_astronomical" title="Permalink to this definition">¶</a></dt>
-<dd><p>The UTC timestamp of evening astronomical (-18 degree) twilight on this run.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="skyportal.models.ObservingRun.twilight_evening_nautical">
-<em class="property">property </em><code class="sig-name descname">twilight_evening_nautical</code><a class="headerlink" href="#skyportal.models.ObservingRun.twilight_evening_nautical" title="Permalink to this definition">¶</a></dt>
-<dd><p>The UTC timestamp of evening nautical (-12 degree) twilight on this run.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="skyportal.models.ObservingRun.twilight_morning_astronomical">
-<em class="property">property </em><code class="sig-name descname">twilight_morning_astronomical</code><a class="headerlink" href="#skyportal.models.ObservingRun.twilight_morning_astronomical" title="Permalink to this definition">¶</a></dt>
-<dd><p>The UTC timestamp of morning astronomical (-18 degree) twilight on this run.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="skyportal.models.ObservingRun.twilight_morning_nautical">
-<em class="property">property </em><code class="sig-name descname">twilight_morning_nautical</code><a class="headerlink" href="#skyportal.models.ObservingRun.twilight_morning_nautical" title="Permalink to this definition">¶</a></dt>
-<dd><p>The UTC timestamp of morning nautical (-12 degree) twilight on this run.</p>
 </dd></dl>
 
 </dd></dl>
@@ -3511,8 +3464,37 @@ if it does not exist, return an empty list.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Telescope.next_sunrise" title="skyportal.models.Telescope.next_sunrise"><code class="xref py py-obj docutils literal notranslate"><span class="pre">next_sunrise</span></code></a>([time])</p></td>
+<td><p>The astropy timestamp of the next sunrise after <cite>time</cite> at this site.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Telescope.next_sunset" title="skyportal.models.Telescope.next_sunset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">next_sunset</span></code></a>([time])</p></td>
+<td><p>The astropy timestamp of the next sunset after <cite>time</cite> at this site.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Telescope.next_twilight_evening_astronomical" title="skyportal.models.Telescope.next_twilight_evening_astronomical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">next_twilight_evening_astronomical</span></code></a>([time])</p></td>
+<td><p>The astropy timestamp of the next evening astronomical (-18 degree) twilight at this site.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Telescope.next_twilight_evening_nautical" title="skyportal.models.Telescope.next_twilight_evening_nautical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">next_twilight_evening_nautical</span></code></a>([time])</p></td>
+<td><p>The astropy timestamp of the next evening nautical (-12 degree) twilight at this site.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Telescope.next_twilight_morning_astronomical" title="skyportal.models.Telescope.next_twilight_morning_astronomical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">next_twilight_morning_astronomical</span></code></a>([time])</p></td>
+<td><p>The astropy timestamp of the next morning astronomical (-18 degree) twilight at this site.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Telescope.next_twilight_morning_nautical" title="skyportal.models.Telescope.next_twilight_morning_nautical"><code class="xref py py-obj docutils literal notranslate"><span class="pre">next_twilight_morning_nautical</span></code></a>([time])</p></td>
+<td><p>The astropy timestamp of the next morning nautical (-12 degree) twilight at this site.</p></td>
+</tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
 <td><p>Serialize this object to a Python dictionary.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 57%" />
+<col style="width: 43%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>ephemeris</strong></p></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -3568,6 +3550,48 @@ if it does not exist, return an empty list.</p>
 <dt id="skyportal.models.Telescope.name">
 <code class="sig-name descname">name</code><a class="headerlink" href="#skyportal.models.Telescope.name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unabbreviated facility name (e.g., Palomar 200-inch Hale Telescope).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="skyportal.models.Telescope.next_sunrise">
+<code class="sig-name descname">next_sunrise</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Telescope.next_sunrise" title="Permalink to this definition">¶</a></dt>
+<dd><p>The astropy timestamp of the next sunrise after <cite>time</cite> at this site.
+If time=None, uses the current time.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="skyportal.models.Telescope.next_sunset">
+<code class="sig-name descname">next_sunset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Telescope.next_sunset" title="Permalink to this definition">¶</a></dt>
+<dd><p>The astropy timestamp of the next sunset after <cite>time</cite> at this site.
+If time=None, uses the current time.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="skyportal.models.Telescope.next_twilight_evening_astronomical">
+<code class="sig-name descname">next_twilight_evening_astronomical</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Telescope.next_twilight_evening_astronomical" title="Permalink to this definition">¶</a></dt>
+<dd><p>The astropy timestamp of the next evening astronomical (-18 degree)
+twilight at this site. If time=None, uses the current time.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="skyportal.models.Telescope.next_twilight_evening_nautical">
+<code class="sig-name descname">next_twilight_evening_nautical</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Telescope.next_twilight_evening_nautical" title="Permalink to this definition">¶</a></dt>
+<dd><p>The astropy timestamp of the next evening nautical (-12 degree)
+twilight at this site. If time=None, uses the current time.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="skyportal.models.Telescope.next_twilight_morning_astronomical">
+<code class="sig-name descname">next_twilight_morning_astronomical</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Telescope.next_twilight_morning_astronomical" title="Permalink to this definition">¶</a></dt>
+<dd><p>The astropy timestamp of the next morning astronomical (-18 degree)
+twilight at this site. If time=None, uses the current time.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="skyportal.models.Telescope.next_twilight_morning_nautical">
+<code class="sig-name descname">next_twilight_morning_nautical</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">time</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Telescope.next_twilight_morning_nautical" title="Permalink to this definition">¶</a></dt>
+<dd><p>The astropy timestamp of the next morning nautical (-12 degree)
+twilight at this site. If time=None, uses the current time.</p>
 </dd></dl>
 
 <dl class="py attribute">
