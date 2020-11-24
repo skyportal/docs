@@ -596,6 +596,170 @@ to return to the user.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt id="skyportal.models.Candidate">
+<em class="property">class </em><code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">Candidate</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Candidate" title="Permalink to this definition">¶</a></dt>
+<dd><p>An Obj that passed a Filter, becoming scannable on the Filter’s scanning page.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
+</dd>
+<dt><strong>filter</strong></dt><dd><p>The filter that the Candidate passed</p>
+</dd>
+<dt><strong>filter_id</strong></dt><dd><p>ID of the filter the candidate passed</p>
+</dd>
+<dt><strong>id</strong></dt><dd><p>Unique object identifier.</p>
+</dd>
+<dt><strong>modified</strong></dt><dd><p>UTC time the object’s row was last modified in the database.</p>
+</dd>
+<dt><strong>obj</strong></dt><dd><p>The Obj that passed a filter</p>
+</dd>
+<dt><strong>obj_id</strong></dt><dd><p>ID of the Obj</p>
+</dd>
+<dt><strong>passed_at</strong></dt><dd><p>ISO UTC time when the Candidate passed the Filter.</p>
+</dd>
+<dt><strong>passing_alert_id</strong></dt><dd><p>ID of the latest Stream alert that passed the Filter.</p>
+</dd>
+<dt><strong>uploader_id</strong></dt><dd><p>ID of the user that posted the candidate</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
+<td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Candidate.get_obj_if_owned_by" title="skyportal.models.Candidate.get_obj_if_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_obj_if_owned_by</span></code></a>(user_or_token[, options])</p></td>
+<td><p>Return an Obj from the database if the Obj is a Candidate in at least one of the requesting User or Token owner’s accessible Groups.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Candidate.is_owned_by" title="skyportal.models.Candidate.is_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code></a>(user_or_token)</p></td>
+<td><p>Return a boolean indicating whether the Candidate passed the Filter of any of a User or Token owner’s accessible Groups.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<td><p>Serialize this object to a Python dictionary.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt id="skyportal.models.Candidate.created_at">
+<code class="sig-name descname">created_at</code><a class="headerlink" href="#skyportal.models.Candidate.created_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC time of insertion of object’s row into the database.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Candidate.filter">
+<code class="sig-name descname">filter</code><a class="headerlink" href="#skyportal.models.Candidate.filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>The filter that the Candidate passed</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Candidate.filter_id">
+<code class="sig-name descname">filter_id</code><a class="headerlink" href="#skyportal.models.Candidate.filter_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>ID of the filter the candidate passed</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="skyportal.models.Candidate.get_obj_if_owned_by">
+<code class="sig-name descname">get_obj_if_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Candidate.get_obj_if_owned_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an Obj from the database if the Obj is a Candidate in at least
+one of the requesting User or Token owner’s accessible Groups. If the Obj is not a
+Candidate in one of the User or Token owner’s accessible Groups, raise an AccessError.
+If the Obj does not exist, return <cite>None</cite>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>obj_id</strong><span class="classifier">integer or string</span></dt><dd><p>Primary key of the Obj.</p>
+</dd>
+<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
+</dd>
+<dt><strong>options</strong><span class="classifier">list of <a href="#id3"><span class="problematic" id="id4">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl>
+<dt><strong>obj</strong><span class="classifier"><cite>skyportal.models.Obj</cite></span></dt><dd><p>The requested Obj.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Candidate.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#skyportal.models.Candidate.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unique object identifier.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="skyportal.models.Candidate.is_owned_by">
+<code class="sig-name descname">is_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Candidate.is_owned_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a boolean indicating whether the Candidate passed the Filter
+of any of a User or Token owner’s accessible Groups.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>owned</strong><span class="classifier">bool</span></dt><dd><p>Whether the Candidate is owned by the User or Token owner.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Candidate.modified">
+<code class="sig-name descname">modified</code><a class="headerlink" href="#skyportal.models.Candidate.modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC time the object’s row was last modified in the database.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Candidate.obj">
+<code class="sig-name descname">obj</code><a class="headerlink" href="#skyportal.models.Candidate.obj" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Obj that passed a filter</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Candidate.obj_id">
+<code class="sig-name descname">obj_id</code><a class="headerlink" href="#skyportal.models.Candidate.obj_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>ID of the Obj</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Candidate.passed_at">
+<code class="sig-name descname">passed_at</code><a class="headerlink" href="#skyportal.models.Candidate.passed_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>ISO UTC time when the Candidate passed the Filter.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Candidate.passing_alert_id">
+<code class="sig-name descname">passing_alert_id</code><a class="headerlink" href="#skyportal.models.Candidate.passing_alert_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>ID of the latest Stream alert that passed the Filter.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Candidate.uploader_id">
+<code class="sig-name descname">uploader_id</code><a class="headerlink" href="#skyportal.models.Candidate.uploader_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>ID of the user that posted the candidate</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt id="skyportal.models.ClassicalAssignment">
 <em class="property">class </em><code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">ClassicalAssignment</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.ClassicalAssignment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Assignment of an Obj to an Observing Run as a target.</p>
@@ -1018,7 +1182,7 @@ have access, raise an AccessError.</p>
 </dd>
 <dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
 </dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id3"><span class="problematic" id="id4">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
+<dt><strong>options</strong><span class="classifier">list of <a href="#id5"><span class="problematic" id="id6">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
 </dd>
 </dl>
 </dd>
@@ -1083,6 +1247,8 @@ with exactly one Group, and a Group may have multiple operational Filters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
 <dd class="field-odd"><dl class="simple">
+<dt><strong>candidates</strong></dt><dd><p>Candidates that have passed the filter.</p>
+</dd>
 <dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
 </dd>
 <dt><strong>group</strong></dt><dd><p>The Filter’s Group.</p>
@@ -1123,6 +1289,12 @@ with exactly one Group, and a Group may have multiple operational Filters.</p>
 </tr>
 </tbody>
 </table>
+<dl class="py attribute">
+<dt id="skyportal.models.Filter.candidates">
+<code class="sig-name descname">candidates</code><a class="headerlink" href="#skyportal.models.Filter.candidates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Candidates that have passed the filter.</p>
+</dd></dl>
+
 <dl class="py attribute">
 <dt id="skyportal.models.Filter.created_at">
 <code class="sig-name descname">created_at</code><a class="headerlink" href="#skyportal.models.Filter.created_at" title="Permalink to this definition">¶</a></dt>
@@ -1338,7 +1510,7 @@ accessible to the given user or token.</p>
 targets for data sharing requests. `Photometry</cite> and <cite>Spectra</cite> shared with
 a <cite>Group</cite> will be visible to all its members. <cite>Group`s maintain specific
 `Stream</cite> permissions. In order for a <cite>User</cite> to join a <cite>Group</cite>, the <cite>User</cite>
-must have access to all of the <cite>Group</cite>’s data <a href="#id5"><span class="problematic" id="id6">`</span></a>Stream`s.</p>
+must have access to all of the <cite>Group</cite>’s data <a href="#id7"><span class="problematic" id="id8">`</span></a>Stream`s.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
 <dd class="field-odd"><dl class="simple">
@@ -2173,7 +2345,7 @@ If the Obj does not exist, return <cite>None</cite>.</p>
 </dd>
 <dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
 </dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id7"><span class="problematic" id="id8">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
+<dt><strong>options</strong><span class="classifier">list of <a href="#id9"><span class="problematic" id="id10">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
 </dd>
 </dl>
 </dd>
@@ -2221,7 +2393,7 @@ with any of the User or Token owner’s accessible Groups.</p>
 </dd>
 <dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
 </dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id9"><span class="problematic" id="id10">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
+<dt><strong>options</strong><span class="classifier">list of <a href="#id11"><span class="problematic" id="id12">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
 </dd>
 </dl>
 </dd>
@@ -3780,7 +3952,7 @@ If the Obj does not exist, return <cite>None</cite>.</p>
 </dd>
 <dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
 </dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id11"><span class="problematic" id="id12">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
+<dt><strong>options</strong><span class="classifier">list of <a href="#id13"><span class="problematic" id="id14">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
 </dd>
 </dl>
 </dd>
@@ -3870,7 +4042,7 @@ If the Obj does not exist, return <cite>None</cite>.</p>
 </dd>
 <dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
 </dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id13"><span class="problematic" id="id14">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
+<dt><strong>options</strong><span class="classifier">list of <a href="#id15"><span class="problematic" id="id16">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
 </dd>
 </dl>
 </dd>
@@ -3920,7 +4092,7 @@ If the Obj does not exist, return <cite>None</cite>.</p>
 </dd>
 <dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
 </dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id15"><span class="problematic" id="id16">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
+<dt><strong>options</strong><span class="classifier">list of <a href="#id17"><span class="problematic" id="id18">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
 </dd>
 </dl>
 </dd>
@@ -3945,7 +4117,7 @@ with any of the User or Token owner’s accessible Groups.</p>
 </dd>
 <dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
 </dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id17"><span class="problematic" id="id18">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
+<dt><strong>options</strong><span class="classifier">list of <a href="#id19"><span class="problematic" id="id20">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
 </dd>
 </dl>
 </dd>
@@ -4044,6 +4216,12 @@ any of a User or Token owner’s accessible Groups.</p>
 <dd><p>Return the list of Groups a User or Token has access to. For non-admin
 Users or Token owners, this corresponds to the Groups they are a member of.
 For System Admins, this corresponds to all Groups.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.user_or_token_accessible_streams">
+<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">user_or_token_accessible_streams</code><a class="headerlink" href="#skyportal.models.user_or_token_accessible_streams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of Streams a User or Token has access to.</p>
 </dd></dl>
 
 <span class="target" id="module-baselayer.app.models"></span><dl class="py class">
@@ -4404,6 +4582,8 @@ as a particular User.</p>
 <dd class="field-odd"><dl class="simple">
 <dt><a class="reference internal" href="#baselayer.app.models.Token.accessible_groups" title="baselayer.app.models.Token.accessible_groups"><code class="xref py py-obj docutils literal notranslate"><span class="pre">accessible_groups</span></code></a></dt><dd><p>Return the list of Groups a User or Token has access to.</p>
 </dd>
+<dt><a class="reference internal" href="#baselayer.app.models.Token.accessible_streams" title="baselayer.app.models.Token.accessible_streams"><code class="xref py py-obj docutils literal notranslate"><span class="pre">accessible_streams</span></code></a></dt><dd><p>Return the list of Streams a User or Token has access to.</p>
+</dd>
 <dt><strong>acls</strong></dt><dd><p>The ACLs granted to the Token.</p>
 </dd>
 <dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
@@ -4416,6 +4596,7 @@ as a particular User.</p>
 </dd>
 <dt><strong>id</strong></dt><dd><p>The value of the token. This field is used for authenticating as a User on the command line.</p>
 </dd>
+<dt><strong>is_system_admin</strong></dt><dd></dd>
 <dt><strong>modified</strong></dt><dd><p>UTC time the object’s row was last modified in the database.</p>
 </dd>
 <dt><strong>name</strong></dt><dd><p>The name of the token.</p>
@@ -4450,6 +4631,12 @@ as a particular User.</p>
 <dd><p>Return the list of Groups a User or Token has access to. For non-admin
 Users or Token owners, this corresponds to the Groups they are a member of.
 For System Admins, this corresponds to all Groups.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baselayer.app.models.Token.accessible_streams">
+<em class="property">property </em><code class="sig-name descname">accessible_streams</code><a class="headerlink" href="#baselayer.app.models.Token.accessible_streams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of Streams a User or Token has access to.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -4586,6 +4773,8 @@ specified User (or Token instance, if a token is passed).</p>
 <dd class="field-odd"><dl class="simple">
 <dt><a class="reference internal" href="#baselayer.app.models.User.accessible_groups" title="baselayer.app.models.User.accessible_groups"><code class="xref py py-obj docutils literal notranslate"><span class="pre">accessible_groups</span></code></a></dt><dd><p>Return the list of Groups a User or Token has access to.</p>
 </dd>
+<dt><a class="reference internal" href="#baselayer.app.models.User.accessible_streams" title="baselayer.app.models.User.accessible_streams"><code class="xref py py-obj docutils literal notranslate"><span class="pre">accessible_streams</span></code></a></dt><dd><p>Return the list of Streams a User or Token has access to.</p>
+</dd>
 <dt><strong>acls</strong></dt><dd><p>ACLs granted to user, separate from role-level ACLs</p>
 </dd>
 <dt><strong>annotations</strong></dt><dd></dd>
@@ -4608,6 +4797,7 @@ specified User (or Token instance, if a token is passed).</p>
 </dd>
 <dt><strong>id</strong></dt><dd><p>Unique object identifier.</p>
 </dd>
+<dt><strong>is_system_admin</strong></dt><dd></dd>
 <dt><strong>last_name</strong></dt><dd><p>The User’s last name.</p>
 </dd>
 <dt><strong>modified</strong></dt><dd><p>UTC time the object’s row was last modified in the database.</p>
@@ -4679,6 +4869,12 @@ specified User (or Token instance, if a token is passed).</p>
 <dd><p>Return the list of Groups a User or Token has access to. For non-admin
 Users or Token owners, this corresponds to the Groups they are a member of.
 For System Admins, this corresponds to all Groups.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="baselayer.app.models.User.accessible_streams">
+<em class="property">property </em><code class="sig-name descname">accessible_streams</code><a class="headerlink" href="#baselayer.app.models.User.accessible_streams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the list of Streams a User or Token has access to.</p>
 </dd></dl>
 
 <dl class="py attribute">
