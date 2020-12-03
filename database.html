@@ -227,10 +227,10 @@ SkyPortal and baselayer classes that are mapped to database tables.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -358,10 +358,10 @@ SkyPortal and baselayer classes that are mapped to database tables.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Annotation.get_if_owned_by" title="skyportal.models.Annotation.get_if_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code></a>(ident, user[, options])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Annotation.get_if_readable_by" title="skyportal.models.Annotation.get_if_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code></a>(ident, user[, options])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -405,8 +405,8 @@ SkyPortal and baselayer classes that are mapped to database tables.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="skyportal.models.Annotation.get_if_owned_by">
-<em class="property">classmethod </em><code class="sig-name descname">get_if_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ident</span></em>, <em class="sig-param"><span class="n">user</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Annotation.get_if_owned_by" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.Annotation.get_if_readable_by">
+<em class="property">classmethod </em><code class="sig-name descname">get_if_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ident</span></em>, <em class="sig-param"><span class="n">user</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Annotation.get_if_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an object from the database if the requesting User or Token
 has access to read the object. If the requesting User or Token does not
 have access, raise an AccessError.</p>
@@ -635,13 +635,13 @@ to return to the user.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Candidate.get_obj_if_owned_by" title="skyportal.models.Candidate.get_obj_if_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_obj_if_owned_by</span></code></a>(user_or_token[, options])</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Candidate.get_obj_if_readable_by" title="skyportal.models.Candidate.get_obj_if_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_obj_if_readable_by</span></code></a>(user_or_token[, options])</p></td>
 <td><p>Return an Obj from the database if the Obj is a Candidate in at least one of the requesting User or Token owner’s accessible Groups.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Candidate.is_owned_by" title="skyportal.models.Candidate.is_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code></a>(user_or_token)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Candidate.is_readable_by" title="skyportal.models.Candidate.is_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code></a>(user_or_token)</p></td>
 <td><p>Return a boolean indicating whether the Candidate passed the Filter of any of a User or Token owner’s accessible Groups.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -668,8 +668,8 @@ to return to the user.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="skyportal.models.Candidate.get_obj_if_owned_by">
-<code class="sig-name descname">get_obj_if_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Candidate.get_obj_if_owned_by" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.Candidate.get_obj_if_readable_by">
+<code class="sig-name descname">get_obj_if_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Candidate.get_obj_if_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an Obj from the database if the Obj is a Candidate in at least
 one of the requesting User or Token owner’s accessible Groups. If the Obj is not a
 Candidate in one of the User or Token owner’s accessible Groups, raise an AccessError.
@@ -701,8 +701,8 @@ If the Obj does not exist, return <cite>None</cite>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="skyportal.models.Candidate.is_owned_by">
-<code class="sig-name descname">is_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Candidate.is_owned_by" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.Candidate.is_readable_by">
+<code class="sig-name descname">is_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Candidate.is_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a boolean indicating whether the Candidate passed the Filter
 of any of a User or Token owner’s accessible Groups.</p>
 <dl class="field-list">
@@ -714,7 +714,7 @@ of any of a User or Token owner’s accessible Groups.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>owned</strong><span class="classifier">bool</span></dt><dd><p>Whether the Candidate is owned by the User or Token owner.</p>
+<dt><strong>readable</strong><span class="classifier">bool</span></dt><dd><p>Whether the Candidate is readable by the User or Token owner.</p>
 </dd>
 </dl>
 </dd>
@@ -813,10 +813,10 @@ of any of a User or Token owner’s accessible Groups.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -974,10 +974,10 @@ of any of a User or Token owner’s accessible Groups.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -1111,10 +1111,10 @@ of any of a User or Token owner’s accessible Groups.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Comment.get_if_owned_by" title="skyportal.models.Comment.get_if_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code></a>(ident, user[, options])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Comment.get_if_readable_by" title="skyportal.models.Comment.get_if_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code></a>(ident, user[, options])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -1170,8 +1170,8 @@ of any of a User or Token owner’s accessible Groups.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="skyportal.models.Comment.get_if_owned_by">
-<em class="property">classmethod </em><code class="sig-name descname">get_if_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ident</span></em>, <em class="sig-param"><span class="n">user</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Comment.get_if_owned_by" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.Comment.get_if_readable_by">
+<em class="property">classmethod </em><code class="sig-name descname">get_if_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ident</span></em>, <em class="sig-param"><span class="n">user</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Comment.get_if_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an object from the database if the requesting User or Token
 has access to read the object. If the requesting User or Token does not
 have access, raise an AccessError.</p>
@@ -1278,10 +1278,10 @@ with exactly one Group, and a Group may have multiple operational Filters.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -1396,10 +1396,10 @@ robotic instrument.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.FollowupRequest.is_owned_by" title="skyportal.models.FollowupRequest.is_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code></a>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.FollowupRequest.is_readable_by" title="skyportal.models.FollowupRequest.is_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code></a>(user_or_token)</p></td>
 <td><p>Return a boolean indicating whether a FollowupRequest belongs to an allocation that is accessible to the given user or token.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -1420,8 +1420,8 @@ robotic instrument.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="skyportal.models.FollowupRequest.is_owned_by">
-<code class="sig-name descname">is_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.FollowupRequest.is_owned_by" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.FollowupRequest.is_readable_by">
+<code class="sig-name descname">is_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.FollowupRequest.is_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a boolean indicating whether a FollowupRequest belongs to
 an allocation that is accessible to the given user or token.</p>
 <dl class="field-list simple">
@@ -1433,7 +1433,7 @@ an allocation that is accessible to the given user or token.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>owned: bool</dt><dd><p>Whether the FollowupRequest belongs to an Allocation that is
+<dt>readable: bool</dt><dd><p>Whether the FollowupRequest belongs to an Allocation that is
 accessible to the given user or token.</p>
 </dd>
 </dl>
@@ -1555,10 +1555,10 @@ must have access to all of the <cite>Group</cite>’s data <a href="#id7"><span 
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -1707,10 +1707,10 @@ must have access to all of the <cite>Group</cite>’s data <a href="#id7"><span 
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -2068,25 +2068,25 @@ entities, namely Source and Candidate.</p>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_annotations_owned_by" title="skyportal.models.Obj.get_annotations_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_annotations_owned_by</span></code></a>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_annotations_readable_by" title="skyportal.models.Obj.get_annotations_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_annotations_readable_by</span></code></a>(user_or_token)</p></td>
 <td><p>Query the database and return the Annotations on this Obj that are accessible to any of the User or Token owner’s accessible Groups.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_classifications_owned_by" title="skyportal.models.Obj.get_classifications_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_classifications_owned_by</span></code></a>(user_or_token)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_classifications_readable_by" title="skyportal.models.Obj.get_classifications_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_classifications_readable_by</span></code></a>(user_or_token)</p></td>
 <td><p>Query the database and return the Classifications on this Obj that are accessible to any of the User or Token owner’s accessible Groups.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_comments_owned_by" title="skyportal.models.Obj.get_comments_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_comments_owned_by</span></code></a>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_comments_readable_by" title="skyportal.models.Obj.get_comments_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_comments_readable_by</span></code></a>(user_or_token)</p></td>
 <td><p>Query the database and return the Comments on this Obj that are accessible to any of the User or Token owner’s accessible Groups.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_if_owned_by" title="skyportal.models.Obj.get_if_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code></a>(user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_if_readable_by" title="skyportal.models.Obj.get_if_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code></a>(user_or_token[, options])</p></td>
 <td><p>Return an Obj from the database if the Obj is either a Source or a Candidate in at least one of the requesting User or Token owner’s accessible Groups.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_photometry_owned_by_user" title="skyportal.models.Obj.get_photometry_owned_by_user"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_photometry_owned_by_user</span></code></a>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_photometry_readable_by_user" title="skyportal.models.Obj.get_photometry_readable_by_user"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_photometry_readable_by_user</span></code></a>(user_or_token)</p></td>
 <td><p>Query the database and return the Photometry for this Obj that is shared with any of the User or Token owner’s accessible Groups.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_spectra_owned_by" title="skyportal.models.Obj.get_spectra_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_spectra_owned_by</span></code></a>(user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_spectra_readable_by" title="skyportal.models.Obj.get_spectra_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_spectra_readable_by</span></code></a>(user_or_token[, options])</p></td>
 <td><p>Query the database and return the Spectra for this Obj that are shared with any of the User or Token owner’s accessible Groups.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -2269,8 +2269,8 @@ zero degrees.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="skyportal.models.Obj.get_annotations_owned_by">
-<code class="sig-name descname">get_annotations_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_annotations_owned_by" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.Obj.get_annotations_readable_by">
+<code class="sig-name descname">get_annotations_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_annotations_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query the database and return the Annotations on this Obj that are accessible
 to any of the User or Token owner’s accessible Groups.</p>
 <dl class="field-list">
@@ -2290,8 +2290,8 @@ to any of the User or Token owner’s accessible Groups.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="skyportal.models.Obj.get_classifications_owned_by">
-<code class="sig-name descname">get_classifications_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_classifications_owned_by" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.Obj.get_classifications_readable_by">
+<code class="sig-name descname">get_classifications_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_classifications_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query the database and return the Classifications on this Obj that are accessible
 to any of the User or Token owner’s accessible Groups.</p>
 <dl class="field-list">
@@ -2311,8 +2311,8 @@ to any of the User or Token owner’s accessible Groups.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="skyportal.models.Obj.get_comments_owned_by">
-<code class="sig-name descname">get_comments_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_comments_owned_by" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.Obj.get_comments_readable_by">
+<code class="sig-name descname">get_comments_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_comments_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query the database and return the Comments on this Obj that are accessible
 to any of the User or Token owner’s accessible Groups.</p>
 <dl class="field-list">
@@ -2332,8 +2332,8 @@ to any of the User or Token owner’s accessible Groups.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="skyportal.models.Obj.get_if_owned_by">
-<code class="sig-name descname">get_if_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_if_owned_by" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.Obj.get_if_readable_by">
+<code class="sig-name descname">get_if_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_if_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an Obj from the database if the Obj is either a Source or a Candidate in at least
 one of the requesting User or Token owner’s accessible Groups. If the Obj is not a
 Source or a Candidate in one of the User or Token owner’s accessible Groups, raise an AccessError.
@@ -2359,8 +2359,8 @@ If the Obj does not exist, return <cite>None</cite>.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="skyportal.models.Obj.get_photometry_owned_by_user">
-<code class="sig-name descname">get_photometry_owned_by_user</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_photometry_owned_by_user" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.Obj.get_photometry_readable_by_user">
+<code class="sig-name descname">get_photometry_readable_by_user</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_photometry_readable_by_user" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query the database and return the Photometry for this Obj that is shared
 with any of the User or Token owner’s accessible Groups.</p>
 <dl class="field-list">
@@ -2382,8 +2382,8 @@ with any of the User or Token owner’s accessible Groups.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="skyportal.models.Obj.get_spectra_owned_by">
-<code class="sig-name descname">get_spectra_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">()</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_spectra_owned_by" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.Obj.get_spectra_readable_by">
+<code class="sig-name descname">get_spectra_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">()</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_spectra_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query the database and return the Spectra for this Obj that are shared
 with any of the User or Token owner’s accessible Groups.</p>
 <dl class="field-list">
@@ -2611,10 +2611,10 @@ astroplan.FixedTarget.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.ObservingRun.rise_time" title="skyportal.models.ObservingRun.rise_time"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rise_time</span></code></a>(target_or_targets[, altitude])</p></td>
@@ -2808,13 +2808,13 @@ astroplan.FixedTarget.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Photometry.is_modifiable_by" title="skyportal.models.Photometry.is_modifiable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_modifiable_by</span></code></a>(user)</p></td>
 <td><p>Return a boolean indicating whether an object point can be modified or deleted by a given user.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -2905,7 +2905,7 @@ deleted by a given user.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>owned: bool</dt><dd><p>Whether the Object can be modified by the User.</p>
+<dt>readable: bool</dt><dd><p>Whether the Object can be modified by the User.</p>
 </dd>
 </dl>
 </dd>
@@ -3031,10 +3031,10 @@ retrieved via the API (for use in the “Top Sources” widget).</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -3148,13 +3148,13 @@ dispersive element.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Spectrum.from_ascii" title="skyportal.models.Spectrum.from_ascii"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_ascii</span></code></a>(file[, obj_id, instrument_id, …])</p></td>
 <td><p>Generate a <cite>Spectrum</cite> from an ascii file.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Spectrum.is_modifiable_by" title="skyportal.models.Spectrum.is_modifiable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_modifiable_by</span></code></a>(user)</p></td>
 <td><p>Return a boolean indicating whether an object point can be modified or deleted by a given user.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -3260,7 +3260,7 @@ deleted by a given user.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>owned: bool</dt><dd><p>Whether the Object can be modified by the User.</p>
+<dt>readable: bool</dt><dd><p>Whether the Object can be modified by the User.</p>
 </dd>
 </dl>
 </dd>
@@ -3377,10 +3377,10 @@ deleted by a given user.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -3478,13 +3478,13 @@ deleted by a given user.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Taxonomy.get_taxonomy_usable_by_user" title="skyportal.models.Taxonomy.get_taxonomy_usable_by_user"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_taxonomy_usable_by_user</span></code></a>(user_or_token)</p></td>
 <td><p>Query the database and return the requested Taxonomy if it is accessible to the requesting User or Token owner.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -3632,10 +3632,10 @@ if it does not exist, return an empty list.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Telescope.next_sunrise" title="skyportal.models.Telescope.next_sunrise"><code class="xref py py-obj docutils literal notranslate"><span class="pre">next_sunrise</span></code></a>([time])</p></td>
@@ -3858,10 +3858,10 @@ local time zone of the observatory (if ground based).</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -3926,8 +3926,8 @@ local time zone of the observatory (if ground based).</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="skyportal.models.candidate_is_owned_by">
-<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">candidate_is_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.candidate_is_owned_by" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.candidate_is_readable_by">
+<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">candidate_is_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.candidate_is_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a boolean indicating whether the Candidate passed the Filter
 of any of a User or Token owner’s accessible Groups.</p>
 <dl class="field-list">
@@ -3939,7 +3939,7 @@ of any of a User or Token owner’s accessible Groups.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>owned</strong><span class="classifier">bool</span></dt><dd><p>Whether the Candidate is owned by the User or Token owner.</p>
+<dt><strong>readable</strong><span class="classifier">bool</span></dt><dd><p>Whether the Candidate is readable by the User or Token owner.</p>
 </dd>
 </dl>
 </dd>
@@ -3947,8 +3947,8 @@ of any of a User or Token owner’s accessible Groups.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="skyportal.models.get_candidate_if_owned_by">
-<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">get_candidate_if_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_candidate_if_owned_by" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.get_candidate_if_readable_by">
+<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">get_candidate_if_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_candidate_if_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an Obj from the database if the Obj is a Candidate in at least
 one of the requesting User or Token owner’s accessible Groups. If the Obj is not a
 Candidate in one of the User or Token owner’s accessible Groups, raise an AccessError.
@@ -3974,8 +3974,8 @@ If the Obj does not exist, return <cite>None</cite>.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="skyportal.models.get_obj_annotations_owned_by">
-<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">get_obj_annotations_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_obj_annotations_owned_by" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.get_obj_annotations_readable_by">
+<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">get_obj_annotations_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_obj_annotations_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query the database and return the Annotations on this Obj that are accessible
 to any of the User or Token owner’s accessible Groups.</p>
 <dl class="field-list">
@@ -3995,8 +3995,8 @@ to any of the User or Token owner’s accessible Groups.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="skyportal.models.get_obj_classifications_owned_by">
-<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">get_obj_classifications_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_obj_classifications_owned_by" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.get_obj_classifications_readable_by">
+<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">get_obj_classifications_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_obj_classifications_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query the database and return the Classifications on this Obj that are accessible
 to any of the User or Token owner’s accessible Groups.</p>
 <dl class="field-list">
@@ -4016,8 +4016,8 @@ to any of the User or Token owner’s accessible Groups.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="skyportal.models.get_obj_comments_owned_by">
-<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">get_obj_comments_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_obj_comments_owned_by" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.get_obj_comments_readable_by">
+<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">get_obj_comments_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_obj_comments_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query the database and return the Comments on this Obj that are accessible
 to any of the User or Token owner’s accessible Groups.</p>
 <dl class="field-list">
@@ -4037,8 +4037,8 @@ to any of the User or Token owner’s accessible Groups.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="skyportal.models.get_obj_if_owned_by">
-<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">get_obj_if_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_obj_if_owned_by" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.get_obj_if_readable_by">
+<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">get_obj_if_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_obj_if_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an Obj from the database if the Obj is either a Source or a Candidate in at least
 one of the requesting User or Token owner’s accessible Groups. If the Obj is not a
 Source or a Candidate in one of the User or Token owner’s accessible Groups, raise an AccessError.
@@ -4064,8 +4064,8 @@ If the Obj does not exist, return <cite>None</cite>.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="skyportal.models.get_photometry_owned_by_user">
-<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">get_photometry_owned_by_user</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_photometry_owned_by_user" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.get_photometry_readable_by_user">
+<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">get_photometry_readable_by_user</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_photometry_readable_by_user" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query the database and return the Photometry for this Obj that is shared
 with any of the User or Token owner’s accessible Groups.</p>
 <dl class="field-list">
@@ -4087,8 +4087,8 @@ with any of the User or Token owner’s accessible Groups.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="skyportal.models.get_source_if_owned_by">
-<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">get_source_if_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_source_if_owned_by" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.get_source_if_readable_by">
+<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">get_source_if_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">[]</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_source_if_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an Obj from the database if the Obj is a Source in at least
 one of the requesting User or Token owner’s accessible Groups. If the Obj is not a
 Source in one of the User or Token owner’s accessible Groups, raise an AccessError.
@@ -4114,8 +4114,8 @@ If the Obj does not exist, return <cite>None</cite>.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="skyportal.models.get_spectra_owned_by">
-<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">get_spectra_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">()</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_spectra_owned_by" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.get_spectra_readable_by">
+<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">get_spectra_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj_id</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em>, <em class="sig-param"><span class="n">options</span><span class="o">=</span><span class="default_value">()</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_spectra_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Query the database and return the Spectra for this Obj that are shared
 with any of the User or Token owner’s accessible Groups.</p>
 <dl class="field-list">
@@ -4176,7 +4176,7 @@ deleted by a given user.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>owned: bool</dt><dd><p>Whether the Object can be modified by the User.</p>
+<dt>readable: bool</dt><dd><p>Whether the Object can be modified by the User.</p>
 </dd>
 </dl>
 </dd>
@@ -4184,16 +4184,16 @@ deleted by a given user.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="skyportal.models.is_owned_by">
-<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">is_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.is_owned_by" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.is_readable_by">
+<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">is_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.is_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p>
 <p>Models with complicated ownership logic should implement their own method
 instead of adding too many additional conditions here.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="skyportal.models.source_is_owned_by">
-<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">source_is_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.source_is_owned_by" title="Permalink to this definition">¶</a></dt>
+<dt id="skyportal.models.source_is_readable_by">
+<code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">source_is_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.source_is_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a boolean indicating whether the Source has been saved to
 any of a User or Token owner’s accessible Groups.</p>
 <dl class="field-list">
@@ -4205,7 +4205,7 @@ any of a User or Token owner’s accessible Groups.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>owned</strong><span class="classifier">bool</span></dt><dd><p>Whether the Candidate is owned by the User or Token owner.</p>
+<dt><strong>readable</strong><span class="classifier">bool</span></dt><dd><p>Whether the Candidate is readable by the User or Token owner.</p>
 </dd>
 </dl>
 </dd>
@@ -4261,10 +4261,10 @@ and <cite>Manage Groups</cite>.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -4323,10 +4323,10 @@ multiple Roles.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -4395,10 +4395,10 @@ multiple Roles.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -4622,11 +4622,11 @@ as a particular User.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baselayer.app.models.Token.is_owned_by" title="baselayer.app.models.Token.is_owned_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code></a>(user_or_token)</p></td>
-<td><p>Return a boolean indicating whether this Token is owned by the specified User (or Token instance, if a token is passed).</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baselayer.app.models.Token.is_readable_by" title="baselayer.app.models.Token.is_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code></a>(user_or_token)</p></td>
+<td><p>Return a boolean indicating whether this Token is readable by the specified User (or Token instance, if a token is passed).</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
 <td><p>Serialize this object to a Python dictionary.</p></td>
@@ -4684,9 +4684,9 @@ For System Admins, this corresponds to all Groups.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="baselayer.app.models.Token.is_owned_by">
-<code class="sig-name descname">is_owned_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Token.is_owned_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a boolean indicating whether this Token is owned by the
+<dt id="baselayer.app.models.Token.is_readable_by">
+<code class="sig-name descname">is_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Token.is_readable_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a boolean indicating whether this Token is readable by the
 specified User (or Token instance, if a token is passed).</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters</dt>
@@ -4697,7 +4697,7 @@ specified User (or Token instance, if a token is passed).</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt><strong>owned</strong><span class="classifier">bool</span></dt><dd><p>Whether this Token instance is owned by the User or Token.</p>
+<dt><strong>readable</strong><span class="classifier">bool</span></dt><dd><p>Whether this Token instance is readable by the User or Token.</p>
 </dd>
 </dl>
 </dd>
@@ -4747,10 +4747,10 @@ specified User (or Token instance, if a token is passed).</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -4851,7 +4851,7 @@ specified User (or Token instance, if a token is passed).</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#baselayer.app.models.User.is_active" title="baselayer.app.models.User.is_active"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_active</span></code></a>()</p></td>
@@ -4860,7 +4860,7 @@ specified User (or Token instance, if a token is passed).</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#baselayer.app.models.User.is_authenticated" title="baselayer.app.models.User.is_authenticated"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_authenticated</span></code></a>()</p></td>
 <td><p>Boolean flag indicating whether the User is currently authenticated.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#baselayer.app.models.User.user_model" title="baselayer.app.models.User.user_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_model</span></code></a>()</p></td>
@@ -5094,10 +5094,10 @@ authenticated.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
@@ -5148,10 +5148,10 @@ authenticated.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_owned_by</span></code>(ident, user_or_token[, options])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_owned_by</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
