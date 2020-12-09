@@ -1514,6 +1514,8 @@ must have access to all of the <cite>Group</cite>’s data <a href="#id7"><span 
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
 <dd class="field-odd"><dl class="simple">
+<dt><strong>admission_requests</strong></dt><dd><p>User requests to join this group.</p>
+</dd>
 <dt><strong>allocations</strong></dt><dd><p>Allocations made to this group.</p>
 </dd>
 <dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
@@ -1533,6 +1535,8 @@ must have access to all of the <cite>Group</cite>’s data <a href="#id7"><span 
 <dt><strong>observing_runs</strong></dt><dd><p>The observing runs associated with this group.</p>
 </dd>
 <dt><strong>photometry</strong></dt><dd><p>The photometry visible to this group.</p>
+</dd>
+<dt><strong>private</strong></dt><dd><p>Boolean indicating whether group is invisible to non-members.</p>
 </dd>
 <dt><strong>single_user_group</strong></dt><dd><p>Flag indicating whether this group is a singleton group for one user only.</p>
 </dd>
@@ -1566,6 +1570,12 @@ must have access to all of the <cite>Group</cite>’s data <a href="#id7"><span 
 </tr>
 </tbody>
 </table>
+<dl class="py attribute">
+<dt id="skyportal.models.Group.admission_requests">
+<code class="sig-name descname">admission_requests</code><a class="headerlink" href="#skyportal.models.Group.admission_requests" title="Permalink to this definition">¶</a></dt>
+<dd><p>User requests to join this group.</p>
+</dd></dl>
+
 <dl class="py attribute">
 <dt id="skyportal.models.Group.allocations">
 <code class="sig-name descname">allocations</code><a class="headerlink" href="#skyportal.models.Group.allocations" title="Permalink to this definition">¶</a></dt>
@@ -1627,6 +1637,12 @@ must have access to all of the <cite>Group</cite>’s data <a href="#id7"><span 
 </dd></dl>
 
 <dl class="py attribute">
+<dt id="skyportal.models.Group.private">
+<code class="sig-name descname">private</code><a class="headerlink" href="#skyportal.models.Group.private" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boolean indicating whether group is invisible to non-members.</p>
+</dd></dl>
+
+<dl class="py attribute">
 <dt id="skyportal.models.Group.single_user_group">
 <code class="sig-name descname">single_user_group</code><a class="headerlink" href="#skyportal.models.Group.single_user_group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Flag indicating whether this group is a singleton group for one user only.</p>
@@ -1648,6 +1664,103 @@ must have access to all of the <cite>Group</cite>’s data <a href="#id7"><span 
 <dt id="skyportal.models.Group.users">
 <code class="sig-name descname">users</code><a class="headerlink" href="#skyportal.models.Group.users" title="Permalink to this definition">¶</a></dt>
 <dd><p>The members of this group.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="skyportal.models.GroupAdmissionRequest">
+<em class="property">class </em><code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">GroupAdmissionRequest</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.GroupAdmissionRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Table tracking requests from users to join groups.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
+</dd>
+<dt><strong>group</strong></dt><dd><p>The Group to which admission is requested</p>
+</dd>
+<dt><strong>group_id</strong></dt><dd><p>ID of the Group to which admission is requested</p>
+</dd>
+<dt><strong>id</strong></dt><dd><p>Unique object identifier.</p>
+</dd>
+<dt><strong>modified</strong></dt><dd><p>UTC time the object’s row was last modified in the database.</p>
+</dd>
+<dt><strong>status</strong></dt><dd><p>Admission request status. Can be one of either ‘pending’, ‘accepted’, or ‘declined’.</p>
+</dd>
+<dt><strong>user</strong></dt><dd><p>The User requesting to join a group</p>
+</dd>
+<dt><strong>user_id</strong></dt><dd><p>ID of the User requesting to join the group</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
+<td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
+<td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
+<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<td><p>Serialize this object to a Python dictionary.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt id="skyportal.models.GroupAdmissionRequest.created_at">
+<code class="sig-name descname">created_at</code><a class="headerlink" href="#skyportal.models.GroupAdmissionRequest.created_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC time of insertion of object’s row into the database.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.GroupAdmissionRequest.group">
+<code class="sig-name descname">group</code><a class="headerlink" href="#skyportal.models.GroupAdmissionRequest.group" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Group to which admission is requested</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.GroupAdmissionRequest.group_id">
+<code class="sig-name descname">group_id</code><a class="headerlink" href="#skyportal.models.GroupAdmissionRequest.group_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>ID of the Group to which admission is requested</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.GroupAdmissionRequest.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#skyportal.models.GroupAdmissionRequest.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unique object identifier.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.GroupAdmissionRequest.modified">
+<code class="sig-name descname">modified</code><a class="headerlink" href="#skyportal.models.GroupAdmissionRequest.modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC time the object’s row was last modified in the database.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.GroupAdmissionRequest.status">
+<code class="sig-name descname">status</code><a class="headerlink" href="#skyportal.models.GroupAdmissionRequest.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Admission request status. Can be one of either ‘pending’, ‘accepted’, or ‘declined’.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.GroupAdmissionRequest.user">
+<code class="sig-name descname">user</code><a class="headerlink" href="#skyportal.models.GroupAdmissionRequest.user" title="Permalink to this definition">¶</a></dt>
+<dd><p>The User requesting to join a group</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.GroupAdmissionRequest.user_id">
+<code class="sig-name descname">user_id</code><a class="headerlink" href="#skyportal.models.GroupAdmissionRequest.user_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>ID of the User requesting to join the group</p>
 </dd></dl>
 
 </dd></dl>
@@ -4801,6 +4914,8 @@ specified User (or Token instance, if a token is passed).</p>
 </dd>
 <dt><a class="reference internal" href="#baselayer.app.models.User.gravatar_url" title="baselayer.app.models.User.gravatar_url"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gravatar_url</span></code></a></dt><dd><p>The Gravatar URL inferred from the user’s contact email, or, if the contact email is null, the username.</p>
 </dd>
+<dt><strong>group_admission_requests</strong></dt><dd><p>User’s requests to join groups.</p>
+</dd>
 <dt><strong>groups</strong></dt><dd><p>The Groups this User is a member of.</p>
 </dd>
 <dt><strong>id</strong></dt><dd><p>Unique object identifier.</p>
@@ -4940,6 +5055,12 @@ For System Admins, this corresponds to all Groups.</p>
 <em class="property">property </em><code class="sig-name descname">gravatar_url</code><a class="headerlink" href="#baselayer.app.models.User.gravatar_url" title="Permalink to this definition">¶</a></dt>
 <dd><p>The Gravatar URL inferred from the user’s contact email, or, if the
 contact email is null, the username.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="baselayer.app.models.User.group_admission_requests">
+<code class="sig-name descname">group_admission_requests</code><a class="headerlink" href="#baselayer.app.models.User.group_admission_requests" title="Permalink to this definition">¶</a></dt>
+<dd><p>User’s requests to join groups.</p>
 </dd></dl>
 
 <dl class="py attribute">

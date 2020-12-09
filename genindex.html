@@ -216,6 +216,8 @@
       </ul></li>
       <li><a href="database.html#skyportal.models.Obj.add_linked_thumbnails">add_linked_thumbnails() (skyportal.models.Obj method)</a>
 </li>
+      <li><a href="database.html#skyportal.models.Group.admission_requests">admission_requests (skyportal.models.Group attribute)</a>
+</li>
       <li><a href="database.html#skyportal.models.Obj.airmass">airmass() (skyportal.models.Obj method)</a>
 </li>
       <li><a href="database.html#skyportal.models.Allocation">Allocation (class in skyportal.models)</a>
@@ -367,6 +369,8 @@
         <li><a href="database.html#skyportal.models.FollowupRequest.created_at">(skyportal.models.FollowupRequest attribute)</a>
 </li>
         <li><a href="database.html#skyportal.models.Group.created_at">(skyportal.models.Group attribute)</a>
+</li>
+        <li><a href="database.html#skyportal.models.GroupAdmissionRequest.created_at">(skyportal.models.GroupAdmissionRequest attribute)</a>
 </li>
         <li><a href="database.html#skyportal.models.Instrument.created_at">(skyportal.models.Instrument attribute)</a>
 </li>
@@ -545,14 +549,14 @@
         <li><a href="database.html#skyportal.models.Obj.get_spectra_readable_by">(skyportal.models.Obj method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="database.html#skyportal.models.get_taxonomy_usable_by_user">get_taxonomy_usable_by_user() (in module skyportal.models)</a>
 
       <ul>
         <li><a href="database.html#skyportal.models.Taxonomy.get_taxonomy_usable_by_user">(skyportal.models.Taxonomy method)</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="database.html#baselayer.app.models.User.gravatar_url">gravatar_url() (baselayer.app.models.User property)</a>
 </li>
       <li><a href="database.html#skyportal.models.Group">Group (class in skyportal.models)</a>
@@ -562,18 +566,26 @@
       <ul>
         <li><a href="database.html#skyportal.models.Filter.group">(skyportal.models.Filter attribute)</a>
 </li>
+        <li><a href="database.html#skyportal.models.GroupAdmissionRequest.group">(skyportal.models.GroupAdmissionRequest attribute)</a>
+</li>
         <li><a href="database.html#skyportal.models.ObservingRun.group">(skyportal.models.ObservingRun attribute)</a>
 </li>
       </ul></li>
+      <li><a href="database.html#baselayer.app.models.User.group_admission_requests">group_admission_requests (baselayer.app.models.User attribute)</a>
+</li>
       <li><a href="database.html#skyportal.models.Allocation.group_id">group_id (skyportal.models.Allocation attribute)</a>
 
       <ul>
         <li><a href="database.html#skyportal.models.Filter.group_id">(skyportal.models.Filter attribute)</a>
 </li>
+        <li><a href="database.html#skyportal.models.GroupAdmissionRequest.group_id">(skyportal.models.GroupAdmissionRequest attribute)</a>
+</li>
         <li><a href="database.html#skyportal.models.ObservingRun.group_id">(skyportal.models.ObservingRun attribute)</a>
 </li>
       </ul></li>
       <li><a href="database.html#skyportal.models.Group.group_users">group_users (skyportal.models.Group attribute)</a>
+</li>
+      <li><a href="database.html#skyportal.models.GroupAdmissionRequest">GroupAdmissionRequest (class in skyportal.models)</a>
 </li>
       <li><a href="database.html#baselayer.app.models.User.groups">groups (baselayer.app.models.User attribute)</a>
 
@@ -639,6 +651,8 @@
         <li><a href="database.html#skyportal.models.FollowupRequest.id">(skyportal.models.FollowupRequest attribute)</a>
 </li>
         <li><a href="database.html#skyportal.models.Group.id">(skyportal.models.Group attribute)</a>
+</li>
+        <li><a href="database.html#skyportal.models.GroupAdmissionRequest.id">(skyportal.models.GroupAdmissionRequest attribute)</a>
 </li>
         <li><a href="database.html#skyportal.models.Instrument.id">(skyportal.models.Instrument attribute)</a>
 </li>
@@ -805,6 +819,8 @@
         <li><a href="database.html#skyportal.models.FollowupRequest.modified">(skyportal.models.FollowupRequest attribute)</a>
 </li>
         <li><a href="database.html#skyportal.models.Group.modified">(skyportal.models.Group attribute)</a>
+</li>
+        <li><a href="database.html#skyportal.models.GroupAdmissionRequest.modified">(skyportal.models.GroupAdmissionRequest attribute)</a>
 </li>
         <li><a href="database.html#skyportal.models.Instrument.modified">(skyportal.models.Instrument attribute)</a>
 </li>
@@ -1038,6 +1054,8 @@
 </li>
       <li><a href="database.html#skyportal.models.ClassicalAssignment.priority">priority (skyportal.models.ClassicalAssignment attribute)</a>
 </li>
+      <li><a href="database.html#skyportal.models.Group.private">private (skyportal.models.Group attribute)</a>
+</li>
       <li><a href="database.html#skyportal.models.Classification.probability">probability (skyportal.models.Classification attribute)</a>
 </li>
       <li><a href="database.html#baselayer.app.models.SlugifiedStr.process_bind_param">process_bind_param() (baselayer.app.models.SlugifiedStr method)</a>
@@ -1176,6 +1194,8 @@
       <ul>
         <li><a href="database.html#skyportal.models.FollowupRequest.status">(skyportal.models.FollowupRequest attribute)</a>
 </li>
+        <li><a href="database.html#skyportal.models.GroupAdmissionRequest.status">(skyportal.models.GroupAdmissionRequest attribute)</a>
+</li>
       </ul></li>
       <li><a href="database.html#skyportal.models.Stream">Stream (class in skyportal.models)</a>
 </li>
@@ -1249,14 +1269,18 @@
 </li>
       <li><a href="database.html#baselayer.app.models.User">User (class in baselayer.app.models)</a>
 </li>
+      <li><a href="database.html#skyportal.models.GroupAdmissionRequest.user">user (skyportal.models.GroupAdmissionRequest attribute)</a>
+</li>
+      <li><a href="database.html#skyportal.models.GroupAdmissionRequest.user_id">user_id (skyportal.models.GroupAdmissionRequest attribute)</a>
+</li>
       <li><a href="database.html#baselayer.app.models.User.user_model">user_model() (baselayer.app.models.User class method)</a>
 </li>
       <li><a href="database.html#skyportal.models.user_or_token_accessible_groups">user_or_token_accessible_groups (in module skyportal.models)</a>
 </li>
-      <li><a href="database.html#skyportal.models.user_or_token_accessible_streams">user_or_token_accessible_streams (in module skyportal.models)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="database.html#skyportal.models.user_or_token_accessible_streams">user_or_token_accessible_streams (in module skyportal.models)</a>
+</li>
       <li><a href="database.html#baselayer.app.models.UserACL">UserACL (class in baselayer.app.models)</a>
 </li>
       <li><a href="database.html#baselayer.app.models.User.username">username (baselayer.app.models.User attribute)</a>
