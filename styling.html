@@ -33,7 +33,6 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
@@ -185,12 +184,12 @@
 (MUI).  We have evaluated several styling systems, including inline
 styles, CSS Modules, and Styled Components, and have settled on using
 <a class="reference external" href="https://material-ui.com/styles/basics/#hook-api">MUI’s style hooks API</a>.</p>
-<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">makeStyles</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@material-ui/core/styles&#39;</span><span class="p">;</span>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="p">{</span> <span class="nx">makeStyles</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;@material-ui/core/styles&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>MUI provides <code class="docutils literal notranslate"><span class="pre">makeStyles</span></code>, which takes in JSS (JavaScript Style
 Sheets) and returns a CSS provider <a class="reference external" href="https://reactjs.org/docs/hooks-reference.html">hook</a>:</p>
-<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">useStyles</span> <span class="o">=</span> <span class="nx">makeStyles</span><span class="p">({</span>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span> <span class="nx">useStyles</span> <span class="o">=</span> <span class="nx">makeStyles</span><span class="p">({</span>
   <span class="nx">root</span><span class="o">:</span> <span class="p">{</span>
     <span class="nx">border</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="nx">padding</span><span class="o">:</span> <span class="s1">&#39;1rem&#39;</span><span class="p">,</span>
@@ -199,16 +198,16 @@ Sheets) and returns a CSS provider <a class="reference external" href="https://r
 </pre></div>
 </div>
 <p>The resulting <code class="docutils literal notranslate"><span class="pre">useStyles</span></code> can then be used inside of a component:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="kr">import</span> <span class="nx">Button</span> <span class="nx">from</span> <span class="s1">&#39;@material-ui/core/Button&#39;</span><span class="p">;</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nx">Button</span> <span class="nx">from</span> <span class="s1">&#39;@material-ui/core/Button&#39;</span><span class="p">;</span>
 
-<span class="kr">const</span> <span class="nx">MyButton</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="kr">const</span> <span class="nx">classes</span> <span class="o">=</span> <span class="nx">useStyles</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">MyButton</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">classes</span> <span class="o">=</span> <span class="nx">useStyles</span><span class="p">();</span>
   <span class="k">return</span> <span class="p">&lt;</span><span class="nt">Button</span> <span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="nx">classes</span><span class="p">.</span><span class="nx">root</span><span class="p">}&gt;</span><span class="nx">Click</span> <span class="nx">Me</span><span class="p">&lt;/</span><span class="nt">Button</span><span class="p">&gt;;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>It is possible to make nested definitions:</p>
-<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">useStyles</span> <span class="o">=</span> <span class="nx">makeStyles</span><span class="p">({</span>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span> <span class="nx">useStyles</span> <span class="o">=</span> <span class="nx">makeStyles</span><span class="p">({</span>
   <span class="nx">root</span><span class="o">:</span> <span class="p">{</span>
     <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
     <span class="s1">&#39;&amp; p&#39;</span><span class="o">:</span> <span class="p">{</span>
@@ -267,7 +266,7 @@ and <code class="docutils literal notranslate"><span class="pre">between</span><
 <li><p><code class="docutils literal notranslate"><span class="pre">theme.breakpoints.up(sm)</span></code>: targets screen sizes <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">small</span></code></p></li>
 </ul>
 <p>Use it as follows:</p>
-<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kr">const</span> <span class="nx">useStyles</span> <span class="o">=</span> <span class="nx">makeStyles</span><span class="p">({</span>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span> <span class="nx">useStyles</span> <span class="o">=</span> <span class="nx">makeStyles</span><span class="p">({</span>
   <span class="nx">root</span><span class="o">:</span> <span class="p">{</span>
     <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span>
     <span class="p">[</span><span class="nx">theme</span><span class="p">.</span><span class="nx">breakpoints</span><span class="p">.</span><span class="nx">up</span><span class="p">(</span><span class="s1">&#39;md&#39;</span><span class="p">)]</span><span class="o">:</span> <span class="p">{</span>

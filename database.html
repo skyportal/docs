@@ -33,7 +33,6 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
@@ -193,6 +192,7 @@ SkyPortal and baselayer classes that are mapped to database tables.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
 <dd class="field-odd"><dl class="simple">
+<dt><strong>altdata</strong></dt><dd></dd>
 <dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
 </dd>
 <dt><strong>end_date</strong></dt><dd><p>The UTC end date of the allocation.</p>
@@ -2101,7 +2101,7 @@ entities, namely Source and Candidate.</p>
 </dd>
 <dt><a class="reference internal" href="#skyportal.models.Obj.desi_dr8_url" title="skyportal.models.Obj.desi_dr8_url"><code class="xref py py-obj docutils literal notranslate"><span class="pre">desi_dr8_url</span></code></a></dt><dd><p>Construct URL for public DESI DR8 cutout.</p>
 </dd>
-<dt><strong>detect_photometry_count</strong></dt><dd><p>How many times the object was detected above <span class="math notranslate nohighlight">\(S/N = 5\)</span>.</p>
+<dt><strong>detect_photometry_count</strong></dt><dd><p>How many times the object was detected above <span class="math notranslate nohighlight">\(S/N = phot_detection_threshold (3.0 by default)\)</span>.</p>
 </dd>
 <dt><strong>dist_nearest_source</strong></dt><dd><p>Distance to the nearest Obj [arcsec].</p>
 </dd>
@@ -2121,7 +2121,9 @@ entities, namely Source and Candidate.</p>
 </dd>
 <dt><strong>is_roid</strong></dt><dd><p>Boolean indicating whether the object is a moving object.</p>
 </dd>
-<dt><strong>last_detected</strong></dt><dd><p>UTC ISO date at which the object was last detected above a S/N of 5.</p>
+<dt><strong>last_detected_at</strong></dt><dd><p>UTC ISO date at which the object was last detected above a given S/N (3.0 by default).</p>
+</dd>
+<dt><strong>last_detected_mag</strong></dt><dd><p>Magnitude at which the object was last detected above a given S/N (3.0 by default).</p>
 </dd>
 <dt><a class="reference internal" href="#skyportal.models.Obj.luminosity_distance" title="skyportal.models.Obj.luminosity_distance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">luminosity_distance</span></code></a></dt><dd><p>The luminosity distance in Mpc, using either DM or distance data in the altdata fields or using the cosmology/redshift.</p>
 </dd>
@@ -2136,6 +2138,10 @@ entities, namely Source and Candidate.</p>
 <dt><strong>origin</strong></dt><dd><p>Origin of the object.</p>
 </dd>
 <dt><a class="reference internal" href="#skyportal.models.Obj.panstarrs_url" title="skyportal.models.Obj.panstarrs_url"><code class="xref py py-obj docutils literal notranslate"><span class="pre">panstarrs_url</span></code></a></dt><dd><p>Construct URL for public PanSTARRS-1 (PS1) cutout.</p>
+</dd>
+<dt><strong>peak_detected_at</strong></dt><dd><p>UTC ISO date at which the object was detected at peak magnitude above a given S/N (3.0 by default).</p>
+</dd>
+<dt><strong>peak_detected_mag</strong></dt><dd><p>Peak magnitude at which the object was detected above a given S/N (3.0 by default).</p>
 </dd>
 <dt><strong>photometry</strong></dt><dd><p>Photometry of the object.</p>
 </dd>
@@ -2348,7 +2354,7 @@ zero degrees.</p>
 <dl class="py attribute">
 <dt id="skyportal.models.Obj.detect_photometry_count">
 <code class="sig-name descname">detect_photometry_count</code><a class="headerlink" href="#skyportal.models.Obj.detect_photometry_count" title="Permalink to this definition">¶</a></dt>
-<dd><p>How many times the object was detected above <span class="math notranslate nohighlight">\(S/N = 5\)</span>.</p>
+<dd><p>How many times the object was detected above <span class="math notranslate nohighlight">\(S/N = phot_detection_threshold (3.0 by default)\)</span>.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -2544,9 +2550,15 @@ with any of the User or Token owner’s accessible Groups.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt id="skyportal.models.Obj.last_detected">
-<code class="sig-name descname">last_detected</code><a class="headerlink" href="#skyportal.models.Obj.last_detected" title="Permalink to this definition">¶</a></dt>
-<dd><p>UTC ISO date at which the object was last detected above a S/N of 5.</p>
+<dt id="skyportal.models.Obj.last_detected_at">
+<code class="sig-name descname">last_detected_at</code><a class="headerlink" href="#skyportal.models.Obj.last_detected_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC ISO date at which the object was last detected above a given S/N (3.0 by default).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Obj.last_detected_mag">
+<code class="sig-name descname">last_detected_mag</code><a class="headerlink" href="#skyportal.models.Obj.last_detected_mag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Magnitude at which the object was last detected above a given S/N (3.0 by default).</p>
 </dd></dl>
 
 <dl class="py method">
@@ -2598,6 +2610,18 @@ rather than the redshift.</p>
 <p>The cutout service doesn’t allow directly querying for an image; the
 best we can do is request a page that contains a link to the image we
 want (in this case a combination of the g/r/i filters).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Obj.peak_detected_at">
+<code class="sig-name descname">peak_detected_at</code><a class="headerlink" href="#skyportal.models.Obj.peak_detected_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC ISO date at which the object was detected at peak magnitude above a given S/N (3.0 by default).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Obj.peak_detected_mag">
+<code class="sig-name descname">peak_detected_mag</code><a class="headerlink" href="#skyportal.models.Obj.peak_detected_mag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Peak magnitude at which the object was detected above a given S/N (3.0 by default).</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -4929,6 +4953,8 @@ specified User (or Token instance, if a token is passed).</p>
 <dt><strong>is_system_admin</strong></dt><dd></dd>
 <dt><strong>last_name</strong></dt><dd><p>The User’s last name.</p>
 </dd>
+<dt><strong>listings</strong></dt><dd><p>The listings saved by this user</p>
+</dd>
 <dt><strong>modified</strong></dt><dd><p>UTC time the object’s row was last modified in the database.</p>
 </dd>
 <dt><strong>oauth_uid</strong></dt><dd><p>The user’s OAuth UID.</p>
@@ -5098,6 +5124,12 @@ authenticated.</p>
 <dt id="baselayer.app.models.User.last_name">
 <code class="sig-name descname">last_name</code><a class="headerlink" href="#baselayer.app.models.User.last_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>The User’s last name.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="baselayer.app.models.User.listings">
+<code class="sig-name descname">listings</code><a class="headerlink" href="#baselayer.app.models.User.listings" title="Permalink to this definition">¶</a></dt>
+<dd><p>The listings saved by this user</p>
 </dd></dl>
 
 <dl class="py attribute">
