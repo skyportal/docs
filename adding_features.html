@@ -420,106 +420,173 @@
 </div>
 <div class="section" id="adding-a-new-end-to-end-skyportal-feature">
 <h2>Adding a new end-to-end SkyPortal feature<a class="headerlink" href="#adding-a-new-end-to-end-skyportal-feature" title="Permalink to this headline">¶</a></h2>
-<p>Now we’ll put all these pieces together and add a simple new “feature” to SkyPortal: a random number generator. We’ll add a button that makes an API call to the back-end, returning a random string, which will be stored in the front-end state and displayed on the screen.</p>
+<p>Now we’ll put all these pieces together and walk through adding a new “feature” to SkyPortal: a simple comments section.</p>
 <div class="section" id="front-end">
 <h3>Front-end<a class="headerlink" href="#front-end" title="Permalink to this headline">¶</a></h3>
-<p>We’ll start with defining our new <code class="docutils literal notranslate"><span class="pre">RandomString</span></code> component in a new file in the components directory (<code class="docutils literal notranslate"><span class="pre">static/js/components/RandomString.jsx</span></code>):</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nx">React</span> <span class="nx">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">useDispatch</span><span class="p">,</span> <span class="nx">useSelector</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">&#39;react-redux&#39;</span><span class="p">;</span>
+<p>We’ll start with defining our new <code class="docutils literal notranslate"><span class="pre">TestComments</span></code> component in a new file in the components directory (<code class="docutils literal notranslate"><span class="pre">static/js/components/TestComments.jsx</span></code>):</p>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span>import React, { useState, useEffect } from &#39;react&#39;;
+import { useDispatch, useSelector } from &#39;react-redux&#39;;
 
-<span class="c1">// Import our action creators from `static/js/ducks/randomString.js` - see below</span>
-<span class="k">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">Actions</span> <span class="nx">from</span> <span class="s1">&#39;../ducks/randomString&#39;</span><span class="p">;</span>
+// Import our action creators from static/js/ducks/testComments.js - see below
+import * as commentsActions from &#39;../ducks/testComments&#39;;
 
 
-<span class="kd">const</span> <span class="nx">RandomString</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="kd">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">useSelector</span><span class="p">((</span><span class="nx">state</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">state</span><span class="p">.</span><span class="nx">randomString</span><span class="p">);</span>
-  <span class="kd">const</span> <span class="nx">dispatch</span> <span class="o">=</span> <span class="nx">useDispatch</span><span class="p">();</span>
+const TestComments = () =&gt; {
+  const comments = useSelector((state) =&gt; state.testComments);
+  const dispatch = useDispatch();
+  const [newCommentText, setNewCommentText] = useState(&quot;&quot;);
 
-  <span class="k">return</span> <span class="p">(</span>
-    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-        <span class="nx">Back</span><span class="o">-</span><span class="nx">end</span> <span class="nx">random</span> <span class="nx">string</span> <span class="nx">generator</span><span class="p">.</span>
-        <span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
-        <span class="nx">This</span> <span class="nx">is</span> <span class="nx">a</span> <span class="nx">dummy</span> <span class="nx">component</span> <span class="k">for</span> <span class="nx">educational</span> <span class="nx">purposes</span><span class="p">.</span>
-        <span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
-        <span class="nx">Current</span> <span class="nx">value</span> <span class="nx">is</span><span class="o">:</span> <span class="p">{</span><span class="nx">value</span><span class="p">}</span>
-      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-      <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="p">=&gt;</span> <span class="nx">dispatch</span><span class="p">(</span><span class="nx">Actions</span><span class="p">.</span><span class="nx">fetchRandomString</span><span class="p">())}&gt;</span>
-          <span class="nx">Generate</span> <span class="k">new</span> <span class="nx">random</span> <span class="nx">string</span> <span class="nx">on</span> <span class="nx">the</span> <span class="nx">back</span><span class="o">-</span><span class="nx">end</span><span class="p">.</span>
-        <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">);</span>
-<span class="p">};</span>
+  // Fetch comments upon initial component render
+  useEffect(() =&gt; {
+    dispatch(commentsActions.fetchComments());
+  }, [dispatch]);
 
-<span class="k">export</span> <span class="k">default</span> <span class="nx">RandomString</span><span class="p">;</span>
+  // Define text input field&#39;s onChange callback
+  const handleCommentTextChange = (event) =&gt; {
+    setNewCommentText(event.target.value);
+  };
+
+  // Define submission callback
+  const handleSubmitNewComment = async () =&gt; {
+    const requestResult = await dispatch(commentsActions.submitComment(newCommentText));
+    if (requestResult.status === &quot;success&quot;) {
+      setNewCommentText(&quot;&quot;);
+    }
+  };
+
+  return (
+    &lt;div&gt;
+      &lt;div&gt;
+        Comments:
+        &lt;ul&gt;
+          {comments.map((comment, idx) =&gt; (
+            &lt;li key={idx}&gt;
+              {comment.text}
+            &lt;/li&gt;
+           ))}
+        &lt;/ul&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        Submit new comment
+        &lt;br /&gt;
+        &lt;input
+          type=&quot;text&quot;
+          value={newCommentText}
+          onChange={handleCommentTextChange}
+          data-testid=&quot;testCommentInput&quot;
+        /&gt;
+        &lt;br /&gt;
+        &lt;button
+          type=&quot;button&quot;
+          onClick={handleSubmitNewComment}
+          data-testid=&quot;testCommentSubmitButton&quot;
+        &gt;
+          Submit
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+};
+
+export default TestComments;
 </pre></div>
 </div>
-<p>Our new component can see a portion of the app state tree (specifically the <code class="docutils literal notranslate"><span class="pre">randomString</span></code> branch) via the <code class="docutils literal notranslate"><span class="pre">useSelector</span></code> hook, and can dispatch action creators via the <code class="docutils literal notranslate"><span class="pre">useDispatch</span></code> hook. The value of <code class="docutils literal notranslate"><span class="pre">state.randomString</span></code> (which is intialized to the string “null” in its associated reducer, which we’ll see shortly) is displayed, and a button is shown. We’ve supplied a handler to the button’s <code class="docutils literal notranslate"><span class="pre">onClick</span></code> event, which when called, dispatches an action creator called <code class="docutils literal notranslate"><span class="pre">fetchRandomString</span></code>. Let’s look at that action creator defined below.</p>
+<p>Inside the component definition we call the <code class="docutils literal notranslate"><span class="pre">useState</span></code> (for maintaining internal component state, here corresponding to the new comment text value), <code class="docutils literal notranslate"><span class="pre">useDispatch</span></code> (for dispatching action creators) and <code class="docutils literal notranslate"><span class="pre">useSelector</span></code> (for accessing the application-wide state) hooks introduced above, and we also make use of the <a class="reference external" href="https://reactjs.org/docs/hooks-effect.html"><code class="docutils literal notranslate"><span class="pre">useEffect</span></code> hook</a>, which executes the function provided as the first argument whenever the values of any of the variables of the second argument (the “dependency array”) change. In this case, <code class="docutils literal notranslate"><span class="pre">dispatch</span></code> will not change after the component’s initial render, so the function we’ve provided as the first argument will be called only at that time, and not during re-renders.</p>
+<p>Below the hooks calls, we define two functions that serve as callbacks for the event listeners of the <code class="docutils literal notranslate"><span class="pre">input</span></code> and <code class="docutils literal notranslate"><span class="pre">button</span></code> elements. The associated <a class="reference external" href="https://developer.mozilla.org/en-US/docs/web/api/event"><code class="docutils literal notranslate"><span class="pre">event</span></code></a> instance is passed as an argument to each callback, which we’ve made use of in the <code class="docutils literal notranslate"><span class="pre">handleCommentTextChange</span></code> callback by setting the component’s state to the newly entered input element’s (the event’s target) value, accessed via the <code class="docutils literal notranslate"><span class="pre">value</span></code> attribute of <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/API/Event/target"><code class="docutils literal notranslate"><span class="pre">event.target</span></code></a>.</p>
+<p>The comments in the list <code class="docutils literal notranslate"><span class="pre">state.testComments</span></code> (which is intialized to an empty list in its associated reducer, which we’ll see shortly) are rendered, as well as a text input field and submit button for adding new comments. We’ve provided callback functions to the text input field’s and button’s <code class="docutils literal notranslate"><span class="pre">onChange</span></code> and <code class="docutils literal notranslate"><span class="pre">onClick</span></code> events, respectively. <code class="docutils literal notranslate"><span class="pre">handleCommentTextChange</span></code> updates the component’s state with the newly input value on each keystroke. <code class="docutils literal notranslate"><span class="pre">handleSubmitNewComment</span></code> dispatches an action creator with the new comment text value, and if the request returns successfully, resets the input value to an empty string. This is an example of a <a class="reference external" href="https://reactjs.org/docs/forms.html#controlled-components">controlled component</a>, in which a component’s value is passed in as an externally-controlled variable. The <code class="docutils literal notranslate"><span class="pre">data-testid</span></code> attributes are specified to facilitate testing (more on that later). Let’s look at the action creators defined below.</p>
 <p>All of the redux-related logic associated with our new component will live in a separate file in the <code class="docutils literal notranslate"><span class="pre">static/js/ducks</span></code> directory. This is where we’ll define our action types, action creators and reducer.</p>
-<p><code class="docutils literal notranslate"><span class="pre">static/js/ducks/randomString.js</span></code>:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">API</span> <span class="nx">from</span> <span class="s1">&#39;../API&#39;</span><span class="p">;</span>
+<p><code class="docutils literal notranslate"><span class="pre">static/js/ducks/testComments.js</span></code>:</p>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nx">messageHandler</span> <span class="nx">from</span> <span class="s2">&quot;baselayer/MessageHandler&quot;</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">API</span> <span class="nx">from</span> <span class="s1">&#39;../API&#39;</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">store</span> <span class="nx">from</span> <span class="s1">&#39;../store&#39;</span><span class="p">;</span>
 
 
-<span class="k">export</span> <span class="kd">const</span> <span class="nx">FETCH_RANDOM_STRING</span> <span class="o">=</span> <span class="s1">&#39;skyportal/FETCH_RANDOM_STRING&#39;</span><span class="p">;</span>
-<span class="k">export</span> <span class="kd">const</span> <span class="nx">FETCH_RANDOM_STRING_OK</span> <span class="o">=</span> <span class="s1">&#39;skyportal/FETCH_RANDOM_STRING_OK&#39;</span><span class="p">;</span>
-<span class="k">export</span> <span class="kd">const</span> <span class="nx">FETCH_RANDOM_STRING_ERROR</span> <span class="o">=</span> <span class="s1">&#39;skyportal/FETCH_RANDOM_STRING_ERROR&#39;</span><span class="p">;</span>
-<span class="k">export</span> <span class="kd">const</span> <span class="nx">FETCH_RANDOM_STRING_FAIL</span> <span class="o">=</span> <span class="s1">&#39;skyportal/FETCH_RANDOM_STRING_FAIL&#39;</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">FETCH_TEST_COMMENTS</span> <span class="o">=</span> <span class="s1">&#39;skyportal/FETCH_TEST_COMMENTS&#39;</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">FETCH_TEST_COMMENTS_OK</span> <span class="o">=</span> <span class="s1">&#39;skyportal/FETCH_TEST_COMMENTS_OK&#39;</span><span class="p">;</span>
 
-<span class="k">export</span> <span class="kd">function</span> <span class="nx">fetchRandomString</span><span class="p">()</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">API</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s1">&#39;/api/random_string&#39;</span><span class="p">,</span> <span class="nx">FETCH_RANDOM_STRING</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">SUBMIT_TEST_COMMENT</span> <span class="o">=</span> <span class="s1">&#39;skyportal/SUBMIT_TEST_COMMENT&#39;</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">function</span> <span class="nx">fetchComments</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">API</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s1">&#39;/api/test_comments&#39;</span><span class="p">,</span> <span class="nx">FETCH_TEST_COMMENTS</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="kd">const</span> <span class="nx">reducer</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span><span class="o">=</span><span class="s2">&quot;null&quot;</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+<span class="k">export</span> <span class="kd">function</span> <span class="nx">submitComment</span><span class="p">(</span><span class="nx">commentText</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">API</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s1">&#39;/api/test_comments&#39;</span><span class="p">,</span> <span class="nx">SUBMIT_TEST_COMMENT</span><span class="p">,</span> <span class="p">{</span> <span class="nx">commentText</span> <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="c1">// Websocket message handler</span>
+<span class="nx">messageHandler</span><span class="p">.</span><span class="nx">add</span><span class="p">((</span><span class="nx">actionType</span><span class="p">,</span> <span class="nx">payload</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">actionType</span> <span class="o">===</span> <span class="nx">FETCH_TEST_COMMENTS</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">dispatch</span><span class="p">(</span><span class="nx">fetchComments</span><span class="p">());</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="kd">const</span> <span class="nx">reducer</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span><span class="o">=</span><span class="p">[],</span> <span class="nx">action</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="nx">FETCH_RANDOM_STRING_OK</span><span class="o">:</span> <span class="p">{</span>
-      <span class="kd">const</span> <span class="p">{</span> <span class="nx">value</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">action</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
-      <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">case</span> <span class="nx">FETCH_RANDOM_STRING_ERROR</span><span class="o">:</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="nx">action</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">case</span> <span class="nx">FETCH_RANDOM_STRING_FAIL</span><span class="o">:</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="s2">&quot;uncaught error&quot;</span><span class="p">;</span>
+    <span class="k">case</span> <span class="nx">FETCH_TEST_COMMENTS_OK</span><span class="o">:</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="nx">action</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="k">default</span><span class="o">:</span>
       <span class="k">return</span> <span class="nx">state</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="nx">store</span><span class="p">.</span><span class="nx">injectReducer</span><span class="p">(</span><span class="s1">&#39;randomString&#39;</span><span class="p">,</span> <span class="nx">reducer</span><span class="p">);</span>
+<span class="nx">store</span><span class="p">.</span><span class="nx">injectReducer</span><span class="p">(</span><span class="s1">&#39;testComments&#39;</span><span class="p">,</span> <span class="nx">reducer</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>This defines a few new action types, a new action creator (in this case, a function that returns a thunk (another function), which is what <code class="docutils literal notranslate"><span class="pre">API.GET</span></code> is), and a reducer, which, upon injecting into the store, describes how the <code class="docutils literal notranslate"><span class="pre">randomString</span></code> branch of the app state should be updated if an action of type <code class="docutils literal notranslate"><span class="pre">FETCH_RANDOM_STRING_OK</span></code> or <code class="docutils literal notranslate"><span class="pre">FETCH_RANDOM_STRING_FAIL</span></code> is received. Note that in addition to dispatching actions of type <code class="docutils literal notranslate"><span class="pre">&quot;ORIGINAL_ACTION_TYPE&quot;</span> <span class="pre">+</span> <span class="pre">&quot;_OK&quot;</span></code> upon successful completion of API calls, the <code class="docutils literal notranslate"><span class="pre">API</span></code> module functions will also dispatch actions of type <code class="docutils literal notranslate"><span class="pre">&quot;ORIGINAL_ACTION_TYPE&quot;</span> <span class="pre">+</span> <span class="pre">&quot;_FAIL&quot;</span></code> if the API call fails.</p>
-<p>To render our new <code class="docutils literal notranslate"><span class="pre">RandomString</span></code> component, we can simply import it and render it in the body of any other component being rendered in our app (depending on where we want it to appear): <code class="docutils literal notranslate"><span class="pre">&lt;RandomString</span> <span class="pre">/&gt;</span></code>. If our component tooks props (like arguments), this is where we’d pass them in.</p>
+<p>This defines a few new action types, two new action creators (in this case, functions that return a thunk (another function), which is what <code class="docutils literal notranslate"><span class="pre">API.GET</span></code> and <code class="docutils literal notranslate"><span class="pre">API.POST</span></code> are), and a reducer, which, upon injecting into the store, describes how the <code class="docutils literal notranslate"><span class="pre">comments</span></code> branch of the app state should be updated if an action of type <code class="docutils literal notranslate"><span class="pre">FETCH_COMMENTS_OK</span></code> is received. Note that in addition to dispatching actions of type <code class="docutils literal notranslate"><span class="pre">&quot;ORIGINAL_ACTION_TYPE&quot;</span> <span class="pre">+</span> <span class="pre">&quot;_OK&quot;</span></code> upon successful completion of API calls, the <code class="docutils literal notranslate"><span class="pre">API</span></code> module functions will also dispatch actions of type <code class="docutils literal notranslate"><span class="pre">&quot;ORIGINAL_ACTION_TYPE&quot;</span> <span class="pre">+</span> <span class="pre">&quot;_FAIL&quot;</span></code> if the API call fails, which can be handled accordingly in the reducer.</p>
+<p>We’ve also imported <code class="docutils literal notranslate"><span class="pre">messageHandler</span></code> from <code class="docutils literal notranslate"><span class="pre">baselayer</span></code> and called <code class="docutils literal notranslate"><span class="pre">messageHandler.add</span></code>, passing in a function that dispatches an action any time a websocket message is received with an action type of <code class="docutils literal notranslate"><span class="pre">&quot;skyportal/FETCH_TEST_COMMENTS&quot;</span></code>. This will allow the front-end state to stay in sync with the database state; whenever the back-end pushes a websocket message with this action type, the front-end will re-fetch the comments list from the back-end. This is a typical usage pattern when a record is created, changed or deleted. We’ll discuss sending websocket messages and front-end message handlers in more detail below.</p>
+<p>To render our new <code class="docutils literal notranslate"><span class="pre">TestComments</span></code> component, we can simply import it and render it in the body of any other component being rendered in our app (depending on where we want it to appear): <code class="docutils literal notranslate"><span class="pre">&lt;TestComments</span> <span class="pre">/&gt;</span></code>. If our component took props (arguments), this is where we’d pass them in. Alternatively, if it is desired that a component be on its own page and associated with its own URL endpoint, this can be accomplished by adding a mapping entry to the <code class="docutils literal notranslate"><span class="pre">app.routes</span></code> section of config.yaml (after you’ve copied config.yaml.defaults to config.yaml and modified accordingly). See <a class="reference external" href="https://github.com/skyportal/skyportal/blob/master/config.yaml.defaults">config.yaml.defaults</a> for examples. These are later passed to <a class="reference external" href="https://github.com/ReactTraining/react-router"><code class="docutils literal notranslate"><span class="pre">react-router</span></code></a>, which maps URL endpoints to React components. For the purposes of this exercise, let’s add the following lines to config.yaml under <code class="docutils literal notranslate"><span class="pre">app.routes</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span>    <span class="p p-Indicator">-</span> <span class="nt">path</span><span class="p">:</span> <span class="s">&quot;/test_comments&quot;</span>
+      <span class="nt">component</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">TestComments</span>
+</pre></div>
+</div>
+<p>Then, after running the app (instructions to follow), we can navigate to <code class="docutils literal notranslate"><span class="pre">&lt;base_url&gt;/test_comments</span></code> in the browser and see our new component rendered there.</p>
 </div>
 <div class="section" id="back-end">
 <h3>Back-end<a class="headerlink" href="#back-end" title="Permalink to this headline">¶</a></h3>
 <p>Now let’s take a look at what we’ll need to add to the back-end to make our new feature work.</p>
 <p>The SkyPortal back-end is built using <a class="reference external" href="https://www.tornadoweb.org/en/stable/">Tornado</a>, a Python web application framework that provides its own I/O event loop for non-blocking sockets, making it ideal for use with websockets (see below).</p>
 <p>To handle HTTP requests, we define <em>request handlers</em> that are mapped to API endpoints in the application’s configuration (in <code class="docutils literal notranslate"><span class="pre">skyportal/app_server.py</span></code> – see below). Each SkyPortal request handler is a subclass of <code class="docutils literal notranslate"><span class="pre">BaseHandler</span></code> (defined in <code class="docutils literal notranslate"><span class="pre">skyportal/handlers/base.py</span></code>), a handler that extends Tornado’s base <a class="reference external" href="https://www.tornadoweb.org/en/stable/web.html#tornado.web.RequestHandler">RequestHandler</a>, handling authentication and providing utility methods for pushing websocket messages to the front-end and returning HTTP responses.</p>
-<p>Let’s take a look at adding our own handler. We’ll start by defining a new request handler in a new file <code class="docutils literal notranslate"><span class="pre">skyportal/handlers/api/random_string.py</span></code>. Note that we’ve imported <code class="docutils literal notranslate"><span class="pre">BaseHandler</span></code> which serves as the base class of our new handler. We define class methods describing how to handle requests of various types, e.g. a <code class="docutils literal notranslate"><span class="pre">put</span></code> method for PUT requests, a <code class="docutils literal notranslate"><span class="pre">post</span></code> method for POST requests, etc.</p>
-<p><code class="docutils literal notranslate"><span class="pre">skyportal/handlers/api/random_string.py</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">uuid</span>
-<span class="kn">from</span> <span class="nn">baselayer.app.access</span> <span class="kn">import</span> <span class="n">auth_or_token</span>
+<p>Let’s take a look at adding our own handler. We’ll start by defining a new request handler in a new file <code class="docutils literal notranslate"><span class="pre">skyportal/handlers/api/test_comment.py</span></code>. Note that we’ve imported <code class="docutils literal notranslate"><span class="pre">BaseHandler</span></code> which serves as the base class of our new handler. We define class methods describing how to handle requests of various types, e.g. a <code class="docutils literal notranslate"><span class="pre">put</span></code> method for PUT requests, a <code class="docutils literal notranslate"><span class="pre">post</span></code> method for POST requests, etc.</p>
+<p><code class="docutils literal notranslate"><span class="pre">skyportal/handlers/api/test_comment.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">baselayer.app.access</span> <span class="kn">import</span> <span class="n">auth_or_token</span>
 <span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">BaseHandler</span>
+<span class="kn">from</span> <span class="nn">...models</span> <span class="kn">import</span> <span class="n">DBSession</span><span class="p">,</span> <span class="n">TestComment</span>
 
 
-<span class="k">class</span> <span class="nc">RandomStringHandler</span><span class="p">(</span><span class="n">BaseHandler</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">TestCommentHandler</span><span class="p">(</span><span class="n">BaseHandler</span><span class="p">):</span>
     <span class="nd">@auth_or_token</span>
     <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid</span><span class="o">.</span><span class="n">uuid4</span><span class="p">())})</span>
+        <span class="c1"># If we wanted to do any query filtering, this is where that would happen</span>
+        <span class="n">comments</span> <span class="o">=</span> <span class="n">DBSession</span><span class="p">()</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">TestComment</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">comments</span><span class="p">)</span>
+
+    <span class="nd">@auth_or_token</span>
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+        <span class="n">comment_text</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;commentText&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">comment_text</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">comment_text</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;`commentText` must be provided as a non-empty string&quot;</span><span class="p">)</span>
+        <span class="n">DBSession</span><span class="p">()</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+            <span class="n">TestComment</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">current_user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">comment_text</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">DBSession</span><span class="p">()</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">push_all</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">&quot;skyportal/FETCH_TEST_COMMENTS&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">success</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The decorator <code class="docutils literal notranslate"><span class="pre">&#64;auth_or_token</span></code> tells the application that the request must come from either or a logged in user (via the browser), or must include a valid token in the request header. If neither of these are true, the request returns with an error. Note that any response data must be passed into <code class="docutils literal notranslate"><span class="pre">success</span></code> as the <code class="docutils literal notranslate"><span class="pre">data</span></code> keyword argument, and must be a dictionary. <code class="docutils literal notranslate"><span class="pre">BaseHandler.success</span></code> will then add a <code class="docutils literal notranslate"><span class="pre">version</span></code> key to this dictionary whose value is a string describing the currently running SkyPortal version, and returns a response object whose JSON body content is of the form:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;success&#39;</span><span class="p">,</span>
- <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;65cd3692-8849-42ad-982d-f5f50e233005&#39;</span><span class="p">,</span>
-          <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;0.9.dev0+git20200202.d9104db&#39;</span><span class="p">}}</span>
+<p>From <code class="docutils literal notranslate"><span class="pre">skyportal/models.py</span></code> we’ve imported <code class="docutils literal notranslate"><span class="pre">DBSession</span></code>, a <a class="reference external" href="https://docs.sqlalchemy.org/en/13/index.html">SQLAlchemy</a> <a class="reference external" href="https://docs.sqlalchemy.org/en/13/orm/session.html">Session</a> instance, and <code class="docutils literal notranslate"><span class="pre">TestComment</span></code>, our SQLAlchemy <a class="reference external" href="https://docs.sqlalchemy.org/en/13/orm/mapping_styles.html#declarative-mapping">mapper class</a> (which maps a Python class to a database table). We’ll see how to define mapper classes (which correspond to database tables) shortly. The decorator <code class="docutils literal notranslate"><span class="pre">&#64;auth_or_token</span></code> tells the application that the request must either come from a logged in user (via the browser), or must include a valid token in the request header. If neither of these are true, the request returns with an error.</p>
+<p>In our GET handler (the <code class="docutils literal notranslate"><span class="pre">get</span></code> method), we retrieve all test comments from the database with <code class="docutils literal notranslate"><span class="pre">DBSession().query(TestComment).all()</span></code>. We then return a call to <code class="docutils literal notranslate"><span class="pre">BaseHandler.success</span></code>, which generates a response object whose JSON body content is of the form:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;success&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s2">&quot;SkyPortal version string&quot;</span><span class="p">,</span>
+    <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<p>(in this particular case).</p>
+<p>where <code class="docutils literal notranslate"><span class="pre">data</span></code> is whatever was passed in as the <code class="docutils literal notranslate"><span class="pre">data</span></code> argument to <code class="docutils literal notranslate"><span class="pre">success</span></code> (the comments list, in this case). <code class="docutils literal notranslate"><span class="pre">BaseHandler.success</span></code> converts <code class="docutils literal notranslate"><span class="pre">data</span></code> to JSON form.</p>
 <p>In addition to <code class="docutils literal notranslate"><span class="pre">success</span></code>, <code class="docutils literal notranslate"><span class="pre">BaseHandler</span></code> also provides an <code class="docutils literal notranslate"><span class="pre">error</span></code> method for returning error responses:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SomeHandler</span><span class="p">(</span><span class="n">BaseHandler</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">some_request_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -530,35 +597,43 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Error responses with informative messages should be returned when a request contains invalid data, if the user doesn’t have access to the requested resource, or if an exception is caught during the handling of the request.</p>
-<p>After adding the relevant import lines to <code class="docutils literal notranslate"><span class="pre">skyportal/handlers/api/__init__.py</span></code> and <code class="docutils literal notranslate"><span class="pre">skyportal/app_server.py</span></code> to import our new <code class="docutils literal notranslate"><span class="pre">RandomStringHandler</span></code> into the <code class="docutils literal notranslate"><span class="pre">app_server</span></code> module, we then add an element to our endpoint &amp; handler mapping list (see the <code class="docutils literal notranslate"><span class="pre">handlers</span></code> assignment statement in the <code class="docutils literal notranslate"><span class="pre">make_app</span></code> function defined in <code class="docutils literal notranslate"><span class="pre">skyportal/app_server.py</span></code>) to map the associated API endpoint to the new handler class. The elements of this list are tuples consisting of a regex string describing the matching URL pattern, and the handler object: <code class="docutils literal notranslate"><span class="pre">(r'/api/random_string',</span> <span class="pre">RandomStringHandler)</span></code>. After defining our handler and mapping it to the API endpoint in our application, we can now expect any authenticated GET requests to <code class="docutils literal notranslate"><span class="pre">&lt;base_URL&gt;/api/random_string</span></code> to return with a successful response containing a new random string in the JSON body.</p>
-<p>We can now fire up SkyPortal to try out our new feature by running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code> (run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">log</span></code> in another terminal to monitor the logs). After we see in the logs that the compiling and bundling our JavaScript sources (you’ll see “main.bundle.js”), navigate to wherever you’ve configured the app to run (localhost:5000 by default), perform a hard refresh to bypass outdated cache, and you can see our component is rendering and behaving as expected.</p>
-<p>Now our new feature should be fully implemented, and we’ll add a test to make sure it’s working as expected. We use Selenium in our front-end tests; we’ll use that to make sure a UUID string appears after (and not before) we click the button. This test assumes we’ve rendered our new component inside the <code class="docutils literal notranslate"><span class="pre">Profile</span></code> component, which is rendered when a user navigates to <code class="docutils literal notranslate"><span class="pre">/profile</span></code> (this is arbitrary - adjust these to reflect whichever location you choose to render your component).</p>
-<p><code class="docutils literal notranslate"><span class="pre">skyportal/tests/frontend/test_random_string.py</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pytest</span>
-<span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">from</span> <span class="nn">selenium.webdriver.support.ui</span> <span class="kn">import</span> <span class="n">Select</span>
-
-<span class="k">def</span> <span class="nf">test_random_string_generator_button</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
-    <span class="n">uuid_re_pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;[0-9a-fA-F]</span><span class="si">{8}</span><span class="s1">\-[0-9a-fA-F]</span><span class="si">{4}</span><span class="s1">\-[0-9a-fA-F]</span><span class="si">{4}</span><span class="s1">\-[0-9a-fA-F]</span><span class="si">{4}</span><span class="s1">\-[0-9a-fA-F]</span><span class="si">{12}</span><span class="s1">&#39;</span>
-
-    <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;/become_user/</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/profile&#39;</span><span class="p">)</span>
-
-    <span class="c1"># Check that default value of &quot;null&quot; is displayed initially</span>
-    <span class="n">orig_display_xpath</span> <span class="o">=</span> <span class="s1">&#39;//div[contains(.,&quot;Current value is: null&quot;)]&#39;</span>
-    <span class="n">display_div</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">wait_for_xpath</span><span class="p">(</span><span class="n">orig_display_xpath</span><span class="p">)</span>
-    <span class="c1"># Check that no UUID string is displayed before we click the button</span>
-    <span class="k">assert</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">uuid_re_pattern</span><span class="p">,</span> <span class="n">display_div</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
-    <span class="n">btn</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">wait_for_xpath</span><span class="p">(</span><span class="s1">&#39;//button[contains(.,&quot;Generate new random string&quot;)]&#39;</span><span class="p">)</span>
-    <span class="n">btn</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
-    <span class="c1"># Check that the original &quot;null&quot; value is no longer displayed after button click</span>
-    <span class="n">driver</span><span class="o">.</span><span class="n">wait_for_xpath_to_disappear</span><span class="p">(</span><span class="n">orig_display_xpath</span><span class="p">)</span>
-    <span class="c1"># Check that a UUID string is displayed after button click</span>
-    <span class="k">assert</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">uuid_re_pattern</span><span class="p">,</span> <span class="n">display_div</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<p>Error responses with informative messages should be returned when a request contains invalid data, if the user doesn’t have access to the requested resource, or if an exception is caught during the handling of the request. The default status code for <code class="docutils literal notranslate"><span class="pre">BaseHandler.error</span></code> is 400, but can be changed accordingly by passing in, for example, <code class="docutils literal notranslate"><span class="pre">status=404</span></code>.</p>
+<p>In our POST handler, we access the request’s JSON body with <code class="docutils literal notranslate"><span class="pre">self.get_json()</span></code>, and ensure that <code class="docutils literal notranslate"><span class="pre">&quot;commentText&quot;</span></code> is provided there as a non-empty string, returning an error response otherwise. We then insert a new row into the test comments table with <code class="docutils literal notranslate"><span class="pre">DBSession().add(TestComment(...))</span></code>, and commit it to disk with <code class="docutils literal notranslate"><span class="pre">DBSession().commit()</span></code>. Before returning a success response, we call <code class="docutils literal notranslate"><span class="pre">BaseHandler.push_all</span></code>, passing in <code class="docutils literal notranslate"><span class="pre">action=&quot;skyportal/FETCH_TEST_COMMENTS&quot;</span></code>, which pushes a websocket message with the specified action type to all currently logged in users. If we wanted to push a websocket message only to the current user (the user who initiated the request currently being handled), we could use <code class="docutils literal notranslate"><span class="pre">self.push</span></code> instead of <code class="docutils literal notranslate"><span class="pre">self.push_all</span></code>.</p>
+<p>Let’s turn for a moment to <a class="reference external" href="https://docs.sqlalchemy.org/en/13/index.html">SQLAlchemy</a>, a Python library offering a SQL toolkit and object relational mapper (ORM). We <a class="reference external" href="https://docs.sqlalchemy.org/en/14/orm/mapping_styles.html#orm-declarative-mapping">declare classes</a> that inherit from SQLAlchemy’s <code class="docutils literal notranslate"><span class="pre">declarative_base</span></code> (this is all set up in <a class="reference external" href="https://github.com/cesium-ml/baselayer"><code class="docutils literal notranslate"><span class="pre">baselayer</span></code></a>’s <a class="reference external" href="https://github.com/cesium-ml/baselayer/blob/master/app/models.py"><code class="docutils literal notranslate"><span class="pre">models</span></code></a> module, which we import in SkyPortal’s <code class="docutils literal notranslate"><span class="pre">models</span></code> module as <code class="docutils literal notranslate"><span class="pre">Base</span></code>) that are then mapped to database tables by SQLAlchemy. <code class="docutils literal notranslate"><span class="pre">baselayer</span></code>’s base class, which SkyPortal mapper classes inherit from, already comes with a few columns: <code class="docutils literal notranslate"><span class="pre">id</span></code> (integer), <code class="docutils literal notranslate"><span class="pre">created_at</span></code> (<code class="docutils literal notranslate"><span class="pre">DateTime</span></code>), and <code class="docutils literal notranslate"><span class="pre">modified</span></code> (<code class="docutils literal notranslate"><span class="pre">DateTime</span></code>).</p>
+<p>With that, let’s define our <code class="docutils literal notranslate"><span class="pre">TestComment</span></code> mapper class in <code class="docutils literal notranslate"><span class="pre">skyportal/models.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TestComment</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">sa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">sa</span><span class="o">.</span><span class="n">String</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Comment text&quot;</span><span class="p">)</span>
+    <span class="n">user_id</span> <span class="o">=</span> <span class="n">sa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+        <span class="n">sa</span><span class="o">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s2">&quot;users.id&quot;</span><span class="p">,</span> <span class="n">ondelete</span><span class="o">=</span><span class="s2">&quot;CASCADE&quot;</span><span class="p">),</span>
+        <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;ID of the User that submitted the comment&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
 </pre></div>
 </div>
-<p>Execute the test suite with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code>, or, to run the new test on its own, run the app in testing mode with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run_testing</span></code> and run <code class="docutils literal notranslate"><span class="pre">py.test</span> <span class="pre">skyportal/tests/frontend/test_random_string.py</span></code> in another terminal.</p>
+<p>The SQLAlchemy ORM maps this class to a database table with the columns <code class="docutils literal notranslate"><span class="pre">text</span></code> (a string type, as specified by <code class="docutils literal notranslate"><span class="pre">sa.String</span></code>) and <code class="docutils literal notranslate"><span class="pre">user_id</span></code> (a <a class="reference external" href="https://docs.sqlalchemy.org/en/14/core/constraints.html#sqlalchemy.schema.ForeignKey"><code class="docutils literal notranslate"><span class="pre">ForeignKey</span></code></a> instance, which defines a dependency on the <code class="docutils literal notranslate"><span class="pre">id</span></code> column of the <code class="docutils literal notranslate"><span class="pre">users</span></code> table, constraining the value to a valid user ID), in addition to the above-mentioned columns inherited from <code class="docutils literal notranslate"><span class="pre">Base</span></code>. Note that class names map to table names by appending an “s” (to indicate plurality) to the lowercase version of the class name (e.g. the <code class="docutils literal notranslate"><span class="pre">User</span></code> class maps to the <code class="docutils literal notranslate"><span class="pre">&quot;users&quot;</span></code> table).</p>
+<p>As illustrated in our <code class="docutils literal notranslate"><span class="pre">TestCommentHandler.post</span></code> implementation above, class instances map to rows in the corresponding table. So to add a new row to the <code class="docutils literal notranslate"><span class="pre">&quot;testcomments&quot;</span></code> table, we pass an instance of <code class="docutils literal notranslate"><span class="pre">TestComment</span></code> to <code class="docutils literal notranslate"><span class="pre">DBSession().add</span></code>: <code class="docutils literal notranslate"><span class="pre">DBSession().add(TestComment(text=text,</span> <span class="pre">user_id=user_id))</span></code>, followed by committing the changes to disk by calling <code class="docutils literal notranslate"><span class="pre">DBSession().commit()</span></code>.</p>
+<p>After adding the relevant import lines to <code class="docutils literal notranslate"><span class="pre">skyportal/handlers/api/__init__.py</span></code> and <code class="docutils literal notranslate"><span class="pre">skyportal/app_server.py</span></code> to import our new <code class="docutils literal notranslate"><span class="pre">TestCommentHandler</span></code> into the <code class="docutils literal notranslate"><span class="pre">app_server</span></code> module, we then add an element to our endpoint &amp; handler mapping list (see the <code class="docutils literal notranslate"><span class="pre">handlers</span></code> assignment statement in the <code class="docutils literal notranslate"><span class="pre">make_app</span></code> function defined in <code class="docutils literal notranslate"><span class="pre">skyportal/app_server.py</span></code>) to map the associated API endpoint to the new handler class. The elements of this list are tuples consisting of a regex string describing the matching URL pattern, and the handler object: <code class="docutils literal notranslate"><span class="pre">(r'/api/test_comments,</span> <span class="pre">TestCommentHandler')</span></code>. After defining our handler and mapping it to the API endpoint in our application, we can now expect any authenticated GET or POST requests to <code class="docutils literal notranslate"><span class="pre">&lt;base_URL&gt;/api/test_comments</span></code> to either fetch or create records.</p>
+<p>We can now fire up SkyPortal to try out our new feature by running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code> (run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">log</span></code> in another terminal to monitor the logs). After we see in the logs that the compiling and bundling our JavaScript sources (you’ll see “main.bundle.js”), navigate to wherever you’ve configured the app to run (localhost:5000 by default), perform a hard refresh to bypass outdated cache, and you can see our component is rendering and behaving as expected.</p>
+<p>Here’s a screen capture of what we’ve implemented in action:
+<img alt="test comments" src="_images/test_comments.gif" /></p>
+<p>Now our new feature should be fully implemented, and we’ll add a test to make sure it’s working as expected. We use Selenium in our front-end tests; we’ll use that to programmatically navigate, click, enter text, etc., in a browser session, and ensure that elements are rendering and behaving as expected. Let’s take a look at an example test for our new component:</p>
+<p><code class="docutils literal notranslate"><span class="pre">skyportal/tests/frontend/test_test_comments.py</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_test_comments</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;/become_user/</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/test_comments)</span>
+
+    <span class="c1"># Get the input field</span>
+    <span class="n">comment_input</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">wait_for_xpath</span><span class="p">(</span><span class="s2">&quot;//input[@data-testid=&#39;testCommentInput&#39;]&quot;</span><span class="p">)</span>
+    <span class="c1"># Enter some comment text</span>
+    <span class="n">comment_input</span><span class="o">.</span><span class="n">send_keys</span><span class="p">(</span><span class="s2">&quot;TEST_TEXT&quot;</span><span class="p">)</span>
+    <span class="c1"># Click the submit button</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">click_xpath</span><span class="p">(</span><span class="s2">&quot;//button[@data-testid=&#39;testCommentSubmitButton&#39;]&quot;</span><span class="p">)</span>
+    <span class="c1"># Wait for the new comment to be displayed</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">wait_for_xpath</span><span class="p">(</span><span class="s2">&quot;//li[text()=&#39;TEST_TEXT&#39;]&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Execute the test suite with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code>, or, to run the new test on its own, run the app in testing mode with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run_testing</span></code> and run <code class="docutils literal notranslate"><span class="pre">py.test</span> <span class="pre">skyportal/tests/frontend/test_comments.py</span></code> in another terminal.</p>
 </div>
 <div class="section" id="websockets">
 <h3>Websockets<a class="headerlink" href="#websockets" title="Permalink to this headline">¶</a></h3>
@@ -570,7 +645,7 @@
         <span class="o">...</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">push_all</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;skyportal/REFRESH_SOURCE&#39;</span><span class="p">,</span>
-                      <span class="n">payload</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;obj_key: comment.obj.internal_key})</span>
+                        <span class="n">payload</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;obj_key: comment.obj.internal_key})</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
 </pre></div>
@@ -635,12 +710,12 @@
 <h3>File creation/edit bookkeeping<a class="headerlink" href="#file-creation-edit-bookkeeping" title="Permalink to this headline">¶</a></h3>
 <p>Let’s recap the files we’ve created or edited to implement this new feature:</p>
 <ul class="simple">
-<li><p>component definition file <code class="docutils literal notranslate"><span class="pre">static/js/components/RandomString.jsx</span></code> <em>(new)</em></p></li>
-<li><p>Redux-related code (action creators, reducer, etc.) <code class="docutils literal notranslate"><span class="pre">static/js/ducks/randomString.js</span></code> <em>(new)</em></p></li>
-<li><p>importing our new component and rendering it in a component that’s already being rendered <em>(2 lines of code)</em></p></li>
-<li><p>back-end handler definition in <code class="docutils literal notranslate"><span class="pre">skyportal/handlers/api/random_string.py</span></code> <em>(new)</em></p></li>
+<li><p>component definition file <code class="docutils literal notranslate"><span class="pre">static/js/components/TestComments.jsx</span></code> <em>(new)</em></p></li>
+<li><p>Redux-related code (action creators, reducer, etc.) <code class="docutils literal notranslate"><span class="pre">static/js/ducks/testComments.js</span></code> <em>(new)</em></p></li>
+<li><p>specifying the route/component mapping in <code class="docutils literal notranslate"><span class="pre">config.yaml.defaults</span></code> <em>(edit)</em></p></li>
+<li><p>back-end handler definition in <code class="docutils literal notranslate"><span class="pre">skyportal/handlers/api/test_comments.py</span></code> <em>(new)</em></p></li>
 <li><p>importing our handler and adding the route mapping to our handlers list in <code class="docutils literal notranslate"><span class="pre">skyportal/app_server.py</span></code> <em>(2 lines of code)</em></p></li>
-<li><p>adding a new test in <code class="docutils literal notranslate"><span class="pre">skyportal/tests/frontend/test_random_string.py</span></code> <em>(new)</em></p></li>
+<li><p>adding a new test in <code class="docutils literal notranslate"><span class="pre">skyportal/tests/frontend/test_comments.py</span></code> <em>(new)</em></p></li>
 </ul>
 </div>
 </div>
