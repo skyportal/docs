@@ -2194,7 +2194,7 @@ entities, namely Source and Candidate.</p>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_annotations_readable_by" title="skyportal.models.Obj.get_annotations_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_annotations_readable_by</span></code></a>(user_or_token)</p></td>
-<td><p>Query the database and return the Annotations on this Obj that are accessible to any of the User or Token owner’s accessible Groups.</p></td>
+<td><p>Query the database and return the Classifications on this Obj that are accessible to any of the User or Token owner’s accessible Groups.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_classifications_readable_by" title="skyportal.models.Obj.get_classifications_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_classifications_readable_by</span></code></a>(user_or_token)</p></td>
 <td><p>Query the database and return the Classifications on this Obj that are accessible to any of the User or Token owner’s accessible Groups.</p></td>
@@ -2396,7 +2396,7 @@ zero degrees.</p>
 <dl class="py method">
 <dt id="skyportal.models.Obj.get_annotations_readable_by">
 <code class="sig-name descname">get_annotations_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_annotations_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Query the database and return the Annotations on this Obj that are accessible
+<dd><p>Query the database and return the Classifications on this Obj that are accessible
 to any of the User or Token owner’s accessible Groups.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters</dt>
@@ -2407,7 +2407,7 @@ to any of the User or Token owner’s accessible Groups.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl>
-<dt><strong>annotation_list</strong><span class="classifier">list of <cite>skyportal.models.Annotation</cite></span></dt><dd><p>The accessible annotations attached to this Obj.</p>
+<dt><strong>classification_list</strong><span class="classifier">list of <cite>skyportal.models.Classification</cite></span></dt><dd><p>The accessible classifications attached to this Obj.</p>
 </dd>
 </dl>
 </dd>
@@ -4119,7 +4119,7 @@ If the Obj does not exist, return <cite>None</cite>.</p>
 <dl class="py function">
 <dt id="skyportal.models.get_obj_annotations_readable_by">
 <code class="sig-prename descclassname">skyportal.models.</code><code class="sig-name descname">get_obj_annotations_readable_by</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">user_or_token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_obj_annotations_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Query the database and return the Annotations on this Obj that are accessible
+<dd><p>Query the database and return the Classifications on this Obj that are accessible
 to any of the User or Token owner’s accessible Groups.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters</dt>
@@ -4130,7 +4130,7 @@ to any of the User or Token owner’s accessible Groups.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl>
-<dt><strong>annotation_list</strong><span class="classifier">list of <cite>skyportal.models.Annotation</cite></span></dt><dd><p>The accessible annotations attached to this Obj.</p>
+<dt><strong>classification_list</strong><span class="classifier">list of <cite>skyportal.models.Classification</cite></span></dt><dd><p>The accessible classifications attached to this Obj.</p>
 </dd>
 </dl>
 </dd>
