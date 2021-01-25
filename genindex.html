@@ -185,6 +185,7 @@
  | <a href="#N"><strong>N</strong></a>
  | <a href="#O"><strong>O</strong></a>
  | <a href="#P"><strong>P</strong></a>
+ | <a href="#Q"><strong>Q</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
@@ -208,6 +209,12 @@
         <li><a href="database.html#baselayer.app.models.User.accessible_streams">(baselayer.app.models.User property)</a>
 </li>
       </ul></li>
+      <li><a href="database.html#skyportal.models.AccessibleIfGroupUserIsAdminAndUserMatches">AccessibleIfGroupUserIsAdminAndUserMatches (class in skyportal.models)</a>
+</li>
+      <li><a href="database.html#baselayer.app.models.AccessibleIfRelatedRowsAreAccessible">AccessibleIfRelatedRowsAreAccessible (class in baselayer.app.models)</a>
+</li>
+      <li><a href="database.html#baselayer.app.models.AccessibleIfUserMatches">AccessibleIfUserMatches (class in baselayer.app.models)</a>
+</li>
       <li><a href="database.html#baselayer.app.models.ACL">ACL (class in baselayer.app.models)</a>
 </li>
       <li><a href="database.html#baselayer.app.models.Role.acls">acls (baselayer.app.models.Role attribute)</a>
@@ -317,6 +324,8 @@
         <li><a href="database.html#skyportal.models.Obj.candidates">(skyportal.models.Obj attribute)</a>
 </li>
       </ul></li>
+      <li><a href="database.html#baselayer.app.models.UserAccessControl.check_cls_for_attributes">check_cls_for_attributes() (baselayer.app.models.UserAccessControl static method)</a>
+</li>
       <li><a href="database.html#skyportal.models.ClassicalAssignment">ClassicalAssignment (class in skyportal.models)</a>
 </li>
       <li><a href="database.html#skyportal.models.Classification">Classification (class in skyportal.models)</a>
@@ -334,6 +343,8 @@
       <li><a href="database.html#skyportal.models.ClassicalAssignment.comment">comment (skyportal.models.ClassicalAssignment attribute)</a>
 </li>
       <li><a href="database.html#skyportal.models.Obj.comments">comments (skyportal.models.Obj attribute)</a>
+</li>
+      <li><a href="database.html#baselayer.app.models.ComposedAccessControl">ComposedAccessControl (class in baselayer.app.models)</a>
 </li>
       <li><a href="database.html#baselayer.app.models.User.contact_email">contact_email (baselayer.app.models.User attribute)</a>
 </li>
@@ -634,9 +645,17 @@
       <ul>
         <li><a href="database.html#baselayer.app.models.Role.id">(baselayer.app.models.Role attribute)</a>
 </li>
+        <li><a href="database.html#baselayer.app.models.RoleACL.id">(baselayer.app.models.RoleACL attribute)</a>
+</li>
         <li><a href="database.html#baselayer.app.models.Token.id">(baselayer.app.models.Token attribute)</a>
 </li>
+        <li><a href="database.html#baselayer.app.models.TokenACL.id">(baselayer.app.models.TokenACL attribute)</a>
+</li>
         <li><a href="database.html#baselayer.app.models.User.id">(baselayer.app.models.User attribute)</a>
+</li>
+        <li><a href="database.html#baselayer.app.models.UserACL.id">(baselayer.app.models.UserACL attribute)</a>
+</li>
+        <li><a href="database.html#baselayer.app.models.UserRole.id">(baselayer.app.models.UserRole attribute)</a>
 </li>
         <li><a href="database.html#skyportal.models.Allocation.id">(skyportal.models.Allocation attribute)</a>
 </li>
@@ -679,10 +698,10 @@
         <li><a href="database.html#skyportal.models.Thumbnail.id">(skyportal.models.Thumbnail attribute)</a>
 </li>
       </ul></li>
-      <li><a href="database.html#baselayer.app.models.SlugifiedStr.impl">impl (baselayer.app.models.SlugifiedStr attribute)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="database.html#baselayer.app.models.SlugifiedStr.impl">impl (baselayer.app.models.SlugifiedStr attribute)</a>
+</li>
       <li><a href="database.html#skyportal.models.Instrument">Instrument (class in skyportal.models)</a>
 </li>
       <li><a href="database.html#skyportal.models.Allocation.instrument">instrument (skyportal.models.Allocation attribute)</a>
@@ -752,6 +771,8 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="database.html#baselayer.app.models.join_model">join_model() (in module baselayer.app.models)</a>
+</li>
+      <li><a href="database.html#baselayer.app.models.JoinModel">JoinModel (class in baselayer.app.models)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -1084,8 +1105,32 @@
 </li>
       <li><a href="database.html#skyportal.models.Taxonomy.provenance">provenance (skyportal.models.Taxonomy attribute)</a>
 </li>
+      <li><a href="database.html#baselayer.app.models.Public">Public (class in baselayer.app.models)</a>
+</li>
       <li><a href="database.html#skyportal.models.Thumbnail.public_url">public_url (skyportal.models.Thumbnail attribute)</a>
 </li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Q">Q</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="database.html#baselayer.app.models.AccessibleIfRelatedRowsAreAccessible.query_accessible_rows">query_accessible_rows() (baselayer.app.models.AccessibleIfRelatedRowsAreAccessible method)</a>
+
+      <ul>
+        <li><a href="database.html#baselayer.app.models.AccessibleIfUserMatches.query_accessible_rows">(baselayer.app.models.AccessibleIfUserMatches method)</a>
+</li>
+        <li><a href="database.html#baselayer.app.models.ComposedAccessControl.query_accessible_rows">(baselayer.app.models.ComposedAccessControl method)</a>
+</li>
+        <li><a href="database.html#baselayer.app.models.Public.query_accessible_rows">(baselayer.app.models.Public method)</a>
+</li>
+        <li><a href="database.html#baselayer.app.models.Restricted.query_accessible_rows">(baselayer.app.models.Restricted method)</a>
+</li>
+        <li><a href="database.html#baselayer.app.models.UserAccessControl.query_accessible_rows">(baselayer.app.models.UserAccessControl method)</a>
+</li>
+        <li><a href="database.html#skyportal.models.AccessibleIfGroupUserIsAdminAndUserMatches.query_accessible_rows">(skyportal.models.AccessibleIfGroupUserIsAdminAndUserMatches method)</a>
+</li>
+      </ul></li>
   </ul></td>
 </tr></table>
 
@@ -1104,6 +1149,8 @@
 </li>
       <li><a href="database.html#skyportal.models.Spectrum.reducers">reducers (skyportal.models.Spectrum attribute)</a>
 </li>
+      <li><a href="database.html#baselayer.app.models.AccessibleIfUserMatches.relationship_names">relationship_names() (baselayer.app.models.AccessibleIfUserMatches property)</a>
+</li>
       <li><a href="database.html#skyportal.models.ClassicalAssignment.requester">requester (skyportal.models.ClassicalAssignment attribute)</a>
 
       <ul>
@@ -1119,6 +1166,8 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="database.html#skyportal.models.Allocation.requests">requests (skyportal.models.Allocation attribute)</a>
+</li>
+      <li><a href="database.html#baselayer.app.models.Restricted">Restricted (class in baselayer.app.models)</a>
 </li>
       <li><a href="database.html#skyportal.models.ArrayOfEnum.result_processor">result_processor() (skyportal.models.ArrayOfEnum method)</a>
 </li>
@@ -1287,6 +1336,8 @@
 </li>
       <li><a href="database.html#skyportal.models.GroupAdmissionRequest.user_id">user_id (skyportal.models.GroupAdmissionRequest attribute)</a>
 </li>
+      <li><a href="database.html#baselayer.app.models.UserAccessControl.user_id_from_user_or_token">user_id_from_user_or_token() (baselayer.app.models.UserAccessControl static method)</a>
+</li>
       <li><a href="database.html#baselayer.app.models.User.user_model">user_model() (baselayer.app.models.User class method)</a>
 </li>
       <li><a href="database.html#skyportal.models.user_or_token_accessible_groups">user_or_token_accessible_groups (in module skyportal.models)</a>
@@ -1294,6 +1345,8 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="database.html#skyportal.models.user_or_token_accessible_streams">user_or_token_accessible_streams (in module skyportal.models)</a>
+</li>
+      <li><a href="database.html#baselayer.app.models.UserAccessControl">UserAccessControl (class in baselayer.app.models)</a>
 </li>
       <li><a href="database.html#baselayer.app.models.UserACL">UserACL (class in baselayer.app.models)</a>
 </li>
