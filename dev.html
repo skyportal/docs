@@ -97,7 +97,10 @@
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Developer notes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#pre-commit-hook">Pre-commit hook</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#test-fixtures">Test fixtures</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#debugging">Debugging</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#database">Database</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#docker-images">Docker images</a></li>
@@ -187,7 +190,7 @@
 </div>
 <p>This will check your changes before each commit to ensure that they
 conform with our code style standards. We use black to reformat Python
-code, and PrettierJS for JavaScript.  We also run ESLint to catch
+code, and PrettierJS for JavaScript. We also run ESLint to catch
 several common Redux usage bugs.</p>
 </div>
 <div class="section" id="testing">
@@ -196,7 +199,7 @@ several common Redux usage bugs.</p>
 <ul class="simple">
 <li><p>Install geckodriver and Firefox</p></li>
 <li><p>To run all tests: <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">test</span></code></p></li>
-<li><p>To run a single test: <code class="docutils literal notranslate"><span class="pre">./tools/test_frontend.py</span> <span class="pre">skportal/tests/frontend/&lt;test_file&gt;.py::test_&lt;specific_test&gt;</span></code></p></li>
+<li><p>To run a single test: <code class="docutils literal notranslate"><span class="pre">./tools/test_frontend.py</span> <span class="pre">skyportal/tests/frontend/&lt;test_file&gt;.py::test_&lt;specific_test&gt;</span></code></p></li>
 </ul>
 <p>This fires up the test server and runs that test. To make things
 faster you can also run the test server separately:</p>
@@ -217,6 +220,13 @@ faster you can also run the test server separately:</p>
 </pre></div>
 </div>
 <p>It is not noticeably faster to run the test suite headlessly.</p>
+<div class="section" id="test-fixtures">
+<h3>Test fixtures<a class="headerlink" href="#test-fixtures" title="Permalink to this headline">¶</a></h3>
+<p>The SkyPortal test suite leverages pytest fixtures to generate and isolate test data for each test. Fixtures are declared in the <code class="docutils literal notranslate"><span class="pre">skyportal/tests/conftest.py</span></code> file, and they utilize factories implemented in <code class="docutils literal notranslate"><span class="pre">skyportal/tests/fixtures.py</span></code> to generate new instances of fixtures as needed.</p>
+<p>Each test will request any fixtures that it requires, and as part of the set-up for that test, new test instances of the fixtures are created. This means that each test is guaranteed to work with fresh, isolated test data in order to avoid any unintended dependencies on other tests. Fixtures should be used when possible in writing new tests to promote safe, repeatable test results.</p>
+<p>SkyPortal test fixtures are implemented with teardown logic, such that any database records generated for that fixture are deleted from the test database upon completion of a test. This serves to avoid bloating of the test database as more tests are run. Note that each fixture defined in <code class="docutils literal notranslate"><span class="pre">conftest.py</span></code> uses the <code class="docutils literal notranslate"><span class="pre">yield</span></code> keyword to return its test object. Any code following <code class="docutils literal notranslate"><span class="pre">yield</span></code> in a pytest fixture is run as teardown logic when that fixture goes out of scope; you will find that in SkyPortal this involves calling the relevant <code class="docutils literal notranslate"><span class="pre">teardown()</span></code> functions on the fixture objects created. These <code class="docutils literal notranslate"><span class="pre">teardown()</span></code> functions are implemented for each SQLAlchemyModelFactory subclass defined in <code class="docutils literal notranslate"><span class="pre">fixtures.py</span></code>.</p>
+<p>Any new fixtures and fixture factories being added should follow this same structure, taking care to delete all fixture data (including SubFactory-generated records, i.e. a new User created to be the author of a new Comment). Foreign key constraints and cascade behavior defined on the database models can be used to simplify this logic but can also lead to subtle errors in tearing down fixtures and should be taken into careful consideration.</p>
+</div>
 </div>
 <div class="section" id="debugging">
 <h2>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
@@ -274,8 +284,8 @@ make use of include:</p>
 <div class="section" id="debugging-github-actions">
 <h2>Debugging GitHub Actions<a class="headerlink" href="#debugging-github-actions" title="Permalink to this headline">¶</a></h2>
 <p>You can insert the following step to debug your workflow:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span>  <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Setup tmate session</span>
-    <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mxschmitt/action-tmate@v2</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Setup tmate session</span>
+  <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mxschmitt/action-tmate@v2</span>
 </pre></div>
 </div>
 <p>It will print a command that you can use to SSH into the runner.</p>
