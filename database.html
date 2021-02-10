@@ -567,7 +567,6 @@ have access, raise an AccessError.</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">python_type</span></code></dt><dd><p>Return the Python type object expected to be returned by instances of this type, if known.</p>
 </dd>
-<dt><strong>sort_key_function</strong></dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -579,13 +578,13 @@ have access, raise an AccessError.</p>
 </colgroup>
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Comparator</span></code>(expr)</p></td>
-<td><p>Define comparison operations for <code class="xref py py-class docutils literal notranslate"><span class="pre">_types.ARRAY</span></code>.</p></td>
+<td><p>Define comparison operations for <code class="xref py py-class docutils literal notranslate"><span class="pre">ARRAY</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">adapt</span></code>(cls, **kw)</p></td>
 <td><p>Produce an “adapted” form of this type, given an “impl” class to work with.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.ArrayOfEnum.bind_expression" title="skyportal.models.ArrayOfEnum.bind_expression"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bind_expression</span></code></a>(bindvalue)</p></td>
-<td><p>Given a bind value (i.e.</p></td>
+<td><p>“Given a bind value (i.e.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bind_processor</span></code>(dialect)</p></td>
 <td><p>Return a conversion function for processing bind values.</p></td>
@@ -645,7 +644,7 @@ have access, raise an AccessError.</p>
 <dl class="py method">
 <dt id="skyportal.models.ArrayOfEnum.bind_expression">
 <code class="sig-name descname">bind_expression</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">bindvalue</span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.ArrayOfEnum.bind_expression" title="Permalink to this definition">¶</a></dt>
-<dd><p>Given a bind value (i.e. a <code class="xref py py-class docutils literal notranslate"><span class="pre">BindParameter</span></code> instance),
+<dd><p>“Given a bind value (i.e. a <code class="xref py py-class docutils literal notranslate"><span class="pre">BindParameter</span></code> instance),
 return a SQL expression in its place.</p>
 <p>This is typically a SQL function that wraps the existing bound
 parameter within the statement.  It is used for special data types
@@ -2140,7 +2139,6 @@ performing spectroscopy.</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">python_type</span></code></dt><dd><p>Return the Python type object expected to be returned by instances of this type, if known.</p>
 </dd>
-<dt><strong>sort_key_function</strong></dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -2158,7 +2156,7 @@ performing spectroscopy.</p>
 <td><p>Produce an “adapted” form of this type, given an “impl” class to work with.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bind_expression</span></code>(bindparam)</p></td>
-<td><p>Given a bind value (i.e.</p></td>
+<td><p>“Given a bind value (i.e.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bind_processor</span></code>(dialect)</p></td>
 <td><p>Provide a bound value processing function for the given <code class="xref py py-class docutils literal notranslate"><span class="pre">Dialect</span></code>.</p></td>
@@ -5201,7 +5199,6 @@ multiple Roles.</p>
 </dd>
 <dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">python_type</span></code></dt><dd><p>Return the Python type object expected to be returned by instances of this type, if known.</p>
 </dd>
-<dt><strong>sort_key_function</strong></dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -5219,7 +5216,7 @@ multiple Roles.</p>
 <td><p>Produce an “adapted” form of this type, given an “impl” class to work with.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bind_expression</span></code>(bindparam)</p></td>
-<td><p>Given a bind value (i.e.</p></td>
+<td><p>“Given a bind value (i.e.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bind_processor</span></code>(dialect)</p></td>
 <td><p>Provide a bound value processing function for the given <code class="xref py py-class docutils literal notranslate"><span class="pre">Dialect</span></code>.</p></td>
