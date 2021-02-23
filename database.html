@@ -4925,6 +4925,99 @@ the mapped class directly and returns mapped instances.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt id="baselayer.app.models.CronJobRun">
+<em class="property">class </em><code class="sig-prename descclassname">baselayer.app.models.</code><code class="sig-name descname">CronJobRun</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.CronJobRun" title="Permalink to this definition">¶</a></dt>
+<dd><p>A record of a run (or attempted run) of a cron job.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
+</dd>
+<dt><strong>exit_status</strong></dt><dd><p>Exit status of cron job subprocess (e.g. 0 or 1).</p>
+</dd>
+<dt><strong>id</strong></dt><dd><p>Unique object identifier.</p>
+</dd>
+<dt><strong>modified</strong></dt><dd><p>UTC time the object’s row was last modified in the database.</p>
+</dd>
+<dt><strong>output</strong></dt><dd><p>Cron job’s subprocess output, or exception string.</p>
+</dd>
+<dt><strong>script</strong></dt><dd><p>Name of script being run.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
+<td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_accessible_by</span></code>(cls_id, user_or_token)</p></td>
+<td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
+<td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_records_accessible_by</span></code>(user_or_token[, …])</p></td>
+<td><p>Retrieve all database records accessible by the specified User or token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_accessible_by</span></code>(user_or_token[, mode])</p></td>
+<td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
+<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
+<td><p>Return the query for all database records accessible by the specified User or token.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<td><p>Serialize this object to a Python dictionary.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt id="baselayer.app.models.CronJobRun.created_at">
+<code class="sig-name descname">created_at</code><a class="headerlink" href="#baselayer.app.models.CronJobRun.created_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC time of insertion of object’s row into the database.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="baselayer.app.models.CronJobRun.exit_status">
+<code class="sig-name descname">exit_status</code><a class="headerlink" href="#baselayer.app.models.CronJobRun.exit_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Exit status of cron job subprocess (e.g. 0 or 1).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="baselayer.app.models.CronJobRun.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#baselayer.app.models.CronJobRun.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unique object identifier.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="baselayer.app.models.CronJobRun.modified">
+<code class="sig-name descname">modified</code><a class="headerlink" href="#baselayer.app.models.CronJobRun.modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC time the object’s row was last modified in the database.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="baselayer.app.models.CronJobRun.output">
+<code class="sig-name descname">output</code><a class="headerlink" href="#baselayer.app.models.CronJobRun.output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cron job’s subprocess output, or exception string.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="baselayer.app.models.CronJobRun.script">
+<code class="sig-name descname">script</code><a class="headerlink" href="#baselayer.app.models.CronJobRun.script" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of script being run.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt id="baselayer.app.models.JoinModel">
 <em class="property">class </em><code class="sig-prename descclassname">baselayer.app.models.</code><code class="sig-name descname">JoinModel</code><a class="headerlink" href="#baselayer.app.models.JoinModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dummy class that join_models subclass. Provides an easy way to
