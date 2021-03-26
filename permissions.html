@@ -105,6 +105,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#rls-architecture-and-design">RLS Architecture and Design</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#create-a-new-policy">Create a New Policy</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#restricted">Restricted</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
@@ -234,6 +235,10 @@
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">query_accessible_rows</span></code> constructs (but does not execute) a query against the table that <code class="docutils literal notranslate"><span class="pre">cls</span></code> is mapped to. The query returns the rows of the <code class="docutils literal notranslate"><span class="pre">cls</span></code> table that <code class="docutils literal notranslate"><span class="pre">user_or_token</span></code> could access.</p>
 <p>To construct a new policy, subclass <code class="docutils literal notranslate"><span class="pre">UserAccessControl</span></code> and override <code class="docutils literal notranslate"><span class="pre">query_accessible_rows</span></code>.</p>
+<div class="section" id="restricted">
+<h3>Restricted<a class="headerlink" href="#restricted" title="Permalink to this headline">¶</a></h3>
+<p>Baselayer provides a <a class="reference external" href="https://github.com/cesium-ml/baselayer/blob/master/app/models.py#L579">restricted</a> policy that grants record access only to users or tokens that have the <code class="docutils literal notranslate"><span class="pre">System</span> <span class="pre">admin</span></code> ACL. <strong>Restricted records are not restricted to all users.</strong></p>
+</div>
 <div class="section" id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
 <p>The following <code class="docutils literal notranslate"><span class="pre">public</span></code> policy will grant record access to any user:</p>

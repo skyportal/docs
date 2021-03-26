@@ -4656,6 +4656,17 @@ any of a User or Token owner’s accessible Groups.</p>
 </dl>
 </dd></dl>
 
+<dl class="py function">
+<dt id="skyportal.models.taxonomy_update_delete_logic">
+<code class="sig-prename descclassname"><span class="pre">skyportal.models.</span></code><code class="sig-name descname"><span class="pre">taxonomy_update_delete_logic</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.taxonomy_update_delete_logic" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function generates the query for taxonomies that the current user
+can update or delete. If the querying user doesn’t have System admin or
+Delete taxonomy acl, then no taxonomies are accessible to that user under
+this policy . Otherwise, the only taxonomies that the user can delete are
+those that have no associated classifications, preventing classifications
+from getting deleted in a cascade when their parent taxonomy is deleted.</p>
+</dd></dl>
+
 <dl class="py attribute">
 <dt id="skyportal.models.token_groups">
 <code class="sig-prename descclassname"><span class="pre">skyportal.models.</span></code><code class="sig-name descname"><span class="pre">token_groups</span></code><a class="headerlink" href="#skyportal.models.token_groups" title="Permalink to this definition">¶</a></dt>
@@ -4674,6 +4685,13 @@ For System Admins, this corresponds to all Groups.</p>
 <dt id="skyportal.models.user_or_token_accessible_streams">
 <code class="sig-prename descclassname"><span class="pre">skyportal.models.</span></code><code class="sig-name descname"><span class="pre">user_or_token_accessible_streams</span></code><a class="headerlink" href="#skyportal.models.user_or_token_accessible_streams" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the list of Streams a User or Token has access to.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="skyportal.models.user_update_delete_logic">
+<code class="sig-prename descclassname"><span class="pre">skyportal.models.</span></code><code class="sig-name descname"><span class="pre">user_update_delete_logic</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.user_update_delete_logic" title="Permalink to this definition">¶</a></dt>
+<dd><p>A user can update or delete themselves, and a super admin can delete
+or update any user.</p>
 </dd></dl>
 
 <span class="target" id="module-baselayer.app.models"></span><dl class="py class">
@@ -5014,6 +5032,55 @@ the mapped class directly and returns mapped instances.</p>
 <dt id="baselayer.app.models.CronJobRun.script">
 <code class="sig-name descname"><span class="pre">script</span></code><a class="headerlink" href="#baselayer.app.models.CronJobRun.script" title="Permalink to this definition">¶</a></dt>
 <dd><p>Name of script being run.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="baselayer.app.models.CustomUserAccessControl">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></code><code class="sig-name descname"><span class="pre">CustomUserAccessControl</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query_or_query_generator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.CustomUserAccessControl" title="Permalink to this definition">¶</a></dt>
+<dd><p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_cls_for_attributes</span></code>(cls, attrs)</p></td>
+<td><p>Check that a target class has the specified attributes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#baselayer.app.models.CustomUserAccessControl.query_accessible_rows" title="baselayer.app.models.CustomUserAccessControl.query_accessible_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_accessible_rows</span></code></a>(cls, user_or_token[, …])</p></td>
+<td><p>Construct a Query object that, when executed, returns the rows of a specified table that are accessible to a specified user or token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_id_from_user_or_token</span></code>(user_or_token)</p></td>
+<td><p>Return the user_id associated with a specified User or Token object.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt id="baselayer.app.models.CustomUserAccessControl.query_accessible_rows">
+<code class="sig-name descname"><span class="pre">query_accessible_rows</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.CustomUserAccessControl.query_accessible_rows" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a Query object that, when executed, returns the rows of a
+specified table that are accessible to a specified user or token.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>cls: `baselayer.app.models.DeclarativeMeta`</strong></dt><dd><p>The mapped class of the target table.</p>
+</dd>
+<dt><strong>user_or_token: `baselayer.app.models.User` or `baselayer.app.models.Token`</strong></dt><dd><p>The User or Token to check.</p>
+</dd>
+<dt><strong>columns: list of sqlalchemy.Column, optional, default None</strong></dt><dd><p>The columns to retrieve from the target table. If None, queries
+the mapped class directly and returns mapped instances.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>query: sqlalchemy.Query</dt><dd><p>Query for the accessible rows.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
