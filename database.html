@@ -2313,10 +2313,6 @@ positional uncertainties, name, and redshift.</p>
 </dd>
 <dt><strong>is_roid</strong></dt><dd><p>Boolean indicating whether the object is a moving object.</p>
 </dd>
-<dt><strong>last_detected_at</strong></dt><dd><p>UTC ISO date at which the object was last detected above a given S/N (3.0 by default).</p>
-</dd>
-<dt><strong>last_detected_mag</strong></dt><dd><p>Magnitude at which the object was last detected above a given S/N (3.0 by default).</p>
-</dd>
 <dt><a class="reference internal" href="#skyportal.models.Obj.luminosity_distance" title="skyportal.models.Obj.luminosity_distance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">luminosity_distance</span></code></a></dt><dd><p>The luminosity distance in Mpc, using either DM or distance data in the altdata fields or using the cosmology/redshift.</p>
 </dd>
 <dt><strong>mag_nearest_source</strong></dt><dd><p>Magnitude of the nearest Obj [AB].</p>
@@ -2330,10 +2326,6 @@ positional uncertainties, name, and redshift.</p>
 <dt><strong>origin</strong></dt><dd><p>Origin of the object.</p>
 </dd>
 <dt><a class="reference internal" href="#skyportal.models.Obj.panstarrs_url" title="skyportal.models.Obj.panstarrs_url"><code class="xref py py-obj docutils literal notranslate"><span class="pre">panstarrs_url</span></code></a></dt><dd><p>Construct URL for public PanSTARRS-1 (PS1) cutout.</p>
-</dd>
-<dt><strong>peak_detected_at</strong></dt><dd><p>UTC ISO date at which the object was detected at peak magnitude above a given S/N (3.0 by default).</p>
-</dd>
-<dt><strong>peak_detected_mag</strong></dt><dd><p>Peak magnitude at which the object was detected above a given S/N (3.0 by default).</p>
 </dd>
 <dt><strong>photometry</strong></dt><dd><p>Photometry of the object.</p>
 </dd>
@@ -2414,6 +2406,18 @@ positional uncertainties, name, and redshift.</p>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
 <td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.last_detected_at" title="skyportal.models.Obj.last_detected_at"><code class="xref py py-obj docutils literal notranslate"><span class="pre">last_detected_at</span></code></a>(user)</p></td>
+<td><p>UTC ISO date at which the object was last detected above a given S/N (3.0 by default).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.last_detected_mag" title="skyportal.models.Obj.last_detected_mag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">last_detected_mag</span></code></a>(user)</p></td>
+<td><p>Magnitude at which the object was last detected above a given S/N (3.0 by default).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.peak_detected_at" title="skyportal.models.Obj.peak_detected_at"><code class="xref py py-obj docutils literal notranslate"><span class="pre">peak_detected_at</span></code></a>(user)</p></td>
+<td><p>UTC ISO date at which the object was detected at peak magnitude above a given S/N (3.0 by default).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.peak_detected_mag" title="skyportal.models.Obj.peak_detected_mag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">peak_detected_mag</span></code></a>(user)</p></td>
+<td><p>Peak magnitude at which the object was detected above a given S/N (3.0 by default).</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -2753,15 +2757,15 @@ with any of the User or Token owner’s accessible Groups.</p>
 <dd><p>Boolean indicating whether the object is a moving object.</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="py method">
 <dt id="skyportal.models.Obj.last_detected_at">
-<code class="sig-name descname"><span class="pre">last_detected_at</span></code><a class="headerlink" href="#skyportal.models.Obj.last_detected_at" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">last_detected_at</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.last_detected_at" title="Permalink to this definition">¶</a></dt>
 <dd><p>UTC ISO date at which the object was last detected above a given S/N (3.0 by default).</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="py method">
 <dt id="skyportal.models.Obj.last_detected_mag">
-<code class="sig-name descname"><span class="pre">last_detected_mag</span></code><a class="headerlink" href="#skyportal.models.Obj.last_detected_mag" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">last_detected_mag</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.last_detected_mag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Magnitude at which the object was last detected above a given S/N (3.0 by default).</p>
 </dd></dl>
 
@@ -2816,15 +2820,15 @@ best we can do is request a page that contains a link to the image we
 want (in this case a combination of the g/r/i filters).</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="py method">
 <dt id="skyportal.models.Obj.peak_detected_at">
-<code class="sig-name descname"><span class="pre">peak_detected_at</span></code><a class="headerlink" href="#skyportal.models.Obj.peak_detected_at" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">peak_detected_at</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.peak_detected_at" title="Permalink to this definition">¶</a></dt>
 <dd><p>UTC ISO date at which the object was detected at peak magnitude above a given S/N (3.0 by default).</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="py method">
 <dt id="skyportal.models.Obj.peak_detected_mag">
-<code class="sig-name descname"><span class="pre">peak_detected_mag</span></code><a class="headerlink" href="#skyportal.models.Obj.peak_detected_mag" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">peak_detected_mag</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.peak_detected_mag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Peak magnitude at which the object was detected above a given S/N (3.0 by default).</p>
 </dd></dl>
 
