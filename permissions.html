@@ -4,7 +4,8 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Access controls &mdash; skyportal 0.9.dev0 documentation</title>
@@ -183,9 +184,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="access-controls">
+  <section id="access-controls">
 <h1>Access controls<a class="headerlink" href="#access-controls" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Astronomical data is often subject to complex data rights policies. As a data platform designed to ingest and serve data from multiple experiments and groups, each potentially with different access policies, SkyPortal must be able to enforce arbitrary logic governing who can see, interact with, and modify data. SkyPortal enforces such policies using a custom row-level security (RLS) framework in the API layer.</p>
 <p>RLS allows SkyPortal developers to define policies that restrict, with row- and user-level granularity, which rows of a table (e.g., photometry, spectra, groups, followup requests, data streams, etc.) a user can read, update, create, and delete. SkyPortal uses baselayer’s ORM-based framework for RLS within API transactions. With baselayer’s RLS framework, SkyPortal developers can</p>
@@ -198,14 +199,14 @@
 <li><p>Implement different policies for different types of access on a single type of record</p></li>
 </ul>
 <p><strong>Note:</strong> Although SkyPortal uses PostgreSQL as the database backend, SkyPortal does not use PostgreSQL’s RLS implementation for row-level security.</p>
-</div>
-<div class="section" id="rls-architecture-and-design">
+</section>
+<section id="rls-architecture-and-design">
 <h2>RLS Architecture and Design<a class="headerlink" href="#rls-architecture-and-design" title="Permalink to this headline">¶</a></h2>
 <p>In SkyPortal, RLS policies are defined on SQLAlchemy mapped classes. Each class has a single policy for each of the create, delete, update, and read access modes. Records are read- and create-public by default, and update- and delete-restricted (i.e., only accessible to users with the “System admin” ACL) by default. Join table classes are also update- and delete-restricted by default, but they can (by default) be created or read by any user that can read both their left and right records. These defaults can be overridden on any mapped class.</p>
 <p>When an API handler brings an instance of a mapped class into the session, either by a database query or by creating a new instance within the handler and adding it to the session, the SQLalchemy ORM tracks changes to the instance’s state. At the end of a transaction, if the handler calls <code class="docutils literal notranslate"><span class="pre">verify_and_commit</span></code>, the RLS permission checker will introspect the database session and get the sets of records that were read, updated, deleted, or created during the current transaction. It will then iterate through each of these collections and check that every record was accessed in an allowable way. If it encounters any permissions violations during this process, it causes the handler to rollback the transaction and return an HTTP status code of 400 with a message that identifies the specific row where an access policy was violated. If no access policies are violated, then the transaction will finish successfully.</p>
 <p>This design ensures that every object pulled into the handler’s session during an API transaction has its access policy checked in a consistent way, automatically preventing leaks of sensitive information to the end user. In most cases, the developer only needs to define a policy on a mapped class, then call <code class="docutils literal notranslate"><span class="pre">verify_and_commit</span></code> at the end of an API handler call to ensure that the policy is applied.</p>
-</div>
-<div class="section" id="create-a-new-policy">
+</section>
+<section id="create-a-new-policy">
 <h2>Create a New Policy<a class="headerlink" href="#create-a-new-policy" title="Permalink to this headline">¶</a></h2>
 <p>Policies are instances of  <code class="docutils literal notranslate"><span class="pre">UserAccessControl</span></code>  defined in baselayer/app/models.py. The only method of <code class="docutils literal notranslate"><span class="pre">UserAccessControl</span></code> that subclasses must provide is <code class="docutils literal notranslate"><span class="pre">query_accessible_rows</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">UserAccessControl</span><span class="p">:</span>
@@ -235,11 +236,11 @@
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">query_accessible_rows</span></code> constructs (but does not execute) a query against the table that <code class="docutils literal notranslate"><span class="pre">cls</span></code> is mapped to. The query returns the rows of the <code class="docutils literal notranslate"><span class="pre">cls</span></code> table that <code class="docutils literal notranslate"><span class="pre">user_or_token</span></code> could access.</p>
 <p>To construct a new policy, subclass <code class="docutils literal notranslate"><span class="pre">UserAccessControl</span></code> and override <code class="docutils literal notranslate"><span class="pre">query_accessible_rows</span></code>.</p>
-<div class="section" id="restricted">
+<section id="restricted">
 <h3>Restricted<a class="headerlink" href="#restricted" title="Permalink to this headline">¶</a></h3>
 <p>Baselayer provides a <a class="reference external" href="https://github.com/cesium-ml/baselayer/blob/master/app/models.py#L579">restricted</a> policy that grants record access only to users or tokens that have the <code class="docutils literal notranslate"><span class="pre">System</span> <span class="pre">admin</span></code> ACL. <strong>Restricted records are not restricted to all users.</strong></p>
-</div>
-<div class="section" id="examples">
+</section>
+<section id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
 <p>The following <code class="docutils literal notranslate"><span class="pre">public</span></code> policy will grant record access to any user:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
@@ -293,17 +294,17 @@
 <span class="p">)</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="binding-policies-to-classes">
+</section>
+</section>
+<section id="binding-policies-to-classes">
 <h2>Binding Policies to Classes<a class="headerlink" href="#binding-policies-to-classes" title="Permalink to this headline">¶</a></h2>
 <p>To bind a policy to a class, set the <code class="docutils literal notranslate"><span class="pre">create</span></code>, <code class="docutils literal notranslate"><span class="pre">read</span></code>, <code class="docutils literal notranslate"><span class="pre">update</span></code>, or <code class="docutils literal notranslate"><span class="pre">delete</span></code> attribute of the class to the policy, depending on which access mode you want the policy to apply to:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Spectrum</span><span class="o">.</span><span class="n">delete</span> <span class="o">=</span> <span class="n">accessible_by_owner</span>
 </pre></div>
 </div>
 <p>The above will ensure that only the owner of a spectrum (or anyone with the “System admin” ACL) can delete the spectrum.</p>
-</div>
-<div class="section" id="convenience-methods">
+</section>
+<section id="convenience-methods">
 <h2>Convenience Methods<a class="headerlink" href="#convenience-methods" title="Permalink to this headline">¶</a></h2>
 <p>Instances of <code class="docutils literal notranslate"><span class="pre">Base</span></code> provide convenience methods to (a) check if an instance of a mapped class is accessible to a specified user, (b) retrieve specific records of a mapped class (identified by a primary key), if they are accessible by a specified user, otherwise raise an AccessError (c) retrieve all records of a mapped class accessible to a specified user, and (d) generate a query object that returns records in a table that are accessible to a given user:</p>
 <p>(a) Can the <code class="docutils literal notranslate"><span class="pre">User</span></code> <code class="docutils literal notranslate"><span class="pre">user</span></code> read the <code class="docutils literal notranslate"><span class="pre">Spectrum</span></code> <code class="docutils literal notranslate"><span class="pre">spectrum</span></code>?</p>
@@ -328,12 +329,12 @@ with a signal-to-noise ratio of at least 10:</p>
 <span class="n">filtered_deletable_query</span> <span class="o">=</span> <span class="n">deletable_phot_query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Photometry</span><span class="o">.</span><span class="n">snr</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="enforcing-permissions-in-handlers">
+</section>
+<section id="enforcing-permissions-in-handlers">
 <h2>Enforcing Permissions in Handlers<a class="headerlink" href="#enforcing-permissions-in-handlers" title="Permalink to this headline">¶</a></h2>
 <p>Calling <code class="docutils literal notranslate"><span class="pre">self.verify_and_commit()</span></code> within a SkyPortal API handler will trigger the RLS permission checker to introspect the current database session and verify that all of the records it currently is tracking are being accessed in an allowable way.  If it encounters any permissions violations during this process, it causes the handler to rollback the transaction and return an HTTP status code of 400 with a message that identifies the specific row where an access policy was violated. If no access policies are violated, then the current database transaction will be committed.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">self.verify_and_commit()</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">called</span> <span class="pre">in</span> <span class="pre">an</span> <span class="pre">API</span> <span class="pre">handler,</span> <span class="pre">the</span> <span class="pre">handler</span> <span class="pre">will</span> <span class="pre">not</span> <span class="pre">automatically</span> <span class="pre">check</span> <span class="pre">for</span> <span class="pre">permissions</span> <span class="pre">violations.</span> <span class="pre">The</span> <span class="pre">best</span> <span class="pre">practice</span> <span class="pre">is</span> <span class="pre">to</span> <span class="pre">call</span> </code>self.verify_and_commit()<code class="docutils literal notranslate"><span class="pre">at</span> <span class="pre">the</span> <span class="pre">end</span> <span class="pre">of</span> <span class="pre">a</span> <span class="pre">handler's</span> <span class="pre">transaction,</span> <span class="pre">immediately</span> <span class="pre">before</span></code>self.success<code class="docutils literal notranslate"><span class="pre">or</span></code>self.error`.</p>
-<div class="section" id="further-examples-of-policies">
+<section id="further-examples-of-policies">
 <h3>Further examples of policies:<a class="headerlink" href="#further-examples-of-policies" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/skyportal/skyportal/blob/c7ab07bd04d26e9f66938a05b4c70172a9364c82/skyportal/models.py#L1998">Policy requiring that a user be in a comment’s groups and able to read the comment’s obj to read the comment</a></p></li>
@@ -345,8 +346,8 @@ corresponding taxonomy and Obj</a></p></li>
 to the group if and only if the new user has access to all of the group’s
 streams</a></p></li>
 </ul>
-</div>
-<div class="section" id="examples-of-permissions-being-checked-in-an-api-handler">
+</section>
+<section id="examples-of-permissions-being-checked-in-an-api-handler">
 <h3>Examples of permissions being checked in an API handler:<a class="headerlink" href="#examples-of-permissions-being-checked-in-an-api-handler" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/skyportal/skyportal/blob/c7ab07bd04d26e9f66938a05b4c70172a9364c82/skyportal/handlers/api/comment.py#L51">Pattern for retrieving a specified record(s) if a user has access, otherwise
@@ -355,9 +356,9 @@ erroring</a></p></li>
 erroring if any violations are detected</a></p></li>
 <li><p><a class="reference external" href="https://github.com/skyportal/skyportal/pull/1801/files#diff-0200612f282483e1172207de90a4db4788b3ca5ce55ab5105938d876e11eb2e0R1562">Pattern for constructing a query for all records accessible to a user, then filtering that query</a></p></li>
 </ul>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>

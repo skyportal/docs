@@ -1,0 +1,297 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Advanced usage &mdash; skyportal 0.9.dev0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/output_cells.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> skyportal
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.9.dev0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="design.html">System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Developer notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_loader.html">Data loader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_features.html">Adding new features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="styling.html">Styling components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migrations.html">Database migrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions.html">Access controls</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">skyportal</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Advanced usage</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <section id="advanced-usage">
+<h1>Advanced usage<a class="headerlink" href="#advanced-usage" title="Permalink to this headline">¶</a></h1>
+<section id="posting-color-magnitude-data-to-generate-an-hr-diagram">
+<h2>Posting color-magnitude data to generate an HR diagram<a class="headerlink" href="#posting-color-magnitude-data-to-generate-an-hr-diagram" title="Permalink to this headline">¶</a></h2>
+<p>For stellar targets we are interested in showing the HR diagram
+based on the color-magnitude data from a cross match to, e.g., the Gaia catalog.
+Currently we support only Gaia inputs on the front-end,
+but in a future release we may expand the notion of the HR diagram
+to arbitrary catalogs.</p>
+<p>This is done by posting an <code class="docutils literal notranslate"><span class="pre">Annotation</span></code> to the source, with correctly formatted data.
+If at least one properly formatted <code class="docutils literal notranslate"><span class="pre">Annotation</span></code> with Gaia color-magnitude data
+exists on the source, an HR diagram will be rendered for it.</p>
+<p>First let’s see how to post an <code class="docutils literal notranslate"><span class="pre">Annotation</span></code> using the <code class="docutils literal notranslate"><span class="pre">requests</span></code> package.
+Here is a working example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:5000&#39;</span>
+<span class="n">token</span> <span class="o">=</span> <span class="s1">&#39;239868fa-8307-41ad-983f-4a8180609df6&#39;</span>
+<span class="n">header</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;token </span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;content_type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">}</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;obj_id&#39;</span><span class="p">:</span> <span class="s1">&#39;2021example&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;origin&#39;</span><span class="p">:</span> <span class="s1">&#39;cross_match_robot&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;Gaia&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Mag_G&#39;</span><span class="p">,</span> <span class="mf">10.2</span><span class="p">,</span>
+                 <span class="s1">&#39;Mag_Bp&#39;</span><span class="p">:</span> <span class="mf">9.8</span><span class="p">,</span>
+                 <span class="s1">&#39;Mag_Rp&#39;</span><span class="p">:</span> <span class="mf">10.5</span><span class="p">,</span>
+                 <span class="s1">&#39;Plx&#39;</span><span class="p">:</span> <span class="mf">8.5</span>
+                 <span class="p">}</span>
+        <span class="p">}</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+      <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">url</span><span class="si">}</span><span class="s1">/api/annotation&#39;</span><span class="p">,</span>
+      <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">,</span>
+      <span class="n">params</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span>
+      <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s look at this line by line.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">url</span></code> should point to the SkyPortal instance,
+in this case running on a local machine.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">token</span></code> should be generated for your user
+through the profile page.
+The token must have the ACL to annotate.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">header</span></code> is used to pass along the SkyPortal authentication token.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">data</span></code> field is a dictionary that contains
+information to be posted to the database.
+In this case the data must be formatted
+to comply with the <code class="docutils literal notranslate"><span class="pre">Annotation</span></code> API,
+namely it must have a valid <code class="docutils literal notranslate"><span class="pre">obj_id</span></code>
+of an existing object that is accessible to the user,
+it must contain a non-empty string for the <code class="docutils literal notranslate"><span class="pre">origin</span></code>
+and it should contain the <code class="docutils literal notranslate"><span class="pre">Annotation</span></code> data,
+that is a dictionary with arbitrary entries.</p>
+<p>In general, the <code class="docutils literal notranslate"><span class="pre">origin</span></code> field is used to
+enumerate the different services that would
+annotate each source.
+Each origin can only post a single <code class="docutils literal notranslate"><span class="pre">Annotation</span></code>
+to each source, but that <code class="docutils literal notranslate"><span class="pre">Annotation</span></code> can contain arbitrary data.</p>
+<p>In the case of the color-magnitude plot,
+the system only recognizes annotations
+with a specific schema:</p>
+<ul class="simple">
+<li><p>One of the keys in the <code class="docutils literal notranslate"><span class="pre">Annotation</span></code> data must be named <code class="docutils literal notranslate"><span class="pre">Gaia</span></code>.</p></li>
+<li><p>The value of that key must be a dictionary.</p></li>
+<li><p>That dictionary must contain the following entries:</p></li>
+<li><p>`Mag_G’, ‘Mag_Bp’, ‘Mag_Rp’, ‘Plx’.</p></li>
+<li><p>All these names (including the catalog name) may be made customizable
+in a future release. Currently, the HR diagram is drawn only for Gaia data.</p></li>
+<li><p>The names are searched ignoring case, and removing underscores.
+So, for example, the dictionary can contain <code class="docutils literal notranslate"><span class="pre">mag_g</span></code> or <code class="docutils literal notranslate"><span class="pre">MagG</span></code>,
+and would still be accepted as data for an HR diagram.
+Please do not include multiple data keys with indistinguishable names,
+i.e., both <code class="docutils literal notranslate"><span class="pre">mag_g</span></code> and <code class="docutils literal notranslate"><span class="pre">Mag_G</span></code> in the same <code class="docutils literal notranslate"><span class="pre">Annotation</span></code> as this will
+cause undefined behavior.</p></li>
+</ul>
+<p>Finally, the return value <code class="docutils literal notranslate"><span class="pre">response</span></code> from the request
+should contain a <code class="docutils literal notranslate"><span class="pre">status==200</span></code> and a data dictionary
+with the data that was posted.
+If the posting was unsuccessful,
+the status would be 400.</p>
+</section>
+</section>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020, The SkyPortal Team.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
