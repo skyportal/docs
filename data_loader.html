@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Data loader &mdash; skyportal 0.9.dev0 documentation</title>
@@ -173,7 +172,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="data-loader">
+  <div class="section" id="data-loader">
 <h1>Data loader<a class="headerlink" href="#data-loader" title="Permalink to this headline">¶</a></h1>
 <p>To populate SkyPortal with initial data, use <code class="docutils literal notranslate"><span class="pre">tools/data_loader.py</span></code>.
 This is also used when doing <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">load_seed_data</span></code> and <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">load_demo_data</span></code>.</p>
@@ -181,7 +180,7 @@ This is also used when doing <code class="docutils literal notranslate"><span cl
 matches the SkyPortal API: each entry corresponds to an API endpoint,
 and contains a list of objects to post (see <code class="docutils literal notranslate"><span class="pre">data/db_demo.yaml</span></code> for an
 example).</p>
-<section id="references">
+<div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <p>The attributes of a posted object can be saved as references:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span><span class="p">:</span>
@@ -212,8 +211,8 @@ This can now be used when, e.g., posting a telescope:</p>
 </pre></div>
 </div>
 <p>Here, the endpoint will become, e.g., <code class="docutils literal notranslate"><span class="pre">groups/6/users</span></code>.</p>
-</section>
-<section id="files">
+</div>
+<div class="section" id="files">
 <h2>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h2>
 <p>Lists of objects to post can be loaded through a top-level file entry:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">telescope</span><span class="p">:</span>
@@ -241,8 +240,8 @@ posted object:</p>
 <p>Here, <code class="docutils literal notranslate"><span class="pre">phot.csv</span></code> has columns <code class="docutils literal notranslate"><span class="pre">filter</span></code>, <code class="docutils literal notranslate"><span class="pre">mjd</span></code>, etc., so each of those
 would become an entry in the posted object, each with a list of
 values.</p>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>

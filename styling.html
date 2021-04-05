@@ -4,8 +4,7 @@
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Styling components &mdash; skyportal 0.9.dev0 documentation</title>
@@ -179,7 +178,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <section id="styling-components">
+  <div class="section" id="styling-components">
 <h1>Styling components<a class="headerlink" href="#styling-components" title="Permalink to this headline">¶</a></h1>
 <p>SkyPortal is built on top of <a class="reference external" href="https://material-ui.com/">Material UI</a>
 (MUI).  We have evaluated several styling systems, including inline
@@ -225,19 +224,19 @@ Sheets) and returns a CSS provider <a class="reference external" href="https://r
 <a class="reference external" href="http://lesscss.org/features/#parent-selectors-feature"><code class="docutils literal notranslate"><span class="pre">&amp;</span></code> selector</a>:
 <code class="docutils literal notranslate"><span class="pre">&amp;p</span></code> is a <code class="docutils literal notranslate"><span class="pre">p</span></code> element on <code class="docutils literal notranslate"><span class="pre">root</span></code> here.</p>
 <p>You can also <a class="reference external" href="https://material-ui.com/styles/basics/#adapting-based-on-props">parameterize <code class="docutils literal notranslate"><span class="pre">makeStyles</span></code></a>.</p>
-<section id="components">
+<div class="section" id="components">
 <h2>Components<a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h2>
 <p>Please refer to the <a class="reference external" href="https://material-ui.com/components/box/">MUI component
 docs</a> for available
 components and their props and CSS styles.</p>
-</section>
-<section id="sizes">
+</div>
+<div class="section" id="sizes">
 <h2>Sizes<a class="headerlink" href="#sizes" title="Permalink to this headline">¶</a></h2>
 <p>All sizes should be specified using <code class="docutils literal notranslate"><span class="pre">rem</span></code>, which stands for “root
 element”—i.e., <code class="docutils literal notranslate"><span class="pre">1.5rem</span></code> would be 1.5 times the size of the font-size
 specified in the root HTML element.</p>
-</section>
-<section id="style-props-on-box">
+</div>
+<div class="section" id="style-props-on-box">
 <h2>Style props on Box<a class="headerlink" href="#style-props-on-box" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">makeStyles</span></code> is preferred in general, but for simple formatting you
 may use <a class="reference external" href="https://material-ui.com/system/basics/#all-inclusive">style
@@ -247,8 +246,8 @@ containers:</p>
 </pre></div>
 </div>
 <p>See also “Grid system” below.</p>
-</section>
-<section id="responsive-design">
+</div>
+<div class="section" id="responsive-design">
 <h2>Responsive Design<a class="headerlink" href="#responsive-design" title="Permalink to this headline">¶</a></h2>
 <p>MUI uses
 <a class="reference external" href="https://material-ui.com/customization/breakpoints">breakpoints</a>
@@ -280,7 +279,7 @@ and <code class="docutils literal notranslate"><span class="pre">between</span><
 <p>You may customize media-queries using the
 <a class="reference external" href="https://material-ui.com/components/use-media-query"><code class="docutils literal notranslate"><span class="pre">useMediaQuery</span></code></a>
 hook.</p>
-<section id="grid-system">
+<div class="section" id="grid-system">
 <h3>Grid system<a class="headerlink" href="#grid-system" title="Permalink to this headline">¶</a></h3>
 <p>For positioning components on a page, MUI provides a <a class="reference external" href="https://material-ui.com/components/grid/">12-column grid
 layout</a>.</p>
@@ -316,9 +315,9 @@ can be specified.</p>
 <span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span>
 </pre></div>
 </div>
-</section>
-</section>
-<section id="do-s-and-don-ts">
+</div>
+</div>
+<div class="section" id="do-s-and-don-ts">
 <h2>Do’s and don’ts<a class="headerlink" href="#do-s-and-don-ts" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p>Do not use inline styles</p>
@@ -330,8 +329,8 @@ hunt down.</p>
 <p>Inline CSS also does not support media queries for responsive design.</p>
 </li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 
 
            </div>
