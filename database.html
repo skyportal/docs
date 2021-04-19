@@ -4387,6 +4387,13 @@ of any of a User or Token owner’s accessible Groups.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt id="skyportal.models.delete_group_access_logic">
+<code class="sig-prename descclassname"><span class="pre">skyportal.models.</span></code><code class="sig-name descname"><span class="pre">delete_group_access_logic</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.delete_group_access_logic" title="Permalink to this definition">¶</a></dt>
+<dd><p>User can delete a group that is not the sitewide public group, is not
+a single user group, and that they are an admin member of.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt id="skyportal.models.get_candidate_if_readable_by">
 <code class="sig-prename descclassname"><span class="pre">skyportal.models.</span></code><code class="sig-name descname"><span class="pre">get_candidate_if_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_candidate_if_readable_by" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an Obj from the database if the Obj is a Candidate in at least
