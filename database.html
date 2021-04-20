@@ -6306,6 +6306,36 @@ the mapped class directly and returns mapped instances.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt id="baselayer.app.models.init_db">
+<code class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></code><code class="sig-name descname"><span class="pre">init_db</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autoflush</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.init_db" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>engine_args</strong><span class="classifier">dict</span></dt><dd><ul>
+<li><p><cite>pool_size</cite>:
+The number of connections maintained to the DB. Default 5.</p></li>
+<li><p><cite>max_overflow</cite>:
+The number of additional connections that will be made as needed.</p>
+<blockquote>
+<div><p>Once these extra connections have been used, they are discarded.</p>
+</div></blockquote>
+<p>Default 10.</p>
+</li>
+<li><dl class="simple">
+<dt><cite>pool_recycle</cite>:</dt><dd><p>Prevent the pool from using any connection that is older than this
+(specified in seconds).
+Default 3600.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt id="baselayer.app.models.join_model">
 <code class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></code><code class="sig-name descname"><span class="pre">join_model</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">join_table</span></em>, <em class="sig-param"><span class="pre">model_1</span></em>, <em class="sig-param"><span class="pre">model_2</span></em>, <em class="sig-param"><span class="pre">column_1=None</span></em>, <em class="sig-param"><span class="pre">column_2=None</span></em>, <em class="sig-param"><span class="pre">fk_1='id'</span></em>, <em class="sig-param"><span class="pre">fk_2='id'</span></em>, <em class="sig-param"><span class="pre">base=&lt;class</span> <span class="pre">'sqlalchemy.ext.declarative.api.Base'&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.join_model" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper function to create a join table for a many-to-many relationship.</p>
