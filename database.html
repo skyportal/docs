@@ -305,7 +305,7 @@ the mapped class directly and returns mapped instances.</p>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -439,7 +439,7 @@ with a set of data as JSON</p>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_accessible_by</span></code>(cls_id, user_or_token)</p></td>
 <td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Annotation.get_if_readable_by" title="skyportal.models.Annotation.get_if_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code></a>(ident, user[, options])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_records_accessible_by</span></code>(user_or_token[, …])</p></td>
@@ -449,7 +449,7 @@ with a set of data as JSON</p>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -492,32 +492,6 @@ with a set of data as JSON</p>
 <dt id="skyportal.models.Annotation.data">
 <code class="sig-name descname"><span class="pre">data</span></code><a class="headerlink" href="#skyportal.models.Annotation.data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Searchable data in JSON format</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="skyportal.models.Annotation.get_if_readable_by">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">get_if_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ident</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Annotation.get_if_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return an object from the database if the requesting User or Token
-has access to read the object. If the requesting User or Token does not
-have access, raise an AccessError.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>ident</strong><span class="classifier">integer or string</span></dt><dd><p>Primary key of the requested object.</p>
-</dd>
-<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
-</dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id1"><span class="problematic" id="id2">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>obj</strong><span class="classifier">baselayer.app.models.Base</span></dt><dd><p>The requested entity.</p>
-</dd>
-</dl>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py attribute">
@@ -732,22 +706,19 @@ to return to the user.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Candidate.get_obj_if_readable_by" title="skyportal.models.Candidate.get_obj_if_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_obj_if_readable_by</span></code></a>(user_or_token[, options])</p></td>
-<td><p>Return an Obj from the database if the Obj is a Candidate in at least one of the requesting User or Token owner’s accessible Groups.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_records_accessible_by</span></code>(user_or_token[, …])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Retrieve all database records accessible by the specified User or token.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_accessible_by</span></code>(user_or_token[, mode])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_accessible_by</span></code>(user_or_token[, mode])</p></td>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Candidate.is_readable_by" title="skyportal.models.Candidate.is_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code></a>(user_or_token)</p></td>
-<td><p>Return a boolean indicating whether the Candidate passed the Filter of any of a User or Token owner’s accessible Groups.</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
 <td><p>Serialize this object to a Python dictionary.</p></td>
 </tr>
 </tbody>
@@ -770,58 +741,10 @@ to return to the user.</p>
 <dd><p>ID of the filter the candidate passed</p>
 </dd></dl>
 
-<dl class="py method">
-<dt id="skyportal.models.Candidate.get_obj_if_readable_by">
-<code class="sig-name descname"><span class="pre">get_obj_if_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Candidate.get_obj_if_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return an Obj from the database if the Obj is a Candidate in at least
-one of the requesting User or Token owner’s accessible Groups. If the Obj is not a
-Candidate in one of the User or Token owner’s accessible Groups, raise an AccessError.
-If the Obj does not exist, return <cite>None</cite>.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>obj_id</strong><span class="classifier">integer or string</span></dt><dd><p>Primary key of the Obj.</p>
-</dd>
-<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
-</dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id3"><span class="problematic" id="id4">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl>
-<dt><strong>obj</strong><span class="classifier"><cite>skyportal.models.Obj</cite></span></dt><dd><p>The requested Obj.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py attribute">
 <dt id="skyportal.models.Candidate.id">
 <code class="sig-name descname"><span class="pre">id</span></code><a class="headerlink" href="#skyportal.models.Candidate.id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unique object identifier.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="skyportal.models.Candidate.is_readable_by">
-<code class="sig-name descname"><span class="pre">is_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Candidate.is_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a boolean indicating whether the Candidate passed the Filter
-of any of a User or Token owner’s accessible Groups.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>readable</strong><span class="classifier">bool</span></dt><dd><p>Whether the Candidate is readable by the User or Token owner.</p>
-</dd>
-</dl>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py attribute">
@@ -929,7 +852,7 @@ of any of a User or Token owner’s accessible Groups.</p>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -1102,7 +1025,7 @@ of any of a User or Token owner’s accessible Groups.</p>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -1241,7 +1164,7 @@ of any of a User or Token owner’s accessible Groups.</p>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_accessible_by</span></code>(cls_id, user_or_token)</p></td>
 <td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Comment.get_if_readable_by" title="skyportal.models.Comment.get_if_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code></a>(ident, user[, options])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
 <td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_records_accessible_by</span></code>(user_or_token[, …])</p></td>
@@ -1251,7 +1174,7 @@ of any of a User or Token owner’s accessible Groups.</p>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -1306,32 +1229,6 @@ of any of a User or Token owner’s accessible Groups.</p>
 <dt id="skyportal.models.Comment.ctype">
 <code class="sig-name descname"><span class="pre">ctype</span></code><a class="headerlink" href="#skyportal.models.Comment.ctype" title="Permalink to this definition">¶</a></dt>
 <dd><p>Comment type. Can be one of ‘text’ or ‘redshift’.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="skyportal.models.Comment.get_if_readable_by">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">get_if_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ident</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Comment.get_if_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return an object from the database if the requesting User or Token
-has access to read the object. If the requesting User or Token does not
-have access, raise an AccessError.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>ident</strong><span class="classifier">integer or string</span></dt><dd><p>Primary key of the requested object.</p>
-</dd>
-<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
-</dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id5"><span class="problematic" id="id6">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>obj</strong><span class="classifier">baselayer.app.models.Base</span></dt><dd><p>The requested entity.</p>
-</dd>
-</dl>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py attribute">
@@ -1430,7 +1327,7 @@ with exactly one Group, and a Group may have multiple operational Filters.</p>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -1559,8 +1456,8 @@ robotic instrument.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_accessible_by</span></code>(user_or_token[, mode])</p></td>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.FollowupRequest.is_readable_by" title="skyportal.models.FollowupRequest.is_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code></a>(user_or_token)</p></td>
-<td><p>Return a boolean indicating whether a FollowupRequest belongs to an allocation that is accessible to the given user or token.</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -1580,28 +1477,6 @@ robotic instrument.</p>
 <dt id="skyportal.models.FollowupRequest.id">
 <code class="sig-name descname"><span class="pre">id</span></code><a class="headerlink" href="#skyportal.models.FollowupRequest.id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unique object identifier.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="skyportal.models.FollowupRequest.is_readable_by">
-<code class="sig-name descname"><span class="pre">is_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.FollowupRequest.is_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a boolean indicating whether a FollowupRequest belongs to
-an allocation that is accessible to the given user or token.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>user_or_token: `baselayer.app.models.User` or `baselayer.app.models.Token`</strong></dt><dd><p>The User or Token to check.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>readable: bool</dt><dd><p>Whether the FollowupRequest belongs to an Allocation that is
-accessible to the given user or token.</p>
-</dd>
-</dl>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py attribute">
@@ -1673,7 +1548,7 @@ accessible to the given user or token.</p>
 targets for data sharing requests. `Photometry</cite> and <cite>Spectra</cite> shared with
 a <cite>Group</cite> will be visible to all its members. <cite>Group`s maintain specific
 `Stream</cite> permissions. In order for a <cite>User</cite> to join a <cite>Group</cite>, the <cite>User</cite>
-must have access to all of the <cite>Group</cite>’s data <a href="#id7"><span class="problematic" id="id8">`</span></a>Stream`s.</p>
+must have access to all of the <cite>Group</cite>’s data <a href="#id1"><span class="problematic" id="id2">`</span></a>Stream`s.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
 <dd class="field-odd"><dl class="simple">
@@ -1735,7 +1610,7 @@ must have access to all of the <cite>Group</cite>’s data <a href="#id7"><span 
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -1892,7 +1767,7 @@ must have access to all of the <cite>Group</cite>’s data <a href="#id7"><span 
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -2020,7 +1895,7 @@ must have access to all of the <cite>Group</cite>’s data <a href="#id7"><span 
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -2377,55 +2252,40 @@ positional uncertainties, name, and redshift.</p>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_annotations_readable_by" title="skyportal.models.Obj.get_annotations_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_annotations_readable_by</span></code></a>(user_or_token)</p></td>
-<td><p>Query the database and return the Annotations on this Obj that are accessible to any of the User or Token owner’s accessible Groups.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_classifications_readable_by" title="skyportal.models.Obj.get_classifications_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_classifications_readable_by</span></code></a>(user_or_token)</p></td>
-<td><p>Query the database and return the Classifications on this Obj that are accessible to any of the User or Token owner’s accessible Groups.</p></td>
-</tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_comments_readable_by" title="skyportal.models.Obj.get_comments_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_comments_readable_by</span></code></a>(user_or_token)</p></td>
-<td><p>Query the database and return the Comments on this Obj that are accessible to any of the User or Token owner’s accessible Groups.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_accessible_by</span></code>(cls_id, user_or_token)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_accessible_by</span></code>(cls_id, user_or_token)</p></td>
 <td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_if_readable_by" title="skyportal.models.Obj.get_if_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code></a>(user_or_token[, options])</p></td>
-<td><p>Return an Obj from the database if the Obj is either a Source or a Candidate in at least one of the requesting User or Token owner’s accessible Groups.</p></td>
-</tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_photometry_readable_by_user" title="skyportal.models.Obj.get_photometry_readable_by_user"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_photometry_readable_by_user</span></code></a>(user_or_token)</p></td>
-<td><p>Query the database and return the Photometry for this Obj that is shared with any of the User or Token owner’s accessible Groups.</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
+<td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Retrieve all database records accessible by the specified User or token.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.get_spectra_readable_by" title="skyportal.models.Obj.get_spectra_readable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_spectra_readable_by</span></code></a>(user_or_token[, options])</p></td>
-<td><p>Query the database and return the Spectra for this Obj that are shared with any of the User or Token owner’s accessible Groups.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_accessible_by</span></code>(user_or_token[, mode])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_accessible_by</span></code>(user_or_token[, mode])</p></td>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.last_detected_at" title="skyportal.models.Obj.last_detected_at"><code class="xref py py-obj docutils literal notranslate"><span class="pre">last_detected_at</span></code></a>(user)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.last_detected_at" title="skyportal.models.Obj.last_detected_at"><code class="xref py py-obj docutils literal notranslate"><span class="pre">last_detected_at</span></code></a>(user)</p></td>
 <td><p>UTC ISO date at which the object was last detected above a given S/N (3.0 by default).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.last_detected_mag" title="skyportal.models.Obj.last_detected_mag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">last_detected_mag</span></code></a>(user)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.last_detected_mag" title="skyportal.models.Obj.last_detected_mag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">last_detected_mag</span></code></a>(user)</p></td>
 <td><p>Magnitude at which the object was last detected above a given S/N (3.0 by default).</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.peak_detected_at" title="skyportal.models.Obj.peak_detected_at"><code class="xref py py-obj docutils literal notranslate"><span class="pre">peak_detected_at</span></code></a>(user)</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.peak_detected_at" title="skyportal.models.Obj.peak_detected_at"><code class="xref py py-obj docutils literal notranslate"><span class="pre">peak_detected_at</span></code></a>(user)</p></td>
 <td><p>UTC ISO date at which the object was detected at peak magnitude above a given S/N (3.0 by default).</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Obj.peak_detected_mag" title="skyportal.models.Obj.peak_detected_mag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">peak_detected_mag</span></code></a>(user)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Obj.peak_detected_mag" title="skyportal.models.Obj.peak_detected_mag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">peak_detected_mag</span></code></a>(user)</p></td>
 <td><p>Peak magnitude at which the object was detected above a given S/N (3.0 by default).</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
 <td><p>Serialize this object to a Python dictionary.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">within</span></code>(other, radius)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">within</span></code>(other, radius)</p></td>
 <td><p>Test if this point is within a given radius of another point.</p></td>
 </tr>
 </tbody>
@@ -2599,144 +2459,6 @@ zero degrees.</p>
 <dt id="skyportal.models.Obj.gal_lon_deg">
 <em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">gal_lon_deg</span></code><a class="headerlink" href="#skyportal.models.Obj.gal_lon_deg" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the galactic longitude of this object</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="skyportal.models.Obj.get_annotations_readable_by">
-<code class="sig-name descname"><span class="pre">get_annotations_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_annotations_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Query the database and return the Annotations on this Obj that are accessible
-to any of the User or Token owner’s accessible Groups.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl>
-<dt><strong>annotation_list</strong><span class="classifier">list of <cite>skyportal.models.Annotation</cite></span></dt><dd><p>The accessible annotations attached to this Obj.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="skyportal.models.Obj.get_classifications_readable_by">
-<code class="sig-name descname"><span class="pre">get_classifications_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_classifications_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Query the database and return the Classifications on this Obj that are accessible
-to any of the User or Token owner’s accessible Groups.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl>
-<dt><strong>classification_list</strong><span class="classifier">list of <cite>skyportal.models.Classification</cite></span></dt><dd><p>The accessible classifications attached to this Obj.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="skyportal.models.Obj.get_comments_readable_by">
-<code class="sig-name descname"><span class="pre">get_comments_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_comments_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Query the database and return the Comments on this Obj that are accessible
-to any of the User or Token owner’s accessible Groups.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl>
-<dt><strong>comment_list</strong><span class="classifier">list of <cite>skyportal.models.Comment</cite></span></dt><dd><p>The accessible comments attached to this Obj.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="skyportal.models.Obj.get_if_readable_by">
-<code class="sig-name descname"><span class="pre">get_if_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_if_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return an Obj from the database if the Obj is either a Source or a Candidate in at least
-one of the requesting User or Token owner’s accessible Groups. If the Obj is not a
-Source or a Candidate in one of the User or Token owner’s accessible Groups, raise an AccessError.
-If the Obj does not exist, return <cite>None</cite>.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>obj_id</strong><span class="classifier">integer or string</span></dt><dd><p>Primary key of the Obj.</p>
-</dd>
-<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
-</dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id9"><span class="problematic" id="id10">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl>
-<dt><strong>obj</strong><span class="classifier"><cite>skyportal.models.Obj</cite></span></dt><dd><p>The requested Obj.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="skyportal.models.Obj.get_photometry_readable_by_user">
-<code class="sig-name descname"><span class="pre">get_photometry_readable_by_user</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_photometry_readable_by_user" title="Permalink to this definition">¶</a></dt>
-<dd><p>Query the database and return the Photometry for this Obj that is shared
-with any of the User or Token owner’s accessible Groups.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>obj_id</strong><span class="classifier">string</span></dt><dd><p>The ID of the Obj to look up.</p>
-</dd>
-<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl>
-<dt><strong>photometry_list</strong><span class="classifier">list of <cite>skyportal.models.Photometry</cite></span></dt><dd><p>The accessible Photometry of this Obj.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="skyportal.models.Obj.get_spectra_readable_by">
-<code class="sig-name descname"><span class="pre">get_spectra_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Obj.get_spectra_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Query the database and return the Spectra for this Obj that are shared
-with any of the User or Token owner’s accessible Groups.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>obj_id</strong><span class="classifier">string</span></dt><dd><p>The ID of the Obj to look up.</p>
-</dd>
-<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
-</dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id11"><span class="problematic" id="id12">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl>
-<dt><strong>photometry_list</strong><span class="classifier">list of <cite>skyportal.models.Spectrum</cite></span></dt><dd><p>The accessible Spectra of this Obj.</p>
-</dd>
-</dl>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py attribute">
@@ -2975,7 +2697,7 @@ astroplan.FixedTarget.</p>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -3183,19 +2905,16 @@ astroplan.FixedTarget.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_accessible_by</span></code>(user_or_token[, mode])</p></td>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#skyportal.models.Photometry.is_modifiable_by" title="skyportal.models.Photometry.is_modifiable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_modifiable_by</span></code></a>(user)</p></td>
-<td><p>Return a boolean indicating whether an object point can be modified or deleted by a given user.</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
 <td><p>Serialize this object to a Python dictionary.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">within</span></code>(other, radius)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">within</span></code>(other, radius)</p></td>
 <td><p>Test if this point is within a given radius of another point.</p></td>
 </tr>
 </tbody>
@@ -3264,27 +2983,6 @@ astroplan.FixedTarget.</p>
 <dt id="skyportal.models.Photometry.instrument_id">
 <code class="sig-name descname"><span class="pre">instrument_id</span></code><a class="headerlink" href="#skyportal.models.Photometry.instrument_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>ID of the Instrument that took this Photometry.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="skyportal.models.Photometry.is_modifiable_by">
-<code class="sig-name descname"><span class="pre">is_modifiable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Photometry.is_modifiable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a boolean indicating whether an object point can be modified or
-deleted by a given user.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>user: `baselayer.app.models.User`</strong></dt><dd><p>The User to check.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>readable: bool</dt><dd><p>Whether the Object can be modified by the User.</p>
-</dd>
-</dl>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py attribute">
@@ -3419,7 +3117,7 @@ retrieved via the API (for use in the “Top Sources” widget).</p>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -3547,16 +3245,13 @@ dispersive element.</p>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_accessible_by</span></code>(user_or_token[, mode])</p></td>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Spectrum.is_modifiable_by" title="skyportal.models.Spectrum.is_modifiable_by"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_modifiable_by</span></code></a>(user)</p></td>
-<td><p>Return a boolean indicating whether an object point can be modified or deleted by a given user.</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
 <td><p>Serialize this object to a Python dictionary.</p></td>
 </tr>
 </tbody>
@@ -3643,27 +3338,6 @@ values of the spectrum (default None).</p>
 <dt id="skyportal.models.Spectrum.instrument_id">
 <code class="sig-name descname"><span class="pre">instrument_id</span></code><a class="headerlink" href="#skyportal.models.Spectrum.instrument_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>ID of the Instrument that acquired the Spectrum.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="skyportal.models.Spectrum.is_modifiable_by">
-<code class="sig-name descname"><span class="pre">is_modifiable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Spectrum.is_modifiable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a boolean indicating whether an object point can be modified or
-deleted by a given user.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>user: `baselayer.app.models.User`</strong></dt><dd><p>The User to check.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>readable: bool</dt><dd><p>Whether the Object can be modified by the User.</p>
-</dd>
-</dl>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py attribute">
@@ -3790,7 +3464,7 @@ using a Filter.</p>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -3906,7 +3580,7 @@ using a Filter.</p>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -4065,7 +3739,7 @@ if it does not exist, return an empty list.</p>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#skyportal.models.Telescope.next_sunrise" title="skyportal.models.Telescope.next_sunrise"><code class="xref py py-obj docutils literal notranslate"><span class="pre">next_sunrise</span></code></a>([time])</p></td>
 <td><p>The astropy timestamp of the next sunrise after <cite>time</cite> at this site.</p></td>
@@ -4293,7 +3967,7 @@ local time zone of the observatory (if ground based).</p>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -4366,223 +4040,10 @@ local time zone of the observatory (if ground based).</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="skyportal.models.candidate_is_readable_by">
-<code class="sig-prename descclassname"><span class="pre">skyportal.models.</span></code><code class="sig-name descname"><span class="pre">candidate_is_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.candidate_is_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a boolean indicating whether the Candidate passed the Filter
-of any of a User or Token owner’s accessible Groups.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>readable</strong><span class="classifier">bool</span></dt><dd><p>Whether the Candidate is readable by the User or Token owner.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt id="skyportal.models.delete_group_access_logic">
 <code class="sig-prename descclassname"><span class="pre">skyportal.models.</span></code><code class="sig-name descname"><span class="pre">delete_group_access_logic</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.delete_group_access_logic" title="Permalink to this definition">¶</a></dt>
 <dd><p>User can delete a group that is not the sitewide public group, is not
 a single user group, and that they are an admin member of.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="skyportal.models.get_candidate_if_readable_by">
-<code class="sig-prename descclassname"><span class="pre">skyportal.models.</span></code><code class="sig-name descname"><span class="pre">get_candidate_if_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_candidate_if_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return an Obj from the database if the Obj is a Candidate in at least
-one of the requesting User or Token owner’s accessible Groups. If the Obj is not a
-Candidate in one of the User or Token owner’s accessible Groups, raise an AccessError.
-If the Obj does not exist, return <cite>None</cite>.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>obj_id</strong><span class="classifier">integer or string</span></dt><dd><p>Primary key of the Obj.</p>
-</dd>
-<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
-</dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id13"><span class="problematic" id="id14">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl>
-<dt><strong>obj</strong><span class="classifier"><cite>skyportal.models.Obj</cite></span></dt><dd><p>The requested Obj.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="skyportal.models.get_obj_annotations_readable_by">
-<code class="sig-prename descclassname"><span class="pre">skyportal.models.</span></code><code class="sig-name descname"><span class="pre">get_obj_annotations_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_obj_annotations_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Query the database and return the Annotations on this Obj that are accessible
-to any of the User or Token owner’s accessible Groups.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl>
-<dt><strong>annotation_list</strong><span class="classifier">list of <cite>skyportal.models.Annotation</cite></span></dt><dd><p>The accessible annotations attached to this Obj.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="skyportal.models.get_obj_classifications_readable_by">
-<code class="sig-prename descclassname"><span class="pre">skyportal.models.</span></code><code class="sig-name descname"><span class="pre">get_obj_classifications_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_obj_classifications_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Query the database and return the Classifications on this Obj that are accessible
-to any of the User or Token owner’s accessible Groups.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl>
-<dt><strong>classification_list</strong><span class="classifier">list of <cite>skyportal.models.Classification</cite></span></dt><dd><p>The accessible classifications attached to this Obj.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="skyportal.models.get_obj_comments_readable_by">
-<code class="sig-prename descclassname"><span class="pre">skyportal.models.</span></code><code class="sig-name descname"><span class="pre">get_obj_comments_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_obj_comments_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Query the database and return the Comments on this Obj that are accessible
-to any of the User or Token owner’s accessible Groups.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl>
-<dt><strong>comment_list</strong><span class="classifier">list of <cite>skyportal.models.Comment</cite></span></dt><dd><p>The accessible comments attached to this Obj.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="skyportal.models.get_obj_if_readable_by">
-<code class="sig-prename descclassname"><span class="pre">skyportal.models.</span></code><code class="sig-name descname"><span class="pre">get_obj_if_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_obj_if_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return an Obj from the database if the Obj is either a Source or a Candidate in at least
-one of the requesting User or Token owner’s accessible Groups. If the Obj is not a
-Source or a Candidate in one of the User or Token owner’s accessible Groups, raise an AccessError.
-If the Obj does not exist, return <cite>None</cite>.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>obj_id</strong><span class="classifier">integer or string</span></dt><dd><p>Primary key of the Obj.</p>
-</dd>
-<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
-</dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id15"><span class="problematic" id="id16">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl>
-<dt><strong>obj</strong><span class="classifier"><cite>skyportal.models.Obj</cite></span></dt><dd><p>The requested Obj.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="skyportal.models.get_photometry_readable_by_user">
-<code class="sig-prename descclassname"><span class="pre">skyportal.models.</span></code><code class="sig-name descname"><span class="pre">get_photometry_readable_by_user</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_photometry_readable_by_user" title="Permalink to this definition">¶</a></dt>
-<dd><p>Query the database and return the Photometry for this Obj that is shared
-with any of the User or Token owner’s accessible Groups.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>obj_id</strong><span class="classifier">string</span></dt><dd><p>The ID of the Obj to look up.</p>
-</dd>
-<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl>
-<dt><strong>photometry_list</strong><span class="classifier">list of <cite>skyportal.models.Photometry</cite></span></dt><dd><p>The accessible Photometry of this Obj.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="skyportal.models.get_source_if_readable_by">
-<code class="sig-prename descclassname"><span class="pre">skyportal.models.</span></code><code class="sig-name descname"><span class="pre">get_source_if_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_source_if_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return an Obj from the database if the Obj is a Source in at least
-one of the requesting User or Token owner’s accessible Groups. If the Obj is not a
-Source in one of the User or Token owner’s accessible Groups, raise an AccessError.
-If the Obj does not exist, return <cite>None</cite>.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>obj_id</strong><span class="classifier">integer or string</span></dt><dd><p>Primary key of the Obj.</p>
-</dd>
-<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
-</dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id17"><span class="problematic" id="id18">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl>
-<dt><strong>obj</strong><span class="classifier"><cite>skyportal.models.Obj</cite></span></dt><dd><p>The requested Obj.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="skyportal.models.get_spectra_readable_by">
-<code class="sig-prename descclassname"><span class="pre">skyportal.models.</span></code><code class="sig-name descname"><span class="pre">get_spectra_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">options</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.get_spectra_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Query the database and return the Spectra for this Obj that are shared
-with any of the User or Token owner’s accessible Groups.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>obj_id</strong><span class="classifier">string</span></dt><dd><p>The ID of the Obj to look up.</p>
-</dd>
-<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
-</dd>
-<dt><strong>options</strong><span class="classifier">list of <a href="#id19"><span class="problematic" id="id20">`</span></a>sqlalchemy.orm.MapperOption`s</span></dt><dd><p>Options that wil be passed to <cite>options()</cite> in the loader query.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl>
-<dt><strong>photometry_list</strong><span class="classifier">list of <cite>skyportal.models.Spectrum</cite></span></dt><dd><p>The accessible Spectra of this Obj.</p>
-</dd>
-</dl>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -4603,56 +4064,6 @@ if it does not exist, return an empty list.</p>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl>
 <dt><strong>tax</strong><span class="classifier"><cite>skyportal.models.Taxonomy</cite></span></dt><dd><p>The requested Taxonomy.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="skyportal.models.is_modifiable_by">
-<code class="sig-prename descclassname"><span class="pre">skyportal.models.</span></code><code class="sig-name descname"><span class="pre">is_modifiable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.is_modifiable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a boolean indicating whether an object point can be modified or
-deleted by a given user.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>user: `baselayer.app.models.User`</strong></dt><dd><p>The User to check.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt>readable: bool</dt><dd><p>Whether the Object can be modified by the User.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt id="skyportal.models.is_readable_by">
-<code class="sig-prename descclassname"><span class="pre">skyportal.models.</span></code><code class="sig-name descname"><span class="pre">is_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.is_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p>
-<p>Models with complicated ownership logic should implement their own method
-instead of adding too many additional conditions here.</p>
-</dd></dl>
-
-<dl class="py function">
-<dt id="skyportal.models.source_is_readable_by">
-<code class="sig-prename descclassname"><span class="pre">skyportal.models.</span></code><code class="sig-name descname"><span class="pre">source_is_readable_by</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.source_is_readable_by" title="Permalink to this definition">¶</a></dt>
-<dd><p>Return a boolean indicating whether the Source has been saved to
-any of a User or Token owner’s accessible Groups.</p>
-<dl class="field-list">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl>
-<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The requesting <cite>User</cite> or <cite>Token</cite> object.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>readable</strong><span class="classifier">bool</span></dt><dd><p>Whether the Candidate is readable by the User or Token owner.</p>
 </dd>
 </dl>
 </dd>
@@ -4739,7 +4150,7 @@ and <cite>Manage Groups</cite>.</p>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -4991,7 +4402,7 @@ the mapped class directly and returns mapped instances.</p>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -5239,7 +4650,7 @@ multiple Roles.</p>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -5324,7 +4735,7 @@ multiple Roles.</p>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -5709,7 +5120,7 @@ specified User (or Token instance, if a token is passed).</p>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -5844,7 +5255,7 @@ specified User (or Token instance, if a token is passed).</p>
 <td><p>Boolean flag indicating whether the User is currently authenticated.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -6112,7 +5523,7 @@ authenticated.</p>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
@@ -6275,7 +5686,7 @@ the mapped class directly and returns mapped instances.</p>
 <td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
-<td><p>Generic ownership logic for any <cite>skyportal</cite> ORM model.</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
