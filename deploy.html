@@ -181,14 +181,14 @@
 <p>SkyPortal can be deployed either with or without using Docker.
 Without Docker, all services (such as the database) need to be running
 locally, as described in <a class="reference internal" href="setup.html"><span class="doc">setup</span></a>.</p>
-<p>More commonly, production deployment will use Docker images.  Here, we
+<p>More commonly, production deployment will use Docker images. Here, we
 discuss how to deploy via
 <a class="reference external" href="https://docs.docker.com/compose/">docker-compose</a>, but much of the
 same information applies when using Kubernetes, for which we have an
 <a class="reference external" href="https://github.com/skyportal/deploy">example deployment</a>.</p>
 <div class="section" id="building-the-docker-images">
 <h2>Building the Docker images<a class="headerlink" href="#building-the-docker-images" title="Permalink to this headline">¶</a></h2>
-<p>The first step is to obtain the images to launch.  We deploy
+<p>The first step is to obtain the images to launch. We deploy
 <a class="reference external" href="https://hub.docker.com/r/skyportal/web">SkyPortal images</a> to Docker
 Hub from time to time, which you can fetch using:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">pull</span> <span class="n">skyportal</span><span class="o">/</span><span class="n">web</span>
@@ -202,7 +202,7 @@ Hub from time to time, which you can fetch using:</p>
 <div class="section" id="starting-containers">
 <h2>Starting containers<a class="headerlink" href="#starting-containers" title="Permalink to this headline">¶</a></h2>
 <p>Next, we deploy two containers: <code class="docutils literal notranslate"><span class="pre">web</span></code> (the SkyPortal application) and
-<code class="docutils literal notranslate"><span class="pre">db</span></code> (the PostgreSQL server).  The database is stored in a local
+<code class="docutils literal notranslate"><span class="pre">db</span></code> (the PostgreSQL server). The database is stored and persisted in a local
 docker volume called <code class="docutils literal notranslate"><span class="pre">skyportal_dbdata</span></code> (see <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">volume</span> <span class="pre">ls</span></code>).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">up</span> <span class="o">-</span><span class="n">d</span>
 </pre></div>
@@ -221,10 +221,12 @@ docker volume called <code class="docutils literal notranslate"><span class="pre
 </div>
 <div class="section" id="adding-test-data">
 <h2>Adding test data<a class="headerlink" href="#adding-test-data" title="Permalink to this headline">¶</a></h2>
-<p>To add some test data to play with, run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">run</span> <span class="n">web</span> <span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;source /skyportal_env/bin/activate &amp;&amp; make load_demo_data&#39;</span>
+<p>Note that by default, the SkyPortal image will run the application in production (<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run_production</span></code>).</p>
+<p>The key behavior to note when running production mode is that the application will not create any database tables automatically (to avoid messing with production data). This means that the very first time you spin up SkyPortal using containers, the <code class="docutils literal notranslate"><span class="pre">skyportal_dbdata</span></code> volume will only have an empty database. You will need to set up the database tables manually. The easiest way to do this would be to run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">exec</span> <span class="n">skyportal_web_1</span> <span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;source /skyportal_env/bin/activate &amp;&amp; FLAGS=&quot;--create_tables --config=config.yaml&quot; make load_demo_data&#39;</span>
 </pre></div>
 </div>
+<p>This will also load in some test data to play with.</p>
 </div>
 <div class="section" id="stopping-the-deployment">
 <h2>Stopping the deployment<a class="headerlink" href="#stopping-the-deployment" title="Permalink to this headline">¶</a></h2>
