@@ -1133,8 +1133,6 @@ to return to the user.</p>
 </dd>
 <dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
 </dd>
-<dt><strong>ctype</strong></dt><dd><p>Comment type. Can be one of ‘text’ or ‘redshift’.</p>
-</dd>
 <dt><strong>groups</strong></dt><dd><p>Groups that can see the comment.</p>
 </dd>
 <dt><strong>id</strong></dt><dd><p>Unique object identifier.</p>
@@ -1191,7 +1189,10 @@ to return to the user.</p>
 <col style="width: 25%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><strong>construct_author_info_dict</strong></p></td>
+<tr class="row-odd"><td><p><strong>backref_name</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>construct_author_info_dict</strong></p></td>
 <td></td>
 </tr>
 </tbody>
@@ -1224,12 +1225,6 @@ to return to the user.</p>
 <dt id="skyportal.models.Comment.created_at">
 <code class="sig-name descname"><span class="pre">created_at</span></code><a class="headerlink" href="#skyportal.models.Comment.created_at" title="Permalink to this definition">¶</a></dt>
 <dd><p>UTC time of insertion of object’s row into the database.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt id="skyportal.models.Comment.ctype">
-<code class="sig-name descname"><span class="pre">ctype</span></code><a class="headerlink" href="#skyportal.models.Comment.ctype" title="Permalink to this definition">¶</a></dt>
-<dd><p>Comment type. Can be one of ‘text’ or ‘redshift’.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -2160,6 +2155,8 @@ positional uncertainties, name, and redshift.</p>
 </dd>
 <dt><strong>comments</strong></dt><dd><p>Comments posted about the object.</p>
 </dd>
+<dt><strong>comments_on_spectra</strong></dt><dd><p>Comments posted about spectra belonging to the object.</p>
+</dd>
 <dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
 </dd>
 <dt><strong>dec</strong></dt><dd></dd>
@@ -2394,6 +2391,12 @@ zero degrees.</p>
 <dt id="skyportal.models.Obj.comments">
 <code class="sig-name descname"><span class="pre">comments</span></code><a class="headerlink" href="#skyportal.models.Obj.comments" title="Permalink to this definition">¶</a></dt>
 <dd><p>Comments posted about the object.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Obj.comments_on_spectra">
+<code class="sig-name descname"><span class="pre">comments_on_spectra</span></code><a class="headerlink" href="#skyportal.models.Obj.comments_on_spectra" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comments posted about spectra belonging to the object.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -3186,6 +3189,8 @@ dispersive element.</p>
 </dd>
 <dt><strong>assignment</strong></dt><dd></dd>
 <dt><strong>assignment_id</strong></dt><dd></dd>
+<dt><strong>comments</strong></dt><dd><p>Comments posted about this spectrum.</p>
+</dd>
 <dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
 </dd>
 <dt><strong>errors</strong></dt><dd><p>Errors on the fluxes of the spectrum [F_lambda, same units as <cite>fluxes</cite>.]</p>
@@ -3269,6 +3274,12 @@ dispersive element.</p>
 <dt id="skyportal.models.Spectrum.altdata">
 <code class="sig-name descname"><span class="pre">altdata</span></code><a class="headerlink" href="#skyportal.models.Spectrum.altdata" title="Permalink to this definition">¶</a></dt>
 <dd><p>Miscellaneous alternative metadata.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="skyportal.models.Spectrum.comments">
+<code class="sig-name descname"><span class="pre">comments</span></code><a class="headerlink" href="#skyportal.models.Spectrum.comments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Comments posted about this spectrum.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -5184,6 +5195,7 @@ specified User (or Token instance, if a token is passed).</p>
 <dt><strong>assignments</strong></dt><dd><p>Objs the User has assigned to ObservingRuns.</p>
 </dd>
 <dt><strong>comments</strong></dt><dd></dd>
+<dt><strong>comments_on_spectra</strong></dt><dd></dd>
 <dt><strong>contact_email</strong></dt><dd><p>The phone number at which the user prefers to receive communications.</p>
 </dd>
 <dt><strong>contact_phone</strong></dt><dd><p>The email at which the user prefers to receive communications.</p>
