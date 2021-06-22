@@ -1601,6 +1601,393 @@ robotic instrument.</p>
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="skyportal.models.GcnEvent">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">skyportal.models.</span></span><span class="sig-name descname"><span class="pre">GcnEvent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.GcnEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Event information, including an event ID, mission, and time of the event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference internal" href="#skyportal.models.GcnEvent.FAR" title="skyportal.models.GcnEvent.FAR"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FAR</span></code></a></dt><dd><p>Returning event false alarm rate.</p>
+</dd>
+<dt><a class="reference internal" href="#skyportal.models.GcnEvent.HasNS" title="skyportal.models.GcnEvent.HasNS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HasNS</span></code></a></dt><dd><p>Checking if GW event contains NS.</p>
+</dd>
+<dt><a class="reference internal" href="#skyportal.models.GcnEvent.HasRemnant" title="skyportal.models.GcnEvent.HasRemnant"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HasRemnant</span></code></a></dt><dd><p>Checking if GW event has remnant matter.</p>
+</dd>
+<dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
+</dd>
+<dt><strong>dateobs</strong></dt><dd><p>Event time</p>
+</dd>
+<dt><strong>gcn_notices</strong></dt><dd></dd>
+<dt><a class="reference internal" href="#skyportal.models.GcnEvent.gracesa" title="skyportal.models.GcnEvent.gracesa"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gracesa</span></code></a></dt><dd><p>Event page URL.</p>
+</dd>
+<dt><strong>id</strong></dt><dd><p>Unique object identifier.</p>
+</dd>
+<dt><a class="reference internal" href="#skyportal.models.GcnEvent.lightcurve" title="skyportal.models.GcnEvent.lightcurve"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lightcurve</span></code></a></dt><dd><p>GRB lightcurve URL.</p>
+</dd>
+<dt><strong>localizations</strong></dt><dd></dd>
+<dt><strong>modified</strong></dt><dd><p>UTC time the object’s row was last modified in the database.</p>
+</dd>
+<dt><a class="reference internal" href="#skyportal.models.GcnEvent.ned_gwf" title="skyportal.models.GcnEvent.ned_gwf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ned_gwf</span></code></a></dt><dd><p>NED URL.</p>
+</dd>
+<dt><strong>retracted</strong></dt><dd><p>Check if event is retracted.</p>
+</dd>
+<dt><strong>sent_by</strong></dt><dd><p>The user that saved this GcnEvent</p>
+</dd>
+<dt><strong>sent_by_id</strong></dt><dd><p>The ID of the User who created this GcnEvent.</p>
+</dd>
+<dt><strong>tags</strong></dt><dd><p>List of tags.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
+<td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_accessible_by</span></code>(cls_id, user_or_token)</p></td>
+<td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
+<td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_records_accessible_by</span></code>(user_or_token[, …])</p></td>
+<td><p>Retrieve all database records accessible by the specified User or token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_accessible_by</span></code>(user_or_token[, mode])</p></td>
+<td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
+<td><p>Return the query for all database records accessible by the specified User or token.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<td><p>Serialize this object to a Python dictionary.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py property">
+<dt class="sig sig-object py" id="skyportal.models.GcnEvent.FAR">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">FAR</span></span><a class="headerlink" href="#skyportal.models.GcnEvent.FAR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returning event false alarm rate.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="skyportal.models.GcnEvent.HasNS">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">HasNS</span></span><a class="headerlink" href="#skyportal.models.GcnEvent.HasNS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checking if GW event contains NS.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="skyportal.models.GcnEvent.HasRemnant">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">HasRemnant</span></span><a class="headerlink" href="#skyportal.models.GcnEvent.HasRemnant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checking if GW event has remnant matter.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnEvent.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#skyportal.models.GcnEvent.created_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC time of insertion of object’s row into the database.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnEvent.dateobs">
+<span class="sig-name descname"><span class="pre">dateobs</span></span><a class="headerlink" href="#skyportal.models.GcnEvent.dateobs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Event time</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="skyportal.models.GcnEvent.gracesa">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">gracesa</span></span><a class="headerlink" href="#skyportal.models.GcnEvent.gracesa" title="Permalink to this definition">¶</a></dt>
+<dd><p>Event page URL.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnEvent.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#skyportal.models.GcnEvent.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unique object identifier.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="skyportal.models.GcnEvent.lightcurve">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">lightcurve</span></span><a class="headerlink" href="#skyportal.models.GcnEvent.lightcurve" title="Permalink to this definition">¶</a></dt>
+<dd><p>GRB lightcurve URL.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnEvent.modified">
+<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#skyportal.models.GcnEvent.modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC time the object’s row was last modified in the database.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="skyportal.models.GcnEvent.ned_gwf">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">ned_gwf</span></span><a class="headerlink" href="#skyportal.models.GcnEvent.ned_gwf" title="Permalink to this definition">¶</a></dt>
+<dd><p>NED URL.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnEvent.retracted">
+<span class="sig-name descname"><span class="pre">retracted</span></span><a class="headerlink" href="#skyportal.models.GcnEvent.retracted" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if event is retracted.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnEvent.sent_by">
+<span class="sig-name descname"><span class="pre">sent_by</span></span><a class="headerlink" href="#skyportal.models.GcnEvent.sent_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>The user that saved this GcnEvent</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnEvent.sent_by_id">
+<span class="sig-name descname"><span class="pre">sent_by_id</span></span><a class="headerlink" href="#skyportal.models.GcnEvent.sent_by_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ID of the User who created this GcnEvent.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnEvent.tags">
+<span class="sig-name descname"><span class="pre">tags</span></span><a class="headerlink" href="#skyportal.models.GcnEvent.tags" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of tags.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="skyportal.models.GcnNotice">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">skyportal.models.</span></span><span class="sig-name descname"><span class="pre">GcnNotice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.GcnNotice" title="Permalink to this definition">¶</a></dt>
+<dd><p>Records of ingested GCN notices</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>bbh</strong></dt><dd></dd>
+<dt><strong>bns</strong></dt><dd></dd>
+<dt><strong>content</strong></dt><dd><p>Raw VOEvent content</p>
+</dd>
+<dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
+</dd>
+<dt><strong>date</strong></dt><dd><p>UTC message timestamp</p>
+</dd>
+<dt><strong>dateobs</strong></dt><dd><p>UTC event timestamp</p>
+</dd>
+<dt><strong>far</strong></dt><dd></dd>
+<dt><strong>has_ns</strong></dt><dd></dd>
+<dt><strong>has_remnant</strong></dt><dd></dd>
+<dt><strong>id</strong></dt><dd><p>Unique object identifier.</p>
+</dd>
+<dt><strong>ivorn</strong></dt><dd><p>Unique identifier of VOEvent</p>
+</dd>
+<dt><strong>mass_gap</strong></dt><dd></dd>
+<dt><strong>modified</strong></dt><dd><p>UTC time the object’s row was last modified in the database.</p>
+</dd>
+<dt><strong>noise</strong></dt><dd></dd>
+<dt><strong>notice_type</strong></dt><dd><p>GCN Notice type</p>
+</dd>
+<dt><strong>nsbh</strong></dt><dd></dd>
+<dt><strong>sent_by</strong></dt><dd><p>The user that saved this GcnNotice</p>
+</dd>
+<dt><strong>sent_by_id</strong></dt><dd><p>The ID of the User who created this GcnNotice.</p>
+</dd>
+<dt><strong>stream</strong></dt><dd><p>Event stream or mission (i.e., “Fermi”)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
+<td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_accessible_by</span></code>(cls_id, user_or_token)</p></td>
+<td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
+<td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_records_accessible_by</span></code>(user_or_token[, …])</p></td>
+<td><p>Retrieve all database records accessible by the specified User or token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_accessible_by</span></code>(user_or_token[, mode])</p></td>
+<td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
+<td><p>Return the query for all database records accessible by the specified User or token.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<td><p>Serialize this object to a Python dictionary.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnNotice.content">
+<span class="sig-name descname"><span class="pre">content</span></span><a class="headerlink" href="#skyportal.models.GcnNotice.content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Raw VOEvent content</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnNotice.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#skyportal.models.GcnNotice.created_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC time of insertion of object’s row into the database.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnNotice.date">
+<span class="sig-name descname"><span class="pre">date</span></span><a class="headerlink" href="#skyportal.models.GcnNotice.date" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC message timestamp</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnNotice.dateobs">
+<span class="sig-name descname"><span class="pre">dateobs</span></span><a class="headerlink" href="#skyportal.models.GcnNotice.dateobs" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC event timestamp</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnNotice.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#skyportal.models.GcnNotice.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unique object identifier.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnNotice.ivorn">
+<span class="sig-name descname"><span class="pre">ivorn</span></span><a class="headerlink" href="#skyportal.models.GcnNotice.ivorn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unique identifier of VOEvent</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnNotice.modified">
+<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#skyportal.models.GcnNotice.modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC time the object’s row was last modified in the database.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnNotice.notice_type">
+<span class="sig-name descname"><span class="pre">notice_type</span></span><a class="headerlink" href="#skyportal.models.GcnNotice.notice_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>GCN Notice type</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnNotice.sent_by">
+<span class="sig-name descname"><span class="pre">sent_by</span></span><a class="headerlink" href="#skyportal.models.GcnNotice.sent_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>The user that saved this GcnNotice</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnNotice.sent_by_id">
+<span class="sig-name descname"><span class="pre">sent_by_id</span></span><a class="headerlink" href="#skyportal.models.GcnNotice.sent_by_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ID of the User who created this GcnNotice.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnNotice.stream">
+<span class="sig-name descname"><span class="pre">stream</span></span><a class="headerlink" href="#skyportal.models.GcnNotice.stream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Event stream or mission (i.e., “Fermi”)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="skyportal.models.GcnTag">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">skyportal.models.</span></span><span class="sig-name descname"><span class="pre">GcnTag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.GcnTag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store qualitative tags for events.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
+</dd>
+<dt><strong>dateobs</strong></dt><dd></dd>
+<dt><strong>id</strong></dt><dd><p>Unique object identifier.</p>
+</dd>
+<dt><strong>modified</strong></dt><dd><p>UTC time the object’s row was last modified in the database.</p>
+</dd>
+<dt><strong>sent_by</strong></dt><dd><p>The user that saved this GcnTag</p>
+</dd>
+<dt><strong>sent_by_id</strong></dt><dd><p>The ID of the User who created this GcnTag.</p>
+</dd>
+<dt><strong>text</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
+<td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_accessible_by</span></code>(cls_id, user_or_token)</p></td>
+<td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
+<td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_records_accessible_by</span></code>(user_or_token[, …])</p></td>
+<td><p>Retrieve all database records accessible by the specified User or token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_accessible_by</span></code>(user_or_token[, mode])</p></td>
+<td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
+<td><p>Return the query for all database records accessible by the specified User or token.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<td><p>Serialize this object to a Python dictionary.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnTag.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#skyportal.models.GcnTag.created_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC time of insertion of object’s row into the database.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnTag.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#skyportal.models.GcnTag.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unique object identifier.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnTag.modified">
+<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#skyportal.models.GcnTag.modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC time the object’s row was last modified in the database.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnTag.sent_by">
+<span class="sig-name descname"><span class="pre">sent_by</span></span><a class="headerlink" href="#skyportal.models.GcnTag.sent_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>The user that saved this GcnTag</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.GcnTag.sent_by_id">
+<span class="sig-name descname"><span class="pre">sent_by_id</span></span><a class="headerlink" href="#skyportal.models.GcnTag.sent_by_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ID of the User who created this GcnTag.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="skyportal.models.Group">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">skyportal.models.</span></span><span class="sig-name descname"><span class="pre">Group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Group" title="Permalink to this definition">¶</a></dt>
 <dd><p>A user group. <cite>Group`s controls `User</cite> access to <cite>Filter`s and serve as
@@ -2060,6 +2447,192 @@ performing spectroscopy.</p>
 <dt class="sig sig-object py" id="skyportal.models.Instrument.type">
 <span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#skyportal.models.Instrument.type" title="Permalink to this definition">¶</a></dt>
 <dd><p>Instrument type, one of Imager, Spectrograph, or Imaging Spectrograph.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="skyportal.models.Localization">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">skyportal.models.</span></span><span class="sig-name descname"><span class="pre">Localization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Localization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Localization information, including the localization ID, event ID, right
+ascension, declination, error radius (if applicable), and the healpix
+map.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>contour</strong></dt><dd><p>GeoJSON contours</p>
+</dd>
+<dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
+</dd>
+<dt><strong>dateobs</strong></dt><dd><p>UTC event timestamp</p>
+</dd>
+<dt><strong>distmu</strong></dt><dd><p>Multiresolution HEALPix distance mu array</p>
+</dd>
+<dt><strong>distnorm</strong></dt><dd><p>Multiresolution HEALPix distance normalization array</p>
+</dd>
+<dt><strong>distsigma</strong></dt><dd><p>Multiresolution HEALPix distance sigma array</p>
+</dd>
+<dt><a class="reference internal" href="#skyportal.models.Localization.flat" title="skyportal.models.Localization.flat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flat</span></code></a></dt><dd><p>Get flat resolution HEALPix dataset, probability density and distance.</p>
+</dd>
+<dt><a class="reference internal" href="#skyportal.models.Localization.flat_2d" title="skyportal.models.Localization.flat_2d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">flat_2d</span></code></a></dt><dd><p>Get flat resolution HEALPix dataset, probability density only.</p>
+</dd>
+<dt><strong>id</strong></dt><dd><p>Unique object identifier.</p>
+</dd>
+<dt><strong>is_3d</strong></dt><dd></dd>
+<dt><strong>localization_name</strong></dt><dd><p>Localization name</p>
+</dd>
+<dt><strong>modified</strong></dt><dd><p>UTC time the object’s row was last modified in the database.</p>
+</dd>
+<dt><strong>probdensity</strong></dt><dd><p>Multiresolution HEALPix probability density array</p>
+</dd>
+<dt><strong>sent_by</strong></dt><dd><p>The user that saved this Localization</p>
+</dd>
+<dt><strong>sent_by_id</strong></dt><dd><p>The ID of the User who created this Localization.</p>
+</dd>
+<dt><a class="reference internal" href="#skyportal.models.Localization.table" title="skyportal.models.Localization.table"><code class="xref py py-obj docutils literal notranslate"><span class="pre">table</span></code></a></dt><dd><p>Get multiresolution HEALPix dataset, probability density and distance.</p>
+</dd>
+<dt><a class="reference internal" href="#skyportal.models.Localization.table_2d" title="skyportal.models.Localization.table_2d"><code class="xref py py-obj docutils literal notranslate"><span class="pre">table_2d</span></code></a></dt><dd><p>Get multiresolution HEALPix dataset, probability density only.</p>
+</dd>
+<dt><strong>uniq</strong></dt><dd><p>Multiresolution HEALPix UNIQ pixel index array</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
+<td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_accessible_by</span></code>(cls_id, user_or_token)</p></td>
+<td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_readable_by</span></code>(ident, user_or_token[, …])</p></td>
+<td><p>Return an object from the database if the requesting User or Token has access to read the object.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_records_accessible_by</span></code>(user_or_token[, …])</p></td>
+<td><p>Retrieve all database records accessible by the specified User or token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_accessible_by</span></code>(user_or_token[, mode])</p></td>
+<td><p>Check if a User or Token has a specified type of access to this database record.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_readable_by</span></code>(user_or_token)</p></td>
+<td><p>Return a boolean indicating whether a User or Token has read access to this object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, …])</p></td>
+<td><p>Return the query for all database records accessible by the specified User or token.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<td><p>Serialize this object to a Python dictionary.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.Localization.contour">
+<span class="sig-name descname"><span class="pre">contour</span></span><a class="headerlink" href="#skyportal.models.Localization.contour" title="Permalink to this definition">¶</a></dt>
+<dd><p>GeoJSON contours</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.Localization.created_at">
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#skyportal.models.Localization.created_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC time of insertion of object’s row into the database.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.Localization.dateobs">
+<span class="sig-name descname"><span class="pre">dateobs</span></span><a class="headerlink" href="#skyportal.models.Localization.dateobs" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC event timestamp</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.Localization.distmu">
+<span class="sig-name descname"><span class="pre">distmu</span></span><a class="headerlink" href="#skyportal.models.Localization.distmu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiresolution HEALPix distance mu array</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.Localization.distnorm">
+<span class="sig-name descname"><span class="pre">distnorm</span></span><a class="headerlink" href="#skyportal.models.Localization.distnorm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiresolution HEALPix distance normalization array</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.Localization.distsigma">
+<span class="sig-name descname"><span class="pre">distsigma</span></span><a class="headerlink" href="#skyportal.models.Localization.distsigma" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiresolution HEALPix distance sigma array</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="skyportal.models.Localization.flat">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">flat</span></span><a class="headerlink" href="#skyportal.models.Localization.flat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get flat resolution HEALPix dataset, probability density and
+distance.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="skyportal.models.Localization.flat_2d">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">flat_2d</span></span><a class="headerlink" href="#skyportal.models.Localization.flat_2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get flat resolution HEALPix dataset, probability density only.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.Localization.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#skyportal.models.Localization.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unique object identifier.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.Localization.localization_name">
+<span class="sig-name descname"><span class="pre">localization_name</span></span><a class="headerlink" href="#skyportal.models.Localization.localization_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Localization name</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.Localization.modified">
+<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#skyportal.models.Localization.modified" title="Permalink to this definition">¶</a></dt>
+<dd><p>UTC time the object’s row was last modified in the database.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.Localization.probdensity">
+<span class="sig-name descname"><span class="pre">probdensity</span></span><a class="headerlink" href="#skyportal.models.Localization.probdensity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiresolution HEALPix probability density array</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.Localization.sent_by">
+<span class="sig-name descname"><span class="pre">sent_by</span></span><a class="headerlink" href="#skyportal.models.Localization.sent_by" title="Permalink to this definition">¶</a></dt>
+<dd><p>The user that saved this Localization</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.Localization.sent_by_id">
+<span class="sig-name descname"><span class="pre">sent_by_id</span></span><a class="headerlink" href="#skyportal.models.Localization.sent_by_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ID of the User who created this Localization.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="skyportal.models.Localization.table">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">table</span></span><a class="headerlink" href="#skyportal.models.Localization.table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get multiresolution HEALPix dataset, probability density and
+distance.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="skyportal.models.Localization.table_2d">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">table_2d</span></span><a class="headerlink" href="#skyportal.models.Localization.table_2d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get multiresolution HEALPix dataset, probability density only.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.Localization.uniq">
+<span class="sig-name descname"><span class="pre">uniq</span></span><a class="headerlink" href="#skyportal.models.Localization.uniq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiresolution HEALPix UNIQ pixel index array</p>
 </dd></dl>
 
 </dd></dl>
@@ -5285,6 +5858,12 @@ specified User (or Token instance, if a token is passed).</p>
 </dd>
 <dt><strong>followup_requests</strong></dt><dd><p>The follow-up requests this User has made.</p>
 </dd>
+<dt><strong>gcnevents</strong></dt><dd><p>The gcnevents saved by this user</p>
+</dd>
+<dt><strong>gcnnotices</strong></dt><dd><p>The GcnNotices saved by this user</p>
+</dd>
+<dt><strong>gcntags</strong></dt><dd><p>The gcntags saved by this user</p>
+</dd>
 <dt><a class="reference internal" href="#baselayer.app.models.User.gravatar_url" title="baselayer.app.models.User.gravatar_url"><code class="xref py py-obj docutils literal notranslate"><span class="pre">gravatar_url</span></code></a></dt><dd><p>The Gravatar URL inferred from the user’s contact email, or, if the contact email is null, the username.</p>
 </dd>
 <dt><strong>group_admission_requests</strong></dt><dd><p>User’s requests to join groups.</p>
@@ -5298,6 +5877,8 @@ specified User (or Token instance, if a token is passed).</p>
 <dt><strong>last_name</strong></dt><dd><p>The User’s last name.</p>
 </dd>
 <dt><strong>listings</strong></dt><dd><p>The listings saved by this user</p>
+</dd>
+<dt><strong>localizations</strong></dt><dd><p>The localizations saved by this user</p>
 </dd>
 <dt><strong>modified</strong></dt><dd><p>UTC time the object’s row was last modified in the database.</p>
 </dd>
@@ -5440,6 +6021,24 @@ For System Admins, this corresponds to all Groups.</p>
 <dd><p>The follow-up requests this User has made.</p>
 </dd></dl>
 
+<dl class="py attribute">
+<dt class="sig sig-object py" id="baselayer.app.models.User.gcnevents">
+<span class="sig-name descname"><span class="pre">gcnevents</span></span><a class="headerlink" href="#baselayer.app.models.User.gcnevents" title="Permalink to this definition">¶</a></dt>
+<dd><p>The gcnevents saved by this user</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="baselayer.app.models.User.gcnnotices">
+<span class="sig-name descname"><span class="pre">gcnnotices</span></span><a class="headerlink" href="#baselayer.app.models.User.gcnnotices" title="Permalink to this definition">¶</a></dt>
+<dd><p>The GcnNotices saved by this user</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="baselayer.app.models.User.gcntags">
+<span class="sig-name descname"><span class="pre">gcntags</span></span><a class="headerlink" href="#baselayer.app.models.User.gcntags" title="Permalink to this definition">¶</a></dt>
+<dd><p>The gcntags saved by this user</p>
+</dd></dl>
+
 <dl class="py property">
 <dt class="sig sig-object py" id="baselayer.app.models.User.gravatar_url">
 <em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">gravatar_url</span></span><a class="headerlink" href="#baselayer.app.models.User.gravatar_url" title="Permalink to this definition">¶</a></dt>
@@ -5488,6 +6087,12 @@ authenticated.</p>
 <dt class="sig sig-object py" id="baselayer.app.models.User.listings">
 <span class="sig-name descname"><span class="pre">listings</span></span><a class="headerlink" href="#baselayer.app.models.User.listings" title="Permalink to this definition">¶</a></dt>
 <dd><p>The listings saved by this user</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="baselayer.app.models.User.localizations">
+<span class="sig-name descname"><span class="pre">localizations</span></span><a class="headerlink" href="#baselayer.app.models.User.localizations" title="Permalink to this definition">¶</a></dt>
+<dd><p>The localizations saved by this user</p>
 </dd></dl>
 
 <dl class="py attribute">
