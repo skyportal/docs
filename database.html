@@ -5854,6 +5854,8 @@ specified User (or Token instance, if a token is passed).</p>
 </dd>
 <dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
 </dd>
+<dt><strong>expiration_date</strong></dt><dd><p>The date until which the user’s account is valid. Users are set to view-only upon expiration.</p>
+</dd>
 <dt><strong>first_name</strong></dt><dd><p>The User’s first name.</p>
 </dd>
 <dt><strong>followup_requests</strong></dt><dd><p>The follow-up requests this User has made.</p>
@@ -6007,6 +6009,12 @@ For System Admins, this corresponds to all Groups.</p>
 <dt class="sig sig-object py" id="baselayer.app.models.User.created_at">
 <span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#baselayer.app.models.User.created_at" title="Permalink to this definition">¶</a></dt>
 <dd><p>UTC time of insertion of object’s row into the database.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="baselayer.app.models.User.expiration_date">
+<span class="sig-name descname"><span class="pre">expiration_date</span></span><a class="headerlink" href="#baselayer.app.models.User.expiration_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>The date until which the user’s account is valid. Users are set to view-only upon expiration.</p>
 </dd></dl>
 
 <dl class="py attribute">
