@@ -98,7 +98,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#source-download-python-environment">Source download, Python environment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#installation-macos">Installation: MacOS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installation-debian-based-linux">Installation: Debian-based Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-debian-based-linux-and-wsl">Installation: Debian-based Linux and WSL</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#launch">Launch</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#additional-configuration">Additional Configuration</a><ul>
@@ -212,6 +212,7 @@ virtual environment.</p>
 </pre></div>
 </div>
 <p>(You can also use <code class="docutils literal notranslate"><span class="pre">conda</span></code> or <code class="docutils literal notranslate"><span class="pre">pipenv</span></code> to create your environment.)</p>
+<p>If you are using Windows Subsystem for Linux (WSL) be sure you clone the repository onto a location on the virtual machine, not the mounted Windows drive. Additionally, we recommend that you use WSL 2, and not WSL 1, in order to avoid complications in interfacing with the Linux image’s <code class="docutils literal notranslate"><span class="pre">localhost</span></code> network.</p>
 </div>
 <div class="section" id="installation-macos">
 <h2>Installation: MacOS<a class="headerlink" href="#installation-macos" title="Permalink to this headline">¶</a></h2>
@@ -242,8 +243,8 @@ virtual environment.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="installation-debian-based-linux">
-<h2>Installation: Debian-based Linux<a class="headerlink" href="#installation-debian-based-linux" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="installation-debian-based-linux-and-wsl">
+<h2>Installation: Debian-based Linux and WSL<a class="headerlink" href="#installation-debian-based-linux-and-wsl" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
 <li><p>Install dependencies</p></li>
 </ol>
@@ -273,6 +274,10 @@ virtual environment.</p>
 <li><p>Extract the binary to somewhere on your path</p></li>
 <li><p>Ensure it runs with <code class="docutils literal notranslate"><span class="pre">geckodriver</span> <span class="pre">--version</span></code></p></li>
 </ul>
+<p>In later versions of Ubuntu (16.04+), you can install Geckodriver through apt:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">firefox</span><span class="o">-</span><span class="n">geckodriver</span>
+</pre></div>
+</div>
 <ol class="simple">
 <li><p>To build the docs, you’ll need graphviz:</p></li>
 </ol>
@@ -298,6 +303,7 @@ Different users have different privileges and can see more or less of the demo d
 <p>If you have trouble getting the demo data try doing</p>
 <p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_clear</span> <span class="pre">&amp;&amp;</span> <span class="pre">make</span> <span class="pre">db_init</span> <span class="pre">&amp;&amp;</span> <span class="pre">make</span> <span class="pre">run</span></code></p>
 <p>and then, from a different window, do <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">load_demo_data</span></code>.</p>
+<p>If you are using WSL, be sure everything (the git repository and all dependencies) are on the Linux machine and not the Windows side, as connection oddities can otherwise cause several errors.</p>
 </div>
 <div class="section" id="additional-configuration">
 <h2>Additional Configuration<a class="headerlink" href="#additional-configuration" title="Permalink to this headline">¶</a></h2>
