@@ -189,7 +189,7 @@
 (MUI).  We have evaluated several styling systems, including inline
 styles, CSS Modules, and Styled Components, and have settled on using
 <a class="reference external" href="https://material-ui.com/styles/basics/#hook-api">MUI’s style hooks API</a>.</p>
-<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="p">{</span> <span class="nx">makeStyles</span> <span class="p">}</span> <span class="k">from</span> <span class="s1">&#39;@material-ui/core/styles&#39;</span><span class="p">;</span>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="p">{</span> <span class="nx">makeStyles</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@material-ui/core/styles&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>MUI provides <code class="docutils literal notranslate"><span class="pre">makeStyles</span></code>, which takes in JSS (JavaScript Style
@@ -203,7 +203,7 @@ Sheets) and returns a CSS provider <a class="reference external" href="https://r
 </pre></div>
 </div>
 <p>The resulting <code class="docutils literal notranslate"><span class="pre">useStyles</span></code> can then be used inside of a component:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nx">Button</span> <span class="k">from</span> <span class="s1">&#39;@material-ui/core/Button&#39;</span><span class="p">;</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nx">Button</span> <span class="kr">from</span> <span class="s1">&#39;@material-ui/core/Button&#39;</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">MyButton</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="nx">classes</span> <span class="o">=</span> <span class="nx">useStyles</span><span class="p">();</span>
