@@ -1,78 +1,38 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Styling components &mdash; skyportal 0.9.dev0 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/output_cells.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/output_cells.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Database Schema" href="database.html" />
     <link rel="prev" title="Adding new features" href="adding_features.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="index.html" class="icon icon-home"> skyportal
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 0.9.dev0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -80,18 +40,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="design.html">System Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
@@ -120,71 +69,31 @@
 <li class="toctree-l1"><a class="reference internal" href="advanced_usage.html">Advanced usage</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">skyportal</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Styling components</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="styling-components">
-<h1>Styling components<a class="headerlink" href="#styling-components" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="styling-components">
+<h1>Styling components<a class="headerlink" href="#styling-components" title="Permalink to this headline"></a></h1>
 <p>SkyPortal is built on top of <a class="reference external" href="https://material-ui.com/">Material UI</a>
 (MUI).  We have evaluated several styling systems, including inline
 styles, CSS Modules, and Styled Components, and have settled on using
@@ -229,20 +138,20 @@ Sheets) and returns a CSS provider <a class="reference external" href="https://r
 <a class="reference external" href="http://lesscss.org/features/#parent-selectors-feature"><code class="docutils literal notranslate"><span class="pre">&amp;</span></code> selector</a>:
 <code class="docutils literal notranslate"><span class="pre">&amp;p</span></code> is a <code class="docutils literal notranslate"><span class="pre">p</span></code> element on <code class="docutils literal notranslate"><span class="pre">root</span></code> here.</p>
 <p>You can also <a class="reference external" href="https://material-ui.com/styles/basics/#adapting-based-on-props">parameterize <code class="docutils literal notranslate"><span class="pre">makeStyles</span></code></a>.</p>
-<div class="section" id="components">
-<h2>Components<a class="headerlink" href="#components" title="Permalink to this headline">¶</a></h2>
+<section id="components">
+<h2>Components<a class="headerlink" href="#components" title="Permalink to this headline"></a></h2>
 <p>Please refer to the <a class="reference external" href="https://material-ui.com/components/box/">MUI component
 docs</a> for available
 components and their props and CSS styles.</p>
-</div>
-<div class="section" id="sizes">
-<h2>Sizes<a class="headerlink" href="#sizes" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="sizes">
+<h2>Sizes<a class="headerlink" href="#sizes" title="Permalink to this headline"></a></h2>
 <p>All sizes should be specified using <code class="docutils literal notranslate"><span class="pre">rem</span></code>, which stands for “root
 element”—i.e., <code class="docutils literal notranslate"><span class="pre">1.5rem</span></code> would be 1.5 times the size of the font-size
 specified in the root HTML element.</p>
-</div>
-<div class="section" id="style-props-on-box">
-<h2>Style props on Box<a class="headerlink" href="#style-props-on-box" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="style-props-on-box">
+<h2>Style props on Box<a class="headerlink" href="#style-props-on-box" title="Permalink to this headline"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">makeStyles</span></code> is preferred in general, but for simple formatting you
 may use <a class="reference external" href="https://material-ui.com/system/basics/#all-inclusive">style
 props</a> on <code class="docutils literal notranslate"><span class="pre">Box</span></code>
@@ -251,9 +160,9 @@ containers:</p>
 </pre></div>
 </div>
 <p>See also “Grid system” below.</p>
-</div>
-<div class="section" id="responsive-design">
-<h2>Responsive Design<a class="headerlink" href="#responsive-design" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="responsive-design">
+<h2>Responsive Design<a class="headerlink" href="#responsive-design" title="Permalink to this headline"></a></h2>
 <p>MUI uses
 <a class="reference external" href="https://material-ui.com/customization/breakpoints">breakpoints</a>
 as a convenient way of writing CSS media queries.</p>
@@ -284,8 +193,8 @@ and <code class="docutils literal notranslate"><span class="pre">between</span><
 <p>You may customize media-queries using the
 <a class="reference external" href="https://material-ui.com/components/use-media-query"><code class="docutils literal notranslate"><span class="pre">useMediaQuery</span></code></a>
 hook.</p>
-<div class="section" id="grid-system">
-<h3>Grid system<a class="headerlink" href="#grid-system" title="Permalink to this headline">¶</a></h3>
+<section id="grid-system">
+<h3>Grid system<a class="headerlink" href="#grid-system" title="Permalink to this headline"></a></h3>
 <p>For positioning components on a page, MUI provides a <a class="reference external" href="https://material-ui.com/components/grid/">12-column grid
 layout</a>.</p>
 <p>There are two <code class="docutils literal notranslate"><span class="pre">Grid</span></code> types: <code class="docutils literal notranslate"><span class="pre">container</span></code> (outer element) and <code class="docutils literal notranslate"><span class="pre">item</span></code>
@@ -320,10 +229,10 @@ can be specified.</p>
 <span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="do-s-and-don-ts">
-<h2>Do’s and don’ts<a class="headerlink" href="#do-s-and-don-ts" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="do-s-and-don-ts">
+<h2>Do’s and don’ts<a class="headerlink" href="#do-s-and-don-ts" title="Permalink to this headline"></a></h2>
 <ul>
 <li><p>Do not use inline styles</p>
 <p>When a list of components are rendered with inline styles, you cannot
@@ -334,55 +243,38 @@ hunt down.</p>
 <p>Inline CSS also does not support media queries for responsive design.</p>
 </li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="database.html" class="btn btn-neutral float-right" title="Database Schema" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="adding_features.html" class="btn btn-neutral float-left" title="Adding new features" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="database.html" class="btn btn-neutral float-right" title="Database Schema" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2020, The SkyPortal Team.
-
-    </p>
+    <p>&#169; Copyright 2020, The SkyPortal Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

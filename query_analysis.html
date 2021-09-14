@@ -1,78 +1,38 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Analyzing database queries &mdash; skyportal 0.9.dev0 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/output_cells.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/output_cells.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Access controls" href="permissions.html" />
     <link rel="prev" title="Database migrations" href="migrations.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
-
-          
             <a href="index.html" class="icon icon-home"> skyportal
-          
-
-          
           </a>
-
-          
-            
-            
               <div class="version">
                 0.9.dev0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -80,18 +40,7 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="design.html">System Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
@@ -117,76 +66,36 @@
 <li class="toctree-l1"><a class="reference internal" href="advanced_usage.html">Advanced usage</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">skyportal</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
       <li>Analyzing database queries</li>
-    
-    
       <li class="wy-breadcrumbs-aside">
-        
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
-  <div class="section" id="analyzing-database-queries">
-<h1>Analyzing database queries<a class="headerlink" href="#analyzing-database-queries" title="Permalink to this headline">¶</a></h1>
+             
+  <section id="analyzing-database-queries">
+<h1>Analyzing database queries<a class="headerlink" href="#analyzing-database-queries" title="Permalink to this headline"></a></h1>
 <p>You may sometimes find yourself needing to either debug or optimize specific queries against the
 PostgreSQL database made by the API handlers. This section outlines some tips for going about
 analyzing and fixing these queries.</p>
-<div class="section" id="sqlalchemy">
-<h2>SQLAlchemy<a class="headerlink" href="#sqlalchemy" title="Permalink to this headline">¶</a></h2>
+<section id="sqlalchemy">
+<h2>SQLAlchemy<a class="headerlink" href="#sqlalchemy" title="Permalink to this headline"></a></h2>
 <p>As described in the <a class="reference internal" href="database.html"><span class="doc">Database Schema</span></a> section, SkyPortal communicates with the
 PostgreSQL database via the <a class="reference external" href="http://sqlalchemy.org">SQLAlchemy</a> ORM. More specifically, most
 of this is done through the SQLAlchemy <code class="docutils literal notranslate"><span class="pre">Query</span></code> object API, found <a class="reference external" href="https://docs.sqlalchemy.org/en/14/orm/query.html">here</a>.
@@ -231,9 +140,9 @@ through the <code class="docutils literal notranslate"><span class="pre">query_a
 <code class="docutils literal notranslate"><span class="pre">query_accessible_rows()</span></code> lines instead. Similarly, if you’re ever wondering where certain parts of
 the printed out SQL are coming from (especially a series of joins), the access control rules
 defined in <code class="docutils literal notranslate"><span class="pre">skyportal/models.py</span></code> for the database model being queried can be a good place to start.</p>
-</div>
-<div class="section" id="postgresql">
-<h2>PostgreSQL<a class="headerlink" href="#postgresql" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="postgresql">
+<h2>PostgreSQL<a class="headerlink" href="#postgresql" title="Permalink to this headline"></a></h2>
 <p>Once you have the full SQL query, it can be easier to spot errors/inefficiencies and to experiment
 with different approaches. It is easier, after all, to directly edit the SQL and try different ways
 of joining, moving around subqueries, etc. without also trying to figure out how to get SQLAlchemy
@@ -251,8 +160,8 @@ every row in another table and is rarely what you really want. Cross-joins will 
 generated by SQLAlchemy with the <code class="docutils literal notranslate"><span class="pre">table_a</span> <span class="pre">,</span> <span class="pre">table_b</span></code> syntax. It can be hard to spot those commas,
 so be on the lookout for them.</p></li>
 </ul>
-<div class="section" id="explain-analyze">
-<h3>EXPLAIN ANALYZE<a class="headerlink" href="#explain-analyze" title="Permalink to this headline">¶</a></h3>
+<section id="explain-analyze">
+<h3>EXPLAIN ANALYZE<a class="headerlink" href="#explain-analyze" title="Permalink to this headline"></a></h3>
 <p>Finally, the most helpful (and in-depth) way of analyzing the performance of a SQL query is through
 the <code class="docutils literal notranslate"><span class="pre">EXPLAIN</span> <span class="pre">ANALYZE</span></code> statement. You can connect to the SkyPortal database using <code class="docutils literal notranslate"><span class="pre">psql</span></code> and then run
 <code class="docutils literal notranslate"><span class="pre">EXPLAIN</span> <span class="pre">ANALYZE</span> <span class="pre">[your</span> <span class="pre">SQL</span> <span class="pre">query</span> <span class="pre">here]</span></code> in order to get a report of the steps PostgreSQL took to
@@ -260,56 +169,39 @@ carry out your query, and how long each step took. This can often point you towa
 necessary to speed up your query. For example, you may notice that PostgreSQL is looping through an
 entire table (a <code class="docutils literal notranslate"><span class="pre">SEQ</span> <span class="pre">SCAN</span></code>) to look for certain rows instead of using an index. More detailed guidance
 on using the <code class="docutils literal notranslate"><span class="pre">EXPLAIN</span></code> outputs can be found in <a class="reference external" href="https://www.postgresql.org/docs/9.3/using-explain.html">the PostgreSQL documentation</a>.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="permissions.html" class="btn btn-neutral float-right" title="Access controls" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="migrations.html" class="btn btn-neutral float-left" title="Database migrations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="permissions.html" class="btn btn-neutral float-right" title="Access controls" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2020, The SkyPortal Team.
-
-    </p>
+    <p>&#169; Copyright 2020, The SkyPortal Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
