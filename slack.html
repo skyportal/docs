@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Slack Integration &mdash; skyportal 0.9.dev0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/output_cells.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Advanced usage" href="advanced_usage.html" />
+    <link rel="prev" title="Access controls" href="permissions.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> skyportal
+          </a>
+              <div class="version">
+                0.9.dev0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="design.html">System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Developer notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_loader.html">Data loader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_features.html">Adding new features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="styling.html">Styling components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migrations.html">Database migrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="query_analysis.html">Analyzing database queries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions.html">Access controls</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Slack Integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#slack-app-creation-one-time-admin-set-up">Slack App Creation: One-time Admin Set Up</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#connecting-skyportal-users-to-slack">Connecting SkyPortal Users to Slack</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#slack-admin-steps">Slack Admin Steps</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#skyportal-user-steps">SkyPortal User Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#notes-on-reliability-and-security">Notes on Reliability and Security</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_usage.html">Advanced usage</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">skyportal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Slack Integration</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="slack-integration">
+<h1>Slack Integration<a class="headerlink" href="#slack-integration" title="Permalink to this headline"></a></h1>
+<p>While the SkyPortal frontend already has real-time notifications for comment mentions and source updates in the browser, users may also wish to see these in Slack.</p>
+<p>The Slack integration allows notifications for a given user to be mirrored to a Slack channel of choice. To set this up, the Slack workspace administrator generates a webhook URL (one per user/channel combination), and the user then adds that URL to their <strong>Profile</strong> page.</p>
+<section id="slack-app-creation-one-time-admin-set-up">
+<h2>Slack App Creation: One-time Admin Set Up<a class="headerlink" href="#slack-app-creation-one-time-admin-set-up" title="Permalink to this headline"></a></h2>
+<p>We first need to create a “Slack App” that acts as a conduit from SkyPortal to Slack. A logged in Slack Admin for a workspace should navigate to:</p>
+<p><a class="reference external" href="https://api.slack.com/apps?new_app=1">https://api.slack.com/apps?new_app=1</a></p>
+<p>Then click on the “From Scratch” section to start the App building process:</p>
+<p><img alt="Slack Integration Start" src="_images/slack_integration_5.png" /></p>
+<p>The Slack admin then creates a name for the application (like <code class="docutils literal notranslate"><span class="pre">SP_integration</span></code>) and creates the app in the desired workspace:</p>
+<p><img alt="Slack Integration Create" src="_images/slack_integration_6.png" /></p>
+<p>After the app is created, click on <code class="docutils literal notranslate"><span class="pre">Incoming</span> <span class="pre">Webhooks</span></code> in the left-side menu and then activate webhooks with the toggle on the top right:</p>
+<p><img alt="Slack Integration Webhook Enable" src="_images/slack_integration_7.png" /></p>
+</section>
+<section id="connecting-skyportal-users-to-slack">
+<h2>Connecting SkyPortal Users to Slack<a class="headerlink" href="#connecting-skyportal-users-to-slack" title="Permalink to this headline"></a></h2>
+<section id="slack-admin-steps">
+<h3>Slack Admin Steps<a class="headerlink" href="#slack-admin-steps" title="Permalink to this headline"></a></h3>
+<p>For each user in Slack who wishes to connect to their SkyPortal notifications, the Slack admin will return to the <code class="docutils literal notranslate"><span class="pre">Incoming</span> <span class="pre">Webhooks</span></code> portion of the Slack app and then click on <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">New</span> <span class="pre">Webhook</span> <span class="pre">to</span> <span class="pre">Workspace</span></code>:</p>
+<p><img alt="Slack Integration Webhook Generate" src="_images/slack_integration_8.png" /></p>
+<p>In the popup dialog choose the Slack direct messages channel for that user and copy the new Webhook URL:</p>
+<p><img alt="Slack Integration Webhook Copy" src="_images/slack_integration_9.png" /></p>
+<p>Anyone with this webhook URL will be able to post messages into the specified Channel (in the example above, <code class="docutils literal notranslate"><span class="pre">#Josh</span></code>). Provide this URL to the user.</p>
+</section>
+<section id="skyportal-user-steps">
+<h3>SkyPortal User Steps<a class="headerlink" href="#skyportal-user-steps" title="Permalink to this headline"></a></h3>
+<p>The SkyPortal user then navigates to their <strong>Profile</strong> page and enables Slack Notifications. They enter the unique Webhook URL generated by the Slack admin into the Slack Integration URL form (circled in blue below):</p>
+<p><img alt="SP Integration" src="_images/slack_integration_10.png" /></p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">&#64;</span> <span class="pre">mentions</span></code> toggle is activated, then all mentions of this user on SkyPortal will be sent to the Slack channel associated with the webhook. Likewise, if <code class="docutils literal notranslate"><span class="pre">Also</span> <span class="pre">Push</span> <span class="pre">to</span> <span class="pre">Slack</span></code> is enabled, then all enabled Favorite Source Activity types for the Browser will also be sent to Slack:</p>
+<p><img alt="SP / Slack View" src="_images/slack_integration_11.png" /></p>
+<p>For the SkyPortal user to stop Slack notifications, they only need to toggle off the Slack Integration button in the <strong>Profile</strong> page.</p>
+</section>
+</section>
+<section id="notes-on-reliability-and-security">
+<h2>Notes on Reliability and Security<a class="headerlink" href="#notes-on-reliability-and-security" title="Permalink to this headline"></a></h2>
+<p>Unlike a fault-tolerant pub-sub mechanism like XMPP Jabber, Slack notifications are not guaranteed to be delivered. If any part of the communication fails (e.g., Slack downtime or SkyPortal errors), the Slack messaging will not work. Users should not rely upon receiving Slack messages to perform mission critical work.</p>
+<p>The Slack Admin is trusted to verify that the SkyPortal user they send a Webhook URL to is the same person (or entity) represented in their Slack Workspace.  For most use cases this is a reasonable measure to keep SkyPortal data secure. In addition, while the names and URLs of sources are shown in Slack, no other information (such as comments or classification results) is transmitted. So even if identities are mismatched or channels are compromised, a Slack user with unauthorized access will not be able to access substantive information in SkyPortal.</p>
+<p>The Slack admin may delete the Slack App for their workspace at any time, invalidating all webhooks.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="permissions.html" class="btn btn-neutral float-left" title="Access controls" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="advanced_usage.html" class="btn btn-neutral float-right" title="Advanced usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, The SkyPortal Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
