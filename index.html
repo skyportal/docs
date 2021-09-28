@@ -116,8 +116,12 @@ GitHub</a>:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ git clone --recurse-submodules git@github.com:skyportal/skyportal.git
 </pre></div>
 </div>
-<p>then install the <a class="reference external" href="./setup.html#dependencies">system dependencies</a>. From the
-<code class="docutils literal notranslate"><span class="pre">skyportal</span></code> directory, run</p>
+<p>then install the <a class="reference external" href="./setup.html#dependencies">system dependencies</a>. If you haven’t
+already initialized the database, from the <code class="docutils literal notranslate"><span class="pre">skyportal</span></code> directory, run</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ make db_init
+</pre></div>
+</div>
+<p>Then start the app with</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ make run
 </pre></div>
 </div>
