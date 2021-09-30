@@ -95,14 +95,14 @@ is associated with.</p>
 <code class="docutils literal notranslate"><span class="pre">api/comment/&lt;commentID&gt;</span></code></p>
 <p>In the new framework, a comment on a source must be accessed via
 the source path:
-<code class="docutils literal notranslate"><span class="pre">api/sources/&lt;sourceID&gt;/comment/&lt;commentID&gt;</span></code></p>
+<code class="docutils literal notranslate"><span class="pre">api/sources/&lt;sourceID&gt;/comments/&lt;commentID&gt;</span></code></p>
 <p>This also applies to comments on spectra:
-<code class="docutils literal notranslate"><span class="pre">api/spectrum/&lt;spectrumID&gt;/comment/&lt;commentID&gt;</span></code></p>
+<code class="docutils literal notranslate"><span class="pre">api/spectra/&lt;spectrumID&gt;/comments/&lt;commentID&gt;</span></code></p>
 <p>For annotations, use:
-<code class="docutils literal notranslate"><span class="pre">api/sources/&lt;sourceID&gt;/annotation/&lt;annotationID&gt;</span></code></p>
+<code class="docutils literal notranslate"><span class="pre">api/sources/&lt;sourceID&gt;/annotations/&lt;annotationID&gt;</span></code></p>
 <p>In all cases, when posting a new comment/annotation,
 do not supply a commentID or annotationID at the end of the path, e.g.,
-POST to <code class="docutils literal notranslate"><span class="pre">api/sources/&lt;sourceID&gt;/comment</span></code>.</p>
+POST to <code class="docutils literal notranslate"><span class="pre">api/sources/&lt;sourceID&gt;/comments</span></code>.</p>
 <p>Any existing scripts that use the comment or annotation
 API must be changed accordingly.</p>
 </section>
