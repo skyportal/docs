@@ -372,7 +372,7 @@ the mapped class directly and returns mapped instances.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="skyportal.models.Annotation">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">skyportal.models.</span></span><span class="sig-name descname"><span class="pre">Annotation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#skyportal.models.Annotation" title="Permalink to this definition"></a></dt>
-<dd><p>A sortable/searchable Annotation made by a filter or other robot,
+<dd><p>A sortable/searchable Annotation on a source, made by a filter or other robot,
 with a set of data as JSON</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes</dt>
@@ -439,7 +439,10 @@ with a set of data as JSON</p>
 <col style="width: 25%" />
 </colgroup>
 <tbody>
-<tr class="row-odd"><td><p><strong>construct_author_info_dict</strong></p></td>
+<tr class="row-odd"><td><p><strong>backref_name</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>construct_author_info_dict</strong></p></td>
 <td></td>
 </tr>
 </tbody>
@@ -2697,6 +2700,8 @@ positional uncertainties, name, and redshift.</p>
 <dt><strong>angular_diameter_distance</strong></dt><dd></dd>
 <dt><strong>annotations</strong></dt><dd><p>Auto-annotations posted about the object.</p>
 </dd>
+<dt><strong>annotations_on_spectra</strong></dt><dd><p>Auto-annotations posted about a spectrum belonging to the object.</p>
+</dd>
 <dt><strong>assignments</strong></dt><dd><p>Assignments of the object to classical observing runs.</p>
 </dd>
 <dt><strong>candidates</strong></dt><dd><p>Instances in which this Obj passed a group’s filter.</p>
@@ -2931,6 +2936,12 @@ zero degrees.</p>
 <dt class="sig sig-object py" id="skyportal.models.Obj.annotations">
 <span class="sig-name descname"><span class="pre">annotations</span></span><a class="headerlink" href="#skyportal.models.Obj.annotations" title="Permalink to this definition"></a></dt>
 <dd><p>Auto-annotations posted about the object.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.Obj.annotations_on_spectra">
+<span class="sig-name descname"><span class="pre">annotations_on_spectra</span></span><a class="headerlink" href="#skyportal.models.Obj.annotations_on_spectra" title="Permalink to this definition"></a></dt>
+<dd><p>Auto-annotations posted about a spectrum belonging to the object.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -3757,6 +3768,8 @@ dispersive element.</p>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>altdata</strong></dt><dd><p>Miscellaneous alternative metadata.</p>
 </dd>
+<dt><strong>annotations</strong></dt><dd><p>Annotations posted about this spectrum.</p>
+</dd>
 <dt><strong>assignment</strong></dt><dd></dd>
 <dt><strong>assignment_id</strong></dt><dd></dd>
 <dt><strong>comments</strong></dt><dd><p>Comments posted about this spectrum.</p>
@@ -3849,6 +3862,12 @@ Defaults to ‘fsource’.</p>
 <dt class="sig sig-object py" id="skyportal.models.Spectrum.altdata">
 <span class="sig-name descname"><span class="pre">altdata</span></span><a class="headerlink" href="#skyportal.models.Spectrum.altdata" title="Permalink to this definition"></a></dt>
 <dd><p>Miscellaneous alternative metadata.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="skyportal.models.Spectrum.annotations">
+<span class="sig-name descname"><span class="pre">annotations</span></span><a class="headerlink" href="#skyportal.models.Spectrum.annotations" title="Permalink to this definition"></a></dt>
+<dd><p>Annotations posted about this spectrum.</p>
 </dd></dl>
 
 <dl class="py attribute">
@@ -5780,6 +5799,7 @@ specified User (or Token instance, if a token is passed).</p>
 <dt><strong>acls</strong></dt><dd><p>ACLs granted to user, separate from role-level ACLs</p>
 </dd>
 <dt><strong>annotations</strong></dt><dd></dd>
+<dt><strong>annotations_on_spectra</strong></dt><dd></dd>
 <dt><strong>assignments</strong></dt><dd><p>Objs the User has assigned to ObservingRuns.</p>
 </dd>
 <dt><strong>comments</strong></dt><dd></dd>
