@@ -108,11 +108,14 @@ Here is a working example:</p>
 <span class="n">header</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;token </span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;content_type&quot;</span><span class="p">:</span> <span class="s2">&quot;application/json&quot;</span><span class="p">}</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;obj_id&#39;</span><span class="p">:</span> <span class="s1">&#39;2021example&#39;</span><span class="p">,</span>
         <span class="s1">&#39;origin&#39;</span><span class="p">:</span> <span class="s1">&#39;cross_match_robot&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;Gaia&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;Mag_G&#39;</span><span class="p">,</span> <span class="mf">10.2</span><span class="p">,</span>
-                 <span class="s1">&#39;Mag_Bp&#39;</span><span class="p">:</span> <span class="mf">9.8</span><span class="p">,</span>
-                 <span class="s1">&#39;Mag_Rp&#39;</span><span class="p">:</span> <span class="mf">10.5</span><span class="p">,</span>
-                 <span class="s1">&#39;Plx&#39;</span><span class="p">:</span> <span class="mf">8.5</span>
-                 <span class="p">}</span>
+        <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;Gaia&#39;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s1">&#39;Mag_G&#39;</span><span class="p">,</span> <span class="mf">10.2</span><span class="p">,</span>
+                <span class="s1">&#39;Mag_Bp&#39;</span><span class="p">:</span> <span class="mf">9.8</span><span class="p">,</span>
+                <span class="s1">&#39;Mag_Rp&#39;</span><span class="p">:</span> <span class="mf">10.5</span><span class="p">,</span>
+                <span class="s1">&#39;Plx&#39;</span><span class="p">:</span> <span class="mf">8.5</span>
+               <span class="p">}</span>
+            <span class="p">}</span>
         <span class="p">}</span>
 
 <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
@@ -136,7 +139,7 @@ to comply with the <code class="docutils literal notranslate"><span class="pre">
 namely it must have a valid <code class="docutils literal notranslate"><span class="pre">obj_id</span></code>
 of an existing object that is accessible to the user,
 it must contain a non-empty string for the <code class="docutils literal notranslate"><span class="pre">origin</span></code>
-and it should contain the <code class="docutils literal notranslate"><span class="pre">Annotation</span></code> data,
+and it should contain the annotation <code class="docutils literal notranslate"><span class="pre">data</span></code>,
 that is a dictionary with arbitrary entries.</p>
 <p>In general, the <code class="docutils literal notranslate"><span class="pre">origin</span></code> field is used to
 enumerate the different services that would
@@ -147,8 +150,8 @@ to each source, but that <code class="docutils literal notranslate"><span class=
 the system only recognizes annotations
 with a specific schema:</p>
 <ul class="simple">
-<li><p>One of the keys in the <code class="docutils literal notranslate"><span class="pre">Annotation</span></code> data must be named <code class="docutils literal notranslate"><span class="pre">Gaia</span></code>.</p></li>
-<li><p>The value of that key must be a dictionary.</p></li>
+<li><p>One of the keys in the annotation <code class="docutils literal notranslate"><span class="pre">data</span></code> must be named <code class="docutils literal notranslate"><span class="pre">Gaia</span></code>.</p></li>
+<li><p>The value of that key must be another dictionary.</p></li>
 <li><p>That dictionary must contain the following entries:</p></li>
 <li><p>`Mag_G’, ‘Mag_Bp’, ‘Mag_Rp’, ‘Plx’.</p></li>
 <li><p>All these names (including the catalog name) may be made customizable
