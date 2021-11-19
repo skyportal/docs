@@ -57,6 +57,7 @@
 <li class="toctree-l1"><a class="reference internal" href="query_analysis.html">Analyzing database queries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="permissions.html">Access controls</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Slack Integration</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#slack-app-manage">Slack App: Manage</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#slack-app-creation-one-time-admin-set-up">Slack App Creation: One-time Admin Set Up</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#connecting-skyportal-users-to-slack">Connecting SkyPortal Users to Slack</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#slack-admin-steps">Slack Admin Steps</a></li>
@@ -96,6 +97,11 @@
 <h1>Slack Integration<a class="headerlink" href="#slack-integration" title="Permalink to this headline"></a></h1>
 <p>While the SkyPortal frontend already has real-time notifications for comment mentions and source updates in the browser, users may also wish to see these in Slack.</p>
 <p>The Slack integration allows notifications for a given user to be mirrored to a Slack channel of choice. To set this up, the Slack workspace administrator generates a webhook URL (one per user/channel combination), and the user then adds that URL to their <strong>Profile</strong> page.</p>
+<section id="slack-app-manage">
+<h2>Slack App: Manage<a class="headerlink" href="#slack-app-manage" title="Permalink to this headline"></a></h2>
+<p>To manage an existing integration as a Slack workspace admin (e.g., add a new SkyPortal user or delete a webhook) you can jump to <a class="reference external" href="https://api.slack.com/apps">https://api.slack.com/apps</a>, then choose the app from the “Your Apps” list, then click “Incoming Webhooks.”</p>
+<p>Otherwise to create a new Slack App, see the following section.</p>
+</section>
 <section id="slack-app-creation-one-time-admin-set-up">
 <h2>Slack App Creation: One-time Admin Set Up<a class="headerlink" href="#slack-app-creation-one-time-admin-set-up" title="Permalink to this headline"></a></h2>
 <p>We first need to create a “Slack App” that acts as a conduit from SkyPortal to Slack. A logged in Slack Admin for a workspace should navigate to:</p>
