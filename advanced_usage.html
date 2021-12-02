@@ -58,6 +58,7 @@
 <li class="toctree-l1"><a class="reference internal" href="slack.html">Slack Integration</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Advanced usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#posting-color-magnitude-data-to-generate-an-hr-diagram">Posting color-magnitude data to generate an HR diagram</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#upgrading-an-existing-taxonomy">Upgrading an existing Taxonomy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#spectroscopic-lines">Spectroscopic lines</a></li>
 </ul>
 </li>
@@ -169,6 +170,46 @@ should contain a <code class="docutils literal notranslate"><span class="pre">st
 with the data that was posted.
 If the posting was unsuccessful,
 the status would be 400.</p>
+</section>
+<section id="upgrading-an-existing-taxonomy">
+<h2>Upgrading an existing Taxonomy<a class="headerlink" href="#upgrading-an-existing-taxonomy" title="Permalink to this headline"></a></h2>
+<p>Taxonomies are used for classification. There is typically a sitewide taxonomy that all users of SkyPortal can see. By default, we seed a new SP database with the latest taxonomy from the <a class="reference external" href="https://github.com/profjsb/timedomain-taxonomy">Time-domain Astronomy Taxonomy
+(Github)</a> (<code class="docutils literal notranslate"><span class="pre">tdtax</span></code>). From time to time, the latest taxonomy may be upgraded as new subclasses of sources are discovered and SP admins may need to push a new version of the taxonomy to the live application.</p>
+<p>To upgrade to the latest <code class="docutils literal notranslate"><span class="pre">tdtax</span></code>, as an admin, you will need to generate a token with a “Post taxonomy” ACL. Next install the latest <code class="docutils literal notranslate"><span class="pre">tdtax</span></code> on your system:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">tdtax</span>
+</pre></div>
+</div>
+<p>Next, in Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">tdtax</span>
+
+<span class="n">tax_obj</span> <span class="o">=</span>  <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Sitewide Taxonomy&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;provenance&#39;</span><span class="p">:</span> <span class="s1">&#39;https://github.com/profjsb/timedomain-taxonomy&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;hierarchy&#39;</span><span class="p">:</span> <span class="n">tdtax</span><span class="o">.</span><span class="n">taxonomy</span><span class="p">,</span>
+            <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">tdtax</span><span class="o">.</span><span class="n">__version__</span><span class="p">),</span>
+<span class="p">}</span>
+
+<span class="n">token</span> <span class="o">=</span> <span class="s2">&quot;USE-YOUR-TOKEN-HERE&quot;</span>
+<span class="k">def</span> <span class="nf">api</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Authorization&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;token </span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">}</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">response</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">api</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;URL_TO_SKYPORTAL_INSTANCE/api/taxonomy&#39;</span><span class="p">,</span>
+                <span class="n">data</span><span class="o">=</span><span class="n">tax_obj</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>You should then see something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;success&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;taxonomy_id&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span>
+ <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="s1">&#39;0.9.dev0+git...&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>If the <code class="docutils literal notranslate"><span class="pre">name</span></code> of the taxonomy is exactly the same as a taxonomy already in the system, this new taxonomy will supercede that taxonomy. That is, by default it will be set to be the latest version (<code class="docutils literal notranslate"><span class="pre">IsLatest</span> <span class="pre">=</span> <span class="pre">True</span></code>) and shown to end users in the dropdown menu on the Source page. Older classifications will be still associated with the <code class="docutils literal notranslate"><span class="pre">taxonomy_id</span></code> they were originally connected to.</p>
+<p>NOTE: in very rare cases you may wish to delete a taxonomy (e.g., if you made a typo when loading it). This should be done with extreme care: if anyone has classifications associated with that taxonomy their classifications will be lost upon delete.</p>
 </section>
 <section id="spectroscopic-lines">
 <h2>Spectroscopic lines<a class="headerlink" href="#spectroscopic-lines" title="Permalink to this headline"></a></h2>
