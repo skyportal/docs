@@ -107,7 +107,7 @@ to be sent to the underlying database - in our case PostgreSQL.</p>
 </pre></div>
 </div>
 <p>would yield the following Postgres-dialect SQL query</p>
-<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="n">instruments</span><span class="p">.</span><span class="n">id</span> <span class="k">FROM</span> <span class="n">instruments</span> <span class="k">WHERE</span> <span class="n">instruments</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<div class="highlight-SQL notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span><span class="w"> </span><span class="n">instruments</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">instruments</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">instruments</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>A good first step to debugging or looking for inefficiencies in a query made by the SkyPortal backend

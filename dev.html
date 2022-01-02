@@ -199,8 +199,8 @@ make use of include:</p>
 <section id="debugging-github-actions">
 <h2>Debugging GitHub Actions<a class="headerlink" href="#debugging-github-actions" title="Permalink to this headline"></a></h2>
 <p>You can insert the following step to debug your workflow:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">Setup tmate session</span>
-  <span class="nt">uses</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mxschmitt/action-tmate@v2</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Setup tmate session</span><span class="w"></span>
+<span class="w">  </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mxschmitt/action-tmate@v2</span><span class="w"></span>
 </pre></div>
 </div>
 <p>It will print a command that you can use to SSH into the runner.</p>
