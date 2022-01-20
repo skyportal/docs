@@ -815,35 +815,41 @@ multiple Roles.</p>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">adapt</span></code>(cls, **kw)</p></td>
 <td><p>Produce an &quot;adapted&quot; form of this type, given an &quot;impl&quot; class to work with.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bind_expression</span></code>(bindparam)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">as_generic</span></code>([allow_nulltype])</p></td>
+<td><p>Return an instance of the generic type corresponding to this type using heuristic rule.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bind_expression</span></code>(bindparam)</p></td>
 <td><p>Given a bind value (i.e.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bind_processor</span></code>(dialect)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bind_processor</span></code>(dialect)</p></td>
 <td><p>Provide a bound value processing function for the given <code class="xref py py-class docutils literal notranslate"><span class="pre">Dialect</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coerce_compared_value</span></code>(op, value)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">coerce_compared_value</span></code>(op, value)</p></td>
 <td><p>Suggest a type for a 'coerced' Python value in an expression.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">column_expression</span></code>(column)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">column_expression</span></code>(column)</p></td>
 <td><p>Given a SELECT column expression, return a wrapping SQL expression.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compare_against_backend</span></code>(dialect, conn_type)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compare_against_backend</span></code>(dialect, conn_type)</p></td>
 <td><p>Compare this type against the given backend type.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compare_values</span></code>(x, y)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compare_values</span></code>(x, y)</p></td>
 <td><p>Given two values, compare them for equality.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compile</span></code>([dialect])</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compile</span></code>([dialect])</p></td>
 <td><p>Produce a string-compiled form of this <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeEngine</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code>(**kw)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code>(**kw)</p></td>
 <td><p>Produce a copy of this <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeDecorator</span></code> instance.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dialect_impl</span></code>(dialect)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dialect_impl</span></code>(dialect)</p></td>
 <td><p>Return a dialect-specific implementation for this <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeEngine</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluates_none</span></code>()</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluates_none</span></code>()</p></td>
 <td><p>Return a copy of this type which has the <code class="xref py py-attr docutils literal notranslate"><span class="pre">should_evaluate_none</span></code> flag set to True.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_children</span></code>([omit_attrs])</p></td>
+<td><p>Return immediate child <code class="xref py py-class docutils literal notranslate"><span class="pre">visitors.Traversible</span></code> elements of this <code class="xref py py-class docutils literal notranslate"><span class="pre">visitors.Traversible</span></code>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_dbapi_type</span></code>(dbapi)</p></td>
 <td><p>Return the DBAPI type object represented by this <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeDecorator</span></code>.</p></td>
@@ -898,16 +904,14 @@ multiple Roles.</p>
 <dt class="sig sig-object py" id="baselayer.app.models.SlugifiedStr.process_bind_param">
 <span class="sig-name descname"><span class="pre">process_bind_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dialect</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.SlugifiedStr.process_bind_param" title="Permalink to this definition"></a></dt>
 <dd><p>Receive a bound parameter value to be converted.</p>
-<p>Subclasses override this method to return the
-value that should be passed along to the underlying
-<code class="xref py py-class docutils literal notranslate"><span class="pre">TypeEngine</span></code> object, and from there to the
-DBAPI <code class="docutils literal notranslate"><span class="pre">execute()</span></code> method.</p>
+<p>Custom subclasses of <code class="xref py py-class docutils literal notranslate"><span class="pre">_types.TypeDecorator</span></code> should override
+this method to provide custom behaviors for incoming data values.
+This method is called at <strong>statement execution time</strong> and is passed
+the literal Python data value which is to be associated with a bound
+parameter in the statement.</p>
 <p>The operation could be anything desired to perform custom
 behavior, such as transforming or serializing data.
 This could also be used as a hook for validating logic.</p>
-<p>This operation should be designed with the reverse operation
-in mind, which would be the process_result_value method of
-this class.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -917,22 +921,25 @@ this method in the subclass.  Can be <code class="docutils literal notranslate">
 </ul>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><span class="xref std std-ref">types_typedecorator</span></p>
+<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">_types.TypeDecorator.process_result_value()</span></code></p>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.SlugifiedStr.process_result_value">
 <span class="sig-name descname"><span class="pre">process_result_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dialect</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.SlugifiedStr.process_result_value" title="Permalink to this definition"></a></dt>
 <dd><p>Receive a result-row column value to be converted.</p>
-<p>Subclasses should implement this method to operate on data
-fetched from the database.</p>
-<p>Subclasses override this method to return the
-value that should be passed back to the application,
-given a value that is already processed by
-the underlying <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeEngine</span></code> object, originally
-from the DBAPI cursor method <code class="docutils literal notranslate"><span class="pre">fetchone()</span></code> or similar.</p>
+<p>Custom subclasses of <code class="xref py py-class docutils literal notranslate"><span class="pre">_types.TypeDecorator</span></code> should override
+this method to provide custom behaviors for data values
+being received in result rows coming from the database.
+This method is called at <strong>result fetching time</strong> and is passed
+the literal Python data value that’s extracted from a database result
+row.</p>
 <p>The operation could be anything desired to perform custom
-behavior, such as transforming or serializing data.
-This could also be used as a hook for validating logic.</p>
+behavior, such as transforming or deserializing data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -942,8 +949,11 @@ this method in the subclass.  Can be <code class="docutils literal notranslate">
 </ul>
 </dd>
 </dl>
-<p>This operation should be designed to be reversible by
-the “process_bind_param” method of this class.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><span class="xref std std-ref">types_typedecorator</span></p>
+<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">_types.TypeDecorator.process_bind_param()</span></code></p>
+</div>
 </dd></dl>
 
 </dd></dl>
@@ -1878,7 +1888,7 @@ Default 3600.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="baselayer.app.models.join_model">
-<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">join_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">join_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_1=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_2=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fk_1='id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fk_2='id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base=&lt;class</span> <span class="pre">'sqlalchemy.ext.declarative.api.Base'&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.join_model" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">join_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">join_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_1=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_2=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fk_1='id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fk_2='id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base=&lt;class</span> <span class="pre">'sqlalchemy.orm.decl_api.Base'&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.join_model" title="Permalink to this definition"></a></dt>
 <dd><p>Helper function to create a join table for a many-to-many relationship.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
