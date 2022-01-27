@@ -64,6 +64,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#skyportal-user-steps">SkyPortal User Steps</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#use-as-an-instrument-triggering-api">Use as an instrument triggering API</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#notes-on-reliability-and-security">Notes on Reliability and Security</a></li>
 </ul>
 </li>
@@ -131,6 +132,10 @@
 <p><img alt="SP / Slack View" src="_images/slack_integration_11.png" /></p>
 <p>For the SkyPortal user to stop Slack notifications, they only need to toggle off the Slack Integration button in the <strong>Profile</strong> page.</p>
 </section>
+</section>
+<section id="use-as-an-instrument-triggering-api">
+<h2>Use as an instrument triggering API<a class="headerlink" href="#use-as-an-instrument-triggering-api" title="Permalink to this headline"></a></h2>
+<p>We have enabled the use of Slack for instrument “triggering,” enabling a push of a transient follow-up request similar to done for other instruments. To enable this, an instrument needs <code class="docutils literal notranslate"><span class="pre">SLACKAPI</span></code> added as its triggering API, and in the instrument allocation, <code class="docutils literal notranslate"><span class="pre">_altdata</span></code> should look like <code class="docutils literal notranslate"><span class="pre">{&quot;slack_workspace&quot;:</span> <span class="pre">&quot;XXX&quot;,</span> <span class="pre">&quot;slack_channel&quot;:</span> <span class="pre">&quot;YYY&quot;,</span> <span class="pre">&quot;slack_token&quot;:</span> <span class="pre">&quot;ZZZ&quot;}</span></code> with the appropriate values. The Slack endpoint will be POSTed to <code class="docutils literal notranslate"><span class="pre">{SLACK_URL}/{altdata['slack_workspace']}/{altdata['slack_channel']}/{altdata['slack_token']}</span></code></p>
 </section>
 <section id="notes-on-reliability-and-security">
 <h2>Notes on Reliability and Security<a class="headerlink" href="#notes-on-reliability-and-security" title="Permalink to this headline"></a></h2>
