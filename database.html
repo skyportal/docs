@@ -100,27 +100,7 @@ interacts with it.</p>
 Each database table is represented by a Python class, and each table Column
 is represented by a class attribute. This Section documents each of the
 SkyPortal and baselayer classes that are mapped to database tables.</p>
-<span class="target" id="module-skyportal.models"></span><dl class="py attribute">
-<dt class="sig sig-object py" id="skyportal.models.token_groups">
-<span class="sig-prename descclassname"><span class="pre">skyportal.models.</span></span><span class="sig-name descname"><span class="pre">token_groups</span></span><a class="headerlink" href="#skyportal.models.token_groups" title="Permalink to this definition"></a></dt>
-<dd><p>The groups the Token owner is a member of.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="skyportal.models.user_or_token_accessible_groups">
-<span class="sig-prename descclassname"><span class="pre">skyportal.models.</span></span><span class="sig-name descname"><span class="pre">user_or_token_accessible_groups</span></span><a class="headerlink" href="#skyportal.models.user_or_token_accessible_groups" title="Permalink to this definition"></a></dt>
-<dd><p>Return the list of Groups a User or Token has access to. For non-admin
-Users or Token owners, this corresponds to the Groups they are a member of.
-For System Admins, this corresponds to all Groups.</p>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="skyportal.models.user_or_token_accessible_streams">
-<span class="sig-prename descclassname"><span class="pre">skyportal.models.</span></span><span class="sig-name descname"><span class="pre">user_or_token_accessible_streams</span></span><a class="headerlink" href="#skyportal.models.user_or_token_accessible_streams" title="Permalink to this definition"></a></dt>
-<dd><p>Return the list of Streams a User or Token has access to.</p>
-</dd></dl>
-
-<span class="target" id="module-baselayer.app.models"></span><dl class="py class">
+<span class="target" id="module-skyportal.models"></span><span class="target" id="module-baselayer.app.models"></span><dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.ACL">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">ACL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.ACL" title="Permalink to this definition"></a></dt>
 <dd><p>An access control list item representing a privilege within the
