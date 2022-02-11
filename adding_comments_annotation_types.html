@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adding a new type of Comment or Annotation &mdash; skyportal 0.9.dev0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/output_cells.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> skyportal
+          </a>
+              <div class="version">
+                0.9.dev0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="design.html">System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Developer notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_loader.html">Data loader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_features.html">Adding new features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="styling.html">Styling components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migrations.html">Database migrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="query_analysis.html">Analyzing database queries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions.html">Access controls</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slack.html">Slack Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_usage.html">Advanced usage</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">skyportal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Adding a new type of Comment or Annotation</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="adding-a-new-type-of-comment-or-annotation">
+<h1>Adding a new type of Comment or Annotation<a class="headerlink" href="#adding-a-new-type-of-comment-or-annotation" title="Permalink to this headline"></a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">Comment</span></code>s and <code class="docutils literal notranslate"><span class="pre">Annotation</span></code>s are made by default on <code class="docutils literal notranslate"><span class="pre">Obj</span></code>s.
+Some of the other data models can also be commented on or annotated.
+An example is <code class="docutils literal notranslate"><span class="pre">Spectrum</span></code> that can be commented on and annotated
+using <code class="docutils literal notranslate"><span class="pre">CommentOnSpectrum</span></code> and <code class="docutils literal notranslate"><span class="pre">AnnotationOnSpectrum</span></code>.</p>
+<p>Here is a list of parts of the code that need to be modified
+to allow comments or annotations on new types of data.
+To make a new <code class="docutils literal notranslate"><span class="pre">Comment</span></code> type:</p>
+<ul class="simple">
+<li><p>Inherit from <code class="docutils literal notranslate"><span class="pre">CommentMixin</span></code> (as well as from <code class="docutils literal notranslate"><span class="pre">Base</span></code>).</p></li>
+<li><p>Add the name of the table to the <code class="docutils literal notranslate"><span class="pre">backref_name</span></code> function on <code class="docutils literal notranslate"><span class="pre">CommentMixin</span></code>.</p></li>
+<li><p>Add any additional columns, like a reference to a model the comment is on.</p></li>
+<li><p>Add the comment as a relationship with <code class="docutils literal notranslate"><span class="pre">back_populates</span></code> (etc.) on the model you are commenting on.
+(e.g., for <code class="docutils literal notranslate"><span class="pre">CommentOnSpectrum</span></code> you need to add <code class="docutils literal notranslate"><span class="pre">comments</span></code> to <code class="docutils literal notranslate"><span class="pre">models/spectrum.py</span></code>)</p></li>
+<li><p>Add a <code class="docutils literal notranslate"><span class="pre">join</span></code> to <code class="docutils literal notranslate"><span class="pre">models/group_joins.py</span></code> so comments will have groups associated with them.</p></li>
+<li><p>Add a <code class="docutils literal notranslate"><span class="pre">join</span></code> to <code class="docutils literal notranslate"><span class="pre">models/user_token.py</span></code> so comments will have a user associated with them.</p></li>
+<li><p>Update the API endpoints for comments, and the reducers to listen for changes in the comments.</p></li>
+<li><p>Update the <code class="docutils literal notranslate"><span class="pre">app_server.py</span></code> paths to accept the new type of comment upon API calls.</p></li>
+</ul>
+<p>The list regards new <code class="docutils literal notranslate"><span class="pre">Comment</span></code> types on new data models,
+but an equivalent list exists for new <code class="docutils literal notranslate"><span class="pre">Annotation</span></code> types.
+As a detailed example, look for the <code class="docutils literal notranslate"><span class="pre">CommentOnSpectrum</span></code>
+found in the abovementioned files.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, The SkyPortal Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
