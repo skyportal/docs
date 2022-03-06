@@ -18,7 +18,9 @@
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Advanced usage" href="advanced_usage.html" />
+    <link rel="prev" title="Slack Integration" href="slack.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,7 +41,7 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="design.html">System Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
@@ -55,6 +57,11 @@
 <li class="toctree-l1"><a class="reference internal" href="query_analysis.html">Analyzing database queries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="permissions.html">Access controls</a></li>
 <li class="toctree-l1"><a class="reference internal" href="slack.html">Slack Integration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MMA Features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#follow-up-triggering">Follow-up triggering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uploading-executed-observations">Uploading executed observations</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_usage.html">Advanced usage</a></li>
 </ul>
 
@@ -97,6 +104,7 @@
 <li><p>LCO: A user account must be made on https://lco.global/, at which point the authentication takes the form {”PROPOSAL_ID”: “your_proposal_ID”, “API_TOKEN”: “testtoken”}.</p></li>
 <li><p>LT: A proposal ID, username, and password are passed as {”username”: “username”, “password”: “password”, “LT_proposalID”: “your_proposal_ID”}.</p></li>
 <li><p>SLACK: As discussed further <a class="reference external" href="./slack.html">here</a>, slack information is pass as {”slack_workspace”: “XXX”, “slack_channel”: “YYY”, “slack_token”: “ZZZ”}.</p></li>
+<li><p>SWIFT: A username and password are passed as {”username”: “username”, “secret”: “password”}.</p></li>
 <li><p>ZTF: An API token for an admin user for <a class="reference external" href="https://github.com/dmitryduev/kowalski">Kowalski</a> can be passed as {”access_token”: “your_token”}.</p></li>
 </ul>
 </section>
@@ -114,7 +122,10 @@
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="slack.html" class="btn btn-neutral float-left" title="Slack Integration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="advanced_usage.html" class="btn btn-neutral float-right" title="Advanced usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
