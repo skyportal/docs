@@ -60,6 +60,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">MMA Features</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#follow-up-triggering">Follow-up triggering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#uploading-executed-observations">Uploading executed observations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#executed-observations-api-upload">Executed Observations API Upload</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_usage.html">Advanced usage</a></li>
@@ -116,6 +117,13 @@
 84434651,1,2458598.8465162003,1.5812000000,20.4940500000,30,ztfr,1.00000
 84434696,1,2458598.8469676003,1.6499500000,20.5603000000,30,ztfr,1.00000</p>
 <p>where observation_id (the ID of the observations, does not need to be unique), the field_id, the observation time (in JD), the seeing (in arcseconds), the limiting magnitude, the exposure time (in seconds), the filter, and the “processed_fraction” (what fraction of the image was successfully processed) are potential columns. We note that only observation_id, field_id, obstime, filter, and exposure_time required.</p>
+</section>
+<section id="executed-observations-api-upload">
+<h2>Executed Observations API Upload<a class="headerlink" href="#executed-observations-api-upload" title="Permalink to this headline"></a></h2>
+<p>As part of the <code class="docutils literal notranslate"><span class="pre">ObservationPlanRequest</span></code> API, it is possible to retrieve <code class="docutils literal notranslate"><span class="pre">ExecutedObservation</span></code>s. We briefly describe the authentication form the available telescopes take below:</p>
+<ul class="simple">
+<li><p>ZTF: Login information for IRSA, which takes the form: {”tap_service”: “https://irsa.ipac.caltech.edu/TAP”, “tap_username”: “your_password”, “tap_password”: “your_password”}</p></li>
+</ul>
 </section>
 </section>
 
