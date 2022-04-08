@@ -111,6 +111,11 @@ how to install them on MacOS and Debian-based systems below.</p>
 <li><p>PostgreSQL (v&gt;=9.6)</p></li>
 <li><p>Node.JS/npm (v&gt;=5.8.0)</p></li>
 </ul>
+<p>When installing SkyPortal on Debian-based systems, 2 additional packages are required to be able to install pycurl later on:</p>
+<ul class="simple">
+<li><p>libcurl4-gnutls-dev</p></li>
+<li><p>libgnutls28-dev</p></li>
+</ul>
 </section>
 <section id="source-download-python-environment">
 <h2>Source download, Python environment<a class="headerlink" href="#source-download-python-environment" title="Permalink to this headline"></a></h2>
@@ -159,7 +164,7 @@ virtual environment.</p>
 <ol class="simple">
 <li><p>Install dependencies</p></li>
 </ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">nginx</span> <span class="n">supervisor</span> <span class="n">postgresql</span> <span class="n">libpq</span><span class="o">-</span><span class="n">dev</span> <span class="n">npm</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">nginx</span> <span class="n">supervisor</span> <span class="n">postgresql</span> <span class="n">libpq</span><span class="o">-</span><span class="n">dev</span> <span class="n">npm</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span> <span class="n">libcurl4</span><span class="o">-</span><span class="n">gnutls</span><span class="o">-</span><span class="n">dev</span> <span class="n">libgnutls28</span><span class="o">-</span><span class="n">dev</span>
 </pre></div>
 </div>
 <ol class="simple">
