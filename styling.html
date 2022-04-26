@@ -100,40 +100,40 @@
 (MUI).  We have evaluated several styling systems, including inline
 styles, CSS Modules, and Styled Components, and have settled on using
 <a class="reference external" href="https://material-ui.com/styles/basics/#hook-api">MUI’s style hooks API</a>.</p>
-<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="p">{</span> <span class="nx">makeStyles</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@material-ui/core/styles&#39;</span><span class="p">;</span>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">makeStyles</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@material-ui/core/styles&#39;</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>MUI provides <code class="docutils literal notranslate"><span class="pre">makeStyles</span></code>, which takes in JSS (JavaScript Style
 Sheets) and returns a CSS provider <a class="reference external" href="https://reactjs.org/docs/hooks-reference.html">hook</a>:</p>
-<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span> <span class="nx">useStyles</span> <span class="o">=</span> <span class="nx">makeStyles</span><span class="p">({</span>
-  <span class="nx">root</span><span class="o">:</span> <span class="p">{</span>
-    <span class="nx">border</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
-    <span class="nx">padding</span><span class="o">:</span> <span class="s1">&#39;1rem&#39;</span><span class="p">,</span>
-  <span class="p">},</span>
-<span class="p">});</span>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">useStyles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeStyles</span><span class="p">({</span><span class="w"></span>
+<span class="w">  </span><span class="nx">root</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">border</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nx">padding</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;1rem&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The resulting <code class="docutils literal notranslate"><span class="pre">useStyles</span></code> can then be used inside of a component:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nx">Button</span> <span class="kr">from</span> <span class="s1">&#39;@material-ui/core/Button&#39;</span><span class="p">;</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nx">Button</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@material-ui/core/Button&#39;</span><span class="p">;</span><span class="w"></span>
 
-<span class="kd">const</span> <span class="nx">MyButton</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="kd">const</span> <span class="nx">classes</span> <span class="o">=</span> <span class="nx">useStyles</span><span class="p">();</span>
-  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">Button</span> <span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="nx">classes</span><span class="p">.</span><span class="nx">root</span><span class="p">}&gt;</span><span class="nx">Click</span> <span class="nx">Me</span><span class="p">&lt;/</span><span class="nt">Button</span><span class="p">&gt;;</span>
-<span class="p">}</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">MyButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">classes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useStyles</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">Button</span> <span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="nx">classes</span><span class="p">.</span><span class="nx">root</span><span class="p">}&gt;</span><span class="nx">Click</span><span class="w"> </span><span class="nx">Me</span><span class="p">&lt;/</span><span class="nt">Button</span><span class="p">&gt;;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>It is possible to make nested definitions:</p>
-<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span> <span class="nx">useStyles</span> <span class="o">=</span> <span class="nx">makeStyles</span><span class="p">({</span>
-  <span class="nx">root</span><span class="o">:</span> <span class="p">{</span>
-    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;&amp; p&#39;</span><span class="o">:</span> <span class="p">{</span>
-      <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span>
-      <span class="s1">&#39;&amp; span&#39;</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;blue&#39;</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">},</span>
-<span class="p">});</span>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">useStyles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeStyles</span><span class="p">({</span><span class="w"></span>
+<span class="w">  </span><span class="nx">root</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="s1">&#39;&amp; p&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="s1">&#39;&amp; span&#39;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;blue&#39;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
 </pre></div>
 </div>
 <p>This is done via the
@@ -182,14 +182,14 @@ and <code class="docutils literal notranslate"><span class="pre">between</span><
 <li><p><code class="docutils literal notranslate"><span class="pre">theme.breakpoints.up(sm)</span></code>: targets screen sizes <code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">small</span></code></p></li>
 </ul>
 <p>Use it as follows:</p>
-<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span> <span class="nx">useStyles</span> <span class="o">=</span> <span class="nx">makeStyles</span><span class="p">({</span>
-  <span class="nx">root</span><span class="o">:</span> <span class="p">{</span>
-    <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span>
-    <span class="p">[</span><span class="nx">theme</span><span class="p">.</span><span class="nx">breakpoints</span><span class="p">.</span><span class="nx">up</span><span class="p">(</span><span class="s1">&#39;md&#39;</span><span class="p">)]</span><span class="o">:</span> <span class="p">{</span>
-      <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
-    <span class="p">},</span>
-  <span class="p">}</span>
-<span class="p">});</span>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">useStyles</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">makeStyles</span><span class="p">({</span><span class="w"></span>
+<span class="w">  </span><span class="nx">root</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">backgroundColor</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">[</span><span class="nx">theme</span><span class="p">.</span><span class="nx">breakpoints</span><span class="p">.</span><span class="nx">up</span><span class="p">(</span><span class="s1">&#39;md&#39;</span><span class="p">)]</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nx">backgroundColor</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;red&#39;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
 </pre></div>
 </div>
 <p>You may customize media-queries using the
@@ -201,16 +201,16 @@ hook.</p>
 layout</a>.</p>
 <p>There are two <code class="docutils literal notranslate"><span class="pre">Grid</span></code> types: <code class="docutils literal notranslate"><span class="pre">container</span></code> (outer element) and <code class="docutils literal notranslate"><span class="pre">item</span></code>
 (inner elements).</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">container</span> <span class="na">spacing</span><span class="o">=</span><span class="p">{</span><span class="mf">1</span><span class="nx">rem</span><span class="p">}&gt;</span>
-  <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="o">=</span><span class="p">{</span><span class="mf">4</span><span class="p">}&gt;</span>
-    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mf">1</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="o">=</span><span class="p">{</span><span class="mf">4</span><span class="p">}&gt;</span>
-    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mf">2</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="o">=</span><span class="p">{</span><span class="mf">4</span><span class="p">}&gt;</span>
-    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mf">3</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">container</span> <span class="na">spacing</span><span class="o">=</span><span class="p">{</span><span class="mf">1</span><span class="nx">rem</span><span class="p">}&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="o">=</span><span class="p">{</span><span class="mf">4</span><span class="p">}&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span><span class="w"> </span><span class="mf">1</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="o">=</span><span class="p">{</span><span class="mf">4</span><span class="p">}&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span><span class="w"> </span><span class="mf">2</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="o">=</span><span class="p">{</span><span class="mf">4</span><span class="p">}&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span><span class="w"> </span><span class="mf">3</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="w"></span>
+<span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">xs</span></code> above refers to <code class="docutils literal notranslate"><span class="pre">xs</span></code>, the breakpoint from the previous
@@ -219,16 +219,16 @@ and up.
 <a class="reference external" href="https://material-ui.com/components/grid/#grid-with-breakpoints">Multiple breakpoints</a>
 can be specified.</p>
 <p>You can also leave the value of <code class="docutils literal notranslate"><span class="pre">xs</span></code> blank, in which case elements are automatically spaced:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">container</span> <span class="na">spacing</span><span class="o">=</span><span class="p">{</span><span class="mf">1</span><span class="nx">rem</span><span class="p">}&gt;</span>
-  <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mf">1</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="o">=</span><span class="p">{</span><span class="mf">6</span><span class="p">}&gt;</span>
-    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mf">2</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span>
-  <span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span> <span class="mf">3</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">container</span> <span class="na">spacing</span><span class="o">=</span><span class="p">{</span><span class="mf">1</span><span class="nx">rem</span><span class="p">}&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span><span class="w"> </span><span class="mf">1</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="o">=</span><span class="p">{</span><span class="mf">6</span><span class="p">}&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span><span class="w"> </span><span class="mf">2</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">item</span> <span class="na">xs</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="nx">Cell</span><span class="w"> </span><span class="mf">3</span><span class="p">&lt;/</span><span class="nt">Paper</span><span class="p">&gt;</span><span class="w"></span>
+<span class="p">&lt;/</span><span class="nt">Grid</span><span class="p">&gt;</span><span class="w"></span>
 </pre></div>
 </div>
 </section>

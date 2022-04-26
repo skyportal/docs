@@ -113,71 +113,71 @@
 <section id="basic-react-concepts-elements-and-components">
 <h3>Basic React concepts: Elements and Components<a class="headerlink" href="#basic-react-concepts-elements-and-components" title="Permalink to this headline"></a></h3>
 <p>In React, <a class="reference external" href="https://reactjs.org/docs/rendering-elements.html"><em>elements</em></a> are the smallest building blocks of an app and correspond to DOM elements, but are simple JavaScript objects that are cheap to create. Elements describe what should be displayed in the browser. Here’s a simple example of an element (written with a <a class="reference external" href="https://reactjs.org/docs/introducing-jsx.html">JSX</a> tag):</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span> <span class="nx">element</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="nx">Hello</span><span class="p">,</span> <span class="nx">world</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">element</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="nx">Hello</span><span class="p">,</span><span class="w"> </span><span class="nx">world</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span><span class="w"></span>
 </pre></div>
 </div>
 <p><a class="reference external" href="https://reactjs.org/docs/components-and-props.html"><em>Components</em></a> are essentially pure JavaScript functions that take inputs (called “props”) and return elements. Let’s look at a simple example:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span> <span class="nx">Component</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="nx">Hello</span><span class="p">,</span> <span class="nx">world</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
-<span class="p">};</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">Component</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="nx">Hello</span><span class="p">,</span><span class="w"> </span><span class="nx">world</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
 </pre></div>
 </div>
 <p>As you can see, our component is simply a function (written above as an ES6 <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions">arrow function</a>) that returns an element. If arrow functions look unfamiliar, the above component definition is equivalent to:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">Component</span><span class="p">()</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="nx">Hello</span><span class="p">,</span> <span class="nx">world</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
-<span class="p">}</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">Component</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="nx">Hello</span><span class="p">,</span><span class="w"> </span><span class="nx">world</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Components can be defined as classes or functions, but in this tutorial we’ll always use the functional form. As noted above, components can take inputs, called props. Let’s take a look at a simple component that takes a single “props” argument <code class="docutils literal notranslate"><span class="pre">name</span></code>:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span> <span class="nx">Component</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="p">(</span>
-    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>
-      <span class="nx">Hello</span><span class="p">,</span> <span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span>
-    <span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-  <span class="p">);</span>
-<span class="p">};</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">Component</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">props</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">      </span><span class="nx">Hello</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="p">);</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
 </pre></div>
 </div>
 <p>This component returns an element, that, when rendered into the DOM (more on this below), displays a header containing the text “Hello, Maria” (assuming we passed in <code class="docutils literal notranslate"><span class="pre">name='Maria'</span></code>). Inside <a class="reference external" href="https://reactjs.org/docs/introducing-jsx.html">JSX</a> tags, JavaScript expressions must be wrapped in curly braces, as <code class="docutils literal notranslate"><span class="pre">props.name</span></code> is above. If we instantiate this component and pass in the value ‘world’ to the <code class="docutils literal notranslate"><span class="pre">name</span></code> prop, the resulting value is identical to the first element we defined above:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span> <span class="nx">helloWorldElement</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nt">Component</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;world&quot;</span> <span class="p">/&gt;;</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">helloWorldElement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">Component</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;world&quot;</span> <span class="p">/&gt;;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>is identical to:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span> <span class="nx">helloWorldElement</span> <span class="o">=</span> <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="nx">Hello</span><span class="p">,</span> <span class="nx">world</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">helloWorldElement</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="nx">Hello</span><span class="p">,</span><span class="w"> </span><span class="nx">world</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Note that React component names should always be capitalized, as React looks for this to distinguish component tags (e.g. <code class="docutils literal notranslate"><span class="pre">&lt;Component</span> <span class="pre">/&gt;</span></code>) from DOM tags (e.g. <code class="docutils literal notranslate"><span class="pre">&lt;div&gt;...&lt;/div&gt;</span></code>).</p>
 <p>Now we know a bit about React elements and components, but we still haven’t actually rendered anything into the DOM. To render a React element into a DOM node, we pass both into <code class="docutils literal notranslate"><span class="pre">ReactDOM.render()</span></code> Let’s look at a full example:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nx">React</span> <span class="kr">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">ReactDOM</span> <span class="kr">from</span> <span class="s1">&#39;react-dom&#39;</span><span class="p">;</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="k">import</span><span class="w"> </span><span class="nx">ReactDOM</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react-dom&#39;</span><span class="p">;</span><span class="w"></span>
 
 
-<span class="c1">// Define our component:</span>
-<span class="kd">const</span> <span class="nx">Component</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">(</span>
-  <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>
-    <span class="nx">Hello</span><span class="p">,</span> <span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span>
-  <span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-<span class="p">);</span>
+<span class="c1">// Define our component:</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">Component</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">props</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="nx">Hello</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span><span class="w"></span>
+<span class="p">);</span><span class="w"></span>
 
-<span class="c1">// Render the element it returns into the DOM (into the DOM element with ID &quot;root&quot;):</span>
-<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(&lt;</span><span class="nt">Component</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;world&quot;</span> <span class="p">/&gt;,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;root&quot;</span><span class="p">));</span>
+<span class="c1">// Render the element it returns into the DOM (into the DOM element with ID &quot;root&quot;):</span><span class="w"></span>
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(&lt;</span><span class="nt">Component</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;world&quot;</span> <span class="p">/&gt;,</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;root&quot;</span><span class="p">));</span><span class="w"></span>
 </pre></div>
 </div>
 <p>We define our component, then pass an instance of that component (which evaluates to a React element) as the first argument to <code class="docutils literal notranslate"><span class="pre">ReactDOM.render()</span></code>, and pass the DOM element that we want to render our element into as the second argument. (Note that in the above component definition, we’re using an <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions#Function_body">arrow function with a “concise body” implicit return</a>.)</p>
 <p>Components can also render other components, as in the following example:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span> <span class="nx">Welcome</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">(</span>
-  <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="nx">Welcome</span><span class="p">,</span> <span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="p">}&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
-<span class="p">);</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="nx">Welcome</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">props</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="nx">Welcome</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="p">}&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span><span class="w"></span>
+<span class="p">);</span><span class="w"></span>
 
-<span class="kd">const</span> <span class="nx">HomePage</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">(</span>
-  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">Welcome</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;Maria&quot;</span> <span class="p">/&gt;</span>
-    <span class="p">&lt;</span><span class="nt">Welcome</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;Sofia&quot;</span> <span class="p">/&gt;</span>
-    <span class="p">&lt;</span><span class="nt">Welcome</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;Li&quot;</span> <span class="p">/&gt;</span>
-  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">HomePage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">  </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">Welcome</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;Maria&quot;</span> <span class="p">/&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">Welcome</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;Sofia&quot;</span> <span class="p">/&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">Welcome</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;Li&quot;</span> <span class="p">/&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span><span class="w"></span>
+<span class="p">);</span><span class="w"></span>
 
-<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(&lt;</span><span class="nt">HomePage</span> <span class="p">/&gt;,</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;root&quot;</span><span class="p">));</span>
+<span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">render</span><span class="p">(&lt;</span><span class="nt">HomePage</span> <span class="p">/&gt;,</span><span class="w"> </span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;root&quot;</span><span class="p">));</span><span class="w"></span>
 </pre></div>
 </div>
 <p>This renders a <code class="docutils literal notranslate"><span class="pre">div</span></code> containing our three welcome headers into the DOM element whose ID is “root”.</p>
@@ -186,45 +186,45 @@
 <h3>Component state<a class="headerlink" href="#component-state" title="Permalink to this headline"></a></h3>
 <p>Components can have their own internal state, independent of the props that are passed into them. To illustrate, let’s create a component that tracks how many times a button has been clicked, and displays the count.</p>
 <p>For functional components, we use React’s <a class="reference external" href="https://reactjs.org/docs/hooks-overview.html"><code class="docutils literal notranslate"><span class="pre">useState</span></code> hook</a> to create a state object and a function that updates it. Let’s first just define a component with some state that displays the value of that state:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span><span class="w"></span>
 
 
-<span class="kd">const</span> <span class="nx">Counter</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">updateCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">Counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">count</span><span class="p">,</span><span class="w"> </span><span class="nx">updateCount</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span><span class="w"></span>
 
-   <span class="k">return</span> <span class="p">(</span>
-     <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-       <span class="nx">Current</span> <span class="nx">count</span><span class="o">:</span> <span class="p">{</span><span class="nx">count</span><span class="p">}</span>
-     <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">);</span>
-<span class="p">};</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">     </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">       </span><span class="nx">Current</span><span class="w"> </span><span class="nx">count</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">count</span><span class="p">}</span><span class="w"></span>
+<span class="w">     </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="p">);</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
 </pre></div>
 </div>
 <p>We pass in <code class="docutils literal notranslate"><span class="pre">0</span></code> as the default value to <code class="docutils literal notranslate"><span class="pre">useState</span></code>, which returns a tuple containing our state object (which we’ve called <code class="docutils literal notranslate"><span class="pre">count</span></code>) and a function that can update that state (which we’ve called <code class="docutils literal notranslate"><span class="pre">updateCount</span></code>). So now we have a component that has its own state and displays that value in a <code class="docutils literal notranslate"><span class="pre">div</span></code>, but that isn’t very useful because we have no way of interacting with it to update that value. Let’s define a handler to update the count, add a button, and pass our handler to the <code class="docutils literal notranslate"><span class="pre">onClick</span></code> event in the button:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span><span class="w"></span>
 
 
-<span class="kd">const</span> <span class="nx">Counter</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">updateCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">Counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">count</span><span class="p">,</span><span class="w"> </span><span class="nx">updateCount</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span><span class="w"></span>
 
-  <span class="kd">const</span> <span class="nx">handleClick</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="nx">newCount</span> <span class="o">=</span> <span class="nx">count</span> <span class="o">+</span> <span class="mf">1</span><span class="p">;</span>
-    <span class="nx">updateCount</span><span class="p">(</span><span class="nx">newCount</span><span class="p">);</span>
-  <span class="p">};</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleClick</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">newCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">count</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nx">updateCount</span><span class="p">(</span><span class="nx">newCount</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">};</span><span class="w"></span>
 
-   <span class="k">return</span> <span class="p">(</span>
-     <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-       <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-         <span class="nx">Current</span> <span class="nx">count</span><span class="o">:</span> <span class="p">{</span><span class="nx">count</span><span class="p">}</span>
-       <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-       <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
-         <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">handleClick</span><span class="p">}&gt;</span>
-           <span class="nx">Increment</span><span class="o">!</span>
-         <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-       <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-     <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-  <span class="p">);</span>
-<span class="p">};</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">     </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">       </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">         </span><span class="nx">Current</span><span class="w"> </span><span class="nx">count</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">count</span><span class="p">}</span><span class="w"></span>
+<span class="w">       </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">       </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">         </span><span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">handleClick</span><span class="p">}&gt;</span><span class="w"></span>
+<span class="w">           </span><span class="nx">Increment</span><span class="o">!</span><span class="w"></span>
+<span class="w">         </span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">       </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">     </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="p">);</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Let’s look at what’s happening here: we’ve defined a new function in our component called <code class="docutils literal notranslate"><span class="pre">handleClick</span></code> that increments the value of our <code class="docutils literal notranslate"><span class="pre">count</span></code> state by 1, and have passed that as a callback to the button’s <code class="docutils literal notranslate"><span class="pre">onClick</span></code> event. Now every time we click the button, <code class="docutils literal notranslate"><span class="pre">handleClick</span></code> will be executed which will increment the value of <code class="docutils literal notranslate"><span class="pre">count</span></code> by 1. React tracks whenever a component’s props or state are updated, and updates the elements being rendered into the DOM accordingly. Great, our first interactive component with its own state is working! Now that we’ve learned some of the basics of React, let’s take a look at Redux, another front-end library employed in our application.</p>
@@ -232,76 +232,76 @@
 <section id="redux-basics">
 <h3>Redux basics<a class="headerlink" href="#redux-basics" title="Permalink to this headline"></a></h3>
 <p>We use <a class="reference external" href="https://redux.js.org/basics/basic-tutorial/">Redux</a> to store and manage global front-end state. The basic idea is simple: Redux provides a global <code class="docutils literal notranslate"><span class="pre">store</span></code> object that contains the application state and allows that state to be updated via the dispatching of <em>actions</em>. Actions are simply objects with a <code class="docutils literal notranslate"><span class="pre">type</span></code> attribute and may contain a payload, e.g. <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">type:</span> <span class="pre">'UPDATE_SOURCES',</span> <span class="pre">data:</span> <span class="pre">{</span> <span class="pre">sourceList:</span> <span class="pre">[{</span> <span class="pre">id:</span> <span class="pre">'14gqr',</span> <span class="pre">...</span> <span class="pre">},</span> <span class="pre">...]</span> <span class="pre">}}</span></code>. We dispatch actions via the Redux function <code class="docutils literal notranslate"><span class="pre">store.dispatch</span></code>, and these actions are handled by <em>reducers</em> which specify how the application state should be updated in response to actions dispatched to the store. Let’s take a look at an example of creating actions and reducers:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="c1">// Define our action type:</span>
-<span class="kd">const</span> <span class="nx">UPDATE_SOURCES</span> <span class="o">=</span> <span class="s2">&quot;UPDATE_SOURCES&quot;</span><span class="p">;</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="c1">// Define our action type:</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">UPDATE_SOURCES</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;UPDATE_SOURCES&quot;</span><span class="p">;</span><span class="w"></span>
 
-<span class="c1">// Define our reducer:</span>
-<span class="kd">const</span> <span class="nx">reducer</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">sourceList</span><span class="o">:</span> <span class="p">[]</span> <span class="p">},</span> <span class="nx">action</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="nx">UPDATE_SOURCES</span><span class="o">:</span> <span class="p">{</span>
-      <span class="kd">const</span> <span class="p">{</span> <span class="nx">sourceList</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">action</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>  <span class="c1">// Object destructuring assignment</span>
-      <span class="k">return</span> <span class="p">{</span>
-        <span class="p">...</span><span class="nx">state</span><span class="p">,</span>  <span class="c1">// Object spread operator</span>
-        <span class="nx">sourceList</span>  <span class="c1">// Object literal property shorthand</span>
-      <span class="p">};</span>
-    <span class="p">}</span>
-    <span class="k">default</span><span class="o">:</span>
-      <span class="k">return</span> <span class="nx">state</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">};</span>
+<span class="c1">// Define our reducer:</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">reducer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">sourceList</span><span class="o">:</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">action</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">UPDATE_SOURCES</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">sourceList</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">action</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span><span class="w">  </span><span class="c1">// Object destructuring assignment</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="p">...</span><span class="nx">state</span><span class="p">,</span><span class="w">  </span><span class="c1">// Object spread operator</span><span class="w"></span>
+<span class="w">        </span><span class="nx">sourceList</span><span class="w">  </span><span class="c1">// Object literal property shorthand</span><span class="w"></span>
+<span class="w">      </span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">default</span><span class="o">:</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">state</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
 </pre></div>
 </div>
 <p>(If the above JavaScript syntax is unfamiliar, please refer to the <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment">object destructuring assignment docs</a>, <a class="reference external" href="https://tc39.es/proposal-object-rest-spread/">object spread syntax docs</a>, and a description here of <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer">object literal property shorthand</a>.) Let’s break this down: we’ve defined our action type, which is just a string literal, and assigned its value to the constant <code class="docutils literal notranslate"><span class="pre">UPDATE_SOURCES</span></code>. We also defined a reducer (the function named <code class="docutils literal notranslate"><span class="pre">reducer</span></code>) which takes two arguments: <code class="docutils literal notranslate"><span class="pre">state</span></code>, the current state value (which we’ve given a default value of <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">sourceList:</span> <span class="pre">[]</span> <span class="pre">}</span></code> here) and <code class="docutils literal notranslate"><span class="pre">action</span></code>, the action object that has been dispatched to the store. Our reducer then returns a new object (or the original state object, described below) based on the previous state and the data contained in <code class="docutils literal notranslate"><span class="pre">action</span></code>. As you can see, the original state is returned with no changes by default, which is the case whenever an action is dispatched whose type doesn’t match any of the cases we’ve described in our reducer. <em>Reducers are pure functions that take the current state and an action as arguments, and return a new state object</em>. Whenever an action is dispatched, each of the reducers in the store is called, with the current state and the action passed in as arguments, and only those reducers whose cases match the action type will return a modified state object.</p>
 <p>In SkyPortal, we’ve added a utility method to the global <code class="docutils literal notranslate"><span class="pre">store</span></code> object to inject reducers to the store. Each reducer corresponds to its own branch of the state tree, which is specified when we inject the reducer into the store. Let’s look at an example, assuming we’re creating new a file in the <code class="docutils literal notranslate"><span class="pre">static/js/ducks</span></code> directory (our <code class="docutils literal notranslate"><span class="pre">store</span></code> is defined in <code class="docutils literal notranslate"><span class="pre">static/js/store.js</span></code>):</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nx">store</span> <span class="kr">from</span> <span class="s1">&#39;../store&#39;</span><span class="p">;</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nx">store</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../store&#39;</span><span class="p">;</span><span class="w"></span>
 
 
-<span class="c1">// Define our action type:</span>
-<span class="kd">const</span> <span class="nx">UPDATE_SOURCES</span> <span class="o">=</span> <span class="s2">&quot;UPDATE_SOURCES&quot;</span><span class="p">;</span>
+<span class="c1">// Define our action type:</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">UPDATE_SOURCES</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;UPDATE_SOURCES&quot;</span><span class="p">;</span><span class="w"></span>
 
-<span class="c1">// Define our reducer:</span>
-<span class="kd">const</span> <span class="nx">reducer</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">sourceList</span><span class="o">:</span> <span class="p">[]</span> <span class="p">},</span> <span class="nx">action</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="nx">UPDATE_SOURCES</span><span class="o">:</span> <span class="p">{</span>
-      <span class="kd">const</span> <span class="p">{</span> <span class="nx">sourceList</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">action</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
-      <span class="k">return</span> <span class="p">{</span>
-        <span class="p">...</span><span class="nx">state</span><span class="p">,</span>
-        <span class="nx">sourceList</span>
-      <span class="p">};</span>
-    <span class="p">}</span>
-    <span class="k">default</span><span class="o">:</span>
-      <span class="k">return</span> <span class="nx">state</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">};</span>
+<span class="c1">// Define our reducer:</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">reducer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">sourceList</span><span class="o">:</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="nx">action</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">UPDATE_SOURCES</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">sourceList</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">action</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="p">...</span><span class="nx">state</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nx">sourceList</span><span class="w"></span>
+<span class="w">      </span><span class="p">};</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">default</span><span class="o">:</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">state</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
 
-<span class="c1">// Inject our reducer into the store, mapping it to the &#39;sources&#39; state branch:</span>
-<span class="nx">store</span><span class="p">.</span><span class="nx">injectReducer</span><span class="p">(</span><span class="s1">&#39;sources&#39;</span><span class="p">,</span> <span class="nx">reducer</span><span class="p">);</span>
+<span class="c1">// Inject our reducer into the store, mapping it to the &#39;sources&#39; state branch:</span><span class="w"></span>
+<span class="nx">store</span><span class="p">.</span><span class="nx">injectReducer</span><span class="p">(</span><span class="s1">&#39;sources&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">reducer</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>This warrants a brief note on code organization: we bundle all of our Redux-related code (action types, action creators, reducer) associated with a particular branch of the application state together in a file in the <code class="docutils literal notranslate"><span class="pre">static/js/ducks</span></code> directory (<a class="reference external" href="https://github.com/erikras/ducks-modular-redux">read more about “ducks” modules here</a>). Each component definition typically goes in its own file in <code class="docutils literal notranslate"><span class="pre">static/js/components</span></code>.</p>
 <p>Now that we’ve added our reducer to the store, whenever an action of type <code class="docutils literal notranslate"><span class="pre">UPDATE_SOURCES</span></code> is dispatched, our reducer will update the <code class="docutils literal notranslate"><span class="pre">sources</span></code> branch of the application state as specified. So far, our global application state looks like: <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">sources:</span> <span class="pre">{</span> <span class="pre">sourceList:</span> <span class="pre">...}</span> <span class="pre">}</span></code>.</p>
 <p>We have injected our reducer into the store that can handle actions of the type <code class="docutils literal notranslate"><span class="pre">UPDATE_SOURCES</span></code>, so now let’s dispatch one. We use the <code class="docutils literal notranslate"><span class="pre">react-redux</span></code> library which provides a <code class="docutils literal notranslate"><span class="pre">useDispatch</span></code> function, giving us access to the store’s dispatch. Dispatching an action is as simple as:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="p">{</span> <span class="nx">useDispatch</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;react-redux&#39;</span><span class="p">;</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useDispatch</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react-redux&#39;</span><span class="p">;</span><span class="w"></span>
 
 
-<span class="kd">const</span> <span class="nx">dispatch</span> <span class="o">=</span> <span class="nx">useDispatch</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">dispatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useDispatch</span><span class="p">();</span><span class="w"></span>
 
-<span class="kd">const</span> <span class="nx">newSourceList</span> <span class="o">=</span> <span class="nx">resultFromSomeAPICall</span><span class="p">();</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">newSourceList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resultFromSomeAPICall</span><span class="p">();</span><span class="w"></span>
 
-<span class="nx">dispatch</span><span class="p">({</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;UPDATE_SOURCES&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="o">:</span> <span class="p">{</span> <span class="nx">sourceList</span><span class="o">:</span> <span class="nx">newSourceList</span> <span class="p">}</span> <span class="p">});</span>
+<span class="nx">dispatch</span><span class="p">({</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;UPDATE_SOURCES&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">sourceList</span><span class="o">:</span><span class="w"> </span><span class="nx">newSourceList</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
 </pre></div>
 </div>
 <p>The store dispatches the action, and applies each of our reducers to it, creating a new state object from the return values of our reducers (each reducer returning the branch of state it’s associated with, e.g. the return value of the reducer above corresponds to the ‘sources’ branch, or <code class="docutils literal notranslate"><span class="pre">state.sources</span></code>, as specified in our <code class="docutils literal notranslate"><span class="pre">store.injectRecuer</span></code> call). Typically we define <em>action creators</em>, functions that return action objects, and call those inside <code class="docutils literal notranslate"><span class="pre">dispatch</span></code> rather than explicitly pass in these clunky action objects everytime we need to dispatch an action. Here’s an example of an action creator being defined, and then using it to dispatch an action:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="c1">// Define action creator</span>
-<span class="kd">const</span> <span class="nx">updateSources</span> <span class="o">=</span> <span class="p">(</span><span class="nx">newSourceList</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;UPDATE_SOURCES&#39;</span><span class="p">,</span> <span class="nx">data</span><span class="o">:</span> <span class="p">{</span> <span class="nx">sourceList</span><span class="o">:</span> <span class="nx">newSourceList</span> <span class="p">}</span> <span class="p">};</span>
-<span class="p">};</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="c1">// Define action creator</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">updateSources</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">newSourceList</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;UPDATE_SOURCES&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">data</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">sourceList</span><span class="o">:</span><span class="w"> </span><span class="nx">newSourceList</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
 
-<span class="c1">// Get some data</span>
-<span class="kd">const</span> <span class="nx">newSourceList</span> <span class="o">=</span> <span class="nx">resultFromSomeAPICall</span><span class="p">();</span>
+<span class="c1">// Get some data</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">newSourceList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">resultFromSomeAPICall</span><span class="p">();</span><span class="w"></span>
 
-<span class="c1">// Dispatch an action containing data from above</span>
-<span class="nx">dispatch</span><span class="p">(</span><span class="nx">updateSources</span><span class="p">(</span><span class="nx">newSourceList</span><span class="p">));</span>
+<span class="c1">// Dispatch an action containing data from above</span><span class="w"></span>
+<span class="nx">dispatch</span><span class="p">(</span><span class="nx">updateSources</span><span class="p">(</span><span class="nx">newSourceList</span><span class="p">));</span><span class="w"></span>
 </pre></div>
 </div>
 <p>We’ll often dispatch actions when users submit data, click a button, or if a websocket message is received from the back-end (more on this later) telling the front-end that the DB has been updated and it should re-fetch some data (we always want the relevant portions of the front-end state to stay in sync with the back-end DB).</p>
@@ -311,24 +311,24 @@
 <div><p>Redux Thunk is a middleware that lets you call action creators that return a function instead of an action object. That function receives the store’s dispatch method, which is then used to dispatch regular synchronous actions inside the body of the function once the asynchronous operations have completed.</p>
 </div></blockquote>
 <p>The function that the action creator returns is a thunk, to which the <code class="docutils literal notranslate"><span class="pre">redux-thunk</span></code> middleware library suppies the store’s dispatch. We can then execute some statements inside the thunk, including making API calls to the back-end, and then dispatch an action containing the result. Let’s illustrate with an example. Here’s a typical SkyPortal action creator (this is a simplified version of part of the actual source code):</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">API</span> <span class="kr">from</span> <span class="s1">&#39;../API&#39;</span><span class="p">;</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">API</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../API&#39;</span><span class="p">;</span><span class="w"></span>
 
 
-<span class="c1">// Action type</span>
-<span class="k">export</span> <span class="kd">const</span> <span class="nx">FETCH_SOURCES</span> <span class="o">=</span> <span class="s1">&#39;skyportal/FETCH_SOURCES&#39;</span><span class="p">;</span>
+<span class="c1">// Action type</span><span class="w"></span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">FETCH_SOURCES</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;skyportal/FETCH_SOURCES&#39;</span><span class="p">;</span><span class="w"></span>
 
-<span class="c1">// Action creator that returns a thunk</span>
-<span class="k">export</span> <span class="kd">function</span> <span class="nx">fetchSources</span><span class="p">()</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">API</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s1">&#39;/api/sources&#39;</span><span class="p">,</span> <span class="nx">FETCH_SOURCES</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="c1">// Action creator that returns a thunk</span><span class="w"></span>
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">fetchSources</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">API</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s1">&#39;/api/sources&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">FETCH_SOURCES</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
 <p>When we call <code class="docutils literal notranslate"><span class="pre">dispatch(fetchSources())</span></code>, the thunk returned by <code class="docutils literal notranslate"><span class="pre">API.GET</span></code> is called, which dispatches an action of type <code class="docutils literal notranslate"><span class="pre">FETCH_SOURCES</span></code>, then makes an asynchronous HTTP GET request to the back-end. If the request returns with a successful response, the response data is then packaged into another action of type “FETCH_SOURCES_OK” which is then dispatched to the store. The first action dispatched, of type <code class="docutils literal notranslate"><span class="pre">FETCH_SOURCES</span></code>, may or may not need to be handled in our reducers. In the case of SkyPortal, we do indeed handle this action and update the front-end state object <code class="docutils literal notranslate"><span class="pre">sources.queryInProgress</span></code> in our reducer. The final action dispatched, of type “FETCH_SOURCES_OK”, which contains the HTTP request response data, is also handled in our reducer, updating other portions of the <code class="docutils literal notranslate"><span class="pre">sources</span></code> branch of the app state.</p>
 <p>In order for our components to access the application state, the <code class="docutils literal notranslate"><span class="pre">react-redux</span></code> library provides the <code class="docutils literal notranslate"><span class="pre">useSelector</span></code> hook:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="p">{</span> <span class="nx">useSelector</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;react-redux&#39;</span><span class="p">;</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useSelector</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react-redux&#39;</span><span class="p">;</span><span class="w"></span>
 
-<span class="c1">// Accessing the application state</span>
-<span class="kd">const</span> <span class="p">{</span> <span class="nx">sourceList</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useSelector</span><span class="p">((</span><span class="nx">state</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">state</span><span class="p">.</span><span class="nx">sources</span><span class="p">);</span>
+<span class="c1">// Accessing the application state</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">sourceList</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useSelector</span><span class="p">((</span><span class="nx">state</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">state</span><span class="p">.</span><span class="nx">sources</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Now that we’ve learned a bit about the various technologies employed in the front-end, let’s learn by getting our hands dirty and add a dummy feature to SkyPortal.</p>
@@ -417,43 +417,43 @@ fields, we use
 <p>The comments in the list <code class="docutils literal notranslate"><span class="pre">state.testComments</span></code> (which is intialized to an empty list in its associated reducer, which we’ll see shortly) are rendered, as well as a text input field and submit button for adding new comments. We’ve provided callback functions to the text input field’s and button’s <code class="docutils literal notranslate"><span class="pre">onChange</span></code> and <code class="docutils literal notranslate"><span class="pre">onClick</span></code> events, respectively. <code class="docutils literal notranslate"><span class="pre">handleCommentTextChange</span></code> updates the component’s state with the newly input value on each keystroke. <code class="docutils literal notranslate"><span class="pre">handleSubmitNewComment</span></code> dispatches an action creator with the new comment text value, and if the request returns successfully, resets the input value to an empty string. This is an example of a <a class="reference external" href="https://reactjs.org/docs/forms.html#controlled-components">controlled component</a>, in which a component’s value is passed in as an externally-controlled variable. The <code class="docutils literal notranslate"><span class="pre">data-testid</span></code> attributes are specified to facilitate testing (more on that later). Let’s look at the action creators defined below.</p>
 <p>All of the redux-related logic associated with our new component will live in a separate file in the <code class="docutils literal notranslate"><span class="pre">static/js/ducks</span></code> directory. This is where we’ll define our action types, action creators and reducer.</p>
 <p><code class="docutils literal notranslate"><span class="pre">static/js/ducks/testComments.js</span></code>:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nx">messageHandler</span> <span class="kr">from</span> <span class="s2">&quot;baselayer/MessageHandler&quot;</span><span class="p">;</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nx">messageHandler</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;baselayer/MessageHandler&quot;</span><span class="p">;</span><span class="w"></span>
 
-<span class="k">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">API</span> <span class="kr">from</span> <span class="s1">&#39;../API&#39;</span><span class="p">;</span>
-<span class="k">import</span> <span class="nx">store</span> <span class="kr">from</span> <span class="s1">&#39;../store&#39;</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">API</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../API&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="k">import</span><span class="w"> </span><span class="nx">store</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../store&#39;</span><span class="p">;</span><span class="w"></span>
 
 
-<span class="kd">const</span> <span class="nx">FETCH_TEST_COMMENTS</span> <span class="o">=</span> <span class="s1">&#39;skyportal/FETCH_TEST_COMMENTS&#39;</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">FETCH_TEST_COMMENTS_OK</span> <span class="o">=</span> <span class="s1">&#39;skyportal/FETCH_TEST_COMMENTS_OK&#39;</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">FETCH_TEST_COMMENTS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;skyportal/FETCH_TEST_COMMENTS&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">FETCH_TEST_COMMENTS_OK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;skyportal/FETCH_TEST_COMMENTS_OK&#39;</span><span class="p">;</span><span class="w"></span>
 
-<span class="kd">const</span> <span class="nx">SUBMIT_TEST_COMMENT</span> <span class="o">=</span> <span class="s1">&#39;skyportal/SUBMIT_TEST_COMMENT&#39;</span><span class="p">;</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">SUBMIT_TEST_COMMENT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;skyportal/SUBMIT_TEST_COMMENT&#39;</span><span class="p">;</span><span class="w"></span>
 
-<span class="k">export</span> <span class="kd">function</span> <span class="nx">fetchComments</span><span class="p">()</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">API</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s1">&#39;/api/test_comments&#39;</span><span class="p">,</span> <span class="nx">FETCH_TEST_COMMENTS</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">fetchComments</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">API</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s1">&#39;/api/test_comments&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">FETCH_TEST_COMMENTS</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="k">export</span> <span class="kd">function</span> <span class="nx">submitComment</span><span class="p">(</span><span class="nx">commentText</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">API</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s1">&#39;/api/test_comments&#39;</span><span class="p">,</span> <span class="nx">SUBMIT_TEST_COMMENT</span><span class="p">,</span> <span class="p">{</span> <span class="nx">commentText</span> <span class="p">});</span>
-<span class="p">}</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">submitComment</span><span class="p">(</span><span class="nx">commentText</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">API</span><span class="p">.</span><span class="nx">POST</span><span class="p">(</span><span class="s1">&#39;/api/test_comments&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">SUBMIT_TEST_COMMENT</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">commentText</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="c1">// Websocket message handler</span>
-<span class="nx">messageHandler</span><span class="p">.</span><span class="nx">add</span><span class="p">((</span><span class="nx">actionType</span><span class="p">,</span> <span class="nx">payload</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">actionType</span> <span class="o">===</span> <span class="nx">FETCH_TEST_COMMENTS</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">dispatch</span><span class="p">(</span><span class="nx">fetchComments</span><span class="p">());</span>
-  <span class="p">}</span>
-<span class="p">});</span>
+<span class="c1">// Websocket message handler</span><span class="w"></span>
+<span class="nx">messageHandler</span><span class="p">.</span><span class="nx">add</span><span class="p">((</span><span class="nx">actionType</span><span class="p">,</span><span class="w"> </span><span class="nx">payload</span><span class="p">,</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">actionType</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">FETCH_TEST_COMMENTS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">fetchComments</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
 
-<span class="kd">const</span> <span class="nx">reducer</span> <span class="o">=</span> <span class="p">(</span><span class="nx">state</span><span class="o">=</span><span class="p">[],</span> <span class="nx">action</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="nx">FETCH_TEST_COMMENTS_OK</span><span class="o">:</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="nx">action</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">default</span><span class="o">:</span>
-      <span class="k">return</span> <span class="nx">state</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">};</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">reducer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">state</span><span class="o">=</span><span class="p">[],</span><span class="w"> </span><span class="nx">action</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nx">FETCH_TEST_COMMENTS_OK</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">action</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="k">default</span><span class="o">:</span><span class="w"></span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">state</span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
 
-<span class="nx">store</span><span class="p">.</span><span class="nx">injectReducer</span><span class="p">(</span><span class="s1">&#39;testComments&#39;</span><span class="p">,</span> <span class="nx">reducer</span><span class="p">);</span>
+<span class="nx">store</span><span class="p">.</span><span class="nx">injectReducer</span><span class="p">(</span><span class="s1">&#39;testComments&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">reducer</span><span class="p">);</span><span class="w"></span>
 </pre></div>
 </div>
 <p>This defines a few new action types, two new action creators (in this case, functions that return a thunk (another function), which is what <code class="docutils literal notranslate"><span class="pre">API.GET</span></code> and <code class="docutils literal notranslate"><span class="pre">API.POST</span></code> are), and a reducer, which, upon injecting into the store, describes how the <code class="docutils literal notranslate"><span class="pre">comments</span></code> branch of the app state should be updated if an action of type <code class="docutils literal notranslate"><span class="pre">FETCH_COMMENTS_OK</span></code> is received. Note that in addition to dispatching actions of type <code class="docutils literal notranslate"><span class="pre">&quot;ORIGINAL_ACTION_TYPE&quot;</span> <span class="pre">+</span> <span class="pre">&quot;_OK&quot;</span></code> upon successful completion of API calls, the <code class="docutils literal notranslate"><span class="pre">API</span></code> module functions will also dispatch actions of type <code class="docutils literal notranslate"><span class="pre">&quot;ORIGINAL_ACTION_TYPE&quot;</span> <span class="pre">+</span> <span class="pre">&quot;_FAIL&quot;</span></code> if the API call fails, which can be handled accordingly in the reducer.</p>
@@ -574,31 +574,31 @@ fields, we use
 <p><code class="docutils literal notranslate"><span class="pre">BaseHandler</span></code> also provides a <code class="docutils literal notranslate"><span class="pre">push</span></code> method for pushing a websocket message to only the current user (the user initiating the request currently being handled).</p>
 <p>Let’s turn for a moment to how these websocket messages are handled by the front-end. The <code class="docutils literal notranslate"><span class="pre">baselayer</span></code> submodule provides a <code class="docutils literal notranslate"><span class="pre">messageHandler</span></code> object that handles all incoming websocket messages, with handlers for a few action types (e.g. displaying browser notifications) already defined. To handle messages with other action types, we need to call <code class="docutils literal notranslate"><span class="pre">messageHandler.add</span></code> and pass in a function that describes how to handle those messages. Let’s look at the front-end websocket message handler associated with the above “skyportal/REFRESH_SOURCE” example:</p>
 <p><code class="docutils literal notranslate"><span class="pre">static/js/ducks/source.js</span></code></p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="nx">messageHandler</span> <span class="kr">from</span> <span class="s1">&#39;baselayer/MessageHandler&#39;</span><span class="p">;</span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nx">messageHandler</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;baselayer/MessageHandler&#39;</span><span class="p">;</span><span class="w"></span>
 
-<span class="p">...</span>
+<span class="p">...</span><span class="w"></span>
 
-<span class="k">export</span> <span class="kd">const</span> <span class="nx">REFRESH_SOURCE</span> <span class="o">=</span> <span class="s1">&#39;skyportal/REFRESH_SOURCE&#39;</span><span class="p">;</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">REFRESH_SOURCE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;skyportal/REFRESH_SOURCE&#39;</span><span class="p">;</span><span class="w"></span>
 
-<span class="p">...</span>
+<span class="p">...</span><span class="w"></span>
 
-<span class="k">export</span> <span class="kd">function</span> <span class="nx">fetchSource</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">API</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="sb">`/api/sources/</span><span class="si">${</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="nx">FETCH_LOADED_SOURCE</span><span class="p">);</span>
-<span class="p">}</span>
+<span class="k">export</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">fetchSource</span><span class="p">(</span><span class="nx">id</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">API</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="sb">`/api/sources/</span><span class="si">${</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span><span class="w"> </span><span class="nx">FETCH_LOADED_SOURCE</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 
-<span class="c1">// Websocket message handler</span>
-<span class="nx">messageHandler</span><span class="p">.</span><span class="nx">add</span><span class="p">((</span><span class="nx">actionType</span><span class="p">,</span> <span class="nx">payload</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">,</span> <span class="nx">getState</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="kd">const</span> <span class="p">{</span> <span class="nx">source</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">getState</span><span class="p">();</span>
+<span class="c1">// Websocket message handler</span><span class="w"></span>
+<span class="nx">messageHandler</span><span class="p">.</span><span class="nx">add</span><span class="p">((</span><span class="nx">actionType</span><span class="p">,</span><span class="w"> </span><span class="nx">payload</span><span class="p">,</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">,</span><span class="w"> </span><span class="nx">getState</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">source</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">getState</span><span class="p">();</span><span class="w"></span>
 
-  <span class="k">if</span> <span class="p">(</span><span class="nx">actionType</span> <span class="o">===</span> <span class="nx">REFRESH_SOURCE</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="nx">loaded_obj_key</span> <span class="o">=</span> <span class="nx">source</span><span class="o">?</span><span class="p">.</span><span class="nx">internal_key</span><span class="p">;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">actionType</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">REFRESH_SOURCE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">loaded_obj_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">source</span><span class="o">?</span><span class="p">.</span><span class="nx">internal_key</span><span class="p">;</span><span class="w"></span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="nx">loaded_obj_key</span> <span class="o">===</span> <span class="nx">payload</span><span class="p">.</span><span class="nx">obj_key</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">dispatch</span><span class="p">(</span><span class="nx">fetchSource</span><span class="p">(</span><span class="nx">source</span><span class="p">.</span><span class="nx">id</span><span class="p">));</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">});</span>
-<span class="p">...</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">loaded_obj_key</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">payload</span><span class="p">.</span><span class="nx">obj_key</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">fetchSource</span><span class="p">(</span><span class="nx">source</span><span class="p">.</span><span class="nx">id</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="p">});</span><span class="w"></span>
+<span class="p">...</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Our handler must be a function with the same signature as above (<code class="docutils literal notranslate"><span class="pre">getState</span></code>, a function that returns the application state, is optional and can be omitted if your handler doesn’t need to access the state). Each handler added to the <code class="docutils literal notranslate"><span class="pre">messageHandler</span></code> will be called on all incoming messages. In this case, if the message has an action type equal to “skyportal/REFRESH_SOURCE”, we check whether the user is currently viewing the source whose <code class="docutils literal notranslate"><span class="pre">internal_key</span></code> value matches that provided in the message’s payload (if a user is currently viewing a source, <code class="docutils literal notranslate"><span class="pre">state.source.internal_key</span></code> will contain that source’s key), and if so, we dispatch an action creator that will re-fetch the source data and update the state accordingly.</p>
