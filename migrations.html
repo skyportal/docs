@@ -96,7 +96,7 @@
 <p>If you are planning to use database migrations, you need to let
 Alembic know the current state of the database.</p>
 <p>Presuming you’ve just started off by running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">load_demo_data</span></code>
-on the latest master branch commit (this should happen on a vanilla master branch,
+on the latest main branch commit (this should happen on a vanilla main branch,
 i.e. without any of your changes to the database schema),
 tell Alembic that you are on the latest database schema:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PYTHONPATH</span><span class="o">=.</span> <span class="n">alembic</span> <span class="o">-</span><span class="n">x</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">yaml</span> <span class="n">stamp</span> <span class="n">head</span>
@@ -105,7 +105,7 @@ tell Alembic that you are on the latest database schema:</p>
 </section>
 <section id="generate-migration-script">
 <h2>Generate migration script<a class="headerlink" href="#generate-migration-script" title="Permalink to this headline"></a></h2>
-<p>To generate a migration script, after having stamped the latest master commit (see above),
+<p>To generate a migration script, after having stamped the latest main commit (see above),
 ensure that the app is stopped, check out the branch with the relevant DB schema
 changes, and run the following:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PYTHONPATH</span><span class="o">=.</span> <span class="n">alembic</span> <span class="o">-</span><span class="n">x</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">yaml</span> <span class="n">revision</span> <span class="o">--</span><span class="n">autogenerate</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;Revision description&quot;</span>
