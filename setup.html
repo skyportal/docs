@@ -251,10 +251,13 @@ setting <code class="docutils literal notranslate"><span class="pre">debug_login
 <section id="creating-an-administrative-user">
 <h3>Creating an administrative user<a class="headerlink" href="#creating-an-administrative-user" title="Permalink to this headline"></a></h3>
 <p>By default, no user has permission to perform system administration.
-You can add a user with such permissions by running the following from
-Python:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skyportal.model_util</span> <span class="kn">import</span> <span class="n">make_super_user</span>
-<span class="n">make_super_user</span><span class="p">(</span><span class="s1">&#39;your@email.address.org&#39;</span><span class="p">)</span>
+You can give this and other permissions to an existing user by running the following from your terminal in the <code class="docutils literal notranslate"><span class="pre">skyportal</span></code> directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PYTHONPATH</span><span class="o">=.</span> <span class="n">python</span> <span class="n">tools</span><span class="o">/</span><span class="n">set_user_role</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">username</span><span class="o">=</span><span class="s2">&quot;&lt;username&gt;&quot;</span> <span class="o">--</span><span class="n">role</span><span class="o">=</span><span class="s2">&quot;&lt;role&gt;&quot;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">role</span></code> argument is optional, and defaults to <code class="docutils literal notranslate"><span class="pre">Super</span> <span class="pre">admin</span></code>.</p>
+<p>You may also list all users and their roles:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PYTHONPATH</span><span class="o">=.</span> <span class="n">python</span> <span class="n">tools</span><span class="o">/</span><span class="n">set_user_role</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="nb">list</span>
 </pre></div>
 </div>
 </section>
