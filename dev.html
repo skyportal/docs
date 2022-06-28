@@ -176,6 +176,7 @@ make use of include:</p>
 <span class="n">DBSession</span><span class="p">()</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span>  <span class="c1"># recover after a DB error</span>
 </pre></div>
 </div>
+<p>For more information on how to use the session, see <code class="docutils literal notranslate"><span class="pre">baselayer/doc/dev.md</span></code>.</p>
 <ul class="simple">
 <li><p>Generic logic applicable to any model is included in the base model class <code class="docutils literal notranslate"><span class="pre">baselayer.app.models.Base</span></code> (<code class="docutils literal notranslate"><span class="pre">to_dict</span></code>, <code class="docutils literal notranslate"><span class="pre">__str__</span></code>, etc.), but can be overridden within a specific model</p></li>
 <li><p>Models can be queried directly (<code class="docutils literal notranslate"><span class="pre">User.query.all()</span></code>), or more specific queries can be constructed via the session object (<code class="docutils literal notranslate"><span class="pre">DBSession().query(User.id).all()</span></code>)</p></li>

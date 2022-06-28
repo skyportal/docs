@@ -131,6 +131,12 @@ and <cite>Manage Groups</cite>.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code>(id_or_list, user_or_token[, mode, ...])</p></td>
+<td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all</span></code>(user_or_token[, mode, options, columns])</p></td>
+<td><p>Retrieve all database records accessible by the specified User or token.</p></td>
+</tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_accessible_by</span></code>(cls_id, user_or_token)</p></td>
 <td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
 </tr>
@@ -149,7 +155,10 @@ and <cite>Manage Groups</cite>.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, ...])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">select</span></code>(user_or_token[, mode, options, columns])</p></td>
+<td><p>Return the select statement for all database records accessible by the specified User or token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
 <td><p>Serialize this object to a Python dictionary.</p></td>
 </tr>
 </tbody>
@@ -197,7 +206,10 @@ and <cite>Manage Groups</cite>.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#baselayer.app.models.AccessibleIfRelatedRowsAreAccessible.query_accessible_rows" title="baselayer.app.models.AccessibleIfRelatedRowsAreAccessible.query_accessible_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_accessible_rows</span></code></a>(cls, user_or_token[, ...])</p></td>
 <td><p>Construct a Query object that, when executed, returns the rows of a specified table that are accessible to a specified user or token.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_id_from_user_or_token</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baselayer.app.models.AccessibleIfRelatedRowsAreAccessible.select_accessible_rows" title="baselayer.app.models.AccessibleIfRelatedRowsAreAccessible.select_accessible_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_accessible_rows</span></code></a>(cls, user_or_token[, ...])</p></td>
+<td><p>Construct a Select object that, when executed, returns the rows of a specified table that are accessible to a specified user or token.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_id_from_user_or_token</span></code>(user_or_token)</p></td>
 <td><p>Return the user_id associated with a specified User or Token object.</p></td>
 </tr>
 </tbody>
@@ -206,23 +218,50 @@ and <cite>Manage Groups</cite>.</p>
 <dt class="sig sig-object py" id="baselayer.app.models.AccessibleIfRelatedRowsAreAccessible.query_accessible_rows">
 <span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AccessibleIfRelatedRowsAreAccessible.query_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Query object that, when executed, returns the rows of a
-specified table that are accessible to a specified user or token.</p>
-<dl class="field-list simple">
+specified table that are accessible to a specified user or token.
+All query based functions will be deprecated when moving to
+SQL Alchemy 2.0 in favor of select functions.</p>
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>cls: `baselayer.app.models.DeclarativeMeta`</strong></dt><dd><p>The mapped class of the target table.</p>
+<dd class="field-odd"><dl>
+<dt><strong>cls</strong><span class="classifier"><cite>baselayer.app.models.DeclarativeMeta</cite></span></dt><dd><p>The mapped class of the target table.</p>
 </dd>
-<dt><strong>user_or_token: `baselayer.app.models.User` or `baselayer.app.models.Token`</strong></dt><dd><p>The User or Token to check.</p>
+<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The User or Token to check.</p>
 </dd>
-<dt><strong>columns: list of sqlalchemy.Column, optional, default None</strong></dt><dd><p>The columns to retrieve from the target table. If None, queries
+<dt><strong>columns</strong><span class="classifier">list of sqlalchemy.Column, optional, default None</span></dt><dd><p>The columns to retrieve from the target table. If None, queries
 the mapped class directly and returns mapped instances.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>query: sqlalchemy.Query</dt><dd><p>Query for the accessible rows.</p>
+<dt><strong>query</strong><span class="classifier">sqlalchemy.Query</span></dt><dd><p>Query for the accessible rows.</p>
 </dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="baselayer.app.models.AccessibleIfRelatedRowsAreAccessible.select_accessible_rows">
+<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AccessibleIfRelatedRowsAreAccessible.select_accessible_rows" title="Permalink to this definition"></a></dt>
+<dd><p>Construct a Select object that, when executed, returns the rows of a
+specified table that are accessible to a specified user or token.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>cls</strong><span class="classifier"><cite>baselayer.app.models.DeclarativeMeta</cite></span></dt><dd><p>The mapped class of the target table.</p>
+</dd>
+<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The User or Token to check.</p>
+</dd>
+<dt><strong>columns</strong><span class="classifier">list of sqlalchemy.Column, optional, default None</span></dt><dd><p>The columns to retrieve from the target table. If None, queries
+the mapped class directly and returns mapped instances.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>sqlalchemy select object</dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -255,7 +294,10 @@ the mapped class directly and returns mapped instances.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#baselayer.app.models.AccessibleIfUserMatches.query_accessible_rows" title="baselayer.app.models.AccessibleIfUserMatches.query_accessible_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_accessible_rows</span></code></a>(cls, user_or_token[, ...])</p></td>
 <td><p>Construct a Query object that, when executed, returns the rows of a specified table that are accessible to a specified user or token.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_id_from_user_or_token</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baselayer.app.models.AccessibleIfUserMatches.select_accessible_rows" title="baselayer.app.models.AccessibleIfUserMatches.select_accessible_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_accessible_rows</span></code></a>(cls, user_or_token[, ...])</p></td>
+<td><p>Construct a Select object that, when executed, returns the rows of a specified table that are accessible to a specified user or token.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_id_from_user_or_token</span></code>(user_or_token)</p></td>
 <td><p>Return the user_id associated with a specified User or Token object.</p></td>
 </tr>
 </tbody>
@@ -264,22 +306,24 @@ the mapped class directly and returns mapped instances.</p>
 <dt class="sig sig-object py" id="baselayer.app.models.AccessibleIfUserMatches.query_accessible_rows">
 <span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AccessibleIfUserMatches.query_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Query object that, when executed, returns the rows of a
-specified table that are accessible to a specified user or token.</p>
-<dl class="field-list simple">
+specified table that are accessible to a specified user or token.
+All query based functions will be deprecated when moving to
+SQL Alchemy 2.0 in favor of select functions.</p>
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>cls: `baselayer.app.models.DeclarativeMeta`</strong></dt><dd><p>The mapped class of the target table.</p>
+<dd class="field-odd"><dl>
+<dt><strong>cls</strong><span class="classifier"><cite>baselayer.app.models.DeclarativeMeta</cite></span></dt><dd><p>The mapped class of the target table.</p>
 </dd>
-<dt><strong>user_or_token: `baselayer.app.models.User` or `baselayer.app.models.Token`</strong></dt><dd><p>The User or Token to check.</p>
+<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The User or Token to check.</p>
 </dd>
-<dt><strong>columns: list of sqlalchemy.Column, optional, default None</strong></dt><dd><p>The columns to retrieve from the target table. If None, queries
+<dt><strong>columns</strong><span class="classifier">list of sqlalchemy.Column, optional, default None</span></dt><dd><p>The columns to retrieve from the target table. If None, queries
 the mapped class directly and returns mapped instances.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>query: sqlalchemy.Query</dt><dd><p>Query for the accessible rows.</p>
+<dt><strong>query</strong><span class="classifier">sqlalchemy.Query</span></dt><dd><p>Query for the accessible rows.</p>
 </dd>
 </dl>
 </dd>
@@ -290,6 +334,31 @@ the mapped class directly and returns mapped instances.</p>
 <dt class="sig sig-object py" id="baselayer.app.models.AccessibleIfUserMatches.relationship_names">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">relationship_names</span></span><a class="headerlink" href="#baselayer.app.models.AccessibleIfUserMatches.relationship_names" title="Permalink to this definition"></a></dt>
 <dd><p>List of names of each relationship in the chain.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="baselayer.app.models.AccessibleIfUserMatches.select_accessible_rows">
+<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AccessibleIfUserMatches.select_accessible_rows" title="Permalink to this definition"></a></dt>
+<dd><p>Construct a Select object that, when executed, returns the rows of a
+specified table that are accessible to a specified user or token.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>cls</strong><span class="classifier"><cite>baselayer.app.models.DeclarativeMeta</cite></span></dt><dd><p>The mapped class of the target table.</p>
+</dd>
+<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The User or Token to check.</p>
+</dd>
+<dt><strong>columns</strong><span class="classifier">list of sqlalchemy.Column, optional, default None</span></dt><dd><p>The columns to retrieve from the target table. If None, queries
+the mapped class directly and returns mapped instances.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>sqlalchemy select object</dt><dd></dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -318,7 +387,10 @@ the mapped class directly and returns mapped instances.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#baselayer.app.models.ComposedAccessControl.query_accessible_rows" title="baselayer.app.models.ComposedAccessControl.query_accessible_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_accessible_rows</span></code></a>(cls, user_or_token[, ...])</p></td>
 <td><p>Construct a Query object that, when executed, returns the rows of a specified table that are accessible to a specified user or token.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_id_from_user_or_token</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baselayer.app.models.ComposedAccessControl.select_accessible_rows" title="baselayer.app.models.ComposedAccessControl.select_accessible_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_accessible_rows</span></code></a>(cls, user_or_token[, ...])</p></td>
+<td><p>Construct a Select object that, when executed, returns the rows of a specified table that are accessible to a specified user or token.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_id_from_user_or_token</span></code>(user_or_token)</p></td>
 <td><p>Return the user_id associated with a specified User or Token object.</p></td>
 </tr>
 </tbody>
@@ -327,23 +399,50 @@ the mapped class directly and returns mapped instances.</p>
 <dt class="sig sig-object py" id="baselayer.app.models.ComposedAccessControl.query_accessible_rows">
 <span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.ComposedAccessControl.query_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Query object that, when executed, returns the rows of a
-specified table that are accessible to a specified user or token.</p>
-<dl class="field-list simple">
+specified table that are accessible to a specified user or token.
+All query based functions will be deprecated when moving to
+SQL Alchemy 2.0 in favor of select functions.</p>
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>cls: `baselayer.app.models.DeclarativeMeta`</strong></dt><dd><p>The mapped class of the target table.</p>
+<dd class="field-odd"><dl>
+<dt><strong>cls</strong><span class="classifier"><cite>baselayer.app.models.DeclarativeMeta</cite></span></dt><dd><p>The mapped class of the target table.</p>
 </dd>
-<dt><strong>user_or_token: `baselayer.app.models.User` or `baselayer.app.models.Token`</strong></dt><dd><p>The User or Token to check.</p>
+<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The User or Token to check.</p>
 </dd>
-<dt><strong>columns: list of sqlalchemy.Column, optional, default None</strong></dt><dd><p>The columns to retrieve from the target table. If None, queries
+<dt><strong>columns</strong><span class="classifier">list of sqlalchemy.Column, optional, default None</span></dt><dd><p>The columns to retrieve from the target table. If None, queries
 the mapped class directly and returns mapped instances.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>query: sqlalchemy.Query</dt><dd><p>Query for the accessible rows.</p>
+<dt><strong>query</strong><span class="classifier">sqlalchemy.Query</span></dt><dd><p>Query for the accessible rows.</p>
 </dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="baselayer.app.models.ComposedAccessControl.select_accessible_rows">
+<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.ComposedAccessControl.select_accessible_rows" title="Permalink to this definition"></a></dt>
+<dd><p>Construct a Select object that, when executed, returns the rows of a
+specified table that are accessible to a specified user or token.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>cls</strong><span class="classifier"><cite>baselayer.app.models.DeclarativeMeta</cite></span></dt><dd><p>The mapped class of the target table.</p>
+</dd>
+<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The User or Token to check.</p>
+</dd>
+<dt><strong>columns</strong><span class="classifier">list of sqlalchemy.Column, optional, default None</span></dt><dd><p>The columns to retrieve from the target table. If None, queries
+the mapped class directly and returns mapped instances.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>sqlalchemy select object</dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -383,6 +482,12 @@ the mapped class directly and returns mapped instances.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code>(id_or_list, user_or_token[, mode, ...])</p></td>
+<td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all</span></code>(user_or_token[, mode, options, columns])</p></td>
+<td><p>Retrieve all database records accessible by the specified User or token.</p></td>
+</tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_accessible_by</span></code>(cls_id, user_or_token)</p></td>
 <td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
 </tr>
@@ -401,7 +506,10 @@ the mapped class directly and returns mapped instances.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, ...])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">select</span></code>(user_or_token[, mode, options, columns])</p></td>
+<td><p>Return the select statement for all database records accessible by the specified User or token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
 <td><p>Serialize this object to a Python dictionary.</p></td>
 </tr>
 </tbody>
@@ -460,7 +568,10 @@ the mapped class directly and returns mapped instances.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#baselayer.app.models.CustomUserAccessControl.query_accessible_rows" title="baselayer.app.models.CustomUserAccessControl.query_accessible_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_accessible_rows</span></code></a>(cls, user_or_token[, ...])</p></td>
 <td><p>Construct a Query object that, when executed, returns the rows of a specified table that are accessible to a specified user or token.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_id_from_user_or_token</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baselayer.app.models.CustomUserAccessControl.select_accessible_rows" title="baselayer.app.models.CustomUserAccessControl.select_accessible_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_accessible_rows</span></code></a>(cls, user_or_token[, ...])</p></td>
+<td><p>Construct a Select object that, when executed, returns the rows of a specified table that are accessible to a specified user or token.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_id_from_user_or_token</span></code>(user_or_token)</p></td>
 <td><p>Return the user_id associated with a specified User or Token object.</p></td>
 </tr>
 </tbody>
@@ -469,23 +580,50 @@ the mapped class directly and returns mapped instances.</p>
 <dt class="sig sig-object py" id="baselayer.app.models.CustomUserAccessControl.query_accessible_rows">
 <span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.CustomUserAccessControl.query_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Query object that, when executed, returns the rows of a
-specified table that are accessible to a specified user or token.</p>
-<dl class="field-list simple">
+specified table that are accessible to a specified user or token.
+All query based functions will be deprecated when moving to
+SQL Alchemy 2.0 in favor of select functions.</p>
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>cls: `baselayer.app.models.DeclarativeMeta`</strong></dt><dd><p>The mapped class of the target table.</p>
+<dd class="field-odd"><dl>
+<dt><strong>cls</strong><span class="classifier"><cite>baselayer.app.models.DeclarativeMeta</cite></span></dt><dd><p>The mapped class of the target table.</p>
 </dd>
-<dt><strong>user_or_token: `baselayer.app.models.User` or `baselayer.app.models.Token`</strong></dt><dd><p>The User or Token to check.</p>
+<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The User or Token to check.</p>
 </dd>
-<dt><strong>columns: list of sqlalchemy.Column, optional, default None</strong></dt><dd><p>The columns to retrieve from the target table. If None, queries
+<dt><strong>columns</strong><span class="classifier">list of sqlalchemy.Column, optional, default None</span></dt><dd><p>The columns to retrieve from the target table. If None, queries
 the mapped class directly and returns mapped instances.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>query: sqlalchemy.Query</dt><dd><p>Query for the accessible rows.</p>
+<dt><strong>query</strong><span class="classifier">sqlalchemy.Query</span></dt><dd><p>Query for the accessible rows.</p>
 </dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="baselayer.app.models.CustomUserAccessControl.select_accessible_rows">
+<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.CustomUserAccessControl.select_accessible_rows" title="Permalink to this definition"></a></dt>
+<dd><p>Construct a Select object that, when executed, returns the rows of a
+specified table that are accessible to a specified user or token.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>cls</strong><span class="classifier"><cite>baselayer.app.models.DeclarativeMeta</cite></span></dt><dd><p>The mapped class of the target table.</p>
+</dd>
+<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The User or Token to check.</p>
+</dd>
+<dt><strong>columns</strong><span class="classifier">list of sqlalchemy.Column, optional, default None</span></dt><dd><p>The columns to retrieve from the target table. If None, queries
+the mapped class directly and returns mapped instances.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>sqlalchemy.Select object</dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -517,7 +655,10 @@ access all join_model mapped classes via the __subclasses__() method.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#baselayer.app.models.Public.query_accessible_rows" title="baselayer.app.models.Public.query_accessible_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_accessible_rows</span></code></a>(cls, user_or_token[, ...])</p></td>
 <td><p>Construct a Query object that, when executed, returns the rows of a specified table that are accessible to a specified user or token.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_id_from_user_or_token</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baselayer.app.models.Public.select_accessible_rows" title="baselayer.app.models.Public.select_accessible_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_accessible_rows</span></code></a>(cls, user_or_token[, ...])</p></td>
+<td><p>Construct a Select object that, when executed, returns the rows of a specified table that are accessible to a specified user or token.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_id_from_user_or_token</span></code>(user_or_token)</p></td>
 <td><p>Return the user_id associated with a specified User or Token object.</p></td>
 </tr>
 </tbody>
@@ -526,23 +667,50 @@ access all join_model mapped classes via the __subclasses__() method.</p>
 <dt class="sig sig-object py" id="baselayer.app.models.Public.query_accessible_rows">
 <span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Public.query_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Query object that, when executed, returns the rows of a
-specified table that are accessible to a specified user or token.</p>
-<dl class="field-list simple">
+specified table that are accessible to a specified user or token.
+All query based functions will be deprecated when moving to
+SQL Alchemy 2.0 in favor of select functions.</p>
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>cls: `baselayer.app.models.DeclarativeMeta`</strong></dt><dd><p>The mapped class of the target table.</p>
+<dd class="field-odd"><dl>
+<dt><strong>cls</strong><span class="classifier"><cite>baselayer.app.models.DeclarativeMeta</cite></span></dt><dd><p>The mapped class of the target table.</p>
 </dd>
-<dt><strong>user_or_token: `baselayer.app.models.User` or `baselayer.app.models.Token`</strong></dt><dd><p>The User or Token to check.</p>
+<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The User or Token to check.</p>
 </dd>
-<dt><strong>columns: list of sqlalchemy.Column, optional, default None</strong></dt><dd><p>The columns to retrieve from the target table. If None, queries
+<dt><strong>columns</strong><span class="classifier">list of sqlalchemy.Column, optional, default None</span></dt><dd><p>The columns to retrieve from the target table. If None, queries
 the mapped class directly and returns mapped instances.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>query: sqlalchemy.Query</dt><dd><p>Query for the accessible rows.</p>
+<dt><strong>query</strong><span class="classifier">sqlalchemy.Query</span></dt><dd><p>Query for the accessible rows.</p>
 </dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="baselayer.app.models.Public.select_accessible_rows">
+<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Public.select_accessible_rows" title="Permalink to this definition"></a></dt>
+<dd><p>Construct a Select object that, when executed, returns the rows of a
+specified table that are accessible to a specified user or token.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>cls</strong><span class="classifier"><cite>baselayer.app.models.DeclarativeMeta</cite></span></dt><dd><p>The mapped class of the target table.</p>
+</dd>
+<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The User or Token to check.</p>
+</dd>
+<dt><strong>columns</strong><span class="classifier">list of sqlalchemy.Column, optional, default None</span></dt><dd><p>The columns to retrieve from the target table. If None, queries
+the mapped class directly and returns mapped instances.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>sqlalchemy select object</dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -567,7 +735,10 @@ the mapped class directly and returns mapped instances.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#baselayer.app.models.Restricted.query_accessible_rows" title="baselayer.app.models.Restricted.query_accessible_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_accessible_rows</span></code></a>(cls, user_or_token[, ...])</p></td>
 <td><p>Construct a Query object that, when executed, returns the rows of a specified table that are accessible to a specified user or token.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_id_from_user_or_token</span></code>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baselayer.app.models.Restricted.select_accessible_rows" title="baselayer.app.models.Restricted.select_accessible_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_accessible_rows</span></code></a>(cls, user_or_token[, ...])</p></td>
+<td><p>Construct a Select object that, when executed, returns the rows of a specified table that are accessible to a specified user or token.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_id_from_user_or_token</span></code>(user_or_token)</p></td>
 <td><p>Return the user_id associated with a specified User or Token object.</p></td>
 </tr>
 </tbody>
@@ -576,23 +747,50 @@ the mapped class directly and returns mapped instances.</p>
 <dt class="sig sig-object py" id="baselayer.app.models.Restricted.query_accessible_rows">
 <span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Restricted.query_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Query object that, when executed, returns the rows of a
-specified table that are accessible to a specified user or token.</p>
-<dl class="field-list simple">
+specified table that are accessible to a specified user or token.
+All query based functions will be deprecated when moving to
+SQL Alchemy 2.0 in favor of select functions.</p>
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>cls: `baselayer.app.models.DeclarativeMeta`</strong></dt><dd><p>The mapped class of the target table.</p>
+<dd class="field-odd"><dl>
+<dt><strong>cls</strong><span class="classifier"><cite>baselayer.app.models.DeclarativeMeta</cite></span></dt><dd><p>The mapped class of the target table.</p>
 </dd>
-<dt><strong>user_or_token: `baselayer.app.models.User` or `baselayer.app.models.Token`</strong></dt><dd><p>The User or Token to check.</p>
+<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The User or Token to check.</p>
 </dd>
-<dt><strong>columns: list of sqlalchemy.Column, optional, default None</strong></dt><dd><p>The columns to retrieve from the target table. If None, queries
+<dt><strong>columns</strong><span class="classifier">list of sqlalchemy.Column, optional, default None</span></dt><dd><p>The columns to retrieve from the target table. If None, queries
 the mapped class directly and returns mapped instances.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>query: sqlalchemy.Query</dt><dd><p>Query for the accessible rows.</p>
+<dt><strong>query</strong><span class="classifier">sqlalchemy.Query</span></dt><dd><p>Query for the accessible rows.</p>
 </dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="baselayer.app.models.Restricted.select_accessible_rows">
+<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Restricted.select_accessible_rows" title="Permalink to this definition"></a></dt>
+<dd><p>Construct a Select object that, when executed, returns the rows of a
+specified table that are accessible to a specified user or token.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>cls</strong><span class="classifier"><cite>baselayer.app.models.DeclarativeMeta</cite></span></dt><dd><p>The mapped class of the target table.</p>
+</dd>
+<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The User or Token to check.</p>
+</dd>
+<dt><strong>columns</strong><span class="classifier">list of sqlalchemy.Column, optional, default None</span></dt><dd><p>The columns to retrieve from the target table. If None, queries
+the mapped class directly and returns mapped instances.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>sqlalchemy.Select object</dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -631,6 +829,12 @@ multiple Roles.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code>(id_or_list, user_or_token[, mode, ...])</p></td>
+<td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all</span></code>(user_or_token[, mode, options, columns])</p></td>
+<td><p>Retrieve all database records accessible by the specified User or token.</p></td>
+</tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_accessible_by</span></code>(cls_id, user_or_token)</p></td>
 <td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
 </tr>
@@ -649,7 +853,10 @@ multiple Roles.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, ...])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">select</span></code>(user_or_token[, mode, options, columns])</p></td>
+<td><p>Return the select statement for all database records accessible by the specified User or token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
 <td><p>Serialize this object to a Python dictionary.</p></td>
 </tr>
 </tbody>
@@ -716,6 +923,12 @@ multiple Roles.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code>(id_or_list, user_or_token[, mode, ...])</p></td>
+<td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all</span></code>(user_or_token[, mode, options, columns])</p></td>
+<td><p>Retrieve all database records accessible by the specified User or token.</p></td>
+</tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_accessible_by</span></code>(cls_id, user_or_token)</p></td>
 <td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
 </tr>
@@ -734,7 +947,10 @@ multiple Roles.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, ...])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">select</span></code>(user_or_token[, mode, options, columns])</p></td>
+<td><p>Return the select statement for all database records accessible by the specified User or token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
 <td><p>Serialize this object to a Python dictionary.</p></td>
 </tr>
 </tbody>
@@ -983,6 +1199,12 @@ as a particular User.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code>(id_or_list, user_or_token[, mode, ...])</p></td>
+<td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all</span></code>(user_or_token[, mode, options, columns])</p></td>
+<td><p>Retrieve all database records accessible by the specified User or token.</p></td>
+</tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_accessible_by</span></code>(cls_id, user_or_token)</p></td>
 <td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
 </tr>
@@ -1001,7 +1223,10 @@ as a particular User.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, ...])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">select</span></code>(user_or_token[, mode, options, columns])</p></td>
+<td><p>Return the select statement for all database records accessible by the specified User or token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
 <td><p>Serialize this object to a Python dictionary.</p></td>
 </tr>
 </tbody>
@@ -1141,6 +1366,12 @@ specified User (or Token instance, if a token is passed).</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code>(id_or_list, user_or_token[, mode, ...])</p></td>
+<td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all</span></code>(user_or_token[, mode, options, columns])</p></td>
+<td><p>Retrieve all database records accessible by the specified User or token.</p></td>
+</tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_accessible_by</span></code>(cls_id, user_or_token)</p></td>
 <td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
 </tr>
@@ -1159,7 +1390,10 @@ specified User (or Token instance, if a token is passed).</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, ...])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">select</span></code>(user_or_token[, mode, options, columns])</p></td>
+<td><p>Return the select statement for all database records accessible by the specified User or token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
 <td><p>Serialize this object to a Python dictionary.</p></td>
 </tr>
 </tbody>
@@ -1304,6 +1538,12 @@ specified User (or Token instance, if a token is passed).</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code>(id_or_list, user_or_token[, mode, ...])</p></td>
+<td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all</span></code>(user_or_token[, mode, options, columns])</p></td>
+<td><p>Retrieve all database records accessible by the specified User or token.</p></td>
+</tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_accessible_by</span></code>(cls_id, user_or_token)</p></td>
 <td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
 </tr>
@@ -1328,7 +1568,10 @@ specified User (or Token instance, if a token is passed).</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, ...])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baselayer.app.models.User.user_model" title="baselayer.app.models.User.user_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_model</span></code></a>()</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">select</span></code>(user_or_token[, mode, options, columns])</p></td>
+<td><p>Return the select statement for all database records accessible by the specified User or token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baselayer.app.models.User.user_model" title="baselayer.app.models.User.user_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_model</span></code></a>()</p></td>
 <td><p>The base model for User subclasses.</p></td>
 </tr>
 </tbody>
@@ -1654,6 +1897,12 @@ authenticated.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code>(id_or_list, user_or_token[, mode, ...])</p></td>
+<td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all</span></code>(user_or_token[, mode, options, columns])</p></td>
+<td><p>Retrieve all database records accessible by the specified User or token.</p></td>
+</tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_accessible_by</span></code>(cls_id, user_or_token)</p></td>
 <td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
 </tr>
@@ -1672,7 +1921,10 @@ authenticated.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, ...])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">select</span></code>(user_or_token[, mode, options, columns])</p></td>
+<td><p>Return the select statement for all database records accessible by the specified User or token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
 <td><p>Serialize this object to a Python dictionary.</p></td>
 </tr>
 </tbody>
@@ -1727,7 +1979,10 @@ requisite permissions.</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#baselayer.app.models.UserAccessControl.query_accessible_rows" title="baselayer.app.models.UserAccessControl.query_accessible_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_accessible_rows</span></code></a>(cls, user_or_token[, ...])</p></td>
 <td><p>Construct a Query object that, when executed, returns the rows of a specified table that are accessible to a specified user or token.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baselayer.app.models.UserAccessControl.user_id_from_user_or_token" title="baselayer.app.models.UserAccessControl.user_id_from_user_or_token"><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_id_from_user_or_token</span></code></a>(user_or_token)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baselayer.app.models.UserAccessControl.select_accessible_rows" title="baselayer.app.models.UserAccessControl.select_accessible_rows"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select_accessible_rows</span></code></a>(cls, user_or_token[, ...])</p></td>
+<td><p>Construct a Select object that, when executed, returns the rows of a specified table that are accessible to a specified user or token.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#baselayer.app.models.UserAccessControl.user_id_from_user_or_token" title="baselayer.app.models.UserAccessControl.user_id_from_user_or_token"><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_id_from_user_or_token</span></code></a>(user_or_token)</p></td>
 <td><p>Return the user_id associated with a specified User or Token object.</p></td>
 </tr>
 </tbody>
@@ -1737,12 +1992,12 @@ requisite permissions.</p>
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_cls_for_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserAccessControl.check_cls_for_attributes" title="Permalink to this definition"></a></dt>
 <dd><p>Check that a target class has the specified attributes. If not,
 raise a TypeError.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>cls: `baselayer.app.models.DeclarativeMeta`</strong></dt><dd><p>The class to check.</p>
+<dd class="field-odd"><dl>
+<dt><strong>cls</strong><span class="classifier"><cite>baselayer.app.models.DeclarativeMeta</cite></span></dt><dd><p>The class to check.</p>
 </dd>
-<dt><strong>attrs: list of str</strong></dt><dd><p>The names of the attributes to check for.</p>
+<dt><strong>attrs</strong><span class="classifier">list of str</span></dt><dd><p>The names of the attributes to check for.</p>
 </dd>
 </dl>
 </dd>
@@ -1753,23 +2008,50 @@ raise a TypeError.</p>
 <dt class="sig sig-object py" id="baselayer.app.models.UserAccessControl.query_accessible_rows">
 <span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserAccessControl.query_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Query object that, when executed, returns the rows of a
-specified table that are accessible to a specified user or token.</p>
-<dl class="field-list simple">
+specified table that are accessible to a specified user or token.
+All query based functions will be deprecated when moving to
+SQL Alchemy 2.0 in favor of select functions.</p>
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>cls: `baselayer.app.models.DeclarativeMeta`</strong></dt><dd><p>The mapped class of the target table.</p>
+<dd class="field-odd"><dl>
+<dt><strong>cls</strong><span class="classifier"><cite>baselayer.app.models.DeclarativeMeta</cite></span></dt><dd><p>The mapped class of the target table.</p>
 </dd>
-<dt><strong>user_or_token: `baselayer.app.models.User` or `baselayer.app.models.Token`</strong></dt><dd><p>The User or Token to check.</p>
+<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The User or Token to check.</p>
 </dd>
-<dt><strong>columns: list of sqlalchemy.Column, optional, default None</strong></dt><dd><p>The columns to retrieve from the target table. If None, queries
+<dt><strong>columns</strong><span class="classifier">list of sqlalchemy.Column, optional, default None</span></dt><dd><p>The columns to retrieve from the target table. If None, queries
 the mapped class directly and returns mapped instances.</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><dl class="simple">
-<dt>query: sqlalchemy.Query</dt><dd><p>Query for the accessible rows.</p>
+<dt><strong>query</strong><span class="classifier">sqlalchemy.Query</span></dt><dd><p>Query for the accessible rows.</p>
 </dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="baselayer.app.models.UserAccessControl.select_accessible_rows">
+<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserAccessControl.select_accessible_rows" title="Permalink to this definition"></a></dt>
+<dd><p>Construct a Select object that, when executed, returns the rows of a
+specified table that are accessible to a specified user or token.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>cls</strong><span class="classifier"><cite>baselayer.app.models.DeclarativeMeta</cite></span></dt><dd><p>The mapped class of the target table.</p>
+</dd>
+<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The User or Token to check.</p>
+</dd>
+<dt><strong>columns</strong><span class="classifier">list of sqlalchemy.Column, optional, default None</span></dt><dd><p>The columns to retrieve from the target table. If None, queries
+the mapped class directly and returns mapped instances.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>sqlalchemy select object</dt><dd></dd>
 </dl>
 </dd>
 </dl>
@@ -1779,10 +2061,10 @@ the mapped class directly and returns mapped instances.</p>
 <dt class="sig sig-object py" id="baselayer.app.models.UserAccessControl.user_id_from_user_or_token">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">user_id_from_user_or_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserAccessControl.user_id_from_user_or_token" title="Permalink to this definition"></a></dt>
 <dd><p>Return the user_id associated with a specified User or Token object.</p>
-<dl class="field-list simple">
+<dl class="field-list">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>user_or_token: `baselayer.app.models.User` or `baselayer.app.models.Token`</strong></dt><dd><p>The User or Token to check.</p>
+<dd class="field-odd"><dl>
+<dt><strong>user_or_token</strong><span class="classifier"><cite>baselayer.app.models.User</cite> or <cite>baselayer.app.models.Token</cite></span></dt><dd><p>The User or Token to check.</p>
 </dd>
 </dl>
 </dd>
@@ -1827,6 +2109,12 @@ the mapped class directly and returns mapped instances.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get</span></code>(id_or_list, user_or_token[, mode, ...])</p></td>
+<td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all</span></code>(user_or_token[, mode, options, columns])</p></td>
+<td><p>Retrieve all database records accessible by the specified User or token.</p></td>
+</tr>
 <tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_if_accessible_by</span></code>(cls_id, user_or_token)</p></td>
 <td><p>Return a database record if it is accessible to the specified User or Token.</p></td>
 </tr>
@@ -1845,7 +2133,10 @@ the mapped class directly and returns mapped instances.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">query_records_accessible_by</span></code>(user_or_token[, ...])</p></td>
 <td><p>Return the query for all database records accessible by the specified User or token.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">select</span></code>(user_or_token[, mode, options, columns])</p></td>
+<td><p>Return the select statement for all database records accessible by the specified User or token.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code>()</p></td>
 <td><p>Serialize this object to a Python dictionary.</p></td>
 </tr>
 </tbody>
@@ -1878,6 +2169,28 @@ the mapped class directly and returns mapped instances.</p>
 <span class="sig-name descname"><span class="pre">read</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.UserRole.read" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="baselayer.app.models.bulk_verify">
+<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">bulk_verify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accessor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.bulk_verify" title="Permalink to this definition"></a></dt>
+<dd><p>Vectorized permission check for a heterogeneous set of records. If an
+access leak is detected, it will be handled according to the <cite>security</cite>
+section of the application’s configuration.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl>
+<dt><strong>mode</strong><span class="classifier">str</span></dt><dd><p>The access mode to check. Can be create, read, update, or delete.</p>
+</dd>
+<dt><strong>collection</strong><span class="classifier">collection of <cite>baselayer.app.models.Base</cite>.</span></dt><dd><p>The records to check. These records will be grouped by type, and
+a single database query will be issued to check access for each
+record type.</p>
+</dd>
+<dt><strong>accessor</strong><span class="classifier">baselayer.app.models.User or baselayer.app.models.Token</span></dt><dd><p>The user or token to check.</p>
+</dd>
+</dl>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
