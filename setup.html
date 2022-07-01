@@ -15,6 +15,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -101,9 +102,9 @@
            <div itemprop="articleBody">
              
   <section id="setup">
-<h1>Setup<a class="headerlink" href="#setup" title="Permalink to this headline"></a></h1>
+<h1>Setup<a class="headerlink" href="#setup" title="Permalink to this heading"></a></h1>
 <section id="dependencies">
-<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline"></a></h2>
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h2>
 <p>SkyPortal requires the following software to be installed.  We show
 how to install them on MacOS and Debian-based systems below.</p>
 <ul class="simple">
@@ -120,7 +121,7 @@ how to install them on MacOS and Debian-based systems below.</p>
 </ul>
 </section>
 <section id="source-download-python-environment">
-<h2>Source download, Python environment<a class="headerlink" href="#source-download-python-environment" title="Permalink to this headline"></a></h2>
+<h2>Source download, Python environment<a class="headerlink" href="#source-download-python-environment" title="Permalink to this heading"></a></h2>
 <p>Clone the <a class="reference external" href="https://github.com/skyportal/skyportal">SkyPortal repository</a> and start a new
 virtual environment.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">skyportal</span><span class="o">/</span><span class="n">skyportal</span><span class="o">.</span><span class="n">git</span>
@@ -133,7 +134,7 @@ virtual environment.</p>
 <p>If you are using Windows Subsystem for Linux (WSL) be sure you clone the repository onto a location on the virtual machine, not the mounted Windows drive. Additionally, we recommend that you use WSL 2, and not WSL 1, in order to avoid complications in interfacing with the Linux image’s <code class="docutils literal notranslate"><span class="pre">localhost</span></code> network.</p>
 </section>
 <section id="installation-macos">
-<h2>Installation: MacOS<a class="headerlink" href="#installation-macos" title="Permalink to this headline"></a></h2>
+<h2>Installation: MacOS<a class="headerlink" href="#installation-macos" title="Permalink to this heading"></a></h2>
 <p>These instructions assume that you have <a class="reference external" href="http://brew.sh/">Homebrew</a> installed.</p>
 <ol class="simple">
 <li><p>Install dependencies</p></li>
@@ -162,7 +163,7 @@ virtual environment.</p>
 </div>
 </section>
 <section id="installation-debian-based-linux-and-wsl">
-<h2>Installation: Debian-based Linux and WSL<a class="headerlink" href="#installation-debian-based-linux-and-wsl" title="Permalink to this headline"></a></h2>
+<h2>Installation: Debian-based Linux and WSL<a class="headerlink" href="#installation-debian-based-linux-and-wsl" title="Permalink to this heading"></a></h2>
 <ol class="simple">
 <li><p>Install dependencies</p></li>
 </ol>
@@ -211,7 +212,7 @@ virtual environment.</p>
 </div>
 </section>
 <section id="launch">
-<h2>Launch<a class="headerlink" href="#launch" title="Permalink to this headline"></a></h2>
+<h2>Launch<a class="headerlink" href="#launch" title="Permalink to this heading"></a></h2>
 <ol class="simple">
 <li><p>Initialize the database with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_init</span></code> (this only needs to
 happen once).</p></li>
@@ -224,14 +225,14 @@ Different users have different privileges and can see more or less of the demo d
 </ol>
 </section>
 <section id="troubleshooting">
-<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline"></a></h2>
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
 <p>If you have trouble getting the demo data try doing</p>
 <p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_clear</span> <span class="pre">&amp;&amp;</span> <span class="pre">make</span> <span class="pre">db_init</span> <span class="pre">&amp;&amp;</span> <span class="pre">make</span> <span class="pre">run</span></code></p>
 <p>and then, from a different window, do <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">load_demo_data</span></code>.</p>
 <p>If you are using WSL, be sure everything (the git repository and all dependencies) are on the Linux machine and not the Windows side, as connection oddities can otherwise cause several errors.</p>
 </section>
 <section id="additional-configuration">
-<h2>Additional Configuration<a class="headerlink" href="#additional-configuration" title="Permalink to this headline"></a></h2>
+<h2>Additional Configuration<a class="headerlink" href="#additional-configuration" title="Permalink to this heading"></a></h2>
 <p>The configuration file lives in <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>, and is meant to be
 self-documenting.  Please modify as you see fit.</p>
 <p><strong>Before deploying this on a public server</strong> change <code class="docutils literal notranslate"><span class="pre">app:secret-key</span></code>
@@ -242,7 +243,7 @@ of the SkyPortal commands with the FLAGS environment variable set:</p>
 </pre></div>
 </div>
 <section id="authentication">
-<h3>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline"></a></h3>
+<h3>Authentication<a class="headerlink" href="#authentication" title="Permalink to this heading"></a></h3>
 <p>By default, the server allows anyone to log in (even if it presents a
 login screen).  If you are running a public-facing instance of
 SkyPortal, you should enable multi-user login by adding Google
@@ -250,7 +251,7 @@ credentials to the <code class="docutils literal notranslate"><span class="pre">
 setting <code class="docutils literal notranslate"><span class="pre">debug_login</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 </section>
 <section id="creating-an-administrative-user">
-<h3>Creating an administrative user<a class="headerlink" href="#creating-an-administrative-user" title="Permalink to this headline"></a></h3>
+<h3>Creating an administrative user<a class="headerlink" href="#creating-an-administrative-user" title="Permalink to this heading"></a></h3>
 <p>By default, no user has permission to perform system administration.
 You can give this and other permissions to an existing user by running the following from your terminal in the <code class="docutils literal notranslate"><span class="pre">skyportal</span></code> directory:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PYTHONPATH</span><span class="o">=.</span> <span class="n">python</span> <span class="n">tools</span><span class="o">/</span><span class="n">set_user_role</span><span class="o">.</span><span class="n">py</span> <span class="o">--</span><span class="n">username</span><span class="o">=</span><span class="s2">&quot;&lt;username&gt;&quot;</span> <span class="o">--</span><span class="n">role</span><span class="o">=</span><span class="s2">&quot;&lt;role&gt;&quot;</span>
@@ -263,7 +264,7 @@ You can give this and other permissions to an existing user by running the follo
 </div>
 </section>
 <section id="test-data">
-<h3>Test data<a class="headerlink" href="#test-data" title="Permalink to this headline"></a></h3>
+<h3>Test data<a class="headerlink" href="#test-data" title="Permalink to this heading"></a></h3>
 <p>By default, SkyPortal contains no data.  You can ingest some sample light curves by running</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">load_demo_data</span>
 </pre></div>
@@ -271,7 +272,7 @@ You can give this and other permissions to an existing user by running the follo
 <p>This also adds <code class="docutils literal notranslate"><span class="pre">testuser&#64;cesium-ml.org</span></code> as an administrator.</p>
 </section>
 <section id="deploying-secure-http-ssl-certificate">
-<h3>Deploying secure HTTP / SSL certificate<a class="headerlink" href="#deploying-secure-http-ssl-certificate" title="Permalink to this headline"></a></h3>
+<h3>Deploying secure HTTP / SSL certificate<a class="headerlink" href="#deploying-secure-http-ssl-certificate" title="Permalink to this heading"></a></h3>
 <p>When running a public server, you will likely want to deploy an SSL certificate (i.e., serve <code class="docutils literal notranslate"><span class="pre">https://your.url</span></code> instead of <code class="docutils literal notranslate"><span class="pre">http://your.url</span></code>). Certificates can be obtained for free from services such as Let’s Encrypt (https://letsencrypt.org/).</p>
 <p><a class="reference external" href="https://certbot.eff.org/">certbot</a> is software for helping you obtain a new SSL certificate from Let’s Encrypt.
 To do so, it first verifies that your server is running (without SSL) at the specified domain.</p>

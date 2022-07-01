@@ -15,6 +15,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -84,7 +85,7 @@
            <div itemprop="articleBody">
              
   <section id="periodic-timeseries-features">
-<h1>Periodic Timeseries Features<a class="headerlink" href="#periodic-timeseries-features" title="Permalink to this headline"></a></h1>
+<h1>Periodic Timeseries Features<a class="headerlink" href="#periodic-timeseries-features" title="Permalink to this heading"></a></h1>
 <p>Skyportal supports periodicity features. In particular, we provide a <code class="docutils literal notranslate"><span class="pre">Periodogram</span> <span class="pre">Analysis</span></code> button available from the <code class="docutils literal notranslate"><span class="pre">Source</span></code> page. This page allows for a dynamic, slider based period assignment and display.</p>
 <p><img alt="Periodogram page" src="_images/periodogram.png" /></p>
 <p>The periods are saved as <code class="docutils literal notranslate"><span class="pre">Annotation</span></code>s, and the app searches for annotated periods with the keyword “period.” Therefore, to add a period the app recognizes,  post an annotation with data: {’period’: <value>} as an annotation (in units of days). The keyword for period can be capitalized or not. In the case of multiple annotations with periods posted, the most recent annotation is plotted. For those sources with this annotation, the <code class="docutils literal notranslate"><span class="pre">SourceTable</span></code> includes a phase-folded light curve on that period.</p>

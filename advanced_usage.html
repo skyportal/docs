@@ -15,6 +15,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -91,9 +92,9 @@
            <div itemprop="articleBody">
              
   <section id="advanced-usage">
-<h1>Advanced usage<a class="headerlink" href="#advanced-usage" title="Permalink to this headline"></a></h1>
+<h1>Advanced usage<a class="headerlink" href="#advanced-usage" title="Permalink to this heading"></a></h1>
 <section id="posting-color-magnitude-data-to-generate-an-hr-diagram">
-<h2>Posting color-magnitude data to generate an HR diagram<a class="headerlink" href="#posting-color-magnitude-data-to-generate-an-hr-diagram" title="Permalink to this headline"></a></h2>
+<h2>Posting color-magnitude data to generate an HR diagram<a class="headerlink" href="#posting-color-magnitude-data-to-generate-an-hr-diagram" title="Permalink to this heading"></a></h2>
 <p>For stellar targets we are interested in showing the HR diagram
 based on the color-magnitude data from a cross match to, e.g., the Gaia catalog.
 Currently we support only Gaia inputs on the front-end,
@@ -175,7 +176,7 @@ If the posting was unsuccessful,
 the status would be 400.</p>
 </section>
 <section id="upgrading-an-existing-taxonomy">
-<h2>Upgrading an existing Taxonomy<a class="headerlink" href="#upgrading-an-existing-taxonomy" title="Permalink to this headline"></a></h2>
+<h2>Upgrading an existing Taxonomy<a class="headerlink" href="#upgrading-an-existing-taxonomy" title="Permalink to this heading"></a></h2>
 <p>Taxonomies are used for classification. There is typically a sitewide taxonomy that all users of SkyPortal can see. By default, we seed a new SP database with the latest taxonomy from the <a class="reference external" href="https://github.com/profjsb/timedomain-taxonomy">Time-domain Astronomy Taxonomy
 (Github)</a> (<code class="docutils literal notranslate"><span class="pre">tdtax</span></code>). From time to time, the latest taxonomy may be upgraded as new subclasses of sources are discovered and SP admins may need to push a new version of the taxonomy to the live application.</p>
 <p>To upgrade to the latest <code class="docutils literal notranslate"><span class="pre">tdtax</span></code>, as an admin, you will need to generate a token with a “Post taxonomy” ACL. Next install the latest <code class="docutils literal notranslate"><span class="pre">tdtax</span></code> on your system:</p>
@@ -215,7 +216,7 @@ the status would be 400.</p>
 <p>NOTE: in very rare cases you may wish to delete a taxonomy (e.g., if you made a typo when loading it). This should be done with extreme care: if anyone has classifications associated with that taxonomy their classifications will be lost upon delete.</p>
 </section>
 <section id="spectroscopic-lines">
-<h2>Spectroscopic lines<a class="headerlink" href="#spectroscopic-lines" title="Permalink to this headline"></a></h2>
+<h2>Spectroscopic lines<a class="headerlink" href="#spectroscopic-lines" title="Permalink to this heading"></a></h2>
 <p>The selection of element and galaxy lines on SkyPortal were derived from the NIST atomic database (<a class="reference external" href="https://www.nist.gov/pml/atomic-spectra-database">https://www.nist.gov/pml/atomic-spectra-database</a>) , using the methods of Gal-Yam (2019) (<a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2019ApJ...882..102G/abstract">https://ui.adsabs.harvard.edu/abs/2019ApJ…882..102G/abstract</a>). Telluric and Skylines were migrated from the ZTF Marshal.
 Element lines and galaxy lines move according to the set redshift or expansion velocity. Tellurics and skylines remain static.</p>
 </section>

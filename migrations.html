@@ -15,6 +15,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -91,9 +92,9 @@
            <div itemprop="articleBody">
              
   <section id="database-migrations">
-<h1>Database migrations<a class="headerlink" href="#database-migrations" title="Permalink to this headline"></a></h1>
+<h1>Database migrations<a class="headerlink" href="#database-migrations" title="Permalink to this heading"></a></h1>
 <section id="setting-up">
-<h2>Setting up<a class="headerlink" href="#setting-up" title="Permalink to this headline"></a></h2>
+<h2>Setting up<a class="headerlink" href="#setting-up" title="Permalink to this heading"></a></h2>
 <p>If you are planning to use database migrations, you need to let
 Alembic know the current state of the database.</p>
 <p>Presuming you’ve just started off by running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">load_demo_data</span></code>
@@ -105,7 +106,7 @@ tell Alembic that you are on the latest database schema:</p>
 </div>
 </section>
 <section id="generate-migration-script">
-<h2>Generate migration script<a class="headerlink" href="#generate-migration-script" title="Permalink to this headline"></a></h2>
+<h2>Generate migration script<a class="headerlink" href="#generate-migration-script" title="Permalink to this heading"></a></h2>
 <p>To generate a migration script, after having stamped the latest main commit (see above),
 ensure that the app is stopped, check out the branch with the relevant DB schema
 changes, and run the following:</p>
@@ -115,7 +116,7 @@ changes, and run the following:</p>
 <p>Review the resulting migration file under <code class="docutils literal notranslate"><span class="pre">alembic/versions</span></code> at hand of the <a class="reference external" href="https://alembic.sqlalchemy.org/en/latest/autogenerate.html">documentation</a>.</p>
 </section>
 <section id="applying-migration-scripts">
-<h2>Applying migration scripts<a class="headerlink" href="#applying-migration-scripts" title="Permalink to this headline"></a></h2>
+<h2>Applying migration scripts<a class="headerlink" href="#applying-migration-scripts" title="Permalink to this heading"></a></h2>
 <p>If the database has been stamped, as outlined above, the migration manager service
 will automatically apply any pending migration scripts upon starting the app.</p>
 <p>To manually apply migration scripts, after ensuring that the app is stopped, check

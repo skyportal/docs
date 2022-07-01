@@ -15,6 +15,7 @@
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -93,7 +94,7 @@
            <div itemprop="articleBody">
              
   <section id="deployment">
-<h1>Deployment<a class="headerlink" href="#deployment" title="Permalink to this headline"></a></h1>
+<h1>Deployment<a class="headerlink" href="#deployment" title="Permalink to this heading"></a></h1>
 <p>SkyPortal can be deployed either with or without using Docker.
 Without Docker, all services (such as the database) need to be running
 locally, as described in <a class="reference internal" href="setup.html"><span class="doc">setup</span></a>.</p>
@@ -103,7 +104,7 @@ discuss how to deploy via
 same information applies when using Kubernetes, for which we have an
 <a class="reference external" href="https://github.com/skyportal/deploy">example deployment</a>.</p>
 <section id="building-the-docker-images">
-<h2>Building the Docker images<a class="headerlink" href="#building-the-docker-images" title="Permalink to this headline"></a></h2>
+<h2>Building the Docker images<a class="headerlink" href="#building-the-docker-images" title="Permalink to this heading"></a></h2>
 <p>The first step is to obtain the images to launch. We deploy
 <a class="reference external" href="https://hub.docker.com/r/skyportal/web">SkyPortal images</a> to Docker
 Hub from time to time, which you can fetch using:</p>
@@ -116,7 +117,7 @@ Hub from time to time, which you can fetch using:</p>
 </div>
 </section>
 <section id="starting-containers">
-<h2>Starting containers<a class="headerlink" href="#starting-containers" title="Permalink to this headline"></a></h2>
+<h2>Starting containers<a class="headerlink" href="#starting-containers" title="Permalink to this heading"></a></h2>
 <p>Next, we deploy two containers: <code class="docutils literal notranslate"><span class="pre">web</span></code> (the SkyPortal application) and
 <code class="docutils literal notranslate"><span class="pre">db</span></code> (the PostgreSQL server). The database is stored and persisted in a local
 docker volume called <code class="docutils literal notranslate"><span class="pre">skyportal_dbdata</span></code> (see <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">volume</span> <span class="pre">ls</span></code>).</p>
@@ -126,7 +127,7 @@ docker volume called <code class="docutils literal notranslate"><span class="pre
 <p>Once both services are up and running, you may browse to SkyPortal at <code class="docutils literal notranslate"><span class="pre">http://localhost:9000</span></code>.</p>
 </section>
 <section id="handling-problems">
-<h2>Handling problems<a class="headerlink" href="#handling-problems" title="Permalink to this headline"></a></h2>
+<h2>Handling problems<a class="headerlink" href="#handling-problems" title="Permalink to this heading"></a></h2>
 <p>You can see which containers are running with <code class="docutils literal notranslate"><span class="pre">docker-compose</span> <span class="pre">ps</span></code>.</p>
 <p>Inspect the logs for the running containers using:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">logs</span> <span class="n">web</span>
@@ -136,7 +137,7 @@ docker volume called <code class="docutils literal notranslate"><span class="pre
 <p>(Or, follow the logs with <code class="docutils literal notranslate"><span class="pre">docker-compose</span> <span class="pre">logs</span> <span class="pre">-f</span> <span class="pre">db</span></code>.)</p>
 </section>
 <section id="adding-test-data">
-<h2>Adding test data<a class="headerlink" href="#adding-test-data" title="Permalink to this headline"></a></h2>
+<h2>Adding test data<a class="headerlink" href="#adding-test-data" title="Permalink to this heading"></a></h2>
 <p>Note that by default, the SkyPortal image will run the application in production (<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run_production</span></code>).</p>
 <p>The key behavior to note when running production mode is that the application will not create any database tables automatically (to avoid messing with production data). This means that the very first time you spin up SkyPortal using containers, the <code class="docutils literal notranslate"><span class="pre">skyportal_dbdata</span></code> volume will only have an empty database. You will need to set up the database tables manually. The easiest way to do this would be to run:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">exec</span> <span class="n">skyportal_web_1</span> <span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;source /skyportal_env/bin/activate &amp;&amp; FLAGS=&quot;--create_tables --config=config.yaml&quot; make load_demo_data&#39;</span>
@@ -145,7 +146,7 @@ docker volume called <code class="docutils literal notranslate"><span class="pre
 <p>This will also load in some test data to play with.</p>
 </section>
 <section id="stopping-the-deployment">
-<h2>Stopping the deployment<a class="headerlink" href="#stopping-the-deployment" title="Permalink to this headline"></a></h2>
+<h2>Stopping the deployment<a class="headerlink" href="#stopping-the-deployment" title="Permalink to this heading"></a></h2>
 <p>You may stop both containers using:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">stop</span>
 </pre></div>
