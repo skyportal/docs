@@ -342,71 +342,71 @@
 <section id="front-end">
 <h3>Front-end<a class="headerlink" href="#front-end" title="Permalink to this heading"></a></h3>
 <p>We’ll start with defining our new <code class="docutils literal notranslate"><span class="pre">TestComments</span></code> component in a new file in the components directory (<code class="docutils literal notranslate"><span class="pre">static/js/components/TestComments.jsx</span></code>):</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span>import React, { useState, useEffect } from &#39;react&#39;;
-import { useDispatch, useSelector } from &#39;react-redux&#39;;
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useState</span><span class="p">,</span><span class="w"> </span><span class="nx">useEffect</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react&#39;</span><span class="p">;</span><span class="w"></span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">useDispatch</span><span class="p">,</span><span class="w"> </span><span class="nx">useSelector</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;react-redux&#39;</span><span class="p">;</span><span class="w"></span>
 
-// Import our action creators from static/js/ducks/testComments.js - see below
-import * as commentsActions from &#39;../ducks/testComments&#39;;
+<span class="c1">// Import our action creators from static/js/ducks/testComments.js - see below</span><span class="w"></span>
+<span class="k">import</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="nx">commentsActions</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;../ducks/testComments&#39;</span><span class="p">;</span><span class="w"></span>
 
 
-const TestComments = () =&gt; {
-  const comments = useSelector((state) =&gt; state.testComments);
-  const dispatch = useDispatch();
-  const [newCommentText, setNewCommentText] = useState(&quot;&quot;);
+<span class="kd">const</span><span class="w"> </span><span class="nx">TestComments</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">comments</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useSelector</span><span class="p">((</span><span class="nx">state</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">state</span><span class="p">.</span><span class="nx">testComments</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">dispatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useDispatch</span><span class="p">();</span><span class="w"></span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">newCommentText</span><span class="p">,</span><span class="w"> </span><span class="nx">setNewCommentText</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span><span class="w"></span>
 
-  // Fetch comments upon initial component render
-  useEffect(() =&gt; {
-    dispatch(commentsActions.fetchComments());
-  }, [dispatch]);
+<span class="w">  </span><span class="c1">// Fetch comments upon initial component render</span><span class="w"></span>
+<span class="w">  </span><span class="nx">useEffect</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">commentsActions</span><span class="p">.</span><span class="nx">fetchComments</span><span class="p">());</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">[</span><span class="nx">dispatch</span><span class="p">]);</span><span class="w"></span>
 
-  // Define text input field&#39;s onChange callback
-  const handleCommentTextChange = (event) =&gt; {
-    setNewCommentText(event.target.value);
-  };
+<span class="w">  </span><span class="c1">// Define text input field&#39;s onChange callback</span><span class="w"></span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleCommentTextChange</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">event</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nx">setNewCommentText</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="p">};</span><span class="w"></span>
 
-  // Define submission callback
-  const handleSubmitNewComment = async () =&gt; {
-    const requestResult = await dispatch(commentsActions.submitComment(newCommentText));
-    if (requestResult.status === &quot;success&quot;) {
-      setNewCommentText(&quot;&quot;);
-    }
-  };
+<span class="w">  </span><span class="c1">// Define submission callback</span><span class="w"></span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">handleSubmitNewComment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">requestResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">dispatch</span><span class="p">(</span><span class="nx">commentsActions</span><span class="p">.</span><span class="nx">submitComment</span><span class="p">(</span><span class="nx">newCommentText</span><span class="p">));</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">requestResult</span><span class="p">.</span><span class="nx">status</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;success&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nx">setNewCommentText</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">};</span><span class="w"></span>
 
-  return (
-    &lt;div&gt;
-      &lt;div&gt;
-        Comments:
-        &lt;ul&gt;
-          {comments.map((comment, idx) =&gt; (
-            &lt;li key={idx}&gt;
-              {comment.text}
-            &lt;/li&gt;
-           ))}
-        &lt;/ul&gt;
-      &lt;/div&gt;
-      &lt;div&gt;
-        Submit new comment
-        &lt;br /&gt;
-        &lt;input
-          type=&quot;text&quot;
-          value={newCommentText}
-          onChange={handleCommentTextChange}
-          data-testid=&quot;testCommentInput&quot;
-        /&gt;
-        &lt;br /&gt;
-        &lt;button
-          type=&quot;button&quot;
-          onClick={handleSubmitNewComment}
-          data-testid=&quot;testCommentSubmitButton&quot;
-        &gt;
-          Submit
-        &lt;/button&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  );
-};
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">        </span><span class="nx">Comments</span><span class="o">:</span><span class="w"></span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">          </span><span class="p">{</span><span class="nx">comments</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">comment</span><span class="p">,</span><span class="w"> </span><span class="nx">idx</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">            </span><span class="p">&lt;</span><span class="nt">li</span> <span class="na">key</span><span class="o">=</span><span class="p">{</span><span class="nx">idx</span><span class="p">}&gt;</span><span class="w"></span>
+<span class="w">              </span><span class="p">{</span><span class="nx">comment</span><span class="p">.</span><span class="nx">text</span><span class="p">}</span><span class="w"></span>
+<span class="w">            </span><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">           </span><span class="p">))}</span><span class="w"></span>
+<span class="w">        </span><span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">      </span><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">        </span><span class="nx">Submit</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">comment</span><span class="w"></span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span><span class="w"></span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">input</span>
+          <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span>
+          <span class="na">value</span><span class="o">=</span><span class="p">{</span><span class="nx">newCommentText</span><span class="p">}</span>
+          <span class="na">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">handleCommentTextChange</span><span class="p">}</span>
+          <span class="na">data-testid</span><span class="o">=</span><span class="s">&quot;testCommentInput&quot;</span>
+        <span class="p">/&gt;</span><span class="w"></span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span><span class="w"></span>
+<span class="w">        </span><span class="p">&lt;</span><span class="nt">button</span>
+          <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span>
+          <span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">handleSubmitNewComment</span><span class="p">}</span>
+          <span class="na">data-testid</span><span class="o">=</span><span class="s">&quot;testCommentSubmitButton&quot;</span>
+        <span class="p">&gt;</span><span class="w"></span>
+<span class="w">          </span><span class="nx">Submit</span><span class="w"></span>
+<span class="w">        </span><span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">      </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">    </span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="p">);</span><span class="w"></span>
+<span class="p">};</span><span class="w"></span>
 
-export default TestComments;
+<span class="k">export</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="nx">TestComments</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>Inside the component definition we call the <code class="docutils literal notranslate"><span class="pre">useState</span></code> (for maintaining internal component state, here corresponding to the new comment text value), <code class="docutils literal notranslate"><span class="pre">useDispatch</span></code> (for dispatching action creators) and <code class="docutils literal notranslate"><span class="pre">useSelector</span></code> (for accessing the application-wide state) hooks introduced above, and we also make use of the <a class="reference external" href="https://reactjs.org/docs/hooks-effect.html"><code class="docutils literal notranslate"><span class="pre">useEffect</span></code> hook</a>, which executes the function provided as the first argument whenever the values of any of the variables of the second argument (the “dependency array”) change. In this case, <code class="docutils literal notranslate"><span class="pre">dispatch</span></code> will not change after the component’s initial render, so the function we’ve provided as the first argument will be called only at that time, and not during re-renders.</p>
