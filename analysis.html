@@ -64,9 +64,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#creating-a-new-analysis-service">Creating a new Analysis Service</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#starting-a-new-analysis">Starting a new Analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#what-an-analysis-service-returns">What an Analysis Service returns</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#supernova-fitter-example">Supernova Fitter Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getting-specific-analysis-products-programmatically">Getting specific analysis products programmatically</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#supernova-fitter-example">Supernova Fitter Example</a></li>
 </ul>
 </li>
 </ul>
@@ -193,8 +194,36 @@ like:</p>
 </div>
 <p>A valid POST will immediately invalidate the unique token so that analysis entry cannot be posted to again (the user can simply restart an analysis with different parameters if they wish).</p>
 </section>
+<section id="getting-specific-analysis-products-programmatically">
+<h3>Getting specific analysis products programmatically<a class="headerlink" href="#getting-specific-analysis-products-programmatically" title="Permalink to this heading"></a></h3>
+<p>SkyPortal has an API endpoint that allows programmatic access to GET products (plots, results, and posterior visualization) produced by an analysis service.
+The GET endpoints are:</p>
+<p>Plots (return an image to display):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">skyportal_base</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">5000</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">obj</span><span class="o">/</span><span class="n">analysis</span><span class="o">/&lt;</span><span class="n">analysis_id</span><span class="o">&gt;/</span><span class="n">plots</span><span class="o">/&lt;</span><span class="n">plot_number</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Posterior viz (ie. return a corner plot image to display):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">skyportal_base</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">5000</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">obj</span><span class="o">/</span><span class="n">analysis</span><span class="o">/&lt;</span><span class="n">analysis_id</span><span class="o">&gt;/</span><span class="n">corner</span>
+</pre></div>
+</div>
+<p>(attach corner plot kwargs in the body of the GET)</p>
+<p>Results (returned as a json):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//&lt;</span><span class="n">skyportal_base</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">5000</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">obj</span><span class="o">/</span><span class="n">analysis</span><span class="o">/&lt;</span><span class="n">analysis_id</span><span class="o">&gt;/</span><span class="n">results</span>
+</pre></div>
+</div>
+<p>For example, to save the first plot of <code class="docutils literal notranslate"><span class="pre">analysis_id=32</span></code>, one can do something like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">shutil</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://localhost:5000/api/obj/analysis/32/plots/0&quot;</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">header</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;img.png&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out_file</span><span class="p">:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">copyfileobj</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">raw</span><span class="p">,</span> <span class="n">out_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="supernova-fitter-example">
-<h3>Supernova Fitter Example<a class="headerlink" href="#supernova-fitter-example" title="Permalink to this heading"></a></h3>
+<h2>Supernova Fitter Example<a class="headerlink" href="#supernova-fitter-example" title="Permalink to this heading"></a></h2>
 <p>SkyPortal ships with an example 3rd party analysis app to fit lightcurves with supernova models in <code class="docutils literal notranslate"><span class="pre">sncosmo</span></code> (see <code class="docutils literal notranslate"><span class="pre">services/sn_analysis_service/</span></code>). To use it locally, load the demo data to create an analysis service entry that establishes the SN fitter microservice:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">load_demo_data</span>
 </pre></div>
@@ -214,7 +243,6 @@ like:</p>
 <span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </pre></div>
 </div>
-</section>
 </section>
 </section>
 
