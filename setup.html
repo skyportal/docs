@@ -111,7 +111,7 @@ how to install them on MacOS and Debian-based systems below.</p>
 <li><p>Python 3.8 or later</p></li>
 <li><p>Supervisor (v&gt;=3.0b2)</p></li>
 <li><p>NGINX (v&gt;=1.7)</p></li>
-<li><p>PostgreSQL (v&gt;=9.6)</p></li>
+<li><p>PostgreSQL (v&gt;=14.0)</p></li>
 <li><p>Node.JS/npm (v&gt;=5.8.0)</p></li>
 </ul>
 <p>When installing SkyPortal on Debian-based systems, 2 additional packages are required to be able to install pycurl later on:</p>
@@ -187,7 +187,7 @@ virtual environment.</p>
 <span class="n">host</span> <span class="nb">all</span> <span class="n">postgres</span> <span class="p">::</span><span class="mi">1</span><span class="o">/</span><span class="mi">128</span> <span class="n">trust</span>
 </pre></div>
 </div>
-<p>In some PostgreSQL installations, the default TCP port may be different from the 5432 value assumed in our default configuration file values. To remedy this, you can either edit your config.yaml file to reflect your system’s PostgreSQL default port, or update your system-wide config to use port 5432 by editing /etc/postgresql/12/main/postgresql.conf (replace “12” with your installed version number) and changing the line <code class="docutils literal notranslate"><span class="pre">port</span> <span class="pre">=</span> <span class="pre">XXXX</span></code> (where “XXXX” is whatever the system default was) to <code class="docutils literal notranslate"><span class="pre">port</span> <span class="pre">=</span> <span class="pre">5432</span></code>.</p>
+<p>In some PostgreSQL installations, the default TCP port may be different from the 5432 value assumed in our default configuration file values. To remedy this, you can either edit your config.yaml file to reflect your system’s PostgreSQL default port, or update your system-wide config to use port 5432 by editing /etc/postgresql/14/main/postgresql.conf (replace “14” with your installed version number) and changing the line <code class="docutils literal notranslate"><span class="pre">port</span> <span class="pre">=</span> <span class="pre">XXXX</span></code> (where “XXXX” is whatever the system default was) to <code class="docutils literal notranslate"><span class="pre">port</span> <span class="pre">=</span> <span class="pre">5432</span></code>.</p>
 <p>Restart PostgreSQL:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">service</span> <span class="n">postgresql</span> <span class="n">restart</span>
 </pre></div>
