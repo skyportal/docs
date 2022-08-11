@@ -130,49 +130,69 @@ virtual environment.</p>
 <span class="n">source</span> <span class="n">skyportal_env</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
 </pre></div>
 </div>
-<p>(You can also use <code class="docutils literal notranslate"><span class="pre">conda</span></code> or <code class="docutils literal notranslate"><span class="pre">pipenv</span></code> to create your environment.)</p>
+<p>You can also use <code class="docutils literal notranslate"><span class="pre">conda</span></code> or <code class="docutils literal notranslate"><span class="pre">pipenv</span></code> to create your environment.</p>
+<p>If you developing on a Mac with an ARM (M1/M2) you might consider using a Rosetta-driven environment so that you more easily install dependencies (that tend to be x86-centric):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CONDA_SUBDIR</span><span class="o">=</span><span class="n">osx</span><span class="o">-</span><span class="mi">64</span> <span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">skyportal_env</span> \
+      <span class="n">python</span><span class="o">=</span><span class="mf">3.9</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">skyportal_env</span>
+<span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">env</span> <span class="o">--</span><span class="nb">set</span> <span class="n">subdir</span> <span class="n">osx</span><span class="o">-</span><span class="mi">64</span>
+<span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">add</span> <span class="n">channels</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
+<span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="nb">set</span> <span class="n">channel_priority</span> <span class="n">strict</span>
+</pre></div>
+</div>
 <p>If you are using Windows Subsystem for Linux (WSL) be sure you clone the repository onto a location on the virtual machine, not the mounted Windows drive. Additionally, we recommend that you use WSL 2, and not WSL 1, in order to avoid complications in interfacing with the Linux image’s <code class="docutils literal notranslate"><span class="pre">localhost</span></code> network.</p>
 </section>
 <section id="installation-macos">
 <h2>Installation: MacOS<a class="headerlink" href="#installation-macos" title="Permalink to this heading"></a></h2>
 <p>These instructions assume that you have <a class="reference external" href="http://brew.sh/">Homebrew</a> installed.</p>
-<ol class="simple">
-<li><p>Install dependencies</p></li>
-</ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">supervisor</span> <span class="n">nginx</span> <span class="n">postgresql</span> <span class="n">node</span>
+<ol>
+<li><p>Install dependencies</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">supervisor</span> <span class="n">nginx</span> <span class="n">postgresql</span> <span class="n">node</span> \
+     <span class="n">llvm</span> <span class="n">libomp</span> <span class="n">gsl</span> <span class="n">rust</span>
+<span class="n">nvm</span> <span class="n">install</span> <span class="n">node</span>
 </pre></div>
 </div>
-<ol class="simple">
+</li>
 <li><p>Start the PostgreSQL server:</p></li>
 </ol>
 <ul class="simple">
 <li><p>To start automatically at login: <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">services</span> <span class="pre">start</span> <span class="pre">postgresql</span></code></p></li>
 <li><p>To start manually: <code class="docutils literal notranslate"><span class="pre">pg_ctl</span> <span class="pre">-D</span> <span class="pre">/usr/local/var/postgres</span> <span class="pre">start</span></code></p></li>
 </ul>
-<ol class="simple">
-<li><p>To run the test suite, you’ll need Geckodriver:</p></li>
-</ol>
+<p>You may also need to run the following command to create the proper admin user:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/usr/local/opt/postgres/bin/createuser -s postgres
+</pre></div>
+</div>
+<ol>
+<li><p>To run the test suite, you’ll need Geckodriver:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">geckodriver</span>
 </pre></div>
 </div>
-<ol class="simple">
-<li><p>To build the docs, you’ll need graphviz:</p></li>
-</ol>
+</li>
+<li><p>To build the docs, you’ll need graphviz:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">graphviz</span>
 </pre></div>
 </div>
+</li>
+<li><p>(ARM M1/M2) Explicitly <a class="reference external" href="https://lscsoft.docs.ligo.org/ligo.skymap/quickstart/install.html#option-2-conda">install ligo.skymap using conda rather than pip</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">skyportal_env</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">ligo</span><span class="o">.</span><span class="n">skymap</span>
+</pre></div>
+</div>
+</li>
+</ol>
 </section>
 <section id="installation-debian-based-linux-and-wsl">
 <h2>Installation: Debian-based Linux and WSL<a class="headerlink" href="#installation-debian-based-linux-and-wsl" title="Permalink to this heading"></a></h2>
-<ol class="simple">
-<li><p>Install dependencies</p></li>
-</ol>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">nginx</span> <span class="n">supervisor</span> <span class="n">postgresql</span> <span class="n">libpq</span><span class="o">-</span><span class="n">dev</span> <span class="n">npm</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span> <span class="n">libcurl4</span><span class="o">-</span><span class="n">gnutls</span><span class="o">-</span><span class="n">dev</span> <span class="n">libgnutls28</span><span class="o">-</span><span class="n">dev</span>
+<ol>
+<li><p>Install dependencies</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">nginx</span> <span class="n">supervisor</span> <span class="n">postgresql</span> \
+      <span class="n">libpq</span><span class="o">-</span><span class="n">dev</span> <span class="n">npm</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span> \
+      <span class="n">libcurl4</span><span class="o">-</span><span class="n">gnutls</span><span class="o">-</span><span class="n">dev</span> <span class="n">libgnutls28</span><span class="o">-</span><span class="n">dev</span>
 </pre></div>
 </div>
-<ol class="simple">
-<li><p>Configure your database permissions.</p></li>
-</ol>
+</li>
+<li><p>Configure your database permissions.</p>
 <p>In <code class="docutils literal notranslate"><span class="pre">pg_hba.conf</span></code> (typically located in
 <code class="docutils literal notranslate"><span class="pre">/etc/postgresql/&lt;postgres-version&gt;/main</span></code>), insert the following lines
 <em>before</em> any other <code class="docutils literal notranslate"><span class="pre">host</span></code> lines:</p>
@@ -192,9 +212,8 @@ virtual environment.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">service</span> <span class="n">postgresql</span> <span class="n">restart</span>
 </pre></div>
 </div>
-<ol class="simple">
-<li><p>To run the test suite, you’ll need Geckodriver:</p></li>
-</ol>
+</li>
+<li><p>To run the test suite, you’ll need Geckodriver:</p>
 <ul class="simple">
 <li><p>Download the latest version from https://github.com/mozilla/geckodriver/releases/</p></li>
 <li><p>Extract the binary to somewhere on your path</p></li>
@@ -204,12 +223,13 @@ virtual environment.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">firefox</span><span class="o">-</span><span class="n">geckodriver</span>
 </pre></div>
 </div>
-<ol class="simple">
-<li><p>To build the docs, you’ll need graphviz:</p></li>
-</ol>
+</li>
+<li><p>To build the docs, you’ll need graphviz:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">graphviz</span><span class="o">-</span><span class="n">dev</span> <span class="n">graphviz</span>
 </pre></div>
 </div>
+</li>
+</ol>
 </section>
 <section id="launch">
 <h2>Launch<a class="headerlink" href="#launch" title="Permalink to this heading"></a></h2>
