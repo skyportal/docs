@@ -54,6 +54,12 @@
 <li class="toctree-l1"><a class="reference internal" href="adding_features.html">Adding new features</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Styling components</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#components">Components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#buttons">Buttons</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#icons">Icons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#asynchronous-operations">Asynchronous Operations</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#sizes">Sizes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#style-props-on-box">Style props on Box</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#responsive-design">Responsive Design</a><ul>
@@ -98,11 +104,11 @@
              
   <section id="styling-components">
 <h1>Styling components<a class="headerlink" href="#styling-components" title="Permalink to this heading"></a></h1>
-<p>SkyPortal is built on top of <a class="reference external" href="https://material-ui.com/">Material UI</a>
+<p>SkyPortal is built on top of <a class="reference external" href="https://mui.com/material-ui/getting-started/overview/">Material UI</a>
 (MUI).  We have evaluated several styling systems, including inline
 styles, CSS Modules, and Styled Components, and have settled on using
-<a class="reference external" href="https://material-ui.com/styles/basics/#hook-api">MUI’s style hooks API</a>.</p>
-<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">makeStyles</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@material-ui/core/styles&#39;</span><span class="p">;</span><span class="w"></span>
+<a class="reference external" href="https://mui.com/system/styles/basics/#hook-api">MUI’s style hooks API</a>.</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nx">makeStyles</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/styles/makeStyles&quot;</span><span class="p">;</span><span class="w"></span>
 </pre></div>
 </div>
 <p>MUI provides <code class="docutils literal notranslate"><span class="pre">makeStyles</span></code>, which takes in JSS (JavaScript Style
@@ -116,11 +122,11 @@ Sheets) and returns a CSS provider <a class="reference external" href="https://r
 </pre></div>
 </div>
 <p>The resulting <code class="docutils literal notranslate"><span class="pre">useStyles</span></code> can then be used inside of a component:</p>
-<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nx">Button</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@material-ui/core/Button&#39;</span><span class="p">;</span><span class="w"></span>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nx">Typography</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/material/Typography&quot;</span><span class="p">;</span><span class="w"></span>
 
-<span class="kd">const</span><span class="w"> </span><span class="nx">MyButton</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">Text</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">classes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useStyles</span><span class="p">();</span><span class="w"></span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">Button</span> <span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="nx">classes</span><span class="p">.</span><span class="nx">root</span><span class="p">}&gt;</span><span class="nx">Click</span><span class="w"> </span><span class="nx">Me</span><span class="p">&lt;/</span><span class="nt">Button</span><span class="p">&gt;;</span><span class="w"></span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">&lt;</span><span class="nt">Typography</span> <span class="na">className</span><span class="o">=</span><span class="p">{</span><span class="nx">classes</span><span class="p">.</span><span class="nx">root</span><span class="p">}&gt;</span><span class="nx">Text</span><span class="p">&lt;/</span><span class="nt">Typography</span><span class="p">&gt;;</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </pre></div>
 </div>
@@ -141,12 +147,93 @@ Sheets) and returns a CSS provider <a class="reference external" href="https://r
 <p>This is done via the
 <a class="reference external" href="http://lesscss.org/features/#parent-selectors-feature"><code class="docutils literal notranslate"><span class="pre">&amp;</span></code> selector</a>:
 <code class="docutils literal notranslate"><span class="pre">&amp;p</span></code> is a <code class="docutils literal notranslate"><span class="pre">p</span></code> element on <code class="docutils literal notranslate"><span class="pre">root</span></code> here.</p>
-<p>You can also <a class="reference external" href="https://material-ui.com/styles/basics/#adapting-based-on-props">parameterize <code class="docutils literal notranslate"><span class="pre">makeStyles</span></code></a>.</p>
+<p>You can also <a class="reference external" href="https://mui.com/system/styles/basics/#adapting-based-on-props">parameterize <code class="docutils literal notranslate"><span class="pre">makeStyles</span></code></a>.</p>
 <section id="components">
 <h2>Components<a class="headerlink" href="#components" title="Permalink to this heading"></a></h2>
-<p>Please refer to the <a class="reference external" href="https://material-ui.com/components/box/">MUI component
+<p>Please refer to the <a class="reference external" href="https://mui.com/material-ui/react-autocomplete/">MUI component
 docs</a> for available
 components and their props and CSS styles.</p>
+</section>
+<section id="buttons">
+<h2>Buttons<a class="headerlink" href="#buttons" title="Permalink to this heading"></a></h2>
+<p>Do not use the MUI Button component, instead use SkyPortal’s standardized Button component. Import as such (assuming you are editing a component in the <code class="docutils literal notranslate"><span class="pre">static/js/components</span></code> directory):</p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nx">Button</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;./Button&#39;</span><span class="p">;</span><span class="w"></span>
+</pre></div>
+</div>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h3>
+<p>There are three accepted button types: primary, secondary, and a regular text button. Use primary buttons for actions such as saving information to the DB or submitting a form. Use secondary buttons and the regular/default button for other actions.</p>
+<p><img alt="buttons" src="_images/buttons.png" /></p>
+<p>Instead of passing <code class="docutils literal notranslate"><span class="pre">variant</span></code> and <code class="docutils literal notranslate"><span class="pre">color</span></code> props, pass in boolean props describing which button you want.</p>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="c1">// Primary button</span><span class="w"></span>
+<span class="p">&lt;</span><span class="nt">Button</span> <span class="na">primary</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="nx">Button</span><span class="w"> </span><span class="nx">text</span><span class="w"></span>
+<span class="p">&lt;/</span><span class="nt">Button</span><span class="p">&gt;</span><span class="w"></span>
+
+<span class="c1">// Secondary button</span><span class="w"></span>
+<span class="p">&lt;</span><span class="nt">Button</span> <span class="na">secondary</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="nx">Button</span><span class="w"> </span><span class="nx">text</span><span class="w"></span>
+<span class="p">&lt;/</span><span class="nt">Button</span><span class="p">&gt;</span><span class="w"></span>
+
+<span class="c1">// Regular/default button- no prop</span><span class="w"></span>
+<span class="p">&lt;</span><span class="nt">Button</span><span class="p">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="nx">Button</span><span class="w"> </span><span class="nx">text</span><span class="w"></span>
+<span class="p">&lt;/</span><span class="nt">Button</span><span class="p">&gt;</span><span class="w"></span>
+</pre></div>
+</div>
+<p>SkyPortal’s Button component accepts all the <a class="reference external" href="https://mui.com/material-ui/api/button/#props">same props as regular MUI Buttons</a>.</p>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span>// Add an onClick handler
+&lt;Button
+  primary
+  onClick={() =&gt; console.log(&#39;clicked&#39;)}
+&gt;
+  Click me!
+&lt;/Button&gt;
+
+// Small secondary button
+&lt;Button
+  secondary
+  size=&quot;small&quot;
+&gt;
+  I&#39;m small
+&lt;/Button&gt;
+</pre></div>
+</div>
+</section>
+<section id="icons">
+<h3>Icons<a class="headerlink" href="#icons" title="Permalink to this heading"></a></h3>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">endIcon</span></code> prop for adding icons to buttons. (Do not use the <code class="docutils literal notranslate"><span class="pre">startIcon</span></code> prop.)</p>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="nx">SearchIcon</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">&quot;@mui/icons-material/Search&quot;</span><span class="p">;</span><span class="w"></span>
+<span class="c1">// ...</span><span class="w"></span>
+<span class="p">&lt;</span><span class="nt">Button</span>
+  <span class="na">primary</span>
+  <span class="na">endIcon</span><span class="o">=</span><span class="p">{&lt;</span><span class="nt">SearchIcon</span> <span class="p">/&gt;}&gt;</span><span class="w"></span>
+<span class="o">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="nx">Search</span><span class="w"></span>
+<span class="p">&lt;/</span><span class="nt">Button</span><span class="p">&gt;</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
+<section id="asynchronous-operations">
+<h3>Asynchronous Operations<a class="headerlink" href="#asynchronous-operations" title="Permalink to this heading"></a></h3>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">async</span></code> and <code class="docutils literal notranslate"><span class="pre">loading</span></code> props to make buttons disabled while waiting for an asynchronous operation to complete. Async buttons will always have primary button styling.</p>
+<p><img alt="async button" src="_images/async_button.gif" /></p>
+<div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">loading</span><span class="p">,</span><span class="w"> </span><span class="nx">setLoading</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span><span class="w"></span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">waitForAsyncOperation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nx">setLoading</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// async operation here...</span><span class="w"></span>
+<span class="w">  </span><span class="nx">setLoading</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="p">&lt;</span><span class="nt">Button</span>
+  <span class="na">async</span>
+  <span class="na">loading</span><span class="o">=</span><span class="p">{</span><span class="nx">loading</span><span class="p">}</span>
+  <span class="na">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">waitForAsyncOperation</span><span class="p">}</span>
+<span class="p">&gt;</span><span class="w"></span>
+<span class="w">  </span><span class="nx">Async</span><span class="w"> </span><span class="nx">button</span><span class="w"></span>
+<span class="p">&lt;/</span><span class="nt">Button</span><span class="p">&gt;</span><span class="w"></span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="sizes">
 <h2>Sizes<a class="headerlink" href="#sizes" title="Permalink to this heading"></a></h2>
@@ -157,7 +244,7 @@ specified in the root HTML element.</p>
 <section id="style-props-on-box">
 <h2>Style props on Box<a class="headerlink" href="#style-props-on-box" title="Permalink to this heading"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">makeStyles</span></code> is preferred in general, but for simple formatting you
-may use <a class="reference external" href="https://material-ui.com/system/basics/#all-inclusive">style
+may use <a class="reference external" href="https://mui.com/system/basics/#all-inclusive">style
 props</a> on <code class="docutils literal notranslate"><span class="pre">Box</span></code>
 containers:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Box</span> <span class="n">m</span><span class="o">=</span><span class="p">{</span><span class="mi">2</span><span class="n">rem</span><span class="p">}</span> <span class="o">/&gt;</span>
@@ -168,7 +255,7 @@ containers:</p>
 <section id="responsive-design">
 <h2>Responsive Design<a class="headerlink" href="#responsive-design" title="Permalink to this heading"></a></h2>
 <p>MUI uses
-<a class="reference external" href="https://material-ui.com/customization/breakpoints">breakpoints</a>
+<a class="reference external" href="https://mui.com/material-ui/customization/breakpoints/">breakpoints</a>
 as a convenient way of writing CSS media queries.</p>
 <p>Breakpoints understand the following pre-defined screen sizes:</p>
 <ul class="simple">
@@ -195,11 +282,11 @@ and <code class="docutils literal notranslate"><span class="pre">between</span><
 </pre></div>
 </div>
 <p>You may customize media-queries using the
-<a class="reference external" href="https://material-ui.com/components/use-media-query"><code class="docutils literal notranslate"><span class="pre">useMediaQuery</span></code></a>
+<a class="reference external" href="https://mui.com/material-ui/react-use-media-query/"><code class="docutils literal notranslate"><span class="pre">useMediaQuery</span></code></a>
 hook.</p>
 <section id="grid-system">
 <h3>Grid system<a class="headerlink" href="#grid-system" title="Permalink to this heading"></a></h3>
-<p>For positioning components on a page, MUI provides a <a class="reference external" href="https://material-ui.com/components/grid/">12-column grid
+<p>For positioning components on a page, MUI provides a <a class="reference external" href="https://mui.com/material-ui/react-grid/">12-column grid
 layout</a>.</p>
 <p>There are two <code class="docutils literal notranslate"><span class="pre">Grid</span></code> types: <code class="docutils literal notranslate"><span class="pre">container</span></code> (outer element) and <code class="docutils literal notranslate"><span class="pre">item</span></code>
 (inner elements).</p>
@@ -218,7 +305,7 @@ layout</a>.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">xs</span></code> above refers to <code class="docutils literal notranslate"><span class="pre">xs</span></code>, the breakpoint from the previous
 section.  In other words, this split of cells will be used from <code class="docutils literal notranslate"><span class="pre">xs</span></code>
 and up.
-<a class="reference external" href="https://material-ui.com/components/grid/#grid-with-breakpoints">Multiple breakpoints</a>
+<a class="reference external" href="https://mui.com/material-ui/react-grid/#grid-with-breakpoints">Multiple breakpoints</a>
 can be specified.</p>
 <p>You can also leave the value of <code class="docutils literal notranslate"><span class="pre">xs</span></code> blank, in which case elements are automatically spaced:</p>
 <div class="highlight-jsx notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">Grid</span> <span class="na">container</span> <span class="na">spacing</span><span class="o">=</span><span class="p">{</span><span class="mf">1</span><span class="nx">rem</span><span class="p">}&gt;</span><span class="w"></span>
