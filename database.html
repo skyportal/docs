@@ -2392,7 +2392,7 @@ Default 3600.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="baselayer.app.models.join_model">
-<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">join_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">join_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_1=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_2=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fk_1='id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fk_2='id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base=&lt;class</span> <span class="pre">'sqlalchemy.orm.decl_api.Base'&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.join_model" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">join_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">join_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_1=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_2=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fk_1='id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fk_2='id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base=&lt;class</span> <span class="pre">'sqlalchemy.orm.decl_api.Base'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_name=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlaps=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.join_model" title="Permalink to this definition"></a></dt>
 <dd><p>Helper function to create a join table for a many-to-many relationship.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -2414,6 +2414,14 @@ then {<cite>table2`[:-1]_id} will be used (e.g., `user_id</cite> for <cite>users
 <dt><strong>fk_2</strong><span class="classifier">str, optional</span></dt><dd><p>Name of the column from <cite>model_2</cite> that the foreign key should refer to.</p>
 </dd>
 <dt><strong>base</strong><span class="classifier">sqlalchemy.ext.declarative.api.DeclarativeMeta</span></dt><dd><p>SQLAlchemy model base to subclass.</p>
+</dd>
+<dt><strong>new_name: str, optional</strong></dt><dd><p>Name of the new model class. If <cite>None</cite>, then the name will be
+model_1.__name__ + model_2.__name__.</p>
+</dd>
+<dt><strong>overlaps</strong><span class="classifier">str or list of str, optional</span></dt><dd><p>Each relationship defined in this model will have, by default,
+overlaps=f”{table_1}, {table_2}”. If any additional overalapping
+relationships or columns need to be added, they can be given as
+a string or list of strings.</p>
 </dd>
 </dl>
 </dd>
