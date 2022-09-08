@@ -1587,6 +1587,7 @@ specified User (or Token instance, if a token is passed).</p>
 <dt><strong>assignments</strong></dt><dd><p>Objs the User has assigned to ObservingRuns.</p>
 </dd>
 <dt><strong>comments</strong></dt><dd></dd>
+<dt><strong>comments_on_earthquakes</strong></dt><dd></dd>
 <dt><strong>comments_on_gcns</strong></dt><dd></dd>
 <dt><strong>comments_on_shifts</strong></dt><dd></dd>
 <dt><strong>comments_on_spectra</strong></dt><dd></dd>
@@ -1597,6 +1598,10 @@ specified User (or Token instance, if a token is passed).</p>
 <dt><strong>created_at</strong></dt><dd><p>UTC time of insertion of object’s row into the database.</p>
 </dd>
 <dt><strong>default_observationplan_requests</strong></dt><dd><p>The default observation plan requests this User has made.</p>
+</dd>
+<dt><strong>earthquakeevents</strong></dt><dd><p>The EarthquakeEvents saved by this user</p>
+</dd>
+<dt><strong>earthquakenotices</strong></dt><dd><p>The EarthquakeNotices saved by this user</p>
 </dd>
 <dt><strong>expiration_date</strong></dt><dd><p>The date until which the user’s account is valid. Users are set to view-only upon expiration.</p>
 </dd>
@@ -1647,6 +1652,7 @@ specified User (or Token instance, if a token is passed).</p>
 <dt><strong>preferences</strong></dt><dd><p>The user’s application settings.</p>
 </dd>
 <dt><strong>reminders</strong></dt><dd></dd>
+<dt><strong>reminders_on_earthquakes</strong></dt><dd></dd>
 <dt><strong>reminders_on_gcns</strong></dt><dd></dd>
 <dt><strong>reminders_on_shifts</strong></dt><dd></dd>
 <dt><strong>reminders_on_spectra</strong></dt><dd></dd>
@@ -1798,6 +1804,18 @@ For System Admins, this corresponds to all Groups.</p>
 <dt class="sig sig-object py" id="baselayer.app.models.User.delete">
 <span class="sig-name descname"><span class="pre">delete</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.CustomUserAccessControl</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.User.delete" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="baselayer.app.models.User.earthquakeevents">
+<span class="sig-name descname"><span class="pre">earthquakeevents</span></span><a class="headerlink" href="#baselayer.app.models.User.earthquakeevents" title="Permalink to this definition"></a></dt>
+<dd><p>The EarthquakeEvents saved by this user</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="baselayer.app.models.User.earthquakenotices">
+<span class="sig-name descname"><span class="pre">earthquakenotices</span></span><a class="headerlink" href="#baselayer.app.models.User.earthquakenotices" title="Permalink to this definition"></a></dt>
+<dd><p>The EarthquakeNotices saved by this user</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.expiration_date">
