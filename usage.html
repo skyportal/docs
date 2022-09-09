@@ -49,6 +49,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#permissions">Permissions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#adding-roles-to-users">Adding roles to users</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#adding-users-to-groups">Adding users to groups</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#managing-source-classifications">Managing source classifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#on-a-source-page">On a source page:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#on-a-group-sources-page">On a group sources page:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#programmatic-access">Programmatic access:</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#important-makefile-targets">Important Makefile targets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#code-formatting-linters">Code formatting / linters</a></li>
 </ul>
@@ -121,6 +127,80 @@ users the same subset of permissions.</p>
 <ul class="simple">
 <li><p>Groups membership can be managed on the <code class="docutils literal notranslate"><span class="pre">/groups/</span></code> page (click through from profile)</p></li>
 </ul>
+</section>
+<section id="managing-source-classifications">
+<h2>Managing source classifications<a class="headerlink" href="#managing-source-classifications" title="Permalink to this heading"></a></h2>
+<p>On the frontend, classifications can be managed from an individual source page or a group sources page.</p>
+<section id="on-a-source-page">
+<h3>On a source page:<a class="headerlink" href="#on-a-source-page" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Scroll to Classifications, choose the desired group(s) for the classification from the Choose Group dropdown</p></li>
+<li><p>Select the desired taxonomy from the Taxonomy dropdown</p></li>
+<li><p>In the Classification dropdown, choose the appropriate label</p></li>
+<li><p>Assign a probability in the range [0, 1] in the Probability box</p></li>
+<li><p>Click SUBMIT to post the classification</p></li>
+<li><p>Classifications can be deleted using the trash bin button</p></li>
+</ul>
+</section>
+<section id="on-a-group-sources-page">
+<h3>On a group sources page:<a class="headerlink" href="#on-a-group-sources-page" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Click the dropdown arrow to the left of a source id</p></li>
+<li><p>Under Post Classifications, select a taxonomy from the dropdown</p></li>
+<li><p>Select one of the Nonstellar or Stellar variable categories</p></li>
+<li><p>The resulting dropdown contains sliders for each classification that can be dragged to the desired probability among [0, 0.25, 0.5, 0.75, 1]</p></li>
+<li><p>If Normalize Probabilities is toggled, probabilities on a given level of the taxonomy will be scaled to sum to unity</p></li>
+<li><p>Click SUBMIT CLASSIFICATIONS when finished</p></li>
+</ul>
+</section>
+<section id="programmatic-access">
+<h3>Programmatic access:<a class="headerlink" href="#programmatic-access" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>The API allows classifications to be managed using HTTP requests (see <a class="reference external" href="https://skyportal.io/docs/api.html">https://skyportal.io/docs/api.html</a>).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">GET</span></code> request allows existing classifications for a source with id <code class="docutils literal notranslate"><span class="pre">source_id</span></code> to be retrieved:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">status</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">api</span><span class="p">(</span>
+        <span class="s1">&#39;GET&#39;</span><span class="p">,</span>
+        <span class="sa">f</span><span class="s1">&#39;sources/</span><span class="si">{</span><span class="n">source_id</span><span class="si">}</span><span class="s1">/classifications&#39;</span><span class="p">,</span>
+        <span class="n">token</span><span class="o">=</span><span class="n">classification_token</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">POST</span></code> request uploads new classifications for multiple sources using the following structure:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+         <span class="s1">&#39;classifications&#39;</span><span class="p">:</span> <span class="p">[</span>
+             <span class="p">{</span>
+                 <span class="s1">&#39;obj_id&#39;</span><span class="p">:</span> <span class="n">public_source</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                 <span class="s1">&#39;classification&#39;</span><span class="p">:</span> <span class="s1">&#39;Algol&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;taxonomy_id&#39;</span><span class="p">:</span> <span class="n">taxonomy_id</span><span class="p">,</span>
+                 <span class="s1">&#39;probability&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+                 <span class="s1">&#39;group_ids&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">public_group</span><span class="o">.</span><span class="n">id</span><span class="p">],</span>
+             <span class="p">},</span>
+             <span class="p">{</span>
+                 <span class="s1">&#39;obj_id&#39;</span><span class="p">:</span> <span class="n">public_source</span><span class="o">.</span><span class="n">id</span><span class="p">,</span>
+                 <span class="s1">&#39;classification&#39;</span><span class="p">:</span> <span class="s1">&#39;Time-domain Source&#39;</span><span class="p">,</span>
+                 <span class="s1">&#39;taxonomy_id&#39;</span><span class="p">:</span> <span class="n">taxonomy_id</span><span class="p">,</span>
+                 <span class="s1">&#39;probability&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+                 <span class="s1">&#39;group_ids&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">public_group</span><span class="o">.</span><span class="n">id</span><span class="p">],</span>
+             <span class="p">},</span>
+         <span class="p">]</span>
+     <span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">status</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">api</span><span class="p">(</span>
+         <span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+         <span class="s1">&#39;classification&#39;</span><span class="p">,</span>
+         <span class="n">data</span><span class="o">=</span><span class="n">post_data</span><span class="p">,</span>
+         <span class="n">token</span><span class="o">=</span><span class="n">classification_token</span><span class="p">,</span>
+     <span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Classifications can be modified and deleted with the <code class="docutils literal notranslate"><span class="pre">PUT</span></code> and <code class="docutils literal notranslate"><span class="pre">DELETE</span></code> requests, respectively. These requests require the integer classification ID provided by the <code class="docutils literal notranslate"><span class="pre">GET</span></code> request. Both requests are made to the endpoint <code class="docutils literal notranslate"><span class="pre">'classification/{classification_id}'</span></code>.</p></li>
+</ul>
+</section>
 </section>
 <section id="important-makefile-targets">
 <h2>Important Makefile targets<a class="headerlink" href="#important-makefile-targets" title="Permalink to this heading"></a></h2>
