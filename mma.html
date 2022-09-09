@@ -62,6 +62,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#follow-up-triggering">Follow-up triggering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#uploading-executed-observations">Uploading executed observations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#executed-observations-api-upload">Executed Observations API Upload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#earthquake-ingestion">Earthquake Ingestion</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="advanced_usage.html">Advanced usage</a></li>
@@ -130,6 +131,16 @@ ar_token = ar.json()[’token’]</p></li>
 <p>As part of the <code class="docutils literal notranslate"><span class="pre">ObservationPlanRequest</span></code> API, it is possible to retrieve <code class="docutils literal notranslate"><span class="pre">ExecutedObservation</span></code>s. We briefly describe the authentication form the available telescopes take below:</p>
 <ul class="simple">
 <li><p>ZTF: Login information for IRSA, which takes the form: {”tap_service”: “https://irsa.ipac.caltech.edu/TAP”, “tap_username”: “your_password”, “tap_password”: “your_password”}</p></li>
+</ul>
+</section>
+<section id="earthquake-ingestion">
+<h2>Earthquake Ingestion<a class="headerlink" href="#earthquake-ingestion" title="Permalink to this heading"></a></h2>
+<p>The most important environmental effect on detectors in the IGWN remains teleseismic earthquakes. For this reason, we enable ingestion of earthquakes using the USGS’ <a class="reference external" href="https://github.com/usgs/pdl">PDL client</a>.</p>
+<p>In order to deploy the service, one must:</p>
+<ul class="simple">
+<li><p>Email Michelle Guy (mguy&#64;usgs.gov) with the static IP address of the server and explain the tool’s usage</p></li>
+<li><p>Download the <a class="reference external" href="https://github.com/usgs/pdl/releases/download/2.7.10/ProductClient.jar">Product Client</a> and place it in the services/pdl_service/ directory.</p></li>
+<li><p>Deploy the Product Client from within services/pdl_service/ by running: ./init.sh start</p></li>
 </ul>
 </section>
 </section>
