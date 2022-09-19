@@ -62,6 +62,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#follow-up-triggering">Follow-up triggering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#uploading-executed-observations">Uploading executed observations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#executed-observations-api-upload">Executed Observations API Upload</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gcn-event-ingestion">GCN Event Ingestion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#earthquake-ingestion">Earthquake Ingestion</a></li>
 </ul>
 </li>
@@ -125,7 +126,12 @@ ar_token = ar.json()[’token’]</p></li>
 84434604,1,2458598.8460417003,1.5741500000,20.4070500000,30,ztfr,1.00000
 84434651,1,2458598.8465162003,1.5812000000,20.4940500000,30,ztfr,1.00000
 84434696,1,2458598.8469676003,1.6499500000,20.5603000000,30,ztfr,1.00000</p>
-<p>where observation_id (the ID of the observations, does not need to be unique), the field_id, the observation time (in JD or otherwise any unambigious format as specified in the astropy docs such as iso or isot: https://docs.astropy.org/en/stable/time/index.html), the seeing (in arcseconds), the limiting magnitude, the exposure time (in seconds), the filter, and the “processed_fraction” (what fraction of the image was successfully processed) are potential columns. We note that only observation_id, field_id, obstime, filter, and exposure_time required.</p>
+<p>where observation_id (the ID of the observations, does not need to be unique), the field_id, the observation time (in JD or otherwise any unambigious format as specified in the astropy docs such as iso or isot: https://docs.astropy.org/en/stable/time/index.html), the seeing (in arcseconds), the limiting magnitude, the exposure time (in seconds), the filter, and the “processed_fraction” (what fraction of the image was successfully processed) are potential columns. We note that only observation_id, field_id, obstime, filter, and exposure_time are required.</p>
+<p>It is also possible to upload by right ascension and declination in cases where field IDs are not available. In this case, field_id is replaced by the columns RA and Dec, i.e.</p>
+<p>observation_id,RA,Dec,obstime,seeing,limmag,exposure_time,filter,processed_fraction
+94434604,30.0,60.0,2458598.8460417003,1.5741500000,20.4070500000,30,ztfr,1.00000
+94434651,45.0,45.0,2458598.8465162003,1.5812000000,20.4940500000,30,ztfr,1.00000
+94434696,60.0,30.0,2458598.8469676003,1.6499500000,20.5603000000,30,ztfr,1.00000</p>
 </section>
 <section id="executed-observations-api-upload">
 <h2>Executed Observations API Upload<a class="headerlink" href="#executed-observations-api-upload" title="Permalink to this heading"></a></h2>
@@ -133,6 +139,31 @@ ar_token = ar.json()[’token’]</p></li>
 <ul class="simple">
 <li><p>ZTF: Login information for IRSA, which takes the form: {”tap_service”: “https://irsa.ipac.caltech.edu/TAP”, “tap_username”: “your_password”, “tap_password”: “your_password”}</p></li>
 </ul>
+</section>
+<section id="gcn-event-ingestion">
+<h2>GCN Event Ingestion<a class="headerlink" href="#gcn-event-ingestion" title="Permalink to this heading"></a></h2>
+<p>We use <a class="reference external" href="https://github.com/nasa-gcn/gcn-kafka-python">gcn-kafka</a> to ingest multi-messenger events distributed by the <a class="reference external" href="https://gcn.nasa.gov/">General Coordinates Network (GCN)</a> within SkyPortal.</p>
+<p>For configuration, one requires a client_id and client_secret at https://gcn.nasa.gov/quickstart. Once that is available, the configuration file should contain the following information (discuss with your administrators if someone else is deploying will be edited as the below).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gcn</span><span class="p">:</span>
+  <span class="n">server</span><span class="p">:</span> <span class="n">gcn</span><span class="o">.</span><span class="n">nasa</span><span class="o">.</span><span class="n">gov</span>
+  <span class="n">client_id</span><span class="p">:</span>
+  <span class="n">client_secret</span><span class="p">:</span>
+  <span class="n">notice_types</span><span class="p">:</span>
+    <span class="o">-</span> <span class="n">FERMI_GBM_FLT_POS</span>
+    <span class="o">-</span> <span class="n">FERMI_GBM_GND_POS</span>
+    <span class="o">-</span> <span class="n">FERMI_GBM_FIN_POS</span>
+    <span class="o">-</span> <span class="n">FERMI_GBM_SUBTHRESH</span>
+    <span class="o">-</span> <span class="n">LVC_PRELIMINARY</span>
+    <span class="o">-</span> <span class="n">LVC_INITIAL</span>
+    <span class="o">-</span> <span class="n">LVC_UPDATE</span>
+    <span class="o">-</span> <span class="n">LVC_RETRACTION</span>
+    <span class="o">-</span> <span class="n">AMON_ICECUBE_COINC</span>
+    <span class="o">-</span> <span class="n">AMON_ICECUBE_HESE</span>
+    <span class="o">-</span> <span class="n">ICECUBE_ASTROTRACK_GOLD</span>
+    <span class="o">-</span> <span class="n">ICECUBE_ASTROTRACK_BRONZE</span>
+</pre></div>
+</div>
+<p>where notice types are also available from the GCN quickstart guide linked above.</p>
 </section>
 <section id="earthquake-ingestion">
 <h2>Earthquake Ingestion<a class="headerlink" href="#earthquake-ingestion" title="Permalink to this heading"></a></h2>
