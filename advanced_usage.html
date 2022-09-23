@@ -61,7 +61,12 @@
 <li class="toctree-l1"><a class="reference internal" href="mma.html">MMA Features</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Advanced usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#posting-color-magnitude-data-to-generate-an-hr-diagram">Posting color-magnitude data to generate an HR diagram</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#upgrading-an-existing-taxonomy">Upgrading an existing Taxonomy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#managing-taxonomies">Managing Taxonomies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#upgrading-the-sitewide-taxonomy">Upgrading the Sitewide Taxonomy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#posting-a-new-taxonomy">Posting a New Taxonomy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#note-deleting-a-taxonomy">NOTE: Deleting a Taxonomy</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#spectroscopic-lines">Spectroscopic lines</a></li>
 </ul>
 </li>
@@ -158,7 +163,7 @@ with a specific schema:</p>
 <li><p>One of the keys in the annotation <code class="docutils literal notranslate"><span class="pre">data</span></code> must be named <code class="docutils literal notranslate"><span class="pre">Gaia</span></code>.</p></li>
 <li><p>The value of that key must be another dictionary.</p></li>
 <li><p>That dictionary must contain the following entries:</p></li>
-<li><p>`Mag_G’, ‘Mag_Bp’, ‘Mag_Rp’, ‘Plx’.</p></li>
+<li><p>‘Mag_G’, ‘Mag_Bp’, ‘Mag_Rp’, ‘Plx’.</p></li>
 <li><p>All these names (including the catalog name) may be made customizable
 in a future release. Currently, the HR diagram is drawn only for Gaia data.</p></li>
 <li><p>The names are searched ignoring case, and removing underscores.
@@ -175,10 +180,12 @@ with the data that was posted.
 If the posting was unsuccessful,
 the status would be 400.</p>
 </section>
-<section id="upgrading-an-existing-taxonomy">
-<h2>Upgrading an existing Taxonomy<a class="headerlink" href="#upgrading-an-existing-taxonomy" title="Permalink to this heading"></a></h2>
+<section id="managing-taxonomies">
+<h2>Managing Taxonomies<a class="headerlink" href="#managing-taxonomies" title="Permalink to this heading"></a></h2>
 <p>Taxonomies are used for classification. There is typically a sitewide taxonomy that all users of SkyPortal can see. By default, we seed a new SP database with the latest taxonomy from the <a class="reference external" href="https://github.com/profjsb/timedomain-taxonomy">Time-domain Astronomy Taxonomy
 (Github)</a> (<code class="docutils literal notranslate"><span class="pre">tdtax</span></code>). From time to time, the latest taxonomy may be upgraded as new subclasses of sources are discovered and SP admins may need to push a new version of the taxonomy to the live application.</p>
+<section id="upgrading-the-sitewide-taxonomy">
+<h3>Upgrading the Sitewide Taxonomy<a class="headerlink" href="#upgrading-the-sitewide-taxonomy" title="Permalink to this heading"></a></h3>
 <p>To upgrade to the latest <code class="docutils literal notranslate"><span class="pre">tdtax</span></code>, as an admin, you will need to generate a token with a “Post taxonomy” ACL. Next install the latest <code class="docutils literal notranslate"><span class="pre">tdtax</span></code> on your system:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">tdtax</span>
 </pre></div>
@@ -213,7 +220,17 @@ the status would be 400.</p>
 </pre></div>
 </div>
 <p>If the <code class="docutils literal notranslate"><span class="pre">name</span></code> of the taxonomy is exactly the same as a taxonomy already in the system, this new taxonomy will supercede that taxonomy. That is, by default it will be set to be the latest version (<code class="docutils literal notranslate"><span class="pre">IsLatest</span> <span class="pre">=</span> <span class="pre">True</span></code>) and shown to end users in the dropdown menu on the Source page. Older classifications will be still associated with the <code class="docutils literal notranslate"><span class="pre">taxonomy_id</span></code> they were originally connected to.</p>
-<p>NOTE: in very rare cases you may wish to delete a taxonomy (e.g., if you made a typo when loading it). This should be done with extreme care: if anyone has classifications associated with that taxonomy their classifications will be lost upon delete.</p>
+</section>
+<section id="posting-a-new-taxonomy">
+<h3>Posting a New Taxonomy<a class="headerlink" href="#posting-a-new-taxonomy" title="Permalink to this heading"></a></h3>
+<p>You may wish to post a new custom taxonomy, for example to enable classifications that are outside the scope of the sitewide taxonomy. When posting a new taxonomy, it is usually preferable to limit its availability to specific, relevant groups. In this way, you can assign your own classifications where needed without extending them across the entire site.</p>
+<p>To post a new taxonomy to specific groups, follow the instructions above, but add the <code class="docutils literal notranslate"><span class="pre">group_ids</span></code> parameter (containing the array of group ids to receive the taxonomy) to <code class="docutils literal notranslate"><span class="pre">tax_obj</span></code>. Ensure your new taxonomy is in a nested JSON format.</p>
+<p>Once the taxonomy is posted, users who are members of the specified groups will be able to see and use the new classifications. To add the taxonomy to another group, perform another <code class="docutils literal notranslate"><span class="pre">POST</span></code> request containing the desired group id.</p>
+</section>
+<section id="note-deleting-a-taxonomy">
+<h3>NOTE: Deleting a Taxonomy<a class="headerlink" href="#note-deleting-a-taxonomy" title="Permalink to this heading"></a></h3>
+<p>In very rare cases you may wish to delete a taxonomy (e.g., if you made a typo when loading it). This should be done with extreme care: if anyone has classifications associated with that taxonomy their classifications will be lost upon delete.</p>
+</section>
 </section>
 <section id="spectroscopic-lines">
 <h2>Spectroscopic lines<a class="headerlink" href="#spectroscopic-lines" title="Permalink to this heading"></a></h2>
