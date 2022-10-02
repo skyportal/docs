@@ -21,7 +21,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Advanced usage" href="advanced_usage.html" />
-    <link rel="prev" title="Slack Integration" href="slack.html" /> 
+    <link rel="prev" title="Follow-up triggering" href="followup.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -58,8 +58,8 @@
 <li class="toctree-l1"><a class="reference internal" href="query_analysis.html">Analyzing database queries</a></li>
 <li class="toctree-l1"><a class="reference internal" href="permissions.html">Access controls</a></li>
 <li class="toctree-l1"><a class="reference internal" href="slack.html">Slack Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="followup.html">Follow-up triggering</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">MMA Features</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#follow-up-triggering">Follow-up triggering</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#uploading-executed-observations">Uploading executed observations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#executed-observations-api-upload">Executed Observations API Upload</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#gcn-event-ingestion">GCN Event Ingestion</a></li>
@@ -100,25 +100,6 @@
 <p>The features are available on the <strong>gcn_events</strong> page, where information on the events (including the skymaps), and associated triggering of follow-up is available. In particular, <code class="docutils literal notranslate"><span class="pre">Allocations</span></code> now cover both transient follow-up (as a <code class="docutils literal notranslate"><span class="pre">FollowupRequest</span></code>) and GCN event follow-up (as an <code class="docutils literal notranslate"><span class="pre">ObservationPlanRequest</span></code>). The main difference between these two is that a <code class="docutils literal notranslate"><span class="pre">FollowupRequest</span></code> is a single pointing associated with a particular object. An <code class="docutils literal notranslate"><span class="pre">ObservationPlanRequest</span></code> (which triggers an associated <code class="docutils literal notranslate"><span class="pre">EventObservationPlan</span></code> with knowledge of the particular fields, filters, and exposure times to be used) performs tiling of a <code class="docutils literal notranslate"><span class="pre">Localization.</span></code></p>
 <p>These <code class="docutils literal notranslate"><span class="pre">ObservationPlanRequest</span></code>s in particular are triggered on the front-end from the <strong>gcn_events</strong> page, with drop down menus creating a schedule for a given instrument. This request creates an <code class="docutils literal notranslate"><span class="pre">EventObservationPlan</span></code>, which will then have the option of being sent to the instrument through the APIs developed in the <strong>FollowupRequest</strong> (see the APIs here: https://github.com/skyportal/skyportal/tree/main/skyportal/facility_apis).</p>
 <p>To evaluate the efficacy of the executed observation plans, we have the <code class="docutils literal notranslate"><span class="pre">ExecutedObservation</span></code>s table, which is accessible through the <code class="docutils literal notranslate"><span class="pre">observation</span></code> api. After execution of the requested observations in the <code class="docutils literal notranslate"><span class="pre">EventObservationPlan</span></code>, the user is responsible for uploading successfully executed observations to the <code class="docutils literal notranslate"><span class="pre">ExecutedObservation</span></code>s table (see below). Users should include information about the time of observation, filter, limiting magnitude, etc. The results of the observations can be compared to the <code class="docutils literal notranslate"><span class="pre">Localization</span></code>s to determine sky coverage and integrated probability contained with the map.</p>
-<section id="follow-up-triggering">
-<h2>Follow-up triggering<a class="headerlink" href="#follow-up-triggering" title="Permalink to this heading"></a></h2>
-<p>The vast majority of follow-up instruments will require some form of authentication. All such information is passed through the <code class="docutils literal notranslate"><span class="pre">altdata</span></code> variable of the <code class="docutils literal notranslate"><span class="pre">Allocation</span></code>s API. We briefly describe the authentication form the available telescopes take below:</p>
-<ul class="simple">
-<li><p>ATLAS Forced Photometry: A user account must be made on https://fallingstar-data.com/forcedphot/, at which point the authentication takes the form <code class="docutils literal notranslate"><span class="pre">{&quot;api_token&quot;:</span> <span class="pre">&quot;testtoken&quot;}</span></code>.</p></li>
-<li><p>KAIT: A username and password are passed as <code class="docutils literal notranslate"><span class="pre">{&quot;username&quot;:</span> <span class="pre">&quot;username&quot;,</span> <span class="pre">&quot;password&quot;:</span> <span class="pre">&quot;password&quot;}</span></code>.</p></li>
-<li><p>LCO: A user account must be made on https://lco.global/, at which point the authentication takes the form <code class="docutils literal notranslate"><span class="pre">{&quot;PROPOSAL_ID&quot;:</span> <span class="pre">&quot;your_proposal_ID&quot;,</span> <span class="pre">&quot;API_TOKEN&quot;:</span> <span class="pre">&quot;testtoken&quot;,</span> <span class="pre">&quot;API_ARCHIVE_TOKEN&quot;:</span> <span class="pre">&quot;testarchivetoken&quot;}</span></code>. The submission token is available directly from https://observe.lco.global while the archive token can be aquired by API:
-ar = requests.post(’https://archive-api.lco.global/api-token-auth/’,
-data = {’username’: username, ‘password’: password})
-ar_token = ar.json()[’token’]</p></li>
-<li><p>LT: A proposal ID, username, and password are passed as <code class="docutils literal notranslate"><span class="pre">{&quot;username&quot;:</span> <span class="pre">&quot;username&quot;,</span> <span class="pre">&quot;password&quot;:</span> <span class="pre">&quot;password&quot;,</span> <span class="pre">&quot;LT_proposalID&quot;:</span> <span class="pre">&quot;your_proposal_ID&quot;}</span></code>.</p></li>
-<li><p>NICER: A username and password (as entered at https://heasarc.gsfc.nasa.gov/ark/nicertoo/) are passed as <code class="docutils literal notranslate"><span class="pre">{&quot;username&quot;:</span> <span class="pre">&quot;username&quot;,</span> <span class="pre">&quot;password&quot;:</span> <span class="pre">&quot;password&quot;}</span></code>.</p></li>
-<li><p>SLACK: As discussed further <a class="reference external" href="./slack.html">here</a>, slack information is pass as <code class="docutils literal notranslate"><span class="pre">{&quot;slack_workspace&quot;:</span> <span class="pre">&quot;XXX&quot;,</span> <span class="pre">&quot;slack_channel&quot;:</span> <span class="pre">&quot;YYY&quot;,</span> <span class="pre">&quot;slack_token&quot;:</span> <span class="pre">&quot;ZZZ&quot;}</span></code>.</p></li>
-<li><p>SWIFT Triggering: A username and password are passed as <code class="docutils literal notranslate"><span class="pre">{&quot;username&quot;:</span> <span class="pre">&quot;username&quot;,</span> <span class="pre">&quot;secret&quot;:</span> <span class="pre">&quot;password&quot;}</span></code>.</p></li>
-<li><p>SWIFT XRT Reductions: A user account must be made with the Swift-XRT data products API platform (see https://www.swift.ac.uk/user_objects/register.php to register). The authentication then is the email of the user <code class="docutils literal notranslate"><span class="pre">&quot;XRT_UserID&quot;:</span> <span class="pre">&quot;swift_email&quot;}</span></code> where swift_email is the email address used upon sign up.</p></li>
-<li><p>ZTF Triggering: An API token for an admin user for <a class="reference external" href="https://github.com/dmitryduev/kowalski">Kowalski</a> can be passed as <code class="docutils literal notranslate"><span class="pre">{&quot;access_token&quot;:</span> <span class="pre">&quot;your_token&quot;}</span></code>.</p></li>
-<li><p>ZTF Forced Photometry: A user account must be made with the ZTF forced photometry service (see https://zwicky.tf/vgt). The authentication then takes the form <code class="docutils literal notranslate"><span class="pre">{&quot;ipac_http_user&quot;:</span> <span class="pre">&quot;http_user&quot;,</span> <span class="pre">&quot;ipac_http_password&quot;:</span> <span class="pre">&quot;http_password&quot;,</span> <span class="pre">&quot;ipac_email&quot;:</span> <span class="pre">&quot;email&quot;,</span> <span class="pre">&quot;ipac_userpass&quot;:</span> <span class="pre">&quot;password&quot;}</span></code> where http_user and http_password are provided in the documentation and ipac_email and ipac_userpass are provided for the specific account. Note that IPAC’s forced photometry database is updated once per hour, on the hour, and requests will only be available after this update.</p></li>
-</ul>
-</section>
 <section id="uploading-executed-observations">
 <h2>Uploading executed observations<a class="headerlink" href="#uploading-executed-observations" title="Permalink to this heading"></a></h2>
 <p>In addition to making available the <code class="docutils literal notranslate"><span class="pre">observation</span></code> api, we also include an Observations page to simplify upload and viewing of <code class="docutils literal notranslate"><span class="pre">ExecutedObservation</span></code>s. On this page, simply specify the instrument and upload a file of the form:</p>
@@ -181,7 +162,7 @@ ar_token = ar.json()[’token’]</p></li>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="slack.html" class="btn btn-neutral float-left" title="Slack Integration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="followup.html" class="btn btn-neutral float-left" title="Follow-up triggering" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="advanced_usage.html" class="btn btn-neutral float-right" title="Advanced usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
