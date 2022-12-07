@@ -110,6 +110,9 @@ Database queries are built via the methods in this <code class="docutils literal
 to be sent to the underlying database - in our case PostgreSQL.</p>
 <p>For example, a query written like this on the Python side</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DBSession</span><span class="p">()</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Instrument</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Instrument</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># new version for SQLAlchemy 2.0</span>
+<span class="k">with</span> <span class="n">DBSession</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+    <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sa</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">Instrument</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Instrument</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>would yield the following Postgres-dialect SQL query</p>
