@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spatial Catalogs &mdash; skyportal 0.9.dev0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/output_cells.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Advanced usage" href="advanced_usage.html" />
+    <link rel="prev" title="MMA Features" href="mma.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> skyportal
+          </a>
+              <div class="version">
+                0.9.dev0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="design.html">System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Developer notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_loader.html">Data loader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_features.html">Adding new features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="styling.html">Styling components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migrations.html">Database migrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="query_analysis.html">Analyzing database queries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions.html">Access controls</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slack.html">Slack Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="followup.html">Follow-up triggering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mma.html">MMA Features</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Spatial Catalogs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-spatial-catalog-file">Creating a spatial catalog file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_usage.html">Advanced usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">SkyPortal Extensions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">skyportal</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Spatial Catalogs</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="spatial-catalogs">
+<h1>Spatial Catalogs<a class="headerlink" href="#spatial-catalogs" title="Permalink to this heading"></a></h1>
+<p>For catalogs where source location uncertainties are large enough that the Source class is insufficient, SkyPortal has the concept of <code class="docutils literal notranslate"><span class="pre">SpatialCatalog</span></code>s. These catalogs enable cross-matching between sources and objects with spatial extent, such as gamma-ray source catalogs.</p>
+<p>Catalogs can be uploaded through the API or on the Source Catalogs web page. Files must have the columns name, ra, dec, where name is the source catalog entry (must be unique), ra and dec are right ascension and declination in degrees. They must also either contain (i) for an ellipse, amaj, amin, and phi, where amaj, amin, and phi are the major and minor ellipse elements with phi the corresponding angle or (ii) for a cone, radius, where radius is the radius of the cone in degrees.</p>
+<section id="creating-a-spatial-catalog-file">
+<h2>Creating a spatial catalog file<a class="headerlink" href="#creating-a-spatial-catalog-file" title="Permalink to this heading"></a></h2>
+<p>Taking the <a class="reference external" href="https://fermi.gsfc.nasa.gov/ssc/data/access/lat/10yr_catalog/gll_psc_v27.fit">Fermi 4FGL DR2 catalog</a> as an example, we can prepare the file as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Load modules</span>
+    <span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
+    <span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Table</span>
+
+    <span class="c1"># Load file and convert to pandas DataFrame</span>
+    <span class="n">hdul</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;gll_psc_v27.fit&#39;</span><span class="p">)</span>
+    <span class="n">tbl</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="n">hdul</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">tbl</span><span class="o">.</span><span class="n">colnames</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tbl</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">tbl</span><span class="p">[</span><span class="n">names</span><span class="p">]</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+
+    <span class="c1"># Keep only the small error regions</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Conf_95_SemiMajor&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="o">/</span><span class="mf">60.</span><span class="p">]</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Convert column names</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span>
+        <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Source_Name&#39;</span><span class="p">:</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;RAJ2000&#39;</span><span class="p">:</span> <span class="s1">&#39;ra&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;DEJ2000&#39;</span><span class="p">:</span> <span class="s1">&#39;dec&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;Conf_95_SemiMajor&#39;</span><span class="p">:</span> <span class="s1">&#39;amaj&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;Conf_95_SemiMinor&#39;</span><span class="p">:</span> <span class="s1">&#39;amin&#39;</span><span class="p">,</span>
+                               <span class="s1">&#39;Conf_95_PosAng&#39;</span><span class="p">:</span> <span class="s1">&#39;phi&#39;</span><span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="n">drop_columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span>
+        <span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="o">-</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;ra&#39;</span><span class="p">,</span> <span class="s1">&#39;dec&#39;</span><span class="p">,</span> <span class="s1">&#39;amaj&#39;</span><span class="p">,</span> <span class="s1">&#39;amin&#39;</span><span class="p">,</span> <span class="s1">&#39;phi&#39;</span><span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+        <span class="n">columns</span><span class="o">=</span><span class="n">drop_columns</span><span class="p">,</span>
+        <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">:</span> <span class="kc">None</span><span class="p">})</span>
+
+    <span class="c1"># Keep columns with error regions</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;amaj&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()]</span>
+
+    <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;gll_psc_v27.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>producing a file of the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">ra</span><span class="p">,</span><span class="n">dec</span><span class="p">,</span><span class="n">amaj</span><span class="p">,</span><span class="n">amin</span><span class="p">,</span><span class="n">phi</span>
+<span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="n">FGL</span> <span class="n">J0000</span><span class="mf">.3</span><span class="o">-</span><span class="mi">7355</span> <span class="p">,</span><span class="mf">0.0983</span><span class="p">,</span><span class="o">-</span><span class="mf">73.922</span><span class="p">,</span><span class="mf">0.0525</span><span class="p">,</span><span class="mf">0.051</span><span class="p">,</span><span class="o">-</span><span class="mf">62.7</span>
+<span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="n">FGL</span> <span class="n">J0001</span><span class="mf">.2</span><span class="o">+</span><span class="mi">4741</span> <span class="p">,</span><span class="mf">0.3126</span><span class="p">,</span><span class="mf">47.6859</span><span class="p">,</span><span class="mf">0.0598</span><span class="p">,</span><span class="mf">0.0538</span><span class="p">,</span><span class="o">-</span><span class="mf">45.9</span>
+<span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="n">FGL</span> <span class="n">J0001</span><span class="mf">.2</span><span class="o">-</span><span class="mi">0747</span> <span class="p">,</span><span class="mf">0.3151</span><span class="p">,</span><span class="o">-</span><span class="mf">7.7971</span><span class="p">,</span><span class="mf">0.0299</span><span class="p">,</span><span class="mf">0.0285</span><span class="p">,</span><span class="mf">64.1</span>
+<span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="n">FGL</span> <span class="n">J0001</span><span class="mf">.5</span><span class="o">+</span><span class="mi">2113</span> <span class="p">,</span><span class="mf">0.3815</span><span class="p">,</span><span class="mf">21.2183</span><span class="p">,</span><span class="mf">0.0422</span><span class="p">,</span><span class="mf">0.0389</span><span class="p">,</span><span class="o">-</span><span class="mf">60.52</span>
+<span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="n">FGL</span> <span class="n">J0001</span><span class="mf">.6</span><span class="o">-</span><span class="mi">4156</span> <span class="p">,</span><span class="mf">0.4165</span><span class="p">,</span><span class="o">-</span><span class="mf">41.9425</span><span class="p">,</span><span class="mf">0.0692</span><span class="p">,</span><span class="mf">0.0525</span><span class="p">,</span><span class="mf">44.09</span>
+<span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="n">FGL</span> <span class="n">J0002</span><span class="mf">.1</span><span class="o">-</span><span class="mi">6728</span> <span class="p">,</span><span class="mf">0.5378</span><span class="p">,</span><span class="o">-</span><span class="mf">67.4746</span><span class="p">,</span><span class="mf">0.0352</span><span class="p">,</span><span class="mf">0.0311</span><span class="p">,</span><span class="mf">52.51</span>
+<span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="n">FGL</span> <span class="n">J0002</span><span class="mf">.3</span><span class="o">-</span><span class="mi">0815</span> <span class="p">,</span><span class="mf">0.5937</span><span class="p">,</span><span class="o">-</span><span class="mf">8.2652</span><span class="p">,</span><span class="mf">0.0677</span><span class="p">,</span><span class="mf">0.0541</span><span class="p">,</span><span class="mf">56.69</span>
+<span class="mi">7</span><span class="p">,</span><span class="mi">4</span><span class="n">FGL</span> <span class="n">J0002</span><span class="mf">.8</span><span class="o">+</span><span class="mi">6217</span> <span class="p">,</span><span class="mf">0.7201</span><span class="p">,</span><span class="mf">62.2905</span><span class="p">,</span><span class="mf">0.0343</span><span class="p">,</span><span class="mf">0.0328</span><span class="p">,</span><span class="mf">3.84</span>
+<span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="n">FGL</span> <span class="n">J0003</span><span class="mf">.1</span><span class="o">-</span><span class="mi">5248</span> <span class="p">,</span><span class="mf">0.7817</span><span class="p">,</span><span class="o">-</span><span class="mf">52.8071</span><span class="p">,</span><span class="mf">0.0333</span><span class="p">,</span><span class="mf">0.0305</span><span class="p">,</span><span class="o">-</span><span class="mf">41.61</span>
+<span class="mi">9</span><span class="p">,</span><span class="mi">4</span><span class="n">FGL</span> <span class="n">J0003</span><span class="mf">.3</span><span class="o">-</span><span class="mi">1928</span> <span class="p">,</span><span class="mf">0.8465</span><span class="p">,</span><span class="o">-</span><span class="mf">19.4676</span><span class="p">,</span><span class="mf">0.0708</span><span class="p">,</span><span class="mf">0.0614</span><span class="p">,</span><span class="o">-</span><span class="mf">51.75</span>
+<span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="n">FGL</span> <span class="n">J0003</span><span class="mf">.6</span><span class="o">+</span><span class="mi">3059</span> <span class="p">,</span><span class="mf">0.9045</span><span class="p">,</span><span class="mf">30.9898</span><span class="p">,</span><span class="mf">0.081</span><span class="p">,</span><span class="mf">0.0714</span><span class="p">,</span><span class="o">-</span><span class="mf">83.55</span>
+</pre></div>
+</div>
+<p>Similarly, for a catalog that uses a cone, it will take the form:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">name</span><span class="p">,</span><span class="n">ra</span><span class="p">,</span><span class="n">dec</span><span class="p">,</span><span class="n">radius</span>
+<span class="n">J121400</span><span class="mf">.6</span><span class="o">+</span><span class="mi">871149</span><span class="p">,</span><span class="mf">183.50287</span><span class="p">,</span><span class="mf">87.19713</span><span class="p">,</span><span class="mf">6.90000e-03</span>
+<span class="n">J111625</span><span class="mf">.8</span><span class="o">+</span><span class="mi">871159</span><span class="p">,</span><span class="mf">169.10778</span><span class="p">,</span><span class="mf">87.19988</span><span class="p">,</span><span class="mf">1.90000e-02</span>
+<span class="n">J111220</span><span class="mf">.4</span><span class="o">+</span><span class="mi">872612</span><span class="p">,</span><span class="mf">168.08524</span><span class="p">,</span><span class="mf">87.43679</span><span class="p">,</span><span class="mf">1.51000e-02</span>
+<span class="n">J094825</span><span class="mf">.7</span><span class="o">+</span><span class="mi">871344</span><span class="p">,</span><span class="mf">147.10712</span><span class="p">,</span><span class="mf">87.22912</span><span class="p">,</span><span class="mf">1.43000e-02</span>
+<span class="n">J121506</span><span class="mf">.0</span><span class="o">+</span><span class="mi">874154</span><span class="p">,</span><span class="mf">183.77503</span><span class="p">,</span><span class="mf">87.69855</span><span class="p">,</span><span class="mf">1.35000e-01</span>
+<span class="n">J142537</span><span class="mf">.5</span><span class="o">+</span><span class="mi">871228</span><span class="p">,</span><span class="mf">216.40663</span><span class="p">,</span><span class="mf">87.20778</span><span class="p">,</span><span class="mf">1.42000e-02</span>
+<span class="n">J113201</span><span class="mf">.4</span><span class="o">+</span><span class="mi">874720</span><span class="p">,</span><span class="mf">173.00596</span><span class="p">,</span><span class="mf">87.78907</span><span class="p">,</span><span class="mf">1.23000e-02</span>
+<span class="n">J093346</span><span class="mf">.6</span><span class="o">+</span><span class="mi">871702</span><span class="p">,</span><span class="mf">143.44429</span><span class="p">,</span><span class="mf">87.28416</span><span class="p">,</span><span class="mf">6.88000e-02</span>
+<span class="n">J095440</span><span class="mf">.9</span><span class="o">+</span><span class="mi">872818</span><span class="p">,</span><span class="mf">148.67079</span><span class="p">,</span><span class="mf">87.47179</span><span class="p">,</span><span class="mf">2.46000e-02</span>
+<span class="n">J144219</span><span class="mf">.2</span><span class="o">+</span><span class="mi">871438</span><span class="p">,</span><span class="mf">220.58000</span><span class="p">,</span><span class="mf">87.24398</span><span class="p">,</span><span class="mf">2.13000e-02</span>
+<span class="n">J134531</span><span class="mf">.1</span><span class="o">+</span><span class="mi">874437</span><span class="p">,</span><span class="mf">206.37993</span><span class="p">,</span><span class="mf">87.74369</span><span class="p">,</span><span class="mf">1.25000e-02</span>
+<span class="n">J123746</span><span class="mf">.9</span><span class="o">+</span><span class="mi">875804</span><span class="p">,</span><span class="mf">189.44571</span><span class="p">,</span><span class="mf">87.96804</span><span class="p">,</span><span class="mf">2.62000e-02</span>
+<span class="n">J094818</span><span class="mf">.5</span><span class="o">+</span><span class="mi">873937</span><span class="p">,</span><span class="mf">147.07723</span><span class="p">,</span><span class="mf">87.66038</span><span class="p">,</span><span class="mf">1.19000e-02</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mma.html" class="btn btn-neutral float-left" title="MMA Features" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="advanced_usage.html" class="btn btn-neutral float-right" title="Advanced usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, The SkyPortal Team.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
