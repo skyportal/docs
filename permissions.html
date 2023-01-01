@@ -134,7 +134,7 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">UserAccessControl</span><span class="p">:</span>
 
     <span class="k">def</span> <span class="nf">query_accessible_rows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">cls</span><span class="p">,</span> <span class="n">user_or_token</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct a Query object that, when executed, returns the rows of a</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct a Query object that, when executed, returns the rows of a</span>
 <span class="sd">        specified table that are accessible to a specified user or token.</span>
 
 <span class="sd">        Parameters</span>
@@ -167,7 +167,7 @@
 <p>The following <code class="docutils literal notranslate"><span class="pre">public</span></code> policy will grant record access to any user:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
 <span class="k">class</span> <span class="nc">Public</span><span class="p">(</span><span class="n">UserAccessControl</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A record accessible to anyone.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A record accessible to anyone.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">query_accessible_rows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">cls</span><span class="p">,</span> <span class="n">user_or_token</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">columns</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>

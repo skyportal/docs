@@ -1322,7 +1322,7 @@ correspond with the names of the arguments.  For example, a datatype
 which accepts a dictionary of lookup values may publish this as a sorted
 series of tuples.   Given a previously un-cacheable type as:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LookupType</span><span class="p">(</span><span class="n">UserDefinedType</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;a custom type that accepts a dictionary as a parameter.</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;a custom type that accepts a dictionary as a parameter.</span>
 
 <span class="sd">    this is the non-cacheable version, as &quot;self.lookup&quot; is not</span>
 <span class="sd">    hashable.</span>
@@ -1372,7 +1372,7 @@ statement cache, since Python dictionaries aren’t hashable:</p>
 <p>The type may be made cacheable by assigning a sorted tuple of tuples
 to the “.lookup” attribute:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LookupType</span><span class="p">(</span><span class="n">UserDefinedType</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;a custom type that accepts a dictionary as a parameter.</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;a custom type that accepts a dictionary as a parameter.</span>
 
 <span class="sd">    The dictionary is stored both as itself in a private variable,</span>
 <span class="sd">    and published in a public variable as a sorted tuple of tuples,</span>
