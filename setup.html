@@ -202,7 +202,7 @@
 <p>SkyPortal requires the following software to be installed.  We show
 how to install them on MacOS and Debian-based systems below.</p>
 <ul class="simple">
-<li><p>Python 3.8 or later</p></li>
+<li><p>Python 3.8 or later (&lt;3.11, since <code class="docutils literal notranslate"><span class="pre">numba</span></code> requires &lt;3.11)</p></li>
 <li><p>Supervisor (v&gt;=4.2.1)</p></li>
 <li><p>NGINX (v&gt;=1.7)</p></li>
 <li><p>PostgreSQL (v&gt;=14.0)</p></li>
@@ -227,7 +227,7 @@ virtual environment.</p>
 <p>You can also use <code class="docutils literal notranslate"><span class="pre">conda</span></code> or <code class="docutils literal notranslate"><span class="pre">pipenv</span></code> to create your environment.</p>
 <p>If you developing on a Mac with an ARM (M1/M2) you might consider using a Rosetta-driven environment so that you more easily install dependencies (that tend to be x86-centric):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CONDA_SUBDIR</span><span class="o">=</span><span class="n">osx</span><span class="o">-</span><span class="mi">64</span> <span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">skyportal_env</span> \
-      <span class="n">python</span><span class="o">=</span><span class="mf">3.9</span>
+      <span class="n">python</span><span class="o">=</span><span class="mf">3.10</span>
 <span class="n">conda</span> <span class="n">activate</span> <span class="n">skyportal_env</span>
 <span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">env</span> <span class="o">--</span><span class="nb">set</span> <span class="n">subdir</span> <span class="n">osx</span><span class="o">-</span><span class="mi">64</span>
 <span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">add</span> <span class="n">channels</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
@@ -265,6 +265,12 @@ virtual environment.</p>
 </li>
 <li><p>To build the docs, you’ll need graphviz:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">graphviz</span>
+</pre></div>
+</div>
+</li>
+<li><p>Activate the environment and add a few (hard-to install-with-pip) packages by hand:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">skyportal_env</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="n">pyproj</span> <span class="n">numba</span> <span class="n">Shapely</span>
 </pre></div>
 </div>
 </li>
@@ -328,6 +334,7 @@ virtual environment.</p>
 <section id="launch">
 <h2>Launch<a class="headerlink" href="#launch" title="Permalink to this heading">¶</a></h2>
 <ol class="simple">
+<li><p>Make sure you are in the skyportal env: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">skyportal_env</span></code></p></li>
 <li><p>Initialize the database with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_init</span></code> (this only needs to
 happen once).</p></li>
 <li><p>Copy <code class="docutils literal notranslate"><span class="pre">config.yaml.defaults</span></code> to <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>.</p></li>
