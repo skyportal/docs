@@ -1,97 +1,50 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
-  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Database Schema &mdash; skyportal 0.9.dev0 documentation</title>
-  
-
-  
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="_static/output_cells.css" type="text/css" />
-
-  
-  
-
-  
-  
-
-  
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/output_cells.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-    
-      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
-    
-    <script type="text/javascript" src="_static/js/theme.js"></script>
-
-    
+    <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Database migrations" href="migrations.html" />
     <link rel="prev" title="Styling components" href="styling.html" /> 
 </head>
 
-<body class="wy-body-for-nav">
-
-   
+<body class="wy-body-for-nav"> 
   <div class="wy-grid-for-nav">
-    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-          
 
           
-            <a href="index.html" class="icon icon-home"> skyportal
           
-
-          
+          <a href="index.html" class="icon icon-home">
+            skyportal
           </a>
-
-          
-            
-            
               <div class="version">
                 0.9.dev0
               </div>
-            
-          
-
-          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-
-          
-        </div>
-
-        
-        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-          
-            
-            
-              
-            
-            
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="design.html">System Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
@@ -307,76 +260,36 @@
 <li class="toctree-l1"><a class="reference internal" href="extensions.html">SkyPortal Extensions</a></li>
 </ul>
 
-            
-          
         </div>
-        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" aria-label="top navigation">
-        
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">skyportal</a>
-        
       </nav>
 
-
       <div class="wy-nav-content">
-        
         <div class="rst-content">
-        
-          
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div role="navigation" aria-label="breadcrumbs navigation">
-
+          <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-        
-      <li>Database Schema</li>
-    
-    
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Database Schema</li>
       <li class="wy-breadcrumbs-aside">
-        
-          
-        
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-            
+             
   <section id="database-schema">
-<h1>Database Schema<a class="headerlink" href="#database-schema" title="Permalink to this heading">¶</a></h1>
+<h1>Database Schema<a class="headerlink" href="#database-schema" title="Permalink to this heading"></a></h1>
 <p>SkyPortal uses a PostgreSQL database to manage persistent state. This section
 documents the schema of the database and describes how the application
 interacts with it.</p>
 <section id="sqlalchemy-model-api-documentation">
-<h2>SQLAlchemy Model API Documentation<a class="headerlink" href="#sqlalchemy-model-api-documentation" title="Permalink to this heading">¶</a></h2>
+<h2>SQLAlchemy Model API Documentation<a class="headerlink" href="#sqlalchemy-model-api-documentation" title="Permalink to this heading"></a></h2>
 <p>The SkyPortal Python backend interacts with the PostgreSQL backend using the
 <a class="reference external" href="http://sqlalchemy.org">SQLAlchemy</a>
 <a class="reference external" href="https://docs.sqlalchemy.org/en/13/orm/tutorial.html">object relational mapper</a>.
@@ -385,7 +298,7 @@ is represented by a class attribute. This Section documents each of the
 SkyPortal and baselayer classes that are mapped to database tables.</p>
 <span class="target" id="module-skyportal.models"></span><span class="target" id="module-baselayer.app.models"></span><dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.ACL">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">ACL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.ACL" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">ACL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.ACL" title="Permalink to this definition"></a></dt>
 <dd><p>An access control list item representing a privilege within the
 application. ACLs are aggregated into collections called Roles which
 are assumed by Users. Examples of ACLs include <cite>Upload Data</cite>, <cite>Comment</cite>,
@@ -442,19 +355,19 @@ and <cite>Manage Groups</cite>.</p>
 </table>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.ACL.created_at">
-<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#baselayer.app.models.ACL.created_at" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#baselayer.app.models.ACL.created_at" title="Permalink to this definition"></a></dt>
 <dd><p>UTC time of insertion of object’s row into the database.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.ACL.id">
-<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#baselayer.app.models.ACL.id" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#baselayer.app.models.ACL.id" title="Permalink to this definition"></a></dt>
 <dd><p>ACL name.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.ACL.modified">
-<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#baselayer.app.models.ACL.modified" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#baselayer.app.models.ACL.modified" title="Permalink to this definition"></a></dt>
 <dd><p>UTC time the object’s row was last modified in the database.</p>
 </dd></dl>
 
@@ -462,7 +375,7 @@ and <cite>Manage Groups</cite>.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.AccessibleIfRelatedRowsAreAccessible">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">AccessibleIfRelatedRowsAreAccessible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">properties_and_modes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AccessibleIfRelatedRowsAreAccessible" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">AccessibleIfRelatedRowsAreAccessible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">properties_and_modes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AccessibleIfRelatedRowsAreAccessible" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -489,7 +402,7 @@ and <cite>Manage Groups</cite>.</p>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.AccessibleIfRelatedRowsAreAccessible.query_accessible_rows">
-<span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AccessibleIfRelatedRowsAreAccessible.query_accessible_rows" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AccessibleIfRelatedRowsAreAccessible.query_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Query object that, when executed, returns the rows of a
 specified table that are accessible to a specified user or token.
 All query based functions will be deprecated when moving to
@@ -517,7 +430,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.AccessibleIfRelatedRowsAreAccessible.select_accessible_rows">
-<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AccessibleIfRelatedRowsAreAccessible.select_accessible_rows" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AccessibleIfRelatedRowsAreAccessible.select_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Select object that, when executed, returns the rows of a
 specified table that are accessible to a specified user or token.</p>
 <dl class="field-list">
@@ -544,7 +457,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.AccessibleIfUserMatches">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">AccessibleIfUserMatches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relationship_chain</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AccessibleIfUserMatches" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">AccessibleIfUserMatches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relationship_chain</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AccessibleIfUserMatches" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -573,7 +486,7 @@ the mapped class directly and returns mapped instances.</p>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.AccessibleIfUserMatches.query_accessible_rows">
-<span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AccessibleIfUserMatches.query_accessible_rows" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AccessibleIfUserMatches.query_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Query object that, when executed, returns the rows of a
 specified table that are accessible to a specified user or token.
 All query based functions will be deprecated when moving to
@@ -601,13 +514,13 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="baselayer.app.models.AccessibleIfUserMatches.relationship_names">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">relationship_names</span></span><a class="headerlink" href="#baselayer.app.models.AccessibleIfUserMatches.relationship_names" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">relationship_names</span></span><a class="headerlink" href="#baselayer.app.models.AccessibleIfUserMatches.relationship_names" title="Permalink to this definition"></a></dt>
 <dd><p>List of names of each relationship in the chain.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.AccessibleIfUserMatches.select_accessible_rows">
-<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AccessibleIfUserMatches.select_accessible_rows" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AccessibleIfUserMatches.select_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Select object that, when executed, returns the rows of a
 specified table that are accessible to a specified user or token.</p>
 <dl class="field-list">
@@ -634,7 +547,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.ComposedAccessControl">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">ComposedAccessControl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">access_controls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'and'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.ComposedAccessControl" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">ComposedAccessControl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">access_controls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'and'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.ComposedAccessControl" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -662,7 +575,7 @@ the mapped class directly and returns mapped instances.</p>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.ComposedAccessControl.query_accessible_rows">
-<span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.ComposedAccessControl.query_accessible_rows" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.ComposedAccessControl.query_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Query object that, when executed, returns the rows of a
 specified table that are accessible to a specified user or token.
 All query based functions will be deprecated when moving to
@@ -690,7 +603,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.ComposedAccessControl.select_accessible_rows">
-<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.ComposedAccessControl.select_accessible_rows" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.ComposedAccessControl.select_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Select object that, when executed, returns the rows of a
 specified table that are accessible to a specified user or token.</p>
 <dl class="field-list">
@@ -717,7 +630,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.CronJobRun">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">CronJobRun</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.CronJobRun" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">CronJobRun</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.CronJobRun" title="Permalink to this definition"></a></dt>
 <dd><p>A record of a run (or attempted run) of a cron job.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
@@ -777,37 +690,37 @@ the mapped class directly and returns mapped instances.</p>
 </table>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.CronJobRun.created_at">
-<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#baselayer.app.models.CronJobRun.created_at" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#baselayer.app.models.CronJobRun.created_at" title="Permalink to this definition"></a></dt>
 <dd><p>UTC time of insertion of object’s row into the database.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.CronJobRun.exit_status">
-<span class="sig-name descname"><span class="pre">exit_status</span></span><a class="headerlink" href="#baselayer.app.models.CronJobRun.exit_status" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">exit_status</span></span><a class="headerlink" href="#baselayer.app.models.CronJobRun.exit_status" title="Permalink to this definition"></a></dt>
 <dd><p>Exit status of cron job subprocess (e.g. 0 or 1).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.CronJobRun.id">
-<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#baselayer.app.models.CronJobRun.id" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#baselayer.app.models.CronJobRun.id" title="Permalink to this definition"></a></dt>
 <dd><p>Unique object identifier.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.CronJobRun.modified">
-<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#baselayer.app.models.CronJobRun.modified" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#baselayer.app.models.CronJobRun.modified" title="Permalink to this definition"></a></dt>
 <dd><p>UTC time the object’s row was last modified in the database.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.CronJobRun.output">
-<span class="sig-name descname"><span class="pre">output</span></span><a class="headerlink" href="#baselayer.app.models.CronJobRun.output" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">output</span></span><a class="headerlink" href="#baselayer.app.models.CronJobRun.output" title="Permalink to this definition"></a></dt>
 <dd><p>Cron job’s subprocess output, or exception string.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.CronJobRun.script">
-<span class="sig-name descname"><span class="pre">script</span></span><a class="headerlink" href="#baselayer.app.models.CronJobRun.script" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">script</span></span><a class="headerlink" href="#baselayer.app.models.CronJobRun.script" title="Permalink to this definition"></a></dt>
 <dd><p>Name of script being run.</p>
 </dd></dl>
 
@@ -815,7 +728,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.CustomUserAccessControl">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">CustomUserAccessControl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query_or_query_generator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.CustomUserAccessControl" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">CustomUserAccessControl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query_or_query_generator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.CustomUserAccessControl" title="Permalink to this definition"></a></dt>
 <dd><p class="rubric">Methods</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
@@ -835,7 +748,7 @@ the mapped class directly and returns mapped instances.</p>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.CustomUserAccessControl.query_accessible_rows">
-<span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.CustomUserAccessControl.query_accessible_rows" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.CustomUserAccessControl.query_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Query object that, when executed, returns the rows of a
 specified table that are accessible to a specified user or token.
 All query based functions will be deprecated when moving to
@@ -863,7 +776,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.CustomUserAccessControl.select_accessible_rows">
-<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.CustomUserAccessControl.select_accessible_rows" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.CustomUserAccessControl.select_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Select object that, when executed, returns the rows of a
 specified table that are accessible to a specified user or token.</p>
 <dl class="field-list">
@@ -890,14 +803,14 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.JoinModel">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">JoinModel</span></span><a class="headerlink" href="#baselayer.app.models.JoinModel" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">JoinModel</span></span><a class="headerlink" href="#baselayer.app.models.JoinModel" title="Permalink to this definition"></a></dt>
 <dd><p>Dummy class that join_models subclass. Provides an easy way to
 access all join_model mapped classes via the __subclasses__() method.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.Public">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">Public</span></span><a class="headerlink" href="#baselayer.app.models.Public" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">Public</span></span><a class="headerlink" href="#baselayer.app.models.Public" title="Permalink to this definition"></a></dt>
 <dd><p>A record accessible to anyone.</p>
 <p class="rubric">Methods</p>
 <table class="autosummary longtable docutils align-default">
@@ -918,7 +831,7 @@ access all join_model mapped classes via the __subclasses__() method.</p>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.Public.query_accessible_rows">
-<span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Public.query_accessible_rows" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Public.query_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Query object that, when executed, returns the rows of a
 specified table that are accessible to a specified user or token.
 All query based functions will be deprecated when moving to
@@ -946,7 +859,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.Public.select_accessible_rows">
-<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Public.select_accessible_rows" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Public.select_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Select object that, when executed, returns the rows of a
 specified table that are accessible to a specified user or token.</p>
 <dl class="field-list">
@@ -973,7 +886,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.Restricted">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">Restricted</span></span><a class="headerlink" href="#baselayer.app.models.Restricted" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">Restricted</span></span><a class="headerlink" href="#baselayer.app.models.Restricted" title="Permalink to this definition"></a></dt>
 <dd><p>A record that can only be accessed by a System Admin.</p>
 <p class="rubric">Methods</p>
 <table class="autosummary longtable docutils align-default">
@@ -994,7 +907,7 @@ the mapped class directly and returns mapped instances.</p>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.Restricted.query_accessible_rows">
-<span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Restricted.query_accessible_rows" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Restricted.query_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Query object that, when executed, returns the rows of a
 specified table that are accessible to a specified user or token.
 All query based functions will be deprecated when moving to
@@ -1022,7 +935,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.Restricted.select_accessible_rows">
-<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Restricted.select_accessible_rows" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Restricted.select_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Select object that, when executed, returns the rows of a
 specified table that are accessible to a specified user or token.</p>
 <dl class="field-list">
@@ -1049,7 +962,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.Role">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">Role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Role" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">Role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Role" title="Permalink to this definition"></a></dt>
 <dd><p>A collection of ACLs. Roles map Users to ACLs. One User may assume
 multiple Roles.</p>
 <dl class="field-list simple">
@@ -1108,31 +1021,31 @@ multiple Roles.</p>
 </table>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.Role.acls">
-<span class="sig-name descname"><span class="pre">acls</span></span><a class="headerlink" href="#baselayer.app.models.Role.acls" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">acls</span></span><a class="headerlink" href="#baselayer.app.models.Role.acls" title="Permalink to this definition"></a></dt>
 <dd><p>ACLs associated with the Role.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.Role.created_at">
-<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#baselayer.app.models.Role.created_at" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#baselayer.app.models.Role.created_at" title="Permalink to this definition"></a></dt>
 <dd><p>UTC time of insertion of object’s row into the database.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.Role.id">
-<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#baselayer.app.models.Role.id" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#baselayer.app.models.Role.id" title="Permalink to this definition"></a></dt>
 <dd><p>Role name.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.Role.modified">
-<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#baselayer.app.models.Role.modified" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#baselayer.app.models.Role.modified" title="Permalink to this definition"></a></dt>
 <dd><p>UTC time the object’s row was last modified in the database.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.Role.users">
-<span class="sig-name descname"><span class="pre">users</span></span><a class="headerlink" href="#baselayer.app.models.Role.users" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">users</span></span><a class="headerlink" href="#baselayer.app.models.Role.users" title="Permalink to this definition"></a></dt>
 <dd><p>Users who have this Role.</p>
 </dd></dl>
 
@@ -1140,7 +1053,7 @@ multiple Roles.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.RoleACL">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">RoleACL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.RoleACL" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">RoleACL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.RoleACL" title="Permalink to this definition"></a></dt>
 <dd><p>Join table class mapping Roles to ACLs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
@@ -1198,37 +1111,37 @@ multiple Roles.</p>
 </table>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.RoleACL.create">
-<span class="sig-name descname"><span class="pre">create</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.RoleACL.create" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">create</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.RoleACL.create" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.RoleACL.created_at">
-<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#baselayer.app.models.RoleACL.created_at" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#baselayer.app.models.RoleACL.created_at" title="Permalink to this definition"></a></dt>
 <dd><p>UTC time of insertion of object’s row into the database.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.RoleACL.id">
-<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#baselayer.app.models.RoleACL.id" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#baselayer.app.models.RoleACL.id" title="Permalink to this definition"></a></dt>
 <dd><p>Unique object identifier.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.RoleACL.modified">
-<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#baselayer.app.models.RoleACL.modified" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#baselayer.app.models.RoleACL.modified" title="Permalink to this definition"></a></dt>
 <dd><p>UTC time the object’s row was last modified in the database.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.RoleACL.read">
-<span class="sig-name descname"><span class="pre">read</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.RoleACL.read" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">read</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.RoleACL.read" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.SlugifiedStr">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">SlugifiedStr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.SlugifiedStr" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">SlugifiedStr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.SlugifiedStr" title="Permalink to this definition"></a></dt>
 <dd><p>Slugified string</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
@@ -1324,7 +1237,7 @@ multiple Roles.</p>
 </table>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.SlugifiedStr.cache_ok">
-<span class="sig-name descname"><span class="pre">cache_ok</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#baselayer.app.models.SlugifiedStr.cache_ok" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">cache_ok</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#baselayer.app.models.SlugifiedStr.cache_ok" title="Permalink to this definition"></a></dt>
 <dd><p>Indicate if statements using this <code class="xref py py-class docutils literal notranslate"><span class="pre">ExternalType</span></code> are “safe to
 cache”.</p>
 <p>The default value <code class="docutils literal notranslate"><span class="pre">None</span></code> will emit a warning and then not allow caching
@@ -1462,13 +1375,13 @@ and <code class="xref py py-class docutils literal notranslate"><span class="pre
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.SlugifiedStr.impl">
-<span class="sig-name descname"><span class="pre">impl</span></span><a class="headerlink" href="#baselayer.app.models.SlugifiedStr.impl" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">impl</span></span><a class="headerlink" href="#baselayer.app.models.SlugifiedStr.impl" title="Permalink to this definition"></a></dt>
 <dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">String</span></code></p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.SlugifiedStr.process_bind_param">
-<span class="sig-name descname"><span class="pre">process_bind_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dialect</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.SlugifiedStr.process_bind_param" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">process_bind_param</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dialect</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.SlugifiedStr.process_bind_param" title="Permalink to this definition"></a></dt>
 <dd><p>Receive a bound parameter value to be converted.</p>
 <p>Custom subclasses of <code class="xref py py-class docutils literal notranslate"><span class="pre">_types.TypeDecorator</span></code> should override
 this method to provide custom behaviors for incoming data values.
@@ -1496,7 +1409,7 @@ this method in the subclass.  Can be <code class="docutils literal notranslate">
 
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.SlugifiedStr.process_result_value">
-<span class="sig-name descname"><span class="pre">process_result_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dialect</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.SlugifiedStr.process_result_value" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">process_result_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dialect</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.SlugifiedStr.process_result_value" title="Permalink to this definition"></a></dt>
 <dd><p>Receive a result-row column value to be converted.</p>
 <p>Custom subclasses of <code class="xref py py-class docutils literal notranslate"><span class="pre">_types.TypeDecorator</span></code> should override
 this method to provide custom behaviors for data values
@@ -1526,7 +1439,7 @@ this method in the subclass.  Can be <code class="docutils literal notranslate">
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.Token">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">Token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Token" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">Token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Token" title="Permalink to this definition"></a></dt>
 <dd><p>A command line token that can be used to programmatically access the API
 as a particular User.</p>
 <dl class="field-list simple">
@@ -1597,7 +1510,7 @@ as a particular User.</p>
 </table>
 <dl class="py property">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.accessible_groups">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accessible_groups</span></span><a class="headerlink" href="#baselayer.app.models.Token.accessible_groups" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accessible_groups</span></span><a class="headerlink" href="#baselayer.app.models.Token.accessible_groups" title="Permalink to this definition"></a></dt>
 <dd><p>Return the list of Groups a User or Token has access to. For non-admin
 Users or Token owners, this corresponds to the Groups they are a member of.
 For System Admins, this corresponds to all Groups.</p>
@@ -1605,59 +1518,59 @@ For System Admins, this corresponds to all Groups.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.accessible_streams">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accessible_streams</span></span><a class="headerlink" href="#baselayer.app.models.Token.accessible_streams" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accessible_streams</span></span><a class="headerlink" href="#baselayer.app.models.Token.accessible_streams" title="Permalink to this definition"></a></dt>
 <dd><p>Return the list of Streams a User or Token has access to.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.acls">
-<span class="sig-name descname"><span class="pre">acls</span></span><a class="headerlink" href="#baselayer.app.models.Token.acls" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">acls</span></span><a class="headerlink" href="#baselayer.app.models.Token.acls" title="Permalink to this definition"></a></dt>
 <dd><p>The ACLs granted to the Token.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.create">
-<span class="sig-name descname"><span class="pre">create</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfUserMatches</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.Token.create" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">create</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfUserMatches</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.Token.create" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.created_at">
-<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#baselayer.app.models.Token.created_at" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#baselayer.app.models.Token.created_at" title="Permalink to this definition"></a></dt>
 <dd><p>UTC time of insertion of object’s row into the database.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.created_by">
-<span class="sig-name descname"><span class="pre">created_by</span></span><a class="headerlink" href="#baselayer.app.models.Token.created_by" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">created_by</span></span><a class="headerlink" href="#baselayer.app.models.Token.created_by" title="Permalink to this definition"></a></dt>
 <dd><p>The User that created the token.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.created_by_id">
-<span class="sig-name descname"><span class="pre">created_by_id</span></span><a class="headerlink" href="#baselayer.app.models.Token.created_by_id" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">created_by_id</span></span><a class="headerlink" href="#baselayer.app.models.Token.created_by_id" title="Permalink to this definition"></a></dt>
 <dd><p>The ID of the User that created the Token.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.delete">
-<span class="sig-name descname"><span class="pre">delete</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfUserMatches</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.Token.delete" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">delete</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfUserMatches</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.Token.delete" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.groups">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">groups</span></span><a class="headerlink" href="#baselayer.app.models.Token.groups" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">groups</span></span><a class="headerlink" href="#baselayer.app.models.Token.groups" title="Permalink to this definition"></a></dt>
 <dd><p>The groups the Token owner is a member of.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.id">
-<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#baselayer.app.models.Token.id" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#baselayer.app.models.Token.id" title="Permalink to this definition"></a></dt>
 <dd><p>The value of the token. This field is used for authenticating as a User on the command line.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.is_readable_by">
-<span class="sig-name descname"><span class="pre">is_readable_by</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Token.is_readable_by" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">is_readable_by</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Token.is_readable_by" title="Permalink to this definition"></a></dt>
 <dd><p>Return a boolean indicating whether this Token is readable by the
 specified User (or Token instance, if a token is passed).</p>
 <dl class="field-list">
@@ -1678,31 +1591,31 @@ specified User (or Token instance, if a token is passed).</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.modified">
-<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#baselayer.app.models.Token.modified" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#baselayer.app.models.Token.modified" title="Permalink to this definition"></a></dt>
 <dd><p>UTC time the object’s row was last modified in the database.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.name">
-<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#baselayer.app.models.Token.name" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#baselayer.app.models.Token.name" title="Permalink to this definition"></a></dt>
 <dd><p>The name of the token.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.read">
-<span class="sig-name descname"><span class="pre">read</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfUserMatches</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.Token.read" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">read</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfUserMatches</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.Token.read" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.update">
-<span class="sig-name descname"><span class="pre">update</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfUserMatches</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.Token.update" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">update</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfUserMatches</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.Token.update" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.TokenACL">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">TokenACL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.TokenACL" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">TokenACL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.TokenACL" title="Permalink to this definition"></a></dt>
 <dd><p>Join table mapping Tokens to ACLs</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
@@ -1760,37 +1673,37 @@ specified User (or Token instance, if a token is passed).</p>
 </table>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.TokenACL.create">
-<span class="sig-name descname"><span class="pre">create</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.TokenACL.create" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">create</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.TokenACL.create" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.TokenACL.created_at">
-<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#baselayer.app.models.TokenACL.created_at" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#baselayer.app.models.TokenACL.created_at" title="Permalink to this definition"></a></dt>
 <dd><p>UTC time of insertion of object’s row into the database.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.TokenACL.id">
-<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#baselayer.app.models.TokenACL.id" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#baselayer.app.models.TokenACL.id" title="Permalink to this definition"></a></dt>
 <dd><p>Unique object identifier.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.TokenACL.modified">
-<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#baselayer.app.models.TokenACL.modified" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#baselayer.app.models.TokenACL.modified" title="Permalink to this definition"></a></dt>
 <dd><p>UTC time the object’s row was last modified in the database.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.TokenACL.read">
-<span class="sig-name descname"><span class="pre">read</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.TokenACL.read" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">read</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.TokenACL.read" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.User">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">User</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.User" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">User</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.User" title="Permalink to this definition"></a></dt>
 <dd><p>An application user.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
@@ -1975,7 +1888,7 @@ specified User (or Token instance, if a token is passed).</p>
 </table>
 <dl class="py property">
 <dt class="sig sig-object py" id="baselayer.app.models.User.accessible_groups">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accessible_groups</span></span><a class="headerlink" href="#baselayer.app.models.User.accessible_groups" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accessible_groups</span></span><a class="headerlink" href="#baselayer.app.models.User.accessible_groups" title="Permalink to this definition"></a></dt>
 <dd><p>Return the list of Groups a User or Token has access to. For non-admin
 Users or Token owners, this corresponds to the Groups they are a member of.
 For System Admins, this corresponds to all Groups.</p>
@@ -1983,349 +1896,349 @@ For System Admins, this corresponds to all Groups.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="baselayer.app.models.User.accessible_streams">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accessible_streams</span></span><a class="headerlink" href="#baselayer.app.models.User.accessible_streams" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accessible_streams</span></span><a class="headerlink" href="#baselayer.app.models.User.accessible_streams" title="Permalink to this definition"></a></dt>
 <dd><p>Return the list of Streams a User or Token has access to.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.acls">
-<span class="sig-name descname"><span class="pre">acls</span></span><a class="headerlink" href="#baselayer.app.models.User.acls" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">acls</span></span><a class="headerlink" href="#baselayer.app.models.User.acls" title="Permalink to this definition"></a></dt>
 <dd><p>ACLs granted to user, separate from role-level ACLs</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.affiliations">
-<span class="sig-name descname"><span class="pre">affiliations</span></span><a class="headerlink" href="#baselayer.app.models.User.affiliations" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">affiliations</span></span><a class="headerlink" href="#baselayer.app.models.User.affiliations" title="Permalink to this definition"></a></dt>
 <dd><p>The User’s affiliations (ex: Department of Mathematics, University X)</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.assignments">
-<span class="sig-name descname"><span class="pre">assignments</span></span><a class="headerlink" href="#baselayer.app.models.User.assignments" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">assignments</span></span><a class="headerlink" href="#baselayer.app.models.User.assignments" title="Permalink to this definition"></a></dt>
 <dd><p>Objs the User has assigned to ObservingRuns.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.catalog_queries">
-<span class="sig-name descname"><span class="pre">catalog_queries</span></span><a class="headerlink" href="#baselayer.app.models.User.catalog_queries" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">catalog_queries</span></span><a class="headerlink" href="#baselayer.app.models.User.catalog_queries" title="Permalink to this definition"></a></dt>
 <dd><p>The catalog queries this User has made.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.contact_email">
-<span class="sig-name descname"><span class="pre">contact_email</span></span><a class="headerlink" href="#baselayer.app.models.User.contact_email" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">contact_email</span></span><a class="headerlink" href="#baselayer.app.models.User.contact_email" title="Permalink to this definition"></a></dt>
 <dd><p>The phone number at which the user prefers to receive communications.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.contact_phone">
-<span class="sig-name descname"><span class="pre">contact_phone</span></span><a class="headerlink" href="#baselayer.app.models.User.contact_phone" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">contact_phone</span></span><a class="headerlink" href="#baselayer.app.models.User.contact_phone" title="Permalink to this definition"></a></dt>
 <dd><p>The email at which the user prefers to receive communications.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.created_at">
-<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#baselayer.app.models.User.created_at" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#baselayer.app.models.User.created_at" title="Permalink to this definition"></a></dt>
 <dd><p>UTC time of insertion of object’s row into the database.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.default_followup_requests">
-<span class="sig-name descname"><span class="pre">default_followup_requests</span></span><a class="headerlink" href="#baselayer.app.models.User.default_followup_requests" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">default_followup_requests</span></span><a class="headerlink" href="#baselayer.app.models.User.default_followup_requests" title="Permalink to this definition"></a></dt>
 <dd><p>The default follow-up requests this User has made.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.default_observationplan_requests">
-<span class="sig-name descname"><span class="pre">default_observationplan_requests</span></span><a class="headerlink" href="#baselayer.app.models.User.default_observationplan_requests" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">default_observationplan_requests</span></span><a class="headerlink" href="#baselayer.app.models.User.default_observationplan_requests" title="Permalink to this definition"></a></dt>
 <dd><p>The default observation plan requests this User has made.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.delete">
-<span class="sig-name descname"><span class="pre">delete</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.CustomUserAccessControl</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.User.delete" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">delete</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.CustomUserAccessControl</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.User.delete" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.earthquakeevents">
-<span class="sig-name descname"><span class="pre">earthquakeevents</span></span><a class="headerlink" href="#baselayer.app.models.User.earthquakeevents" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">earthquakeevents</span></span><a class="headerlink" href="#baselayer.app.models.User.earthquakeevents" title="Permalink to this definition"></a></dt>
 <dd><p>The EarthquakeEvents saved by this user</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.earthquakenotices">
-<span class="sig-name descname"><span class="pre">earthquakenotices</span></span><a class="headerlink" href="#baselayer.app.models.User.earthquakenotices" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">earthquakenotices</span></span><a class="headerlink" href="#baselayer.app.models.User.earthquakenotices" title="Permalink to this definition"></a></dt>
 <dd><p>The EarthquakeNotices saved by this user</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.expiration_date">
-<span class="sig-name descname"><span class="pre">expiration_date</span></span><a class="headerlink" href="#baselayer.app.models.User.expiration_date" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">expiration_date</span></span><a class="headerlink" href="#baselayer.app.models.User.expiration_date" title="Permalink to this definition"></a></dt>
 <dd><p>The date until which the user’s account is valid. Users are set to view-only upon expiration.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.first_name">
-<span class="sig-name descname"><span class="pre">first_name</span></span><a class="headerlink" href="#baselayer.app.models.User.first_name" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">first_name</span></span><a class="headerlink" href="#baselayer.app.models.User.first_name" title="Permalink to this definition"></a></dt>
 <dd><p>The User’s first name.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.followup_requests">
-<span class="sig-name descname"><span class="pre">followup_requests</span></span><a class="headerlink" href="#baselayer.app.models.User.followup_requests" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">followup_requests</span></span><a class="headerlink" href="#baselayer.app.models.User.followup_requests" title="Permalink to this definition"></a></dt>
 <dd><p>The follow-up requests this User has made.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.gcnevents">
-<span class="sig-name descname"><span class="pre">gcnevents</span></span><a class="headerlink" href="#baselayer.app.models.User.gcnevents" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">gcnevents</span></span><a class="headerlink" href="#baselayer.app.models.User.gcnevents" title="Permalink to this definition"></a></dt>
 <dd><p>The gcnevents saved by this user</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.gcnnotices">
-<span class="sig-name descname"><span class="pre">gcnnotices</span></span><a class="headerlink" href="#baselayer.app.models.User.gcnnotices" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">gcnnotices</span></span><a class="headerlink" href="#baselayer.app.models.User.gcnnotices" title="Permalink to this definition"></a></dt>
 <dd><p>The GcnNotices saved by this user</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.gcnproperties">
-<span class="sig-name descname"><span class="pre">gcnproperties</span></span><a class="headerlink" href="#baselayer.app.models.User.gcnproperties" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">gcnproperties</span></span><a class="headerlink" href="#baselayer.app.models.User.gcnproperties" title="Permalink to this definition"></a></dt>
 <dd><p>The gcnproperties saved by this user</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.gcnsummaries">
-<span class="sig-name descname"><span class="pre">gcnsummaries</span></span><a class="headerlink" href="#baselayer.app.models.User.gcnsummaries" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">gcnsummaries</span></span><a class="headerlink" href="#baselayer.app.models.User.gcnsummaries" title="Permalink to this definition"></a></dt>
 <dd><p>The gcnsummaries saved by this user</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.gcntags">
-<span class="sig-name descname"><span class="pre">gcntags</span></span><a class="headerlink" href="#baselayer.app.models.User.gcntags" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">gcntags</span></span><a class="headerlink" href="#baselayer.app.models.User.gcntags" title="Permalink to this definition"></a></dt>
 <dd><p>The gcntags saved by this user</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="baselayer.app.models.User.gravatar_url">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gravatar_url</span></span><a class="headerlink" href="#baselayer.app.models.User.gravatar_url" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gravatar_url</span></span><a class="headerlink" href="#baselayer.app.models.User.gravatar_url" title="Permalink to this definition"></a></dt>
 <dd><p>The Gravatar URL inferred from the user’s contact email, or, if the
 contact email is null, the username.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.group_admission_requests">
-<span class="sig-name descname"><span class="pre">group_admission_requests</span></span><a class="headerlink" href="#baselayer.app.models.User.group_admission_requests" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">group_admission_requests</span></span><a class="headerlink" href="#baselayer.app.models.User.group_admission_requests" title="Permalink to this definition"></a></dt>
 <dd><p>User’s requests to join groups.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.groups">
-<span class="sig-name descname"><span class="pre">groups</span></span><a class="headerlink" href="#baselayer.app.models.User.groups" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">groups</span></span><a class="headerlink" href="#baselayer.app.models.User.groups" title="Permalink to this definition"></a></dt>
 <dd><p>The Groups this User is a member of.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.id">
-<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#baselayer.app.models.User.id" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#baselayer.app.models.User.id" title="Permalink to this definition"></a></dt>
 <dd><p>Unique object identifier.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.User.is_active">
-<span class="sig-name descname"><span class="pre">is_active</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.User.is_active" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">is_active</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.User.is_active" title="Permalink to this definition"></a></dt>
 <dd><p>Boolean flag indicating whether the User is currently active.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.User.is_authenticated">
-<span class="sig-name descname"><span class="pre">is_authenticated</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.User.is_authenticated" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">is_authenticated</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.User.is_authenticated" title="Permalink to this definition"></a></dt>
 <dd><p>Boolean flag indicating whether the User is currently
 authenticated.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.last_name">
-<span class="sig-name descname"><span class="pre">last_name</span></span><a class="headerlink" href="#baselayer.app.models.User.last_name" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">last_name</span></span><a class="headerlink" href="#baselayer.app.models.User.last_name" title="Permalink to this definition"></a></dt>
 <dd><p>The User’s last name.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.listings">
-<span class="sig-name descname"><span class="pre">listings</span></span><a class="headerlink" href="#baselayer.app.models.User.listings" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">listings</span></span><a class="headerlink" href="#baselayer.app.models.User.listings" title="Permalink to this definition"></a></dt>
 <dd><p>The listings saved by this user</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.localizationproperties">
-<span class="sig-name descname"><span class="pre">localizationproperties</span></span><a class="headerlink" href="#baselayer.app.models.User.localizationproperties" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">localizationproperties</span></span><a class="headerlink" href="#baselayer.app.models.User.localizationproperties" title="Permalink to this definition"></a></dt>
 <dd><p>The localizationproperties saved by this user</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.localizations">
-<span class="sig-name descname"><span class="pre">localizations</span></span><a class="headerlink" href="#baselayer.app.models.User.localizations" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">localizations</span></span><a class="headerlink" href="#baselayer.app.models.User.localizations" title="Permalink to this definition"></a></dt>
 <dd><p>The localizations saved by this user</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.localizationtags">
-<span class="sig-name descname"><span class="pre">localizationtags</span></span><a class="headerlink" href="#baselayer.app.models.User.localizationtags" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">localizationtags</span></span><a class="headerlink" href="#baselayer.app.models.User.localizationtags" title="Permalink to this definition"></a></dt>
 <dd><p>The localizationtags saved by this user</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.mmadetector_spectra">
-<span class="sig-name descname"><span class="pre">mmadetector_spectra</span></span><a class="headerlink" href="#baselayer.app.models.User.mmadetector_spectra" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">mmadetector_spectra</span></span><a class="headerlink" href="#baselayer.app.models.User.mmadetector_spectra" title="Permalink to this definition"></a></dt>
 <dd><p>MMADetectorSpectra uploaded by this User.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.mmadetector_time_intervals">
-<span class="sig-name descname"><span class="pre">mmadetector_time_intervals</span></span><a class="headerlink" href="#baselayer.app.models.User.mmadetector_time_intervals" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">mmadetector_time_intervals</span></span><a class="headerlink" href="#baselayer.app.models.User.mmadetector_time_intervals" title="Permalink to this definition"></a></dt>
 <dd><p>MMADetectorTimeInterval uploaded by this User.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.modified">
-<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#baselayer.app.models.User.modified" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#baselayer.app.models.User.modified" title="Permalink to this definition"></a></dt>
 <dd><p>UTC time the object’s row was last modified in the database.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.notifications">
-<span class="sig-name descname"><span class="pre">notifications</span></span><a class="headerlink" href="#baselayer.app.models.User.notifications" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">notifications</span></span><a class="headerlink" href="#baselayer.app.models.User.notifications" title="Permalink to this definition"></a></dt>
 <dd><p>Notifications to be displayed on front-end associated with User</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.oauth_uid">
-<span class="sig-name descname"><span class="pre">oauth_uid</span></span><a class="headerlink" href="#baselayer.app.models.User.oauth_uid" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">oauth_uid</span></span><a class="headerlink" href="#baselayer.app.models.User.oauth_uid" title="Permalink to this definition"></a></dt>
 <dd><p>The user’s OAuth UID.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.observationplan_requests">
-<span class="sig-name descname"><span class="pre">observationplan_requests</span></span><a class="headerlink" href="#baselayer.app.models.User.observationplan_requests" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">observationplan_requests</span></span><a class="headerlink" href="#baselayer.app.models.User.observationplan_requests" title="Permalink to this definition"></a></dt>
 <dd><p>The observation plan requests this User has made.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.observing_runs">
-<span class="sig-name descname"><span class="pre">observing_runs</span></span><a class="headerlink" href="#baselayer.app.models.User.observing_runs" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">observing_runs</span></span><a class="headerlink" href="#baselayer.app.models.User.observing_runs" title="Permalink to this definition"></a></dt>
 <dd><p>Observing Runs this User has created.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="baselayer.app.models.User.permissions">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">permissions</span></span><a class="headerlink" href="#baselayer.app.models.User.permissions" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">permissions</span></span><a class="headerlink" href="#baselayer.app.models.User.permissions" title="Permalink to this definition"></a></dt>
 <dd><p>List of the names of all of the user’s ACLs (role-level + individual).</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.photometric_series">
-<span class="sig-name descname"><span class="pre">photometric_series</span></span><a class="headerlink" href="#baselayer.app.models.User.photometric_series" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">photometric_series</span></span><a class="headerlink" href="#baselayer.app.models.User.photometric_series" title="Permalink to this definition"></a></dt>
 <dd><p>PhotometricSeries uploaded by this User.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.photometry">
-<span class="sig-name descname"><span class="pre">photometry</span></span><a class="headerlink" href="#baselayer.app.models.User.photometry" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">photometry</span></span><a class="headerlink" href="#baselayer.app.models.User.photometry" title="Permalink to this definition"></a></dt>
 <dd><p>Photometry uploaded by this User.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.preferences">
-<span class="sig-name descname"><span class="pre">preferences</span></span><a class="headerlink" href="#baselayer.app.models.User.preferences" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">preferences</span></span><a class="headerlink" href="#baselayer.app.models.User.preferences" title="Permalink to this definition"></a></dt>
 <dd><p>The user’s application settings.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.roles">
-<span class="sig-name descname"><span class="pre">roles</span></span><a class="headerlink" href="#baselayer.app.models.User.roles" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">roles</span></span><a class="headerlink" href="#baselayer.app.models.User.roles" title="Permalink to this definition"></a></dt>
 <dd><p>The roles assumed by this user.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.shifts">
-<span class="sig-name descname"><span class="pre">shifts</span></span><a class="headerlink" href="#baselayer.app.models.User.shifts" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">shifts</span></span><a class="headerlink" href="#baselayer.app.models.User.shifts" title="Permalink to this definition"></a></dt>
 <dd><p>The Shifts this User is a member of.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.source_notifications">
-<span class="sig-name descname"><span class="pre">source_notifications</span></span><a class="headerlink" href="#baselayer.app.models.User.source_notifications" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">source_notifications</span></span><a class="headerlink" href="#baselayer.app.models.User.source_notifications" title="Permalink to this definition"></a></dt>
 <dd><p>Source notifications the User has sent out.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.sources">
-<span class="sig-name descname"><span class="pre">sources</span></span><a class="headerlink" href="#baselayer.app.models.User.sources" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">sources</span></span><a class="headerlink" href="#baselayer.app.models.User.sources" title="Permalink to this definition"></a></dt>
 <dd><p>The Sources accessible to this User.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.spectra">
-<span class="sig-name descname"><span class="pre">spectra</span></span><a class="headerlink" href="#baselayer.app.models.User.spectra" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">spectra</span></span><a class="headerlink" href="#baselayer.app.models.User.spectra" title="Permalink to this definition"></a></dt>
 <dd><p>Spectra uploaded by this User.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.streams">
-<span class="sig-name descname"><span class="pre">streams</span></span><a class="headerlink" href="#baselayer.app.models.User.streams" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">streams</span></span><a class="headerlink" href="#baselayer.app.models.User.streams" title="Permalink to this definition"></a></dt>
 <dd><p>The Streams this User has access to.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.survey_efficiency_for_observation_plan">
-<span class="sig-name descname"><span class="pre">survey_efficiency_for_observation_plan</span></span><a class="headerlink" href="#baselayer.app.models.User.survey_efficiency_for_observation_plan" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">survey_efficiency_for_observation_plan</span></span><a class="headerlink" href="#baselayer.app.models.User.survey_efficiency_for_observation_plan" title="Permalink to this definition"></a></dt>
 <dd><p>The survey efficiency analyses on ObservationPlans this User has made.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.survey_efficiency_for_observations">
-<span class="sig-name descname"><span class="pre">survey_efficiency_for_observations</span></span><a class="headerlink" href="#baselayer.app.models.User.survey_efficiency_for_observations" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">survey_efficiency_for_observations</span></span><a class="headerlink" href="#baselayer.app.models.User.survey_efficiency_for_observations" title="Permalink to this definition"></a></dt>
 <dd><p>The survey efficiency analyses on Observations this User has made.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.User.to_dict">
-<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.User.to_dict" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.User.to_dict" title="Permalink to this definition"></a></dt>
 <dd><p>Serialize this object to a Python dictionary.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.tokens">
-<span class="sig-name descname"><span class="pre">tokens</span></span><a class="headerlink" href="#baselayer.app.models.User.tokens" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">tokens</span></span><a class="headerlink" href="#baselayer.app.models.User.tokens" title="Permalink to this definition"></a></dt>
 <dd><p>This user’s tokens.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.transaction_requests">
-<span class="sig-name descname"><span class="pre">transaction_requests</span></span><a class="headerlink" href="#baselayer.app.models.User.transaction_requests" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">transaction_requests</span></span><a class="headerlink" href="#baselayer.app.models.User.transaction_requests" title="Permalink to this definition"></a></dt>
 <dd><p>The FacilityTransactionRequests initiated by this User.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.transactions">
-<span class="sig-name descname"><span class="pre">transactions</span></span><a class="headerlink" href="#baselayer.app.models.User.transactions" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">transactions</span></span><a class="headerlink" href="#baselayer.app.models.User.transactions" title="Permalink to this definition"></a></dt>
 <dd><p>The FacilityTransactions initiated by this User.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.update">
-<span class="sig-name descname"><span class="pre">update</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.CustomUserAccessControl</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.User.update" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">update</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.CustomUserAccessControl</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.User.update" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.User.user_model">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">user_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.User.user_model" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">user_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.User.user_model" title="Permalink to this definition"></a></dt>
 <dd><p>The base model for User subclasses.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.username">
-<span class="sig-name descname"><span class="pre">username</span></span><a class="headerlink" href="#baselayer.app.models.User.username" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">username</span></span><a class="headerlink" href="#baselayer.app.models.User.username" title="Permalink to this definition"></a></dt>
 <dd><p>The user’s username.</p>
 </dd></dl>
 
@@ -2333,7 +2246,7 @@ authenticated.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.UserACL">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">UserACL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserACL" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">UserACL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserACL" title="Permalink to this definition"></a></dt>
 <dd><p>Join table mapping Users to ACLs</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
@@ -2391,37 +2304,37 @@ authenticated.</p>
 </table>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.UserACL.create">
-<span class="sig-name descname"><span class="pre">create</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.UserACL.create" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">create</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.UserACL.create" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.UserACL.created_at">
-<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#baselayer.app.models.UserACL.created_at" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#baselayer.app.models.UserACL.created_at" title="Permalink to this definition"></a></dt>
 <dd><p>UTC time of insertion of object’s row into the database.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.UserACL.id">
-<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#baselayer.app.models.UserACL.id" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#baselayer.app.models.UserACL.id" title="Permalink to this definition"></a></dt>
 <dd><p>Unique object identifier.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.UserACL.modified">
-<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#baselayer.app.models.UserACL.modified" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#baselayer.app.models.UserACL.modified" title="Permalink to this definition"></a></dt>
 <dd><p>UTC time the object’s row was last modified in the database.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.UserACL.read">
-<span class="sig-name descname"><span class="pre">read</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.UserACL.read" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">read</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.UserACL.read" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.UserAccessControl">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">UserAccessControl</span></span><a class="headerlink" href="#baselayer.app.models.UserAccessControl" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">UserAccessControl</span></span><a class="headerlink" href="#baselayer.app.models.UserAccessControl" title="Permalink to this definition"></a></dt>
 <dd><p>Logic for controlling user access to database records. Mapped classes
 can set their create, read, update, or delete attributes to subclasses of
 this class to ensure they are only accessed by users or tokens with the
@@ -2445,7 +2358,7 @@ requisite permissions.</p>
 </table>
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.UserAccessControl.check_cls_for_attributes">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_cls_for_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserAccessControl.check_cls_for_attributes" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_cls_for_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserAccessControl.check_cls_for_attributes" title="Permalink to this definition"></a></dt>
 <dd><p>Check that a target class has the specified attributes. If not,
 raise a TypeError.</p>
 <dl class="field-list">
@@ -2462,7 +2375,7 @@ raise a TypeError.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.UserAccessControl.query_accessible_rows">
-<span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserAccessControl.query_accessible_rows" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">query_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserAccessControl.query_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Query object that, when executed, returns the rows of a
 specified table that are accessible to a specified user or token.
 All query based functions will be deprecated when moving to
@@ -2490,7 +2403,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.UserAccessControl.select_accessible_rows">
-<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserAccessControl.select_accessible_rows" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">select_accessible_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserAccessControl.select_accessible_rows" title="Permalink to this definition"></a></dt>
 <dd><p>Construct a Select object that, when executed, returns the rows of a
 specified table that are accessible to a specified user or token.</p>
 <dl class="field-list">
@@ -2515,7 +2428,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.UserAccessControl.user_id_from_user_or_token">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">user_id_from_user_or_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserAccessControl.user_id_from_user_or_token" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">user_id_from_user_or_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserAccessControl.user_id_from_user_or_token" title="Permalink to this definition"></a></dt>
 <dd><p>Return the user_id associated with a specified User or Token object.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -2537,7 +2450,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.UserRole">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">UserRole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserRole" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">UserRole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserRole" title="Permalink to this definition"></a></dt>
 <dd><p>Join table mapping Users to Roles.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
@@ -2595,37 +2508,37 @@ the mapped class directly and returns mapped instances.</p>
 </table>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.UserRole.create">
-<span class="sig-name descname"><span class="pre">create</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.UserRole.create" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">create</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.UserRole.create" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.UserRole.created_at">
-<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#baselayer.app.models.UserRole.created_at" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">created_at</span></span><a class="headerlink" href="#baselayer.app.models.UserRole.created_at" title="Permalink to this definition"></a></dt>
 <dd><p>UTC time of insertion of object’s row into the database.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.UserRole.id">
-<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#baselayer.app.models.UserRole.id" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#baselayer.app.models.UserRole.id" title="Permalink to this definition"></a></dt>
 <dd><p>Unique object identifier.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.UserRole.modified">
-<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#baselayer.app.models.UserRole.modified" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">modified</span></span><a class="headerlink" href="#baselayer.app.models.UserRole.modified" title="Permalink to this definition"></a></dt>
 <dd><p>UTC time the object’s row was last modified in the database.</p>
 </dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.UserRole.read">
-<span class="sig-name descname"><span class="pre">read</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.UserRole.read" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">read</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.UserRole.read" title="Permalink to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="baselayer.app.models.bulk_verify">
-<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">bulk_verify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accessor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.bulk_verify" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">bulk_verify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accessor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.bulk_verify" title="Permalink to this definition"></a></dt>
 <dd><p>Vectorized permission check for a heterogeneous set of records. If an
 access leak is detected, it will be handled according to the <cite>security</cite>
 section of the application’s configuration.</p>
@@ -2647,7 +2560,7 @@ record type.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="baselayer.app.models.init_db">
-<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">init_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autoflush</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.init_db" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">init_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autoflush</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.init_db" title="Permalink to this definition"></a></dt>
 <dd><dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl>
@@ -2677,7 +2590,7 @@ Default 3600.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="baselayer.app.models.join_model">
-<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">join_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">join_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_1=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_2=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fk_1='id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fk_2='id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base=&lt;class</span> <span class="pre">'sqlalchemy.orm.decl_api.Base'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_name=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlaps=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.join_model" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">join_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">join_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_1=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_2=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fk_1='id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fk_2='id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base=&lt;class</span> <span class="pre">'sqlalchemy.orm.decl_api.Base'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_name=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlaps=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.join_model" title="Permalink to this definition"></a></dt>
 <dd><p>Helper function to create a join table for a many-to-many relationship.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -2721,7 +2634,7 @@ a string or list of strings.</p>
 
 </section>
 <section id="entity-relationship-diagram">
-<h2>Entity Relationship Diagram<a class="headerlink" href="#entity-relationship-diagram" title="Permalink to this heading">¶</a></h2>
+<h2>Entity Relationship Diagram<a class="headerlink" href="#entity-relationship-diagram" title="Permalink to this heading"></a></h2>
 <p>The following entity relationship diagram visualizes the structure of the
 SkyPortal database.</p>
 <a class="reference external image-reference" href="_images/erd.png"><img alt="Skyportal Entity Relationship Diagram" src="_images/erd.png" /></a>
@@ -2730,50 +2643,33 @@ SkyPortal database.</p>
 
 
            </div>
-           
           </div>
-          <footer>
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="migrations.html" class="btn btn-neutral float-right" title="Database migrations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="styling.html" class="btn btn-neutral float-left" title="Styling components" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="migrations.html" class="btn btn-neutral float-right" title="Database migrations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>
-        &#169; Copyright 2020–2023, The SkyPortal Team.
-
-    </p>
+    <p>&#169; Copyright 2020–2023, The SkyPortal Team.</p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
 
 </footer>
         </div>
       </div>
-
     </section>
-
   </div>
-  
-
-  <script type="text/javascript">
+  <script>
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
