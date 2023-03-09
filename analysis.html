@@ -75,6 +75,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#supernova-fitter-example">Supernova Fitter Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summaries">Summaries</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ai-summarization">AI Summarization</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="image_analysis.html">Image Analysis</a></li>
@@ -117,6 +121,7 @@
 <li><p><strong>Light curve fitting</strong> to template models</p></li>
 <li><p><strong>Redshift fitting</strong> on spectra</p></li>
 </ul>
+<p>(analysis_services)=</p>
 <section id="creating-a-new-analysis-service">
 <h3>Creating a new Analysis Service<a class="headerlink" href="#creating-a-new-analysis-service" title="Permalink to this heading"></a></h3>
 <p>The first step is to tell SkyPortal where your analysis service lives (URL/port), what data it expects, what type of analysis it performs, etc.</p>
@@ -286,6 +291,16 @@ The GET endpoints are:</p>
 <span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </pre></div>
 </div>
+</section>
+<section id="summaries">
+<h2>Summaries<a class="headerlink" href="#summaries" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="analysis_services">Analysis services</a> in SkyPortal can be declared as providing a summary of a source. When <code class="docutils literal notranslate"><span class="pre">is_summary</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> in an analysis service, the results of an analysis using this service will be stored in the <code class="docutils literal notranslate"><span class="pre">obj.summary</span></code> and <code class="docutils literal notranslate"><span class="pre">obj.summary_history</span></code> (akin to how redshifts are stored and updated). If the associated analysis is deleted then it will be removed from <code class="docutils literal notranslate"><span class="pre">obj.summary_history</span></code>. The frontend allows a user to see the summary history and edit the results of a summary analysis.</p>
+<section id="ai-summarization">
+<h3>AI Summarization<a class="headerlink" href="#ai-summarization" title="Permalink to this heading"></a></h3>
+<p>Following the dramatic quality, speed, and cost improvements of publicly assessable large language models (LLMs), the ability to programmatically summarize what is known about (many SkyPortal) sources became feasible. Shipped with SkyPortal is a microservice served by default at the endpoint <code class="docutils literal notranslate"><span class="pre">http://localhost:7003/summarize</span></code>. This service packages source information such as comments, redshift, and classification, and obtains a human-readable summary by wrapping the ChatGPT API from OpenAI. Summaries (AI or human generated) appear below the source name on the source page and can be returned as part of a query on <code class="docutils literal notranslate"><span class="pre">objs</span></code>.</p>
+<p>To use this service the SkyPortal config must set a valid API key from OpenAI to be shared with all users of the service or each individual user must supply their own API key and set the OpenAI integration to <code class="docutils literal notranslate"><span class="pre">active</span></code> in their user profiles. Specifics of the  ChatGPT interaction (such as model, model parameters, and prompt) are established in the site-wide config. See the <code class="docutils literal notranslate"><span class="pre">openai_analysis_service</span></code> section of <code class="docutils literal notranslate"><span class="pre">analysis_services</span></code> in the config file.</p>
+<p>Note: only data that the user who initiates a summary analysis has access to is shipped to the 3rd party. However summaries, like redshifts, are public on the source. So anyone who has access to the source can see the summaries. Users are advised to check for any sensitive information that might leak into summaries that other SkyPortal users might not know otherwise. If information has leaked in an AI summary they can delete the appropriate analysis and manually add a summary as they see fit.</p>
+</section>
 </section>
 </section>
 
