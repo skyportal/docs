@@ -1317,8 +1317,8 @@ statement cache, since Python dictionaries aren’t hashable:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># however this key is not hashable, will fail when used with</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># SQLAlchemy statement cache</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">some_cache</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="s2">&quot;some sql value&quot;</span><span class="p">}</span>
-<span class="x">Traceback (most recent call last): File &quot;&lt;stdin&gt;&quot;, line 1,</span>
-<span class="x">in &lt;module&gt; TypeError: unhashable type: &#39;dict&#39;</span>
+<span class="go">Traceback (most recent call last): File &quot;&lt;stdin&gt;&quot;, line 1,</span>
+<span class="go">in &lt;module&gt; TypeError: unhashable type: &#39;dict&#39;</span>
 </pre></div>
 </div>
 <p>The type may be made cacheable by assigning a sorted tuple of tuples
