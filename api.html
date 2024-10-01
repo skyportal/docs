@@ -1,14 +1,13 @@
 <!doctype html>
 <html>
   <head>
-    <title>Scalar API Reference</title>
+    <title>SkyPortal API Reference</title>
     <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1" />
   </head>
   <body>
-    <!-- Need a Custom Header? Check out this example https://codepen.io/scalarorg/pen/VwOXqam -->
     <script
         id="api-reference"
         type="application/json">
@@ -22,8 +21,13 @@
       "href": "https://skyportal.io/docs"
     },
     "title": "SkyPortal",
-    "version": "0.9.dev0+git20240929.a171eb4a"
+    "version": "0.9.dev0+git20241001.b6937284"
   },
+  "security": [
+    {
+      "token": []
+    }
+  ],
   "paths": {
     "/api/allocation/report/{instrument_id}": {
       "get": {
@@ -189,7 +193,7 @@
       },
       "put": {
         "summary": "Update an allocation",
-        "description": "Update an allocation on a robotic instrument",
+        "description": "<b>Permission(s) required:</b> <em>Manage allocations (or System admin)</em><br><br>Update an allocation on a robotic instrument",
         "tags": [
           "allocations"
         ],
@@ -235,7 +239,7 @@
       },
       "delete": {
         "summary": "Delete an allocation",
-        "description": "Delete allocation.",
+        "description": "<b>Permission(s) required:</b> <em>Manage allocations (or System admin)</em><br><br>Delete allocation.",
         "tags": [
           "allocations"
         ],
@@ -303,7 +307,7 @@
       },
       "post": {
         "summary": "Create a new allocation",
-        "description": "Post new allocation on a robotic instrument",
+        "description": "<b>Permission(s) required:</b> <em>Manage allocations (or System admin)</em><br><br>Post new allocation on a robotic instrument",
         "tags": [
           "allocations"
         ],
@@ -374,6 +378,90 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SingleDefaultAnalysis"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a default analysis",
+        "description": "Delete a default analysis",
+        "tags": [
+          "default analyses"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "analysis_service_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Analysis service ID"
+          },
+          {
+            "in": "path",
+            "name": "default_analysis_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Default analysis ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/analysis_service/{analysis_service_id}/default_analysis": {
+      "get": {
+        "summary": "Get all default analyses",
+        "description": "Retrieve all default analyses",
+        "tags": [
+          "default analyses"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "analysis_service_id",
+            "required": true,
+            "description": "Analysis service ID, if not provided, return all default analyses for all analysis services"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArrayOfDefaultAnalysiss"
                 }
               }
             }
@@ -478,90 +566,6 @@
             }
           }
         }
-      },
-      "delete": {
-        "summary": "Delete a default analysis",
-        "description": "Delete a default analysis",
-        "tags": [
-          "default analyses"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "analysis_service_id",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            },
-            "description": "Analysis service ID"
-          },
-          {
-            "in": "path",
-            "name": "default_analysis_id",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            },
-            "description": "Default analysis ID"
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/analysis_service/{analysis_service_id}/default_analysis": {
-      "get": {
-        "summary": "Get all default analyses",
-        "description": "Retrieve all default analyses",
-        "tags": [
-          "default analyses"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "analysis_service_id",
-            "required": true,
-            "description": "Analysis service ID, if not provided, return all default analyses for all analysis services"
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ArrayOfDefaultAnalysiss"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
       }
     },
     "/api/analysis_service/{analysis_service_id}": {
@@ -604,7 +608,7 @@
       },
       "delete": {
         "summary": "Delete an Analysis Service.",
-        "description": "Delete an Analysis Service.",
+        "description": "<b>Permission(s) required:</b> <em>Manage Analysis Services (or System admin)</em><br><br>Delete an Analysis Service.",
         "tags": [
           "analysis services"
         ],
@@ -663,7 +667,7 @@
     "/api/{analysis_resource_type}/{resource_id}/analysis_upload/{analysis_service_id}": {
       "post": {
         "summary": "Upload an upload_only analysis result",
-        "description": "Upload an upload_only analysis result",
+        "description": "<b>Permission(s) required:</b> <em>Run Analyses (or System admin)</em><br><br>Upload an upload_only analysis result",
         "tags": [
           "analysis"
         ],
@@ -856,7 +860,7 @@
       },
       "delete": {
         "summary": "Delete an Analysis.",
-        "description": "Delete an Analysis.",
+        "description": "<b>Permission(s) required:</b> <em>Run Analyses (or System admin)</em><br><br>Delete an Analysis.",
         "tags": [
           "analysis"
         ],
@@ -915,7 +919,7 @@
     "/api/{analysis_resource_type}/{resource_id}/analysis/{analysis_service_id}": {
       "post": {
         "summary": "Run an analysis",
-        "description": "Begin an analysis run",
+        "description": "<b>Permission(s) required:</b> <em>Run Analyses (or System admin)</em><br><br>Begin an analysis run",
         "tags": [
           "analysis"
         ],
@@ -1115,7 +1119,7 @@
       },
       "delete": {
         "summary": "Delete an Analysis.",
-        "description": "Delete an Analysis.",
+        "description": "<b>Permission(s) required:</b> <em>Run Analyses (or System admin)</em><br><br>Delete an Analysis.",
         "tags": [
           "analysis"
         ],
@@ -1174,7 +1178,7 @@
     "/api/{analysis_resource_type}/analysis/{resource_id}": {
       "post": {
         "summary": "Run an analysis",
-        "description": "Begin an analysis run",
+        "description": "<b>Permission(s) required:</b> <em>Run Analyses (or System admin)</em><br><br>Begin an analysis run",
         "tags": [
           "analysis"
         ],
@@ -1408,7 +1412,7 @@
       },
       "put": {
         "summary": "Update an assignment",
-        "description": "Update an assignment",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update an assignment",
         "tags": [
           "assignments"
         ],
@@ -1454,7 +1458,7 @@
       },
       "delete": {
         "summary": "Delete an assignment",
-        "description": "Delete assignment.",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Delete assignment.",
         "tags": [
           "assignments"
         ],
@@ -1511,7 +1515,7 @@
       },
       "post": {
         "summary": "Post a new assignment",
-        "description": "Post new target assignment to observing run",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Post new target assignment to observing run",
         "tags": [
           "assignments"
         ],
@@ -1650,7 +1654,7 @@
       },
       "delete": {
         "summary": "Delete candidate(s)",
-        "description": "Delete candidate(s)",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Delete candidate(s)",
         "tags": [
           "candidates"
         ],
@@ -2131,7 +2135,7 @@
       },
       "post": {
         "summary": "Create new candidate(s)",
-        "description": "Create new candidate(s) (one per filter).",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Create new candidate(s) (one per filter).",
         "tags": [
           "candidates"
         ],
@@ -2211,7 +2215,7 @@
     "/api/candidates/": {
       "post": {
         "summary": "Create new candidate(s)",
-        "description": "Create new candidate(s) (one per filter).",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Create new candidate(s) (one per filter).",
         "tags": [
           "candidates"
         ],
@@ -2291,7 +2295,7 @@
     "/api/candidates/{obj_id}/{filter_id}": {
       "delete": {
         "summary": "Delete candidate(s)",
-        "description": "Delete candidate(s)",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Delete candidate(s)",
         "tags": [
           "candidates"
         ],
@@ -2675,7 +2679,7 @@
       },
       "put": {
         "summary": "Update a classification",
-        "description": "Update a classification",
+        "description": "<b>Permission(s) required:</b> <em>Classify (or System admin)</em><br><br>Update a classification",
         "tags": [
           "classifications"
         ],
@@ -2737,7 +2741,7 @@
       },
       "delete": {
         "summary": "Delete a classification",
-        "description": "Delete a classification",
+        "description": "<b>Permission(s) required:</b> <em>Classify (or System admin)</em><br><br>Delete a classification",
         "tags": [
           "classifications"
         ],
@@ -2880,7 +2884,7 @@
       },
       "post": {
         "summary": "Post a classification",
-        "description": "Post a classification",
+        "description": "<b>Permission(s) required:</b> <em>Classify (or System admin)</em><br><br>Post a classification",
         "tags": [
           "classifications"
         ],
@@ -3219,7 +3223,7 @@
       },
       "delete": {
         "summary": "Delete a default gcn tag",
-        "description": "Delete a default gcn tag",
+        "description": "<b>Permission(s) required:</b> <em>Manage GCNs (or System admin)</em><br><br>Delete a default gcn tag",
         "tags": [
           "gcn event default tags"
         ],
@@ -3276,7 +3280,7 @@
       },
       "post": {
         "summary": "Create a default gcn tag",
-        "description": "Create default gcn tag.",
+        "description": "<b>Permission(s) required:</b> <em>Manage GCNs (or System admin)</em><br><br>Create default gcn tag.",
         "tags": [
           "gcn event default tags"
         ],
@@ -3360,7 +3364,7 @@
       },
       "delete": {
         "summary": "Delete a default observation plan request.",
-        "description": "Delete a default observation plan",
+        "description": "<b>Permission(s) required:</b> <em>Manage observation plans (or System admin)</em><br><br>Delete a default observation plan",
         "tags": [
           "filters"
         ],
@@ -3417,7 +3421,7 @@
       },
       "post": {
         "summary": "Create default observation plan requests.",
-        "description": "Create default observation plan requests.",
+        "description": "<b>Permission(s) required:</b> <em>Manage observation plans (or System admin)</em><br><br>Create default observation plan requests.",
         "tags": [
           "default observation plan"
         ],
@@ -3698,7 +3702,7 @@
       },
       "patch": {
         "summary": "Update a filter",
-        "description": "Update filter name",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update filter name",
         "tags": [
           "filters"
         ],
@@ -3744,7 +3748,7 @@
       },
       "delete": {
         "summary": "Delete a filter",
-        "description": "Delete a filter",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Delete a filter",
         "tags": [
           "filters"
         ],
@@ -3801,7 +3805,7 @@
       },
       "post": {
         "summary": "Create a new filter",
-        "description": "POST a new filter.",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>POST a new filter.",
         "tags": [
           "filters"
         ],
@@ -3848,7 +3852,7 @@
     "/api/followup_request/{followup_request_id}/comment": {
       "put": {
         "summary": "Update a follow-up request comment",
-        "description": "Update a follow-up request comment",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update a follow-up request comment",
         "tags": [
           "followup requests"
         ],
@@ -4206,7 +4210,7 @@
     "/api/followup_request": {
       "post": {
         "summary": "Post new followup request",
-        "description": "Submit follow-up request.",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Submit follow-up request.",
         "tags": [
           "followup requests"
         ],
@@ -4253,7 +4257,7 @@
     "/api/followup_request/{request_id}": {
       "put": {
         "summary": "Update a follow-up request",
-        "description": "Update a follow-up request",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update a follow-up request",
         "tags": [
           "followup requests"
         ],
@@ -4299,7 +4303,7 @@
       },
       "delete": {
         "summary": "Delete a follow-up request",
-        "description": "Delete follow-up request.",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Delete follow-up request.",
         "tags": [
           "followup requests"
         ],
@@ -4359,7 +4363,7 @@
     "/api/galaxy_catalog/glade": {
       "post": {
         "summary": "Upload galaxies from GLADE+ catalog",
-        "description": "Upload galaxies from GLADE+ catalog. If no file_name or file_url is provided, will look for the GLADE+ catalog in the data directory. If it can't be found, it will download it.",
+        "description": "<b>Permission(s) required:</b> <em>System Admin (or System admin)</em><br><br>Upload galaxies from GLADE+ catalog. If no file_name or file_url is provided, will look for the GLADE+ catalog in the data directory. If it can't be found, it will download it.",
         "tags": [
           "galaxies"
         ],
@@ -4407,7 +4411,7 @@
     "/api/galaxy_catalog/ascii": {
       "post": {
         "summary": "Upload galaxies from ASCII file",
-        "description": "Upload galaxies from ASCII file",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Upload galaxies from ASCII file",
         "tags": [
           "galaxies"
         ],
@@ -4659,7 +4663,7 @@
       },
       "delete": {
         "summary": "Delete a galaxy catalog",
-        "description": "Delete a galaxy catalog",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Delete a galaxy catalog",
         "tags": [
           "galaxies"
         ],
@@ -4698,7 +4702,7 @@
     "/api/galaxy_catalog": {
       "post": {
         "summary": "Ingest a Galaxy catalog",
-        "description": "Ingest a Galaxy catalog",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Ingest a Galaxy catalog",
         "tags": [
           "galaxies"
         ],
@@ -4980,7 +4984,7 @@
       },
       "put": {
         "summary": "Update a comment",
-        "description": "Update a comment",
+        "description": "<b>Permission(s) required:</b> <em>Comment (or System admin)</em><br><br>Update a comment",
         "tags": [
           "comments"
         ],
@@ -5072,7 +5076,7 @@
       },
       "delete": {
         "summary": "Delete a comment",
-        "description": "Delete a comment",
+        "description": "<b>Permission(s) required:</b> <em>Comment (or System admin)</em><br><br>Delete a comment",
         "tags": [
           "comments"
         ],
@@ -5199,7 +5203,7 @@
       },
       "post": {
         "summary": "Post a comment",
-        "description": "Post a new comment. If sent through the API (authenticated with a token), it will be flagged as a bot comment.",
+        "description": "<b>Permission(s) required:</b> <em>Comment (or System admin)</em><br><br>Post a new comment. If sent through the API (authenticated with a token), it will be flagged as a bot comment.",
         "tags": [
           "comments"
         ],
@@ -5306,7 +5310,7 @@
       },
       "put": {
         "summary": "Update a comment",
-        "description": "Update a comment",
+        "description": "<b>Permission(s) required:</b> <em>Comment (or System admin)</em><br><br>Update a comment",
         "tags": [
           "comments"
         ],
@@ -5398,7 +5402,7 @@
       },
       "delete": {
         "summary": "Delete a comment",
-        "description": "Delete a comment",
+        "description": "<b>Permission(s) required:</b> <em>Comment (or System admin)</em><br><br>Delete a comment",
         "tags": [
           "comments"
         ],
@@ -5451,7 +5455,7 @@
     "/api/{associated_resource_type}/{resource_id}/comments/{ignore_args}": {
       "post": {
         "summary": "Post a comment",
-        "description": "Post a new comment. If sent through the API (authenticated with a token), it will be flagged as a bot comment.",
+        "description": "<b>Permission(s) required:</b> <em>Comment (or System admin)</em><br><br>Post a new comment. If sent through the API (authenticated with a token), it will be flagged as a bot comment.",
         "tags": [
           "comments"
         ],
@@ -5922,95 +5926,9 @@
           }
         }
       },
-      "post": {
-        "summary": "Post a reminder",
-        "description": "Post a reminder",
-        "tags": [
-          "reminders"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "associated_resource_type",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "source",
-                "spectra",
-                "gcn_event",
-                "shift"
-              ]
-            },
-            "description": "What underlying data the reminder is on:\n\"sources\" or \"spectra\" or \"gcn_event\" or \"shift\".\n"
-          },
-          {
-            "in": "path",
-            "name": "resource_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The ID of the source or spectrum\nthat the reminder is posted to.\nThis would be a string for a source ID\nor an integer for a spectrum.\n"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "text": {
-                    "type": "string"
-                  },
-                  "group_ids": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer"
-                    },
-                    "description": "List of group IDs corresponding to which groups should be\nable to view reminder. Defaults to all of requesting user's\ngroups.\n"
-                  }
-                },
-                "required": [
-                  "text"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/Success"
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "data": {
-                          "type": "object",
-                          "properties": {
-                            "reminder_id": {
-                              "type": "integer",
-                              "description": "New reminder ID"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      },
       "patch": {
         "summary": "Update a reminder",
-        "description": "Update a reminder",
+        "description": "<b>Permission(s) required:</b> <em>Reminder (or System admin)</em><br><br>Update a reminder",
         "tags": [
           "reminders"
         ],
@@ -6096,7 +6014,7 @@
       },
       "delete": {
         "summary": "Delete a reminder",
-        "description": "Delete a reminder",
+        "description": "<b>Permission(s) required:</b> <em>Reminder (or System admin)</em><br><br>Delete a reminder",
         "tags": [
           "reminders"
         ],
@@ -6199,6 +6117,92 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Post a reminder",
+        "description": "<b>Permission(s) required:</b> <em>Reminder (or System admin)</em><br><br>Post a reminder",
+        "tags": [
+          "reminders"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "associated_resource_type",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "source",
+                "spectra",
+                "gcn_event",
+                "shift"
+              ]
+            },
+            "description": "What underlying data the reminder is on:\n\"sources\" or \"spectra\" or \"gcn_event\" or \"shift\".\n"
+          },
+          {
+            "in": "path",
+            "name": "resource_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the source or spectrum\nthat the reminder is posted to.\nThis would be a string for a source ID\nor an integer for a spectrum.\n"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  },
+                  "group_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "List of group IDs corresponding to which groups should be\nable to view reminder. Defaults to all of requesting user's\ngroups.\n"
+                  }
+                },
+                "required": [
+                  "text"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "reminder_id": {
+                              "type": "integer",
+                              "description": "New reminder ID"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -6559,7 +6563,7 @@
     "/api/gcn_event/{dateobs}/gracedb": {
       "post": {
         "summary": "Retrieve GW Event data from GraceDB",
-        "description": "Scrape data of a GCN Event from GraceDB",
+        "description": "<b>Permission(s) required:</b> <em>Manage GCNs (or System admin)</em><br><br>Scrape data of a GCN Event from GraceDB",
         "tags": [
           "gcn events"
         ],
@@ -6855,7 +6859,7 @@
     "/api/gcn_event/{dateobs}/tach": {
       "post": {
         "summary": "Retrieve GCN Event aliases from TACH",
-        "description": "Scrape aliases of a GCN Event from GCNs notice/circulars",
+        "description": "<b>Permission(s) required:</b> <em>Manage GCNs (or System admin)</em><br><br>Scrape aliases of a GCN Event from GCNs notice/circulars",
         "tags": [
           "gcn events"
         ],
@@ -7340,7 +7344,7 @@
         }
       }
     },
-    "/api/gcn_event/tags/{dateobs}": {
+    "/api/gcn_event/tags": {
       "get": {
         "summary": "Get all GCN Event tags",
         "description": "Get all GCN Event tags",
@@ -7367,7 +7371,9 @@
             }
           }
         }
-      },
+      }
+    },
+    "/api/gcn_event/tags/{dateobs}": {
       "post": {
         "summary": "Post a GCN Event tag",
         "description": "Post a GCN Event tag",
@@ -7543,7 +7549,7 @@
     "/api/gcn_event/{dateobs}": {
       "delete": {
         "summary": "Delete a GCN Event",
-        "description": "Delete a GCN event",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Delete a GCN event",
         "tags": [
           "gcn events"
         ],
@@ -7740,7 +7746,7 @@
       },
       "post": {
         "summary": "Confirm or reject a source in a gcn",
-        "description": "Confirm or reject a source in a gcn",
+        "description": "<b>Permission(s) required:</b> <em>Manage GCNs (or System admin)</em><br><br>Confirm or reject a source in a gcn",
         "tags": [
           "gcn events",
           "sources"
@@ -7840,7 +7846,7 @@
       },
       "patch": {
         "summary": "Update the confirmed/rejected status of a source in a GCN",
-        "description": "Update the confirmed or rejected status of a source in a GCN",
+        "description": "<b>Permission(s) required:</b> <em>Manage GCNs (or System admin)</em><br><br>Update the confirmed or rejected status of a source in a GCN",
         "tags": [
           "gcn events",
           "sources"
@@ -7922,7 +7928,7 @@
       },
       "delete": {
         "summary": "Remove the confirmed/rejected status of a source in a GCN",
-        "description": "Deletes the confirmed or rejected status of source in a GCN.\nIts status can be considered as 'undefined'.\n",
+        "description": "<b>Permission(s) required:</b> <em>Manage GCNs (or System admin)</em><br><br>Deletes the confirmed or rejected status of source in a GCN.\nIts status can be considered as 'undefined'.\n",
         "tags": [
           "gcn events",
           "sources"
@@ -8267,7 +8273,7 @@
     "/api/healpix": {
       "get": {
         "summary": "Get a count of sources w/ and w/o Healpix values",
-        "description": "find the number of sources with and without a Healpix value",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>find the number of sources with and without a Healpix value",
         "tags": [
           "sources"
         ],
@@ -8314,7 +8320,7 @@
       },
       "post": {
         "summary": "Calculate Healpix values for sources w/o them",
-        "description": "calculate healpix values for a batch of sources without a Healpix value",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>calculate healpix values for a batch of sources without a Healpix value",
         "tags": [
           "sources"
         ],
@@ -8386,7 +8392,7 @@
     "/api/comment_attachment": {
       "get": {
         "summary": "Get counts of comments w/ and w/o attachment_bytes",
-        "description": "find the number of comments with and without attachment_bytes",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>find the number of comments with and without attachment_bytes",
         "tags": [
           "comments"
         ],
@@ -8433,7 +8439,7 @@
       },
       "post": {
         "summary": "Create attachments for comments with attachment_bytes",
-        "description": "create attachments for a batch of comments with attachment_bytes",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>create attachments for a batch of comments with attachment_bytes",
         "tags": [
           "comments"
         ],
@@ -8543,7 +8549,7 @@
       },
       "post": {
         "summary": "Create new phot stats for a source",
-        "description": "create a new PhotStat to be associated with the obj_id.",
+        "description": "<b>Permission(s) required:</b> <em>system admin (or System admin)</em><br><br>create a new PhotStat to be associated with the obj_id.",
         "tags": [
           "photometry"
         ],
@@ -8581,7 +8587,7 @@
       },
       "put": {
         "summary": "Update phot stats for a source",
-        "description": "create or update the PhotStat associated with the obj_id.",
+        "description": "<b>Permission(s) required:</b> <em>system admin (or System admin)</em><br><br>create or update the PhotStat associated with the obj_id.",
         "tags": [
           "photometry"
         ],
@@ -8619,7 +8625,7 @@
       },
       "delete": {
         "summary": "Delete phot stats of a source",
-        "description": "delete the PhotStat associated with the obj_id.",
+        "description": "<b>Permission(s) required:</b> <em>system admin (or System admin)</em><br><br>delete the PhotStat associated with the obj_id.",
         "tags": [
           "photometry"
         ],
@@ -8659,7 +8665,7 @@
     "/api/phot_stats": {
       "get": {
         "summary": "Get counts of sources w/ and w/o PhotStats",
-        "description": "find the number of sources with and without a PhotStat object",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>find the number of sources with and without a PhotStat object",
         "tags": [
           "photometry"
         ],
@@ -8765,7 +8771,7 @@
       },
       "post": {
         "summary": "Calculate phot stats for a batch of sources",
-        "description": "calculate photometric stats for a batch of sources without a PhotStat",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>calculate photometric stats for a batch of sources without a PhotStat",
         "tags": [
           "photometry"
         ],
@@ -8853,7 +8859,7 @@
       },
       "patch": {
         "summary": "Recalculate phot stats for a batch of sources",
-        "description": "manually recalculate the photometric stats for a batch of sources",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>manually recalculate the photometric stats for a batch of sources",
         "tags": [
           "photometry"
         ],
@@ -9253,7 +9259,7 @@
     "/api/groups/{group_id}/streams": {
       "post": {
         "summary": "Add alert stream to group",
-        "description": "Add alert stream access to group",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Add alert stream access to group",
         "tags": [
           "groups",
           "streams"
@@ -9323,7 +9329,7 @@
     "/api/groups/{group_id}/streams/{stream_id}": {
       "delete": {
         "summary": "Delete alert stream from group",
-        "description": "Delete an alert stream from group",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Delete an alert stream from group",
         "tags": [
           "groups",
           "streams"
@@ -9362,7 +9368,7 @@
     "/api/groups/{group_id}/users": {
       "post": {
         "summary": "Add a group user",
-        "description": "Add a group user",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Add a group user",
         "tags": [
           "groups",
           "users"
@@ -9442,7 +9448,7 @@
       },
       "patch": {
         "summary": "Update a group user",
-        "description": "Update a group user's admin or save access status",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update a group user's admin or save access status",
         "tags": [
           "groups",
           "users"
@@ -9537,7 +9543,7 @@
     "/api/groups/{group_id}/usersFromGroups": {
       "post": {
         "summary": "Add users from other group(s)",
-        "description": "Add users from other group(s) to specified group",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Add users from other group(s) to specified group",
         "tags": [
           "groups",
           "users"
@@ -9662,7 +9668,7 @@
       },
       "put": {
         "summary": "Update a group",
-        "description": "Update a group",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update a group",
         "tags": [
           "groups"
         ],
@@ -9708,7 +9714,7 @@
       },
       "delete": {
         "summary": "Delete a group",
-        "description": "Delete a group",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Delete a group",
         "tags": [
           "groups"
         ],
@@ -9818,7 +9824,7 @@
       },
       "post": {
         "summary": "Create a new group",
-        "description": "Create a new group",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Create a new group",
         "tags": [
           "groups"
         ],
@@ -9918,7 +9924,7 @@
       },
       "patch": {
         "summary": "Update an MMA Detector",
-        "description": "Update a Multimessenger Astronomical Detector (MMADetector)",
+        "description": "<b>Permission(s) required:</b> <em>Manage allocations (or System admin)</em><br><br>Update a Multimessenger Astronomical Detector (MMADetector)",
         "tags": [
           "mma detectors"
         ],
@@ -9964,7 +9970,7 @@
       },
       "delete": {
         "summary": "Delete an MMA Detector",
-        "description": "Delete a Multimessenger Astronomical Detector (MMADetector)",
+        "description": "<b>Permission(s) required:</b> <em>Manage allocations (or System admin)</em><br><br>Delete a Multimessenger Astronomical Detector (MMADetector)",
         "tags": [
           "mma detectors"
         ],
@@ -10040,7 +10046,7 @@
       },
       "post": {
         "summary": "Create an MMA Detector",
-        "description": "Create a Multimessenger Astronomical Detector (MMADetector)",
+        "description": "<b>Permission(s) required:</b> <em>Manage allocations (or System admin)</em><br><br>Create a Multimessenger Astronomical Detector (MMADetector)",
         "tags": [
           "mma detectors"
         ],
@@ -10133,7 +10139,7 @@
       },
       "patch": {
         "summary": "Update an MMA Detector Spectrum",
-        "description": "Update mmadetector spectrum",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update mmadetector spectrum",
         "tags": [
           "mma detector spectra"
         ],
@@ -10179,7 +10185,7 @@
       },
       "delete": {
         "summary": "Delete an MMA Detector Spectrum",
-        "description": "Delete an mmadetector spectrum",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Delete an mmadetector spectrum",
         "tags": [
           "mma detector spectra"
         ],
@@ -10267,7 +10273,7 @@
       },
       "post": {
         "summary": "Upload an MMA Detector Spectrum",
-        "description": "Upload a Multimessenger Astronomical Detector (MMADetector) spectrum",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Upload a Multimessenger Astronomical Detector (MMADetector) spectrum",
         "tags": [
           "mma detector spectra"
         ],
@@ -10360,7 +10366,7 @@
       },
       "patch": {
         "summary": "Update an MMA Detector Time Interval",
-        "description": "Update mmadetector time_interval",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update mmadetector time_interval",
         "tags": [
           "mma detector time intervals"
         ],
@@ -10406,7 +10412,7 @@
       },
       "delete": {
         "summary": "Delete an MMA Detector Time Interval",
-        "description": "Delete an mmadetector time_interval",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Delete an mmadetector time_interval",
         "tags": [
           "mma detector time intervals"
         ],
@@ -10493,7 +10499,7 @@
       },
       "post": {
         "summary": "Upload an MMA Detector Time Interval",
-        "description": "Upload a Multimessenger Astronomical Detector (MMADetector) time_interval(s)",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Upload a Multimessenger Astronomical Detector (MMADetector) time_interval(s)",
         "tags": [
           "mma detector time intervals"
         ],
@@ -10811,7 +10817,7 @@
       },
       "patch": {
         "summary": "Update a group admission request status",
-        "description": "Update a group admission request's status",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update a group admission request's status",
         "tags": [
           "groups",
           "users"
@@ -10858,7 +10864,7 @@
       },
       "delete": {
         "summary": "Delete a group admission request",
-        "description": "Delete a group admission request",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Delete a group admission request",
         "tags": [
           "groups",
           "users"
@@ -10988,7 +10994,7 @@
     "/api/instrument/{instrument_id}/fields": {
       "delete": {
         "summary": "Delete an instrument's fields",
-        "description": "Delete fields associated with an instrument",
+        "description": "<b>Permission(s) required:</b> <em>Delete instrument (or System admin)</em><br><br>Delete fields associated with an instrument",
         "tags": [
           "instruments"
         ],
@@ -11113,7 +11119,7 @@
     "/api/instrument/{allocation_id}/external_api": {
       "get": {
         "summary": "Get instrument logs from external API",
-        "description": "Retrieve logs for a specific allocation from the instrument's external API",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Retrieve logs for a specific allocation from the instrument's external API",
         "tags": [
           "instruments"
         ],
@@ -11171,7 +11177,7 @@
     "/api/instrument/{instrument_id}/status": {
       "put": {
         "summary": "Update instrument status",
-        "description": "Update the status of an instrument",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update the status of an instrument",
         "tags": [
           "instruments"
         ],
@@ -11317,7 +11323,7 @@
       },
       "put": {
         "summary": "Update an instrument",
-        "description": "Update instrument",
+        "description": "<b>Permission(s) required:</b> <em>Manage instruments (or System admin)</em><br><br>Update instrument",
         "tags": [
           "instruments"
         ],
@@ -11363,7 +11369,7 @@
       },
       "delete": {
         "summary": "Delete an instrument",
-        "description": "Delete an instrument",
+        "description": "<b>Permission(s) required:</b> <em>Delete instrument (or System admin)</em><br><br>Delete an instrument",
         "tags": [
           "instruments"
         ],
@@ -11516,7 +11522,7 @@
       },
       "post": {
         "summary": "Add an instrument",
-        "description": "Add a new instrument",
+        "description": "<b>Permission(s) required:</b> <em>Manage instruments (or System admin)</em><br><br>Add a new instrument",
         "tags": [
           "instruments"
         ],
@@ -11993,7 +11999,7 @@
     "/api/invitations": {
       "get": {
         "summary": "Retrieve invitations",
-        "description": "Retrieve invitations",
+        "description": "<b>Permission(s) required:</b> <em>Manage users (or System admin)</em><br><br>Retrieve invitations",
         "tags": [
           "invitations"
         ],
@@ -12098,7 +12104,7 @@
       },
       "post": {
         "summary": "Invite a new user",
-        "description": "Invite a new user",
+        "description": "<b>Permission(s) required:</b> <em>Manage users (or System admin)</em><br><br>Invite a new user",
         "tags": [
           "invitations"
         ],
@@ -12190,7 +12196,7 @@
     "/api/invitations/{invitation_id}": {
       "patch": {
         "summary": "Update a pending invitation",
-        "description": "Update a pending invitation",
+        "description": "<b>Permission(s) required:</b> <em>Manage users (or System admin)</em><br><br>Update a pending invitation",
         "tags": [
           "invitations"
         ],
@@ -12238,7 +12244,7 @@
       },
       "delete": {
         "summary": "Delete an invitation",
-        "description": "Delete an invitation",
+        "description": "<b>Permission(s) required:</b> <em>Manage users (or System admin)</em><br><br>Delete an invitation",
         "tags": [
           "invitations"
         ],
@@ -12444,7 +12450,7 @@
       },
       "post": {
         "summary": "Ingest a set of ExecutedObservations",
-        "description": "Ingest a set of ExecutedObservations",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Ingest a set of ExecutedObservations",
         "tags": [
           "observations"
         ],
@@ -12521,7 +12527,7 @@
     "/api/observation/ascii": {
       "post": {
         "summary": "Upload observation from ASCII file",
-        "description": "Upload observation from ASCII file",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Upload observation from ASCII file",
         "tags": [
           "observations"
         ],
@@ -12735,7 +12741,10 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {}
+        ]
       }
     },
     "/api/observation/simsurvey/{survey_efficiency_analysis_id}/plot": {
@@ -12898,7 +12907,7 @@
     "/api/observation/external_api/{allocation_id}": {
       "get": {
         "summary": "Retrieve queued observations from external API",
-        "description": "Retrieve queued observations from external API",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Retrieve queued observations from external API",
         "tags": [
           "observations"
         ],
@@ -12963,7 +12972,7 @@
       },
       "delete": {
         "summary": "Delete queued observations from external API",
-        "description": "Delete queued observations from external API",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Delete queued observations from external API",
         "tags": [
           "observations"
         ],
@@ -13012,7 +13021,7 @@
     "/api/observation/external_api": {
       "post": {
         "summary": "Retrieve observations from external API",
-        "description": "Retrieve observations from external API",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Retrieve observations from external API",
         "tags": [
           "observations"
         ],
@@ -13126,7 +13135,7 @@
       },
       "put": {
         "summary": "Update an observing run",
-        "description": "Update observing run",
+        "description": "<b>Permission(s) required:</b> <em>Manage observing runs (or System admin)</em><br><br>Update observing run",
         "tags": [
           "observing runs"
         ],
@@ -13238,7 +13247,7 @@
       },
       "post": {
         "summary": "Create an observing run",
-        "description": "Add a new observing run",
+        "description": "<b>Permission(s) required:</b> <em>Manage observing runs (or System admin)</em><br><br>Add a new observing run",
         "tags": [
           "observing runs"
         ],
@@ -13294,7 +13303,7 @@
     "/api/observation_plan/manual": {
       "post": {
         "summary": "Submit manual observation plan request.",
-        "description": "Submit manual observation plan.",
+        "description": "<b>Permission(s) required:</b> <em>Manage observation plans (or System admin)</em><br><br>Submit manual observation plan.",
         "tags": [
           "observation plan requests"
         ],
@@ -13455,7 +13464,7 @@
     "/api/observation_plan/{observation_plan_request_id}": {
       "delete": {
         "summary": "Delete observation plan request.",
-        "description": "Delete observation plan.",
+        "description": "<b>Permission(s) required:</b> <em>Manage observation plans (or System admin)</em><br><br>Delete observation plan.",
         "tags": [
           "observation plan requests"
         ],
@@ -13485,7 +13494,7 @@
     "/api/observation_plan/{observation_plan_request_id}/treasuremap": {
       "post": {
         "summary": "Submit observation plan request to TreasureMap.",
-        "description": "Submit the observation plan to treasuremap.space",
+        "description": "<b>Permission(s) required:</b> <em>Manage observation plans (or System admin)</em><br><br>Submit the observation plan to treasuremap.space",
         "tags": [
           "observation plan requests"
         ],
@@ -13522,7 +13531,7 @@
       },
       "delete": {
         "summary": "Remove observation plan from treasuremap.space.",
-        "description": "Remove observation plan from treasuremap.space.",
+        "description": "<b>Permission(s) required:</b> <em>Manage observation plans (or System admin)</em><br><br>Remove observation plan from treasuremap.space.",
         "tags": [
           "observation plan requests"
         ],
@@ -13582,7 +13591,7 @@
     "/api/observation_plan/{observation_plan_request_id}/queue": {
       "post": {
         "summary": "Submit observation plan request to telescope.",
-        "description": "Submit an observation plan.",
+        "description": "<b>Permission(s) required:</b> <em>Manage observation plans (or System admin)</em><br><br>Submit an observation plan.",
         "tags": [
           "observation plan requests"
         ],
@@ -13610,7 +13619,7 @@
       },
       "delete": {
         "summary": "Remove observation plan request from telescope queue.",
-        "description": "Remove an observation plan from the queue.",
+        "description": "<b>Permission(s) required:</b> <em>Manage observation plans (or System admin)</em><br><br>Remove an observation plan from the queue.",
         "tags": [
           "observation plan requests"
         ],
@@ -13832,7 +13841,10 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {}
+        ]
       }
     },
     "/api/observation_plan/{observation_plan_request_id}/geojson": {
@@ -13898,7 +13910,7 @@
     "/api/observation_plan/{observation_plan_request_id}/observing_run": {
       "post": {
         "summary": "Create observing run from observation plan.",
-        "description": "Submit the fields in the observation plan to an observing run",
+        "description": "<b>Permission(s) required:</b> <em>Manage observation plans (or System admin)</em><br><br>Submit the fields in the observation plan to an observing run",
         "tags": [
           "observation plan requests"
         ],
@@ -13938,7 +13950,7 @@
     "/api/observation_plan/{observation_plan_request_id}/fields": {
       "delete": {
         "summary": "Delete fields from the observation plan.",
-        "description": "Delete selected fields from the observation plan.",
+        "description": "<b>Permission(s) required:</b> <em>Manage observation plans (or System admin)</em><br><br>Delete selected fields from the observation plan.",
         "tags": [
           "observation plan requests"
         ],
@@ -14098,7 +14110,7 @@
       },
       "patch": {
         "summary": "Update photometry",
-        "description": "Update photometry",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update photometry",
         "tags": [
           "photometry"
         ],
@@ -14151,7 +14163,7 @@
       },
       "delete": {
         "summary": "Delete photometry",
-        "description": "Delete photometry",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Delete photometry",
         "tags": [
           "photometry"
         ],
@@ -14190,7 +14202,7 @@
     "/api/photometry": {
       "put": {
         "summary": "Update and/or upload photometry",
-        "description": "Update and/or upload photometry, resolving potential duplicates",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update and/or upload photometry, resolving potential duplicates",
         "tags": [
           "photometry"
         ],
@@ -14280,7 +14292,7 @@
     "/api/photometry/{photometry_id}/validation": {
       "post": {
         "summary": "Validate/Reject a photometry point",
-        "description": "Validate or reject a photometric point based on data quality (e.g. examining quality of the image and/or reduction)",
+        "description": "<b>Permission(s) required:</b> <em>Manage sources (or System admin)</em><br><br>Validate or reject a photometric point based on data quality (e.g. examining quality of the image and/or reduction)",
         "tags": [
           "photometry"
         ],
@@ -14354,7 +14366,7 @@
       },
       "patch": {
         "summary": "Update the validated/rejected status of a photometry point",
-        "description": "Update the validated or rejected status of a source in a GCN",
+        "description": "<b>Permission(s) required:</b> <em>Manage sources (or System admin)</em><br><br>Update the validated or rejected status of a source in a GCN",
         "tags": [
           "photometry"
         ],
@@ -14427,7 +14439,7 @@
       },
       "delete": {
         "summary": "Delete the validated/rejected status of a photometry point",
-        "description": "Deletes the validated or rejected status of a photometric point.\nIts status can be considered as 'undefined'.\n",
+        "description": "<b>Permission(s) required:</b> <em>Manage sources (or System admin)</em><br><br>Deletes the validated or rejected status of a photometric point.\nIts status can be considered as 'undefined'.\n",
         "tags": [
           "photometry"
         ],
@@ -14483,51 +14495,11 @@
     },
     "/api/photometric_series/{photometric_series_id}": {
       "get": {
-        "summary": "Retrieve a photometric series",
-        "description": "Retrieve a photometric series",
-        "tags": [
-          "photometric series"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "photometric_series_id",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "dataFormat",
-            "required": false,
-            "default": "json",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "json",
-                "hdf5",
-                "none"
-              ]
-            },
-            "description": "Format of the data to return. If `none`, the data will not be returned.\nIf `hdf5`, the data will be returned as a bytestream in HDF5 format.\n(to see how to unpack this data format, look at `photometric_series.md`)\nIf `json`, the data will be returned as a JSON object, where each key\nis a list of values for that column.\n"
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SinglePhotometricSeries"
-                }
-              }
-            }
-          }
-        }
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>"
       },
       "delete": {
         "summary": "Delete a photometric series",
-        "description": "Delete a photometric series",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Delete a photometric series",
         "tags": [
           "photometric series"
         ],
@@ -15192,7 +15164,7 @@
     "/api/sharing": {
       "post": {
         "summary": "Share data with additional groups/users",
-        "description": "Share data with additional groups/users",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Share data with additional groups/users",
         "tags": [
           "data sharing",
           "photometry",
@@ -15342,7 +15314,7 @@
       },
       "patch": {
         "summary": "Update a shift",
-        "description": "Update a shift",
+        "description": "<b>Permission(s) required:</b> <em>Manage shifts (or System admin)</em><br><br>Update a shift",
         "tags": [
           "shifts"
         ],
@@ -15388,7 +15360,7 @@
       },
       "delete": {
         "summary": "Delete a shift",
-        "description": "Delete a shift",
+        "description": "<b>Permission(s) required:</b> <em>Manage shifts (or System admin)</em><br><br>Delete a shift",
         "tags": [
           "shifts"
         ],
@@ -15427,7 +15399,7 @@
     "/api/shifts": {
       "post": {
         "summary": "Add a new shift",
-        "description": "Add a new shift",
+        "description": "<b>Permission(s) required:</b> <em>Manage shifts (or System admin)</em><br><br>Add a new shift",
         "tags": [
           "shifts"
         ],
@@ -15698,7 +15670,7 @@
     "/api/photometry/bulk_delete/{upload_id}": {
       "delete": {
         "summary": "Delete bulk-uploaded photometry",
-        "description": "Delete bulk-uploaded photometry set",
+        "description": "<b>Permission(s) required:</b> <em>Delete bulk photometry (or System admin)</em><br><br>Delete bulk-uploaded photometry set",
         "tags": [
           "photometry"
         ],
@@ -15880,7 +15852,7 @@
       },
       "delete": {
         "summary": "Delete a Recurring API",
-        "description": "Delete an Recurring API.",
+        "description": "<b>Permission(s) required:</b> <em>Manage Recurring APIs (or System admin)</em><br><br>Delete an Recurring API.",
         "tags": [
           "recurring apis"
         ],
@@ -15937,7 +15909,7 @@
       },
       "post": {
         "summary": "Create a new Recurring API",
-        "description": "POST a new Recurring APIs.",
+        "description": "<b>Permission(s) required:</b> <em>Manage Recurring APIs (or System admin)</em><br><br>POST a new Recurring APIs.",
         "tags": [
           "recurring apis"
         ],
@@ -16053,7 +16025,7 @@
     "/api/skymap_trigger/{allocation_id}": {
       "get": {
         "summary": "Retrieve skymap-based trigger from external API",
-        "description": "Retrieve skymap-based trigger from external API",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Retrieve skymap-based trigger from external API",
         "tags": [
           "localizations",
           "observations"
@@ -16092,7 +16064,7 @@
       },
       "delete": {
         "summary": "Delete skymap-based trigger from external API",
-        "description": "Delete skymap-based trigger from external API",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Delete skymap-based trigger from external API",
         "tags": [
           "observations"
         ],
@@ -16141,7 +16113,7 @@
     "/api/skymap_trigger": {
       "post": {
         "summary": "Post a skymap-based trigger",
-        "description": "Post a skymap-based trigger",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Post a skymap-based trigger",
         "tags": [
           "localizations",
           "observations"
@@ -16180,7 +16152,7 @@
     "/api/sources/{target_id}/copy_photometry": {
       "post": {
         "summary": "Copy photometry from one source to another",
-        "description": "Copy all photometry points from one source to another",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Copy all photometry points from one source to another",
         "tags": [
           "sources",
           "photometry"
@@ -16376,7 +16348,7 @@
       },
       "delete": {
         "summary": "Delete all photometry for an object",
-        "description": "Delete object photometry",
+        "description": "<b>Permission(s) required:</b> <em>Delete bulk photometry (or System admin)</em><br><br>Delete object photometry",
         "tags": [
           "photometry"
         ],
@@ -16506,7 +16478,7 @@
     "/api/sources/{obj_id}/host": {
       "post": {
         "summary": "Set an object's host galaxy",
-        "description": "Set an object's host galaxy",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Set an object's host galaxy",
         "tags": [
           "objs",
           "galaxies"
@@ -16562,7 +16534,7 @@
       },
       "delete": {
         "summary": "Delete an object's host galaxy",
-        "description": "Delete an object's host galaxy",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Delete an object's host galaxy",
         "tags": [
           "objs",
           "galaxies"
@@ -17960,7 +17932,7 @@
       },
       "post": {
         "summary": "Post an annotation",
-        "description": "Post an annotation",
+        "description": "<b>Permission(s) required:</b> <em>Annotate (or System admin)</em><br><br>Post an annotation",
         "tags": [
           "annotations"
         ],
@@ -18045,7 +18017,7 @@
       },
       "put": {
         "summary": "Update an annotation",
-        "description": "Update an annotation",
+        "description": "<b>Permission(s) required:</b> <em>Annotate (or System admin)</em><br><br>Update an annotation",
         "tags": [
           "annotations"
         ],
@@ -18125,7 +18097,7 @@
       },
       "delete": {
         "summary": "Delete an annotation",
-        "description": "Delete an annotation",
+        "description": "<b>Permission(s) required:</b> <em>Annotate (or System admin)</em><br><br>Delete an annotation",
         "tags": [
           "annotations"
         ],
@@ -18235,7 +18207,7 @@
       },
       "put": {
         "summary": "Update an annotation",
-        "description": "Update an annotation",
+        "description": "<b>Permission(s) required:</b> <em>Annotate (or System admin)</em><br><br>Update an annotation",
         "tags": [
           "annotations"
         ],
@@ -18315,7 +18287,7 @@
       },
       "delete": {
         "summary": "Delete an annotation",
-        "description": "Delete an annotation",
+        "description": "<b>Permission(s) required:</b> <em>Annotate (or System admin)</em><br><br>Delete an annotation",
         "tags": [
           "annotations"
         ],
@@ -18527,54 +18499,11 @@
         }
       },
       "patch": {
-        "summary": "Update a source",
-        "description": "Update a source",
-        "tags": [
-          "sources"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "obj_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ObjNoID"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>"
       },
       "delete": {
         "summary": "Delete a source",
-        "description": "Delete a source",
+        "description": "<b>Permission(s) required:</b> <em>Manage sources (or System admin)</em><br><br>Delete a source",
         "tags": [
           "sources"
         ],
@@ -18611,7 +18540,7 @@
     },
     "/api/sources": {
       "get": {
-        "summary": "Retrieve multiple sources",
+        "summary": "Get multiple sources",
         "description": "Retrieve all sources, given a set of filters",
         "tags": [
           "sources"
@@ -19013,6 +18942,15 @@
           },
           {
             "in": "query",
+            "name": "classified",
+            "nullable": true,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Boolean indicating whether to return only sources with classifications.\nDefaults to false.\n"
+          },
+          {
+            "in": "query",
             "name": "unclassified",
             "nullable": true,
             "schema": {
@@ -19329,7 +19267,7 @@
       },
       "post": {
         "summary": "Add a new source",
-        "description": "Add a new source",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Add a new source",
         "tags": [
           "sources"
         ],
@@ -19453,7 +19391,7 @@
     "/api/source_notifications": {
       "post": {
         "summary": "Send a source notification",
-        "description": "Send out a new source notification",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Send out a new source notification",
         "tags": [
           "sources"
         ],
@@ -19526,7 +19464,7 @@
     "/api/source_groups": {
       "post": {
         "summary": "Save or unsave sources to/from groups",
-        "description": "Save or request group(s) to save source, and optionally unsave from group(s).",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Save or request group(s) to save source, and optionally unsave from group(s).",
         "tags": [
           "sources"
         ],
@@ -19579,7 +19517,7 @@
     "/api/source_groups/{obj_id}": {
       "patch": {
         "summary": "Update a Source table row",
-        "description": "Update a Source table row",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update a Source table row",
         "tags": [
           "sources"
         ],
@@ -19634,7 +19572,7 @@
     "/api/spatial_catalog/ascii": {
       "post": {
         "summary": "Upload a Spatial Catalog from ASCII file",
-        "description": "Upload spatial catalog from ASCII file",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Upload spatial catalog from ASCII file",
         "tags": [
           "spatial catalogs"
         ],
@@ -19846,7 +19784,7 @@
       },
       "put": {
         "summary": "Update a spectrum",
-        "description": "Update a spectrum",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update a spectrum",
         "tags": [
           "spectra"
         ],
@@ -19892,7 +19830,7 @@
       },
       "delete": {
         "summary": "Delete a spectrum",
-        "description": "Delete a spectrum",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Delete a spectrum",
         "tags": [
           "spectra"
         ],
@@ -20091,7 +20029,7 @@
       },
       "post": {
         "summary": "Upload spectrum",
-        "description": "Upload spectrum",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Upload spectrum",
         "tags": [
           "spectra"
         ],
@@ -20147,7 +20085,7 @@
     "/api/spectra/parse/ascii": {
       "post": {
         "summary": "Parse spectrum from ASCII file",
-        "description": "Parse spectrum from ASCII file",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Parse spectrum from ASCII file",
         "tags": [
           "spectra"
         ],
@@ -20185,7 +20123,7 @@
     "/api/spectra/ascii": {
       "post": {
         "summary": "Upload spectrum from ASCII",
-        "description": "Upload spectrum from ASCII file",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Upload spectrum from ASCII file",
         "tags": [
           "spectra"
         ],
@@ -20408,7 +20346,7 @@
       },
       "put": {
         "summary": "Update a spectrum",
-        "description": "Update a spectrum",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update a spectrum",
         "tags": [
           "spectra"
         ],
@@ -20454,7 +20392,7 @@
       },
       "delete": {
         "summary": "Delete a spectrum",
-        "description": "Delete a spectrum",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Delete a spectrum",
         "tags": [
           "spectra"
         ],
@@ -20653,7 +20591,7 @@
       },
       "post": {
         "summary": "Upload spectrum",
-        "description": "Upload spectrum",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Upload spectrum",
         "tags": [
           "spectra"
         ],
@@ -20709,7 +20647,7 @@
     "/api/spectrum/parse/ascii": {
       "post": {
         "summary": "Parse spectrum from ASCII file",
-        "description": "Parse spectrum from ASCII file",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Parse spectrum from ASCII file",
         "tags": [
           "spectra"
         ],
@@ -20747,7 +20685,7 @@
     "/api/spectrum/ascii": {
       "post": {
         "summary": "Upload spectrum from ASCII",
-        "description": "Upload spectrum from ASCII file",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Upload spectrum from ASCII file",
         "tags": [
           "spectra"
         ],
@@ -20974,7 +20912,7 @@
     "/api/streams/{stream_id}/users": {
       "post": {
         "summary": "Grant stream access to a user",
-        "description": "Grant stream access to a user",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Grant stream access to a user",
         "tags": [
           "streams",
           "users"
@@ -21044,7 +20982,7 @@
     "/api/streams/{stream_id}/users/{user_id}": {
       "delete": {
         "summary": "Revoke stream access from a user",
-        "description": "Delete a stream user (revoke stream access for user)",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Delete a stream user (revoke stream access for user)",
         "tags": [
           "streams",
           "users"
@@ -21120,7 +21058,7 @@
       },
       "patch": {
         "summary": "Update a stream",
-        "description": "Update a stream",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Update a stream",
         "tags": [
           "streams"
         ],
@@ -21174,7 +21112,7 @@
       },
       "delete": {
         "summary": "Delete a stream",
-        "description": "Delete a stream",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Delete a stream",
         "tags": [
           "streams"
         ],
@@ -21231,7 +21169,7 @@
       },
       "post": {
         "summary": "Create a new stream",
-        "description": "POST a new stream.",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>POST a new stream.",
         "tags": [
           "streams"
         ],
@@ -21447,7 +21385,7 @@
     "/api/db_stats": {
       "get": {
         "summary": "Get DB statistics",
-        "description": "Retrieve basic DB statistics",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Retrieve basic DB statistics",
         "tags": [
           "system info"
         ],
@@ -21553,7 +21491,10 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {}
+        ]
       }
     },
     "/api/config": {
@@ -21658,7 +21599,7 @@
       },
       "put": {
         "summary": "Update a taxonomy",
-        "description": "Update taxonomy",
+        "description": "<b>Permission(s) required:</b> <em>Post taxonomy (or System admin)</em><br><br>Update taxonomy",
         "tags": [
           "taxonomies"
         ],
@@ -21704,7 +21645,7 @@
       },
       "delete": {
         "summary": "Delete a taxonomy",
-        "description": "Delete a taxonomy",
+        "description": "<b>Permission(s) required:</b> <em>Delete taxonomy (or System admin)</em><br><br>Delete a taxonomy",
         "tags": [
           "taxonomies"
         ],
@@ -21761,7 +21702,7 @@
       },
       "post": {
         "summary": "Post new taxonomy",
-        "description": "Post new taxonomy",
+        "description": "<b>Permission(s) required:</b> <em>Post taxonomy (or System admin)</em><br><br>Post new taxonomy",
         "tags": [
           "taxonomies"
         ],
@@ -21879,7 +21820,7 @@
       },
       "put": {
         "summary": "Update a telescope",
-        "description": "Update telescope",
+        "description": "<b>Permission(s) required:</b> <em>Manage telescopes (or System admin)</em><br><br>Update telescope",
         "tags": [
           "telescopes"
         ],
@@ -21925,7 +21866,7 @@
       },
       "delete": {
         "summary": "Delete a telescope",
-        "description": "Delete a telescope",
+        "description": "<b>Permission(s) required:</b> <em>Delete telescope (or System admin)</em><br><br>Delete a telescope",
         "tags": [
           "telescopes"
         ],
@@ -22033,7 +21974,7 @@
       },
       "post": {
         "summary": "Create a telescope",
-        "description": "Create telescopes",
+        "description": "<b>Permission(s) required:</b> <em>Manage telescopes (or System admin)</em><br><br>Create telescopes",
         "tags": [
           "telescopes"
         ],
@@ -22126,7 +22067,7 @@
       },
       "put": {
         "summary": "Update a thumbnail",
-        "description": "Update thumbnail",
+        "description": "<b>Permission(s) required:</b> <em>Manage sources (or System admin)</em><br><br>Update thumbnail",
         "tags": [
           "thumbnails"
         ],
@@ -22172,7 +22113,7 @@
       },
       "delete": {
         "summary": "Delete a thumbnail",
-        "description": "Delete a thumbnail",
+        "description": "<b>Permission(s) required:</b> <em>Manage sources (or System admin)</em><br><br>Delete a thumbnail",
         "tags": [
           "thumbnails"
         ],
@@ -22211,7 +22152,7 @@
     "/api/thumbnail": {
       "post": {
         "summary": "Upload thumbnails",
-        "description": "Upload thumbnails",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Upload thumbnails",
         "tags": [
           "thumbnails"
         ],
@@ -22286,7 +22227,7 @@
     "/api/thumbnailPath": {
       "get": {
         "summary": "Check thumbnail paths",
-        "description": "Get information on thumbnails that are\nor are not in the correct folder/path.\n",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Get information on thumbnails that are\nor are not in the correct folder/path.\n",
         "tags": [
           "thumbnails"
         ],
@@ -22356,7 +22297,7 @@
       },
       "patch": {
         "summary": "Update thumbnail paths",
-        "description": "Update the file path and file_uri of the database rows\nof thumbnails that are not in the correct folder/path.\n",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Update the file path and file_uri of the database rows\nof thumbnails that are not in the correct folder/path.\n",
         "tags": [
           "thumbnails"
         ],
@@ -22444,7 +22385,7 @@
       },
       "delete": {
         "summary": "Delete empty thumbnail folders",
-        "description": "Delete all empty subfolders under \"thumbnails\".\nThese can be left over if moving thumbnails to a\ndifferent folder structure.\n",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Delete all empty subfolders under \"thumbnails\".\nThese can be left over if moving thumbnails to a\ndifferent folder structure.\n",
         "tags": [
           "thumbnails"
         ],
@@ -22524,7 +22465,7 @@
     "/api/tns_robot/{tnsrobot_id}/group/{group_id}/autoreporter/{user_id}": {
       "post": {
         "summary": "Add autoreporter(s) to a TNSRobotGroup",
-        "description": "Add autoreporter(s) to a TNSRobotGroup",
+        "description": "<b>Permission(s) required:</b> <em>Manage TNS robots (or System admin)</em><br><br>Add autoreporter(s) to a TNSRobotGroup",
         "tags": [
           "tns robot"
         ],
@@ -22598,7 +22539,7 @@
       },
       "delete": {
         "summary": "Remove autoreporter(s) from a TNSRobotGroup",
-        "description": "Delete an autoreporter from a TNSRobotGroup",
+        "description": "<b>Permission(s) required:</b> <em>Manage TNS robots (or System admin)</em><br><br>Delete an autoreporter from a TNSRobotGroup",
         "tags": [
           "tns robot"
         ],
@@ -22678,7 +22619,7 @@
     "/api/tns_robot/{tnsrobot_id}/group/{group_id}": {
       "put": {
         "summary": "Add or edit a group for a TNS robot",
-        "description": "Add or edit a group for a TNS robot",
+        "description": "<b>Permission(s) required:</b> <em>Manage TNS robots (or System admin)</em><br><br>Add or edit a group for a TNS robot",
         "tags": [
           "tns robot"
         ],
@@ -22748,7 +22689,7 @@
       },
       "delete": {
         "summary": "Delete a group from a TNS robot",
-        "description": "Delete a group from a TNSRobot",
+        "description": "<b>Permission(s) required:</b> <em>Manage TNS robots (or System admin)</em><br><br>Delete a group from a TNSRobot",
         "tags": [
           "tns robot"
         ],
@@ -22922,7 +22863,7 @@
     "/api/tns_robot/{tnsrobot_id}/coauthor/{user_id}": {
       "post": {
         "summary": "Add a coauthor to a TNS robot",
-        "description": "Add a coauthor to a TNS robot",
+        "description": "<b>Permission(s) required:</b> <em>Manage TNS robots (or System admin)</em><br><br>Add a coauthor to a TNS robot",
         "tags": [
           "tns robot"
         ],
@@ -22984,7 +22925,7 @@
       },
       "delete": {
         "summary": "Remove a coauthor from a TNS robot",
-        "description": "Remove a coauthor from a TNS robot",
+        "description": "<b>Permission(s) required:</b> <em>Manage TNS robots (or System admin)</em><br><br>Remove a coauthor from a TNS robot",
         "tags": [
           "tns robot"
         ],
@@ -23070,7 +23011,7 @@
       },
       "delete": {
         "summary": "Delete a TNS robot",
-        "description": "Delete a TNS robot",
+        "description": "<b>Permission(s) required:</b> <em>Manage TNS robots (or System admin)</em><br><br>Delete a TNS robot",
         "tags": [
           "tns robot"
         ],
@@ -23109,7 +23050,7 @@
     "/api/tns_robot/{existing_id}": {
       "put": {
         "summary": "Create or update a TNS robot",
-        "description": "Post or update a TNS robot",
+        "description": "<b>Permission(s) required:</b> <em>Manage TNS robots (or System admin)</em><br><br>Post or update a TNS robot",
         "tags": [
           "tns robot"
         ],
@@ -23318,7 +23259,7 @@
     "/api/user/{user_id}/acls": {
       "post": {
         "summary": "Grant ACLs to a user",
-        "description": "Grant new ACL(s) to a user",
+        "description": "<b>Permission(s) required:</b> <em>Manage users (or System admin)</em><br><br>Grant new ACL(s) to a user",
         "tags": [
           "acls"
         ],
@@ -23369,7 +23310,7 @@
     "/api/user/{user_id}/acls/{acl_id}": {
       "delete": {
         "summary": "Remove ACL from a user",
-        "description": "Remove ACL from user permissions",
+        "description": "<b>Permission(s) required:</b> <em>Manage users (or System admin)</em><br><br>Remove ACL from user permissions",
         "tags": [
           "acls"
         ],
@@ -23407,7 +23348,7 @@
     "/api/user/{user_id}/roles": {
       "post": {
         "summary": "Grant new Role(s) to a user",
-        "description": "Grant new Role(s) to a user",
+        "description": "<b>Permission(s) required:</b> <em>Manage users (or System admin)</em><br><br>Grant new Role(s) to a user",
         "tags": [
           "roles"
         ],
@@ -23458,7 +23399,7 @@
     "/api/user/{user_id}/roles/{role_id}": {
       "delete": {
         "summary": "Delete user role",
-        "description": "Delete user role",
+        "description": "<b>Permission(s) required:</b> <em>Manage users (or System admin)</em><br><br>Delete user role",
         "tags": [
           "roles"
         ],
@@ -23533,7 +23474,7 @@
       },
       "patch": {
         "summary": "Update a user",
-        "description": "Update a User record",
+        "description": "<b>Permission(s) required:</b> <em>Manage users (or System admin)</em><br><br>Update a User record",
         "tags": [
           "users"
         ],
@@ -23576,7 +23517,7 @@
       },
       "delete": {
         "summary": "Delete a user",
-        "description": "Delete a user",
+        "description": "<b>Permission(s) required:</b> <em>Manage users (or System admin)</em><br><br>Delete a user",
         "tags": [
           "users"
         ],
@@ -23759,7 +23700,7 @@
       },
       "post": {
         "summary": "Add a new user",
-        "description": "Add a new user",
+        "description": "<b>Permission(s) required:</b> <em>Manage users (or System admin)</em><br><br>Add a new user",
         "tags": [
           "users"
         ],
@@ -23982,7 +23923,10 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {}
+        ]
       }
     },
     "/api/public_pages/source/{source_id}": {
@@ -24036,7 +23980,7 @@
       },
       "post": {
         "summary": "Create a public page for a source",
-        "description": "Create a public page for a source, with given options, only if this page does not already exist",
+        "description": "<b>Permission(s) required:</b> <em>Manage sources (or System admin)</em><br><br>Create a public page for a source, with given options, only if this page does not already exist",
         "tags": [
           "sources"
         ],
@@ -24098,7 +24042,7 @@
     "/api/public_pages/source/{page_id}": {
       "delete": {
         "summary": "Delete a public source page",
-        "description": "Delete a public source page",
+        "description": "<b>Permission(s) required:</b> <em>Manage sources (or System admin)</em><br><br>Delete a public source page",
         "tags": [
           "sources"
         ],
@@ -24175,7 +24119,7 @@
       },
       "post": {
         "summary": "Create a new public release",
-        "description": "Create a new public release",
+        "description": "<b>Permission(s) required:</b> <em>Manage sources (or System admin)</em><br><br>Create a new public release",
         "tags": [
           "public"
         ],
@@ -24236,7 +24180,7 @@
     "/api/public_pages/release/{release_id}": {
       "patch": {
         "summary": "Update a public release",
-        "description": "Update a public release",
+        "description": "<b>Permission(s) required:</b> <em>Manage sources (or System admin)</em><br><br>Update a public release",
         "tags": [
           "public"
         ],
@@ -24302,7 +24246,7 @@
       },
       "delete": {
         "summary": "Delete a public release",
-        "description": "Delete a public release",
+        "description": "<b>Permission(s) required:</b> <em>Manage sources (or System admin)</em><br><br>Delete a public release",
         "tags": [
           "public"
         ],
@@ -24340,53 +24284,9 @@
     },
     "/public/sources/{source_id}/{version_hash}///": {
       "get": {
-        "summary": "Display the public page for a source",
-        "description": "Display the public page for a given source and version",
-        "tags": [
-          "public",
-          "sources"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "source_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The ID of the source for which to display the public page"
-          },
-          {
-            "in": "path",
-            "name": "version_hash",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The hash of the source data used to identify the version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "text/html": {
-                "schema": {
-                  "type": "string",
-                  "description": "The HTML content of the selected version of the public source page\nor the latest version if hash is not provided\n"
-                }
-              }
-            }
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
+        "security": [
+          {}
+        ]
       }
     },
     "/public/sources/{source_id}/{version_hash}//": {
@@ -24468,49 +24368,17 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {}
+        ]
       }
     },
     "/public/releases/{link_name}": {
       "get": {
-        "summary": "Get a public release",
-        "description": "Display the page with all sources and descriptions for a given public release",
-        "tags": [
-          "public",
-          "public releases"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "link_name",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The link name of the public release to display"
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "text/html": {
-                "schema": {
-                  "type": "string",
-                  "description": "The HTML content of the selected release page"
-                }
-              }
-            }
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
+        "security": [
+          {}
+        ]
       }
     },
     "/public/releases": {
@@ -24562,7 +24430,10 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {}
+        ]
       }
     }
   },
@@ -25153,14 +25024,7 @@
             "nullable": true
           },
           "authentication_type": {
-            "enum": [
-              "none",
-              "header_token",
-              "api_key",
-              "HTTPBasicAuth",
-              "HTTPDigestAuth",
-              "OAuth1"
-            ],
+            "enum": null,
             "maxLength": 14,
             "description": "Service authentiction method. One of: 'none', 'header_token', 'api_key', 'HTTPBasicAuth', 'HTTPDigestAuth', 'OAuth1'. See https://docs.python-requests.org/en/master/user/authentication/"
           },
@@ -25173,11 +25037,7 @@
             "type": "boolean"
           },
           "analysis_type": {
-            "enum": [
-              "lightcurve_fitting",
-              "spectrum_fitting",
-              "meta_analysis"
-            ],
+            "enum": null,
             "maxLength": 18,
             "description": "Type of analysis. One of: 'lightcurve_fitting', 'spectrum_fitting', 'meta_analysis'"
           },
@@ -25321,14 +25181,7 @@
             "nullable": true
           },
           "authentication_type": {
-            "enum": [
-              "none",
-              "header_token",
-              "api_key",
-              "HTTPBasicAuth",
-              "HTTPDigestAuth",
-              "OAuth1"
-            ],
+            "enum": null,
             "maxLength": 14,
             "description": "Service authentiction method. One of: 'none', 'header_token', 'api_key', 'HTTPBasicAuth', 'HTTPDigestAuth', 'OAuth1'. See https://docs.python-requests.org/en/master/user/authentication/"
           },
@@ -25341,11 +25194,7 @@
             "type": "boolean"
           },
           "analysis_type": {
-            "enum": [
-              "lightcurve_fitting",
-              "spectrum_fitting",
-              "meta_analysis"
-            ],
+            "enum": null,
             "maxLength": 18,
             "description": "Type of analysis. One of: 'lightcurve_fitting', 'spectrum_fitting', 'meta_analysis'"
           },
@@ -26769,13 +26618,7 @@
             "description": "Status of the assignment [done, not done, pending]."
           },
           "priority": {
-            "enum": [
-              "1",
-              "2",
-              "3",
-              "4",
-              "5"
-            ],
+            "enum": null,
             "maxLength": 1,
             "description": "Priority of the request (1 = lowest, 5 = highest)."
           },
@@ -26890,13 +26733,7 @@
             "description": "Status of the assignment [done, not done, pending]."
           },
           "priority": {
-            "enum": [
-              "1",
-              "2",
-              "3",
-              "4",
-              "5"
-            ],
+            "enum": null,
             "maxLength": 1,
             "description": "Priority of the request (1 = lowest, 5 = highest)."
           },
@@ -34424,11 +34261,7 @@
             "description": "ID of the Group to which admission is requested"
           },
           "status": {
-            "enum": [
-              "pending",
-              "accepted",
-              "declined"
-            ],
+            "enum": null,
             "maxLength": 8,
             "description": "Admission request status. Can be one of either 'pending', 'accepted', or 'declined'."
           },
@@ -34503,11 +34336,7 @@
             "description": "ID of the Group to which admission is requested"
           },
           "status": {
-            "enum": [
-              "pending",
-              "accepted",
-              "declined"
-            ],
+            "enum": null,
             "maxLength": 8,
             "description": "Admission request status. Can be one of either 'pending', 'accepted', or 'declined'."
           }
@@ -38923,11 +38752,7 @@
             "description": "Instrument name."
           },
           "type": {
-            "enum": [
-              "imager",
-              "spectrograph",
-              "imaging spectrograph"
-            ],
+            "enum": null,
             "maxLength": 20,
             "description": "Instrument type, one of Imager, Spectrograph, or Imaging Spectrograph."
           },
@@ -38964,84 +38789,19 @@
             "nullable": true
           },
           "api_classname": {
-            "enum": [
-              "MMAAPI",
-              "GENERICAPI",
-              "SLACKAPI",
-              "ATLASAPI",
-              "COLIBRIAPI",
-              "GROWTHINDIAMMAAPI",
-              "KAITAPI",
-              "SEDMAPI",
-              "SEDMV2API",
-              "IOOAPI",
-              "IOIAPI",
-              "SPRATAPI",
-              "SINISTROAPI",
-              "SPECTRALAPI",
-              "FLOYDSAPI",
-              "MUSCATAPI",
-              "NICERAPI",
-              "PS1API",
-              "SOARGHTSAPI",
-              "SOARGHTSIMAGERAPI",
-              "SOARTSPECAPI",
-              "UVOTXRTAPI",
-              "UVOTXRTMMAAPI",
-              "TAROTAPI",
-              "TESSAPI",
-              "TRTAPI",
-              "WINTERAPI",
-              "ZTFAPI",
-              "ZTFMMAAPI",
-              null
-            ],
+            "enum": null,
             "maxLength": 17,
             "description": "Name of the instrument's API class.",
             "nullable": true
           },
           "api_classname_obsplan": {
-            "enum": [
-              "MMAAPI",
-              "GENERICAPI",
-              "SLACKAPI",
-              "ATLASAPI",
-              "COLIBRIAPI",
-              "GROWTHINDIAMMAAPI",
-              "KAITAPI",
-              "SEDMAPI",
-              "SEDMV2API",
-              "IOOAPI",
-              "IOIAPI",
-              "SPRATAPI",
-              "SINISTROAPI",
-              "SPECTRALAPI",
-              "FLOYDSAPI",
-              "MUSCATAPI",
-              "NICERAPI",
-              "PS1API",
-              "SOARGHTSAPI",
-              "SOARGHTSIMAGERAPI",
-              "SOARTSPECAPI",
-              "UVOTXRTAPI",
-              "UVOTXRTMMAAPI",
-              "TAROTAPI",
-              "TESSAPI",
-              "TRTAPI",
-              "WINTERAPI",
-              "ZTFAPI",
-              "ZTFMMAAPI",
-              null
-            ],
+            "enum": null,
             "maxLength": 17,
             "description": "Name of the instrument's ObservationPlan API class.",
             "nullable": true
           },
           "listener_classname": {
-            "enum": [
-              "SEDMListener",
-              null
-            ],
+            "enum": null,
             "maxLength": 12,
             "description": "Name of the instrument's listener class.",
             "nullable": true
@@ -39665,11 +39425,7 @@
             "description": "Instrument name."
           },
           "type": {
-            "enum": [
-              "imager",
-              "spectrograph",
-              "imaging spectrograph"
-            ],
+            "enum": null,
             "maxLength": 20,
             "description": "Instrument type, one of Imager, Spectrograph, or Imaging Spectrograph."
           },
@@ -39706,84 +39462,19 @@
             "nullable": true
           },
           "api_classname": {
-            "enum": [
-              "MMAAPI",
-              "GENERICAPI",
-              "SLACKAPI",
-              "ATLASAPI",
-              "COLIBRIAPI",
-              "GROWTHINDIAMMAAPI",
-              "KAITAPI",
-              "SEDMAPI",
-              "SEDMV2API",
-              "IOOAPI",
-              "IOIAPI",
-              "SPRATAPI",
-              "SINISTROAPI",
-              "SPECTRALAPI",
-              "FLOYDSAPI",
-              "MUSCATAPI",
-              "NICERAPI",
-              "PS1API",
-              "SOARGHTSAPI",
-              "SOARGHTSIMAGERAPI",
-              "SOARTSPECAPI",
-              "UVOTXRTAPI",
-              "UVOTXRTMMAAPI",
-              "TAROTAPI",
-              "TESSAPI",
-              "TRTAPI",
-              "WINTERAPI",
-              "ZTFAPI",
-              "ZTFMMAAPI",
-              null
-            ],
+            "enum": null,
             "maxLength": 17,
             "description": "Name of the instrument's API class.",
             "nullable": true
           },
           "api_classname_obsplan": {
-            "enum": [
-              "MMAAPI",
-              "GENERICAPI",
-              "SLACKAPI",
-              "ATLASAPI",
-              "COLIBRIAPI",
-              "GROWTHINDIAMMAAPI",
-              "KAITAPI",
-              "SEDMAPI",
-              "SEDMV2API",
-              "IOOAPI",
-              "IOIAPI",
-              "SPRATAPI",
-              "SINISTROAPI",
-              "SPECTRALAPI",
-              "FLOYDSAPI",
-              "MUSCATAPI",
-              "NICERAPI",
-              "PS1API",
-              "SOARGHTSAPI",
-              "SOARGHTSIMAGERAPI",
-              "SOARTSPECAPI",
-              "UVOTXRTAPI",
-              "UVOTXRTMMAAPI",
-              "TAROTAPI",
-              "TESSAPI",
-              "TRTAPI",
-              "WINTERAPI",
-              "ZTFAPI",
-              "ZTFMMAAPI",
-              null
-            ],
+            "enum": null,
             "maxLength": 17,
             "description": "Name of the instrument's ObservationPlan API class.",
             "nullable": true
           },
           "listener_classname": {
-            "enum": [
-              "SEDMListener",
-              null
-            ],
+            "enum": null,
             "maxLength": 12,
             "description": "Name of the instrument's listener class.",
             "nullable": true
@@ -41027,11 +40718,7 @@
             "description": "Abbreviated facility name (e.g., H1)."
           },
           "type": {
-            "enum": [
-              "gravitational-wave",
-              "neutrino",
-              "gamma-ray-burst"
-            ],
+            "enum": null,
             "maxLength": 18,
             "description": "MMA detector type, one of gravitational wave, neutrino, or gamma-ray burst."
           },
@@ -41136,11 +40823,7 @@
             "description": "Abbreviated facility name (e.g., H1)."
           },
           "type": {
-            "enum": [
-              "gravitational-wave",
-              "neutrino",
-              "gamma-ray-burst"
-            ],
+            "enum": null,
             "maxLength": 18,
             "description": "MMA detector type, one of gravitational wave, neutrino, or gamma-ray burst."
           },
@@ -42197,14 +41880,7 @@
             "description": "url for internal API to handle the incoming callback."
           },
           "status": {
-            "enum": [
-              "queued",
-              "pending",
-              "completed",
-              "failure",
-              "cancelled",
-              "timed_out"
-            ],
+            "enum": null,
             "maxLength": 9,
             "description": "Status of the Webhook. One of: 'queued', 'pending', 'completed', 'failure', 'cancelled', 'timed_out'."
           },
@@ -42357,14 +42033,7 @@
             "description": "url for internal API to handle the incoming callback."
           },
           "status": {
-            "enum": [
-              "queued",
-              "pending",
-              "completed",
-              "failure",
-              "cancelled",
-              "timed_out"
-            ],
+            "enum": null,
             "maxLength": 9,
             "description": "Status of the Webhook. One of: 'queued', 'pending', 'completed', 'failure', 'cancelled', 'timed_out'."
           },
@@ -45148,171 +44817,7 @@
             "description": "Unique identifier of an object inside the series of images out of which the photometry is generated. E.g., could be the TESS TICID. "
           },
           "filter": {
-            "enum": [
-              "bessellux",
-              "bessellb",
-              "bessellv",
-              "bessellr",
-              "besselli",
-              "standard::u",
-              "standard::b",
-              "standard::v",
-              "standard::r",
-              "standard::i",
-              "desu",
-              "desg",
-              "desr",
-              "desi",
-              "desz",
-              "desy",
-              "sdssu",
-              "sdssg",
-              "sdssr",
-              "sdssi",
-              "sdssz",
-              "f435w",
-              "f475w",
-              "f555w",
-              "f606w",
-              "f625w",
-              "f775w",
-              "f850lp",
-              "nicf110w",
-              "nicf160w",
-              "f098m",
-              "f105w",
-              "f110w",
-              "f125w",
-              "f127m",
-              "f139m",
-              "f140w",
-              "f153m",
-              "f160w",
-              "f218w",
-              "f225w",
-              "f275w",
-              "f300x",
-              "f336w",
-              "f350lp",
-              "f390w",
-              "f689m",
-              "f763m",
-              "f845m",
-              "f438w",
-              "uvf475w",
-              "uvf555w",
-              "uvf606w",
-              "uvf625w",
-              "uvf775w",
-              "uvf814w",
-              "uvf850lp",
-              "kepler",
-              "cspb",
-              "csphs",
-              "csphd",
-              "cspjs",
-              "cspjd",
-              "cspv3009",
-              "cspv3014",
-              "cspv9844",
-              "cspys",
-              "cspyd",
-              "cspg",
-              "cspi",
-              "cspk",
-              "cspr",
-              "cspu",
-              "f070w",
-              "f090w",
-              "f115w",
-              "f150w",
-              "f200w",
-              "f277w",
-              "f356w",
-              "f444w",
-              "f140m",
-              "f162m",
-              "f182m",
-              "f210m",
-              "f250m",
-              "f300m",
-              "f335m",
-              "f360m",
-              "f410m",
-              "f430m",
-              "f460m",
-              "f480m",
-              "f560w",
-              "f770w",
-              "f1000w",
-              "f1130w",
-              "f1280w",
-              "f1500w",
-              "f1800w",
-              "f2100w",
-              "f2550w",
-              "f1065c",
-              "f1140c",
-              "f1550c",
-              "f2300c",
-              "lsstu",
-              "lsstg",
-              "lsstr",
-              "lssti",
-              "lsstz",
-              "lssty",
-              "keplercam::us",
-              "keplercam::b",
-              "keplercam::v",
-              "keplercam::r",
-              "keplercam::i",
-              "4shooter2::us",
-              "4shooter2::b",
-              "4shooter2::v",
-              "4shooter2::r",
-              "4shooter2::i",
-              "f062",
-              "f087",
-              "f106",
-              "f129",
-              "f158",
-              "f184",
-              "f213",
-              "f146",
-              "ztfg",
-              "ztfr",
-              "ztfi",
-              "uvot::b",
-              "uvot::u",
-              "uvot::uvm2",
-              "uvot::uvw1",
-              "uvot::uvw2",
-              "uvot::v",
-              "uvot::white",
-              "ps1::open",
-              "ps1::g",
-              "ps1::r",
-              "ps1::i",
-              "ps1::z",
-              "ps1::y",
-              "ps1::w",
-              "atlasc",
-              "atlaso",
-              "2massj",
-              "2massh",
-              "2massks",
-              "gaia::gbp",
-              "gaia::g",
-              "gaia::grp",
-              "gaia::grvs",
-              "tess",
-              "gotob",
-              "gotog",
-              "gotol",
-              "gotor",
-              "swiftxrt",
-              "nicerxti"
-            ],
+            "enum": null,
             "maxLength": 13,
             "description": "Filter with which the observation was taken."
           },
@@ -45375,11 +44880,7 @@
             "description": "Number of exposures in the series. "
           },
           "time_stamp_alignment": {
-            "enum": [
-              "start",
-              "middle",
-              "end"
-            ],
+            "enum": null,
             "maxLength": 6,
             "description": "When in each exposure is the mjd timestamp measured: start, middle, or end."
           },
@@ -45606,171 +45107,7 @@
             "description": "Unique identifier of an object inside the series of images out of which the photometry is generated. E.g., could be the TESS TICID. "
           },
           "filter": {
-            "enum": [
-              "bessellux",
-              "bessellb",
-              "bessellv",
-              "bessellr",
-              "besselli",
-              "standard::u",
-              "standard::b",
-              "standard::v",
-              "standard::r",
-              "standard::i",
-              "desu",
-              "desg",
-              "desr",
-              "desi",
-              "desz",
-              "desy",
-              "sdssu",
-              "sdssg",
-              "sdssr",
-              "sdssi",
-              "sdssz",
-              "f435w",
-              "f475w",
-              "f555w",
-              "f606w",
-              "f625w",
-              "f775w",
-              "f850lp",
-              "nicf110w",
-              "nicf160w",
-              "f098m",
-              "f105w",
-              "f110w",
-              "f125w",
-              "f127m",
-              "f139m",
-              "f140w",
-              "f153m",
-              "f160w",
-              "f218w",
-              "f225w",
-              "f275w",
-              "f300x",
-              "f336w",
-              "f350lp",
-              "f390w",
-              "f689m",
-              "f763m",
-              "f845m",
-              "f438w",
-              "uvf475w",
-              "uvf555w",
-              "uvf606w",
-              "uvf625w",
-              "uvf775w",
-              "uvf814w",
-              "uvf850lp",
-              "kepler",
-              "cspb",
-              "csphs",
-              "csphd",
-              "cspjs",
-              "cspjd",
-              "cspv3009",
-              "cspv3014",
-              "cspv9844",
-              "cspys",
-              "cspyd",
-              "cspg",
-              "cspi",
-              "cspk",
-              "cspr",
-              "cspu",
-              "f070w",
-              "f090w",
-              "f115w",
-              "f150w",
-              "f200w",
-              "f277w",
-              "f356w",
-              "f444w",
-              "f140m",
-              "f162m",
-              "f182m",
-              "f210m",
-              "f250m",
-              "f300m",
-              "f335m",
-              "f360m",
-              "f410m",
-              "f430m",
-              "f460m",
-              "f480m",
-              "f560w",
-              "f770w",
-              "f1000w",
-              "f1130w",
-              "f1280w",
-              "f1500w",
-              "f1800w",
-              "f2100w",
-              "f2550w",
-              "f1065c",
-              "f1140c",
-              "f1550c",
-              "f2300c",
-              "lsstu",
-              "lsstg",
-              "lsstr",
-              "lssti",
-              "lsstz",
-              "lssty",
-              "keplercam::us",
-              "keplercam::b",
-              "keplercam::v",
-              "keplercam::r",
-              "keplercam::i",
-              "4shooter2::us",
-              "4shooter2::b",
-              "4shooter2::v",
-              "4shooter2::r",
-              "4shooter2::i",
-              "f062",
-              "f087",
-              "f106",
-              "f129",
-              "f158",
-              "f184",
-              "f213",
-              "f146",
-              "ztfg",
-              "ztfr",
-              "ztfi",
-              "uvot::b",
-              "uvot::u",
-              "uvot::uvm2",
-              "uvot::uvw1",
-              "uvot::uvw2",
-              "uvot::v",
-              "uvot::white",
-              "ps1::open",
-              "ps1::g",
-              "ps1::r",
-              "ps1::i",
-              "ps1::z",
-              "ps1::y",
-              "ps1::w",
-              "atlasc",
-              "atlaso",
-              "2massj",
-              "2massh",
-              "2massks",
-              "gaia::gbp",
-              "gaia::g",
-              "gaia::grp",
-              "gaia::grvs",
-              "tess",
-              "gotob",
-              "gotog",
-              "gotol",
-              "gotor",
-              "swiftxrt",
-              "nicerxti"
-            ],
+            "enum": null,
             "maxLength": 13,
             "description": "Filter with which the observation was taken."
           },
@@ -45833,11 +45170,7 @@
             "description": "Number of exposures in the series. "
           },
           "time_stamp_alignment": {
-            "enum": [
-              "start",
-              "middle",
-              "end"
-            ],
+            "enum": null,
             "maxLength": 6,
             "description": "When in each exposure is the mjd timestamp measured: start, middle, or end."
           },
@@ -46067,171 +45400,7 @@
             "description": "Gaussian error on the flux in \u00b5Jy."
           },
           "filter": {
-            "enum": [
-              "bessellux",
-              "bessellb",
-              "bessellv",
-              "bessellr",
-              "besselli",
-              "standard::u",
-              "standard::b",
-              "standard::v",
-              "standard::r",
-              "standard::i",
-              "desu",
-              "desg",
-              "desr",
-              "desi",
-              "desz",
-              "desy",
-              "sdssu",
-              "sdssg",
-              "sdssr",
-              "sdssi",
-              "sdssz",
-              "f435w",
-              "f475w",
-              "f555w",
-              "f606w",
-              "f625w",
-              "f775w",
-              "f850lp",
-              "nicf110w",
-              "nicf160w",
-              "f098m",
-              "f105w",
-              "f110w",
-              "f125w",
-              "f127m",
-              "f139m",
-              "f140w",
-              "f153m",
-              "f160w",
-              "f218w",
-              "f225w",
-              "f275w",
-              "f300x",
-              "f336w",
-              "f350lp",
-              "f390w",
-              "f689m",
-              "f763m",
-              "f845m",
-              "f438w",
-              "uvf475w",
-              "uvf555w",
-              "uvf606w",
-              "uvf625w",
-              "uvf775w",
-              "uvf814w",
-              "uvf850lp",
-              "kepler",
-              "cspb",
-              "csphs",
-              "csphd",
-              "cspjs",
-              "cspjd",
-              "cspv3009",
-              "cspv3014",
-              "cspv9844",
-              "cspys",
-              "cspyd",
-              "cspg",
-              "cspi",
-              "cspk",
-              "cspr",
-              "cspu",
-              "f070w",
-              "f090w",
-              "f115w",
-              "f150w",
-              "f200w",
-              "f277w",
-              "f356w",
-              "f444w",
-              "f140m",
-              "f162m",
-              "f182m",
-              "f210m",
-              "f250m",
-              "f300m",
-              "f335m",
-              "f360m",
-              "f410m",
-              "f430m",
-              "f460m",
-              "f480m",
-              "f560w",
-              "f770w",
-              "f1000w",
-              "f1130w",
-              "f1280w",
-              "f1500w",
-              "f1800w",
-              "f2100w",
-              "f2550w",
-              "f1065c",
-              "f1140c",
-              "f1550c",
-              "f2300c",
-              "lsstu",
-              "lsstg",
-              "lsstr",
-              "lssti",
-              "lsstz",
-              "lssty",
-              "keplercam::us",
-              "keplercam::b",
-              "keplercam::v",
-              "keplercam::r",
-              "keplercam::i",
-              "4shooter2::us",
-              "4shooter2::b",
-              "4shooter2::v",
-              "4shooter2::r",
-              "4shooter2::i",
-              "f062",
-              "f087",
-              "f106",
-              "f129",
-              "f158",
-              "f184",
-              "f213",
-              "f146",
-              "ztfg",
-              "ztfr",
-              "ztfi",
-              "uvot::b",
-              "uvot::u",
-              "uvot::uvm2",
-              "uvot::uvw1",
-              "uvot::uvw2",
-              "uvot::v",
-              "uvot::white",
-              "ps1::open",
-              "ps1::g",
-              "ps1::r",
-              "ps1::i",
-              "ps1::z",
-              "ps1::y",
-              "ps1::w",
-              "atlasc",
-              "atlaso",
-              "2massj",
-              "2massh",
-              "2massks",
-              "gaia::gbp",
-              "gaia::g",
-              "gaia::grp",
-              "gaia::grvs",
-              "tess",
-              "gotob",
-              "gotog",
-              "gotol",
-              "gotor",
-              "swiftxrt",
-              "nicerxti"
-            ],
+            "enum": null,
             "maxLength": 13,
             "description": "Filter with which the observation was taken."
           },
@@ -47052,171 +46221,7 @@
             "description": "Gaussian error on the flux in \u00b5Jy."
           },
           "filter": {
-            "enum": [
-              "bessellux",
-              "bessellb",
-              "bessellv",
-              "bessellr",
-              "besselli",
-              "standard::u",
-              "standard::b",
-              "standard::v",
-              "standard::r",
-              "standard::i",
-              "desu",
-              "desg",
-              "desr",
-              "desi",
-              "desz",
-              "desy",
-              "sdssu",
-              "sdssg",
-              "sdssr",
-              "sdssi",
-              "sdssz",
-              "f435w",
-              "f475w",
-              "f555w",
-              "f606w",
-              "f625w",
-              "f775w",
-              "f850lp",
-              "nicf110w",
-              "nicf160w",
-              "f098m",
-              "f105w",
-              "f110w",
-              "f125w",
-              "f127m",
-              "f139m",
-              "f140w",
-              "f153m",
-              "f160w",
-              "f218w",
-              "f225w",
-              "f275w",
-              "f300x",
-              "f336w",
-              "f350lp",
-              "f390w",
-              "f689m",
-              "f763m",
-              "f845m",
-              "f438w",
-              "uvf475w",
-              "uvf555w",
-              "uvf606w",
-              "uvf625w",
-              "uvf775w",
-              "uvf814w",
-              "uvf850lp",
-              "kepler",
-              "cspb",
-              "csphs",
-              "csphd",
-              "cspjs",
-              "cspjd",
-              "cspv3009",
-              "cspv3014",
-              "cspv9844",
-              "cspys",
-              "cspyd",
-              "cspg",
-              "cspi",
-              "cspk",
-              "cspr",
-              "cspu",
-              "f070w",
-              "f090w",
-              "f115w",
-              "f150w",
-              "f200w",
-              "f277w",
-              "f356w",
-              "f444w",
-              "f140m",
-              "f162m",
-              "f182m",
-              "f210m",
-              "f250m",
-              "f300m",
-              "f335m",
-              "f360m",
-              "f410m",
-              "f430m",
-              "f460m",
-              "f480m",
-              "f560w",
-              "f770w",
-              "f1000w",
-              "f1130w",
-              "f1280w",
-              "f1500w",
-              "f1800w",
-              "f2100w",
-              "f2550w",
-              "f1065c",
-              "f1140c",
-              "f1550c",
-              "f2300c",
-              "lsstu",
-              "lsstg",
-              "lsstr",
-              "lssti",
-              "lsstz",
-              "lssty",
-              "keplercam::us",
-              "keplercam::b",
-              "keplercam::v",
-              "keplercam::r",
-              "keplercam::i",
-              "4shooter2::us",
-              "4shooter2::b",
-              "4shooter2::v",
-              "4shooter2::r",
-              "4shooter2::i",
-              "f062",
-              "f087",
-              "f106",
-              "f129",
-              "f158",
-              "f184",
-              "f213",
-              "f146",
-              "ztfg",
-              "ztfr",
-              "ztfi",
-              "uvot::b",
-              "uvot::u",
-              "uvot::uvm2",
-              "uvot::uvw1",
-              "uvot::uvw2",
-              "uvot::v",
-              "uvot::white",
-              "ps1::open",
-              "ps1::g",
-              "ps1::r",
-              "ps1::i",
-              "ps1::z",
-              "ps1::y",
-              "ps1::w",
-              "atlasc",
-              "atlaso",
-              "2massj",
-              "2massh",
-              "2massks",
-              "gaia::gbp",
-              "gaia::g",
-              "gaia::grp",
-              "gaia::grvs",
-              "tess",
-              "gotob",
-              "gotog",
-              "gotol",
-              "gotor",
-              "swiftxrt",
-              "nicerxti"
-            ],
+            "enum": null,
             "maxLength": 13,
             "description": "Filter with which the observation was taken."
           },
@@ -51333,11 +50338,7 @@
             "nullable": true
           },
           "type": {
-            "enum": [
-              "source",
-              "host",
-              "host_center"
-            ],
+            "enum": null,
             "maxLength": 11,
             "description": "Type of spectrum. One of: 'source', 'host', 'host_center'.\n                Defaults to 'fsource'."
           },
@@ -51908,11 +50909,7 @@
             "nullable": true
           },
           "type": {
-            "enum": [
-              "source",
-              "host",
-              "host_center"
-            ],
+            "enum": null,
             "maxLength": 11,
             "description": "Type of spectrum. One of: 'source', 'host', 'host_center'.\n                Defaults to 'fsource'."
           },
@@ -55070,19 +54067,7 @@
             "nullable": true
           },
           "type": {
-            "enum": [
-              "new",
-              "ref",
-              "sub",
-              "sdss",
-              "dr8",
-              "ls",
-              "ps1",
-              "new_gz",
-              "ref_gz",
-              "sub_gz",
-              null
-            ],
+            "enum": null,
             "maxLength": 6,
             "description": "Thumbnail type (e.g., ref, new, sub, ls, ps1, ...)",
             "nullable": true
@@ -55168,19 +54153,7 @@
             "nullable": true
           },
           "type": {
-            "enum": [
-              "new",
-              "ref",
-              "sub",
-              "sdss",
-              "dr8",
-              "ls",
-              "ps1",
-              "new_gz",
-              "ref_gz",
-              "sub_gz",
-              null
-            ],
+            "enum": null,
             "maxLength": 6,
             "description": "Thumbnail type (e.g., ref, new, sub, ls, ps1, ...)",
             "nullable": true
@@ -57533,6 +56506,6 @@
       document.getElementById('api-reference').dataset.configuration =
         JSON.stringify(configuration)
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference@1.25.10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference@1.25.24"></script>
   </body>
 </html>
