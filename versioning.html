@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>SkyPortal Extensions &#8212; skyportal 1.0.0 documentation</title>
+    <title>Versioning &#8212; skyportal 1.0.0 documentation</title>
   
   
   
@@ -41,11 +41,11 @@
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'extensions';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'versioning';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Front-end Pages" href="pages.html" />
-    <link rel="prev" title="Analysis" href="analysis.html" />
+    <link rel="next" title="Data loader" href="data_loader.html" />
+    <link rel="prev" title="Deployment" href="deploy.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -156,7 +156,7 @@
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dev.html">Developer notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deploy.html">Deployment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="versioning.html">Versioning</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Versioning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_loader.html">Data loader</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">How to Contribute</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adding_features.html">Adding new features</a></li>
@@ -174,7 +174,7 @@
 <li class="toctree-l1"><a class="reference internal" href="advanced_usage.html">Advanced usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="photometric_series.html">How to work with photometric series</a></li>
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">SkyPortal Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">SkyPortal Extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pages.html">Front-end Pages</a></li>
 </ul>
 
@@ -230,7 +230,7 @@
       
       
       
-      <li><a href="_sources/extensions.md" target="_blank"
+      <li><a href="_sources/versioning.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -312,7 +312,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>SkyPortal Extensions</h1>
+    <h1>Versioning</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -326,83 +326,18 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="skyportal-extensions">
-<h1>SkyPortal Extensions<a class="headerlink" href="#skyportal-extensions" title="Link to this heading">#</a></h1>
-<p>It is common for specific instances of SkyPortal to employ “extensions”, which use added components and APIs not available in the baseline app, usually because of particular forms of data access and distribution. Some examples include <a class="reference external" href="https://github.com/fritz-marshal/fritz">Fritz</a> or <a class="reference external" href="https://github.com/grandma-collaboration/icare">SkyPortal-GRANDMA</a>.</p>
-<p>For the APIs, they will have a folder: extensions/skyportal/skyportal/handlers/api
-For redux, they will have a folder: extensions/skyportal/static/js/ducks
-For the components, they will have a folder: extensions/skyportal/static/js/components</p>
-<p>When deploying, files are copied into each of these SkyPortal folders from your repository.</p>
-<p>For APIs in particular, a dedicated <code class="docutils literal notranslate"><span class="pre">app_server.py</span></code> needs to be created. To deploy, it will take a form similar to <a class="reference external" href="https://github.com/fritz-marshal/fritz/blob/main/extensions/skyportal/skyportal/app_server_fritz.py">this</a>, where in addition to the baseline application loaded with</p>
-<p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">skyportal.app_server</span> <span class="pre">import</span> <span class="pre">make_app</span></code></p>
-<p>Custom handlers are added as follows (taking Fritz as an example):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skyportal.handlers.api.alert</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">AlertHandler</span><span class="p">,</span>
-    <span class="n">AlertAuxHandler</span><span class="p">,</span>
-    <span class="n">AlertCutoutHandler</span><span class="p">,</span>
-    <span class="n">AlertTripletsHandler</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="kn">from</span> <span class="nn">skyportal.handlers.api.archive</span> <span class="kn">import</span> <span class="p">(</span>
-    <span class="n">ArchiveCatalogsHandler</span><span class="p">,</span>
-    <span class="n">ArchiveHandler</span><span class="p">,</span>
-    <span class="n">CrossMatchHandler</span><span class="p">,</span>
-<span class="p">)</span>
-<span class="kn">from</span> <span class="nn">skyportal.handlers.api.kowalski_filter</span> <span class="kn">import</span> <span class="n">KowalskiFilterHandler</span>
-<span class="kn">from</span> <span class="nn">skyportal.handlers.api.tns_info</span> <span class="kn">import</span> <span class="n">TNSInfoHandler</span>
-
-
-<span class="n">fritz_handlers</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="c1"># Fritz-specific API endpoints</span>
-    <span class="c1"># Alerts</span>
-    <span class="p">(</span><span class="sa">r</span><span class="s2">&quot;/api/alerts(/.+)?&quot;</span><span class="p">,</span> <span class="n">AlertHandler</span><span class="p">),</span>
-    <span class="p">(</span><span class="sa">r</span><span class="s2">&quot;/api/alerts_aux(/.+)?&quot;</span><span class="p">,</span> <span class="n">AlertAuxHandler</span><span class="p">),</span>
-    <span class="p">(</span><span class="sa">r</span><span class="s2">&quot;/api/alerts_cutouts(/.+)?&quot;</span><span class="p">,</span> <span class="n">AlertCutoutHandler</span><span class="p">),</span>
-    <span class="p">(</span><span class="sa">r</span><span class="s2">&quot;/api/alerts_triplets(/.+)?&quot;</span><span class="p">,</span> <span class="n">AlertTripletsHandler</span><span class="p">),</span>
-    <span class="c1"># Archive</span>
-    <span class="p">(</span><span class="sa">r</span><span class="s2">&quot;/api/archive&quot;</span><span class="p">,</span> <span class="n">ArchiveHandler</span><span class="p">),</span>
-    <span class="p">(</span><span class="sa">r</span><span class="s2">&quot;/api/archive/catalogs&quot;</span><span class="p">,</span> <span class="n">ArchiveCatalogsHandler</span><span class="p">),</span>
-    <span class="p">(</span><span class="sa">r</span><span class="s2">&quot;/api/archive/cross_match&quot;</span><span class="p">,</span> <span class="n">CrossMatchHandler</span><span class="p">),</span>
-    <span class="c1"># Alert Stream filter versioning via K:</span>
-    <span class="p">(</span><span class="sa">r</span><span class="s2">&quot;/api/filters/([0-9]+)?/v&quot;</span><span class="p">,</span> <span class="n">KowalskiFilterHandler</span><span class="p">),</span>
-    <span class="p">(</span><span class="sa">r</span><span class="s2">&quot;/api/tns_info/(.*)&quot;</span><span class="p">,</span> <span class="n">TNSInfoHandler</span><span class="p">),</span>
-<span class="p">]</span>
-</pre></div>
-</div>
-<p>and then those handlers are added to the baseline app:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">app</span> <span class="o">=</span> <span class="n">make_app</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">baselayer_handlers</span><span class="p">,</span> <span class="n">baselayer_settings</span><span class="p">,</span> <span class="n">process</span><span class="p">,</span> <span class="n">env</span><span class="p">)</span>
-    <span class="n">app</span><span class="o">.</span><span class="n">add_handlers</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;.*&quot;</span><span class="p">,</span> <span class="n">fritz_handlers</span><span class="p">)</span>  <span class="c1"># match any host</span>
-</pre></div>
-</div>
-<p>This is known as the “app factory”, which is a function used to create the Tornado application. This is often needed to add additional routes, or do certain setup procedures before the application is run.</p>
-<p>To add accessible routes to the web interface, one configures the config.yaml as follows.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">routes</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">path</span><span class="p">:</span> <span class="s2">&quot;/alerts&quot;</span>
-        <span class="n">component</span><span class="p">:</span> <span class="n">Alerts</span>
-      <span class="o">-</span> <span class="n">path</span><span class="p">:</span> <span class="s2">&quot;/alerts/ztf/:id&quot;</span>
-        <span class="n">component</span><span class="p">:</span> <span class="n">ZTFAlert</span>
-      <span class="o">-</span> <span class="n">path</span><span class="p">:</span> <span class="s2">&quot;/archive&quot;</span>
-        <span class="n">component</span><span class="p">:</span> <span class="n">Archive</span>
-</pre></div>
-</div>
-<p>where each path in the browser is tied to a specific React.js component as rendered.</p>
-<p>For certain Javascript components we also have “Plugins”, through which functionality can be added to extend those pages. These are currently available on the Source (<code class="docutils literal notranslate"><span class="pre">SourcePlugins.jsx</span></code>), Candidates (<code class="docutils literal notranslate"><span class="pre">CandidatePlugins.jsx</span></code>), Filters (<code class="docutils literal notranslate"><span class="pre">FilterPlugins.jsx</span></code>), and About (<code class="docutils literal notranslate"><span class="pre">AboutPlugins.jsx</span></code>) pages.</p>
-<p>Settings for extensions can be specified in the <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>. Taking fritz as an example again, here is a segment that configures <code class="docutils literal notranslate"><span class="pre">kowalski</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">kowalski</span><span class="p">:</span>
-    <span class="n">protocol</span><span class="p">:</span> <span class="n">https</span>
-    <span class="n">host</span><span class="p">:</span> <span class="n">kowalski</span><span class="o">.</span><span class="n">caltech</span><span class="o">.</span><span class="n">edu</span>
-    <span class="n">port</span><span class="p">:</span> <span class="mi">443</span>
-    <span class="n">token</span><span class="p">:</span> <span class="n">YOUR_TOKEN_HERE</span>
-</pre></div>
-</div>
-<p>Your extension can read the configuration as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="kn">from</span> <span class="nn">baselayer.app.env</span> <span class="kn">import</span> <span class="n">load_env</span>
-  <span class="n">env</span><span class="p">,</span> <span class="n">cfg</span> <span class="o">=</span> <span class="n">load_env</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>and then access specific entries with calls like:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="n">protocol</span> <span class="o">=</span> <span class="n">cfg</span><span class="p">[</span><span class="s2">&quot;app.kowalski.protocol&quot;</span><span class="p">]</span>
-</pre></div>
-</div>
+  <section id="versioning">
+<h1>Versioning<a class="headerlink" href="#versioning" title="Link to this heading">#</a></h1>
+<p>Breaking API changes, and changes that require major upgrades of critical system dependencies (like PostgreSQL), are rare. On the other hand, features (new endpoints, or additional data returned by existing endpoints) are added regularly. Lastly, changes that impact neither the user nor the developer (e.g. refactoring, performance improvements, bug fixes) happen continuously, but do not typically need to be advertised.</p>
+<p>SkyPortal uses <a class="reference external" href="https://semver.org/">Semantic Versioning</a> to indicate the severity of changes. The version number will be of the form <code class="docutils literal notranslate"><span class="pre">MAJOR.MINOR.PATCH</span></code>, where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MAJOR</span></code> is incremented when breaking changes, or major dependency upgrades, are introduced;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MINOR</span></code> is incremented when new features are added in a backwards-compatible manner, requiring no changes to user code and minimal changes to existing deployments; and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PATCH</span></code> is incremented when backwards-compatible bug fixes are made.</p></li>
+</ul>
+<p>We aim to make releases monthly. New features are added earlier in the release cycle, then tested, with bugfixes made as necessary. New versions are published on GitHub, generated from tagged commits in the repository. System administrators would typically deploy directly from the tag. End-users can see, from within SkyPortal, which version they are querying: this information is included in API responses, as well as on the About page.</p>
+<p>The SkyPortal version number is accessible as <code class="docutils literal notranslate"><span class="pre">skyportal.__version__</span></code>.</p>
+<p>Please refer to the <a class="reference internal" href="dev.html"><span class="doc">Development Guide</span></a>’s <a class="reference external" href="dev.html#making-a-release">Making a release</a> section for instructions on how to create and publish a new release.</p>
 </section>
 
 
@@ -417,20 +352,20 @@ For the components, they will have a folder: extensions/skyportal/static/js/comp
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="analysis.html"
+       href="deploy.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Analysis</p>
+        <p class="prev-next-title">Deployment</p>
       </div>
     </a>
     <a class="right-next"
-       href="pages.html"
+       href="data_loader.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Front-end Pages</p>
+        <p class="prev-next-title">Data loader</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
