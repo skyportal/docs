@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Deployment &#8212; skyportal 1.0.0 documentation</title>
+    <title>Deployment &#8212; skyportal 1.1.0 documentation</title>
   
   
   
@@ -40,7 +40,7 @@
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
-    <script src="_static/documentation_options.js?v=f9c1cefe"></script>
+    <script src="_static/documentation_options.js?v=051bfb12"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
@@ -51,7 +51,7 @@
     <link rel="prev" title="Developer notes" href="dev.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-  <meta name="docsearch:version" content="1.0.0" />
+  <meta name="docsearch:version" content="1.1.0" />
   </head>
   
   
@@ -126,7 +126,7 @@
   
   
   
-    <p class="title logo__title">skyportal 1.0.0 documentation</p>
+    <p class="title logo__title">skyportal 1.1.0 documentation</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -307,8 +307,9 @@
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-docker-images">Building the Docker images</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-containers">Starting containers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initializing-the-database">Initializing the database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-the-deployment-configuration">Customizing the deployment configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-problems">Handling problems</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-test-data">Adding test data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stopping-the-deployment">Stopping the deployment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-the-deployment">Updating the deployment</a></li>
 </ul>
@@ -334,26 +335,66 @@ same information applies when using Kubernetes, for which we have an
 <a class="reference external" href="https://github.com/skyportal/deploy">example deployment</a>.</p>
 <section id="building-the-docker-images">
 <h2>Building the Docker images<a class="headerlink" href="#building-the-docker-images" title="Link to this heading">#</a></h2>
-<p>The first step is to obtain the images to launch. We deploy
-<a class="reference external" href="https://hub.docker.com/r/skyportal/web">SkyPortal images</a> to Docker
-Hub from time to time, which you can fetch using:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">pull</span> <span class="n">skyportal</span><span class="o">/</span><span class="n">web</span>
-</pre></div>
-</div>
-<p>Otherwise, you may build the images from scratch:</p>
+<p>The first step is to create the images to launch. For that, you can start by git cloning the repository and checking out to the desired version. For a production deployment, we recommend using the version tagged on a release (see <a class="reference internal" href="versioning.html"><span class="doc">versioning</span></a>).</p>
+<p>After customizing your <code class="docutils literal notranslate"><span class="pre">docker.yaml</span></code> file (the equivalent of <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>, used as the config file when building a docker image), you may build the images using the following command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">docker</span><span class="o">-</span><span class="n">local</span>
 </pre></div>
 </div>
 </section>
 <section id="starting-containers">
 <h2>Starting containers<a class="headerlink" href="#starting-containers" title="Link to this heading">#</a></h2>
-<p>Next, we deploy two containers: <code class="docutils literal notranslate"><span class="pre">web</span></code> (the SkyPortal application) and
-<code class="docutils literal notranslate"><span class="pre">db</span></code> (the PostgreSQL server). The database is stored and persisted in a local
-docker volume called <code class="docutils literal notranslate"><span class="pre">skyportal_dbdata</span></code> (see <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">volume</span> <span class="pre">ls</span></code>).</p>
+<p>Next, we deploy two containers: <code class="docutils literal notranslate"><span class="pre">web</span></code> (the SkyPortal application, which image you just built) and
+<code class="docutils literal notranslate"><span class="pre">db</span></code> (the PostgreSQL server, from the official Docker image).
+The database is stored and persisted in a local docker volume called <code class="docutils literal notranslate"><span class="pre">skyportal_dbdata</span></code> (see <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">volume</span> <span class="pre">ls</span></code>), which location is specified in the <code class="docutils literal notranslate"><span class="pre">docker-compose.yaml</span></code> file, as well as the database name, user, and password, other volume mounts, and the port mapping.</p>
+<p>To start the containers, run:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span><span class="o">-</span><span class="n">compose</span> <span class="n">up</span> <span class="o">-</span><span class="n">d</span>
 </pre></div>
 </div>
-<p>Once both services are up and running, you may browse to SkyPortal at <code class="docutils literal notranslate"><span class="pre">http://localhost:9000</span></code>.</p>
+<p>The application will not be accessible until the database has been initialized, which is explained in the next section.</p>
+</section>
+<section id="initializing-the-database">
+<h2>Initializing the database<a class="headerlink" href="#initializing-the-database" title="Link to this heading">#</a></h2>
+<p>Note that by default, the SkyPortal image will run the application in production (<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run_production</span></code>, see the <code class="docutils literal notranslate"><span class="pre">CMD</span></code> directive at the end of the Dockerfile).</p>
+<p>The key behavior to note when running production mode is that the application will not create any database tables automatically (to avoid messing with production data). This means that the very first time you spin up SkyPortal using containers, the <code class="docutils literal notranslate"><span class="pre">skyportal_dbdata</span></code> volume will only have an empty database. While the <code class="docutils literal notranslate"><span class="pre">skyportal-web-1</span></code> container will start, the web application will not be accessible without an initialized database. This can easily be done manually, and the easiest way to do this is to run:</p>
+<p>To initialize an empty database, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">exec</span> <span class="n">skyportal</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="mi">1</span> <span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;source /skyportal_env/bin/activate &amp;&amp; FLAGS=&quot;--config=config.yaml&quot; make db_create_tables&#39;</span>
+</pre></div>
+</div>
+<p>To load an example database, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">exec</span> <span class="n">skyportal</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="mi">1</span> <span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;source /skyportal_env/bin/activate &amp;&amp; FLAGS=&quot;--create_tables --config=config.yaml&quot; make load_demo_data&#39;</span>
+</pre></div>
+</div>
+<p><em>Notes:</em></p>
+<ul class="simple">
+<li><p>This command can take a few minutes to run, depending on your machine’s configuration.</p></li>
+<li><p>It should only <strong>run once</strong>.</p></li>
+<li><p>Older versions of docker compose may use a different container name, such as <code class="docutils literal notranslate"><span class="pre">skyportal_web_1</span></code> (with underscores instead of dashes).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">FLAGS</span></code> variable is used to pass arguments to the <code class="docutils literal notranslate"><span class="pre">make</span></code> command. In this case, we are passing the <code class="docutils literal notranslate"><span class="pre">--create_tables</span></code> flag to create the database tables and the <code class="docutils literal notranslate"><span class="pre">--config=config.yaml</span></code> flag to specify the configuration file to use. You can pass any other flags you want to the <code class="docutils literal notranslate"><span class="pre">make</span></code> command in the same way.</p></li>
+<li><p>If you are using a different configuration file, please refer to the next section on how to customize the deployment configuration, before you run the <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">load_demo_data</span></code> command.</p></li>
+<li><p>When running the command above, you might see a few <code class="docutils literal notranslate"><span class="pre">SAWarning</span></code> warnings. These are harmless and can be ignored.</p></li>
+<li><p>Similarly, you might see a handful of <code class="docutils literal notranslate"><span class="pre">No</span> <span class="pre">token</span> <span class="pre">specified;</span> <span class="pre">reading</span> <span class="pre">from</span> <span class="pre">SkyPortal</span> <span class="pre">generated</span> <span class="pre">.tokens.yaml</span></code> messages. These appear as after creating the tables, the application will take a few seconds to start up and generate a token for the admin user. This token is then saved to a <code class="docutils literal notranslate"><span class="pre">.tokens.yaml</span></code> file in the root directory of the application. This token is used to authenticate the admin user when making requests to the API. The token is only generated once, and if you delete the <code class="docutils literal notranslate"><span class="pre">.tokens.yaml</span></code> file, a new token will be generated the next time the application starts up.</p></li>
+</ul>
+<p>Now, you may browse to SkyPortal at <code class="docutils literal notranslate"><span class="pre">http://localhost:5000</span></code> (or any other port you have configured it to run on).</p>
+</section>
+<section id="customizing-the-deployment-configuration">
+<h2>Customizing the deployment configuration<a class="headerlink" href="#customizing-the-deployment-configuration" title="Link to this heading">#</a></h2>
+<p>If you want to use a specific configuration file at runtime (that can then be different from the one used to build the image), you can mount it as a volume when starting the container. For example, if you had a <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> file in a directory called <code class="docutils literal notranslate"><span class="pre">config</span></code>, you would add to your <code class="docutils literal notranslate"><span class="pre">docker-compose.yaml</span></code> file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">web</span><span class="p">:</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">volumes</span><span class="p p-Indicator">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./config/config.yaml:/etc/skyportal/config.yaml</span>
+<span class="w">    </span><span class="err">```</span>
+</pre></div>
+</div>
+<p>This will mount the <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> file from the <code class="docutils literal notranslate"><span class="pre">config</span></code> directory to the <code class="docutils literal notranslate"><span class="pre">/etc/skyportal/config.yaml</span></code> path in the container. You could technically directly have it mounted to <code class="docutils literal notranslate"><span class="pre">/skyportal/config.yaml</span></code>, but we recommend using a different path to not lose track of the original configuration file used to build the image.</p>
+<p>You would need to pass the <code class="docutils literal notranslate"><span class="pre">--config=config.yaml</span></code> flag when calling any <code class="docutils literal notranslate"><span class="pre">make</span></code> commands. For the container to use this configuration file on startup, set the FLAG environment variable in the <code class="docutils literal notranslate"><span class="pre">docker-compose.yaml</span></code> file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">web</span><span class="p">:</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">environment</span><span class="p p-Indicator">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FLAGS=--config=/etc/skyportal/config.yaml</span>
+</pre></div>
+</div>
+<p><strong>Note: Elements of the configuration used to customize the frontend need to be set in the configuration file used to build the image (<code class="docutils literal notranslate"><span class="pre">docker.yaml</span></code>), as they are used to build the web application’s bundle which only happens once at build time, and will not take effect if changed at runtime.</strong></p>
 </section>
 <section id="handling-problems">
 <h2>Handling problems<a class="headerlink" href="#handling-problems" title="Link to this heading">#</a></h2>
@@ -364,16 +405,6 @@ docker volume called <code class="docutils literal notranslate"><span class="pre
 </pre></div>
 </div>
 <p>(Or, follow the logs with <code class="docutils literal notranslate"><span class="pre">docker-compose</span> <span class="pre">logs</span> <span class="pre">-f</span> <span class="pre">db</span></code>.)</p>
-</section>
-<section id="adding-test-data">
-<h2>Adding test data<a class="headerlink" href="#adding-test-data" title="Link to this heading">#</a></h2>
-<p>Note that by default, the SkyPortal image will run the application in production (<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run_production</span></code>).</p>
-<p>The key behavior to note when running production mode is that the application will not create any database tables automatically (to avoid messing with production data). This means that the very first time you spin up SkyPortal using containers, the <code class="docutils literal notranslate"><span class="pre">skyportal_dbdata</span></code> volume will only have an empty database. You will need to set up the database tables manually. The easiest way to do this would be to run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">exec</span> <span class="n">skyportal</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="mi">1</span> <span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;source /skyportal_env/bin/activate &amp;&amp; FLAGS=&quot;--create_tables --config=config.yaml&quot; make load_demo_data&#39;</span>
-</pre></div>
-</div>
-<p><em>Note: Older versions of docker compose may use a different container name, such as <code class="docutils literal notranslate"><span class="pre">skyportal_web_1</span></code> (with underscores instead of dashes).</em></p>
-<p>This will also load in some test data to play with.</p>
 </section>
 <section id="stopping-the-deployment">
 <h2>Stopping the deployment<a class="headerlink" href="#stopping-the-deployment" title="Link to this heading">#</a></h2>
@@ -442,8 +473,9 @@ docker volume called <code class="docutils literal notranslate"><span class="pre
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-docker-images">Building the Docker images</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-containers">Starting containers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initializing-the-database">Initializing the database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-the-deployment-configuration">Customizing the deployment configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-problems">Handling problems</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-test-data">Adding test data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stopping-the-deployment">Stopping the deployment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-the-deployment">Updating the deployment</a></li>
 </ul>
