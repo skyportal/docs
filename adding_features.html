@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -27,18 +27,18 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/output_cells.css?v=4c393c42" />
   
   <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=051bfb12"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
@@ -173,9 +173,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -703,14 +708,14 @@ fields, we use
 Handler<code class="docutils literal notranslate"><span class="pre">(defined</span> <span class="pre">in</span></code>skyportal/handlers/base.py`), a handler that extends Tornado’s base <a class="reference external" href="https://www.tornadoweb.org/en/stable/web.html#tornado.web.RequestHandler">RequestHandler</a>, handling authentication and providing utility methods for pushing websocket messages to the front-end and returning HTTP responses.</p>
 <p>Let’s take a look at adding our own handler. We’ll start by defining a new request handler in a new file <code class="docutils literal notranslate"><span class="pre">skyportal/handlers/api/test_comment.py</span></code>. Note that we’ve imported <code class="docutils literal notranslate"><span class="pre">BaseHandler</span></code> which serves as the base class of our new handler. We define class methods describing how to handle requests of various types, e.g. a <code class="docutils literal notranslate"><span class="pre">put</span></code> method for PUT requests, a <code class="docutils literal notranslate"><span class="pre">post</span></code> method for POST requests, etc.</p>
 <p><code class="docutils literal notranslate"><span class="pre">skyportal/handlers/api/test_comment.py</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">baselayer.app.access</span> <span class="kn">import</span> <span class="n">auth_or_token</span>
-<span class="kn">from</span> <span class="nn">..base</span> <span class="kn">import</span> <span class="n">BaseHandler</span>
-<span class="kn">from</span> <span class="nn">...models</span> <span class="kn">import</span> <span class="n">TestComment</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">baselayer.app.access</span><span class="w"> </span><span class="kn">import</span> <span class="n">auth_or_token</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">..base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseHandler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">...models</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestComment</span>
 
 
-<span class="k">class</span> <span class="nc">TestCommentHandler</span><span class="p">(</span><span class="n">BaseHandler</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TestCommentHandler</span><span class="p">(</span><span class="n">BaseHandler</span><span class="p">):</span>
     <span class="nd">@auth_or_token</span>
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># If we wanted to do any query filtering, this is where that would happen</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
             <span class="n">comments</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">scalars</span><span class="p">(</span>
@@ -719,7 +724,7 @@ Handler<code class="docutils literal notranslate"><span class="pre">(defined</sp
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">comments</span><span class="p">)</span>
 
     <span class="nd">@auth_or_token</span>
-    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
         <span class="n">comment_text</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;commentText&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">comment_text</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">comment_text</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
@@ -753,8 +758,8 @@ Handler<code class="docutils literal notranslate"><span class="pre">(defined</sp
 </div>
 <p>where <code class="docutils literal notranslate"><span class="pre">data</span></code> is whatever was passed in as the <code class="docutils literal notranslate"><span class="pre">data</span></code> argument to <code class="docutils literal notranslate"><span class="pre">success</span></code> (the comments list, in this case). <code class="docutils literal notranslate"><span class="pre">BaseHandler.success</span></code> converts <code class="docutils literal notranslate"><span class="pre">data</span></code> to JSON form.</p>
 <p>In addition to <code class="docutils literal notranslate"><span class="pre">success</span></code>, <code class="docutils literal notranslate"><span class="pre">BaseHandler</span></code> also provides an <code class="docutils literal notranslate"><span class="pre">error</span></code> method for returning error responses:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SomeHandler</span><span class="p">(</span><span class="n">BaseHandler</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">some_request_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SomeHandler</span><span class="p">(</span><span class="n">BaseHandler</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">some_request_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="o">...</span>
         <span class="k">if</span> <span class="n">error_occurred</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Error message here&quot;</span><span class="p">)</span>
@@ -764,8 +769,8 @@ Handler<code class="docutils literal notranslate"><span class="pre">(defined</sp
 </div>
 <p>Note: In Python, if an error occurs and isn’t caught, the method will raise an exception. Here, we want to catch errors so we can still use return a response to the client containing the error message. To do so, one can use the <code class="docutils literal notranslate"><span class="pre">try</span></code>/<code class="docutils literal notranslate"><span class="pre">except</span></code> syntax:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="k">class</span> <span class="nc">SomeHandler</span><span class="p">(</span><span class="n">BaseHandler</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">some_request_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SomeHandler</span><span class="p">(</span><span class="n">BaseHandler</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">some_request_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="o">...</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">do_something_that_might_raise_an_error</span><span class="p">()</span>
@@ -778,13 +783,13 @@ Handler<code class="docutils literal notranslate"><span class="pre">(defined</sp
 <p>Let’s turn for a moment to <a class="reference external" href="https://docs.sqlalchemy.org/en/13/index.html">SQLAlchemy</a>, a Python library offering a SQL toolkit and object relational mapper (ORM). We <a class="reference external" href="https://docs.sqlalchemy.org/en/14/orm/mapping_styles.html#orm-declarative-mapping">declare classes</a> that inherit from SQLAlchemy’s <code class="docutils literal notranslate"><span class="pre">declarative_base</span></code> (this is all set up in <a class="reference external" href="https://github.com/cesium-ml/baselayer"><code class="docutils literal notranslate"><span class="pre">baselayer</span></code></a>’s <a class="reference external" href="https://github.com/cesium-ml/baselayer/blob/main/app/models.py"><code class="docutils literal notranslate"><span class="pre">models</span></code></a> module, which we import in SkyPortal’s <code class="docutils literal notranslate"><span class="pre">models</span></code> module as <code class="docutils literal notranslate"><span class="pre">Base</span></code>) that are then mapped to database tables by SQLAlchemy. <code class="docutils literal notranslate"><span class="pre">baselayer</span></code>’s base class, which SkyPortal mapper classes inherit from, already comes with a few columns: <code class="docutils literal notranslate"><span class="pre">id</span></code> (integer), <code class="docutils literal notranslate"><span class="pre">created_at</span></code> (<code class="docutils literal notranslate"><span class="pre">DateTime</span></code>), and <code class="docutils literal notranslate"><span class="pre">modified</span></code> (<code class="docutils literal notranslate"><span class="pre">DateTime</span></code>).</p>
 <p>With that, let’s define our <code class="docutils literal notranslate"><span class="pre">TestComment</span></code> mapper class in <code class="docutils literal notranslate"><span class="pre">skyportal/models</span></code> directory, in a file called <code class="docutils literal notranslate"><span class="pre">test_comment.py</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TestComment&#39;</span><span class="p">]</span>
-<span class="kn">import</span> <span class="nn">sqlalchemy</span> <span class="k">as</span> <span class="nn">sa</span>
-<span class="kn">from</span> <span class="nn">sqlalchemy.orm</span> <span class="kn">import</span> <span class="n">relationship</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sa</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">relationship</span>
 
-<span class="kn">from</span> <span class="nn">baselayer.app.models</span> <span class="kn">import</span> <span class="n">Base</span><span class="p">,</span> <span class="n">User</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">baselayer.app.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Base</span><span class="p">,</span> <span class="n">User</span>
 
 
-<span class="k">class</span> <span class="nc">TestComment</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TestComment</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="n">text</span> <span class="o">=</span> <span class="n">sa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">sa</span><span class="o">.</span><span class="n">String</span><span class="p">,</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">doc</span><span class="o">=</span><span class="s2">&quot;Comment text&quot;</span><span class="p">)</span>
 
     <span class="n">user_id</span> <span class="o">=</span> <span class="n">sa</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
@@ -811,15 +816,15 @@ Handler<code class="docutils literal notranslate"><span class="pre">(defined</sp
 <p>The SQLAlchemy ORM maps this class to a database table with the columns <code class="docutils literal notranslate"><span class="pre">text</span></code> (a string type, as specified by <code class="docutils literal notranslate"><span class="pre">sa.String</span></code>) and <code class="docutils literal notranslate"><span class="pre">user_id</span></code> (a <a class="reference external" href="https://docs.sqlalchemy.org/en/14/core/constraints.html#sqlalchemy.schema.ForeignKey"><code class="docutils literal notranslate"><span class="pre">ForeignKey</span></code></a> instance, which defines a dependency on the <code class="docutils literal notranslate"><span class="pre">id</span></code> column of the <code class="docutils literal notranslate"><span class="pre">users</span></code> table, constraining the value to a valid user ID), in addition to the above-mentioned columns inherited from <code class="docutils literal notranslate"><span class="pre">Base</span></code>. Note that class names map to table names by appending an “s” (to indicate plurality) to the lowercase version of the class name (e.g. the <code class="docutils literal notranslate"><span class="pre">User</span></code> class maps to the <code class="docutils literal notranslate"><span class="pre">&quot;users&quot;</span></code> table).</p>
 <p>Also, we defined a relationship between the <code class="docutils literal notranslate"><span class="pre">TestComment</span></code> class and the <code class="docutils literal notranslate"><span class="pre">User</span></code> class, which is a one-to-many relationship (one user can have many comments, but a comment can only be submitted by one user). This is done by defining a <a class="reference external" href="https://docs.sqlalchemy.org/en/14/orm/basic_relationships.html#one-to-many"><code class="docutils literal notranslate"><span class="pre">relationship</span></code></a> named <code class="docutils literal notranslate"><span class="pre">user</span></code> in the TestComment class, and then defining a <a class="reference external" href="https://docs.sqlalchemy.org/en/14/orm/basic_relationships.html#one-to-many"><code class="docutils literal notranslate"><span class="pre">relationship</span></code></a> named <code class="docutils literal notranslate"><span class="pre">test_comments</span></code> on the <code class="docutils literal notranslate"><span class="pre">User</span></code> class. This is necessary because the <code class="docutils literal notranslate"><span class="pre">TestComment</span></code> class is defined after the <code class="docutils literal notranslate"><span class="pre">User</span></code> class, and so the <code class="docutils literal notranslate"><span class="pre">User</span></code> class doesn’t know about the <code class="docutils literal notranslate"><span class="pre">TestComment</span></code> class yet. The 2 relationships are then linked together by setting the <code class="docutils literal notranslate"><span class="pre">back_populates</span></code> argument of the <code class="docutils literal notranslate"><span class="pre">relationship</span></code> on the <code class="docutils literal notranslate"><span class="pre">User</span></code> class to the <code class="docutils literal notranslate"><span class="pre">relationship</span></code> on the <code class="docutils literal notranslate"><span class="pre">TestComment</span></code> class, and vice versa.</p>
 <p>After adding a new handler and/or model, we ensure that they can be imported in other modules by adding them to the <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> files in their respective directories. For example, for <code class="docutils literal notranslate"><span class="pre">skyportal/handlers/api/test_comment.py</span></code>, we add the following line to the <code class="docutils literal notranslate"><span class="pre">skyportal/handlers/api/__init__.py</span></code> file:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.test_comment</span> <span class="kn">import</span> <span class="n">TestCommentHandler</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">.test_comment</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestCommentHandler</span>
 </pre></div>
 </div>
 <p>and for <code class="docutils literal notranslate"><span class="pre">skyportal/models/test_comment.py</span></code>, we add the following line to the <code class="docutils literal notranslate"><span class="pre">skyportal/models/__init__.py</span></code> file:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.test_comment</span> <span class="kn">import</span> <span class="n">TestComment</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">.test_comment</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestComment</span>
 </pre></div>
 </div>
 <p>Now, we need to define the API endpoint that will be used to access the <code class="docutils literal notranslate"><span class="pre">TestCommentHandler</span></code> we just defined. This is done in the <code class="docutils literal notranslate"><span class="pre">skyportal/app_server.py</span></code> file.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skyportal.handlers.api</span> <span class="kn">import</span> <span class="n">TestCommentHandler</span> <span class="c1"># add this line to the top of the file after the existing handlers imports</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skyportal.handlers.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestCommentHandler</span> <span class="c1"># add this line to the top of the file after the existing handlers imports</span>
 
 <span class="o">...</span>
 
@@ -838,7 +843,7 @@ Handler<code class="docutils literal notranslate"><span class="pre">(defined</sp
 <img alt="test comments" src="_images/test_comments.gif" /></p>
 <p>Now our new feature should be fully implemented, and we’ll add a test to make sure it’s working as expected. We use Selenium in our front-end tests; we’ll use that to programmatically navigate, click, enter text, etc., in a browser session, and ensure that elements are rendering and behaving as expected. Let’s take a look at an example test for our new component:</p>
 <p><code class="docutils literal notranslate"><span class="pre">skyportal/tests/frontend/test_test_comments.py</span></code>:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_test_comments</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">test_test_comments</span><span class="p">(</span><span class="n">driver</span><span class="p">,</span> <span class="n">user</span><span class="p">):</span>
     <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;/become_user/</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/test_comments)</span>
 
@@ -860,8 +865,8 @@ Handler<code class="docutils literal notranslate"><span class="pre">(defined</sp
 <p>SkyPortal utilizes <a class="reference external" href="http://cesium-ml.org/blog/2016/07/13/a-pattern-for-websockets-in-python/">websockets</a> for pushing messages from the back-end to the front-end. Websockets can be used for telling the front-end that a long-running job has finished, that the DB state has changed and should be re-fetched, for displaying notifications, etc. In SkyPortal, websocket messages are pushed from within the body of request handlers, and always contain an <em>action type</em>. When a message is received by the front-end, its action type is used to determine how to handle the message, which typically involves dispatching actions that update the state. For example, when a new comment is added to a source, we want the comment to automatically appear in the comments section if a user is currently viewing that source. To do this, <code class="docutils literal notranslate"><span class="pre">CommentHandler.post</span></code> pushes a websocket message to all active sessions with an action type of “skyportal/REFRESH_SOURCE” and a payload containing the source’s internal key:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
 
-<span class="k">class</span> <span class="nc">CommentHandler</span><span class="p">(</span><span class="n">BaseHandler</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CommentHandler</span><span class="p">(</span><span class="n">BaseHandler</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="o">...</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">push_all</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;skyportal/REFRESH_SOURCE&#39;</span><span class="p">,</span>
@@ -903,23 +908,23 @@ Handler<code class="docutils literal notranslate"><span class="pre">(defined</sp
 <p>Our handler must be a function with the same signature as above (<code class="docutils literal notranslate"><span class="pre">getState</span></code>, a function that returns the application state, is optional and can be omitted if your handler doesn’t need to access the state). Each handler added to the <code class="docutils literal notranslate"><span class="pre">messageHandler</span></code> will be called on all incoming messages. In this case, if the message has an action type equal to “skyportal/REFRESH_SOURCE”, we check whether the user is currently viewing the source whose <code class="docutils literal notranslate"><span class="pre">internal_key</span></code> value matches that provided in the message’s payload (if a user is currently viewing a source, <code class="docutils literal notranslate"><span class="pre">state.source.internal_key</span></code> will contain that source’s key), and if so, we dispatch an action creator that will re-fetch the source data and update the state accordingly.</p>
 <p>By using websocket messages whenever the back-end state has changed, in conjuction with the automatic re-rendering capabilities of React, we ensure that any changes to the DB state are automatically reflected by real time updates to the front-end view.</p>
 <p>In addition to <code class="docutils literal notranslate"><span class="pre">BaseHandler.push</span></code> and <code class="docutils literal notranslate"><span class="pre">BaseHandler.push_all</span></code>, an optional <code class="docutils literal notranslate"><span class="pre">action</span></code> keyword argument (and corresponding <code class="docutils literal notranslate"><span class="pre">payload</span></code> keywoard argument, if relevant) can be supplied to <code class="docutils literal notranslate"><span class="pre">BaseHandler.success</span></code>, and a websocket message with that action type (and payload, if provided) will be pushed to the current user. For example,</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SomeHandler</span><span class="p">(</span><span class="n">BaseHandler</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">some_request_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SomeHandler</span><span class="p">(</span><span class="n">BaseHandler</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">some_request_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="o">...</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">},</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;skyportal/ACTION_TYPE&quot;</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
 </pre></div>
 </div>
 <p>is just a more compact form of the following, which is equivalent:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SomeHandler</span><span class="p">(</span><span class="n">BaseHandler</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">some_request_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SomeHandler</span><span class="p">(</span><span class="n">BaseHandler</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">some_request_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="o">...</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">&quot;skyportal/ACTION_TYPE&quot;</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
 </pre></div>
 </div>
 <p>Note that whenever a message should be pushed to <em>all</em> active users, <code class="docutils literal notranslate"><span class="pre">BaseHandler.push_all</span></code> must be used:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SomeHandler</span><span class="p">(</span><span class="n">BaseHandler</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">some_request_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SomeHandler</span><span class="p">(</span><span class="n">BaseHandler</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">some_request_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="o">...</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">push_all</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">&quot;skyportal/ACTION_TYPE&quot;</span><span class="p">,</span> <span class="n">payload</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">success</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
@@ -1057,8 +1062,8 @@ By The SkyPortal Team
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>
