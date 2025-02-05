@@ -19544,8 +19544,19 @@
                   }
                 },
                 "required": [
-                  "objId",
-                  "inviteGroupIds"
+                  "objId"
+                ],
+                "anyOf": [
+                  {
+                    "required": [
+                      "inviteGroupIds"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "unsaveGroupIds"
+                    ]
+                  }
                 ]
               }
             }
@@ -46902,6 +46913,10 @@
             "type": "boolean",
             "description": "Whether the public release is visible to the public"
           },
+          "auto_publish_enabled": {
+            "type": "boolean",
+            "description": "Whether the source page from the same group should be automatically published in this release"
+          },
           "options": {
             "description": "Default options for the public source of the release"
           }
@@ -46985,6 +47000,10 @@
             "type": "boolean",
             "description": "Whether the public release is visible to the public"
           },
+          "auto_publish_enabled": {
+            "type": "boolean",
+            "description": "Whether the source page from the same group should be automatically published in this release"
+          },
           "options": {
             "description": "Default options for the public source of the release"
           }
@@ -47057,6 +47076,10 @@
           "hash": {
             "type": "string",
             "description": "Hash of the source data used to identify the page version"
+          },
+          "is_auto_published": {
+            "type": "boolean",
+            "description": "Whether the page was automatically published"
           },
           "is_visible": {
             "type": "boolean",
@@ -47132,6 +47155,10 @@
           "hash": {
             "type": "string",
             "description": "Hash of the source data used to identify the page version"
+          },
+          "is_auto_published": {
+            "type": "boolean",
+            "description": "Whether the page was automatically published"
           },
           "is_visible": {
             "type": "boolean",
