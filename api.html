@@ -6210,6 +6210,104 @@
         }
       }
     },
+    "/api/moving_object/{obj_name}/followup": {
+      "post": {
+        "summary": "Find a continuous sequence of observations for a moving object",
+        "description": "Find a continuous sequence of observations for a moving object in an instrument's field. N observations of a given exposure time and filter are scheduled at the optimal times between start_time and end_time.",
+        "tags": [
+          "moving objects",
+          "follow-up"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "obj_name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Name of the moving object"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "instrument_id": {
+                    "type": "integer",
+                    "description": "ID of the instrument to use"
+                  },
+                  "exposure_count": {
+                    "type": "integer",
+                    "description": "Number of exposures"
+                  },
+                  "exposure_time": {
+                    "type": "number",
+                    "description": "Exposure time in seconds"
+                  },
+                  "start_time": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Start time of the obversations' time window"
+                  },
+                  "end_time": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "End time of the obversations' time window"
+                  },
+                  "filter": {
+                    "type": "string",
+                    "description": "Filter to use"
+                  },
+                  "primary_only": {
+                    "type": "boolean",
+                    "description": "Only consider an instrument's fields from it's primary grid, if any",
+                    "required": false
+                  },
+                  "airmass_limit": {
+                    "type": "number",
+                    "description": "Maximum airmass for observations. Default is 2.5",
+                    "required": false
+                  },
+                  "moon_distance_limit": {
+                    "type": "number",
+                    "description": "Minimum distance from the Moon in degrees. Default is 30",
+                    "required": false
+                  },
+                  "sun_altitude_limit": {
+                    "type": "number",
+                    "description": "Maximum altitude of the Sun in degrees. Default is -18",
+                    "required": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/earthquake/status": {
       "get": {
         "summary": "Retrieve all Earthquake status tags",
@@ -19965,6 +20063,24 @@
           },
           {
             "in": "query",
+            "name": "modifiedBefore",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Arrow-parseable date string (e.g. 2020-01-01). If provided,\nreturn only spectra modified before this time.\n"
+          },
+          {
+            "in": "query",
+            "name": "modifiedAfter",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Arrow-parseable date string (e.g. 2020-01-01). If provided,\nreturn only spectra modified after this time.\n"
+          },
+          {
+            "in": "query",
             "name": "objID",
             "nullable": true,
             "schema": {
@@ -20524,6 +20640,24 @@
               "type": "string"
             },
             "description": "Arrow-parseable date string (e.g. 2020-01-01). If provided,\nreturn only spectra observed after this time.\n"
+          },
+          {
+            "in": "query",
+            "name": "modifiedBefore",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Arrow-parseable date string (e.g. 2020-01-01). If provided,\nreturn only spectra modified before this time.\n"
+          },
+          {
+            "in": "query",
+            "name": "modifiedAfter",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Arrow-parseable date string (e.g. 2020-01-01). If provided,\nreturn only spectra modified after this time.\n"
           },
           {
             "in": "query",
@@ -38807,15 +38941,21 @@
           },
           "fields": {
             "type": "array",
-            "items": {}
+            "items": {
+              "description": "The Fields for this instrument."
+            }
           },
           "tiles": {
             "type": "array",
-            "items": {}
+            "items": {
+              "description": "The Tiles for this instrument."
+            }
           },
           "plans": {
             "type": "array",
-            "items": {}
+            "items": {
+              "description": "The ObservationPlans for this instrument."
+            }
           },
           "logs": {
             "type": "array",
@@ -39480,15 +39620,21 @@
           },
           "fields": {
             "type": "array",
-            "items": {}
+            "items": {
+              "description": "The Fields for this instrument."
+            }
           },
           "tiles": {
             "type": "array",
-            "items": {}
+            "items": {
+              "description": "The Tiles for this instrument."
+            }
           },
           "plans": {
             "type": "array",
-            "items": {}
+            "items": {
+              "description": "The ObservationPlans for this instrument."
+            }
           },
           "logs": {
             "type": "array",
