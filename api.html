@@ -1559,6 +1559,227 @@
         }
       }
     },
+    "/api/candidates/scan_reports/{report_id}/items/{_}": {
+      "get": {
+        "summary": "Retrieve all items in a scanning report",
+        "tags": [
+          "report item"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "report_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID of the report to retrieve items from"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArrayOfCandidateScanReport"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/candidates/scan_reports/{report_id}/items/{item_id}": {
+      "patch": {
+        "summary": "Update an item from a scanning report",
+        "tags": [
+          "report item"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "report_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID of the report where the item is located"
+          },
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID of the report item to update"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "comment": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/candidates/scan_reports": {
+      "get": {
+        "summary": "Retrieve multiple scanning reports",
+        "tags": [
+          "report"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "numPerPage",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of items to return"
+          },
+          {
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page number to return"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArrayOfCandidateScanReport"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Populate the candidate scanning report with all saved candidates in a given range",
+        "tags": [
+          "report"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "group_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "groups use to filter the candidates and manage the report"
+                  },
+                  "passed_filters_range": {
+                    "type": "object",
+                    "properties": {
+                      "start_date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Start date of the passed filters range"
+                      },
+                      "end_date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "End date of the passed filters range"
+                      }
+                    },
+                    "saved_candidates_range": {
+                      "type": "object",
+                      "properties": {
+                        "start_saved_date": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "Start date of the saved candidates range"
+                        },
+                        "end_saved_date": {
+                          "type": "string",
+                          "format": "date-time",
+                          "description": "End date of the saved candidates range"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/candidates/{obj_id}": {
       "head": {
         "summary": "Check if a Candidate exists",
@@ -37980,6 +38201,134 @@
           "status"
         ]
       },
+      "GroupScanReport": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "nullable": true
+          },
+          "scanreport": {
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "group_id": {
+            "type": "integer"
+          },
+          "scanreport_id": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "group_id",
+          "scanreport_id"
+        ]
+      },
+      "SingleGroupScanReport": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GroupScanReport"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfGroupScanReports": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupScanReport"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "GroupScanReportNoID": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "nullable": true
+          },
+          "scanreport": {
+            "nullable": true
+          },
+          "group_id": {
+            "type": "integer"
+          },
+          "scanreport_id": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "group_id",
+          "scanreport_id"
+        ]
+      },
+      "SingleGroupScanReportNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GroupScanReportNoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfGroupScanReportNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupScanReportNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
       "GroupSourceNotification": {
         "type": "object",
         "properties": {
@@ -49110,6 +49459,290 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RoleNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ScanReport": {
+        "type": "object",
+        "properties": {
+          "author": {
+            "description": "The User that created this report",
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "description": "List of candidates saved in this scanning report"
+            }
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "description": "The groups that have access to this report"
+            }
+          },
+          "author_id": {
+            "type": "integer",
+            "description": "ID of the user that created this report"
+          },
+          "options": {
+            "description": "Options used to create this report"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "author_id",
+          "options"
+        ]
+      },
+      "SingleScanReport": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ScanReport"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfScanReports": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScanReport"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ScanReportItem": {
+        "type": "object",
+        "properties": {
+          "scan_report": {
+            "nullable": true
+          },
+          "obj_id": {
+            "type": "string",
+            "description": "ID of the Object associated with the candidate"
+          },
+          "scan_report_id": {
+            "type": "integer",
+            "description": "ID of the report where the saved candidate is listed"
+          },
+          "data": {
+            "description": "Source data of the candidate when the report was generated",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "obj_id",
+          "scan_report_id"
+        ]
+      },
+      "SingleScanReportItem": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ScanReportItem"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfScanReportItems": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScanReportItem"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ScanReportItemNoID": {
+        "type": "object",
+        "properties": {
+          "scan_report": {
+            "nullable": true
+          },
+          "obj_id": {
+            "type": "string",
+            "description": "ID of the Object associated with the candidate"
+          },
+          "scan_report_id": {
+            "type": "integer",
+            "description": "ID of the report where the saved candidate is listed"
+          },
+          "data": {
+            "description": "Source data of the candidate when the report was generated",
+            "nullable": true
+          }
+        },
+        "required": [
+          "obj_id",
+          "scan_report_id"
+        ]
+      },
+      "SingleScanReportItemNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ScanReportItemNoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfScanReportItemNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScanReportItemNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ScanReportNoID": {
+        "type": "object",
+        "properties": {
+          "author": {
+            "description": "The User that created this report",
+            "nullable": true
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "description": "List of candidates saved in this scanning report"
+            }
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "description": "The groups that have access to this report"
+            }
+          },
+          "author_id": {
+            "type": "integer",
+            "description": "ID of the user that created this report"
+          },
+          "options": {
+            "description": "Options used to create this report"
+          }
+        },
+        "required": [
+          "author_id",
+          "options"
+        ]
+      },
+      "SingleScanReportNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ScanReportNoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfScanReportNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScanReportNoID"
             }
           }
         },
