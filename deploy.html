@@ -328,7 +328,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-containers">Starting containers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initializing-the-database">Initializing the database</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-the-deployment-configuration">Customizing the deployment configuration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-problems">Handling problems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-problems">Handling problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sncosmo-bandpass-problems">sncosmo bandpass problems</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stopping-the-deployment">Stopping the deployment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-the-deployment">Updating the deployment</a></li>
 </ul>
@@ -387,7 +390,7 @@ The database is stored and persisted in a local docker volume called <code class
 <ul class="simple">
 <li><p>This command can take a few minutes to run, depending on your machine’s configuration.</p></li>
 <li><p>It should only <strong>run once</strong>.</p></li>
-<li><p>Older versions of docker compose may use a different container name, such as <code class="docutils literal notranslate"><span class="pre">skyportal_web_1</span></code> (with underscores instead of dashes).</p></li>
+<li><p>Older versions of docker compose may use a different container name, such as <code class="docutils literal notranslate"><span class="pre">skyportal_web_1</span></code> (with underscores instead of dashes).  Run <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">ps</span></code> to see what containers are running.  If you’re in the directory with the <code class="docutils literal notranslate"><span class="pre">docker-compose.yaml</span></code> file, you may run <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">compose</span> <span class="pre">exec</span> <span class="pre">web...</span></code> instead of <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">exec</span> <span class="pre">skyportal-web-1...</span></code>.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">FLAGS</span></code> variable is used to pass arguments to the <code class="docutils literal notranslate"><span class="pre">make</span></code> command. In this case, we are passing the <code class="docutils literal notranslate"><span class="pre">--create_tables</span></code> flag to create the database tables and the <code class="docutils literal notranslate"><span class="pre">--config=config.yaml</span></code> flag to specify the configuration file to use. You can pass any other flags you want to the <code class="docutils literal notranslate"><span class="pre">make</span></code> command in the same way.</p></li>
 <li><p>If you are using a different configuration file, please refer to the next section on how to customize the deployment configuration, before you run the <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">load_demo_data</span></code> command.</p></li>
 <li><p>When running the command above, you might see a few <code class="docutils literal notranslate"><span class="pre">SAWarning</span></code> warnings. These are harmless and can be ignored.</p></li>
@@ -424,6 +427,23 @@ The database is stored and persisted in a local docker volume called <code class
 </pre></div>
 </div>
 <p>(Or, follow the logs with <code class="docutils literal notranslate"><span class="pre">docker-compose</span> <span class="pre">logs</span> <span class="pre">-f</span> <span class="pre">db</span></code>.)</p>
+<p>There are additional log files inside the container that might be worth looking at.  Get a shell on the running web container with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">exec</span> <span class="o">-</span><span class="n">it</span> <span class="n">skyportal</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="mi">1</span> <span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">bash</span>
+</pre></div>
+</div>
+<p>and look in <code class="docutils literal notranslate"><span class="pre">skyportal/log</span></code>.  If everything has started up cleaning, then running</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">grep</span> <span class="s1">&#39;Listening on&#39;</span> <span class="n">app</span><span class="o">*</span><span class="n">log</span>
+</pre></div>
+</div>
+<p>should return several lines that end in things like <code class="docutils literal notranslate"><span class="pre">Listening</span> <span class="pre">on</span> <span class="pre">127.0.0.1:65000</span></code> (with a different port number for each line).  (The number of lines returned should equal the number configured in server.processes; the default is 4.)  Right after skyportal startup succesfully completes, these will be the last lines in <code class="docutils literal notranslate"><span class="pre">app*log</span></code>.</p>
+<section id="sncosmo-bandpass-problems">
+<h3>sncosmo bandpass problems<a class="headerlink" href="#sncosmo-bandpass-problems" title="Link to this heading">#</a></h3>
+<p>If skyportal is not properly starting up, look in one of the <code class="docutils literal notranslate"><span class="pre">/skyportal/log/app*log</span></code> files.  If you’re seeing repeated blocks of exceptions that end with something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">ValueError</span><span class="p">:</span> <span class="n">Could</span> <span class="ow">not</span> <span class="n">get</span> <span class="n">bandpass</span> <span class="k">for</span> <span class="n">f460m</span> <span class="n">due</span> <span class="n">to</span> <span class="n">sncosmo</span> <span class="n">error</span><span class="p">:</span> <span class="n">zero</span><span class="o">-</span><span class="n">size</span> <span class="n">array</span> <span class="n">to</span> <span class="n">reduction</span> <span class="n">operation</span> <span class="n">maximum</span> <span class="n">which</span> <span class="n">has</span> <span class="n">no</span> <span class="n">identity</span>
+</pre></div>
+</div>
+<p>it may indicate that sncosmo had a glitch downloading some bandpass files, and is not detecting that it needs to redownload them.  When this happens, you may also see high CPU usage as various servies keep trying to restart themselves (run <code class="docutils literal notranslate"><span class="pre">htop</span></code> inside the container).  To address this issue, you can delete the directory three <code class="docutils literal notranslate"><span class="pre">/skyportal/persistentdata/sncosmo/bandpasses</span></code> inside the container.  Ideally, that will break the crash loop, and allow skyportal to finish starting up.  (sncosmo will then later attempt to redownload bandpass files as it needs them.)</p>
+</section>
 </section>
 <section id="stopping-the-deployment">
 <h2>Stopping the deployment<a class="headerlink" href="#stopping-the-deployment" title="Link to this heading">#</a></h2>
@@ -493,7 +513,10 @@ The database is stored and persisted in a local docker volume called <code class
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-containers">Starting containers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initializing-the-database">Initializing the database</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-the-deployment-configuration">Customizing the deployment configuration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-problems">Handling problems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-problems">Handling problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sncosmo-bandpass-problems">sncosmo bandpass problems</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stopping-the-deployment">Stopping the deployment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-the-deployment">Updating the deployment</a></li>
 </ul>
