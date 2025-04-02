@@ -324,7 +324,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-docker-images">Building the Docker images</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-docker-images">Building the Docker images</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-with-a-different-uid-gid-and-docker-image-name">Running with a different UID, GID and Docker image name</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-containers">Starting containers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initializing-the-database">Initializing the database</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-the-deployment-configuration">Customizing the deployment configuration</a></li>
@@ -362,6 +365,13 @@ same information applies when using Kubernetes, for which we have an
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">docker</span><span class="o">-</span><span class="n">local</span>
 </pre></div>
 </div>
+<section id="running-with-a-different-uid-gid-and-docker-image-name">
+<h3>Running with a different UID, GID and Docker image name<a class="headerlink" href="#running-with-a-different-uid-gid-and-docker-image-name" title="Link to this heading">#</a></h3>
+<p>If you’re building the docker file to deploy somewhere, you may need to have the file and directory ownership inside the container be under a different UID/GID than the default (which is 1000).  In addition, it is convenient to specify the name of the Docker image to be where you need to push it.  You can change any or all of these values by specifying additional arguments to <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">docker-local</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SKYPORTAL_UID</span><span class="o">=&lt;</span><span class="n">uid</span><span class="o">&gt;</span> <span class="n">SKYPORTAL_GID</span><span class="o">=&lt;</span><span class="n">gid</span><span class="o">&gt;</span> <span class="n">DOCKER_IMAGENAME</span><span class="o">=&lt;</span><span class="n">imagename</span><span class="o">&gt;</span> <span class="n">make</span> <span class="n">docker</span><span class="o">-</span><span class="n">local</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="starting-containers">
 <h2>Starting containers<a class="headerlink" href="#starting-containers" title="Link to this heading">#</a></h2>
@@ -509,7 +519,10 @@ The database is stored and persisted in a local docker volume called <code class
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-docker-images">Building the Docker images</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-docker-images">Building the Docker images</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-with-a-different-uid-gid-and-docker-image-name">Running with a different UID, GID and Docker image name</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-containers">Starting containers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initializing-the-database">Initializing the database</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-the-deployment-configuration">Customizing the deployment configuration</a></li>
