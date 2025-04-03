@@ -1844,6 +1844,15 @@
           },
           {
             "in": "query",
+            "name": "includeFollowupRequests",
+            "nullable": true,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Boolean indicating whether to include associated follow-up requests. Defaults to false.\n"
+          },
+          {
+            "in": "query",
             "name": "includeAlerts",
             "nullable": true,
             "schema": {
@@ -2026,24 +2035,6 @@
             "explode": false,
             "style": "simple",
             "description": "Comma-separated string of filter IDs (e.g. \"1,2\"). Defaults to all of user's\ngroups' filters if groupIDs is not provided.\n"
-          },
-          {
-            "in": "query",
-            "name": "annotationExcludeOrigin",
-            "nullable": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Only load objects that do not have annotations from this origin.\nIf the annotationsExcludeOutdatedDate is also given, then annotations with\nthis origin will still be loaded if they were modified before that date.\n"
-          },
-          {
-            "in": "query",
-            "name": "annotationExcludeOutdatedDate",
-            "nullable": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "An Arrow parseable string designating when an existing annotation is outdated.\nOnly relevant if giving the annotationExcludeOrigin argument.\nWill treat objects with outdated annotations as if they did not have that annotation,\nso it will load an object if it doesn't have an annotation with the origin specified or\nif it does have it but the annotation modified date < annotationsExcludeOutdatedDate\n"
           },
           {
             "in": "query",
