@@ -22809,66 +22809,6 @@
         }
       }
     },
-    "/api/tns_bulk": {
-      "post": {
-        "summary": "Bulk retrieve objects from TNS",
-        "description": "Retrieve objects from TNS",
-        "tags": [
-          "tns",
-          "objs"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "tnsrobotID": {
-                    "type": "int",
-                    "description": "TNS Robot ID.\n"
-                  },
-                  "startDate": {
-                    "type": "string",
-                    "description": "Arrow-parseable date string (e.g. 2020-01-01).\nFilter by public_timestamp >= startDate.\nDefaults to one day ago.\n"
-                  },
-                  "groupIds": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer"
-                    },
-                    "description": "List of IDs of groups to indicate labelling for\n"
-                  }
-                },
-                "required": [
-                  "tnsrobotID",
-                  "groupIds"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/tns_robot/{tnsrobot_id}/group/{group_id}/autoreporter/{user_id}": {
       "post": {
         "summary": "Add autoreporter(s) to a TNSRobotGroup",
@@ -23142,7 +23082,7 @@
         }
       }
     },
-    "/api/tns_robot/{tnsrobot_id}/submissions/{id}": {
+    "/api/tns_robot/{tnsrobot_id}/submissions/{tnsrobot_submission_id}": {
       "get": {
         "summary": "Retrieve a TNSRobotSubmission",
         "description": "Retrieve a TNSRobotSubmission",
@@ -23161,7 +23101,7 @@
           },
           {
             "in": "path",
-            "name": "id",
+            "name": "tnsrobot_submission_id",
             "required": true,
             "schema": {
               "type": "integer"
