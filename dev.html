@@ -334,6 +334,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-images">Docker images</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-github-actions">Debugging GitHub Actions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-a-release">Making a release</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#developer-instructions">Developer instructions</a></li>
 </ul>
             </nav>
         </div>
@@ -496,6 +497,14 @@ https://help.github.com/articles/signing-commits-with-gpg/)</p>
 </li>
 </ol>
 </section>
+<section id="developer-instructions">
+<h2>Developer instructions<a class="headerlink" href="#developer-instructions" title="Link to this heading">#</a></h2>
+<p>There are a few methods in <code class="docutils literal notranslate"><span class="pre">skyportal/utils/parse.py</span></code> that are used to help parse common types of input.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">get_list_typed</span></code>: This method is used to parse a comma-separated string into a list of a specified type. It can also handle a list and will convert it to a list of the specified type.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_page_and_n_per_page</span></code>: This method is used to parse the page number and number of items per page used for pagination in multiple handlers. It takes the page number and number of items per page as input and returns them as integers. It also ensures that the number of items per page does not exceed a maximum value (default is 500).</p></li>
+</ul>
+</section>
 </section>
 
 
@@ -553,6 +562,7 @@ https://help.github.com/articles/signing-commits-with-gpg/)</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-images">Docker images</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#debugging-github-actions">Debugging GitHub Actions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-a-release">Making a release</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#developer-instructions">Developer instructions</a></li>
 </ul>
   </nav></div>
 
