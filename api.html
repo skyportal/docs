@@ -17792,6 +17792,105 @@
         }
       }
     },
+    "/api/sources/{obj_id}/hermes": {
+      "post": {
+        "description": "Publish a message to Hermes",
+        "Tags": [
+          "Hermes"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "obj_id",
+            "required": true,
+            "description": "Object ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "tns_robot_id",
+            "required": true,
+            "description": "TNS robot ID",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "instrument_ids",
+            "required": true,
+            "description": "List of instrument IDs",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "in": "query",
+            "name": "stream_ids",
+            "required": true,
+            "description": "List of stream IDs",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          {
+            "in": "query",
+            "name": "title",
+            "required": true,
+            "description": "Title of the message",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "submitter",
+            "required": true,
+            "description": "Submitter of the message",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "photometry_options",
+            "required": true,
+            "description": "Photometry options",
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/sources/{obj_id}/position": {
       "get": {
         "summary": "Retrieve photometry-based position of an Obj",
