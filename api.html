@@ -44543,6 +44543,4166 @@
           "status"
         ]
       },
+      "LocalizationTile_2025_05": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2025_05": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2025_05"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2025_05s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2025_05"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2025_05NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2025_05NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2025_05NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2025_05NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2025_05NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2025_06": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2025_06": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2025_06"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2025_06s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2025_06"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2025_06NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2025_06NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2025_06NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2025_06NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2025_06NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2025_07": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2025_07": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2025_07"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2025_07s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2025_07"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2025_07NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2025_07NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2025_07NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2025_07NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2025_07NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2025_08": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2025_08": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2025_08"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2025_08s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2025_08"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2025_08NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2025_08NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2025_08NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2025_08NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2025_08NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2025_09": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2025_09": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2025_09"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2025_09s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2025_09"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2025_09NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2025_09NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2025_09NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2025_09NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2025_09NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2025_10": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2025_10": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2025_10"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2025_10s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2025_10"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2025_10NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2025_10NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2025_10NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2025_10NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2025_10NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2025_11": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2025_11": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2025_11"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2025_11s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2025_11"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2025_11NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2025_11NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2025_11NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2025_11NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2025_11NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2025_12": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2025_12": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2025_12"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2025_12s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2025_12"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2025_12NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2025_12NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2025_12NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2025_12NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2025_12NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_01": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_01": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_01"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_01s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_01"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_01NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_01NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_01NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_01NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_01NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_02": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_02": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_02"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_02s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_02"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_02NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_02NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_02NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_02NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_02NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_03": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_03": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_03"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_03s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_03"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_03NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_03NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_03NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_03NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_03NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_04": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_04": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_04"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_04s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_04"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_04NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_04NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_04NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_04NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_04NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_05": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_05": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_05"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_05s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_05"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_05NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_05NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_05NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_05NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_05NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_06": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_06": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_06"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_06s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_06"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_06NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_06NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_06NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_06NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_06NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_07": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_07": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_07"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_07s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_07"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_07NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_07NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_07NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_07NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_07NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_08": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_08": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_08"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_08s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_08"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_08NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_08NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_08NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_08NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_08NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_09": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_09": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_09"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_09s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_09"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_09NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_09NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_09NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_09NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_09NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_10": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_10": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_10"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_10s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_10"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_10NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_10NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_10NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_10NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_10NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_11": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_11": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_11"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_11s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_11"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_11NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_11NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_11NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_11NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_11NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_12": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_12": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_12"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_12s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_12"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2026_12NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2026_12NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2026_12NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2026_12NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2026_12NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_01": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_01": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_01"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_01s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_01"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_01NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_01NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_01NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_01NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_01NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_02": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_02": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_02"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_02s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_02"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_02NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_02NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_02NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_02NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_02NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_03": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_03": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_03"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_03s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_03"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_03NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_03NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_03NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_03NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_03NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_04": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_04": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_04"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_04s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_04"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_04NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_04NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_04NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_04NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_04NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_05": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_05": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_05"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_05s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_05"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_05NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_05NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_05NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_05NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_05NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_06": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_06": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_06"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_06s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_06"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_06NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_06NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_06NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_06NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_06NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_07": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_07": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_07"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_07s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_07"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_07NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_07NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_07NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_07NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_07NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_08": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_08": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_08"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_08s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_08"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_08NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_08NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_08NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_08NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_08NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_09": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_09": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_09"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_09s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_09"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_09NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_09NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_09NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_09NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_09NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_10": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_10": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_10"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_10s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_10"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_10NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_10NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_10NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_10NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_10NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_11": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_11": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_11"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_11s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_11"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_11NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_11NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_11NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_11NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_11NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_12": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_12": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_12"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_12s": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_12"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "LocalizationTile_2027_12NoID": {
+        "type": "object",
+        "properties": {
+          "localization_id": {
+            "type": "integer",
+            "description": "localization ID"
+          },
+          "probdensity": {
+            "type": "number",
+            "description": "Probability density for the tile"
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date of observation for the Localization to which this tile belongs"
+          }
+        },
+        "required": [
+          "localization_id",
+          "probdensity"
+        ]
+      },
+      "SingleLocalizationTile_2027_12NoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LocalizationTile_2027_12NoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfLocalizationTile_2027_12NoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LocalizationTile_2027_12NoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
       "LocalizationTile_def": {
         "type": "object",
         "properties": {
