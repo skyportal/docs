@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>System Architecture &#8212; skyportal 1.4.0 documentation</title>
+    <title>Object Thumbnails &#8212; skyportal 1.4.0 documentation</title>
   
   
   
@@ -41,11 +41,10 @@
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'design';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'thumbnails';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Setup" href="setup.html" />
-    <link rel="prev" title="SkyPortal" href="index.html" />
+    <link rel="prev" title="Front-end Pages" href="pages.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -150,7 +149,7 @@
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="design.html">System Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
@@ -176,7 +175,7 @@
 <li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="extensions.html">SkyPortal Extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="pages.html">Front-end Pages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="thumbnails.html">Object Thumbnails</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Object Thumbnails</a></li>
 </ul>
 
     </div>
@@ -231,7 +230,7 @@
       
       
       
-      <li><a href="_sources/design.md" target="_blank"
+      <li><a href="_sources/thumbnails.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -302,7 +301,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -313,11 +314,19 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>System Architecture</h1>
+    <h1>Object Thumbnails</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-existing-thumbnails">Updating existing thumbnails</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -327,26 +336,27 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="system-architecture">
-<h1>System Architecture<a class="headerlink" href="#system-architecture" title="Link to this heading">#</a></h1>
-<p>SkyPortal is designed to be effective, fast, and scalable.  The
-following diagram shows the underlying architecture:</p>
-<p><img alt="System architecture" src="_images/architecture.png" /></p>
-<p>All the technological components used in SkyPortal are applied exactly
-for the purpose they were written.  We do not attempt novel
-configurations that push these technologies outside of their design
-boundaries.  Instead, we combine technologies effectively to build a
-robust and scalable platform, so that many of the components could be
-replaced, should they become unsupported.</p>
-<p>The frontend is built on React, using Redux to drive the application
-logic, as shown in the following diagram:</p>
-<p><img alt="Frontend architecture" src="_images/frontend.png" /></p>
-<p>SkyPortal is released under the BSD license.  We encourage you to
-modify it, reuse it, and contributed changes back for the benefit of
-others.  We follow standard open source development practices: changes
-are submitted as pull requests and, once they pass the test suite,
-reviewed by the team before inclusion.  Please also see
-<a class="reference internal" href="contributing.html"><span class="doc">our contributing guide</span></a>.</p>
+  <section id="object-thumbnails">
+<h1>Object Thumbnails<a class="headerlink" href="#object-thumbnails" title="Link to this heading">#</a></h1>
+<p>In SkyPortal, we provide thumbnails for objects, that are displayed on many of the frontend’s pages: source page, sources list, candidates page, etc.</p>
+<p>Some of thumbnails are generated by the backend and stored in the database when new objects are created, extracted from the images of 3 surveys: SDSS, PanSTARRS, and Legacy Survey (LS). For these, no image data is saved but only links to their thumbnail services, which return PNGs that the frontend can render and that can be cached on the client-side. A micro-service is dedicated to thumbnail generation, so that it can happen asynchronously and not block the creation of new objects.</p>
+<p>Also, custom thumbnails can be uploaded by users, with the following types: <code class="docutils literal notranslate"><span class="pre">new</span></code>, <code class="docutils literal notranslate"><span class="pre">ref</span></code>, <code class="docutils literal notranslate"><span class="pre">sub</span></code>. These have be designed with large survey alert streams in mind, which usually rely on image difference algorithms to detect candidates, hence the triplet of new image, reference image, and subtracted image types. However, any image can be uploaded as a custom thumbnail (we recommend using the <code class="docutils literal notranslate"><span class="pre">new</span></code> type for that). To upload your own thumbnails to SkyPortal, you can use the <code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/thumbnails</span></code> endpoint, as described in the <a class="reference external" href="api.html#tag/thumbnails/POST/api/thumbnail">API documentation</a>. Here, we do not store URLs to any external services, but the actual image data on disk (in the <code class="docutils literal notranslate"><span class="pre">persistentdata</span></code> directory) and pointers to these files in the database.</p>
+<section id="updating-existing-thumbnails">
+<h2>Updating existing thumbnails<a class="headerlink" href="#updating-existing-thumbnails" title="Link to this heading">#</a></h2>
+<p>Every now and then, the surveys mentioned above publish new data releases and/or services to fetch thumbnails from them. When that happens, SkyPortal is usually updated to start using these for new thumbnails. The URLs of existing thumbnails in the DB are still valid (unless of course, the URLs they point to aren’t accessible anymore), but one may want to update them to the new ones. In that case, we provide scripts to update the content of the thumbnails table in the DB, which are found in <code class="docutils literal notranslate"><span class="pre">tools/thumbnails_udpate/</span></code>. The naming scheme of each script should be self-explanatory, and all they need as a parameter (optional) is the path to the config file with <code class="docutils literal notranslate"><span class="pre">--config=path/to/config</span></code> (default is <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> in the root of the repo).</p>
+<p>For example, on 2025-05-03, we updated SkyPortal to start pointing to Legacy Survey’s DR10 instead of DR9, and the script to update the thumbnails table is <code class="docutils literal notranslate"><span class="pre">tools/thumbnails_update/ls_dr9_to_dr10.py</span></code>. To run it, one would do:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>skyportal_env/bin/activate
+<span class="nv">PYTHONPATH</span><span class="o">=</span>.<span class="w"> </span>python<span class="w"> </span>tools/thumbnails_update/ls_dr9_to_dr10.py<span class="w"> </span>--config<span class="o">=</span>config.yaml
+</pre></div>
+</div>
+<p>Alternatively, since the thumbnail generation is handled by a micro-service which scans for objects that don’t have thumbnails for all 3 surveys, a “brute-force” way to update all existing thumbnails is to delete the existing ones from the DB. <strong>This is not recommended at all for databases with &gt;10k objects</strong>, but for smaller ones, it can be done by running the following queries in the DB:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">BEGIN</span><span class="p">;</span>
+<span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">thumbnails</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;sdss&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ps1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ls&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dr8&#39;</span><span class="p">);</span>
+<span class="k">COMMIT</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This will delete all thumbnails of the 3 surveys, and the micro-service will then generate new ones for all  the objects.</p>
+</section>
 </section>
 
 
@@ -361,22 +371,13 @@ reviewed by the team before inclusion.  Please also see
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="index.html"
+       href="pages.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">SkyPortal</p>
+        <p class="prev-next-title">Front-end Pages</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="setup.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Setup</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -384,6 +385,21 @@ reviewed by the team before inclusion.  Please also see
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-existing-thumbnails">Updating existing thumbnails</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
