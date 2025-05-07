@@ -50579,6 +50579,152 @@
           "status"
         ]
       },
+      "ObjObjTagOption": {
+        "type": "object",
+        "properties": {
+          "obj": {
+            "nullable": true
+          },
+          "objtagoption": {
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "obj_id": {
+            "type": "string"
+          },
+          "objtagoption_id": {
+            "type": "integer"
+          },
+          "author_id": {
+            "type": "integer",
+            "description": "ID of the user who created the tag association"
+          },
+          "author": {
+            "description": "The associated User",
+            "nullable": true
+          }
+        },
+        "required": [
+          "author_id",
+          "obj_id",
+          "objtagoption_id"
+        ]
+      },
+      "SingleObjObjTagOption": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ObjObjTagOption"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfObjObjTagOptions": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObjObjTagOption"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ObjObjTagOptionNoID": {
+        "type": "object",
+        "properties": {
+          "obj": {
+            "nullable": true
+          },
+          "objtagoption": {
+            "nullable": true
+          },
+          "obj_id": {
+            "type": "string"
+          },
+          "objtagoption_id": {
+            "type": "integer"
+          },
+          "author_id": {
+            "type": "integer",
+            "description": "ID of the user who created the tag association"
+          },
+          "author": {
+            "description": "The associated User",
+            "nullable": true
+          }
+        },
+        "required": [
+          "author_id",
+          "obj_id",
+          "objtagoption_id"
+        ]
+      },
+      "SingleObjObjTagOptionNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ObjObjTagOptionNoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfObjObjTagOptionNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObjObjTagOptionNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
       "ObjPost": {
         "type": "object",
         "properties": {
@@ -50901,6 +51047,116 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObjPost"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ObjTagOption": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Available tags that can be associated to an object."
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "SingleObjTagOption": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ObjTagOption"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfObjTagOptions": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObjTagOption"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ObjTagOptionNoID": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Available tags that can be associated to an object."
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "SingleObjTagOptionNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ObjTagOptionNoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfObjTagOptionNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObjTagOptionNoID"
             }
           }
         },
