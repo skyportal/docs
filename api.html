@@ -15625,8 +15625,8 @@
     },
     "/api/shifts/{shift_id}": {
       "get": {
-        "summary": "Retrieve shifts",
-        "description": "Retrieve shifts",
+        "summary": "Get a shift",
+        "description": "Retrieve a single shift by its ID.",
         "tags": [
           "shifts"
         ],
@@ -15637,15 +15637,8 @@
             "required": true,
             "schema": {
               "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "group_id",
-            "nullable": true,
-            "schema": {
-              "type": "integer"
-            }
+            },
+            "description": "ID of the shift to retrieve"
           }
         ],
         "responses": {
@@ -15653,7 +15646,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ArrayOfShifts"
+                  "$ref": "#/components/schemas/Shift"
                 }
               }
             }
@@ -15754,6 +15747,64 @@
       }
     },
     "/api/shifts": {
+      "get": {
+        "summary": "Get all shifts",
+        "description": "Retrieve all shifts, optionally filtered by group ID or date limits",
+        "tags": [
+          "shifts"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "group_id",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Filter shifts by group ID"
+          },
+          {
+            "in": "query",
+            "name": "start_date_limit",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Return shifts that start after or at this datetime"
+          },
+          {
+            "in": "query",
+            "name": "end_date_limit",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "Return shifts that end after or at this datetime"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArrayOfShifts"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "summary": "Add a new shift",
         "description": "<b>Permission(s) required:</b> <em>Manage shifts (or System admin)</em><br><br>Add a new shift",
@@ -15776,7 +15827,7 @@
                         "items": {
                           "type": "integer"
                         },
-                        "description": "List of IDs of users to be shift admins. Current user will\nautomatically be added as a shift admin.\n"
+                        "description": "List of IDs of users to be shift admins.\n"
                       }
                     }
                   }
