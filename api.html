@@ -5996,7 +5996,7 @@
             "name": "gcnevent_id",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer"
             }
           }
         ],
@@ -51061,6 +51061,11 @@
             "type": "string",
             "description": "Available tags that can be associated to an object."
           },
+          "color": {
+            "type": "string",
+            "description": "Hex color code for the tag display (e.g., #3a87ad)",
+            "nullable": true
+          },
           "id": {
             "type": "integer",
             "description": "Unique object identifier."
@@ -51117,6 +51122,11 @@
           "name": {
             "type": "string",
             "description": "Available tags that can be associated to an object."
+          },
+          "color": {
+            "type": "string",
+            "description": "Hex color code for the tag display (e.g., #3a87ad)",
+            "nullable": true
           }
         },
         "required": [
