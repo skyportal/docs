@@ -16191,35 +16191,6 @@
         }
       }
     },
-    "/api/photometry/origins": {
-      "get": {
-        "summary": "Get all photometry origins",
-        "description": "Get all photometry origins",
-        "tags": [
-          "photometry"
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/recurring_api/{recurring_api_id}": {
       "get": {
         "summary": "Retrieve a Recurring API",
