@@ -7942,86 +7942,6 @@
         }
       }
     },
-    "/api/sources_in_gcn/{dateobs}/tns": {
-      "post": {
-        "tags": [
-          "gcn events",
-          "sources",
-          "tns"
-        ],
-        "summary": "Post sources that have been confirmed in a GCN to TNS",
-        "description": "Post sources that have been confirmed in a GCN to TNS",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dateobs",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The dateobs of the event, as an arrow parseable string"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "tnsrobotID": {
-                    "type": "int",
-                    "description": "TNS Robot ID.\n"
-                  },
-                  "reporters": {
-                    "type": "string",
-                    "description": "Reporters for the TNS report.\n"
-                  },
-                  "archival": {
-                    "type": "boolean",
-                    "description": "Report sources as archival (i.e. no upperlimit).\nDefaults to False.\n"
-                  },
-                  "archivalComment": {
-                    "type": "string",
-                    "description": "Comment on archival source. Required if archival is True.\n"
-                  },
-                  "sourcesIDList": {
-                    "type": "string",
-                    "description": "A comma-separated list of source_id's to post.\nIf not provided, all sources confirmed in GCN will be posted.\n"
-                  },
-                  "confirmed": {
-                    "type": "boolean",
-                    "description": "Only post sources noted as confirmed / highlighted.\nDefaults to True.\n"
-                  }
-                },
-                "required": [
-                  "tnsrobotID"
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/sources_in_gcn/{dateobs}/{source_id}": {
       "get": {
         "tags": [
@@ -17774,143 +17694,6 @@
             }
           }
         }
-      },
-      "post": {
-        "summary": "Post an Obj to TNS",
-        "description": "Post an Obj to TNS",
-        "tags": [
-          "tns",
-          "objs"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "obj_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/sources/{obj_id}/hermes": {
-      "post": {
-        "description": "Publish a message to Hermes",
-        "Tags": [
-          "Hermes"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "obj_id",
-            "required": true,
-            "description": "Object ID",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "tns_robot_id",
-            "required": true,
-            "description": "TNS robot ID",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "instrument_ids",
-            "required": true,
-            "description": "List of instrument IDs",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          {
-            "in": "query",
-            "name": "stream_ids",
-            "required": true,
-            "description": "List of stream IDs",
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          {
-            "in": "query",
-            "name": "title",
-            "required": true,
-            "description": "Title of the message",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "submitter",
-            "required": true,
-            "description": "Submitter of the message",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "photometry_options",
-            "required": true,
-            "description": "Photometry options",
-            "schema": {
-              "type": "object"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
       }
     },
     "/api/sources/{obj_id}/position": {
@@ -21348,95 +21131,6 @@
         }
       }
     },
-    "/api/spectrum/tns/{spectrum_id}": {
-      "post": {
-        "summary": "Submit a (classification) spectrum to TNS",
-        "description": "Submit a (classification) spectrum to TNS",
-        "tags": [
-          "tns",
-          "spectra"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "spectrum_id",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "in": "query",
-            "name": "tnsrobotID",
-            "schema": {
-              "type": "int"
-            },
-            "required": true,
-            "description": "SkyPortal TNS Robot ID\n"
-          },
-          {
-            "in": "query",
-            "name": "classificationID",
-            "schema": {
-              "type": "string"
-            },
-            "description": "Classification ID (see TNS documentation at\nhttps://www.wis-tns.org/content/tns-getting-started\nfor options)\n"
-          },
-          {
-            "in": "query",
-            "name": "classifiers",
-            "schema": {
-              "type": "string"
-            },
-            "description": "List of those performing classification.\n"
-          },
-          {
-            "in": "query",
-            "name": "spectrumType",
-            "schema": {
-              "type": "string"
-            },
-            "description": "Type of spectrum that this is. Valid options are:\n['object', 'host', 'sky', 'arcs', 'synthetic']\n"
-          },
-          {
-            "in": "query",
-            "name": "spectrumComment",
-            "schema": {
-              "type": "string"
-            },
-            "description": "Comment on the spectrum.\n"
-          },
-          {
-            "in": "query",
-            "name": "classificationComment",
-            "schema": {
-              "type": "string"
-            },
-            "description": "Comment on the classification.\n"
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SingleSpectrum"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/streams/{stream_id}/users": {
       "post": {
         "summary": "Grant stream access to a user",
@@ -22930,144 +22624,39 @@
         }
       }
     },
-    "/api/tns_robot/{tnsrobot_id}/group/{group_id}/autoreporter/{user_id}": {
-      "post": {
-        "summary": "Add autoreporter(s) to a TNSRobotGroup",
-        "description": "<b>Permission(s) required:</b> <em>Manage TNS robots (or System admin)</em><br><br>Add autoreporter(s) to a TNSRobotGroup",
+    "/api/sharing_service/submission/{sharing_service_submission_id}": {
+      "get": {
+        "summary": "Retrieve a SharingServiceSubmission",
+        "description": "Retrieve a SharingServiceSubmission",
         "tags": [
-          "tns robot"
+          "sharing service submission"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "tnsrobot_id",
+            "name": "sharing_service_submission_id",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer"
             },
-            "description": "The ID of the TNSRobot"
-          },
-          {
-            "in": "path",
-            "name": "group_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The ID of the group to add autoreporter(s) to"
+            "description": "The ID of the sharing service submission"
           },
           {
             "in": "query",
-            "name": "user_id",
-            "required": false,
+            "name": "sharing_service_id",
+            "required": true,
             "schema": {
-              "type": "string"
+              "type": "integer"
             },
-            "description": "The ID of the user to add as an autoreporter"
+            "description": "The ID of the external sharing service to which the submission belongs"
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "user_ids": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "description": "An array of user IDs to add as autoreporters.\nIf a string is provided, it will be split by commas.\n"
-                  }
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "summary": "Remove autoreporter(s) from a TNSRobotGroup",
-        "description": "<b>Permission(s) required:</b> <em>Manage TNS robots (or System admin)</em><br><br>Delete an autoreporter from a TNSRobotGroup",
-        "tags": [
-          "tns robot"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "tnsrobot_id",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            },
-            "description": "The ID of the TNSRobot"
-          },
-          {
-            "in": "path",
-            "name": "group_id",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            },
-            "description": "The ID of the Group"
-          },
-          {
-            "in": "path",
-            "name": "user_id",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            },
-            "description": "The ID of the User to remove as an autoreporter. If not provided, the user_id will be taken from the request body."
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "user_id": {
-                    "type": "integer",
-                    "description": "The ID of the User to remove as an autoreporter"
-                  },
-                  "user_ids": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer"
-                    },
-                    "description": "The IDs of the Users to remove as autoreporters, overrides user_id"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "$ref": "#/components/schemas/SharingServiceSubmission"
                 }
               }
             }
@@ -23084,190 +22673,22 @@
         }
       }
     },
-    "/api/tns_robot/{tnsrobot_id}/group/{group_id}": {
-      "put": {
-        "summary": "Add or edit a group for a TNS robot",
-        "description": "<b>Permission(s) required:</b> <em>Manage TNS robots (or System admin)</em><br><br>Add or edit a group for a TNS robot",
-        "tags": [
-          "tns robot"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "tnsrobot_id",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            },
-            "description": "ID of the TNS robot"
-          },
-          {
-            "in": "path",
-            "name": "group_id",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            },
-            "description": "ID of the group to edit"
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "group_id": {
-                    "type": "integer",
-                    "description": "ID of the group to add"
-                  },
-                  "auto_report": {
-                    "type": "boolean",
-                    "description": "Whether to automatically report to this group"
-                  },
-                  "owner": {
-                    "type": "boolean",
-                    "description": "Whether this group is the owner of the TNS robot"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "summary": "Delete a group from a TNS robot",
-        "description": "<b>Permission(s) required:</b> <em>Manage TNS robots (or System admin)</em><br><br>Delete a group from a TNSRobot",
-        "tags": [
-          "tns robot"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "tnsrobot_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The ID of the TNSRobot"
-          },
-          {
-            "in": "path",
-            "name": "group_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "The ID of the group to remove from the TNSRobot"
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/tns_robot/{tnsrobot_id}/submissions/{tnsrobot_submission_id}": {
+    "/api/sharing_service/submission": {
       "get": {
-        "summary": "Retrieve a TNSRobotSubmission",
-        "description": "Retrieve a TNSRobotSubmission",
+        "summary": "Retrieve all SharingServiceSubmissions",
+        "description": "Retrieve all SharingServiceSubmissions",
         "tags": [
-          "tns robot"
+          "external sharing service"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "tnsrobot_id",
+            "name": "sharing_service_id",
             "required": true,
             "schema": {
               "type": "integer"
             },
-            "description": "The ID of the TNSRobot"
-          },
-          {
-            "in": "path",
-            "name": "tnsrobot_submission_id",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            },
-            "description": "The ID of the TNSRobotSubmission"
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TNSRobotSubmission"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/tns_robot/{tnsrobot_id}/submissions": {
-      "get": {
-        "summary": "Retrieve all TNSRobotSubmissions",
-        "description": "Retrieve all TNSRobotSubmissions",
-        "tags": [
-          "tns robot"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "tnsrobot_id",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            },
-            "description": "The ID of the TNSRobot"
+            "description": "The ID of the SharingService to which the submissions belong"
           },
           {
             "in": "query",
@@ -23304,6 +22725,15 @@
               "type": "boolean"
             },
             "description": "Whether to include the response in the response"
+          },
+          {
+            "in": "query",
+            "name": "objectID",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The object ID of the submission"
           }
         ],
         "responses": {
@@ -23311,7 +22741,99 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ArrayOfTNSRobotSubmissions"
+                  "$ref": "#/components/schemas/ArrayOfSharingServiceSubmissions"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create an SharingServiceSubmission to publish an Obj to TNS or Hermes using a sharing service",
+        "description": "Create an SharingServiceSubmission to publish an Obj to TNS or Hermes using a sharing service.",
+        "tags": [
+          "sharing service submission"
+        ],
+        "parameter": null,
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "obj_id": {
+                    "type": "string",
+                    "description": "ID of the object to publish",
+                    "required": true
+                  },
+                  "sharing_service_id": {
+                    "type": "integer",
+                    "description": "ID of the external sharing service to use for submission",
+                    "required": true
+                  },
+                  "publishers": {
+                    "type": "string",
+                    "description": "Custom string for publishers",
+                    "required": true
+                  },
+                  "remarks": {
+                    "type": "string",
+                    "description": "Custom remarks string"
+                  },
+                  "archival": {
+                    "type": "boolean",
+                    "description": "Flag to indicate if the source is archival"
+                  },
+                  "archival_comment": {
+                    "type": "string",
+                    "description": "Comment for archival sources (required if archival is True)"
+                  },
+                  "instrument_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "List of instrument IDs to associate with the submission"
+                  },
+                  "stream_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "List of stream IDs to associate with the submission"
+                  },
+                  "photometry_options": {
+                    "type": "object",
+                    "description": "Options for photometry processing"
+                  },
+                  "publish_to_tns": {
+                    "type": "boolean",
+                    "description": "Flag to indicate if the submission should be published to TNS"
+                  },
+                  "publish_to_hermes": {
+                    "type": "boolean",
+                    "description": "Flag to indicate if the submission should be published to Hermes"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
                 }
               }
             }
@@ -23328,22 +22850,22 @@
         }
       }
     },
-    "/api/tns_robot/{tnsrobot_id}/coauthor/{user_id}": {
+    "/api/sharing_service/{sharing_service_id}/coauthor/{user_id}": {
       "post": {
-        "summary": "Add a coauthor to a TNS robot",
-        "description": "<b>Permission(s) required:</b> <em>Manage TNS robots (or System admin)</em><br><br>Add a coauthor to a TNS robot",
+        "summary": "Add a coauthor to an external sharing service",
+        "description": "<b>Permission(s) required:</b> <em>Manage sharing services (or System admin)</em><br><br>Add a coauthor to an external sharing service",
         "tags": [
-          "tns robot"
+          "external sharing service"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "tnsrobot_id",
+            "name": "sharing_service_id",
             "required": true,
             "schema": {
               "type": "integer"
             },
-            "description": "ID of the TNS robot"
+            "description": "ID of the sharing service"
           },
           {
             "in": "path",
@@ -23392,20 +22914,20 @@
         }
       },
       "delete": {
-        "summary": "Remove a coauthor from a TNS robot",
-        "description": "<b>Permission(s) required:</b> <em>Manage TNS robots (or System admin)</em><br><br>Remove a coauthor from a TNS robot",
+        "summary": "Remove a coauthor from an external sharing service",
+        "description": "<b>Permission(s) required:</b> <em>Manage sharing services (or System admin)</em><br><br>Remove a coauthor from an external sharing service",
         "tags": [
-          "tns robot"
+          "external sharing service"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "tnsrobot_id",
+            "name": "sharing_service_id",
             "required": true,
             "schema": {
               "type": "integer"
             },
-            "description": "ID of the TNS robot"
+            "description": "ID of the external sharing service"
           },
           {
             "in": "path",
@@ -23439,29 +22961,70 @@
         }
       }
     },
-    "/api/tns_robot/{tnsrobot_id}": {
-      "get": {
-        "summary": "Retrieve a TNS robot",
-        "description": "Retrieve a TNS robot",
+    "/api/sharing_service/{sharing_service_id}/group/{group_id}": {
+      "put": {
+        "summary": "Add or edit a group for an external sharing service",
+        "description": "<b>Permission(s) required:</b> <em>Manage sharing services (or System admin)</em><br><br>Add or edit a group for an external sharing service",
         "tags": [
-          "tns robot"
+          "external sharing service"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "tnsrobot_id",
+            "name": "sharing_service_id",
             "required": true,
             "schema": {
               "type": "integer"
-            }
+            },
+            "description": "ID of the external sharing service"
+          },
+          {
+            "in": "path",
+            "name": "group_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "ID of the group to edit"
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "group_id": {
+                    "type": "integer",
+                    "description": "ID of the group to add"
+                  },
+                  "auto_share_to_tns": {
+                    "type": "boolean",
+                    "description": "Whether to automatically publish to TNS"
+                  },
+                  "auto_share_to_hermes": {
+                    "type": "boolean",
+                    "description": "Whether to automatically publish to Hermes"
+                  },
+                  "auto_sharing_allow_bots": {
+                    "type": "boolean",
+                    "description": "Whether to allow bots to automatically publish"
+                  },
+                  "owner": {
+                    "type": "boolean",
+                    "description": "Whether this group is the owner of the external sharing service"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SingleTNSRobot"
+                  "$ref": "#/components/schemas/Success"
                 }
               }
             }
@@ -23478,15 +23041,255 @@
         }
       },
       "delete": {
-        "summary": "Delete a TNS robot",
-        "description": "<b>Permission(s) required:</b> <em>Manage TNS robots (or System admin)</em><br><br>Delete a TNS robot",
+        "summary": "Delete a group from an external sharing service",
+        "description": "<b>Permission(s) required:</b> <em>Manage sharing services (or System admin)</em><br><br>Delete a group from an external sharing service",
         "tags": [
-          "tns robot"
+          "external sharing service"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "tnsrobot_id",
+            "name": "sharing_service_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the external sharing service"
+          },
+          {
+            "in": "path",
+            "name": "group_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the group to remove from the external sharing service"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sharing_service/{sharing_service_id}/group/{group_id}/auto_publisher/{user_id}": {
+      "post": {
+        "summary": "Add auto_publisher(s) to an SharingServiceGroup",
+        "description": "<b>Permission(s) required:</b> <em>Manage sharing services (or System admin)</em><br><br>Add auto_publisher(s) to an SharingServiceGroup",
+        "tags": [
+          "external sharing service"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "sharing_service_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the SharingService"
+          },
+          {
+            "in": "path",
+            "name": "group_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the group to add auto_publisher(s) to"
+          },
+          {
+            "in": "query",
+            "name": "user_id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The ID of the user to add as an auto_publisher"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "An array of user IDs to add as auto_publishers.\nIf a string is provided, it will be split by commas.\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Remove auto_publisher(s) from an SharingServiceGroup",
+        "description": "<b>Permission(s) required:</b> <em>Manage sharing services (or System admin)</em><br><br>Delete an auto_publisher from an SharingServiceGroup",
+        "tags": [
+          "external sharing service"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "sharing_service_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The ID of the external sharing service"
+          },
+          {
+            "in": "path",
+            "name": "group_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The ID of the Group"
+          },
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The ID of the User to remove as an auto_publisher. If not provided, the user_id will be taken from the request body."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_id": {
+                    "type": "integer",
+                    "description": "The ID of the User to remove as an auto_publisher"
+                  },
+                  "user_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "The IDs of the Users to remove as auto_publishers, overrides user_id"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sharing_service/{sharing_service_id}": {
+      "get": {
+        "summary": "Retrieve an external sharing service",
+        "description": "Retrieve an external sharing service",
+        "tags": [
+          "external sharing service"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "sharing_service_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleSharingService"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete an external sharing service",
+        "description": "<b>Permission(s) required:</b> <em>Manage sharing services (or System admin)</em><br><br>Delete an external sharing service",
+        "tags": [
+          "external sharing service"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "sharing_service_id",
             "required": true,
             "schema": {
               "type": "integer"
@@ -23515,18 +23318,47 @@
         }
       }
     },
-    "/api/tns_robot/{existing_id}": {
-      "put": {
-        "summary": "Create or update a TNS robot",
-        "description": "<b>Permission(s) required:</b> <em>Manage TNS robots (or System admin)</em><br><br>Post or update a TNS robot",
+    "/api/sharing_service": {
+      "get": {
+        "summary": "Retrieve all external sharing services",
+        "description": "Retrieve all external sharing services",
         "tags": [
-          "tns robot"
+          "external sharing service"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArrayOfSharingServices"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sharing_service/{existing_id}": {
+      "put": {
+        "summary": "Create or update a sharing service",
+        "description": "<b>Permission(s) required:</b> <em>Manage sharing services (or System admin)</em><br><br>Post or update a sharing service",
+        "tags": [
+          "sharing service"
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TNSRobotNoID"
+                "$ref": "#/components/schemas/SharingServiceNoID"
               }
             }
           }
@@ -23548,7 +23380,7 @@
                           "properties": {
                             "id": {
                               "type": "integer",
-                              "description": "New TNS robot ID"
+                              "description": "New Sharing Service ID"
                             }
                           }
                         }
@@ -34621,10 +34453,10 @@
               "description": "User requests to join this group."
             }
           },
-          "tnsrobots": {
+          "sharing_services": {
             "type": "array",
             "items": {
-              "description": "TNS Robots associated with this group."
+              "description": "Sharing services associated with this group."
             }
           },
           "gcnreports": {
@@ -36792,10 +36624,10 @@
               "description": "User requests to join this group."
             }
           },
-          "tnsrobots": {
+          "sharing_services": {
             "type": "array",
             "items": {
-              "description": "TNS Robots associated with this group."
+              "description": "Sharing services associated with this group."
             }
           },
           "gcnreports": {
@@ -39346,10 +39178,10 @@
             "type": "array",
             "items": {}
           },
-          "tnsrobots": {
+          "sharing_services": {
             "type": "array",
             "items": {
-              "description": "TNS robots associated with this instrument, used for auto-reporting."
+              "description": "Sharing services associated with this instrument."
             }
           },
           "name": {
@@ -40025,10 +39857,10 @@
             "type": "array",
             "items": {}
           },
-          "tnsrobots": {
+          "sharing_services": {
             "type": "array",
             "items": {
-              "description": "TNS robots associated with this instrument, used for auto-reporting."
+              "description": "Sharing services associated with this instrument."
             }
           },
           "name": {
@@ -40161,13 +39993,13 @@
           "status"
         ]
       },
-      "InstrumentTNSRobot": {
+      "InstrumentSharingService": {
         "type": "object",
         "properties": {
           "instrument": {
             "nullable": true
           },
-          "tnsrobot": {
+          "sharingservice": {
             "nullable": true
           },
           "id": {
@@ -40177,16 +40009,16 @@
           "instrument_id": {
             "type": "integer"
           },
-          "tnsrobot_id": {
+          "sharing_service_id": {
             "type": "integer"
           }
         },
         "required": [
           "instrument_id",
-          "tnsrobot_id"
+          "sharing_service_id"
         ]
       },
-      "SingleInstrumentTNSRobot": {
+      "SingleInstrumentSharingService": {
         "type": "object",
         "properties": {
           "status": {
@@ -40198,14 +40030,14 @@
             "type": "string"
           },
           "data": {
-            "$ref": "#/components/schemas/InstrumentTNSRobot"
+            "$ref": "#/components/schemas/InstrumentSharingService"
           }
         },
         "required": [
           "status"
         ]
       },
-      "ArrayOfInstrumentTNSRobots": {
+      "ArrayOfInstrumentSharingServices": {
         "type": "object",
         "properties": {
           "status": {
@@ -40219,7 +40051,7 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/InstrumentTNSRobot"
+              "$ref": "#/components/schemas/InstrumentSharingService"
             }
           }
         },
@@ -40227,28 +40059,28 @@
           "status"
         ]
       },
-      "InstrumentTNSRobotNoID": {
+      "InstrumentSharingServiceNoID": {
         "type": "object",
         "properties": {
           "instrument": {
             "nullable": true
           },
-          "tnsrobot": {
+          "sharingservice": {
             "nullable": true
           },
           "instrument_id": {
             "type": "integer"
           },
-          "tnsrobot_id": {
+          "sharing_service_id": {
             "type": "integer"
           }
         },
         "required": [
           "instrument_id",
-          "tnsrobot_id"
+          "sharing_service_id"
         ]
       },
-      "SingleInstrumentTNSRobotNoID": {
+      "SingleInstrumentSharingServiceNoID": {
         "type": "object",
         "properties": {
           "status": {
@@ -40260,14 +40092,14 @@
             "type": "string"
           },
           "data": {
-            "$ref": "#/components/schemas/InstrumentTNSRobotNoID"
+            "$ref": "#/components/schemas/InstrumentSharingServiceNoID"
           }
         },
         "required": [
           "status"
         ]
       },
-      "ArrayOfInstrumentTNSRobotNoIDs": {
+      "ArrayOfInstrumentSharingServiceNoIDs": {
         "type": "object",
         "properties": {
           "status": {
@@ -40281,7 +40113,7 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/InstrumentTNSRobotNoID"
+              "$ref": "#/components/schemas/InstrumentSharingServiceNoID"
             }
           }
         },
@@ -49731,10 +49563,10 @@
               "description": "Sources in a localization."
             }
           },
-          "tns_submissions": {
+          "sharing_service_submissions": {
             "type": "array",
             "items": {
-              "description": "TNS auto-submissions associated with this obj."
+              "description": "Sharing submissions associated with this obj."
             }
           },
           "id": {
@@ -50374,10 +50206,10 @@
               "description": "Sources in a localization."
             }
           },
-          "tns_submissions": {
+          "sharing_service_submissions": {
             "type": "array",
             "items": {
-              "description": "TNS auto-submissions associated with this obj."
+              "description": "Sharing submissions associated with this obj."
             }
           },
           "ra_dis": {
@@ -50846,10 +50678,10 @@
               "description": "Sources in a localization."
             }
           },
-          "tns_submissions": {
+          "sharing_service_submissions": {
             "type": "array",
             "items": {
-              "description": "TNS auto-submissions associated with this obj."
+              "description": "Sharing submissions associated with this obj."
             }
           },
           "id": {
@@ -57462,6 +57294,976 @@
           "status"
         ]
       },
+      "SharingService": {
+        "type": "object",
+        "properties": {
+          "instruments": {
+            "type": "array",
+            "items": {
+              "description": "Instruments to restrict the photometry to when publishing."
+            }
+          },
+          "streams": {
+            "type": "array",
+            "items": {
+              "description": "Streams to restrict the photometry to when publishing."
+            }
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "description": "Groups associated with this sharing service."
+            }
+          },
+          "coauthors": {
+            "type": "array",
+            "items": {
+              "description": "Coauthors associated with this sharing service."
+            }
+          },
+          "submissions": {
+            "type": "array",
+            "items": {
+              "description": "Submissions associated with this sharing service."
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Sharing service name."
+          },
+          "acknowledgments": {
+            "type": "string",
+            "description": "Acknowledgments to use for sharing."
+          },
+          "testing": {
+            "type": "boolean",
+            "description": "If true, nothing will be shared but the request's payload will be stored"
+          },
+          "photometry_options": {
+            "description": "Photometry options to use to make some data optional or mandatory for manual and auto-publishing.",
+            "nullable": true
+          },
+          "enable_sharing_with_hermes": {
+            "type": "boolean",
+            "description": "Whether to enable publishing to Hermes or not."
+          },
+          "enable_sharing_with_tns": {
+            "type": "boolean",
+            "description": "Whether to enable publishing to TNS or not."
+          },
+          "tns_bot_name": {
+            "type": "string",
+            "description": "Name of the TNS bot.",
+            "nullable": true
+          },
+          "tns_bot_id": {
+            "type": "integer",
+            "description": "ID of the TNS bot.",
+            "nullable": true
+          },
+          "tns_source_group_id": {
+            "type": "integer",
+            "description": "Source group ID of the TNS bot.",
+            "nullable": true
+          },
+          "_tns_altdata": {
+            "type": "string",
+            "nullable": true
+          },
+          "publish_existing_tns_objects": {
+            "type": "boolean",
+            "description": "Whether to publish objects that already exist in TNS but not reported under this internal name (e.g., reported by another survey).",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "SingleSharingService": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SharingService"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfSharingServices": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SharingService"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "SharingServiceCoauthor": {
+        "type": "object",
+        "properties": {
+          "sharing_service": {
+            "description": "The sharing service associated with this coauthor.",
+            "nullable": true
+          },
+          "sharing_service_id": {
+            "type": "integer"
+          },
+          "user_id": {
+            "type": "integer"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "sharing_service_id",
+          "user_id"
+        ]
+      },
+      "SingleSharingServiceCoauthor": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SharingServiceCoauthor"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfSharingServiceCoauthors": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SharingServiceCoauthor"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "SharingServiceCoauthorNoID": {
+        "type": "object",
+        "properties": {
+          "sharing_service": {
+            "description": "The sharing service associated with this coauthor.",
+            "nullable": true
+          },
+          "sharing_service_id": {
+            "type": "integer"
+          },
+          "user_id": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "sharing_service_id",
+          "user_id"
+        ]
+      },
+      "SingleSharingServiceCoauthorNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SharingServiceCoauthorNoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfSharingServiceCoauthorNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SharingServiceCoauthorNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "SharingServiceGroup": {
+        "type": "object",
+        "properties": {
+          "sharing_service": {
+            "description": "The sharing service associated with this group.",
+            "nullable": true
+          },
+          "group": {
+            "description": "The Group associated with this mapper.",
+            "nullable": true
+          },
+          "auto_publishers": {
+            "type": "array",
+            "items": {
+              "description": "Users associated with this SharingServiceGroup."
+            }
+          },
+          "sharing_service_id": {
+            "type": "integer"
+          },
+          "group_id": {
+            "type": "integer"
+          },
+          "owner": {
+            "type": "boolean"
+          },
+          "auto_share_to_tns": {
+            "type": "boolean"
+          },
+          "auto_share_to_hermes": {
+            "type": "boolean"
+          },
+          "auto_sharing_allow_bots": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "group_id",
+          "sharing_service_id"
+        ]
+      },
+      "SingleSharingServiceGroup": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SharingServiceGroup"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfSharingServiceGroups": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SharingServiceGroup"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "SharingServiceGroupAutoPublisher": {
+        "type": "object",
+        "properties": {
+          "sharing_service_groups": {
+            "description": "The sharing service associated with this auto publisher.",
+            "nullable": true
+          },
+          "sharing_service_group_id": {
+            "type": "integer"
+          },
+          "group_user_id": {
+            "type": "integer"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "user_id": {
+            "type": "integer",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "group_user_id",
+          "sharing_service_group_id"
+        ]
+      },
+      "SingleSharingServiceGroupAutoPublisher": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SharingServiceGroupAutoPublisher"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfSharingServiceGroupAutoPublishers": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SharingServiceGroupAutoPublisher"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "SharingServiceGroupAutoPublisherNoID": {
+        "type": "object",
+        "properties": {
+          "sharing_service_groups": {
+            "description": "The sharing service associated with this auto publisher.",
+            "nullable": true
+          },
+          "sharing_service_group_id": {
+            "type": "integer"
+          },
+          "group_user_id": {
+            "type": "integer"
+          },
+          "user_id": {
+            "type": "integer",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "group_user_id",
+          "sharing_service_group_id"
+        ]
+      },
+      "SingleSharingServiceGroupAutoPublisherNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SharingServiceGroupAutoPublisherNoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfSharingServiceGroupAutoPublisherNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SharingServiceGroupAutoPublisherNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "SharingServiceGroupNoID": {
+        "type": "object",
+        "properties": {
+          "sharing_service": {
+            "description": "The sharing service associated with this group.",
+            "nullable": true
+          },
+          "group": {
+            "description": "The Group associated with this mapper.",
+            "nullable": true
+          },
+          "auto_publishers": {
+            "type": "array",
+            "items": {
+              "description": "Users associated with this SharingServiceGroup."
+            }
+          },
+          "sharing_service_id": {
+            "type": "integer"
+          },
+          "group_id": {
+            "type": "integer"
+          },
+          "owner": {
+            "type": "boolean"
+          },
+          "auto_share_to_tns": {
+            "type": "boolean"
+          },
+          "auto_share_to_hermes": {
+            "type": "boolean"
+          },
+          "auto_sharing_allow_bots": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "group_id",
+          "sharing_service_id"
+        ]
+      },
+      "SingleSharingServiceGroupNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SharingServiceGroupNoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfSharingServiceGroupNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SharingServiceGroupNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "SharingServiceNoID": {
+        "type": "object",
+        "properties": {
+          "instruments": {
+            "type": "array",
+            "items": {
+              "description": "Instruments to restrict the photometry to when publishing."
+            }
+          },
+          "streams": {
+            "type": "array",
+            "items": {
+              "description": "Streams to restrict the photometry to when publishing."
+            }
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "description": "Groups associated with this sharing service."
+            }
+          },
+          "coauthors": {
+            "type": "array",
+            "items": {
+              "description": "Coauthors associated with this sharing service."
+            }
+          },
+          "submissions": {
+            "type": "array",
+            "items": {
+              "description": "Submissions associated with this sharing service."
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Sharing service name."
+          },
+          "acknowledgments": {
+            "type": "string",
+            "description": "Acknowledgments to use for sharing."
+          },
+          "testing": {
+            "type": "boolean",
+            "description": "If true, nothing will be shared but the request's payload will be stored"
+          },
+          "photometry_options": {
+            "description": "Photometry options to use to make some data optional or mandatory for manual and auto-publishing.",
+            "nullable": true
+          },
+          "enable_sharing_with_hermes": {
+            "type": "boolean",
+            "description": "Whether to enable publishing to Hermes or not."
+          },
+          "enable_sharing_with_tns": {
+            "type": "boolean",
+            "description": "Whether to enable publishing to TNS or not."
+          },
+          "tns_bot_name": {
+            "type": "string",
+            "description": "Name of the TNS bot.",
+            "nullable": true
+          },
+          "tns_bot_id": {
+            "type": "integer",
+            "description": "ID of the TNS bot.",
+            "nullable": true
+          },
+          "tns_source_group_id": {
+            "type": "integer",
+            "description": "Source group ID of the TNS bot.",
+            "nullable": true
+          },
+          "_tns_altdata": {
+            "type": "string",
+            "nullable": true
+          },
+          "publish_existing_tns_objects": {
+            "type": "boolean",
+            "description": "Whether to publish objects that already exist in TNS but not reported under this internal name (e.g., reported by another survey).",
+            "nullable": true
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "SingleSharingServiceNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SharingServiceNoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfSharingServiceNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SharingServiceNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "SharingServiceSubmission": {
+        "type": "object",
+        "properties": {
+          "sharing_service": {
+            "description": "The sharing service associated with this submission.",
+            "nullable": true
+          },
+          "obj": {
+            "description": "The Obj submitted.",
+            "nullable": true
+          },
+          "user": {
+            "description": "The User who submitted this object.",
+            "nullable": true
+          },
+          "sharing_service_id": {
+            "type": "integer"
+          },
+          "obj_id": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "integer"
+          },
+          "custom_publishing_string": {
+            "type": "string",
+            "description": "Custom publishing string to use for this submission only.",
+            "nullable": true
+          },
+          "custom_remarks_string": {
+            "type": "string",
+            "description": "Custom remarks string to use for this submission only.",
+            "nullable": true
+          },
+          "publish_to_tns": {
+            "type": "boolean",
+            "description": "Whether to publish to TNS or not."
+          },
+          "tns_status": {
+            "type": "string",
+            "description": "Status of the TNS submission.",
+            "nullable": true
+          },
+          "tns_submission_id": {
+            "type": "integer",
+            "description": "ID of the submission returned by TNS.",
+            "nullable": true
+          },
+          "tns_response": {
+            "description": "Serialized HTTP response from TNS.",
+            "nullable": true
+          },
+          "tns_payload": {
+            "description": "Payload to publish to TNS.",
+            "nullable": true
+          },
+          "publish_to_hermes": {
+            "type": "boolean",
+            "description": "Whether to publish to Hermes or not."
+          },
+          "hermes_status": {
+            "type": "string",
+            "description": "Status of the Hermes submission.",
+            "nullable": true
+          },
+          "hermes_response": {
+            "description": "Serialized HTTP response from Hermes.",
+            "nullable": true
+          },
+          "archival": {
+            "type": "boolean",
+            "description": "Whether this is an archival submission or not."
+          },
+          "archival_comment": {
+            "type": "string",
+            "description": "Comment to use for archival submission.",
+            "nullable": true
+          },
+          "auto_submission": {
+            "type": "boolean",
+            "description": "Whether this submission was auto-requested or not."
+          },
+          "instrument_ids": {
+            "description": "Instrument IDs to use for this submission. If specified, overrides the sharing service's default instrument IDs.",
+            "nullable": true
+          },
+          "stream_ids": {
+            "description": "Stream IDs to use for this submission. If specified, overrides the sharing service's default stream IDs.",
+            "nullable": true
+          },
+          "photometry_options": {
+            "description": "Photometry options to use for this submission, to make some data optional or mandatory.If specified, overrides the sharing service's default photometry options.",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "obj_id",
+          "sharing_service_id",
+          "user_id"
+        ]
+      },
+      "SingleSharingServiceSubmission": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SharingServiceSubmission"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfSharingServiceSubmissions": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SharingServiceSubmission"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "SharingServiceSubmissionNoID": {
+        "type": "object",
+        "properties": {
+          "sharing_service": {
+            "description": "The sharing service associated with this submission.",
+            "nullable": true
+          },
+          "obj": {
+            "description": "The Obj submitted.",
+            "nullable": true
+          },
+          "user": {
+            "description": "The User who submitted this object.",
+            "nullable": true
+          },
+          "sharing_service_id": {
+            "type": "integer"
+          },
+          "obj_id": {
+            "type": "string"
+          },
+          "user_id": {
+            "type": "integer"
+          },
+          "custom_publishing_string": {
+            "type": "string",
+            "description": "Custom publishing string to use for this submission only.",
+            "nullable": true
+          },
+          "custom_remarks_string": {
+            "type": "string",
+            "description": "Custom remarks string to use for this submission only.",
+            "nullable": true
+          },
+          "publish_to_tns": {
+            "type": "boolean",
+            "description": "Whether to publish to TNS or not."
+          },
+          "tns_status": {
+            "type": "string",
+            "description": "Status of the TNS submission.",
+            "nullable": true
+          },
+          "tns_submission_id": {
+            "type": "integer",
+            "description": "ID of the submission returned by TNS.",
+            "nullable": true
+          },
+          "tns_response": {
+            "description": "Serialized HTTP response from TNS.",
+            "nullable": true
+          },
+          "tns_payload": {
+            "description": "Payload to publish to TNS.",
+            "nullable": true
+          },
+          "publish_to_hermes": {
+            "type": "boolean",
+            "description": "Whether to publish to Hermes or not."
+          },
+          "hermes_status": {
+            "type": "string",
+            "description": "Status of the Hermes submission.",
+            "nullable": true
+          },
+          "hermes_response": {
+            "description": "Serialized HTTP response from Hermes.",
+            "nullable": true
+          },
+          "archival": {
+            "type": "boolean",
+            "description": "Whether this is an archival submission or not."
+          },
+          "archival_comment": {
+            "type": "string",
+            "description": "Comment to use for archival submission.",
+            "nullable": true
+          },
+          "auto_submission": {
+            "type": "boolean",
+            "description": "Whether this submission was auto-requested or not."
+          },
+          "instrument_ids": {
+            "description": "Instrument IDs to use for this submission. If specified, overrides the sharing service's default instrument IDs.",
+            "nullable": true
+          },
+          "stream_ids": {
+            "description": "Stream IDs to use for this submission. If specified, overrides the sharing service's default stream IDs.",
+            "nullable": true
+          },
+          "photometry_options": {
+            "description": "Photometry options to use for this submission, to make some data optional or mandatory.If specified, overrides the sharing service's default photometry options.",
+            "nullable": true
+          }
+        },
+        "required": [
+          "obj_id",
+          "sharing_service_id",
+          "user_id"
+        ]
+      },
+      "SingleSharingServiceSubmissionNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SharingServiceSubmissionNoID"
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "ArrayOfSharingServiceSubmissionNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SharingServiceSubmissionNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
       "Shift": {
         "type": "object",
         "properties": {
@@ -60211,10 +61013,10 @@
               "description": "Photometric series associated with this stream."
             }
           },
-          "tnsrobots": {
+          "sharing_services": {
             "type": "array",
             "items": {
-              "description": "TNS robots associated with this stream, used for auto-reporting."
+              "description": "Sharing services associated with this stream"
             }
           },
           "name": {
@@ -60436,10 +61238,10 @@
               "description": "Photometric series associated with this stream."
             }
           },
-          "tnsrobots": {
+          "sharing_services": {
             "type": "array",
             "items": {
-              "description": "TNS robots associated with this stream, used for auto-reporting."
+              "description": "Sharing services associated with this stream"
             }
           },
           "name": {
@@ -60752,13 +61554,13 @@
           "status"
         ]
       },
-      "StreamTNSRobot": {
+      "StreamSharingService": {
         "type": "object",
         "properties": {
           "stream": {
             "nullable": true
           },
-          "tnsrobot": {
+          "sharingservice": {
             "nullable": true
           },
           "id": {
@@ -60768,16 +61570,16 @@
           "stream_id": {
             "type": "integer"
           },
-          "tnsrobot_id": {
+          "sharing_service_id": {
             "type": "integer"
           }
         },
         "required": [
-          "stream_id",
-          "tnsrobot_id"
+          "sharing_service_id",
+          "stream_id"
         ]
       },
-      "SingleStreamTNSRobot": {
+      "SingleStreamSharingService": {
         "type": "object",
         "properties": {
           "status": {
@@ -60789,14 +61591,14 @@
             "type": "string"
           },
           "data": {
-            "$ref": "#/components/schemas/StreamTNSRobot"
+            "$ref": "#/components/schemas/StreamSharingService"
           }
         },
         "required": [
           "status"
         ]
       },
-      "ArrayOfStreamTNSRobots": {
+      "ArrayOfStreamSharingServices": {
         "type": "object",
         "properties": {
           "status": {
@@ -60810,7 +61612,7 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/StreamTNSRobot"
+              "$ref": "#/components/schemas/StreamSharingService"
             }
           }
         },
@@ -60818,28 +61620,28 @@
           "status"
         ]
       },
-      "StreamTNSRobotNoID": {
+      "StreamSharingServiceNoID": {
         "type": "object",
         "properties": {
           "stream": {
             "nullable": true
           },
-          "tnsrobot": {
+          "sharingservice": {
             "nullable": true
           },
           "stream_id": {
             "type": "integer"
           },
-          "tnsrobot_id": {
+          "sharing_service_id": {
             "type": "integer"
           }
         },
         "required": [
-          "stream_id",
-          "tnsrobot_id"
+          "sharing_service_id",
+          "stream_id"
         ]
       },
-      "SingleStreamTNSRobotNoID": {
+      "SingleStreamSharingServiceNoID": {
         "type": "object",
         "properties": {
           "status": {
@@ -60851,14 +61653,14 @@
             "type": "string"
           },
           "data": {
-            "$ref": "#/components/schemas/StreamTNSRobotNoID"
+            "$ref": "#/components/schemas/StreamSharingServiceNoID"
           }
         },
         "required": [
           "status"
         ]
       },
-      "ArrayOfStreamTNSRobotNoIDs": {
+      "ArrayOfStreamSharingServiceNoIDs": {
         "type": "object",
         "properties": {
           "status": {
@@ -60872,7 +61674,7 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/StreamTNSRobotNoID"
+              "$ref": "#/components/schemas/StreamSharingServiceNoID"
             }
           }
         },
@@ -61381,904 +62183,6 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SurveyEfficiencyForObservationsNoID"
-            }
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "TNSRobot": {
-        "type": "object",
-        "properties": {
-          "instruments": {
-            "type": "array",
-            "items": {
-              "description": "Instruments to restrict the photometry to when reporting."
-            }
-          },
-          "streams": {
-            "type": "array",
-            "items": {
-              "description": "Streams to restrict the photometry to when reporting."
-            }
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "description": "Groups associated with this TNSRobot."
-            }
-          },
-          "coauthors": {
-            "type": "array",
-            "items": {
-              "description": "Coauthors associated with this TNSRobot."
-            }
-          },
-          "bot_name": {
-            "type": "string",
-            "description": "Name of the TNS bot."
-          },
-          "bot_id": {
-            "type": "integer",
-            "description": "ID of the TNS bot."
-          },
-          "source_group_id": {
-            "type": "integer",
-            "description": "Source group ID of the TNS bot."
-          },
-          "_altdata": {
-            "type": "string",
-            "nullable": true
-          },
-          "acknowledgments": {
-            "type": "string",
-            "description": "Acknowledgments to use for this robot."
-          },
-          "report_existing": {
-            "type": "boolean",
-            "description": "Whether to still report objects that are already in the TNS, but not reported with this object internal name (i.e., reported by another survey)."
-          },
-          "testing": {
-            "type": "boolean",
-            "description": "If true, robot will not report to TNS and only store the request's payload."
-          },
-          "photometry_options": {
-            "description": "Photometry options to use for this robot, to make some data optional or mandatory for manual and auto-reporting.",
-            "nullable": true
-          },
-          "id": {
-            "type": "integer",
-            "description": "Unique object identifier."
-          },
-          "submissions": {
-            "type": "array",
-            "items": {
-              "description": "Auto-submissions associated with this TNSRobot."
-            }
-          }
-        },
-        "required": [
-          "bot_id",
-          "bot_name",
-          "source_group_id"
-        ]
-      },
-      "SingleTNSRobot": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "$ref": "#/components/schemas/TNSRobot"
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "ArrayOfTNSRobots": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TNSRobot"
-            }
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "TNSRobotCoauthor": {
-        "type": "object",
-        "properties": {
-          "tnsrobot": {
-            "description": "The TNSRobot associated with this mapper.",
-            "nullable": true
-          },
-          "tnsrobot_id": {
-            "type": "integer"
-          },
-          "user_id": {
-            "type": "integer"
-          },
-          "id": {
-            "type": "integer",
-            "description": "Unique object identifier."
-          }
-        },
-        "required": [
-          "tnsrobot_id",
-          "user_id"
-        ]
-      },
-      "SingleTNSRobotCoauthor": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "$ref": "#/components/schemas/TNSRobotCoauthor"
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "ArrayOfTNSRobotCoauthors": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TNSRobotCoauthor"
-            }
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "TNSRobotCoauthorNoID": {
-        "type": "object",
-        "properties": {
-          "tnsrobot": {
-            "description": "The TNSRobot associated with this mapper.",
-            "nullable": true
-          },
-          "tnsrobot_id": {
-            "type": "integer"
-          },
-          "user_id": {
-            "type": "integer"
-          }
-        },
-        "required": [
-          "tnsrobot_id",
-          "user_id"
-        ]
-      },
-      "SingleTNSRobotCoauthorNoID": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "$ref": "#/components/schemas/TNSRobotCoauthorNoID"
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "ArrayOfTNSRobotCoauthorNoIDs": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TNSRobotCoauthorNoID"
-            }
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "TNSRobotGroup": {
-        "type": "object",
-        "properties": {
-          "tnsrobot": {
-            "description": "The TNSRobot associated with this mapper.",
-            "nullable": true
-          },
-          "group": {
-            "description": "The Group associated with this mapper.",
-            "nullable": true
-          },
-          "autoreporters": {
-            "type": "array",
-            "items": {
-              "description": "Users associated with this TNSRobotGroup."
-            }
-          },
-          "tnsrobot_id": {
-            "type": "integer"
-          },
-          "group_id": {
-            "type": "integer"
-          },
-          "owner": {
-            "type": "boolean"
-          },
-          "auto_report": {
-            "type": "boolean"
-          },
-          "auto_report_allow_bots": {
-            "type": "boolean"
-          },
-          "id": {
-            "type": "integer",
-            "description": "Unique object identifier."
-          }
-        },
-        "required": [
-          "group_id",
-          "tnsrobot_id"
-        ]
-      },
-      "SingleTNSRobotGroup": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "$ref": "#/components/schemas/TNSRobotGroup"
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "ArrayOfTNSRobotGroups": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TNSRobotGroup"
-            }
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "TNSRobotGroupAutoreporter": {
-        "type": "object",
-        "properties": {
-          "tnsrobot_group": {
-            "description": "The TNSRobot associated with this mapper.",
-            "nullable": true
-          },
-          "tnsrobot_group_id": {
-            "type": "integer"
-          },
-          "group_user_id": {
-            "type": "integer"
-          },
-          "id": {
-            "type": "integer",
-            "description": "Unique object identifier."
-          },
-          "user_id": {
-            "type": "integer",
-            "readOnly": true
-          }
-        },
-        "required": [
-          "group_user_id",
-          "tnsrobot_group_id"
-        ]
-      },
-      "SingleTNSRobotGroupAutoreporter": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "$ref": "#/components/schemas/TNSRobotGroupAutoreporter"
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "ArrayOfTNSRobotGroupAutoreporters": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TNSRobotGroupAutoreporter"
-            }
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "TNSRobotGroupAutoreporterNoID": {
-        "type": "object",
-        "properties": {
-          "tnsrobot_group": {
-            "description": "The TNSRobot associated with this mapper.",
-            "nullable": true
-          },
-          "tnsrobot_group_id": {
-            "type": "integer"
-          },
-          "group_user_id": {
-            "type": "integer"
-          },
-          "user_id": {
-            "type": "integer",
-            "readOnly": true
-          }
-        },
-        "required": [
-          "group_user_id",
-          "tnsrobot_group_id"
-        ]
-      },
-      "SingleTNSRobotGroupAutoreporterNoID": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "$ref": "#/components/schemas/TNSRobotGroupAutoreporterNoID"
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "ArrayOfTNSRobotGroupAutoreporterNoIDs": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TNSRobotGroupAutoreporterNoID"
-            }
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "TNSRobotGroupNoID": {
-        "type": "object",
-        "properties": {
-          "tnsrobot": {
-            "description": "The TNSRobot associated with this mapper.",
-            "nullable": true
-          },
-          "group": {
-            "description": "The Group associated with this mapper.",
-            "nullable": true
-          },
-          "autoreporters": {
-            "type": "array",
-            "items": {
-              "description": "Users associated with this TNSRobotGroup."
-            }
-          },
-          "tnsrobot_id": {
-            "type": "integer"
-          },
-          "group_id": {
-            "type": "integer"
-          },
-          "owner": {
-            "type": "boolean"
-          },
-          "auto_report": {
-            "type": "boolean"
-          },
-          "auto_report_allow_bots": {
-            "type": "boolean"
-          }
-        },
-        "required": [
-          "group_id",
-          "tnsrobot_id"
-        ]
-      },
-      "SingleTNSRobotGroupNoID": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "$ref": "#/components/schemas/TNSRobotGroupNoID"
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "ArrayOfTNSRobotGroupNoIDs": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TNSRobotGroupNoID"
-            }
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "TNSRobotNoID": {
-        "type": "object",
-        "properties": {
-          "instruments": {
-            "type": "array",
-            "items": {
-              "description": "Instruments to restrict the photometry to when reporting."
-            }
-          },
-          "streams": {
-            "type": "array",
-            "items": {
-              "description": "Streams to restrict the photometry to when reporting."
-            }
-          },
-          "groups": {
-            "type": "array",
-            "items": {
-              "description": "Groups associated with this TNSRobot."
-            }
-          },
-          "coauthors": {
-            "type": "array",
-            "items": {
-              "description": "Coauthors associated with this TNSRobot."
-            }
-          },
-          "bot_name": {
-            "type": "string",
-            "description": "Name of the TNS bot."
-          },
-          "bot_id": {
-            "type": "integer",
-            "description": "ID of the TNS bot."
-          },
-          "source_group_id": {
-            "type": "integer",
-            "description": "Source group ID of the TNS bot."
-          },
-          "_altdata": {
-            "type": "string",
-            "nullable": true
-          },
-          "acknowledgments": {
-            "type": "string",
-            "description": "Acknowledgments to use for this robot."
-          },
-          "report_existing": {
-            "type": "boolean",
-            "description": "Whether to still report objects that are already in the TNS, but not reported with this object internal name (i.e., reported by another survey)."
-          },
-          "testing": {
-            "type": "boolean",
-            "description": "If true, robot will not report to TNS and only store the request's payload."
-          },
-          "photometry_options": {
-            "description": "Photometry options to use for this robot, to make some data optional or mandatory for manual and auto-reporting.",
-            "nullable": true
-          },
-          "submissions": {
-            "type": "array",
-            "items": {
-              "description": "Auto-submissions associated with this TNSRobot."
-            }
-          }
-        },
-        "required": [
-          "bot_id",
-          "bot_name",
-          "source_group_id"
-        ]
-      },
-      "SingleTNSRobotNoID": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "$ref": "#/components/schemas/TNSRobotNoID"
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "ArrayOfTNSRobotNoIDs": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TNSRobotNoID"
-            }
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "TNSRobotSubmission": {
-        "type": "object",
-        "properties": {
-          "tnsrobot": {
-            "description": "The TNSRobot associated with this mapper.",
-            "nullable": true
-          },
-          "obj": {
-            "description": "The Obj associated with this mapper.",
-            "nullable": true
-          },
-          "user": {
-            "description": "The User associated with this mapper.",
-            "nullable": true
-          },
-          "tnsrobot_id": {
-            "type": "integer"
-          },
-          "obj_id": {
-            "type": "string"
-          },
-          "user_id": {
-            "type": "integer"
-          },
-          "custom_reporting_string": {
-            "type": "string",
-            "description": "Custom reporting string to use for this submission only.",
-            "nullable": true
-          },
-          "custom_remarks_string": {
-            "type": "string",
-            "description": "Custom remarks string to use for this submission only.",
-            "nullable": true
-          },
-          "status": {
-            "type": "string"
-          },
-          "archival": {
-            "type": "boolean",
-            "description": "Whether this is an archival submission or not."
-          },
-          "archival_comment": {
-            "type": "string",
-            "description": "Comment to use for archival submission.",
-            "nullable": true
-          },
-          "submission_id": {
-            "type": "integer",
-            "description": "ID of the submission returned by TNS.",
-            "nullable": true
-          },
-          "auto_submission": {
-            "type": "boolean",
-            "description": "Whether this submission was auto-requested or not."
-          },
-          "instrument_ids": {
-            "description": "Instrument IDs to use for this submission. If specified, overrides the robot's default instrument IDs.",
-            "nullable": true
-          },
-          "stream_ids": {
-            "description": "Stream IDs to use for this submission. If specified, overrides the robot's default stream IDs.",
-            "nullable": true
-          },
-          "photometry_options": {
-            "description": "Photometry options to use for this robot, to make some data optional or mandatory. If specified, overrides the robot's default photometry options.",
-            "nullable": true
-          },
-          "payload": {
-            "description": "Payload to be sent to TNS.",
-            "nullable": true
-          },
-          "response": {
-            "description": "Serialized HTTP response.",
-            "nullable": true
-          },
-          "id": {
-            "type": "integer",
-            "description": "Unique object identifier."
-          }
-        },
-        "required": [
-          "obj_id",
-          "tnsrobot_id",
-          "user_id"
-        ]
-      },
-      "SingleTNSRobotSubmission": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "$ref": "#/components/schemas/TNSRobotSubmission"
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "ArrayOfTNSRobotSubmissions": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TNSRobotSubmission"
-            }
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "TNSRobotSubmissionNoID": {
-        "type": "object",
-        "properties": {
-          "tnsrobot": {
-            "description": "The TNSRobot associated with this mapper.",
-            "nullable": true
-          },
-          "obj": {
-            "description": "The Obj associated with this mapper.",
-            "nullable": true
-          },
-          "user": {
-            "description": "The User associated with this mapper.",
-            "nullable": true
-          },
-          "tnsrobot_id": {
-            "type": "integer"
-          },
-          "obj_id": {
-            "type": "string"
-          },
-          "user_id": {
-            "type": "integer"
-          },
-          "custom_reporting_string": {
-            "type": "string",
-            "description": "Custom reporting string to use for this submission only.",
-            "nullable": true
-          },
-          "custom_remarks_string": {
-            "type": "string",
-            "description": "Custom remarks string to use for this submission only.",
-            "nullable": true
-          },
-          "status": {
-            "type": "string"
-          },
-          "archival": {
-            "type": "boolean",
-            "description": "Whether this is an archival submission or not."
-          },
-          "archival_comment": {
-            "type": "string",
-            "description": "Comment to use for archival submission.",
-            "nullable": true
-          },
-          "submission_id": {
-            "type": "integer",
-            "description": "ID of the submission returned by TNS.",
-            "nullable": true
-          },
-          "auto_submission": {
-            "type": "boolean",
-            "description": "Whether this submission was auto-requested or not."
-          },
-          "instrument_ids": {
-            "description": "Instrument IDs to use for this submission. If specified, overrides the robot's default instrument IDs.",
-            "nullable": true
-          },
-          "stream_ids": {
-            "description": "Stream IDs to use for this submission. If specified, overrides the robot's default stream IDs.",
-            "nullable": true
-          },
-          "photometry_options": {
-            "description": "Photometry options to use for this robot, to make some data optional or mandatory. If specified, overrides the robot's default photometry options.",
-            "nullable": true
-          },
-          "payload": {
-            "description": "Payload to be sent to TNS.",
-            "nullable": true
-          },
-          "response": {
-            "description": "Serialized HTTP response.",
-            "nullable": true
-          }
-        },
-        "required": [
-          "obj_id",
-          "tnsrobot_id",
-          "user_id"
-        ]
-      },
-      "SingleTNSRobotSubmissionNoID": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "$ref": "#/components/schemas/TNSRobotSubmissionNoID"
-          }
-        },
-        "required": [
-          "status"
-        ]
-      },
-      "ArrayOfTNSRobotSubmissionNoIDs": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ]
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TNSRobotSubmissionNoID"
             }
           }
         },
@@ -63456,10 +63360,10 @@
               "description": "The Sources accessible to this User."
             }
           },
-          "tns_submissions": {
+          "sharing_service_submissions": {
             "type": "array",
             "items": {
-              "description": "The TNSRobotSubmission this user has made (manual or automatic)."
+              "description": "Sharing submissions this user has made (manual or automatic)."
             }
           },
           "social_auth": {
@@ -64130,10 +64034,10 @@
               "description": "The Sources accessible to this User."
             }
           },
-          "tns_submissions": {
+          "sharing_service_submissions": {
             "type": "array",
             "items": {
-              "description": "The TNSRobotSubmission this user has made (manual or automatic)."
+              "description": "Sharing submissions this user has made (manual or automatic)."
             }
           },
           "social_auth": {
