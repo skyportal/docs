@@ -14301,6 +14301,383 @@
         }
       }
     },
+    "/api/objtagoption": {
+      "get": {
+        "summary": "Retrieve all tag options",
+        "description": "Retrieve all available tag options accessible to the user",
+        "tags": [
+          "object tags"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ObjTagOption"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new tag option",
+        "description": "<b>Permission(s) required:</b> <em>Manage sources (or System admin)</em><br><br>Create a new tag option that can be applied to objects",
+        "tags": [
+          "object tags"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Tag name (letters and numbers only)"
+                  },
+                  "color": {
+                    "type": "string",
+                    "description": "Hex color code (e.g.,"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/ObjTagOption"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/objtagoption/{tag_id}": {
+      "patch": {
+        "summary": "Update a tag option",
+        "description": "Update an existing tag option's name and/or color",
+        "tags": [
+          "object tags"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tag_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "New tag name"
+                  },
+                  "color": {
+                    "type": "string",
+                    "description": "New hex color code (e.g.,"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a tag option",
+        "description": "<b>Permission(s) required:</b> <em>Manage sources (or System admin)</em><br><br>Delete an existing tag option",
+        "tags": [
+          "object tags"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "tag_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/objtag": {
+      "get": {
+        "summary": "Retrieve object-tag associations",
+        "description": "Retrieve all tag-object associations or filter by object ID or tag option ID",
+        "tags": [
+          "object tags"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "obj_id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter associations by object ID"
+          },
+          {
+            "in": "query",
+            "name": "objtagoption_id",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Filter associations by tag option ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/ObjTag"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create object-tag association",
+        "description": "Create a new association between an object and a tag option",
+        "tags": [
+          "object tags"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "objtagoption_id": {
+                    "type": "integer",
+                    "description": "ID of the tag option to associate"
+                  },
+                  "obj_id": {
+                    "type": "string",
+                    "description": "ID of the object to tag"
+                  }
+                },
+                "required": [
+                  "objtagoption_id",
+                  "obj_id"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/ObjTag"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/objtag/{association_id}": {
+      "delete": {
+        "summary": "Delete object-tag association",
+        "description": "Delete an existing association between an object and a tag option",
+        "tags": [
+          "object tags"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "association_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/photometry/{photometry_id}": {
       "get": {
         "summary": "Get a photometry point",
@@ -17130,6 +17507,22 @@
               "maximum": 4
             },
             "description": "output desired number of offset stars [0,5] (default: 3)\n"
+          },
+          {
+            "in": "query",
+            "name": "as_json",
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Return a JSON including the finding chart and star_list\n"
+          },
+          {
+            "in": "query",
+            "name": "use_cache",
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Use caching when generating finding charts (default: true)\n"
           }
         ],
         "responses": {
@@ -17146,6 +17539,21 @@
                 "schema": {
                   "type": "string",
                   "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Name of the file"
+                    },
+                    "data": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
                 }
               }
             }
@@ -23942,6 +24350,32 @@
               "type": "boolean"
             },
             "description": "Include users with expired accounts in the results."
+          },
+          {
+            "in": "query",
+            "name": "sortBy",
+            "nullable": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "username",
+                "createdAt"
+              ]
+            },
+            "description": "Field to sort by. Options are 'username' (alphabetical, default) or 'createdAt' (creation date).\n"
+          },
+          {
+            "in": "query",
+            "name": "sortOrder",
+            "nullable": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "description": "Sort order - 'asc' for ascending (default) or 'desc' for descending."
           }
         ],
         "responses": {
@@ -24726,6 +25160,55 @@
         "security": [
           {}
         ]
+      }
+    },
+    "/public/finding_charts/{cache_key}": {
+      "get": {
+        "summary": "Retrieve a cached finding chart",
+        "description": "Download a pre-generated PDF/PNG finding chart that has been cached",
+        "tags": [
+          "sources",
+          "finding chart",
+          "public"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cache_key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A PDF/PNG finding chart file",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
