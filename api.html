@@ -19162,7 +19162,50 @@
         }
       },
       "patch": {
-        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>"
+        "summary": "Update a source",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update a source",
+        "tags": [
+          "sources"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "obj_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObjNoID"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
       },
       "delete": {
         "summary": "Delete a source",
