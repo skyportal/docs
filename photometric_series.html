@@ -326,6 +326,14 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#posting-data">Posting data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sharing-and-access-control">Sharing and Access Control</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#group-sharing">Group Sharing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stream-association">Stream Association</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-sharing-permissions">Updating Sharing Permissions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permission-levels">Permission Levels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-response-data">API Response Data</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-binary-file">Creating a binary file</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-photometric-series">Downloading photometric series</a></li>
 </ul>
@@ -407,6 +415,74 @@ This can be one of the following values: “middle”, “start”, “end”.</
 </ul>
 <p>Any of the above request body parameters can be given
 as metadata inside the photometry HDF5 file.</p>
+</section>
+<section id="sharing-and-access-control">
+<h2>Sharing and Access Control<a class="headerlink" href="#sharing-and-access-control" title="Link to this heading">#</a></h2>
+<p>PhotometricSeries data is subject to SkyPortal’s permission-based access control system.</p>
+<section id="group-sharing">
+<h3>Group Sharing<a class="headerlink" href="#group-sharing" title="Link to this heading">#</a></h3>
+<p>By specifying <code class="docutils literal notranslate"><span class="pre">group_ids</span></code> when uploading a photometric series,
+you grant access to that series to members of those groups.</p>
+<ul class="simple">
+<li><p>Members of the specified groups can <strong>read</strong> the photometric series</p></li>
+<li><p>Members of the specified groups can <strong>update</strong> or <strong>delete</strong> the series if they have the “Manage photometry” permission</p></li>
+<li><p>The owner of the series can always update or delete it</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">group_ids</span></code> is not specified, the series is only accessible to the owner (via their single-user group)</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">group_ids:</span> <span class="pre">&quot;all&quot;</span></code> to share the series with all public groups</p></li>
+</ul>
+</section>
+<section id="stream-association">
+<h3>Stream Association<a class="headerlink" href="#stream-association" title="Link to this heading">#</a></h3>
+<p>By specifying <code class="docutils literal notranslate"><span class="pre">stream_ids</span></code> when uploading a photometric series,
+you associate the series with data streams.
+This allows automated pipelines and data workflows to identify and process the data appropriately.</p>
+</section>
+<section id="updating-sharing-permissions">
+<h3>Updating Sharing Permissions<a class="headerlink" href="#updating-sharing-permissions" title="Link to this heading">#</a></h3>
+<p>To change which groups have access to a photometric series after creation,
+use the <code class="docutils literal notranslate"><span class="pre">PATCH</span> <span class="pre">/api/photometric_series/&lt;id&gt;</span></code> endpoint with new <code class="docutils literal notranslate"><span class="pre">group_ids</span></code>:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;group_ids&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This will update the group associations for the series.</p>
+</section>
+<section id="permission-levels">
+<h3>Permission Levels<a class="headerlink" href="#permission-levels" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Read:</strong> Members of a series’ groups, members of associated streams, or the owner can read the series</p></li>
+<li><p><strong>Update:</strong> Only the owner or users with “Manage photometry” permission who are in one of the series’ groups can update</p></li>
+<li><p><strong>Delete:</strong> Only the owner or system admins can delete a series</p></li>
+<li><p><strong>System Admin:</strong> System administrators can read, update, and delete any photometric series</p></li>
+</ul>
+</section>
+<section id="api-response-data">
+<h3>API Response Data<a class="headerlink" href="#api-response-data" title="Link to this heading">#</a></h3>
+<p>When retrieving a photometric series via the API,
+the response includes group and stream information:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;groups&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Group Name&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;nickname&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;short-name&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;single_user_group&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;streams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Stream Name&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can disable the inclusion of group/stream information by using
+query parameters in the API request if needed.</p>
+</section>
 </section>
 <section id="creating-a-binary-file">
 <h2>Creating a binary file<a class="headerlink" href="#creating-a-binary-file" title="Link to this heading">#</a></h2>
@@ -575,6 +651,14 @@ To get the data without saving it to disk, use the following code
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#posting-data">Posting data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sharing-and-access-control">Sharing and Access Control</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#group-sharing">Group Sharing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stream-association">Stream Association</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-sharing-permissions">Updating Sharing Permissions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permission-levels">Permission Levels</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#api-response-data">API Response Data</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-binary-file">Creating a binary file</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-photometric-series">Downloading photometric series</a></li>
 </ul>

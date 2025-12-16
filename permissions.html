@@ -334,6 +334,13 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binding-policies-to-classes">Binding Policies to Classes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convenience-methods">Convenience Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#photometricseries-permissions">PhotometricSeries Permissions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-access">Read Access</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update-and-delete-access">Update and Delete Access</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-permission-checks">Example Permission Checks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#group-and-stream-management">Group and Stream Management</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enforcing-permissions-in-handlers">Enforcing Permissions in Handlers</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-examples-of-policies">Further examples of policies:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-permissions-being-checked-in-an-api-handler">Examples of permissions being checked in an API handler:</a></li>
@@ -496,6 +503,61 @@ with a signal-to-noise ratio of at least 10:</p>
 </pre></div>
 </div>
 </section>
+<section id="photometricseries-permissions">
+<h2>PhotometricSeries Permissions<a class="headerlink" href="#photometricseries-permissions" title="Link to this heading">#</a></h2>
+<p>PhotometricSeries records follow a similar access control pattern to Photometry,
+with additional support for group-based and stream-based access:</p>
+<section id="read-access">
+<h3>Read Access<a class="headerlink" href="#read-access" title="Link to this heading">#</a></h3>
+<p>A user can <strong>read</strong> a PhotometricSeries if:</p>
+<ul class="simple">
+<li><p>The user is a member of one of the series’ groups, OR</p></li>
+<li><p>The user is a member of one of the series’ associated streams, OR</p></li>
+<li><p>The user is the owner of the series</p></li>
+</ul>
+</section>
+<section id="update-and-delete-access">
+<h3>Update and Delete Access<a class="headerlink" href="#update-and-delete-access" title="Link to this heading">#</a></h3>
+<p>A user can <strong>update</strong> or <strong>delete</strong> a PhotometricSeries if:</p>
+<ul class="simple">
+<li><p>The user is the owner of the series, OR</p></li>
+<li><p>The user is a system administrator, OR</p></li>
+<li><p>The user has the “Manage photometry” permission AND is a member of one of the series’ groups</p></li>
+</ul>
+</section>
+<section id="example-permission-checks">
+<h3>Example Permission Checks<a class="headerlink" href="#example-permission-checks" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve all photometric series a user can read</span>
+<span class="n">readable_series</span> <span class="o">=</span> <span class="n">PhotometricSeries</span><span class="o">.</span><span class="n">get_records_accessible_by</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;read&quot;</span><span class="p">)</span>
+
+<span class="c1"># Check if a user can delete a specific series</span>
+<span class="n">deletable_series</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">scalars</span><span class="p">(</span>
+    <span class="n">PhotometricSeries</span><span class="o">.</span><span class="n">query_records_accessible_by</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;delete&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+        <span class="n">PhotometricSeries</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">series_id</span>
+    <span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">deletable_series</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;You do not have permission to delete this photometric series&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="group-and-stream-management">
+<h3>Group and Stream Management<a class="headerlink" href="#group-and-stream-management" title="Link to this heading">#</a></h3>
+<p>When uploading a PhotometricSeries:</p>
+<ul class="simple">
+<li><p>Specify <code class="docutils literal notranslate"><span class="pre">group_ids</span></code> to grant access to specific groups</p></li>
+<li><p>Specify <code class="docutils literal notranslate"><span class="pre">stream_ids</span></code> to associate the series with data streams</p></li>
+<li><p>Omitting <code class="docutils literal notranslate"><span class="pre">group_ids</span></code> means only the owner (via their single-user group) has access</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">group_ids:</span> <span class="pre">&quot;all&quot;</span></code> to share with all public groups</p></li>
+</ul>
+<p>When updating a PhotometricSeries:</p>
+<ul class="simple">
+<li><p>Use a PATCH request to modify the <code class="docutils literal notranslate"><span class="pre">group_ids</span></code> and <code class="docutils literal notranslate"><span class="pre">stream_ids</span></code></p></li>
+<li><p>This updates which groups and streams have access to the series</p></li>
+</ul>
+</section>
+</section>
 <section id="enforcing-permissions-in-handlers">
 <h2>Enforcing Permissions in Handlers<a class="headerlink" href="#enforcing-permissions-in-handlers" title="Link to this heading">#</a></h2>
 <p>Calling <code class="docutils literal notranslate"><span class="pre">self.verify_and_commit()</span></code> within a SkyPortal API handler will trigger the RLS permission checker to introspect the current database session and verify that all of the records it currently is tracking are being accessed in an allowable way.  If it encounters any permissions violations during this process, it causes the handler to rollback the transaction and return an HTTP status code of 400 with a message that identifies the specific row where an access policy was violated. If no access policies are violated, then the current database transaction will be committed.</p>
@@ -580,6 +642,13 @@ erroring if any violations are detected</a></p></li>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#binding-policies-to-classes">Binding Policies to Classes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convenience-methods">Convenience Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#photometricseries-permissions">PhotometricSeries Permissions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#read-access">Read Access</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#update-and-delete-access">Update and Delete Access</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-permission-checks">Example Permission Checks</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#group-and-stream-management">Group and Stream Management</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#enforcing-permissions-in-handlers">Enforcing Permissions in Handlers</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#further-examples-of-policies">Further examples of policies:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-permissions-being-checked-in-an-api-handler">Examples of permissions being checked in an API handler:</a></li>
