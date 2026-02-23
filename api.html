@@ -27233,7 +27233,9 @@
         "type": "object",
         "properties": {
           "payload": {
-            "description": "Content of the catalog query request."
+            "type": "object",
+            "description": "Content of the catalog query request.",
+            "additionalProperties": {}
           },
           "status": {
             "type": "string",
@@ -32869,7 +32871,9 @@
             "description": "ID of the target Obj."
           },
           "payload": {
-            "description": "Content of the followup request."
+            "type": "object",
+            "description": "Content of the followup request.",
+            "additionalProperties": {}
           },
           "status": {
             "type": "string",
@@ -52599,7 +52603,9 @@
             "description": "ID of the GcnEvent."
           },
           "payload": {
-            "description": "Content of the observation plan request."
+            "type": "object",
+            "description": "Content of the observation plan request.",
+            "additionalProperties": {}
           },
           "status": {
             "type": "string",
@@ -53760,8 +53766,10 @@
             "description": "List of stream IDs to which photometry points will be visible."
           },
           "altdata": {
+            "type": "object",
             "default": null,
             "description": "Misc. alternative metadata stored in JSON format, e.g. `{'calibration': {'source': 'ps1','color_term': 0.012}, 'photometry_method': 'allstar', 'method_reference': 'Masci et al. (2015)'}`. Can be a list of dicts or a single dict which will be broadcast to all values.",
+            "additionalProperties": {},
             "nullable": true
           },
           "magsys": {
@@ -53901,8 +53909,10 @@
             "description": "List of stream IDs to which photometry points will be visible."
           },
           "altdata": {
+            "type": "object",
             "default": null,
             "description": "Misc. alternative metadata stored in JSON format, e.g. `{'calibration': {'source': 'ps1','color_term': 0.012}, 'photometry_method': 'allstar', 'method_reference': 'Masci et al. (2015)'}`. Can be a list of dicts or a single dict which will be broadcast to all values.",
+            "additionalProperties": {},
             "nullable": true
           },
           "magsys": {
@@ -61933,7 +61943,9 @@
             "description": "ID of the classical assignment that generated this spectrum, if any."
           },
           "altdata": {
-            "description": "Miscellaneous alternative metadata."
+            "type": "object",
+            "description": "Miscellaneous alternative metadata.",
+            "additionalProperties": {}
           }
         },
         "required": [
@@ -62581,7 +62593,9 @@
             "description": "ID of the classical assignment that generated this spectrum, if any."
           },
           "altdata": {
-            "description": "Miscellaneous alternative metadata."
+            "type": "object",
+            "description": "Miscellaneous alternative metadata.",
+            "additionalProperties": {}
           }
         },
         "required": [
@@ -66599,7 +66613,9 @@
         "type": "object",
         "properties": {
           "payload": {
-            "description": "Content of the default follow-up request."
+            "type": "object",
+            "description": "Content of the default follow-up request.",
+            "additionalProperties": {}
           },
           "allocation_id": {
             "type": "integer",
@@ -66639,7 +66655,9 @@
         "type": "object",
         "properties": {
           "payload": {
-            "description": "Content of the default observation plan request."
+            "type": "object",
+            "description": "Content of the default observation plan request.",
+            "additionalProperties": {}
           },
           "allocation_id": {
             "type": "integer",
@@ -66662,7 +66680,9 @@
         "type": "object",
         "properties": {
           "payload": {
-            "description": "Content of the default survey efficiency analysis."
+            "type": "object",
+            "description": "Content of the default survey efficiency analysis.",
+            "additionalProperties": {}
           },
           "default_observationplan_request_id": {
             "type": "integer",
@@ -66694,6 +66714,7 @@
             "nullable": true
           },
           "catalogData": {
+            "type": "string",
             "description": "Catalog data Ascii string"
           }
         },
@@ -66725,7 +66746,10 @@
           "catalog_data": {
             "type": "array",
             "description": "Galaxy catalog data",
-            "items": {}
+            "items": {
+              "type": "object",
+              "additionalProperties": {}
+            }
           }
         },
         "required": [
@@ -66741,6 +66765,7 @@
             "description": "UTC event timestamp"
           },
           "text": {
+            "type": "string",
             "description": "GCN Event tag"
           }
         },
@@ -66799,7 +66824,9 @@
             "description": "The instrument name associated with the fields"
           },
           "observationData": {
-            "description": "Observation data dictionary list"
+            "type": "object",
+            "description": "Observation data dictionary list",
+            "additionalProperties": {}
           }
         },
         "required": [
@@ -66816,7 +66843,9 @@
             "description": "The instrument ID associated with the fields"
           },
           "observationData": {
-            "description": "Observation data Ascii string"
+            "type": "object",
+            "description": "Observation data Ascii string",
+            "additionalProperties": {}
           }
         },
         "required": [
@@ -66852,7 +66881,9 @@
             }
           },
           "observation_plan_data": {
-            "description": "Observation plan data json"
+            "type": "object",
+            "description": "Observation plan data json",
+            "additionalProperties": {}
           }
         },
         "required": [
@@ -66892,7 +66923,9 @@
             "description": "Spatial catalog name."
           },
           "catalogData": {
-            "description": "Catalog data Ascii string"
+            "type": "object",
+            "description": "Catalog data Ascii string",
+            "additionalProperties": {}
           }
         },
         "additionalProperties": false
@@ -66907,7 +66940,10 @@
           "catalog_data": {
             "type": "array",
             "description": "Spatial catalog data",
-            "items": {}
+            "items": {
+              "type": "object",
+              "additionalProperties": {}
+            }
           }
         },
         "additionalProperties": false

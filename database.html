@@ -1440,52 +1440,49 @@ multiple Roles.</p>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">column_expression</span></code>(column)</p></td>
 <td><p>Given a SELECT column expression, return a wrapping SQL expression.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compare_against_backend</span></code>(dialect, conn_type)</p></td>
-<td><p>Compare this type against the given backend type.</p></td>
-</tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compare_values</span></code>(x, y)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compare_values</span></code>(x, y)</p></td>
 <td><p>Given two values, compare them for equality.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compile</span></code>([dialect])</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">compile</span></code>([dialect])</p></td>
 <td><p>Produce a string-compiled form of this <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeEngine</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code>(**kw)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">copy</span></code>(**kw)</p></td>
 <td><p>Produce a copy of this <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeDecorator</span></code> instance.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dialect_impl</span></code>(dialect)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">dialect_impl</span></code>(dialect)</p></td>
 <td><p>Return a dialect-specific implementation for this <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeEngine</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluates_none</span></code>()</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluates_none</span></code>()</p></td>
 <td><p>Return a copy of this type which has the <code class="xref py py-attr docutils literal notranslate"><span class="pre">should_evaluate_none</span></code> flag set to True.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_dbapi_type</span></code>(dbapi)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_dbapi_type</span></code>(dbapi)</p></td>
 <td><p>Return the DBAPI type object represented by this <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeDecorator</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#baselayer.app.models.SlugifiedStr.impl" title="baselayer.app.models.SlugifiedStr.impl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">impl</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#baselayer.app.models.SlugifiedStr.impl" title="baselayer.app.models.SlugifiedStr.impl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">impl</span></code></a></p></td>
 <td><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">String</span></code></p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">literal_processor</span></code>(dialect)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">literal_processor</span></code>(dialect)</p></td>
 <td><p>Provide a literal processing function for the given <code class="xref py py-class docutils literal notranslate"><span class="pre">Dialect</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_dialect_impl</span></code>(dialect)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_dialect_impl</span></code>(dialect)</p></td>
 <td><p>Return a <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeEngine</span></code> object corresponding to a dialect.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baselayer.app.models.SlugifiedStr.process_bind_param" title="baselayer.app.models.SlugifiedStr.process_bind_param"><code class="xref py py-obj docutils literal notranslate"><span class="pre">process_bind_param</span></code></a>(value, dialect)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baselayer.app.models.SlugifiedStr.process_bind_param" title="baselayer.app.models.SlugifiedStr.process_bind_param"><code class="xref py py-obj docutils literal notranslate"><span class="pre">process_bind_param</span></code></a>(value, dialect)</p></td>
 <td><p>Receive a bound parameter value to be converted.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">process_literal_param</span></code>(value, dialect)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">process_literal_param</span></code>(value, dialect)</p></td>
 <td><p>Receive a literal parameter value to be rendered inline within a statement.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baselayer.app.models.SlugifiedStr.process_result_value" title="baselayer.app.models.SlugifiedStr.process_result_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">process_result_value</span></code></a>(value, dialect)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baselayer.app.models.SlugifiedStr.process_result_value" title="baselayer.app.models.SlugifiedStr.process_result_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">process_result_value</span></code></a>(value, dialect)</p></td>
 <td><p>Receive a result-row column value to be converted.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">result_processor</span></code>(dialect, coltype)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">result_processor</span></code>(dialect, coltype)</p></td>
 <td><p>Provide a result value processing function for the given <code class="xref py py-class docutils literal notranslate"><span class="pre">Dialect</span></code>.</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">type_engine</span></code>(dialect)</p></td>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">type_engine</span></code>(dialect)</p></td>
 <td><p>Return a dialect-specific <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeEngine</span></code> instance for this <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeDecorator</span></code>.</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_variant</span></code>(type_, *dialect_names)</p></td>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">with_variant</span></code>(type_, *dialect_names)</p></td>
 <td><p>Produce a copy of this type object that will utilize the given type when applied to the dialect of the given name.</p></td>
 </tr>
 </tbody>
@@ -1539,12 +1536,12 @@ correspond with the names of the arguments.  For example, a datatype
 which accepts a dictionary of lookup values may publish this as a sorted
 series of tuples.   Given a previously un-cacheable type as:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">LookupType</span><span class="p">(</span><span class="n">UserDefinedType</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;a custom type that accepts a dictionary as a parameter.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;a custom type that accepts a dictionary as a parameter.</span>
 
 <span class="sd">    this is the non-cacheable version, as &quot;self.lookup&quot; is not</span>
 <span class="sd">    hashable.</span>
 
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lookup</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lookup</span> <span class="o">=</span> <span class="n">lookup</span>
@@ -1552,8 +1549,7 @@ series of tuples.   Given a previously un-cacheable type as:</p>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_col_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;VARCHAR(255)&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">bind_processor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dialect</span><span class="p">):</span>
-        <span class="c1"># ...  works with &quot;self.lookup&quot; ...</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">bind_processor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dialect</span><span class="p">):</span> <span class="o">...</span>  <span class="c1"># works with &quot;self.lookup&quot; ...</span>
 </pre></div>
 </div>
 <p>Where “lookup” is a dictionary.  The type will not be able to generate
@@ -1589,7 +1585,7 @@ statement cache, since Python dictionaries aren’t hashable:</p>
 <p>The type may be made cacheable by assigning a sorted tuple of tuples
 to the “.lookup” attribute:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">LookupType</span><span class="p">(</span><span class="n">UserDefinedType</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;a custom type that accepts a dictionary as a parameter.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;a custom type that accepts a dictionary as a parameter.</span>
 
 <span class="sd">    The dictionary is stored both as itself in a private variable,</span>
 <span class="sd">    and published in a public variable as a sorted tuple of tuples,</span>
@@ -1597,7 +1593,7 @@ to the “.lookup” attribute:</p>
 <span class="sd">    two equivalent dictionaries.  Note it assumes the keys and</span>
 <span class="sd">    values of the dictionary are themselves hashable.</span>
 
-<span class="sd">    &#39;&#39;&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">cache_ok</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -1606,15 +1602,12 @@ to the “.lookup” attribute:</p>
 
         <span class="c1"># assume keys/values of &quot;lookup&quot; are hashable; otherwise</span>
         <span class="c1"># they would also need to be converted in some way here</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lookup</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
-            <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">lookup</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">lookup</span><span class="p">)</span>
-        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lookup</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">((</span><span class="n">key</span><span class="p">,</span> <span class="n">lookup</span><span class="p">[</span><span class="n">key</span><span class="p">])</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">lookup</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">get_col_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;VARCHAR(255)&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">bind_processor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dialect</span><span class="p">):</span>
-        <span class="c1"># ...  works with &quot;self._lookup&quot; ...</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">bind_processor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dialect</span><span class="p">):</span> <span class="o">...</span>  <span class="c1"># works with &quot;self._lookup&quot; ...</span>
 </pre></div>
 </div>
 <p>Where above, the cache key for <code class="docutils literal notranslate"><span class="pre">LookupType({&quot;a&quot;:</span> <span class="pre">10,</span> <span class="pre">&quot;b&quot;:</span> <span class="pre">20})</span></code> will be:</p>
