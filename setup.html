@@ -38,8 +38,8 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="_static/documentation_options.js?v=bc4b15cc"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'setup';</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -380,22 +380,17 @@ how to install them on MacOS and Debian-based systems below.</p>
 </section>
 <section id="source-download-python-environment">
 <h2>Source download, Python environment<a class="headerlink" href="#source-download-python-environment" title="Link to this heading">#</a></h2>
-<p>Clone the <a class="reference external" href="https://github.com/skyportal/skyportal">SkyPortal repository</a> and start a new
-virtual environment.</p>
+<p>First, clone the <a class="reference external" href="https://github.com/skyportal/skyportal">SkyPortal repository</a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">skyportal</span><span class="o">/</span><span class="n">skyportal</span><span class="o">.</span><span class="n">git</span>
 <span class="n">cd</span> <span class="n">skyportal</span><span class="o">/</span>
-<span class="n">virtualenv</span> <span class="n">skyportal_env</span>
-<span class="n">source</span> <span class="n">skyportal_env</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
 </pre></div>
 </div>
-<p>You can also use <code class="docutils literal notranslate"><span class="pre">conda</span></code> or <code class="docutils literal notranslate"><span class="pre">pipenv</span></code> to create your environment.</p>
-<p>If you developing on a Mac with an ARM (M1/M2) you might consider using a Rosetta-driven environment so that you more easily install dependencies (that tend to be x86-centric):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CONDA_SUBDIR</span><span class="o">=</span><span class="n">osx</span><span class="o">-</span><span class="mi">64</span> <span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">skyportal_env</span> \
-      <span class="n">python</span><span class="o">=</span><span class="mf">3.10</span>
-<span class="n">conda</span> <span class="n">activate</span> <span class="n">skyportal_env</span>
-<span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">env</span> <span class="o">--</span><span class="nb">set</span> <span class="n">subdir</span> <span class="n">osx</span><span class="o">-</span><span class="mi">64</span>
-<span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="n">add</span> <span class="n">channels</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span>
-<span class="n">conda</span> <span class="n">config</span> <span class="o">--</span><span class="nb">set</span> <span class="n">channel_priority</span> <span class="n">strict</span>
+<p>Then, using <code class="docutils literal notranslate"><span class="pre">uv</span></code> (see <a class="reference external" href="https://docs.astral.sh/uv/getting-started/installation/">uv documentation</a> for more details on how to use it), let’s create a virtual environment and install the Python dependencies, in once command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span> <span class="n">sync</span>
+</pre></div>
+</div>
+<p>Thereafter, to enter the environment, simply run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">.</span><span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
 </pre></div>
 </div>
 <p>If you are using Windows Subsystem for Linux (WSL) be sure you clone the repository onto a location on the virtual machine, not the mounted Windows drive. Additionally, we recommend that you use WSL 2, and not WSL 1, in order to avoid complications in interfacing with the Linux image’s <code class="docutils literal notranslate"><span class="pre">localhost</span></code> network.</p>
@@ -446,18 +441,6 @@ virtual environment.</p>
 </pre></div>
 </div>
 </li>
-<li><p>Activate the environment and add a few (hard-to install-with-pip) packages by hand:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">skyportal_env</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="n">pyproj</span> <span class="n">numba</span> <span class="n">Shapely</span>
-</pre></div>
-</div>
-</li>
-<li><p>(ARM M1/M2) Explicitly <a class="reference external" href="https://lscsoft.docs.ligo.org/ligo.skymap/quickstart/install.html#option-2-conda">install ligo.skymap using conda rather than pip</a>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span> <span class="n">skyportal_env</span>
-<span class="n">conda</span> <span class="n">install</span> <span class="n">ligo</span><span class="o">.</span><span class="n">skymap</span>
-</pre></div>
-</div>
-</li>
 </ol>
 <p><a name="configure-shell-mac"></a></p>
 <section id="configuring-shell-environment-for-development">
@@ -482,6 +465,12 @@ virtual environment.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">info</span> <span class="o">&lt;</span><span class="n">name_of_package</span><span class="o">&gt;</span>
 </pre></div>
 </div>
+<p>If you want to build the docs and installed graphviz, you may need to add its <code class="docutils literal notranslate"><span class="pre">include</span></code> and <code class="docutils literal notranslate"><span class="pre">lib</span></code> directories to your <code class="docutils literal notranslate"><span class="pre">CFLAGS</span></code> and <code class="docutils literal notranslate"><span class="pre">LDFLAGS</span></code> environment variables, respectively, in your <code class="docutils literal notranslate"><span class="pre">.zshrc</span></code> file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">CFLAGS</span><span class="o">=</span><span class="s2">&quot;-I$(brew --prefix graphviz)/include&quot;</span>
+<span class="n">export</span> <span class="n">LDFLAGS</span><span class="o">=</span><span class="s2">&quot;-L$(brew --prefix graphviz)/lib&quot;</span>
+</pre></div>
+</div>
+<p><em>Remember to source your <code class="docutils literal notranslate"><span class="pre">.zshrc</span></code> file after making these changes with <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">~/.zshrc</span></code>.</em></p>
 </section>
 <section id="alias-pip3-and-python3">
 <h4>Alias pip3 and python3<a class="headerlink" href="#alias-pip3-and-python3" title="Link to this heading">#</a></h4>
@@ -504,7 +493,7 @@ virtual environment.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lsof</span> <span class="o">-</span><span class="n">i</span> <span class="p">:</span><span class="mi">5000</span>
 </pre></div>
 </div>
-<p>If the command outputs information about a service, it means that port 5000 is already in use. In this case, you may need to configure SkyPortal to use a different port.</p>
+<p>If the command outputs information about a service, it means that port 5000 is already in use. In this case, you may need to configure SkyPortal to use a different port (in <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>, and if you intend to run the unit tests, then also in <code class="docutils literal notranslate"><span class="pre">test_config.yaml</span></code>).</p>
 </section>
 </section>
 <section id="installation-debian-based-linux-and-wsl">
@@ -567,7 +556,7 @@ virtual environment.</p>
 <section id="launch">
 <h2>Launch<a class="headerlink" href="#launch" title="Link to this heading">#</a></h2>
 <ol class="simple">
-<li><p>Make sure you are in the skyportal env: <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">skyportal_env</span></code></p></li>
+<li><p>Make sure you are in the skyportal env: <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">sync</span> <span class="pre">&amp;&amp;</span> <span class="pre">source</span> <span class="pre">.venv/bin/activate</span></code>.</p></li>
 <li><p>Initialize the database with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_init</span></code> (this only needs to
 happen once).</p></li>
 <li><p>Copy <code class="docutils literal notranslate"><span class="pre">config.yaml.defaults</span></code> to <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>.</p></li>

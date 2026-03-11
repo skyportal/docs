@@ -38,8 +38,8 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="_static/documentation_options.js?v=bc4b15cc"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'thumbnails';</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -345,7 +345,7 @@ document.write(`
 <h2>Updating existing thumbnails<a class="headerlink" href="#updating-existing-thumbnails" title="Link to this heading">#</a></h2>
 <p>Every now and then, the surveys mentioned above publish new data releases and/or services to fetch thumbnails from them. When that happens, SkyPortal is usually updated to start using these for new thumbnails. The URLs of existing thumbnails in the DB are still valid (unless of course, the URLs they point to aren’t accessible anymore), but one may want to update them to the new ones. In that case, we provide scripts to update the content of the thumbnails table in the DB, which are found in <code class="docutils literal notranslate"><span class="pre">tools/thumbnails_udpate/</span></code>. The naming scheme of each script should be self-explanatory, and all they need as a parameter (optional) is the path to the config file with <code class="docutils literal notranslate"><span class="pre">--config=path/to/config</span></code> (default is <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> in the root of the repo).</p>
 <p>For example, on 2025-05-03, we updated SkyPortal to start pointing to Legacy Survey’s DR10 instead of DR9, and the script to update the thumbnails table is <code class="docutils literal notranslate"><span class="pre">tools/thumbnails_update/ls_dr9_to_dr10.py</span></code>. To run it, one would do:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>skyportal_env/bin/activate
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
 <span class="nv">PYTHONPATH</span><span class="o">=</span>.<span class="w"> </span>python<span class="w"> </span>tools/thumbnails_update/ls_dr9_to_dr10.py<span class="w"> </span>--config<span class="o">=</span>config.yaml
 </pre></div>
 </div>

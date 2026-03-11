@@ -38,8 +38,8 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="_static/documentation_options.js?v=bc4b15cc"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'deploy';</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -390,11 +390,11 @@ The database is stored and persisted in a local docker volume called <code class
 <p>Note that by default, the SkyPortal image will run the application in production (<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run_production</span></code>, see the <code class="docutils literal notranslate"><span class="pre">CMD</span></code> directive at the end of the Dockerfile).</p>
 <p>The key behavior to note when running production mode is that the application will not create any database tables automatically (to avoid messing with production data). This means that the very first time you spin up SkyPortal using containers, the <code class="docutils literal notranslate"><span class="pre">skyportal_dbdata</span></code> volume will only have an empty database. While the <code class="docutils literal notranslate"><span class="pre">skyportal-web-1</span></code> container will start, the web application will not be accessible without an initialized database. This can easily be done manually, and the easiest way to do this is to run:</p>
 <p>To initialize an empty database, run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">exec</span> <span class="n">skyportal</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="mi">1</span> <span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;source /skyportal_env/bin/activate &amp;&amp; FLAGS=&quot;--config=config.yaml&quot; make db_create_tables&#39;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">exec</span> <span class="n">skyportal</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="mi">1</span> <span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;source .venv/bin/activate &amp;&amp; FLAGS=&quot;--config=config.yaml&quot; make db_create_tables&#39;</span>
 </pre></div>
 </div>
 <p>To load an example database, run:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">exec</span> <span class="n">skyportal</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="mi">1</span> <span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;source /skyportal_env/bin/activate &amp;&amp; FLAGS=&quot;--create_tables --config=config.yaml&quot; make load_demo_data&#39;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">exec</span> <span class="n">skyportal</span><span class="o">-</span><span class="n">web</span><span class="o">-</span><span class="mi">1</span> <span class="n">bash</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;source .venv/bin/activate &amp;&amp; FLAGS=&quot;--create_tables --config=config.yaml&quot; make load_demo_data&#39;</span>
 </pre></div>
 </div>
 <p><em>Notes:</em></p>

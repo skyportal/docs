@@ -38,8 +38,8 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
     <script src="_static/documentation_options.js?v=bc4b15cc"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'database';</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -550,7 +550,7 @@ is represented by a class attribute. This Section documents each of the
 SkyPortal and baselayer classes that are mapped to database tables.</p>
 <span class="target" id="module-skyportal.models"></span><span class="target" id="module-baselayer.app.models"></span><dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.ACL">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">ACL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.ACL" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">ACL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.ACL" title="Link to this definition">#</a></dt>
 <dd><p>An access control list item representing a privilege within the
 application. ACLs are aggregated into collections called Roles which
 are assumed by Users. Examples of ACLs include <cite>Upload Data</cite>, <cite>Comment</cite>,
@@ -568,7 +568,7 @@ and <cite>Manage Groups</cite>.</p>
 </dd>
 </dl>
 <p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
@@ -628,7 +628,7 @@ and <cite>Manage Groups</cite>.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.AccessibleIfRelatedRowsAreAccessible">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">AccessibleIfRelatedRowsAreAccessible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">properties_and_modes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AccessibleIfRelatedRowsAreAccessible" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">AccessibleIfRelatedRowsAreAccessible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">properties_and_modes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AccessibleIfRelatedRowsAreAccessible" title="Link to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -637,7 +637,7 @@ and <cite>Manage Groups</cite>.</p>
 </dd>
 </dl>
 <p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_cls_for_attributes</span></code>(cls, attrs)</p></td>
 <td><p>Check that a target class has the specified attributes.</p></td>
@@ -711,7 +711,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.AccessibleIfUserMatches">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">AccessibleIfUserMatches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relationship_chain</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AccessibleIfUserMatches" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">AccessibleIfUserMatches</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">relationship_chain</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AccessibleIfUserMatches" title="Link to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -722,7 +722,7 @@ the mapped class directly and returns mapped instances.</p>
 </dd>
 </dl>
 <p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_cls_for_attributes</span></code>(cls, attrs)</p></td>
 <td><p>Check that a target class has the specified attributes.</p></td>
@@ -769,7 +769,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="baselayer.app.models.AccessibleIfUserMatches.relationship_names">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">relationship_names</span></span><a class="headerlink" href="#baselayer.app.models.AccessibleIfUserMatches.relationship_names" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">relationship_names</span></span><a class="headerlink" href="#baselayer.app.models.AccessibleIfUserMatches.relationship_names" title="Link to this definition">#</a></dt>
 <dd><p>List of names of each relationship in the chain.</p>
 </dd></dl>
 
@@ -802,7 +802,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.ComposedAccessControl">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">ComposedAccessControl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">access_controls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'and'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.ComposedAccessControl" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">ComposedAccessControl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">access_controls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'and'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.ComposedAccessControl" title="Link to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -812,7 +812,7 @@ the mapped class directly and returns mapped instances.</p>
 </dd>
 </dl>
 <p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_cls_for_attributes</span></code>(cls, attrs)</p></td>
 <td><p>Check that a target class has the specified attributes.</p></td>
@@ -886,7 +886,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.CronJobRun">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">CronJobRun</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.CronJobRun" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">CronJobRun</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.CronJobRun" title="Link to this definition">#</a></dt>
 <dd><p>A record of a run (or attempted run) of a cron job.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
@@ -907,7 +907,7 @@ the mapped class directly and returns mapped instances.</p>
 </dd>
 </dl>
 <p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
@@ -985,9 +985,9 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.CustomUserAccessControl">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">CustomUserAccessControl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query_or_query_generator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.CustomUserAccessControl" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">CustomUserAccessControl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query_or_query_generator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.CustomUserAccessControl" title="Link to this definition">#</a></dt>
 <dd><p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_cls_for_attributes</span></code>(cls, attrs)</p></td>
 <td><p>Check that a target class has the specified attributes.</p></td>
@@ -1061,17 +1061,17 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.JoinModel">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">JoinModel</span></span><a class="headerlink" href="#baselayer.app.models.JoinModel" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">JoinModel</span></span><a class="headerlink" href="#baselayer.app.models.JoinModel" title="Link to this definition">#</a></dt>
 <dd><p>Dummy class that join_models subclass. Provides an easy way to
 access all join_model mapped classes via the __subclasses__() method.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.Public">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">Public</span></span><a class="headerlink" href="#baselayer.app.models.Public" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">Public</span></span><a class="headerlink" href="#baselayer.app.models.Public" title="Link to this definition">#</a></dt>
 <dd><p>A record accessible to anyone.</p>
 <p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_cls_for_attributes</span></code>(cls, attrs)</p></td>
 <td><p>Check that a target class has the specified attributes.</p></td>
@@ -1145,10 +1145,10 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.Restricted">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">Restricted</span></span><a class="headerlink" href="#baselayer.app.models.Restricted" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">Restricted</span></span><a class="headerlink" href="#baselayer.app.models.Restricted" title="Link to this definition">#</a></dt>
 <dd><p>A record that can only be accessed by a System Admin.</p>
 <p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_cls_for_attributes</span></code>(cls, attrs)</p></td>
 <td><p>Check that a target class has the specified attributes.</p></td>
@@ -1222,7 +1222,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.Role">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">Role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Role" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">Role</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Role" title="Link to this definition">#</a></dt>
 <dd><p>A collection of ACLs. Roles map Users to ACLs. One User may assume
 multiple Roles.</p>
 <dl class="field-list simple">
@@ -1242,7 +1242,7 @@ multiple Roles.</p>
 </dd>
 </dl>
 <p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
@@ -1314,7 +1314,7 @@ multiple Roles.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.RoleACL">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">RoleACL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.RoleACL" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">RoleACL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.RoleACL" title="Link to this definition">#</a></dt>
 <dd><p>Join table class mapping Roles to ACLs.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
@@ -1333,7 +1333,7 @@ multiple Roles.</p>
 </dd>
 </dl>
 <p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
@@ -1373,7 +1373,7 @@ multiple Roles.</p>
 </div>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.RoleACL.create">
-<span class="sig-name descname"><span class="pre">create</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.RoleACL.create" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">create</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#baselayer.app.models.RoleACL.create" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1396,14 +1396,14 @@ multiple Roles.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.RoleACL.read">
-<span class="sig-name descname"><span class="pre">read</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.RoleACL.read" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">read</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#baselayer.app.models.RoleACL.read" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.SlugifiedStr">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">SlugifiedStr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.SlugifiedStr" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">SlugifiedStr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.SlugifiedStr" title="Link to this definition">#</a></dt>
 <dd><p>Slugified string</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
@@ -1417,7 +1417,7 @@ multiple Roles.</p>
 </dd>
 </dl>
 <p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Comparator</span></code>(expr)</p></td>
 <td><p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeEngine.Comparator</span></code> that is specific to <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeDecorator</span></code>.</p></td>
@@ -1459,7 +1459,7 @@ multiple Roles.</p>
 <td><p>Return the DBAPI type object represented by this <code class="xref py py-class docutils literal notranslate"><span class="pre">TypeDecorator</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#baselayer.app.models.SlugifiedStr.impl" title="baselayer.app.models.SlugifiedStr.impl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">impl</span></code></a></p></td>
-<td><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">String</span></code></p></td>
+<td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">literal_processor</span></code>(dialect)</p></td>
 <td><p>Provide a literal processing function for the given <code class="xref py py-class docutils literal notranslate"><span class="pre">Dialect</span></code>.</p></td>
@@ -1498,7 +1498,7 @@ multiple Roles.</p>
 </div>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.SlugifiedStr.cache_ok">
-<span class="sig-name descname"><span class="pre">cache_ok</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#baselayer.app.models.SlugifiedStr.cache_ok" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">cache_ok</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="headerlink" href="#baselayer.app.models.SlugifiedStr.cache_ok" title="Link to this definition">#</a></dt>
 <dd><p>Indicate if statements using this <code class="xref py py-class docutils literal notranslate"><span class="pre">ExternalType</span></code> are “safe to
 cache”.</p>
 <p>The default value <code class="docutils literal notranslate"><span class="pre">None</span></code> will emit a warning and then not allow caching
@@ -1696,7 +1696,7 @@ this method in the subclass.  Can be <code class="docutils literal notranslate">
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.Token">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">Token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Token" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">Token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.Token" title="Link to this definition">#</a></dt>
 <dd><p>A command line token that can be used to programmatically access the API
 as a particular User.</p>
 <dl class="field-list simple">
@@ -1730,7 +1730,7 @@ as a particular User.</p>
 </dd>
 </dl>
 <p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#baselayer.app.models.Token.assert_group_accessible" title="baselayer.app.models.Token.assert_group_accessible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assert_group_accessible</span></code></a>(group_id)</p></td>
 <td><p>Raise an error if the user or token does not have access to the given group. Parameters ---------- group_id : int or str     The ID of the group to check. Raises ------ AccessError     If the user or token does not have access to the group.</p></td>
@@ -1773,13 +1773,13 @@ as a particular User.</p>
 </div>
 <dl class="py property">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.accessible_group_ids">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accessible_group_ids</span></span><a class="headerlink" href="#baselayer.app.models.Token.accessible_group_ids" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">accessible_group_ids</span></span><a class="headerlink" href="#baselayer.app.models.Token.accessible_group_ids" title="Link to this definition">#</a></dt>
 <dd><p>Return a set of group IDs that the user or token has access to.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.accessible_groups">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accessible_groups</span></span><a class="headerlink" href="#baselayer.app.models.Token.accessible_groups" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">accessible_groups</span></span><a class="headerlink" href="#baselayer.app.models.Token.accessible_groups" title="Link to this definition">#</a></dt>
 <dd><p>Return the list of Groups a User or Token has access to. For non-admin
 Users or Token owners, this corresponds to the Groups they are a member of.
 For System Admins, this corresponds to all Groups.</p>
@@ -1787,7 +1787,7 @@ For System Admins, this corresponds to all Groups.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.accessible_streams">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accessible_streams</span></span><a class="headerlink" href="#baselayer.app.models.Token.accessible_streams" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">accessible_streams</span></span><a class="headerlink" href="#baselayer.app.models.Token.accessible_streams" title="Link to this definition">#</a></dt>
 <dd><p>Return the list of Streams a User or Token has access to.</p>
 </dd></dl>
 
@@ -1818,7 +1818,7 @@ group_id : int or str</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.create">
-<span class="sig-name descname"><span class="pre">create</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfUserMatches</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.Token.create" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">create</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfUserMatches</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#baselayer.app.models.Token.create" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1841,12 +1841,12 @@ group_id : int or str</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.delete">
-<span class="sig-name descname"><span class="pre">delete</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfUserMatches</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.Token.delete" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfUserMatches</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#baselayer.app.models.Token.delete" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.groups">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">groups</span></span><a class="headerlink" href="#baselayer.app.models.Token.groups" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">groups</span></span><a class="headerlink" href="#baselayer.app.models.Token.groups" title="Link to this definition">#</a></dt>
 <dd><p>The groups the Token owner is a member of.</p>
 </dd></dl>
 
@@ -1891,19 +1891,19 @@ specified User (or Token instance, if a token is passed).</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.read">
-<span class="sig-name descname"><span class="pre">read</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfUserMatches</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.Token.read" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">read</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfUserMatches</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#baselayer.app.models.Token.read" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.Token.update">
-<span class="sig-name descname"><span class="pre">update</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfUserMatches</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.Token.update" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">update</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfUserMatches</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#baselayer.app.models.Token.update" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.TokenACL">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">TokenACL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.TokenACL" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">TokenACL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.TokenACL" title="Link to this definition">#</a></dt>
 <dd><p>Join table mapping Tokens to ACLs</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
@@ -1922,7 +1922,7 @@ specified User (or Token instance, if a token is passed).</p>
 </dd>
 </dl>
 <p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
@@ -1962,7 +1962,7 @@ specified User (or Token instance, if a token is passed).</p>
 </div>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.TokenACL.create">
-<span class="sig-name descname"><span class="pre">create</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.TokenACL.create" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">create</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#baselayer.app.models.TokenACL.create" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -1985,14 +1985,14 @@ specified User (or Token instance, if a token is passed).</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.TokenACL.read">
-<span class="sig-name descname"><span class="pre">read</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.TokenACL.read" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">read</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#baselayer.app.models.TokenACL.read" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.User">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">User</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.User" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">User</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.User" title="Link to this definition">#</a></dt>
 <dd><p>An application user.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
@@ -2141,7 +2141,7 @@ specified User (or Token instance, if a token is passed).</p>
 </dd>
 </dl>
 <p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#baselayer.app.models.User.assert_group_accessible" title="baselayer.app.models.User.assert_group_accessible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">assert_group_accessible</span></code></a>(group_id)</p></td>
 <td><p>Raise an error if the user or token does not have access to the given group. Parameters ---------- group_id : int or str     The ID of the group to check. Raises ------ AccessError     If the user or token does not have access to the group.</p></td>
@@ -2198,13 +2198,13 @@ specified User (or Token instance, if a token is passed).</p>
 </div>
 <dl class="py property">
 <dt class="sig sig-object py" id="baselayer.app.models.User.accessible_group_ids">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accessible_group_ids</span></span><a class="headerlink" href="#baselayer.app.models.User.accessible_group_ids" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">accessible_group_ids</span></span><a class="headerlink" href="#baselayer.app.models.User.accessible_group_ids" title="Link to this definition">#</a></dt>
 <dd><p>Return a set of group IDs that the user or token has access to.</p>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="baselayer.app.models.User.accessible_groups">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accessible_groups</span></span><a class="headerlink" href="#baselayer.app.models.User.accessible_groups" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">accessible_groups</span></span><a class="headerlink" href="#baselayer.app.models.User.accessible_groups" title="Link to this definition">#</a></dt>
 <dd><p>Return the list of Groups a User or Token has access to. For non-admin
 Users or Token owners, this corresponds to the Groups they are a member of.
 For System Admins, this corresponds to all Groups.</p>
@@ -2212,7 +2212,7 @@ For System Admins, this corresponds to all Groups.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="baselayer.app.models.User.accessible_streams">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">accessible_streams</span></span><a class="headerlink" href="#baselayer.app.models.User.accessible_streams" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">accessible_streams</span></span><a class="headerlink" href="#baselayer.app.models.User.accessible_streams" title="Link to this definition">#</a></dt>
 <dd><p>Return the list of Streams a User or Token has access to.</p>
 </dd></dl>
 
@@ -2303,7 +2303,7 @@ group_id : int or str</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.delete">
-<span class="sig-name descname"><span class="pre">delete</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.CustomUserAccessControl</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.User.delete" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.CustomUserAccessControl</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#baselayer.app.models.User.delete" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -2374,7 +2374,7 @@ group_id : int or str</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="baselayer.app.models.User.gravatar_url">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">gravatar_url</span></span><a class="headerlink" href="#baselayer.app.models.User.gravatar_url" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">gravatar_url</span></span><a class="headerlink" href="#baselayer.app.models.User.gravatar_url" title="Link to this definition">#</a></dt>
 <dd><p>The Gravatar URL inferred from the user’s contact email, or, if the
 contact email is null, the username.</p>
 </dd></dl>
@@ -2490,7 +2490,7 @@ authenticated.</p>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="baselayer.app.models.User.permissions">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">permissions</span></span><a class="headerlink" href="#baselayer.app.models.User.permissions" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">permissions</span></span><a class="headerlink" href="#baselayer.app.models.User.permissions" title="Link to this definition">#</a></dt>
 <dd><p>List of the names of all of the user’s ACLs (role-level + individual).</p>
 </dd></dl>
 
@@ -2604,12 +2604,12 @@ authenticated.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.User.update">
-<span class="sig-name descname"><span class="pre">update</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.CustomUserAccessControl</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.User.update" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">update</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.CustomUserAccessControl</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#baselayer.app.models.User.update" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.User.user_model">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">user_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.User.user_model" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">user_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.User.user_model" title="Link to this definition">#</a></dt>
 <dd><p>The base model for User subclasses.</p>
 </dd></dl>
 
@@ -2623,7 +2623,7 @@ authenticated.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.UserACL">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">UserACL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserACL" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">UserACL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserACL" title="Link to this definition">#</a></dt>
 <dd><p>Join table mapping Users to ACLs</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
@@ -2642,7 +2642,7 @@ authenticated.</p>
 </dd>
 </dl>
 <p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
@@ -2682,7 +2682,7 @@ authenticated.</p>
 </div>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.UserACL.create">
-<span class="sig-name descname"><span class="pre">create</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.UserACL.create" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">create</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#baselayer.app.models.UserACL.create" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -2705,20 +2705,20 @@ authenticated.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.UserACL.read">
-<span class="sig-name descname"><span class="pre">read</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.UserACL.read" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">read</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#baselayer.app.models.UserACL.read" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.UserAccessControl">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">UserAccessControl</span></span><a class="headerlink" href="#baselayer.app.models.UserAccessControl" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">UserAccessControl</span></span><a class="headerlink" href="#baselayer.app.models.UserAccessControl" title="Link to this definition">#</a></dt>
 <dd><p>Logic for controlling user access to database records. Mapped classes
 can set their create, read, update, or delete attributes to subclasses of
 this class to ensure they are only accessed by users or tokens with the
 requisite permissions.</p>
 <p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#baselayer.app.models.UserAccessControl.check_cls_for_attributes" title="baselayer.app.models.UserAccessControl.check_cls_for_attributes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">check_cls_for_attributes</span></code></a>(cls, attrs)</p></td>
 <td><p>Check that a target class has the specified attributes.</p></td>
@@ -2737,7 +2737,7 @@ requisite permissions.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.UserAccessControl.check_cls_for_attributes">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">check_cls_for_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserAccessControl.check_cls_for_attributes" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">check_cls_for_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserAccessControl.check_cls_for_attributes" title="Link to this definition">#</a></dt>
 <dd><p>Check that a target class has the specified attributes. If not,
 raise a TypeError.</p>
 <dl class="field-list">
@@ -2807,7 +2807,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.UserAccessControl.user_id_from_user_or_token">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">user_id_from_user_or_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserAccessControl.user_id_from_user_or_token" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">static</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">user_id_from_user_or_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserAccessControl.user_id_from_user_or_token" title="Link to this definition">#</a></dt>
 <dd><p>Return the user_id associated with a specified User or Token object.</p>
 <dl class="field-list">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -2829,7 +2829,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="baselayer.app.models.UserRole">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">UserRole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserRole" title="Link to this definition">#</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">UserRole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.UserRole" title="Link to this definition">#</a></dt>
 <dd><p>Join table mapping Users to Roles.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Attributes<span class="colon">:</span></dt>
@@ -2848,7 +2848,7 @@ the mapped class directly and returns mapped instances.</p>
 </dd>
 </dl>
 <p class="rubric">Methods</p>
-<div class="pst-scrollable-table-container"><table class="autosummary longtable table autosummary">
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
 <tbody>
 <tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">create_or_get</span></code>(id)</p></td>
 <td><p>Return a new <cite>cls</cite> if an instance with the specified primary key does not exist, else return the existing instance.</p></td>
@@ -2888,7 +2888,7 @@ the mapped class directly and returns mapped instances.</p>
 </div>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.UserRole.create">
-<span class="sig-name descname"><span class="pre">create</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.UserRole.create" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">create</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#baselayer.app.models.UserRole.create" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -2911,7 +2911,7 @@ the mapped class directly and returns mapped instances.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="baselayer.app.models.UserRole.read">
-<span class="sig-name descname"><span class="pre">read</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#baselayer.app.models.UserRole.read" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">read</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;baselayer.app.models.AccessibleIfRelatedRowsAreAccessible</span> <span class="pre">object&gt;</span></span><a class="headerlink" href="#baselayer.app.models.UserRole.read" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -2970,7 +2970,7 @@ Default 3600.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="baselayer.app.models.join_model">
-<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">join_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">join_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_1=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_2=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fk_1='id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fk_2='id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base=&lt;class</span> <span class="pre">'sqlalchemy.orm.decl_api.Base'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_name=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlaps=None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.join_model" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">join_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">join_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fk_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fk_2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;class</span> <span class="pre">'sqlalchemy.orm.decl_api.Base'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlaps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.join_model" title="Link to this definition">#</a></dt>
 <dd><p>Helper function to create a join table for a many-to-many relationship.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
