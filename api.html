@@ -51223,6 +51223,12 @@
               "description": "Instances in which a group saved this Obj."
             }
           },
+          "super_objs": {
+            "type": "array",
+            "items": {
+              "description": "SuperObj entries associated with this Obj."
+            }
+          },
           "users": {
             "type": "array",
             "items": {}
@@ -51871,6 +51877,12 @@
               "description": "Instances in which a group saved this Obj."
             }
           },
+          "super_objs": {
+            "type": "array",
+            "items": {
+              "description": "SuperObj entries associated with this Obj."
+            }
+          },
           "users": {
             "type": "array",
             "items": {}
@@ -52352,6 +52364,12 @@
               "description": "Instances in which a group saved this Obj."
             }
           },
+          "super_objs": {
+            "type": "array",
+            "items": {
+              "description": "SuperObj entries associated with this Obj."
+            }
+          },
           "users": {
             "type": "array",
             "items": {}
@@ -52523,6 +52541,132 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObjTagOptionNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ObjToSuperObj": {
+        "type": "object",
+        "properties": {
+          "obj_id": {
+            "type": "string",
+            "description": "ID of the associated Obj."
+          },
+          "super_obj_id": {
+            "type": "integer",
+            "description": "ID of the associated SuperObj."
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "obj_id",
+          "super_obj_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleObjToSuperObj": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ObjToSuperObj"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfObjToSuperObjs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObjToSuperObj"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ObjToSuperObjNoID": {
+        "type": "object",
+        "properties": {
+          "obj_id": {
+            "type": "string",
+            "description": "ID of the associated Obj."
+          },
+          "super_obj_id": {
+            "type": "integer",
+            "description": "ID of the associated SuperObj."
+          }
+        },
+        "required": [
+          "obj_id",
+          "super_obj_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleObjToSuperObjNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ObjToSuperObjNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfObjToSuperObjNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObjToSuperObjNoID"
             }
           }
         },
@@ -63652,6 +63796,140 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/StreamUserNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "SuperObj": {
+        "type": "object",
+        "properties": {
+          "objs": {
+            "type": "array",
+            "items": {
+              "description": "Obj entries associated with this SuperObj."
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the super-object (e.g., its AT name from the Transient Name Server).",
+            "nullable": true
+          },
+          "is_roid": {
+            "type": "boolean",
+            "description": "Boolean indicating whether the super-object is a moving object.",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "additionalProperties": false
+      },
+      "SingleSuperObj": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SuperObj"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfSuperObjs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SuperObj"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "SuperObjNoID": {
+        "type": "object",
+        "properties": {
+          "objs": {
+            "type": "array",
+            "items": {
+              "description": "Obj entries associated with this SuperObj."
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the super-object (e.g., its AT name from the Transient Name Server).",
+            "nullable": true
+          },
+          "is_roid": {
+            "type": "boolean",
+            "description": "Boolean indicating whether the super-object is a moving object.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SingleSuperObjNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SuperObjNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfSuperObjNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SuperObjNoID"
             }
           }
         },
