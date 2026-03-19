@@ -569,10 +569,29 @@ Different users have different privileges and can see more or less of the demo d
 </section>
 <section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
-<p>If you have trouble getting the demo data try doing</p>
-<p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_clear</span> <span class="pre">&amp;&amp;</span> <span class="pre">make</span> <span class="pre">db_init</span> <span class="pre">&amp;&amp;</span> <span class="pre">make</span> <span class="pre">run</span></code></p>
+<p>If you have trouble running <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">sync</span></code> and see an error link to <code class="docutils literal notranslate"><span class="pre">python-ligo-lw</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Failed to build `python-ligo-lw==1.8.4`
+...
+error: incompatible pointer to integer conversion
+</pre></div>
+</div>
+<p>You may need to run <code class="docutils literal notranslate"><span class="pre">CFLAGS=&quot;-Wno-error=int-conversion&quot;</span> <span class="pre">uv</span> <span class="pre">sync</span></code> instead to avoid treating this warning as an error.</p>
+<hr class="docutils" />
+<p>If you have trouble running <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code> and see this error:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="o">***</span> <span class="p">[</span><span class="n">dependencies</span><span class="p">]</span> <span class="n">Error</span> <span class="mi">1</span>
+<span class="n">make</span><span class="p">:</span> <span class="o">***</span> <span class="p">[</span><span class="n">run</span><span class="p">]</span> <span class="n">Error</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>You may need to run <code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">install</span> <span class="pre">--legacy-peer-deps</span></code> and then try <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code> again.</p>
+<hr class="docutils" />
+<p>If you have trouble getting the demo data try doing:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">db_clear</span> <span class="o">&amp;&amp;</span> <span class="n">make</span> <span class="n">db_init</span> <span class="o">&amp;&amp;</span> <span class="n">make</span> <span class="n">run</span>
+</pre></div>
+</div>
 <p>and then, from a different window, do <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">load_demo_data</span></code>.</p>
+<hr class="docutils" />
 <p>If you are using WSL, be sure everything (the git repository and all dependencies) are on the Linux machine and not the Windows side, as connection oddities can otherwise cause several errors.</p>
+<hr class="docutils" />
 <p>Mac users may need to disable Airplay Receiver in System Preferences to free up port 5000 and avoid a 403 Forbidden error.</p>
 </section>
 <section id="additional-configuration">
