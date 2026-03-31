@@ -380,13 +380,21 @@ how to install them on MacOS and Debian-based systems below.</p>
 </section>
 <section id="source-download-python-environment">
 <h2>Source download, Python environment<a class="headerlink" href="#source-download-python-environment" title="Link to this heading">#</a></h2>
-<p>First, clone the <a class="reference external" href="https://github.com/skyportal/skyportal">SkyPortal repository</a>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">skyportal</span><span class="o">/</span><span class="n">skyportal</span><span class="o">.</span><span class="n">git</span>
+<p>First, clone the <a class="reference external" href="https://github.com/skyportal/skyportal">SkyPortal repository</a> and its submodule <a class="reference external" href="https://github.com/cesium-ml/baselayer/">Baselayer</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recurse</span><span class="o">-</span><span class="n">submodules</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">skyportal</span><span class="o">/</span><span class="n">skyportal</span><span class="o">.</span><span class="n">git</span>
 <span class="n">cd</span> <span class="n">skyportal</span><span class="o">/</span>
 </pre></div>
 </div>
-<p>Then, using <code class="docutils literal notranslate"><span class="pre">uv</span></code> (see <a class="reference external" href="https://docs.astral.sh/uv/getting-started/installation/">uv documentation</a> for more details on how to use it), let’s create a virtual environment and install the Python dependencies, in once command:</p>
+<p>If you already cloned the repository without <code class="docutils literal notranslate"><span class="pre">--recurse-submodules</span></code>, you can initialize the submodules with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">submodule</span> <span class="n">update</span> <span class="o">--</span><span class="n">init</span> <span class="o">--</span><span class="n">recursive</span>
+</pre></div>
+</div>
+<p>Then, using <code class="docutils literal notranslate"><span class="pre">uv</span></code> (see <a class="reference external" href="https://docs.astral.sh/uv/getting-started/installation/">uv documentation</a> for more details on how to use it), let’s create a virtual environment and install the Python dependencies, in one command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span> <span class="n">sync</span>
+</pre></div>
+</div>
+<p>If you intend to do development work (running tests, using pre-commit hooks, etc.), install the dev dependencies instead:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span> <span class="n">sync</span> <span class="o">--</span><span class="n">inexact</span> <span class="o">--</span><span class="n">group</span> <span class="n">dev</span>
 </pre></div>
 </div>
 <p>Thereafter, to enter the environment, simply run:</p>

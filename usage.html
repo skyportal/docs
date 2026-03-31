@@ -482,7 +482,7 @@ for the first time).</p></li>
 </section>
 <section id="code-formatting-linters">
 <h2>Code formatting / linters<a class="headerlink" href="#code-formatting-linters" title="Link to this heading">#</a></h2>
-<p>To set up <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> for automatically reformatting Python and JavaScript changes, run <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pre-commit</span> <span class="pre">&amp;&amp;</span> <span class="pre">pre-commit</span> <span class="pre">install</span></code>.</p>
+<p>To set up <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> for automatically reformatting Python and JavaScript changes, make sure you have installed the dev dependencies (<code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">sync</span> <span class="pre">--inexact</span> <span class="pre">--group</span> <span class="pre">dev</span></code>, see <a class="reference internal" href="dev.html"><span class="doc">Developer notes</span></a>) and then run <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">run</span> <span class="pre">pre-commit</span> <span class="pre">install</span></code>.</p>
 <p><code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> is run each time a new change is committed. If an error can be fixed automatically (such as a spacing issue), the tool does that automatically, and you can re-attempt the commit. Otherwise, you may have to make the change manually.</p>
 </section>
 </section>

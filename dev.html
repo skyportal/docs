@@ -325,6 +325,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#development-setup">Development setup</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-commit-hook">Pre-commit hook</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-fixtures">Test fixtures</a></li>
@@ -349,16 +350,23 @@ document.write(`
                   
   <section id="developer-notes">
 <h1>Developer notes<a class="headerlink" href="#developer-notes" title="Link to this heading">#</a></h1>
+<section id="development-setup">
+<h2>Development setup<a class="headerlink" href="#development-setup" title="Link to this heading">#</a></h2>
+<p>If you intend to do any development work on the application, first install the dev dependencies:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span> <span class="n">sync</span> <span class="o">--</span><span class="n">inexact</span> <span class="o">--</span><span class="n">group</span> <span class="n">dev</span>
+</pre></div>
+</div>
+<p>This includes <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code>, <code class="docutils literal notranslate"><span class="pre">pytest</span></code>, <code class="docutils literal notranslate"><span class="pre">selenium</span></code>, and other tools needed for development and testing.</p>
+</section>
 <section id="pre-commit-hook">
 <h2>Pre-commit hook<a class="headerlink" href="#pre-commit-hook" title="Link to this heading">#</a></h2>
-<p>Install our pre-commit hook as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pre</span><span class="o">-</span><span class="n">commit</span>
-<span class="n">pre</span><span class="o">-</span><span class="n">commit</span> <span class="n">install</span>
+<p>Install our pre-commit hook:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span> <span class="n">run</span> <span class="n">pre</span><span class="o">-</span><span class="n">commit</span> <span class="n">install</span>
 </pre></div>
 </div>
 <p>This will check your changes before each commit to ensure that they
-conform with our code style standards. We use black to reformat Python
-code, and PrettierJS for JavaScript. We also run ESLint to catch
+conform with our code style standards. We use ruff to lint and reformat Python
+code, and Prettier for JavaScript. We also run ESLint to catch
 several common Redux usage bugs.</p>
 </section>
 <section id="testing">
@@ -553,6 +561,7 @@ https://help.github.com/articles/signing-commits-with-gpg/)</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#development-setup">Development setup</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-commit-hook">Pre-commit hook</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-fixtures">Test fixtures</a></li>
