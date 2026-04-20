@@ -101,7 +101,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Number of observation plans to return per paginated request. Defaults to 10. Can be no larger than {MAX_OBSERVATION_PLANS}.\n"
+            "description": "Number of observation plans to return per paginated request. Defaults to 10. Can be no larger than 1000.\n"
           },
           {
             "in": "query",
@@ -158,7 +158,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Number of followup requests to return per paginated request. Defaults to 10. Can be no larger than {MAX_FOLLOWUP_REQUESTS}.\n"
+            "description": "Number of followup requests to return per paginated request. Defaults to 10. Can be no larger than 1000.\n"
           },
           {
             "in": "query",
@@ -606,6 +606,137 @@
           }
         }
       },
+      "patch": {
+        "summary": "Update an Analysis Service.",
+        "description": "<b>Permission(s) required:</b> <em>Manage Analysis Services (or System admin)</em><br><br>Update an Analysis Service.",
+        "tags": [
+          "analysis services"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "analysis_service_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Unique name/identifier of the analysis service."
+                  },
+                  "display_name": {
+                    "type": "string",
+                    "description": "Display name of the analysis service."
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the analysis service."
+                  },
+                  "version": {
+                    "type": "string",
+                    "description": "Semantic version (or githash) of the analysis service."
+                  },
+                  "contact_name": {
+                    "type": "string",
+                    "description": "Name of person responsible for the service (ie. the maintainer).\nThis person does not need to be part of this SkyPortal instance.\n"
+                  },
+                  "contact_email": {
+                    "type": "string",
+                    "description": "Email address of the person responsible for the service."
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "URL to running service accessible to this SkyPortal instance.\nFor example, http://localhost:5000/analysis/<service_name>.\n"
+                  },
+                  "optional_analysis_parameters": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "description": "Optional URL parameters that can be passed to the service, along\nwith a list of possible values (to be used in a dropdown UI)\n"
+                  },
+                  "authentication_type": {
+                    "type": "string",
+                    "description": "Service authentication method. One of: 'none', 'header_token', 'api_key', 'HTTPBasicAuth', 'HTTPDigestAuth', 'OAuth1'.\nSee https://docs.python-requests.org/en/master/user/authentication/\n"
+                  },
+                  "authinfo": {
+                    "type": "object",
+                    "description": "Authentication secrets for the service. Not needed if authentication_type is \"none\"."
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Whether the service is enabled or not."
+                  },
+                  "analysis_type": {
+                    "type": "string",
+                    "description": "Type of analysis. One of: 'lightcurve_fitting', 'spectrum_fitting', 'meta_analysis'\n"
+                  },
+                  "input_data_types": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of input data types that the service requires. Zero to many of:\n'photometry', 'spectra', 'redshift', 'annotations', 'comments', 'classifications'\n"
+                  },
+                  "timeout": {
+                    "type": "float",
+                    "description": "Max time in seconds to wait for the analysis service to complete. Default is 3600.0.",
+                    "default": 3600.0
+                  },
+                  "is_summary": {
+                    "type": "boolean",
+                    "description": "Establishes that analysis results on the resource should be considered a summary\n",
+                    "default": false
+                  },
+                  "display_on_resource_dropdown": {
+                    "type": "boolean",
+                    "description": "Show this analysis service on the analysis dropdown of the resource\n",
+                    "default": true
+                  },
+                  "group_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "List of group IDs corresponding to which groups should be\nable to use the Analysis Service.\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
       "delete": {
         "summary": "Delete an Analysis Service.",
         "description": "<b>Permission(s) required:</b> <em>Manage Analysis Services (or System admin)</em><br><br>Delete an Analysis Service.",
@@ -657,6 +788,143 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create an Analysis Service.",
+        "description": "<b>Permission(s) required:</b> <em>Manage Analysis Services (or System admin)</em><br><br>POST a new Analysis Service.",
+        "tags": [
+          "analysis services"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Unique name/identifier of the analysis service."
+                  },
+                  "display_name": {
+                    "type": "string",
+                    "description": "Display name of the analysis service."
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the analysis service."
+                  },
+                  "version": {
+                    "type": "string",
+                    "description": "Semantic version (or githash) of the analysis service."
+                  },
+                  "contact_name": {
+                    "type": "string",
+                    "description": "Name of person responsible for the service (ie. the maintainer).\nThis person does not need to be part of this SkyPortal instance.\n"
+                  },
+                  "contact_email": {
+                    "type": "string",
+                    "description": "Email address of the person responsible for the service."
+                  },
+                  "url": {
+                    "type": "string",
+                    "description": "URL to running service accessible to this SkyPortal instance.\nFor example, http://localhost:5000/analysis/<service_name>.\n"
+                  },
+                  "optional_analysis_parameters": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "description": "Optional URL parameters that can be passed to the service, along\nwith a list of possible values (to be used in a dropdown UI)\n"
+                  },
+                  "authentication_type": {
+                    "type": "string",
+                    "description": "Service authentication method. One of: 'none', 'header_token', 'api_key', 'HTTPBasicAuth', 'HTTPDigestAuth', 'OAuth1'.\nSee https://docs.python-requests.org/en/master/user/authentication/\n"
+                  },
+                  "_authinfo": {
+                    "type": "object",
+                    "description": "Authentication secrets for the service. Not needed if authentication_type is \"none\".\nThis should be a string that can be parsed by the python json.loads() function and\nshould contain the key `authentication_type`. Values of this key will be used\nto POST into the remote analysis service.\n"
+                  },
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Whether the service is enabled or not."
+                  },
+                  "analysis_type": {
+                    "type": "string",
+                    "description": "Type of analysis. One of: 'lightcurve_fitting', 'spectrum_fitting', 'meta_analysis'\n"
+                  },
+                  "input_data_types": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "List of input data types that the service requires. Zero to many of:\n'photometry', 'spectra', 'redshift', 'annotations', 'comments', 'classifications'\n"
+                  },
+                  "timeout": {
+                    "type": "float",
+                    "description": "Max time in seconds to wait for the analysis service to complete. Default is 3600.0.",
+                    "default": 3600.0
+                  },
+                  "is_summary": {
+                    "type": "boolean",
+                    "description": "Establishes that analysis results on the resource should be considered a summary\n",
+                    "default": false
+                  },
+                  "display_on_resource_dropdown": {
+                    "type": "boolean",
+                    "description": "Show this analysis service on the analysis dropdown of the resource\n",
+                    "default": true
+                  },
+                  "group_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "List of group IDs corresponding to which groups should be\nable to use the Analysis Service. Defaults to all of requesting\nuser's groups.\n"
+                  }
+                },
+                "required": [
+                  "name",
+                  "url",
+                  "authentication_type",
+                  "analysis_type",
+                  "input_data_types"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "description": "New AnalysisService ID"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -4410,7 +4678,183 @@
         }
       }
     },
+    "/api/followup_request/{followup_request_id}": {
+      "get": {
+        "summary": "Get a followup request",
+        "description": "Retrieve a followup request",
+        "tags": [
+          "followup requests"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "followup_request_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleFollowupRequest"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/followup_request": {
+      "get": {
+        "summary": "Retrieve multiple followup requests",
+        "description": "Retrieve all followup requests",
+        "tags": [
+          "followup requests"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "sourceID",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Portion of ID to filter on"
+          },
+          {
+            "in": "query",
+            "name": "instrumentID",
+            "nullable": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Instrument ID to filter on. Ignored if allocationID is provided."
+          },
+          {
+            "in": "query",
+            "name": "allocationID",
+            "nullable": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Allocation ID to filter on"
+          },
+          {
+            "in": "query",
+            "name": "startDate",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Arrow-parseable date string (e.g. 2020-01-01). If provided, filter by\ncreated_at >= startDate\n"
+          },
+          {
+            "in": "query",
+            "name": "endDate",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Arrow-parseable date string (e.g. 2020-01-01). If provided, filter by\ncreated_at <= endDate\n"
+          },
+          {
+            "in": "query",
+            "name": "observationStartDate",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Arrow-parseable date string (e.g. 2020-01-01). If provided, filter by\npayload.start_date >= observationStartDate\n"
+          },
+          {
+            "in": "query",
+            "name": "observationEndDate",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Arrow-parseable date string (e.g. 2020-01-01). If provided, filter by\npayload.end_date <= observationEndDate\n"
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "String to match status of request against\n"
+          },
+          {
+            "in": "query",
+            "name": "priorityThreshold",
+            "nullable": true,
+            "schema": {
+              "type": "number"
+            },
+            "description": "Threshold on request priority to include. If provided, filter by\npayload.priority >= priorityThreshold\n"
+          },
+          {
+            "in": "query",
+            "name": "requesters",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma seperated list of user IDs to filter on (e.g. 1,2,3). If provided, filter by\nrequester_id in requesters\n"
+          },
+          {
+            "in": "query",
+            "name": "numPerPage",
+            "nullable": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of followup requests to return per paginated request. Defaults to 100. Can be no larger than 1000.\n"
+          },
+          {
+            "in": "query",
+            "name": "pageNumber",
+            "nullable": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page number for paginated query results. Defaults to 1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArrayOfFollowupRequests"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "summary": "Post new followup request",
         "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Submit follow-up request.",
@@ -4795,7 +5239,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Number of galaxies to return per paginated request.\nDefaults to 100. Can be no larger than {MAX_GALAXIES}.\n"
+            "description": "Number of galaxies to return per paginated request.\nDefaults to 100. Can be no larger than 10000.\n"
           },
           {
             "in": "query",
@@ -7844,7 +8288,257 @@
         }
       }
     },
+    "/api/gcn_event/{dateobs}": {
+      "get": {
+        "summary": "Get a GCN Event",
+        "description": "Retrieve a GCN event",
+        "tags": [
+          "gcn events"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dateobs",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "excludeNoticeContent",
+            "nullable": true,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "If true, do not include the notice content in the response.\nDefaults to false.\n"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GcnEventHandlerGet"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a GCN Event",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Delete a GCN event",
+        "tags": [
+          "gcn events"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dateobs",
+            "required": true,
+            "schema": {
+              "type": "dateobs"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/gcn_event": {
+      "get": {
+        "summary": "Get multiple GCN Events",
+        "description": "Retrieve multiple GCN events",
+        "tags": [
+          "gcn events"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "startDate",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Arrow-parseable date string (e.g. 2020-01-01). If provided, filter by\ndateobs >= startDate\n"
+          },
+          {
+            "in": "query",
+            "name": "endDate",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Arrow-parseable date string (e.g. 2020-01-01). If provided, filter by\ndateobs <= endDate\n"
+          },
+          {
+            "in": "query",
+            "name": "partialdateobs",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Partial dateobs string (or alias substring) to filter events whose\ndateobs starts with the given value or whose aliases contain it.\n"
+          },
+          {
+            "in": "query",
+            "name": "gcnTagKeep",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated string of `GcnTag`s. Returns events that match any of them.\n"
+          },
+          {
+            "in": "query",
+            "name": "gcnTagRemove",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated string of `GcnTag`s. Returns events that do not have any of these tags.\n"
+          },
+          {
+            "in": "query",
+            "name": "localizationTagKeep",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated string of `LocalizationTag`s. Returns events that match any of them.\n"
+          },
+          {
+            "in": "query",
+            "name": "localizationTagRemove",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated string of `LocalizationTag`s. Returns events that do not have any of these tags.\n"
+          },
+          {
+            "in": "query",
+            "name": "gcnPropertiesFilter",
+            "nullable": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "explode": false,
+            "style": "simple",
+            "description": "Comma-separated string of \"property: value: operator\" single(s) or triplet(s) to filter for events matching\nthat/those property(ies), i.e. \"BNS\" or \"BNS: 0.5: lt\"\n"
+          },
+          {
+            "in": "query",
+            "name": "localizationPropertiesFilter",
+            "nullable": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "explode": false,
+            "style": "simple",
+            "description": "Comma-separated string of \"property: value: operator\" single(s) or triplet(s) to filter for event localizations matching\nthat/those property(ies), i.e. \"area_90\" or \"area_90: 500: lt\"\n"
+          },
+          {
+            "in": "query",
+            "name": "numPerPage",
+            "nullable": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of GCN events to return per paginated request.\nDefaults to 10. Can be no larger than 1000.\n"
+          },
+          {
+            "in": "query",
+            "name": "pageNumber",
+            "nullable": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page number for paginated query results. Defaults to 1."
+          },
+          {
+            "in": "query",
+            "name": "sortBy",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Field to sort by. Currently only \"dateobs\" is supported.\n"
+          },
+          {
+            "in": "query",
+            "name": "sortOrder",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Sort order, \"asc\" or \"desc\". Defaults to \"asc\".\n"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GcnEventHandlerGet"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "summary": "Post a GCN Event from xml/json/dictionary",
         "description": "Ingest a GCN Event from xml/json/dictionary",
@@ -7878,45 +8572,6 @@
                       }
                     }
                   }
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/gcn_event/{dateobs}": {
-      "delete": {
-        "summary": "Delete a GCN Event",
-        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Delete a GCN event",
-        "tags": [
-          "gcn events"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "dateobs",
-            "required": true,
-            "schema": {
-              "type": "dateobs"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Success"
                 }
               }
             }
@@ -12583,6 +13238,71 @@
         }
       }
     },
+    "/api/newsfeed": {
+      "get": {
+        "description": "Retrieve summary of recent activity",
+        "tags": [
+          "news_feed"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "numItems",
+            "nullable": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of newsfeed items to return.\nDefaults to 50. Max is 1000.\n"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "type": {
+                                "type": "string"
+                              },
+                              "time": {
+                                "type": "string"
+                              },
+                              "message": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/observation": {
       "get": {
         "summary": "Get all observations",
@@ -12709,7 +13429,7 @@
             "schema": {
               "type": "integer"
             },
-            "description": "Number of followup requests to return per paginated request.\nDefaults to 100. Can be no larger than {MAX_OBSERVATIONS}.\n"
+            "description": "Number of followup requests to return per paginated request.\nDefaults to 100. Can be no larger than 10000.\n"
           },
           {
             "in": "query",
@@ -13701,17 +14421,91 @@
     },
     "/api/observation_plan": {
       "get": {
-        "summary": "Get all observation plan names.",
-        "description": "Get all Observation Plan names",
+        "summary": "Get all observation plans.",
+        "description": "Get all observation plans.",
         "tags": [
-          "observation plans"
+          "observation plan requests"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "dateobs",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "GcnEvent dateobs to filter on"
+          },
+          {
+            "in": "query",
+            "name": "instrumentID",
+            "nullable": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Instrument ID to filter on"
+          },
+          {
+            "in": "query",
+            "name": "startDate",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Arrow-parseable date string (e.g. 2020-01-01). If provided, filter by\ncreated_at >= startDate\n"
+          },
+          {
+            "in": "query",
+            "name": "endDate",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Arrow-parseable date string (e.g. 2020-01-01). If provided, filter by\ncreated_at <= endDate\n"
+          },
+          {
+            "in": "query",
+            "name": "status",
+            "nullable": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "String to match status of request against\n"
+          },
+          {
+            "in": "query",
+            "name": "numPerPage",
+            "nullable": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Number of observation plan requests to return per paginated request. Defaults to 100. Can be no larger than 1000.\n"
+          },
+          {
+            "in": "query",
+            "name": "pageNumber",
+            "nullable": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page number for paginated query results. Defaults to 1"
+          },
+          {
+            "in": "query",
+            "name": "includePlannedObservations",
+            "nullable": true,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Boolean indicating whether to include associated planned observations. Defaults to false.\n"
+          }
         ],
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "$ref": "#/components/schemas/ArrayOfObservationPlanRequests"
                 }
               }
             }
@@ -13774,6 +14568,61 @@
       }
     },
     "/api/observation_plan/{observation_plan_request_id}": {
+      "get": {
+        "summary": "Get an observation plan.",
+        "description": "Get an observation plan.",
+        "tags": [
+          "observation plan requests"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "observation_plan_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "includePlannedObservations",
+            "nullable": true,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Boolean indicating whether to include associated planned observations. Defaults to false.\n"
+          },
+          {
+            "in": "query",
+            "name": "rubinFormat",
+            "nullable": true,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Boolean indicating whether to format the response in a way that is compatible with Rubin\n"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SingleObservationPlanRequest"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
       "delete": {
         "summary": "Delete observation plan request.",
         "description": "<b>Permission(s) required:</b> <em>Manage observation plans (or System admin)</em><br><br>Delete observation plan.",
@@ -14889,6 +15738,65 @@
       }
     },
     "/api/photometry": {
+      "post": {
+        "summary": "Upload photometry",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Upload photometry. Posting is capped at 10000 for database stability purposes.",
+        "tags": [
+          "photometry"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/PhotMagFlexible"
+                  },
+                  {
+                    "$ref": "#/components/schemas/PhotFluxFlexible"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "ids": {
+                              "type": "array",
+                              "items": {
+                                "type": "integer"
+                              },
+                              "description": "List of new photometry IDs"
+                            },
+                            "upload_id": {
+                              "type": "string",
+                              "description": "Upload ID associated with all photometry points\nadded in request. Can be used to later delete all\npoints in a single request."
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
       "put": {
         "summary": "Update and/or upload photometry",
         "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update and/or upload photometry, resolving potential duplicates",
@@ -15185,6 +16093,173 @@
     "/api/photometric_series/{photometric_series_id}": {
       "get": {
         "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>"
+      },
+      "patch": {
+        "summary": "Update a photometric series.",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update a photometric series.\nAll the inputs in the request body are optional.\nIn any case the series is loaded, metadata or data are updated,\nand the series is saved again to disk.\nIf new data is given, the RA/Dec, exposure time and filter\nwill be inferred from the data columns (if the exist),\nand will override the existing values for the photometric series\nin the database. To avoid this, supply those values explicitly\nin the request body parameters.\n",
+        "tags": [
+          "photometric series"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "photometric_series_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "string or dict",
+                    "description": "The data to upload. Can be a string or a dict.\nIf a dict (i.e., a json object) will assume each\nkey is a column name and each value is a list of\nvalues for that column.\nThat dictionary will be passed into a pandas\nDataFrame constructor, so the keys must be valid\nand the length of each value must be the same.\nIf a string, will be converted to a bytes array\nand de-serialized by the pandas HDF5 reader.\nUse the HDFStore to create a file that includes\na single key/group with the photometric data.\nAdditional information, including any of the\nparameters specified below, can be stored in\nthe HDFStore as well, inside the attributes\nunder the key \"metadata\".\nIn any case the DataFrame must have the following\ncolumns: \"mjd\", and either \"flux\" or \"mag\".\nAdditional columns like \"fluxerr\" or \"magerr\" can be\nadded, to plot errorbars on the frontend.\nColumns like \"RA\" or \"exp_time\" can be added to keep\ntrack of the values for individual observations,\nand the median value of these columns can be used\ninstead of specifying the values in the metadata.\nOther information can be added as additional columns\nthat will be saved to disk. That information will not\nbe used by SkyPortal, but will be available for download.\n",
+                    "required": false
+                  },
+                  "series_name": {
+                    "type": "string",
+                    "description": "Name of the photometric series. Each series can contain light curves\nfor multiple objects, and is usually continuous in some sense.\nEach series has a single instrument/filter, and generally a single pointing.\nSome examples would be a TESS sector or a single pointing with a fast photometer.\nThe series name is used as the path to the file containing the photometric data,\nand can contain slashes (can also include underscores, + and -).\n",
+                    "required": false
+                  },
+                  "series_obj_id": {
+                    "type": "string",
+                    "description": "Name or number of the object inside the photometric series. This can\nbe a global object ID from the specific survey (e.g., a TESS TIC ID),\nor a casual index of the object in the series (e.g., star number 3).\nThis does not have to correspond to the object ID in SkyPortal.\nIt must be a unique identifier inside the series to be able to upload\nmultiple light curves for different objects in the same series.\n",
+                    "required": false
+                  },
+                  "obj_id": {
+                    "type": "string",
+                    "description": "SkyPortal object ID.",
+                    "required": false
+                  },
+                  "instrument_id": {
+                    "type": "integer",
+                    "description": "SkyPortal ID of the instrument used to take the photometric series.",
+                    "required": false
+                  },
+                  "group_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "List of group IDs to associate with the photometric series.\nIf not specified, defaults to the user's single user group.\nCan also specify \"all\" to share with all groups.\n",
+                    "required": false
+                  },
+                  "stream_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "List of stream IDs to associate with the photometric series.\n",
+                    "required": false
+                  },
+                  "ra": {
+                    "type": "number",
+                    "description": "Right ascension of the photometric series (degrees).\nCan specify the value for the entire series,\nor add an \"RA\" column to the data file.\nIf not specified, the median RA from the data\nwill be used as the coordinate for this object.\nIf specified, will override the median value,\nbut will not affect the individual measured RA.\nIf no ra is given and no such column exists in the data file,\nthe photometric series will not be posted.\n",
+                    "required": false
+                  },
+                  "dec": {
+                    "type": "number",
+                    "description": "Declination of the photometric series (degrees).\nSame as the RA column, only using the Dec column.\n",
+                    "required": false
+                  },
+                  "exp_time": {
+                    "type": "number",
+                    "description": "Exposure time of each measurement in the\nphotometric series (seconds). If not specified,\nthe median value of the \"exp_time\" column in\nthe data file will be used instead.\nIf no such column exists and the exp_time is not\ngiven, the photometric series will not be posted.\n",
+                    "required": false
+                  },
+                  "filter": {
+                    "type": "string",
+                    "description": "Name of the filter used to take the photometric series.\nIf not specified, the filter name will be inferred from the\ndata file. If no filter name is given and no such column\nIf no filter name is given and no such column exists in the data file,\nthe photometric series will not be posted.\nFilter must be one of the allowed band passes.\n",
+                    "required": false
+                  },
+                  "channel": {
+                    "type": "string",
+                    "description": "Name of the channel used to take the photometric series.\nThis is useful for multi-band simultaneous photometry,\nor for mosiaced CCD images where each tile has its own channel ID.\nThis allows multiple series to be saved with the same series name\nbut different channels, without violating the uniqueness constraint.\nSeries with different channels can have the same or different filters.\nThis field is entirely optional.\n",
+                    "required": false
+                  },
+                  "limiting_mag": {
+                    "type": "number",
+                    "description": "The limiting magnitude of the photometric series.\nCan specify the value for the entire series,\nor add an \"limiting_mag\" column to the data file.\nIf not specified, the median limit from the data\nwill be used as the representative limiting mag for this series.\nIf specified, will override the median value,\nbut will not affect the individual measured limits.\nIf no limit is given and no such column exists in the data file,\nthe photometric series will be posted with None as the limit.\n"
+                  },
+                  "magref": {
+                    "type": "number",
+                    "description": "Reference magnitude for the photometric series.\nThis is used when the photometry is relative\n(e.g., based on subtraction images) and the magnitude\nof the object when it is not active is measured separately.\nThis would be the magnitude before/after a transient,\nor the mean magnitude of a variable.\nFor absolute photometry this is left as None.\n",
+                    "required": false
+                  },
+                  "e_magref": {
+                    "type": "number",
+                    "description": "uncertainty on the magref.",
+                    "required": false
+                  },
+                  "ra_unc": {
+                    "type": "number",
+                    "description": "uncertainty on the ra.",
+                    "required": false
+                  },
+                  "dec_unc": {
+                    "type": "number",
+                    "description": "uncertainty on the dec.",
+                    "required": false
+                  },
+                  "followup_request_id": {
+                    "type": "integer",
+                    "description": "ID of the followup request that generated this photometric series.\nThis is used to link the photometric series to the followup request\nin the SkyPortal database.\n",
+                    "required": false
+                  },
+                  "assignment_id": {
+                    "type": "integer",
+                    "description": "ID of the assignment that generated this photometric series.\nThis is used to link the photometric series to the assignment\nin the SkyPortal database.\n",
+                    "required": false
+                  },
+                  "time_stamp_alignment": {
+                    "type": "string",
+                    "description": "Specify when the time stamp for each measurement was taken\ninside each exposure. Possible values are \"start\", \"middle\", \"end\".\nThis is optional, and defaults to \"middle\".\n",
+                    "required": false
+                  },
+                  "altdata": {
+                    "type": "object",
+                    "description": "Additional information to store in the photometric series.\nThis can be any valid JSON object, and will be stored\nin the database as a JSON string.\nThis can hold various information that does not fit into\nany of the other inputs, but will still be useful to keep track of.\n",
+                    "required": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "description": "New photometric series ID"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
       },
       "delete": {
         "summary": "Delete a photometric series",
@@ -15730,6 +16805,163 @@
                             },
                             "numPerPage": {
                               "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Upload a photometric series.",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Upload a photometric series.",
+        "tags": [
+          "photometric series"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "string or dict",
+                    "description": "The data to upload. Can be a string or a dict.\nIf a dict (i.e., a json object) will assume each\nkey is a column name and each value is a list of\nvalues for that column.\nThat dictionary will be passed into a pandas\nDataFrame constructor, so the keys must be valid\nand the length of each value must be the same.\nIf a string, will be converted to a bytes array\nand de-serialized by the pandas HDF5 reader.\nUse the HDFStore to create a file that includes\na single key/group with the photometric data.\nAdditional information, including any of the\nparameters specified below, can be stored in\nthe HDFStore as well, inside the attributes\nunder the key \"metadata\".\nIn any case the DataFrame must have the following\ncolumns: \"mjd\", and either \"flux\" or \"mag\".\nAdditional columns like \"fluxerr\" or \"magerr\" can be\nadded, to plot errorbars on the frontend.\nColumns like \"RA\" or \"exp_time\" can be added to keep\ntrack of the values for individual observations,\nand the median value of these columns can be used\ninstead of specifying the values in the metadata.\nOther information can be added as additional columns\nthat will be saved to disk. That information will not\nbe used by SkyPortal, but will be available for download.\n",
+                    "required": true
+                  },
+                  "series_name": {
+                    "type": "string",
+                    "description": "Name of the photometric series. Each series can contain light curves\nfor multiple objects, and is usually continuous in some sense.\nEach series has a single instrument/filter, and generally a single pointing.\nSome examples would be a TESS sector or a single pointing with a fast photometer.\nThe series name is used as the path to the file containing the photometric data,\nand can contain slashes (can also include underscores, + and -).\n",
+                    "required": true
+                  },
+                  "series_obj_id": {
+                    "type": "string",
+                    "description": "Name or number of the object inside the photometric series. This can\nbe a global object ID from the specific survey (e.g., a TESS TIC ID),\nor a casual index of the object in the series (e.g., star number 3).\nThis does not have to correspond to the object ID in SkyPortal.\nIt must be a unique identifier inside the series to be able to upload\nmultiple light curves for different objects in the same series.\n",
+                    "required": true
+                  },
+                  "obj_id": {
+                    "type": "string",
+                    "description": "SkyPortal object ID.",
+                    "required": true
+                  },
+                  "instrument_id": {
+                    "type": "integer",
+                    "description": "SkyPortal ID of the instrument used to take the photometric series.",
+                    "required": true
+                  },
+                  "group_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "List of group IDs to associate with the photometric series.\nIf not specified, defaults to the user's single user group.\nCan also specify \"all\" to share with all groups.\n",
+                    "required": false
+                  },
+                  "stream_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "List of stream IDs to associate with the photometric series.\n",
+                    "required": false
+                  },
+                  "ra": {
+                    "type": "number",
+                    "description": "Right ascension of the photometric series (degrees).\nCan specify the value for the entire series,\nor add an \"RA\" column to the data file.\nIf not specified, the median RA from the data\nwill be used as the coordinate for this object.\nIf specified, will override the median value,\nbut will not affect the individual measured RA.\nIf no ra is given and no such column exists in the data file,\nthe photometric series will not be posted.\n",
+                    "required": false
+                  },
+                  "dec": {
+                    "type": "number",
+                    "description": "Declination of the photometric series (degrees).\nSame as the RA column, only using the Dec column.\n",
+                    "required": false
+                  },
+                  "exp_time": {
+                    "type": "number",
+                    "description": "Exposure time of each measurement in the\nphotometric series (seconds). If not specified,\nthe median value of the \"exp_time\" column in\nthe data file will be used instead.\nIf no such column exists and the exp_time is not\ngiven, the photometric series will not be posted.\n",
+                    "required": false
+                  },
+                  "filter": {
+                    "type": "string",
+                    "description": "Name of the filter used to take the photometric series.\nIf not specified, the filter name will be inferred from the\ndata file. If no filter name is given and no such column\nIf no filter name is given and no such column exists in the data file,\nthe photometric series will not be posted.\nFilter must be one of the allowed band passes.\n",
+                    "required": false
+                  },
+                  "channel": {
+                    "type": "string",
+                    "description": "Name of the channel used to take the photometric series.\nThis is useful for multi-band simultaneous photometry,\nor for mosiaced CCD images where each tile has its own channel ID.\nThis allows multiple series to be saved with the same series name\nbut different channels, without violating the uniqueness constraint.\nSeries with different channels can have the same or different filters.\nThis field is entirely optional.\n",
+                    "required": false
+                  },
+                  "limiting_mag": {
+                    "type": "number",
+                    "description": "The limiting magnitude of the photometric series.\nCan specify the value for the entire series,\nor add an \"limiting_mag\" column to the data file.\nIf not specified, the median limit from the data\nwill be used as the representative limiting mag for this series.\nIf specified, will override the median value,\nbut will not affect the individual measured limits.\nIf no limit is given and no such column exists in the data file,\nthe photometric series will be posted with None as the limit.\n"
+                  },
+                  "magref": {
+                    "type": "number",
+                    "description": "Reference magnitude for the photometric series.\nThis is used when the photometry is relative\n(e.g., based on subtraction images) and the magnitude\nof the object when it is not active is measured separately.\nThis would be the magnitude before/after a transient,\nor the mean magnitude of a variable.\nFor absolute photometry this is left as None.\n",
+                    "required": false
+                  },
+                  "e_magref": {
+                    "type": "number",
+                    "description": "uncertainty on the magref.",
+                    "required": false
+                  },
+                  "ra_unc": {
+                    "type": "number",
+                    "description": "uncertainty on the ra.",
+                    "required": false
+                  },
+                  "dec_unc": {
+                    "type": "number",
+                    "description": "uncertainty on the dec.",
+                    "required": false
+                  },
+                  "followup_request_id": {
+                    "type": "integer",
+                    "description": "ID of the followup request that generated this photometric series.\nThis is used to link the photometric series to the followup request\nin the SkyPortal database.\n",
+                    "required": false
+                  },
+                  "assignment_id": {
+                    "type": "integer",
+                    "description": "ID of the assignment that generated this photometric series.\nThis is used to link the photometric series to the assignment\nin the SkyPortal database.\n",
+                    "required": false
+                  },
+                  "time_stamp_alignment": {
+                    "type": "string",
+                    "description": "Specify when the time stamp for each measurement was taken\ninside each exposure. Possible values are \"start\", \"middle\", \"end\".\nThis is optional, and defaults to \"middle\".\n",
+                    "required": false
+                  },
+                  "altdata": {
+                    "type": "object",
+                    "description": "Additional information to store in the photometric series.\nThis can be any valid JSON object, and will be stored\nin the database as a JSON string.\nThis can hold various information that does not fit into\nany of the other inputs, but will still be useful to keep track of.\n",
+                    "required": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "description": "New photometric series ID"
                             }
                           }
                         }
@@ -67133,6 +68365,34 @@
           "text": {
             "type": "string",
             "description": "GCN Event tag"
+          }
+        },
+        "additionalProperties": false
+      },
+      "GcnEventHandlerGet": {
+        "type": "object",
+        "properties": {
+          "tags": {
+            "type": "array",
+            "description": "Event tags",
+            "items": {}
+          },
+          "dateobs": {
+            "description": "UTC event timestamp"
+          },
+          "localizations": {
+            "type": "array",
+            "description": "Healpix localizations",
+            "items": {}
+          },
+          "notices": {
+            "type": "array",
+            "description": "VOEvent XML notices",
+            "items": {}
+          },
+          "lightcurve": {
+            "type": "string",
+            "description": "URL for light curve"
           }
         },
         "additionalProperties": false
