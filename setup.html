@@ -431,13 +431,15 @@ how to install them on MacOS and Debian-based systems below.</p>
 <li><p>Start the PostgreSQL server:</p></li>
 </ol>
 <ul class="simple">
-<li><p>To start automatically at login: <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">services</span> <span class="pre">start</span> <span class="pre">postgresql</span></code></p></li>
-<li><p>To start manually: <code class="docutils literal notranslate"><span class="pre">pg_ctl</span> <span class="pre">-D</span> <span class="pre">/usr/local/var/postgres</span> <span class="pre">start</span></code></p></li>
+<li><p>To start automatically at login: <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">services</span> <span class="pre">start</span> <span class="pre">postgresql&#64;&lt;version&gt;</span></code></p></li>
+<li><p>To start manually: <code class="docutils literal notranslate"><span class="pre">pg_ctl</span> <span class="pre">-D</span> <span class="pre">$(brew</span> <span class="pre">--prefix)/var/postgresql&#64;&lt;version&gt;</span> <span class="pre">start</span></code></p></li>
 </ul>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">&lt;version&gt;</span></code> with your installed PostgreSQL version (e.g., <code class="docutils literal notranslate"><span class="pre">14</span></code>). You can check with <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">list</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">postgresql</span></code>.</p>
 <p>You may also need to run the following command to create the proper admin user:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/usr/local/opt/postgres/bin/createuser<span class="w"> </span>-s<span class="w"> </span>postgres
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>createuser<span class="w"> </span>-s<span class="w"> </span>postgres
 </pre></div>
 </div>
+<p>If <code class="docutils literal notranslate"><span class="pre">createuser</span></code> is not found in your <code class="docutils literal notranslate"><span class="pre">PATH</span></code>, locate it via <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">info</span> <span class="pre">postgresql</span></code> (typically <code class="docutils literal notranslate"><span class="pre">/opt/homebrew/opt/postgresql&#64;&lt;version&gt;/bin/</span></code> on Apple Silicon, or <code class="docutils literal notranslate"><span class="pre">/usr/local/opt/postgresql&#64;&lt;version&gt;/bin/</span></code> on Intel Macs) and invoke it with its full path.</p>
 <ol>
 <li><p>To run the test suite, you’ll need Geckodriver:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">geckodriver</span>
