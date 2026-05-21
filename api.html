@@ -18175,12 +18175,13 @@
             "in": "query",
             "name": "format",
             "required": false,
-            "description": "Return the photometry in flux or magnitude space? If a value for this query parameter is not provided, the result will be returned in magnitude space.",
+            "description": "Return the photometry in flux or magnitude space? If a value for this query parameter is not provided, the result will be returned in magnitude space. \"plot\" returns a slim per-point payload (id, obj_id, filter, mjd, origin, mag, magerr, limiting_mag) intended for lightcurve plotting; all per-point auxiliary joins (groups, annotations, instrument, owner, streams, validations) and the ref/tot/extinction blocks are skipped, regardless of the corresponding ``include*`` flags.",
             "schema": {
               "type": "string",
               "enum": [
                 "mag",
-                "flux"
+                "flux",
+                "plot"
               ]
             }
           },
