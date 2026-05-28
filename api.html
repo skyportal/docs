@@ -15462,7 +15462,7 @@
       },
       "post": {
         "summary": "Create object-tag association",
-        "description": "Create a new association between an object and a tag option",
+        "description": "Create a new association between an object and a tag option, with group access",
         "tags": [
           "object tags"
         ],
@@ -15479,11 +15479,19 @@
                   "obj_id": {
                     "type": "string",
                     "description": "ID of the object to tag"
+                  },
+                  "group_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "IDs of groups that can access this tag association"
                   }
                 },
                 "required": [
                   "objtagoption_id",
-                  "obj_id"
+                  "obj_id",
+                  "group_ids"
                 ]
               }
             }
@@ -15535,7 +15543,7 @@
     "/api/objtag/{association_id}": {
       "delete": {
         "summary": "Delete object-tag association",
-        "description": "Delete an existing association between an object and a tag option",
+        "description": "Remove group associations with a tag. If group_ids is provided, only those specific groups are removed. Otherwise, all user's group associations are removed. If no group associations remain after removal, the tag is deleted entirely. System admins can remove any group; regular users can only remove their groups.\n",
         "tags": [
           "object tags"
         ],
@@ -15549,6 +15557,24 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "group_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "Optional list of group IDs to remove. If not provided, all user's group associations are removed.\n"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "content": {
@@ -36618,6 +36644,12 @@
           "id": {
             "type": "integer",
             "description": "Unique object identifier."
+          },
+          "obj_tags": {
+            "type": "array",
+            "items": {
+              "description": "Object tags associated with this group."
+            }
           }
         },
         "required": [
@@ -38881,6 +38913,12 @@
             "type": "boolean",
             "description": "Flag indicating whether this group is a singleton group for one user only.",
             "nullable": true
+          },
+          "obj_tags": {
+            "type": "array",
+            "items": {
+              "description": "Object tags associated with this group."
+            }
           }
         },
         "required": [
@@ -39269,6 +39307,140 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GroupObjNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "GroupObjObjTagOption": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "nullable": true
+          },
+          "objobjtagoption": {
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "group_id": {
+            "type": "integer"
+          },
+          "obj_tag_id": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "group_id",
+          "obj_tag_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGroupObjObjTagOption": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GroupObjObjTagOption"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGroupObjObjTagOptions": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupObjObjTagOption"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "GroupObjObjTagOptionNoID": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "nullable": true
+          },
+          "objobjtagoption": {
+            "nullable": true
+          },
+          "group_id": {
+            "type": "integer"
+          },
+          "obj_tag_id": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "group_id",
+          "obj_tag_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGroupObjObjTagOptionNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GroupObjObjTagOptionNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGroupObjObjTagOptionNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ]
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupObjObjTagOptionNoID"
             }
           }
         },
@@ -53236,6 +53408,12 @@
           "author": {
             "description": "The associated User",
             "nullable": true
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "description": "Groups that can access this object tag."
+            }
           }
         },
         "required": [
@@ -53310,6 +53488,12 @@
           "author": {
             "description": "The associated User",
             "nullable": true
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "description": "Groups that can access this object tag."
+            }
           }
         },
         "required": [
