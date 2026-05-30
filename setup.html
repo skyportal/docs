@@ -343,6 +343,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-configuration">Additional Configuration</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#authentication">Authentication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#username-generation">Username generation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-an-administrative-user">Creating an administrative user</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-data">Test data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deploying-secure-http-ssl-certificate">Deploying secure HTTP / SSL certificate</a></li>
@@ -623,6 +624,12 @@ SkyPortal, you should enable multi-user login by adding Google
 credentials to the <code class="docutils literal notranslate"><span class="pre">server:auth</span></code> section of the configuration file and
 setting <code class="docutils literal notranslate"><span class="pre">debug_login</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 </section>
+<section id="username-generation">
+<h3>Username generation<a class="headerlink" href="#username-generation" title="Link to this heading">#</a></h3>
+<p>When <code class="docutils literal notranslate"><span class="pre">server.auth.username_is_email</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code> (the default), the user’s username is generated from their email address (e.g., <code class="docutils literal notranslate"><span class="pre">testuser&#64;cesium-ml.org</span></code> → <code class="docutils literal notranslate"><span class="pre">testuser-cesium-ml-org</span></code>).</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">server.auth.username_is_email</span></code> is set to <code class="docutils literal notranslate"><span class="pre">False</span></code>, SkyPortal automatically generates a username from the user’s OAuth profile using the first letter of their first name combined with their last name (e.g., “Camille Douzet” → <code class="docutils literal notranslate"><span class="pre">cdouzet</span></code>). If that username is already taken, a number is appended and incremented until a unique username is found (e.g., <code class="docutils literal notranslate"><span class="pre">cdouzet1</span></code>, <code class="docutils literal notranslate"><span class="pre">cdouzet2</span></code>, …).</p>
+<p>If the OAuth provider does not supply first and last name fields, the username falls back to the raw <code class="docutils literal notranslate"><span class="pre">username</span></code> field from the provider details.</p>
+</section>
 <section id="creating-an-administrative-user">
 <h3>Creating an administrative user<a class="headerlink" href="#creating-an-administrative-user" title="Link to this heading">#</a></h3>
 <p>By default, no user has permission to perform system administration.
@@ -738,6 +745,7 @@ sudo certbot renew</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-configuration">Additional Configuration</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#authentication">Authentication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#username-generation">Username generation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-an-administrative-user">Creating an administrative user</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-data">Test data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deploying-secure-http-ssl-certificate">Deploying secure HTTP / SSL certificate</a></li>
