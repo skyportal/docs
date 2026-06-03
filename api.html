@@ -15431,6 +15431,15 @@
               "type": "integer"
             },
             "description": "Filter associations by tag option ID"
+          },
+          {
+            "in": "query",
+            "name": "includeSuperObjs",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "If true and obj_id is given, also return tags on the Objs linked\nto it through a SuperObj (meta-object), as one provenance-tagged\nunion (each entry keeps its obj_id). Defaults to false.\n"
           }
         ],
         "responses": {
@@ -18889,6 +18898,15 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "in": "query",
+            "name": "includeSuperObjs",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "If true and the obj is linked to other objs via a SuperObj\n(meta-object), return the union of classifications across all\nlinked objs. Each entry carries its obj_id for provenance.\n"
           }
         ],
         "responses": {
