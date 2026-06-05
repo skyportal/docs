@@ -1849,7 +1849,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ArrayOfCandidateScanReport"
+                  "$ref": "#/components/schemas/ArrayOfScanReportItems"
                 }
               }
             }
@@ -1957,7 +1957,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ArrayOfCandidateScanReport"
+                  "$ref": "#/components/schemas/ArrayOfScanReports"
                 }
               }
             }
@@ -12657,263 +12657,69 @@
                       },
                       "sensitivity_data": {
                         "type": "object",
-                        "properties": {
-                          "filter_name": {
-                            "type": "object",
-                            "enum": [
-                              "bessellux",
-                              "bessellb",
-                              "bessellv",
-                              "bessellr",
-                              "besselli",
-                              "standard::u",
-                              "standard::b",
-                              "standard::v",
-                              "standard::r",
-                              "standard::i",
-                              "desu",
-                              "desg",
-                              "desr",
-                              "desi",
-                              "desz",
-                              "desy",
-                              "sdssu",
-                              "sdssg",
-                              "sdssr",
-                              "sdssi",
-                              "sdssz",
-                              "f435w",
-                              "f475w",
-                              "f555w",
-                              "f606w",
-                              "f625w",
-                              "f775w",
-                              "f850lp",
-                              "nicf110w",
-                              "nicf160w",
-                              "f098m",
-                              "f105w",
-                              "f110w",
-                              "f125w",
-                              "f127m",
-                              "f139m",
-                              "f140w",
-                              "f153m",
-                              "f160w",
-                              "f218w",
-                              "f225w",
-                              "f275w",
-                              "f300x",
-                              "f336w",
-                              "f350lp",
-                              "f390w",
-                              "f689m",
-                              "f763m",
-                              "f845m",
-                              "f438w",
-                              "uvf475w",
-                              "uvf555w",
-                              "uvf606w",
-                              "uvf625w",
-                              "uvf775w",
-                              "uvf814w",
-                              "uvf850lp",
-                              "kepler",
-                              "cspb",
-                              "csphs",
-                              "csphd",
-                              "cspjs",
-                              "cspjd",
-                              "cspv3009",
-                              "cspv3014",
-                              "cspv9844",
-                              "cspys",
-                              "cspyd",
-                              "cspg",
-                              "cspi",
-                              "cspk",
-                              "cspr",
-                              "cspu",
-                              "f070w",
-                              "f090w",
-                              "f115w",
-                              "f150w",
-                              "f200w",
-                              "f277w",
-                              "f356w",
-                              "f444w",
-                              "f140m",
-                              "f162m",
-                              "f182m",
-                              "f210m",
-                              "f250m",
-                              "f300m",
-                              "f335m",
-                              "f360m",
-                              "f410m",
-                              "f430m",
-                              "f460m",
-                              "f480m",
-                              "f560w",
-                              "f770w",
-                              "f1000w",
-                              "f1130w",
-                              "f1280w",
-                              "f1500w",
-                              "f1800w",
-                              "f2100w",
-                              "f2550w",
-                              "f1065c",
-                              "f1140c",
-                              "f1550c",
-                              "f2300c",
-                              "lsstu",
-                              "lsstg",
-                              "lsstr",
-                              "lssti",
-                              "lsstz",
-                              "lssty",
-                              "keplercam::us",
-                              "keplercam::b",
-                              "keplercam::v",
-                              "keplercam::r",
-                              "keplercam::i",
-                              "4shooter2::us",
-                              "4shooter2::b",
-                              "4shooter2::v",
-                              "4shooter2::r",
-                              "4shooter2::i",
-                              "f062",
-                              "f087",
-                              "f106",
-                              "f129",
-                              "f158",
-                              "f184",
-                              "f213",
-                              "f146",
-                              "ztfg",
-                              "ztfr",
-                              "ztfi",
-                              "uvot::b",
-                              "uvot::u",
-                              "uvot::uvm2",
-                              "uvot::uvw1",
-                              "uvot::uvw2",
-                              "uvot::v",
-                              "uvot::white",
-                              "ps1::open",
-                              "ps1::g",
-                              "ps1::r",
-                              "ps1::i",
-                              "ps1::z",
-                              "ps1::y",
-                              "ps1::w",
-                              "atlasc",
-                              "atlaso",
-                              "2massj",
-                              "2massh",
-                              "2massks",
-                              "gaia::gbp",
-                              "gaia::g",
-                              "gaia::grp",
-                              "gaia::grvs",
-                              "tess",
-                              "galex::fuv",
-                              "galex::nuv",
-                              "gotob",
-                              "gotog",
-                              "gotol",
-                              "gotor",
-                              "skymapperu",
-                              "skymapperg",
-                              "skymapperr",
-                              "skymapperi",
-                              "skymapperz",
-                              "ztf::g",
-                              "ztf::r",
-                              "ztf::i",
-                              "megacam6::g",
-                              "megacam6::r",
-                              "megacam6::i",
-                              "megacam6::i2",
-                              "megacam6::z",
-                              "hsc::g",
-                              "hsc::r",
-                              "hsc::r2",
-                              "hsc::i",
-                              "hsc::i2",
-                              "hsc::z",
-                              "hsc::y",
-                              "swiftxrt",
-                              "nicerxti"
-                            ],
-                            "properties": {
-                              "limiting_magnitude": {
-                                "type": "float"
-                              },
-                              "magsys": {
-                                "type": "string"
-                              },
-                              "exposure_time": {
-                                "type": "float",
-                                "description": "Exposure time in seconds.\n"
-                              }
+                        "additionalProperties": {
+                          "type": "object",
+                          "properties": {
+                            "limiting_magnitude": {
+                              "type": "number"
+                            },
+                            "magsys": {
+                              "type": "string"
+                            },
+                            "exposure_time": {
+                              "type": "number",
+                              "description": "Exposure time in seconds."
                             }
                           }
                         },
-                        "description": "List of filters and associated limiting magnitude and exposure time.\nSensitivity_data filters must be a subset of the instrument filters.\nLimiting magnitude assumed to be AB magnitude.\n"
+                        "description": "Map of filter name to its limiting magnitude and exposure time.\nSensitivity_data filters must be a subset of the instrument filters.\nLimiting magnitude assumed to be AB magnitude.\n"
                       },
                       "configuration_data": {
                         "type": "object",
-                        "properties": {
-                          "filter_name": {
-                            "type": "object",
-                            "properties": {
-                              "filt_change_time": {
-                                "type": "float",
-                                "description": "Time in seconds to change filters\n"
-                              },
-                              "readout": {
-                                "type": "float",
-                                "description": "Time in seconds to readout camera\n"
-                              },
-                              "overhead_per_exposure": {
-                                "type": "float",
-                                "description": "Non-readout overheads, e.g. instrument settling times, in seconds.\n"
-                              },
-                              "slew_rate": {
-                                "type": "float",
-                                "description": "Slew rate for the telescope in deg/s.\n"
-                              }
+                        "additionalProperties": {
+                          "type": "object",
+                          "properties": {
+                            "filt_change_time": {
+                              "type": "number",
+                              "description": "Time in seconds to change filters"
+                            },
+                            "readout": {
+                              "type": "number",
+                              "description": "Time in seconds to readout camera"
+                            },
+                            "overhead_per_exposure": {
+                              "type": "number",
+                              "description": "Non-readout overheads, e.g. instrument settling times, in seconds.\n"
+                            },
+                            "slew_rate": {
+                              "type": "number",
+                              "description": "Slew rate for the telescope in deg/s."
                             }
                           }
                         },
                         "description": "Instrument configuration properties such as instrument overhead, filter change time, readout, etc.\n"
                       },
                       "field_data": {
-                        "type": "dict",
-                        "items": {
-                          "type": "array"
-                        },
+                        "type": "object",
                         "description": "List of ID, RA, and Dec for each field.\n"
                       },
                       "field_region": {
-                        "type": "str",
+                        "type": "string",
                         "description": "Serialized version of a regions.Region describing\nthe shape of the instrument field. Note: should\nonly include field_region or field_fov_type.\n"
                       },
                       "references": {
-                        "type": "dict",
-                        "items": {
-                          "type": "array"
-                        },
+                        "type": "object",
                         "description": "List of filter, and limiting magnitude for each reference.\n"
                       },
                       "field_fov_type": {
-                        "type": "str",
+                        "type": "string",
                         "description": "Option for instrument field shape. Must be either\ncircle or rectangle. Note: should only\ninclude field_region or field_fov_type.\n"
                       },
                       "field_fov_attributes": {
-                        "type": "list",
+                        "type": "array",
+                        "items": {
+                          "type": "number"
+                        },
                         "description": "Option for instrument field shape parameters.\nSingle float radius in degrees in case of circle or\nlist of two floats (height and width) in case of\na rectangle.\n"
                       }
                     }
@@ -26296,9 +26102,9 @@
                     "type": "string"
                   },
                   "group_ids": {
-                    "type": "integer",
+                    "type": "array",
                     "items": {
-                      "$ref": "#/components/schemas/None"
+                      "type": "integer"
                     }
                   },
                   "description": {
@@ -39993,13 +39799,13 @@
         ],
         "additionalProperties": false
       },
-      "GroupObjObjTagOption": {
+      "GroupObjTag": {
         "type": "object",
         "properties": {
           "group": {
             "readOnly": true
           },
-          "objobjtagoption": {
+          "objtag": {
             "readOnly": true
           },
           "id": {
@@ -40019,7 +39825,7 @@
         ],
         "additionalProperties": false
       },
-      "SingleGroupObjObjTagOption": {
+      "SingleGroupObjTag": {
         "type": "object",
         "properties": {
           "status": {
@@ -40032,7 +39838,7 @@
             "type": "string"
           },
           "data": {
-            "$ref": "#/components/schemas/GroupObjObjTagOption"
+            "$ref": "#/components/schemas/GroupObjTag"
           }
         },
         "required": [
@@ -40040,7 +39846,7 @@
         ],
         "additionalProperties": false
       },
-      "ArrayOfGroupObjObjTagOptions": {
+      "ArrayOfGroupObjTags": {
         "type": "object",
         "properties": {
           "status": {
@@ -40055,7 +39861,7 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/GroupObjObjTagOption"
+              "$ref": "#/components/schemas/GroupObjTag"
             }
           }
         },
@@ -40064,13 +39870,13 @@
         ],
         "additionalProperties": false
       },
-      "GroupObjObjTagOptionNoID": {
+      "GroupObjTagNoID": {
         "type": "object",
         "properties": {
           "group": {
             "readOnly": true
           },
-          "objobjtagoption": {
+          "objtag": {
             "readOnly": true
           },
           "group_id": {
@@ -40086,7 +39892,7 @@
         ],
         "additionalProperties": false
       },
-      "SingleGroupObjObjTagOptionNoID": {
+      "SingleGroupObjTagNoID": {
         "type": "object",
         "properties": {
           "status": {
@@ -40099,7 +39905,7 @@
             "type": "string"
           },
           "data": {
-            "$ref": "#/components/schemas/GroupObjObjTagOptionNoID"
+            "$ref": "#/components/schemas/GroupObjTagNoID"
           }
         },
         "required": [
@@ -40107,7 +39913,7 @@
         ],
         "additionalProperties": false
       },
-      "ArrayOfGroupObjObjTagOptionNoIDs": {
+      "ArrayOfGroupObjTagNoIDs": {
         "type": "object",
         "properties": {
           "status": {
@@ -40122,7 +39928,7 @@
           "data": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/GroupObjObjTagOptionNoID"
+              "$ref": "#/components/schemas/GroupObjTagNoID"
             }
           }
         },
@@ -54786,176 +54592,6 @@
         ],
         "additionalProperties": false
       },
-      "ObjObjTagOption": {
-        "type": "object",
-        "properties": {
-          "obj": {
-            "readOnly": true
-          },
-          "objtagoption": {
-            "readOnly": true
-          },
-          "id": {
-            "type": "integer",
-            "description": "Unique object identifier."
-          },
-          "obj_id": {
-            "type": "string"
-          },
-          "objtagoption_id": {
-            "type": "integer"
-          },
-          "author_id": {
-            "type": "integer",
-            "description": "ID of the user who created the tag association"
-          },
-          "author": {
-            "readOnly": true,
-            "description": "The associated User"
-          },
-          "groups": {
-            "type": "array",
-            "readOnly": true,
-            "items": {
-              "description": "Groups that can access this object tag."
-            }
-          }
-        },
-        "required": [
-          "author_id",
-          "obj_id",
-          "objtagoption_id"
-        ],
-        "additionalProperties": false
-      },
-      "SingleObjObjTagOption": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ],
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "$ref": "#/components/schemas/ObjObjTagOption"
-          }
-        },
-        "required": [
-          "status"
-        ],
-        "additionalProperties": false
-      },
-      "ArrayOfObjObjTagOptions": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ],
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ObjObjTagOption"
-            }
-          }
-        },
-        "required": [
-          "status"
-        ],
-        "additionalProperties": false
-      },
-      "ObjObjTagOptionNoID": {
-        "type": "object",
-        "properties": {
-          "obj": {
-            "readOnly": true
-          },
-          "objtagoption": {
-            "readOnly": true
-          },
-          "obj_id": {
-            "type": "string"
-          },
-          "objtagoption_id": {
-            "type": "integer"
-          },
-          "author_id": {
-            "type": "integer",
-            "description": "ID of the user who created the tag association"
-          },
-          "author": {
-            "readOnly": true,
-            "description": "The associated User"
-          },
-          "groups": {
-            "type": "array",
-            "readOnly": true,
-            "items": {
-              "description": "Groups that can access this object tag."
-            }
-          }
-        },
-        "required": [
-          "author_id",
-          "obj_id",
-          "objtagoption_id"
-        ],
-        "additionalProperties": false
-      },
-      "SingleObjObjTagOptionNoID": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ],
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "$ref": "#/components/schemas/ObjObjTagOptionNoID"
-          }
-        },
-        "required": [
-          "status"
-        ],
-        "additionalProperties": false
-      },
-      "ArrayOfObjObjTagOptionNoIDs": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ],
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ObjObjTagOptionNoID"
-            }
-          }
-        },
-        "required": [
-          "status"
-        ],
-        "additionalProperties": false
-      },
       "ObjPost": {
         "type": "object",
         "properties": {
@@ -55320,6 +54956,176 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObjPost"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ObjTag": {
+        "type": "object",
+        "properties": {
+          "obj": {
+            "readOnly": true
+          },
+          "objtagoption": {
+            "readOnly": true
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "obj_id": {
+            "type": "string"
+          },
+          "objtagoption_id": {
+            "type": "integer"
+          },
+          "author_id": {
+            "type": "integer",
+            "description": "ID of the user who created the tag association"
+          },
+          "author": {
+            "readOnly": true,
+            "description": "The associated User"
+          },
+          "groups": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "description": "Groups that can access this object tag."
+            }
+          }
+        },
+        "required": [
+          "author_id",
+          "obj_id",
+          "objtagoption_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleObjTag": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ObjTag"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfObjTags": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObjTag"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ObjTagNoID": {
+        "type": "object",
+        "properties": {
+          "obj": {
+            "readOnly": true
+          },
+          "objtagoption": {
+            "readOnly": true
+          },
+          "obj_id": {
+            "type": "string"
+          },
+          "objtagoption_id": {
+            "type": "integer"
+          },
+          "author_id": {
+            "type": "integer",
+            "description": "ID of the user who created the tag association"
+          },
+          "author": {
+            "readOnly": true,
+            "description": "The associated User"
+          },
+          "groups": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "description": "Groups that can access this object tag."
+            }
+          }
+        },
+        "required": [
+          "author_id",
+          "obj_id",
+          "objtagoption_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleObjTagNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ObjTagNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfObjTagNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObjTagNoID"
             }
           }
         },
