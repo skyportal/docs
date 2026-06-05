@@ -18406,6 +18406,16 @@
               "type": "string"
             },
             "description": "The order to sort the spectra by. Defaults to asc.\nOptions are: asc, desc\n"
+          },
+          {
+            "in": "query",
+            "name": "includeOriginalFile",
+            "required": false,
+            "default": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "If true, include the raw uploaded spectrum file\n(original_file_string) in each spectrum. Defaults to false;\nwhen omitted, that field is neither loaded nor returned.\n"
           }
         ],
         "responses": {
@@ -21788,6 +21798,16 @@
             "schema": {
               "type": "integer"
             }
+          },
+          {
+            "in": "query",
+            "name": "includeOriginalFile",
+            "nullable": true,
+            "default": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "If true, include the raw uploaded spectrum file\n(original_file_string) in the response. Defaults to false;\nwhen omitted, that field is neither loaded nor returned.\n"
           }
         ],
         "responses": {
@@ -21912,6 +21932,16 @@
               "type": "boolean"
             },
             "description": "If true, return only the minimal metadata\nabout each spectrum, instead of returning\nthe potentially large payload that includes\nwavelength/flux and also comments and annotations.\nThe metadata that is always included is:\nid, obj_id, owner_id, origin, type, label,\nobserved_at, created_at, modified,\ninstrument_id, instrument_name, original_file_name,\nfollowup_request_id, assignment_id, and altdata.\n"
+          },
+          {
+            "in": "query",
+            "name": "includeOriginalFile",
+            "nullable": true,
+            "default": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "If true, include the raw uploaded spectrum file\n(original_file_string) in each spectrum. Defaults to false;\nwhen omitted, that field is neither loaded nor returned.\nIgnored when minimalPayload is true (which never includes it).\n"
           },
           {
             "in": "query",
@@ -22305,6 +22335,16 @@
               "type": "ISO UTC date string"
             },
             "description": "Maximum UTC date of range in ISOT format. If None,\nopen ended range.\n"
+          },
+          {
+            "in": "query",
+            "name": "includeOriginalFile",
+            "required": false,
+            "default": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "If true, include the raw uploaded spectrum file\n(original_file_string) in each spectrum. Defaults to false;\nwhen omitted, that field is neither loaded nor returned.\n"
           }
         ],
         "responses": {
@@ -22368,6 +22408,16 @@
             "schema": {
               "type": "integer"
             }
+          },
+          {
+            "in": "query",
+            "name": "includeOriginalFile",
+            "nullable": true,
+            "default": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "If true, include the raw uploaded spectrum file\n(original_file_string) in the response. Defaults to false;\nwhen omitted, that field is neither loaded nor returned.\n"
           }
         ],
         "responses": {
@@ -22492,6 +22542,16 @@
               "type": "boolean"
             },
             "description": "If true, return only the minimal metadata\nabout each spectrum, instead of returning\nthe potentially large payload that includes\nwavelength/flux and also comments and annotations.\nThe metadata that is always included is:\nid, obj_id, owner_id, origin, type, label,\nobserved_at, created_at, modified,\ninstrument_id, instrument_name, original_file_name,\nfollowup_request_id, assignment_id, and altdata.\n"
+          },
+          {
+            "in": "query",
+            "name": "includeOriginalFile",
+            "nullable": true,
+            "default": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "If true, include the raw uploaded spectrum file\n(original_file_string) in each spectrum. Defaults to false;\nwhen omitted, that field is neither loaded nor returned.\nIgnored when minimalPayload is true (which never includes it).\n"
           },
           {
             "in": "query",
@@ -22837,6 +22897,16 @@
               "type": "ISO UTC date string"
             },
             "description": "Maximum UTC date of range in ISOT format. If None,\nopen ended range.\n"
+          },
+          {
+            "in": "query",
+            "name": "includeOriginalFile",
+            "required": false,
+            "default": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "If true, include the raw uploaded spectrum file\n(original_file_string) in each spectrum. Defaults to false;\nwhen omitted, that field is neither loaded nor returned.\n"
           }
         ],
         "responses": {
