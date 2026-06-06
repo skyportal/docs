@@ -1595,7 +1595,7 @@
                 "type": "object",
                 "properties": {
                   "download": {
-                    "type": "bool",
+                    "type": "boolean",
                     "description": "Download the results as a file\n"
                   },
                   "plot_kwargs": {
@@ -1612,11 +1612,23 @@
         },
         "responses": {
           "200": {
-            "description": "Requested analysis file",
+            "description": "Requested analysis product. For product_type=corner returns a PNG\nimage; for product_type=plots returns binary plot data; for\nproduct_type=results returns either a JSON file download or a\nJSON-wrapped result payload.\n",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object"
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -2977,11 +2989,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/Success"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/Success"
                 }
               }
             }
@@ -3837,13 +3845,7 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "integer",
-                              "description": "New default gcn tag ID"
-                            }
-                          }
+                          "$ref": "#/components/schemas/DefaultGcnTag"
                         }
                       }
                     }
@@ -7120,7 +7122,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -8314,7 +8331,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/GcnTag"
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -8438,7 +8470,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/GcnProperty"
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -8770,19 +8817,7 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "gcnevent_id": {
-                              "type": "integer",
-                              "description": "New GcnEvent ID"
-                            },
-                            "dateobs": {
-                              "type": "string"
-                            },
-                            "notice_id": {
-                              "type": "integer"
-                            }
-                          }
+                          "$ref": "#/components/schemas/GcnEvent"
                         }
                       }
                     }
@@ -9112,25 +9147,7 @@
                         "data": {
                           "type": "array",
                           "items": {
-                            "type": "object",
-                            "properties": {
-                              "id": {
-                                "type": "integer",
-                                "description": "the id of the confirmed_source_in_gcn"
-                              },
-                              "obj_id": {
-                                "type": "string",
-                                "description": "the source_id of the source"
-                              },
-                              "dateobs": {
-                                "type": "string",
-                                "description": "dateobs of the GCN evn"
-                              },
-                              "confirmed": {
-                                "type": "boolean",
-                                "description": "Whether the source is confirmed (True) or rejected (False)"
-                              }
-                            }
+                            "$ref": "#/components/schemas/SourcesConfirmedInGCN"
                           }
                         }
                       }
@@ -10140,7 +10157,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/LocalizationProperty"
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -10760,23 +10792,7 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "allOf": [
-                            {
-                              "$ref": "#/components/schemas/Group"
-                            },
-                            {
-                              "type": "object",
-                              "properties": {
-                                "users": {
-                                  "type": "array",
-                                  "items": {
-                                    "$ref": "#/components/schemas/User"
-                                  },
-                                  "description": "List of group users"
-                                }
-                              }
-                            }
-                          ]
+                          "$ref": "#/components/schemas/Group"
                         }
                       }
                     }
@@ -11427,9 +11443,44 @@
                 "type": "integer"
               }
             },
-            "description": "If provided, filter only spectra saved to one of these group IDs."
+            "description": "If provided, filter only spectra saved to one of these group IDs.\n"
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/MMADetectorSpectrum"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
       },
       "post": {
         "summary": "Upload an MMA Detector Spectrum",
@@ -11659,9 +11710,44 @@
                 "type": "integer"
               }
             },
-            "description": "If provided, filter only time_interval saved to one of these group IDs."
+            "description": "If provided, filter only time_interval saved to one of these group IDs.\n"
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/MMADetectorTimeInterval"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
       },
       "post": {
         "summary": "Upload an MMA Detector Time Interval",
@@ -14890,7 +14976,19 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/SingleObservationPlanRequest"
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -16090,13 +16188,7 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "integer",
-                              "description": "The id of the photomety_validation"
-                            }
-                          }
+                          "$ref": "#/components/schemas/PhotometryValidation"
                         }
                       }
                     }
@@ -16163,13 +16255,7 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "integer",
-                              "description": "The id of the modified photometry_validation"
-                            }
-                          }
+                          "$ref": "#/components/schemas/PhotometryValidation"
                         }
                       }
                     }
@@ -17193,14 +17279,9 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "sources": {
-                              "type": "array",
-                              "items": {
-                                "$ref": "#/components/schemas/Obj"
-                              }
-                            }
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Obj"
                           }
                         }
                       }
@@ -18278,11 +18359,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/Success"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/Success"
                 }
               }
             }
@@ -18552,19 +18629,7 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "obj_id": {
-                              "type": "string",
-                              "description": "The ID of the requested Obj"
-                            },
-                            "spectra": {
-                              "type": "array",
-                              "items": {
-                                "$ref": "#/components/schemas/Spectrum"
-                              }
-                            }
-                          }
+                          "$ref": "#/components/schemas/Spectrum"
                         }
                       }
                     }
@@ -19348,18 +19413,23 @@
                       "$ref": "#/components/schemas/Success"
                     },
                     {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "origin": {
-                            "type": "string"
-                          },
-                          "color": {
-                            "type": "number"
-                          },
-                          "abs_mag": {
-                            "type": "number"
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "origin": {
+                                "type": "string"
+                              },
+                              "color": {
+                                "type": "number"
+                              },
+                              "abs_mag": {
+                                "type": "number"
+                              }
+                            }
                           }
                         }
                       }
@@ -19569,17 +19639,29 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "ra": {
-                      "type": "number",
-                      "description": "Right ascension of the object"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
                     },
-                    "dec": {
-                      "type": "number",
-                      "description": "Declination of the object"
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "ra": {
+                              "type": "number",
+                              "description": "Right ascension of the object"
+                            },
+                            "dec": {
+                              "type": "number",
+                              "description": "Declination of the object"
+                            }
+                          }
+                        }
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -21556,7 +21638,38 @@
               "type": "string"
             }
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "source_exists": {
+                              "type": "boolean"
+                            },
+                            "message": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/source_exists": {
@@ -21594,7 +21707,38 @@
             },
             "description": "Radius for spatial filtering if ra & dec are provided (in decimal degrees)"
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "source_exists": {
+                              "type": "boolean"
+                            },
+                            "message": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/source_notifications": {
@@ -21855,7 +21999,39 @@
               "type": "integer"
             }
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/SpatialCatalog"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
       },
       "delete": {
         "summary": "Delete a Spatial Catalog",
@@ -21901,7 +22077,42 @@
         "description": "Retrieve all SpatialCatalogs",
         "tags": [
           "spatial catalogs"
-        ]
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/SpatialCatalog"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
       },
       "post": {
         "summary": "Ingest a Spatial Catalog",
@@ -22299,9 +22510,44 @@
             "schema": {
               "type": "string"
             },
-            "description": "Arrow-parseable date string (e.g. 2020-01-01). If provided,\nonly return sources that have comments after this time."
+            "description": "Arrow-parseable date string (e.g. 2020-01-01). If provided,\nonly return sources that have comments after this time.\n"
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Spectrum"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
       },
       "post": {
         "summary": "Upload spectrum",
@@ -22574,18 +22820,9 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "obj_id": {
-                              "type": "string",
-                              "description": "The ID of the requested Obj"
-                            },
-                            "spectra": {
-                              "type": "array",
-                              "items": {
-                                "$ref": "#/components/schemas/Spectrum"
-                              }
-                            }
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Spectrum"
                           }
                         }
                       }
@@ -22948,9 +23185,44 @@
             "schema": {
               "type": "string"
             },
-            "description": "Arrow-parseable date string (e.g. 2020-01-01). If provided,\nonly return sources that have comments after this time."
+            "description": "Arrow-parseable date string (e.g. 2020-01-01). If provided,\nonly return sources that have comments after this time.\n"
           }
-        ]
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Spectrum"
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
       },
       "post": {
         "summary": "Upload spectrum",
@@ -23172,18 +23444,9 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "obj_id": {
-                              "type": "string",
-                              "description": "The ID of the requested Obj"
-                            },
-                            "spectra": {
-                              "type": "array",
-                              "items": {
-                                "$ref": "#/components/schemas/Spectrum"
-                              }
-                            }
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Spectrum"
                           }
                         }
                       }
@@ -26431,7 +26694,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/PublicSourcePage"
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -26570,7 +26848,22 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/PublicRelease"
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
