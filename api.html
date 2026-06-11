@@ -26571,6 +26571,10 @@
                               "type": "string",
                               "description": "Datetime (UTC) when the weather was fetched\n"
                             },
+                            "weather_fetch_at": {
+                              "type": "string",
+                              "description": "Datetime (UTC) when the API call was made,\neven if no data was returned\n"
+                            },
                             "weather_link": {
                               "type": "string",
                               "description": "URL for more weather info"
@@ -26596,6 +26600,15 @@
                       }
                     }
                   ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
