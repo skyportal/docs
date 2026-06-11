@@ -175,7 +175,27 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SingleAllocation"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "allocation": {
+                              "$ref": "#/components/schemas/Allocation"
+                            },
+                            "totalMatches": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -1109,7 +1129,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SingleObjAnalysis"
+                  "$ref": "#/components/schemas/SingleObjAnalysisDetail"
                 }
               }
             }
@@ -1166,7 +1186,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ArrayOfObjAnalysiss"
+                  "$ref": "#/components/schemas/ArrayOfObjAnalysisDetails"
                 }
               }
             }
@@ -1365,7 +1385,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SingleObjAnalysis"
+                  "$ref": "#/components/schemas/SingleObjAnalysisDetail"
                 }
               }
             }
@@ -1422,7 +1442,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ArrayOfObjAnalysiss"
+                  "$ref": "#/components/schemas/ArrayOfObjAnalysisDetails"
                 }
               }
             }
@@ -4928,7 +4948,36 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ArrayOfFollowupRequests"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "followup_requests": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/FollowupRequest"
+                              }
+                            },
+                            "totalMatches": {
+                              "type": "integer"
+                            },
+                            "pageNumber": {
+                              "type": "integer"
+                            },
+                            "numPerPage": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -5387,7 +5436,45 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ArrayOfGalaxys"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "galaxies": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/Galaxy"
+                              }
+                            },
+                            "totalMatches": {
+                              "type": "integer"
+                            },
+                            "sortBy": {
+                              "type": "string"
+                            },
+                            "sortOrder": {
+                              "type": "string"
+                            },
+                            "page": {
+                              "type": "integer"
+                            },
+                            "numPerPage": {
+                              "type": "integer"
+                            },
+                            "geojson": {
+                              "type": "object"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -7310,7 +7397,30 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ArrayOfEarthquakeEvents"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "events": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/EarthquakeEvent"
+                              }
+                            },
+                            "totalMatches": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -8341,7 +8451,7 @@
                         "data": {
                           "type": "array",
                           "items": {
-                            "$ref": "#/components/schemas/GcnTag"
+                            "type": "string"
                           }
                         }
                       }
@@ -13635,7 +13745,56 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ArrayOfExecutedObservations"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "observations": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/ExecutedObservation"
+                              }
+                            },
+                            "totalMatches": {
+                              "type": "integer"
+                            },
+                            "geojson": {
+                              "type": "array",
+                              "items": {
+                                "type": "object"
+                              },
+                              "nullable": true
+                            },
+                            "field_ids": {
+                              "type": "array",
+                              "items": {
+                                "type": "integer"
+                              },
+                              "nullable": true
+                            },
+                            "probability": {
+                              "type": "number",
+                              "nullable": true
+                            },
+                            "area": {
+                              "type": "number",
+                              "nullable": true
+                            },
+                            "min_observations_per_field": {
+                              "type": "integer",
+                              "nullable": true
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -14682,7 +14841,30 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ArrayOfObservationPlanRequests"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "requests": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/ObservationPlanRequest"
+                              }
+                            },
+                            "totalMatches": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -25092,7 +25274,39 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ArrayOfSharingServiceSubmissions"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "sharing_service_id": {
+                              "type": "integer"
+                            },
+                            "submissions": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/SharingServiceSubmission"
+                              }
+                            },
+                            "pageNumber": {
+                              "type": "integer"
+                            },
+                            "numPerPage": {
+                              "type": "integer"
+                            },
+                            "totalMatches": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -56855,6 +57069,108 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/ObjAnalysis"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ObjAnalysisDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Unique identifier for the analysis."
+          },
+          "obj_id": {
+            "type": "string",
+            "description": "ID of the Obj this analysis was run on."
+          },
+          "analysis_service_id": {
+            "type": "integer",
+            "description": "ID of the AnalysisService used to produce this analysis."
+          },
+          "analysis_service_name": {
+            "type": "string",
+            "description": "Display name of the AnalysisService, injected by the handler."
+          },
+          "analysis_service_description": {
+            "type": "string",
+            "description": "Description of the AnalysisService, injected by the handler."
+          },
+          "num_plots": {
+            "type": "integer",
+            "description": "Number of plots in this analysis's data. Single-analysis responses only."
+          },
+          "groups": {
+            "type": "array",
+            "description": "Groups with access to this analysis.",
+            "items": {
+              "type": "object"
+            }
+          },
+          "filename": {
+            "type": "string",
+            "description": "Server-side filename for the analysis payload. Present only when ``includeFilename=true``."
+          },
+          "data": {
+            "description": "Raw analysis payload (results/plots/inference_data). Present only when ``includeAnalysisData=true`` on single-analysis requests.",
+            "type": "object"
+          },
+          "analysis_parameters": {
+            "description": "Parameters passed to the analysis service (sensitive keys stripped).",
+            "type": "object"
+          },
+          "status": {
+            "type": "string",
+            "description": "Current status of the analysis run."
+          },
+          "status_message": {
+            "type": "string",
+            "description": "Human-readable status detail."
+          }
+        },
+        "additionalProperties": false
+      },
+      "SingleObjAnalysisDetail": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ObjAnalysisDetail"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfObjAnalysisDetails": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ObjAnalysisDetail"
             }
           }
         },
