@@ -343,6 +343,7 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.AccessibleIfUserMatches.select_accessible_rows"><code class="docutils literal notranslate"><span class="pre">AccessibleIfUserMatches.select_accessible_rows()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.AsyncVerifiedSession"><code class="docutils literal notranslate"><span class="pre">AsyncVerifiedSession()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.ComposedAccessControl"><code class="docutils literal notranslate"><span class="pre">ComposedAccessControl</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.ComposedAccessControl.query_accessible_rows"><code class="docutils literal notranslate"><span class="pre">ComposedAccessControl.query_accessible_rows()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.ComposedAccessControl.select_accessible_rows"><code class="docutils literal notranslate"><span class="pre">ComposedAccessControl.select_accessible_rows()</span></code></a></li>
@@ -518,6 +519,7 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.UserRole.read"><code class="docutils literal notranslate"><span class="pre">UserRole.read</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.async_bulk_verify"><code class="docutils literal notranslate"><span class="pre">async_bulk_verify()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.bulk_verify"><code class="docutils literal notranslate"><span class="pre">bulk_verify()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.init_db"><code class="docutils literal notranslate"><span class="pre">init_db()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.join_model"><code class="docutils literal notranslate"><span class="pre">join_model()</span></code></a></li>
@@ -798,6 +800,13 @@ the mapped class directly and returns mapped instances.</p>
 </dl>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="baselayer.app.models.AsyncVerifiedSession">
+<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">AsyncVerifiedSession</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_or_token</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.AsyncVerifiedSession" title="Link to this definition">#</a></dt>
+<dd><p>Async equivalent of <cite>VerifiedSession()</cite>. Yields an
+<cite>_AsyncVerifiedSession</cite> bound to the configured async engine.</p>
 </dd></dl>
 
 <dl class="py class">
@@ -2917,6 +2926,13 @@ the mapped class directly and returns mapped instances.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="baselayer.app.models.async_bulk_verify">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">async_bulk_verify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accessor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.async_bulk_verify" title="Link to this definition">#</a></dt>
+<dd><p>Async counterpart of <cite>bulk_verify</cite>. Runs the RLS leak check inside
+the supplied async session rather than the global sync <cite>DBSession</cite>.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="baselayer.app.models.bulk_verify">
 <span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">bulk_verify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mode</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accessor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.bulk_verify" title="Link to this definition">#</a></dt>
 <dd><p>Vectorized permission check for a heterogeneous set of records. If an
@@ -3085,6 +3101,7 @@ SkyPortal database.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.AccessibleIfUserMatches.select_accessible_rows"><code class="docutils literal notranslate"><span class="pre">AccessibleIfUserMatches.select_accessible_rows()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.AsyncVerifiedSession"><code class="docutils literal notranslate"><span class="pre">AsyncVerifiedSession()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.ComposedAccessControl"><code class="docutils literal notranslate"><span class="pre">ComposedAccessControl</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.ComposedAccessControl.query_accessible_rows"><code class="docutils literal notranslate"><span class="pre">ComposedAccessControl.query_accessible_rows()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.ComposedAccessControl.select_accessible_rows"><code class="docutils literal notranslate"><span class="pre">ComposedAccessControl.select_accessible_rows()</span></code></a></li>
@@ -3260,6 +3277,7 @@ SkyPortal database.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.UserRole.read"><code class="docutils literal notranslate"><span class="pre">UserRole.read</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.async_bulk_verify"><code class="docutils literal notranslate"><span class="pre">async_bulk_verify()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.bulk_verify"><code class="docutils literal notranslate"><span class="pre">bulk_verify()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.init_db"><code class="docutils literal notranslate"><span class="pre">init_db()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.join_model"><code class="docutils literal notranslate"><span class="pre">join_model()</span></code></a></li>
