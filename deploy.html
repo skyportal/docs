@@ -332,6 +332,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-containers">Starting containers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initializing-the-database">Initializing the database</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-the-deployment-configuration">Customizing the deployment configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-pooling">Connection pooling</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-problems">Handling problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sncosmo-bandpass-problems">sncosmo bandpass problems</a></li>
 </ul>
@@ -428,6 +429,24 @@ The database is stored and persisted in a local docker volume called <code class
 </pre></div>
 </div>
 <p><strong>Note: Elements of the configuration used to customize the frontend need to be set in the configuration file used to build the image (<code class="docutils literal notranslate"><span class="pre">docker.yaml</span></code>), as they are used to build the web application’s bundle which only happens once at build time, and will not take effect if changed at runtime.</strong></p>
+</section>
+<section id="connection-pooling">
+<h2>Connection pooling<a class="headerlink" href="#connection-pooling" title="Link to this heading">#</a></h2>
+<p>Each app process and microservice opens its own SQLAlchemy pool, so a busy async deployment can exhaust Postgres <code class="docutils literal notranslate"><span class="pre">max_connections</span></code>. A transaction-mode pooler (pgbouncer or pgcat) between SkyPortal and Postgres multiplexes all of these onto a small, bounded backend pool.</p>
+<p>Enable it in <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">database</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432</span><span class="w">        </span><span class="c1"># real Postgres</span>
+<span class="w">  </span><span class="nt">pooler</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">host</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">localhost</span>
+<span class="w">    </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6432</span><span class="w">      </span><span class="c1"># pooler</span>
+<span class="w">    </span><span class="nt">pool_mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">transaction</span>
+<span class="w">    </span><span class="nt">default_pool_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">25</span>
+</pre></div>
+</div>
+<p>When enabled, the app and services connect to the pooler instead of Postgres directly (setup and migrations still connect directly). The bundled <code class="docutils literal notranslate"><span class="pre">pgbouncer</span></code> service starts automatically; alternatively point <code class="docutils literal notranslate"><span class="pre">pooler.host</span></code>/<code class="docutils literal notranslate"><span class="pre">pooler.port</span></code> at an externally managed pgbouncer/pgcat. The design is pooler-agnostic — SkyPortal only needs the pooler’s host/port.</p>
+<p>Because transaction pooling hands out a different backend connection per transaction, SkyPortal disables psycopg3 server-side prepared statements when the pooler is enabled. The bundled pgbouncer <code class="docutils literal notranslate"><span class="pre">auth_type</span></code> defaults to <code class="docutils literal notranslate"><span class="pre">md5</span></code> (or <code class="docutils literal notranslate"><span class="pre">trust</span></code> without a password); adjust <code class="docutils literal notranslate"><span class="pre">services/pgbouncer/pgbouncer.ini.template</span></code> to match your Postgres auth (e.g. <code class="docutils literal notranslate"><span class="pre">scram-sha-256</span></code> or <code class="docutils literal notranslate"><span class="pre">auth_query</span></code>).</p>
 </section>
 <section id="handling-problems">
 <h2>Handling problems<a class="headerlink" href="#handling-problems" title="Link to this heading">#</a></h2>
@@ -527,6 +546,7 @@ The database is stored and persisted in a local docker volume called <code class
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-containers">Starting containers</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initializing-the-database">Initializing the database</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-the-deployment-configuration">Customizing the deployment configuration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-pooling">Connection pooling</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#handling-problems">Handling problems</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sncosmo-bandpass-problems">sncosmo bandpass problems</a></li>
 </ul>
