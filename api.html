@@ -12381,7 +12381,7 @@
     "/api/instrument/{instrument_id}/fields": {
       "delete": {
         "summary": "Delete an instrument's fields",
-        "description": "<b>Permission(s) required:</b> <em>Delete instrument (or System admin)</em><br><br>Delete fields associated with an instrument",
+        "description": "<b>Permission(s) required:</b> <em>Manage instruments (or System admin)</em><br><br>Delete fields associated with an instrument",
         "tags": [
           "instruments"
         ],
@@ -12676,6 +12676,15 @@
           },
           {
             "in": "query",
+            "name": "ignoreCache",
+            "nullable": true,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Boolean indicating whether to ignore field caching. Defaults to\nfalse.\n"
+          },
+          {
+            "in": "query",
             "name": "localizationDateobs",
             "schema": {
               "type": "string"
@@ -12697,6 +12706,14 @@
               "type": "number"
             },
             "description": "Cumulative probability up to which to include fields.\nDefaults to 0.95.\n"
+          },
+          {
+            "in": "query",
+            "name": "airmassTime",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Time to use for airmass calculation in\nISO 8601 format (`YYYY-MM-DDTHH:MM:SS.sss`).\nDefaults to localizationDateobs if not supplied.\n"
           }
         ],
         "responses": {
@@ -12780,7 +12797,7 @@
       },
       "delete": {
         "summary": "Delete an instrument",
-        "description": "<b>Permission(s) required:</b> <em>Delete instrument (or System admin)</em><br><br>Delete an instrument",
+        "description": "<b>Permission(s) required:</b> <em>Manage instruments (or System admin)</em><br><br>Delete an instrument",
         "tags": [
           "instruments"
         ],
@@ -12855,71 +12872,12 @@
           },
           {
             "in": "query",
-            "name": "includeGeoJSON",
-            "nullable": true,
-            "schema": {
-              "type": "boolean"
-            },
-            "description": "Boolean indicating whether to include associated GeoJSON. Defaults to\nfalse.\n"
-          },
-          {
-            "in": "query",
-            "name": "includeGeoJSONSummary",
-            "nullable": true,
-            "schema": {
-              "type": "boolean"
-            },
-            "description": "Boolean indicating whether to include associated GeoJSON summary bounding box. Defaults to\nfalse.\n"
-          },
-          {
-            "in": "query",
             "name": "includeRegion",
             "nullable": true,
             "schema": {
               "type": "boolean"
             },
             "description": "Boolean indicating whether to include associated DS9 region. Defaults to\nfalse.\n"
-          },
-          {
-            "in": "query",
-            "name": "ignoreCache",
-            "nullable": true,
-            "schema": {
-              "type": "boolean"
-            },
-            "description": "Boolean indicating whether to ignore field caching. Defaults to\nfalse.\n"
-          },
-          {
-            "in": "query",
-            "name": "localizationDateobs",
-            "schema": {
-              "type": "string"
-            },
-            "description": "Include fields within a given localization.\nEvent time in ISO 8601 format (`YYYY-MM-DDTHH:MM:SS.sss`).\nEach localization is associated with a specific GCNEvent by\nthe date the event happened, and this date is used as a unique\nidentifier. It can be therefore found as Localization.dateobs,\nqueried from the /api/localization endpoint or dateobs in the\nGcnEvent page table.\n"
-          },
-          {
-            "in": "query",
-            "name": "localizationName",
-            "schema": {
-              "type": "string"
-            },
-            "description": "Name of localization / skymap to use.\nCan be found in Localization.localization_name queried from\n/api/localization endpoint or skymap name in GcnEvent page\ntable.\n"
-          },
-          {
-            "in": "query",
-            "name": "localizationCumprob",
-            "schema": {
-              "type": "number"
-            },
-            "description": "Cumulative probability up to which to include fields.\nDefaults to 0.95.\n"
-          },
-          {
-            "in": "query",
-            "name": "airmassTime",
-            "schema": {
-              "type": "string"
-            },
-            "description": "Time to use for airmass calculation in\nISO 8601 format (`YYYY-MM-DDTHH:MM:SS.sss`).\nDefaults to localizationDateobs if not supplied.\n"
           }
         ],
         "responses": {
@@ -12945,7 +12903,7 @@
       },
       "post": {
         "summary": "Add an instrument",
-        "description": "<b>Permission(s) required:</b> <em>Manage instruments (or System admin)</em><br><br>Add a new instrument",
+        "description": "Add a new instrument",
         "tags": [
           "instruments"
         ],
@@ -24693,7 +24651,7 @@
       },
       "delete": {
         "summary": "Delete a telescope",
-        "description": "<b>Permission(s) required:</b> <em>Delete telescope (or System admin)</em><br><br>Delete a telescope",
+        "description": "<b>Permission(s) required:</b> <em>Manage telescopes (or System admin)</em><br><br>Delete a telescope",
         "tags": [
           "telescopes"
         ],
@@ -24801,7 +24759,7 @@
       },
       "post": {
         "summary": "Create a telescope",
-        "description": "<b>Permission(s) required:</b> <em>Manage telescopes (or System admin)</em><br><br>Create telescopes",
+        "description": "Create telescopes",
         "tags": [
           "telescopes"
         ],
