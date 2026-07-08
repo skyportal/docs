@@ -500,11 +500,24 @@ how to install them on MacOS and Debian-based systems below.</p>
 </section>
 <section id="checking-for-port-availability">
 <h3>Checking for Port Availability<a class="headerlink" href="#checking-for-port-availability" title="Link to this heading">#</a></h3>
-<p>SkyPortal defaults to using port 5000. However, this port may already be in use by MacPorts or other services. To verify if port 5000 is available, use the <code class="docutils literal notranslate"><span class="pre">lsof</span></code> command in the terminal.</p>
+<p>SkyPortal defaults to using port 5000. However, this port may already be in use on MacOS (e.g., by AirPlay Receiver, MacPorts, or other services). To verify port availability, use the <code class="docutils literal notranslate"><span class="pre">lsof</span></code> command in the terminal:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lsof</span> <span class="o">-</span><span class="n">i</span> <span class="p">:</span><span class="mi">5000</span>
 </pre></div>
 </div>
-<p>If the command outputs information about a service, it means that port 5000 is already in use. In this case, you may need to configure SkyPortal to use a different port (in <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>, and if you intend to run the unit tests, then also in <code class="docutils literal notranslate"><span class="pre">test_config.yaml</span></code>).</p>
+<p>If the command outputs information about a service, it means that port 5000 is already in use. In this case, you may need to configure SkyPortal to use a different port by updating the following lines in <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">server</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5001</span><span class="w">  </span><span class="c1"># Change from 5000 to 5001</span>
+
+<span class="nt">ports</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5001</span><span class="w">  </span><span class="c1"># Change from 5000 to 5001</span>
+
+<span class="nt">docs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">servers</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://localhost:5001</span><span class="w">  </span><span class="c1"># Change from 5000 to 5001</span>
+</pre></div>
+</div>
+<p>Before switching, verify that your chosen alternative port is itself available (e.g., <code class="docutils literal notranslate"><span class="pre">lsof</span> <span class="pre">-i</span> <span class="pre">:5001</span></code>).</p>
+<p>If you plan to run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">load_demo_data</span></code> or the unit tests, also update the port in <code class="docutils literal notranslate"><span class="pre">test_config.yaml</span></code> to match. Port mismatches between the two configs can cause 403 Forbidden errors during demo data loading.</p>
 </section>
 </section>
 <section id="installation-debian-based-linux-and-wsl">
@@ -572,7 +585,7 @@ how to install them on MacOS and Debian-based systems below.</p>
 happen once).</p></li>
 <li><p>Copy <code class="docutils literal notranslate"><span class="pre">config.yaml.defaults</span></code> to <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>.</p></li>
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">log</span></code> to monitor the service and, in a separate window, <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code> to start the server.</p></li>
-<li><p>Direct your browser to <code class="docutils literal notranslate"><span class="pre">http://localhost:5000</span></code>.</p></li>
+<li><p>Direct your browser to <code class="docutils literal notranslate"><span class="pre">http://localhost:5000</span></code> (or <code class="docutils literal notranslate"><span class="pre">http://localhost:&lt;port&gt;</span></code> if you changed the default port in <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>).</p></li>
 <li><p>If you want some test data to play with, run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">load_demo_data</span></code> (do this while the server is running!).</p></li>
 <li><p>Change users by navigating to <code class="docutils literal notranslate"><span class="pre">http://localhost:5000/become_user/&lt;#&gt;</span></code> where # is a number from 1-5.
 Different users have different privileges and can see more or less of the demo data.</p></li>
