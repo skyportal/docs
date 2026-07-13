@@ -523,6 +523,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.bulk_verify"><code class="docutils literal notranslate"><span class="pre">bulk_verify()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.init_db"><code class="docutils literal notranslate"><span class="pre">init_db()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.join_model"><code class="docutils literal notranslate"><span class="pre">join_model()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.primary_key_keys"><code class="docutils literal notranslate"><span class="pre">primary_key_keys()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entity-relationship-diagram">Entity Relationship Diagram</a></li>
@@ -2986,7 +2987,7 @@ Default 3600.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="baselayer.app.models.join_model">
-<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">join_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">join_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fk_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fk_2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;class</span> <span class="pre">'sqlalchemy.orm.decl_api.Base'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlaps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.join_model" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">join_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">join_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fk_1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fk_2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'id'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">&lt;class</span> <span class="pre">'sqlalchemy.orm.decl_api.Base'&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlaps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">index_created_at</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">composite_pk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.join_model" title="Link to this definition">#</a></dt>
 <dd><p>Helper function to create a join table for a many-to-many relationship.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -3017,6 +3018,12 @@ overlaps=f”{table_1}, {table_2}”. If any additional overalapping
 relationships or columns need to be added, they can be given as
 a string or list of strings.</p>
 </dd>
+<dt><strong>index_created_at</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to index the auto-added <code class="docutils literal notranslate"><span class="pre">created_at</span></code> column. Defaults to True.</p>
+</dd>
+<dt><strong>composite_pk</strong><span class="classifier">bool, optional</span></dt><dd><p>If True, use <code class="docutils literal notranslate"><span class="pre">(column_1,</span> <span class="pre">column_2)</span></code> as the primary key instead of a
+surrogate <code class="docutils literal notranslate"><span class="pre">id</span></code> column; the PK’s unique index replaces the forward index.
+Defaults to False.</p>
+</dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -3026,6 +3033,18 @@ a string or list of strings.</p>
 </dl>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="baselayer.app.models.primary_key_keys">
+<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">primary_key_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.primary_key_keys" title="Link to this definition">#</a></dt>
+<dd><p>Return the attribute keys of <code class="docutils literal notranslate"><span class="pre">cls</span></code>’s primary key columns.</p>
+<p>Most mapped classes use a single surrogate <code class="docutils literal notranslate"><span class="pre">id</span></code>, but join tables may use
+a composite primary key (e.g. <code class="docutils literal notranslate"><span class="pre">group_id</span></code> + <code class="docutils literal notranslate"><span class="pre">photometr_id</span></code>). Access
+control joins on the primary key, so deriving it here keeps that logic
+PK-agnostic instead of assuming a column named <code class="docutils literal notranslate"><span class="pre">id</span></code>.</p>
+<p>Uses <code class="docutils literal notranslate"><span class="pre">.mapper.primary_key</span></code> so it works for both mapped classes and aliased
+classes (an <code class="docutils literal notranslate"><span class="pre">AliasedInsp</span></code> has no <code class="docutils literal notranslate"><span class="pre">primary_key</span></code> of its own).</p>
 </dd></dl>
 
 </section>
@@ -3281,6 +3300,7 @@ SkyPortal database.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.bulk_verify"><code class="docutils literal notranslate"><span class="pre">bulk_verify()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.init_db"><code class="docutils literal notranslate"><span class="pre">init_db()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.join_model"><code class="docutils literal notranslate"><span class="pre">join_model()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.primary_key_keys"><code class="docutils literal notranslate"><span class="pre">primary_key_keys()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entity-relationship-diagram">Entity Relationship Diagram</a></li>
