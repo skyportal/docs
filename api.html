@@ -413,6 +413,77 @@
           }
         }
       },
+      "patch": {
+        "summary": "Update a default analysis",
+        "description": "Partial update of a default analysis. Any of default_analysis_parameters,\nsource_filter, group_ids, daily_limit, show_parameters, show_plots,\nshow_corner may be supplied; omitted fields are left unchanged.\n",
+        "tags": [
+          "default analyses"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "analysis_service_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "default_analysis_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "default_analysis_parameters": {
+                    "type": "object"
+                  },
+                  "source_filter": {
+                    "type": "object"
+                  },
+                  "daily_limit": {
+                    "type": "integer"
+                  },
+                  "group_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
       "delete": {
         "summary": "Delete a default analysis",
         "description": "Delete a default analysis",
