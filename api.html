@@ -19378,6 +19378,22 @@
           },
           {
             "in": "query",
+            "name": "mag_min",
+            "schema": {
+              "type": "number"
+            },
+            "description": "Brightest (smallest) offset-star magnitude to allow. Defaults to the\nfacility value when omitted.\n"
+          },
+          {
+            "in": "query",
+            "name": "mag_limit",
+            "schema": {
+              "type": "number"
+            },
+            "description": "Faintest (largest) offset-star magnitude to allow. Defaults to the\nfacility value when omitted.\n"
+          },
+          {
+            "in": "query",
             "name": "as_json",
             "schema": {
               "type": "boolean"
@@ -19431,6 +19447,40 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/finder_chart/facilities": {
+      "get": {
+        "summary": "Get finding chart facility parameters",
+        "description": "Retrieve the per-facility default parameters used to generate finding\ncharts (offset-star magnitude range, search radius, minimum\nseparation). Used by the frontend to populate the finder-chart form.\n",
+        "tags": [
+          "sources",
+          "finding chart"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "description": "Object keyed by facility name; each value holds\nradius_degrees, mag_limit (faint end), mag_min\n(bright end), and min_sep_arcsec."
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
