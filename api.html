@@ -24851,6 +24851,195 @@
         }
       }
     },
+    "/api/teams/{team_id}": {
+      "get": {
+        "summary": "Get a team",
+        "description": "Retrieve a team, its groups, and its derived member roster",
+        "tags": [
+          "teams"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "team_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a team",
+        "description": "<b>Permission(s) required:</b> <em>Manage teams (or System admin)</em><br><br>Update a team's fields and/or its set of groups. When `group_ids` is\nprovided it replaces the team's groups; the user must be an admin of\neach group added or removed.\n",
+        "tags": [
+          "teams"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "team_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a team",
+        "description": "<b>Permission(s) required:</b> <em>Manage teams (or System admin)</em><br><br>Delete a team (does not affect its groups or their data)",
+        "tags": [
+          "teams"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "team_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/teams": {
+      "get": {
+        "summary": "Get all accessible teams",
+        "description": "Retrieve all teams the current user can access",
+        "tags": [
+          "teams"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a new team",
+        "description": "<b>Permission(s) required:</b> <em>Manage teams (or System admin)</em><br><br>Create a team from a set of existing groups. The current user must be\nan admin of each group added to the team.\n",
+        "tags": [
+          "teams"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "group_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/telescope/{telescope_id}": {
       "get": {
         "summary": "Get a telescope",
@@ -39244,6 +39433,13 @@
               "$ref": "#/components/schemas/Filter"
             }
           },
+          "teams": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/Team"
+            }
+          },
           "shifts": {
             "type": "array",
             "readOnly": true,
@@ -41911,6 +42107,13 @@
             "readOnly": true,
             "items": {
               "$ref": "#/components/schemas/Filter"
+            }
+          },
+          "teams": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/Team"
             }
           },
           "shifts": {
@@ -45033,6 +45236,164 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GroupTaxonomyNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "GroupTeam": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Group"
+              }
+            ],
+            "readOnly": true
+          },
+          "team": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Team"
+              }
+            ],
+            "readOnly": true
+          },
+          "group_id": {
+            "type": "integer"
+          },
+          "team_id": {
+            "type": "integer"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "group_id",
+          "team_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGroupTeam": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GroupTeam"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGroupTeams": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupTeam"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "GroupTeamNoID": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Group"
+              }
+            ],
+            "readOnly": true
+          },
+          "team": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Team"
+              }
+            ],
+            "readOnly": true
+          },
+          "group_id": {
+            "type": "integer"
+          },
+          "team_id": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "group_id",
+          "team_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGroupTeamNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GroupTeamNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGroupTeamNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupTeamNoID"
             }
           }
         },
@@ -73388,6 +73749,200 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TaxonomyNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "Team": {
+        "type": "object",
+        "properties": {
+          "groups": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/Group"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the team."
+          },
+          "nickname": {
+            "type": "string",
+            "description": "Short team nickname.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Longer description of the team.",
+            "nullable": true
+          },
+          "primary_color": {
+            "type": "string",
+            "description": "Hex color used to theme the app banner when this team is active.",
+            "nullable": true
+          },
+          "secondary_color": {
+            "type": "string",
+            "description": "Hex accent color for this team's theme.",
+            "nullable": true
+          },
+          "logo_url": {
+            "type": "string",
+            "description": "URL of a logo shown in place of the SkyPortal logo when active.",
+            "nullable": true
+          },
+          "background_url": {
+            "type": "string",
+            "description": "URL of a background image for this team.",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "SingleTeam": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Team"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfTeams": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Team"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "TeamNoID": {
+        "type": "object",
+        "properties": {
+          "groups": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/Group"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the team."
+          },
+          "nickname": {
+            "type": "string",
+            "description": "Short team nickname.",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "description": "Longer description of the team.",
+            "nullable": true
+          },
+          "primary_color": {
+            "type": "string",
+            "description": "Hex color used to theme the app banner when this team is active.",
+            "nullable": true
+          },
+          "secondary_color": {
+            "type": "string",
+            "description": "Hex accent color for this team's theme.",
+            "nullable": true
+          },
+          "logo_url": {
+            "type": "string",
+            "description": "URL of a logo shown in place of the SkyPortal logo when active.",
+            "nullable": true
+          },
+          "background_url": {
+            "type": "string",
+            "description": "URL of a background image for this team.",
+            "nullable": true
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "SingleTeamNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/TeamNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfTeamNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TeamNoID"
             }
           }
         },
