@@ -10418,6 +10418,85 @@
         }
       }
     },
+    "/api/phot_stats/aggregate": {
+      "get": {
+        "summary": "Bulk photometry statistics for plotting",
+        "description": "Return a compact set of PhotStat scalar fields across many accessible\nsources, optionally down-selected by classification, for bulk\nvisualization (e.g. plotting peak magnitude against rise rate for all\nsources classified as SN Ia). Each source is colored by its\nhighest-probability classification. Call without xField/yField to get\nthe list of plottable fields only.\n",
+        "tags": [
+          "photometry"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "xField",
+            "schema": {
+              "type": "string"
+            },
+            "description": "PhotStat field for the x axis (see the returned `fields`)."
+          },
+          {
+            "in": "query",
+            "name": "yField",
+            "schema": {
+              "type": "string"
+            },
+            "description": "PhotStat field for the y axis."
+          },
+          {
+            "in": "query",
+            "name": "zField",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Optional PhotStat field for a third (z) axis."
+          },
+          {
+            "in": "query",
+            "name": "classifications",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated classification names to down-select sources\n(matches any). Omit to include all accessible sources.\n"
+          },
+          {
+            "in": "query",
+            "name": "classificationProbThreshold",
+            "schema": {
+              "type": "number"
+            },
+            "description": "Only count classifications at or above this probability."
+          },
+          {
+            "in": "query",
+            "name": "maxMatches",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Maximum number of points to return (default 20000, capped at\n100000). If more match, the response is truncated.\n"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/localization/tags": {
       "get": {
         "summary": "Get all Localization tags",
@@ -73558,12 +73637,16 @@
               "dr8",
               "ls",
               "ps1",
+              "sm",
+              "hst",
+              "chandra",
+              "jwst",
               "new_gz",
               "ref_gz",
               "sub_gz",
               null
             ],
-            "maxLength": 6,
+            "maxLength": 7,
             "description": "Thumbnail type (e.g., ref, new, sub, ls, ps1, ...)",
             "nullable": true,
             "type": "string"
@@ -73667,12 +73750,16 @@
               "dr8",
               "ls",
               "ps1",
+              "sm",
+              "hst",
+              "chandra",
+              "jwst",
               "new_gz",
               "ref_gz",
               "sub_gz",
               null
             ],
-            "maxLength": 6,
+            "maxLength": 7,
             "description": "Thumbnail type (e.g., ref, new, sub, ls, ps1, ...)",
             "nullable": true,
             "type": "string"
