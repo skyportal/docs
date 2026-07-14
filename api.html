@@ -2167,6 +2167,83 @@
         }
       }
     },
+    "/api/candidates/bulk_delete": {
+      "post": {
+        "summary": "Bulk-delete old, unsaved candidates",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Delete objects that appear as candidates, are not currently saved as\nan active source in any group, and whose most recent candidate\n`passed_at` is older than `maxAgeMonths`. Deleting the object cascades\nto its candidates, photometry, annotations, thumbnails, etc. System\nadmin only. Intended to be driven periodically via the Recurring API.\n",
+        "tags": [
+          "candidates"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "maxAgeMonths": {
+                    "type": "integer",
+                    "description": "Delete objects whose most recent candidate `passed_at` is\nolder than this many months. Defaults to 6.\n"
+                  },
+                  "batchSize": {
+                    "type": "integer",
+                    "description": "Maximum number of objects to delete in this call (deleted\noldest-first). Defaults to 1000.\n"
+                  },
+                  "dryRun": {
+                    "type": "boolean",
+                    "description": "If true, only report how many objects would be deleted,\nwithout deleting anything. Defaults to false.\n"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "deleted": {
+                              "type": "integer",
+                              "description": "Number of objects deleted in this call."
+                            },
+                            "remaining": {
+                              "type": "integer",
+                              "description": "Number of matching objects still to delete."
+                            },
+                            "dryRun": {
+                              "type": "boolean"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/candidates/{obj_id}": {
       "head": {
         "summary": "Check if a Candidate exists",
