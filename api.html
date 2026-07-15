@@ -74227,7 +74227,8 @@
           },
           "is_grayscale": {
             "type": "boolean",
-            "description": "Boolean indicating whether the thumbnail is (mostly) grayscale or not."
+            "description": "Whether the thumbnail is (mostly) grayscale. NULL until a remote (public_url-only) thumbnail is classified by the thumbnail_queue service.",
+            "nullable": true
           },
           "id": {
             "type": "integer",
@@ -74340,7 +74341,8 @@
           },
           "is_grayscale": {
             "type": "boolean",
-            "description": "Boolean indicating whether the thumbnail is (mostly) grayscale or not."
+            "description": "Whether the thumbnail is (mostly) grayscale. NULL until a remote (public_url-only) thumbnail is classified by the thumbnail_queue service.",
+            "nullable": true
           }
         },
         "required": [
