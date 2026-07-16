@@ -45834,6 +45834,11 @@
             "description": "TNS API ID for this instrument",
             "nullable": true
           },
+          "across_id": {
+            "type": "string",
+            "description": "NASA ACROSS instrument UUID, used to route visibility queries to the ACROSS calculator. See https://across.sciencecloud.nasa.gov",
+            "nullable": true
+          },
           "region": {
             "type": "string",
             "description": "Instrument astropy.regions representation.",
@@ -46734,6 +46739,11 @@
           "tns_id": {
             "type": "integer",
             "description": "TNS API ID for this instrument",
+            "nullable": true
+          },
+          "across_id": {
+            "type": "string",
+            "description": "NASA ACROSS instrument UUID, used to route visibility queries to the ACROSS calculator. See https://across.sciencecloud.nasa.gov",
             "nullable": true
           },
           "region": {
