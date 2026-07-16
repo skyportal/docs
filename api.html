@@ -19967,6 +19967,56 @@
                     "type": "string",
                     "required": true,
                     "description": "Arrow-parseable date string (e.g. 2020-01-01).\nIf provided, filter by GcnEvent.dateobs <= startDate.\n"
+                  },
+                  "probability": {
+                    "type": "number",
+                    "description": "Integrated probability contour to crossmatch within (default 0.95)."
+                  },
+                  "beforeFirstDetection": {
+                    "type": "boolean",
+                    "description": "If true, only crossmatch GCN events at or before the source's\nfirst detection.\n"
+                  },
+                  "gcnTagKeep": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Only crossmatch events having any of these GCN tags."
+                  },
+                  "gcnTagRemove": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Exclude events having any of these GCN tags."
+                  },
+                  "localizationTagKeep": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Only crossmatch events with a localization having any of these tags."
+                  },
+                  "localizationTagRemove": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Exclude events with a localization having any of these tags."
+                  },
+                  "gcnPropertiesFilter": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "GCN property filters, each \"name\" or \"name:value:op\"\n(op in lt,le,eq,ne,ge,gt).\n"
+                  },
+                  "localizationPropertiesFilter": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Localization property filters, same format as gcnPropertiesFilter."
                   }
                 }
               }
