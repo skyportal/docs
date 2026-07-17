@@ -2365,6 +2365,159 @@
         }
       }
     },
+    "/api/brokers/{broker_id}/alerts/{alert_id}/photometry": {
+      "get": {
+        "summary": "Display photometry for an object (DB + on-demand broker)",
+        "description": "Return an object's photometry for display: the persisted,\naccess-controlled photometry from the database merged with photometry\nfetched on demand from the broker (deduped by instrument/filter/mjd,\nso the broker only augments saved points). The broker half is held in\na read-through cache keyed by the object and the requester's access\nscope, and is never written to the database. Returns a bare list of\npoints, matching GET /sources/{id}/photometry.\n",
+        "tags": [
+          "brokers",
+          "photometry"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "alert_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Object identifier (objectId) to fetch photometry for."
+          },
+          {
+            "in": "query",
+            "name": "survey",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "format",
+            "schema": {
+              "type": "string",
+              "default": "mag"
+            }
+          },
+          {
+            "in": "query",
+            "name": "magsys",
+            "schema": {
+              "type": "string",
+              "default": "ab"
+            }
+          },
+          {
+            "in": "query",
+            "name": "refresh",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "Bypass any cached broker payload and re-fetch."
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/brokers/photometry/{object_id}": {
+      "get": {
+        "summary": "Display photometry for an object via the survey's broker",
+        "description": "Broker-address-free variant of the photometry passthrough for the\nsource-page lightcurve: resolves the active provider that supports\nget_photometry for ``?survey=`` server-side, so a deployment can set\n`photometry_display_endpoint:\n/api/brokers/photometry/{id}?survey=ZTF` without pinning a broker id.\nIf no such broker is configured, degrades to the object's DB\nphotometry. Returns a bare list of points, matching\nGET /sources/{id}/photometry.\n",
+        "tags": [
+          "brokers",
+          "photometry"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "object_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "survey",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "format",
+            "schema": {
+              "type": "string",
+              "default": "mag"
+            }
+          },
+          {
+            "in": "query",
+            "name": "magsys",
+            "schema": {
+              "type": "string",
+              "default": "ab"
+            }
+          },
+          {
+            "in": "query",
+            "name": "refresh",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/brokers/{broker_id}/alerts/{alert_id}/save": {
       "post": {
         "summary": "Save a broker alert as a source",
