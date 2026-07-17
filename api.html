@@ -2365,6 +2365,84 @@
         }
       }
     },
+    "/api/brokers/{broker_id}/cone_search": {
+      "get": {
+        "summary": "Cross-match a position against a broker's archival catalogs",
+        "description": "Positional cone-search against a broker's reference catalogs (e.g. Gaia, PS1, AllWISE), dispatched to the broker's provider. Returns matched sources keyed by catalog name.",
+        "tags": [
+          "brokers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "ra",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "description": "RA in degrees (0 <= ra < 360)."
+          },
+          {
+            "in": "query",
+            "name": "dec",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "description": "Declination in degrees (-90 <= dec <= 90)."
+          },
+          {
+            "in": "query",
+            "name": "radius",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "in": "query",
+            "name": "radius_units",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "deg",
+                "arcmin",
+                "arcsec"
+              ],
+              "default": "arcsec"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/brokers/{broker_id}/alerts/{alert_id}/photometry": {
       "get": {
         "summary": "Display photometry for an object (DB + on-demand broker)",
