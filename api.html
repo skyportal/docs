@@ -1922,6 +1922,761 @@
         }
       }
     },
+    "/api/brokers/{broker_id}/filter/test": {
+      "post": {
+        "summary": "Preview a broker filter",
+        "description": "Run/preview a filter against the broker and return matching alerts, dispatched to the broker's provider. The request body is filter parameters specific to the broker's filter_kind (e.g. Lasair's selected/tables/conditions, BOOM's pipeline).",
+        "tags": [
+          "brokers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/brokers/{broker_id}/filter_modules/{name})?": {
+      "get": {
+        "summary": "Broker filter-building vocabulary",
+        "description": "Return the filter modules/schema (fields, operators, and any broker-scoped custom variables) for a broker's survey, dispatched to the broker's provider. Drives the filter builder UI.",
+        "tags": [
+          "brokers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a broker custom filter module",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Store a broker-scoped custom filter-building element (a variable/listVariable/switchCase/block) named ``name`` in the broker's altdata, for reuse by the filter builder.",
+        "tags": [
+          "brokers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a broker custom filter module",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update an existing broker-scoped custom filter-building element named ``name``.",
+        "tags": [
+          "brokers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/brokers/{broker_id}/filters/{filter_id})?": {
+      "get": {
+        "summary": "Get broker filter(s)",
+        "description": "List skyportal Filters, or get one enriched with the broker-side versions/active state (via the provider).",
+        "tags": [
+          "brokers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "filter_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a broker filter version",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Attach a broker-side filter/version to an existing skyportal Filter. The body carries the compiled native filter (``altdata``) and the editable version tree (``filters``); the provider forwards it to the broker and the broker-side ids are stored in the Filter's altdata.",
+        "tags": [
+          "brokers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "filter_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update a broker filter",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Activate a version (``active``/``active_fid``, forwarded to the broker) or toggle autoAnnotate/autoSave/autoFollowup flags.",
+        "tags": [
+          "brokers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "filter_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a broker filter",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Delete the skyportal Filter and (best-effort) its broker-side filter via the provider.",
+        "tags": [
+          "brokers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "filter_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/brokers/{broker_id}/alerts/{alert_id}/cutouts": {
+      "get": {
+        "summary": "Get an alert's cutouts from a broker",
+        "description": "Fetch science/template/difference cutouts for an alert, dispatched to the broker's provider.",
+        "tags": [
+          "brokers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "alert_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Alert identifier (e.g. candid) the provider keys cutouts on."
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/brokers/{broker_id}/alerts/{alert_id}/save": {
+      "post": {
+        "summary": "Save a broker alert as a source",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Ingest an alert/object from a broker into skyportal as an Obj/Source with photometry, dispatched to the broker's provider.",
+        "tags": [
+          "brokers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "alert_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Object identifier to save."
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "group_ids"
+                ],
+                "properties": {
+                  "group_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/brokers/{broker_id}/alerts/{alert_id})?": {
+      "get": {
+        "summary": "Query broker alerts",
+        "description": "Search alerts (or fetch one by id) from a broker, dispatched to the broker's registered provider.",
+        "tags": [
+          "brokers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "alert_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/brokers/{broker_id})?": {
+      "get": {
+        "summary": "Retrieve broker(s)",
+        "description": "Get one broker (by id) or all brokers. Credentials are only included for system admins.",
+        "tags": [
+          "brokers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update a broker",
+        "tags": [
+          "brokers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>"
+      },
+      "delete": {
+        "summary": "Delete a broker",
+        "tags": [
+          "brokers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>"
+      }
+    },
+    "/api/brokers/)?": {
+      "post": {
+        "summary": "Create a broker",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Register a configured connection to an external alert broker.",
+        "tags": [
+          "brokers"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "broker_classname"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "broker_classname": {
+                    "type": "string",
+                    "description": "A registered BrokerAPI provider class name."
+                  },
+                  "altdata": {
+                    "type": "object",
+                    "description": "Endpoints/credentials for this broker instance."
+                  },
+                  "active": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/candidates/scan_reports/{report_id}/items/{_}": {
       "get": {
         "summary": "Retrieve all items in a scanning report",
@@ -29910,6 +30665,178 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AssociationNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "Broker": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Unique name of the broker."
+          },
+          "broker_classname": {
+            "enum": [
+              "GENERICBROKER",
+              "LASAIRBROKER",
+              "BABAMULBROKER",
+              "BOOMBROKER",
+              "FINKBROKER",
+              "ALERCEBROKER",
+              "ANTARESBROKER",
+              "PITTGOOGLEBROKER",
+              "AMPELBROKER"
+            ],
+            "maxLength": 16,
+            "description": "Name of the registered BrokerAPI provider class.",
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Whether this broker is enabled."
+          },
+          "_altdata": {
+            "type": "string",
+            "description": "Encrypted per-instance configuration (endpoints, credentials).",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "broker_classname",
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "SingleBroker": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Broker"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfBrokers": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Broker"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "BrokerNoID": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Unique name of the broker."
+          },
+          "broker_classname": {
+            "enum": [
+              "GENERICBROKER",
+              "LASAIRBROKER",
+              "BABAMULBROKER",
+              "BOOMBROKER",
+              "FINKBROKER",
+              "ALERCEBROKER",
+              "ANTARESBROKER",
+              "PITTGOOGLEBROKER",
+              "AMPELBROKER"
+            ],
+            "maxLength": 16,
+            "description": "Name of the registered BrokerAPI provider class.",
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Whether this broker is enabled."
+          },
+          "_altdata": {
+            "type": "string",
+            "description": "Encrypted per-instance configuration (endpoints, credentials).",
+            "nullable": true
+          }
+        },
+        "required": [
+          "broker_classname",
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "SingleBrokerNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/BrokerNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfBrokerNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BrokerNoID"
             }
           }
         },
