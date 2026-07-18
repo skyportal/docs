@@ -64107,6 +64107,10 @@
               "$ref": "#/components/schemas/PhotometryValidation"
             }
           },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
           "mjd": {
             "type": "number",
             "description": "MJD of the observation."
@@ -64378,10 +64382,6 @@
           "dec": {
             "type": "number",
             "nullable": true
-          },
-          "id": {
-            "type": "integer",
-            "description": "Unique object identifier."
           }
         },
         "required": [
