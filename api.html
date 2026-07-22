@@ -1970,6 +1970,53 @@
         }
       }
     },
+    "/api/brokers/{broker_id}/filters/{filter_id}/validate": {
+      "post": {
+        "summary": "Validate a broker filter version for activation",
+        "description": "Run the broker's activation validation for a filter version without changing state, and record the result on the filter so it can be activated (skyportal gates activation on this).",
+        "tags": [
+          "brokers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "filter_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/brokers/{broker_id}/filter_modules/{name})?": {
       "get": {
         "summary": "Broker filter-building vocabulary",
