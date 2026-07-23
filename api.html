@@ -11509,6 +11509,22 @@
           },
           {
             "in": "query",
+            "name": "group_id",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Restrict to sources saved to this group (an alternative to\nclassification-based selection).\n"
+          },
+          {
+            "in": "query",
+            "name": "obj_ids",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated object IDs to restrict to (an alternative to\nclassification-based selection).\n"
+          },
+          {
+            "in": "query",
             "name": "maxMatches",
             "schema": {
               "type": "integer"
@@ -23743,6 +23759,72 @@
                       }
                     }
                   ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/spectra/bulk": {
+      "post": {
+        "summary": "Bulk spectra for a set of sources",
+        "description": "Return slim spectra (wavelengths/fluxes/observed_at) plus per-source\nphase anchors (redshift, first-detection and peak MJD, TNS discovery\ndate) for a set of accessible sources selected by group, explicit\nobject list, and/or classification. Powers the phase-stacked spectra\nview without one request per source.\n",
+        "tags": [
+          "spectra"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "group_id": {
+                    "type": "integer",
+                    "description": "Restrict to sources saved to this group."
+                  },
+                  "obj_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Restrict to these object IDs (also accepts a comma-separated string)."
+                  },
+                  "classifications": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Restrict to sources with any of these (non-ML) classifications."
+                  },
+                  "classificationProbThreshold": {
+                    "type": "number",
+                    "description": "Only count classifications at or above this probability."
+                  },
+                  "maxSources": {
+                    "type": "integer",
+                    "description": "Max sources to fetch spectra for (default 200, capped at 1000)."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
                 }
               }
             }
