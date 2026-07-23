@@ -329,6 +329,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-download-python-environment">Source download, Python environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nix-direnv-optional">Nix + direnv (optional)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-macos">Installation: MacOS</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-shell-environment-for-development">Configuring Shell Environment for Development</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#open-your-zshrc-file-in-a-text-editor">Open your <code class="docutils literal notranslate"><span class="pre">.zshrc</span></code> file in a text editor:</a></li>
@@ -380,6 +381,7 @@ how to install them on MacOS and Debian-based systems below.</p>
 <li><p>libcurl4-gnutls-dev</p></li>
 <li><p>libgnutls28-dev</p></li>
 </ul>
+<p>If you use <a class="reference external" href="https://nixos.org/">Nix</a>, the repository ships a flake that provides the language toolchain (Python, Node.js, <code class="docutils literal notranslate"><span class="pre">uv</span></code>) — see <a class="reference external" href="#nix-direnv">Nix + direnv</a> below. You will still need to install the system services (PostgreSQL, NGINX, Supervisor) following the platform instructions.</p>
 </section>
 <section id="source-download-python-environment">
 <h2>Source download, Python environment<a class="headerlink" href="#source-download-python-environment" title="Link to this heading">#</a></h2>
@@ -405,6 +407,21 @@ how to install them on MacOS and Debian-based systems below.</p>
 </pre></div>
 </div>
 <p>If you are using Windows Subsystem for Linux (WSL) be sure you clone the repository onto a location on the virtual machine, not the mounted Windows drive. Additionally, we recommend that you use WSL 2, and not WSL 1, in order to avoid complications in interfacing with the Linux image’s <code class="docutils literal notranslate"><span class="pre">localhost</span></code> network.</p>
+<p><a name="nix-direnv"></a></p>
+</section>
+<section id="nix-direnv-optional">
+<h2>Nix + direnv (optional)<a class="headerlink" href="#nix-direnv-optional" title="Link to this heading">#</a></h2>
+<p>The repository includes a Nix flake (<code class="docutils literal notranslate"><span class="pre">flake.nix</span></code>) that provides a development shell with Python, Node.js, and <code class="docutils literal notranslate"><span class="pre">uv</span></code>, pinned to exact versions by <code class="docutils literal notranslate"><span class="pre">flake.lock</span></code>. This means every developer — and any CI job or AI coding agent working in the repository — gets the same toolchain, regardless of what is installed system-wide, and entering the shell automatically runs <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">sync</span></code> to keep the Python environment up to date.</p>
+<p>With <a class="reference external" href="https://nixos.org/download/">Nix installed</a> (and flakes enabled), enter the shell with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nix</span> <span class="n">develop</span>
+</pre></div>
+</div>
+<p>For a smoother workflow, install <a class="reference external" href="https://direnv.net/">direnv</a> and hook it into your shell. The repository’s <code class="docutils literal notranslate"><span class="pre">.envrc</span></code> already contains <code class="docutils literal notranslate"><span class="pre">use</span> <span class="pre">flake</span></code>, so after a one-time:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">direnv</span> <span class="n">allow</span>
+</pre></div>
+</div>
+<p>the development shell loads automatically whenever you <code class="docutils literal notranslate"><span class="pre">cd</span></code> into the repository, and unloads when you leave. This also benefits tools that spawn shells on your behalf: editors and AI coding agents (e.g., Claude Code) pick up the pinned toolchain through direnv, so their builds and tests run with the same versions you use, without any manual environment activation.</p>
+<p>Note that the flake only covers the language toolchain; system services (PostgreSQL, NGINX, Supervisor) and test/doc dependencies (Geckodriver, graphviz) still need to be installed following the platform instructions below.</p>
 </section>
 <section id="installation-macos">
 <h2>Installation: MacOS<a class="headerlink" href="#installation-macos" title="Link to this heading">#</a></h2>
@@ -744,6 +761,7 @@ sudo certbot renew</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#source-download-python-environment">Source download, Python environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nix-direnv-optional">Nix + direnv (optional)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-macos">Installation: MacOS</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-shell-environment-for-development">Configuring Shell Environment for Development</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#open-your-zshrc-file-in-a-text-editor">Open your <code class="docutils literal notranslate"><span class="pre">.zshrc</span></code> file in a text editor:</a></li>
