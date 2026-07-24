@@ -21789,34 +21789,15 @@
             "schema": {
               "type": "string"
             },
-            "description": "The ID of the underlying data.\nThis would be a string for an object ID,\nor an integer for other data types,\ne.g., a spectrum.\n"
+            "description": "The ID of the underlying data.\nThis would be a string for an object ID,\nor an integer for other data types,\ne.g., a spectrum."
           }
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "origin": {
-                    "type": "string",
-                    "description": "String describing the source of this information.\nOnly one Annotation per origin is allowed, although\neach Annotation can have multiple fields.\nTo add/change data, use the update method instead\nof trying to post another Annotation from this origin.\nOrigin must be a non-empty string starting with an\nalphanumeric character or underscore.\n(it must match the regex: /^\\w+/)\n"
-                  },
-                  "data": {
-                    "type": "object"
-                  },
-                  "group_ids": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer"
-                    },
-                    "description": "List of group IDs corresponding to which groups should be\nable to view annotation. Defaults to all of requesting user's\ngroups.\n"
-                  }
-                },
-                "required": [
-                  "origin",
-                  "data"
-                ]
+                "$ref": "#/components/schemas/AnnotationPostBody"
               }
             }
           }
@@ -21834,13 +21815,7 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "annotation_id": {
-                              "type": "integer",
-                              "description": "New annotation ID"
-                            }
-                          }
+                          "$ref": "#/components/schemas/AnnotationPostResponse"
                         }
                       }
                     }
@@ -78491,6 +78466,55 @@
           "localization_id"
         ],
         "additionalProperties": false
+      },
+      "AnnotationPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for posting an annotation.",
+        "properties": {
+          "origin": {
+            "description": "String describing the source of this information. Only one Annotation per origin is allowed, although each Annotation can have multiple fields. To add/change data, use the update method instead of trying to post another Annotation from this origin. Origin must be a non-empty string starting with an alphanumeric character or underscore (it must match the regex: /^\\w+/).",
+            "pattern": "^\\w+",
+            "title": "Origin",
+            "type": "string"
+          },
+          "data": {
+            "additionalProperties": true,
+            "description": "Annotation data as {key: value} pairs.",
+            "title": "Data",
+            "type": "object"
+          },
+          "group_ids": {
+            "default": null,
+            "description": "List of group IDs corresponding to which groups should be able to view annotation. Defaults to all of requesting user's groups.",
+            "title": "Group Ids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
+          }
+        },
+        "required": [
+          "origin",
+          "data"
+        ],
+        "title": "AnnotationPostBody",
+        "type": "object"
+      },
+      "AnnotationPostResponse": {
+        "description": "Data payload returned when posting an annotation.",
+        "properties": {
+          "annotation_id": {
+            "description": "New annotation ID",
+            "title": "Annotation Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "annotation_id"
+        ],
+        "title": "AnnotationPostResponse",
+        "type": "object"
       },
       "SpatialCatalogASCIIFileHandlerPost": {
         "type": "object",
