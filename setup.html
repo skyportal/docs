@@ -375,6 +375,7 @@ how to install them on MacOS and Debian-based systems below.</p>
 <li><p>NGINX (v&gt;=1.7)</p></li>
 <li><p>PostgreSQL (v&gt;=14.0)</p></li>
 <li><p>Node.JS/npm (v&gt;=16.14.0/8.3.2)</p></li>
+<li><p>Bun</p></li>
 </ul>
 <p>When installing SkyPortal on Debian-based systems, 2 additional packages are required to be able to install <code class="docutils literal notranslate"><span class="pre">pycurl</span></code> later on:</p>
 <ul class="simple">
@@ -430,7 +431,7 @@ how to install them on MacOS and Debian-based systems below.</p>
 <li><p>Install project dependencies</p></li>
 </ol>
 <p>Using Homebrew, install core dependencies:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">supervisor</span> <span class="n">nginx</span> <span class="n">postgresql</span> <span class="n">node</span> <span class="n">llvm</span> <span class="n">libomp</span> <span class="n">gsl</span> <span class="n">rust</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">supervisor</span> <span class="n">nginx</span> <span class="n">postgresql</span> <span class="n">node</span> <span class="n">llvm</span> <span class="n">libomp</span> <span class="n">gsl</span> <span class="n">rust</span> <span class="n">bun</span>
 </pre></div>
 </div>
 <p>If you want to use <a class="reference external" href="https://en.wikipedia.org/wiki/Brotli">brotli compression</a> with NGINX (better compression rates for the frontend), you can install NGINX with the <code class="docutils literal notranslate"><span class="pre">ngx_brotli</span></code> module with this command:</p>
@@ -556,6 +557,10 @@ how to install them on MacOS and Debian-based systems below.</p>
 </pre></div>
 </div>
 <p>Otherwise, you can install NGINX normally with <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">nginx</span></code>.</p>
+<p>Bun isn’t packaged in apt; install it with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">fsSL</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">bun</span><span class="o">.</span><span class="n">sh</span><span class="o">/</span><span class="n">install</span> <span class="o">|</span> <span class="n">bash</span>
+</pre></div>
+</div>
 </li>
 <li><p>Configure your database permissions.</p>
 <p>In <code class="docutils literal notranslate"><span class="pre">pg_hba.conf</span></code> (typically located in
