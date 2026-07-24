@@ -5469,15 +5469,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FilterNoID"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -5494,6 +5485,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FilterPatchBody"
               }
             }
           }
@@ -5563,10 +5564,11 @@
           "filters"
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/FilterNoID"
+                "$ref": "#/components/schemas/FilterPostBody"
               }
             }
           }
@@ -5584,13 +5586,7 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "integer",
-                              "description": "New filter ID"
-                            }
-                          }
+                          "$ref": "#/components/schemas/FilterPostResponse"
                         }
                       }
                     }
@@ -13503,24 +13499,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "description": "One of either 'accepted', 'declined', or 'pending'."
-                  }
-                },
-                "required": [
-                  "status"
-                ]
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -13528,6 +13506,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Success"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupAdmissionRequestPatchBody"
               }
             }
           }
@@ -13611,22 +13599,11 @@
           "users"
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "groupID": {
-                    "type": "integer"
-                  },
-                  "userID": {
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "groupID",
-                  "userID"
-                ]
+                "$ref": "#/components/schemas/GroupAdmissionRequestPostBody"
               }
             }
           }
@@ -13644,13 +13621,7 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "integer",
-                              "description": "New group admission request ID"
-                            }
-                          }
+                          "$ref": "#/components/schemas/GroupAdmissionRequestPostResponse"
                         }
                       }
                     }
@@ -20776,27 +20747,6 @@
             "description": "ID of object to indicate source labelling for\n"
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "groupIds": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer"
-                    },
-                    "description": "List of IDs of groups to indicate labelling for\n"
-                  }
-                },
-                "required": [
-                  "groupIds"
-                ]
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -20804,6 +20754,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Success"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SourceLabelsPostBody"
               }
             }
           }
@@ -20825,27 +20785,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "groupIds": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer"
-                    },
-                    "description": "List of IDs of groups to indicate scanning for\n"
-                  }
-                },
-                "required": [
-                  "groupIds"
-                ]
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -20853,6 +20792,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Success"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SourceLabelsDeleteBody"
               }
             }
           }
@@ -78242,6 +78191,94 @@
         ],
         "additionalProperties": false
       },
+      "FilterPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for creating a filter.",
+        "properties": {
+          "name": {
+            "description": "Filter name.",
+            "title": "Name",
+            "type": "string"
+          },
+          "stream_id": {
+            "description": "ID of the Filter's Stream.",
+            "title": "Stream Id",
+            "type": "integer"
+          },
+          "group_id": {
+            "description": "ID of the Filter's Group.",
+            "title": "Group Id",
+            "type": "integer"
+          },
+          "altdata": {
+            "default": null,
+            "description": "Arbitrary additional JSON data associated with the Filter.",
+            "title": "Altdata",
+            "additionalProperties": true,
+            "type": "object",
+            "nullable": true
+          }
+        },
+        "required": [
+          "name",
+          "stream_id",
+          "group_id"
+        ],
+        "title": "FilterPostBody",
+        "type": "object"
+      },
+      "FilterPostResponse": {
+        "description": "Data payload returned when creating a filter.",
+        "properties": {
+          "id": {
+            "description": "New filter ID",
+            "title": "Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "FilterPostResponse",
+        "type": "object"
+      },
+      "FilterPatchBody": {
+        "additionalProperties": false,
+        "description": "Request body for updating a filter.",
+        "properties": {
+          "name": {
+            "default": null,
+            "description": "Filter name.",
+            "title": "Name",
+            "type": "string",
+            "nullable": true
+          },
+          "altdata": {
+            "default": null,
+            "description": "Arbitrary additional JSON data associated with the Filter.",
+            "title": "Altdata",
+            "additionalProperties": true,
+            "type": "object",
+            "nullable": true
+          },
+          "group_id": {
+            "default": null,
+            "description": "ID of the Filter's Group. Cannot be changed; accepted only if it matches the current value.",
+            "title": "Group Id",
+            "type": "integer",
+            "nullable": true
+          },
+          "stream_id": {
+            "default": null,
+            "description": "ID of the Filter's Stream. Cannot be changed; accepted only if it matches the current value.",
+            "title": "Stream Id",
+            "type": "integer",
+            "nullable": true
+          }
+        },
+        "title": "FilterPatchBody",
+        "type": "object"
+      },
       "GalaxyASCIIFileHandlerPost": {
         "type": "object",
         "properties": {
@@ -78364,6 +78401,64 @@
         },
         "additionalProperties": false
       },
+      "GroupAdmissionRequestPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for creating a group admission request.",
+        "properties": {
+          "groupID": {
+            "description": "ID of the group to request admission to",
+            "title": "Groupid",
+            "type": "integer"
+          },
+          "userID": {
+            "description": "ID of the user requesting admission",
+            "title": "Userid",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "groupID",
+          "userID"
+        ],
+        "title": "GroupAdmissionRequestPostBody",
+        "type": "object"
+      },
+      "GroupAdmissionRequestPostResponse": {
+        "description": "Data payload returned when creating a group admission request.",
+        "properties": {
+          "id": {
+            "description": "New group admission request ID",
+            "title": "Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "GroupAdmissionRequestPostResponse",
+        "type": "object"
+      },
+      "GroupAdmissionRequestPatchBody": {
+        "additionalProperties": false,
+        "description": "Request body for updating a group admission request's status.",
+        "properties": {
+          "status": {
+            "description": "One of either 'accepted', 'declined', or 'pending'.",
+            "enum": [
+              "pending",
+              "accepted",
+              "declined"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "title": "GroupAdmissionRequestPatchBody",
+        "type": "object"
+      },
       "ObservationHandlerPost": {
         "type": "object",
         "properties": {
@@ -78466,6 +78561,44 @@
           "localization_id"
         ],
         "additionalProperties": false
+      },
+      "SourceLabelsPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for labelling a source.",
+        "properties": {
+          "groupIds": {
+            "description": "List of IDs of groups to indicate labelling for",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Groupids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "groupIds"
+        ],
+        "title": "SourceLabelsPostBody",
+        "type": "object"
+      },
+      "SourceLabelsDeleteBody": {
+        "additionalProperties": false,
+        "description": "Request body for deleting source labels.",
+        "properties": {
+          "groupIds": {
+            "description": "List of IDs of groups to indicate scanning for",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Groupids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "groupIds"
+        ],
+        "title": "SourceLabelsDeleteBody",
+        "type": "object"
       },
       "AnnotationPostBody": {
         "additionalProperties": false,
