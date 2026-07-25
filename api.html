@@ -19458,43 +19458,11 @@
           "recurring apis"
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "endpoint": {
-                    "type": "string",
-                    "description": "Endpoint of the API call."
-                  },
-                  "method": {
-                    "type": "string",
-                    "description": "HTTP method of the API call."
-                  },
-                  "next_call": {
-                    "type": "datetime",
-                    "description": "Time of the next API call."
-                  },
-                  "call_delay": {
-                    "type": "number",
-                    "description": "Delay until next API call in days."
-                  },
-                  "number_of_retries": {
-                    "type": "integer",
-                    "description": "Number of retries before service is deactivated."
-                  },
-                  "payload": {
-                    "type": "object",
-                    "description": "Payload of the API call."
-                  }
-                },
-                "required": [
-                  "endpoint",
-                  "method",
-                  "next_call",
-                  "call_delay",
-                  "payload"
-                ]
+                "$ref": "#/components/schemas/RecurringAPIPostBody"
               }
             }
           }
@@ -19512,13 +19480,7 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "integer",
-                              "description": "New RecurringAPI ID"
-                            }
-                          }
+                          "$ref": "#/components/schemas/RecurringAPIPostResponse"
                         }
                       }
                     }
@@ -24944,18 +24906,11 @@
           }
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "user_id": {
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "user_id"
-                ]
+                "$ref": "#/components/schemas/StreamUserPostBody"
               }
             }
           }
@@ -24973,17 +24928,7 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "stream_id": {
-                              "type": "integer",
-                              "description": "Stream ID"
-                            },
-                            "user_id": {
-                              "type": "integer",
-                              "description": "User ID"
-                            }
-                          }
+                          "$ref": "#/components/schemas/StreamUserPostResponse"
                         }
                       }
                     }
@@ -25088,41 +25033,12 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "altdata": {
-                    "type": "object"
-                  }
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/Success"
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "data": {
-                          "$ref": "#/components/schemas/Stream"
-                        }
-                      }
-                    }
-                  ]
+                  "$ref": "#/components/schemas/Success"
                 }
               }
             }
@@ -25133,6 +25049,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StreamPatchBody"
               }
             }
           }
@@ -25202,21 +25128,11 @@
           "streams"
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "altdata": {
-                    "type": "object"
-                  }
-                },
-                "required": [
-                  "name"
-                ]
+                "$ref": "#/components/schemas/StreamPostBody"
               }
             }
           }
@@ -25234,13 +25150,7 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "integer",
-                              "description": "New stream ID"
-                            }
-                          }
+                          "$ref": "#/components/schemas/StreamPostResponse"
                         }
                       }
                     }
@@ -27664,27 +27574,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "aclIds": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "description": "Array of ACL IDs (strings) to be granted to user"
-                  }
-                },
-                "required": [
-                  "aclIds"
-                ]
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -27692,6 +27581,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Success"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserACLPostBody"
               }
             }
           }
@@ -78562,6 +78461,69 @@
         "title": "ObjTagPostBody",
         "type": "object"
       },
+      "RecurringAPIPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for creating a recurring API.",
+        "properties": {
+          "endpoint": {
+            "description": "Endpoint of the API call.",
+            "title": "Endpoint",
+            "type": "string"
+          },
+          "method": {
+            "description": "HTTP method of the API call.",
+            "title": "Method",
+            "type": "string"
+          },
+          "next_call": {
+            "description": "Time of the next API call.",
+            "title": "Next Call",
+            "type": "string"
+          },
+          "call_delay": {
+            "description": "Delay until next API call in days.",
+            "title": "Call Delay",
+            "type": "number"
+          },
+          "payload": {
+            "description": "JSON string with the payload of the API call.",
+            "title": "Payload",
+            "type": "string"
+          },
+          "number_of_retries": {
+            "default": null,
+            "description": "Number of retries before service is deactivated.",
+            "title": "Number Of Retries",
+            "maximum": 10,
+            "type": "integer",
+            "nullable": true
+          }
+        },
+        "required": [
+          "endpoint",
+          "method",
+          "next_call",
+          "call_delay",
+          "payload"
+        ],
+        "title": "RecurringAPIPostBody",
+        "type": "object"
+      },
+      "RecurringAPIPostResponse": {
+        "description": "Data payload returned when creating a recurring API.",
+        "properties": {
+          "id": {
+            "description": "New RecurringAPI ID",
+            "title": "Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "RecurringAPIPostResponse",
+        "type": "object"
+      },
       "SkymapQueueAPIHandlerPost": {
         "type": "object",
         "properties": {
@@ -78764,6 +78726,119 @@
         },
         "additionalProperties": false
       },
+      "StreamUserPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for granting stream access to a user.",
+        "properties": {
+          "user_id": {
+            "description": "ID of the user to be granted stream access",
+            "title": "User Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "user_id"
+        ],
+        "title": "StreamUserPostBody",
+        "type": "object"
+      },
+      "StreamUserPostResponse": {
+        "description": "Data payload returned when granting stream access to a user.",
+        "properties": {
+          "stream_id": {
+            "description": "Stream ID",
+            "title": "Stream Id",
+            "type": "integer"
+          },
+          "user_id": {
+            "description": "User ID",
+            "title": "User Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "stream_id",
+          "user_id"
+        ],
+        "title": "StreamUserPostResponse",
+        "type": "object"
+      },
+      "StreamPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for creating a stream.",
+        "properties": {
+          "name": {
+            "description": "Stream name.",
+            "title": "Name",
+            "type": "string"
+          },
+          "altdata": {
+            "default": null,
+            "description": "Misc. metadata stored in JSON format, e.g. `{'collection': 'ZTF_alerts', selector: [1, 2]}`",
+            "title": "Altdata",
+            "additionalProperties": true,
+            "type": "object",
+            "nullable": true
+          },
+          "auto_join": {
+            "default": false,
+            "description": "Boolean indicating whether any user may add themselves to this stream. Auto-join streams are visible to all users.",
+            "title": "Auto Join",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "StreamPostBody",
+        "type": "object"
+      },
+      "StreamPostResponse": {
+        "description": "Data payload returned when creating a stream.",
+        "properties": {
+          "id": {
+            "description": "New stream ID",
+            "title": "Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "StreamPostResponse",
+        "type": "object"
+      },
+      "StreamPatchBody": {
+        "additionalProperties": false,
+        "description": "Request body for updating a stream.",
+        "properties": {
+          "name": {
+            "description": "Stream name.",
+            "title": "Name",
+            "type": "string"
+          },
+          "altdata": {
+            "default": null,
+            "description": "Misc. metadata stored in JSON format, e.g. `{'collection': 'ZTF_alerts', selector: [1, 2]}`",
+            "title": "Altdata",
+            "additionalProperties": true,
+            "type": "object",
+            "nullable": true
+          },
+          "auto_join": {
+            "default": null,
+            "description": "Boolean indicating whether any user may add themselves to this stream. Auto-join streams are visible to all users.",
+            "title": "Auto Join",
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "StreamPatchBody",
+        "type": "object"
+      },
       "TeamPostBody": {
         "additionalProperties": false,
         "description": "Request body for creating a team.",
@@ -78925,6 +79000,25 @@
           "id"
         ],
         "title": "TeamPutResponse",
+        "type": "object"
+      },
+      "UserACLPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for granting ACLs to a user.",
+        "properties": {
+          "aclIds": {
+            "description": "Array of ACL IDs (strings) to be granted to user",
+            "items": {
+              "type": "string"
+            },
+            "title": "Aclids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "aclIds"
+        ],
+        "title": "UserACLPostBody",
         "type": "object"
       }
     },
