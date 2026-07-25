@@ -18656,41 +18656,6 @@
           "photometry",
           "spectra"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "photometryIDs": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer"
-                    },
-                    "description": "IDs of the photometry data to be shared. If `spectrumIDs` is not\nprovided, this is required.\n"
-                  },
-                  "spectrumIDs": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer"
-                    },
-                    "description": "IDs of the spectra to be shared. If `photometryIDs` is not provided, this is required."
-                  },
-                  "groupIDs": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer"
-                    },
-                    "description": "List of IDs of groups data will be shared with. To share data with\na single user, specify their single user group ID here.\n"
-                  }
-                },
-                "required": [
-                  "groupIDs"
-                ]
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -18698,6 +18663,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Success"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SharingPostBody"
               }
             }
           }
@@ -25557,15 +25532,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TaxonomyNoID"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -25582,6 +25548,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TaxonomyPutBody"
               }
             }
           }
@@ -25651,44 +25627,11 @@
           "taxonomies"
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "description": "Short string to make this taxonomy memorable\nto end users.\n"
-                  },
-                  "hierarchy": {
-                    "type": "object",
-                    "description": "Nested JSON describing the taxonomy\nwhich should be validated against\na schema before entry\n"
-                  },
-                  "group_ids": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer"
-                    },
-                    "description": "List of group IDs corresponding to which groups should be\nable to view comment. Defaults to all of requesting\nuser's groups.\n"
-                  },
-                  "version": {
-                    "type": "string",
-                    "description": "Semantic version of this taxonomy name\n"
-                  },
-                  "provenance": {
-                    "type": "string",
-                    "description": "Identifier (e.g., URL or git hash) that\nuniquely ties this taxonomy back\nto an origin or place of record\n"
-                  },
-                  "isLatest": {
-                    "type": "boolean",
-                    "description": "Consider this version of the taxonomy with this\nname the latest? Defaults to True.\n"
-                  }
-                },
-                "required": [
-                  "name",
-                  "hierarchy",
-                  "version"
-                ]
+                "$ref": "#/components/schemas/TaxonomyPostBody"
               }
             }
           }
@@ -25706,13 +25649,7 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "taxonomy_id": {
-                              "type": "integer",
-                              "description": "New taxonomy ID"
-                            }
-                          }
+                          "$ref": "#/components/schemas/TaxonomyPostResponse"
                         }
                       }
                     }
@@ -27652,27 +27589,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "roleIds": {
-                    "type": "array",
-                    "items": {
-                      "type": "string"
-                    },
-                    "description": "Array of Role IDs (strings) to be granted to user"
-                  }
-                },
-                "required": [
-                  "roleIds"
-                ]
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -27680,6 +27596,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Success"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserRolePostBody"
               }
             }
           }
@@ -78461,6 +78387,46 @@
         "title": "ObjTagPostBody",
         "type": "object"
       },
+      "SharingPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for sharing data with additional groups/users.",
+        "properties": {
+          "groupIDs": {
+            "description": "List of IDs of groups data will be shared with. To share data with a single user, specify their single user group ID here.",
+            "items": {
+              "type": "integer"
+            },
+            "minItems": 1,
+            "title": "Groupids",
+            "type": "array"
+          },
+          "photometryIDs": {
+            "default": null,
+            "description": "IDs of the photometry data to be shared. If `spectrumIDs` is not provided, this is required.",
+            "title": "Photometryids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
+          },
+          "spectrumIDs": {
+            "default": null,
+            "description": "IDs of the spectra to be shared. If `photometryIDs` is not provided, this is required.",
+            "title": "Spectrumids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
+          }
+        },
+        "required": [
+          "groupIDs"
+        ],
+        "title": "SharingPostBody",
+        "type": "object"
+      },
       "RecurringAPIPostBody": {
         "additionalProperties": false,
         "description": "Request body for creating a recurring API.",
@@ -78839,6 +78805,135 @@
         "title": "StreamPatchBody",
         "type": "object"
       },
+      "TaxonomyPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for posting a new taxonomy.",
+        "properties": {
+          "name": {
+            "description": "Short string to make this taxonomy memorable to end users.",
+            "title": "Name",
+            "type": "string"
+          },
+          "version": {
+            "description": "Semantic version of this taxonomy name",
+            "title": "Version",
+            "type": "string"
+          },
+          "hierarchy": {
+            "default": null,
+            "description": "Nested JSON describing the taxonomy which should be validated against a schema before entry. One of `hierarchy` or `hierarchy_file` must be provided.",
+            "title": "Hierarchy",
+            "additionalProperties": true,
+            "type": "object",
+            "nullable": true
+          },
+          "hierarchy_file": {
+            "default": null,
+            "description": "YAML string describing the taxonomy, parsed into `hierarchy` when provided.",
+            "title": "Hierarchy File",
+            "type": "string",
+            "nullable": true
+          },
+          "group_ids": {
+            "default": null,
+            "description": "List of group IDs corresponding to which groups should be able to view the taxonomy. Defaults to the public group.",
+            "title": "Group Ids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
+          },
+          "provenance": {
+            "default": null,
+            "description": "Identifier (e.g., URL or git hash) that uniquely ties this taxonomy back to an origin or place of record",
+            "title": "Provenance",
+            "type": "string",
+            "nullable": true
+          },
+          "isLatest": {
+            "default": true,
+            "description": "Consider this version of the taxonomy with this name the latest? Defaults to True.",
+            "title": "Islatest",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "version"
+        ],
+        "title": "TaxonomyPostBody",
+        "type": "object"
+      },
+      "TaxonomyPostResponse": {
+        "description": "Data payload returned when posting a taxonomy.",
+        "properties": {
+          "taxonomy_id": {
+            "description": "New taxonomy ID",
+            "title": "Taxonomy Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "taxonomy_id"
+        ],
+        "title": "TaxonomyPostResponse",
+        "type": "object"
+      },
+      "TaxonomyPutBody": {
+        "additionalProperties": false,
+        "description": "Request body for updating a taxonomy.",
+        "properties": {
+          "name": {
+            "default": null,
+            "description": "Short string to make this taxonomy memorable to end users.",
+            "title": "Name",
+            "type": "string",
+            "nullable": true
+          },
+          "version": {
+            "default": null,
+            "description": "Semantic version of this taxonomy name",
+            "title": "Version",
+            "type": "string",
+            "nullable": true
+          },
+          "provenance": {
+            "default": null,
+            "description": "Identifier (e.g., URL or git hash) that uniquely ties this taxonomy back to an origin or place of record",
+            "title": "Provenance",
+            "type": "string",
+            "nullable": true
+          },
+          "isLatest": {
+            "default": null,
+            "description": "Consider this version of the taxonomy with this name the latest?",
+            "title": "Islatest",
+            "type": "boolean",
+            "nullable": true
+          },
+          "group_ids": {
+            "default": null,
+            "description": "List of group IDs corresponding to which groups should be able to view the taxonomy.",
+            "title": "Group Ids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
+          },
+          "hierarchy": {
+            "default": null,
+            "description": "Not editable; upload a new taxonomy if a hierarchy change is desired.",
+            "title": "Hierarchy",
+            "additionalProperties": true,
+            "type": "object",
+            "nullable": true
+          }
+        },
+        "title": "TaxonomyPutBody",
+        "type": "object"
+      },
       "TeamPostBody": {
         "additionalProperties": false,
         "description": "Request body for creating a team.",
@@ -79019,6 +79114,25 @@
           "aclIds"
         ],
         "title": "UserACLPostBody",
+        "type": "object"
+      },
+      "UserRolePostBody": {
+        "additionalProperties": false,
+        "description": "Request body for granting roles to a user.",
+        "properties": {
+          "roleIds": {
+            "description": "Array of Role IDs (strings) to be granted to user",
+            "items": {
+              "type": "string"
+            },
+            "title": "Roleids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "roleIds"
+        ],
+        "title": "UserRolePostBody",
         "type": "object"
       }
     },
