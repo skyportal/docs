@@ -13663,29 +13663,11 @@
           }
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "start_date": {
-                    "type": "string",
-                    "description": "Arrow-parseable date string (e.g. 2020-01-01).\n"
-                  },
-                  "end_date": {
-                    "type": "string",
-                    "description": "Arrow-parseable date string (e.g. 2020-01-01).\n"
-                  },
-                  "logs": {
-                    "type": "object",
-                    "description": "Nested JSON containing the log messages.\n"
-                  }
-                },
-                "required": [
-                  "start_date",
-                  "end_date",
-                  "logs"
-                ]
+                "$ref": "#/components/schemas/InstrumentLogPostBody"
               }
             }
           }
@@ -13703,26 +13685,11 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "integer",
-                              "description": "The id of the InstrumentLog"
-                            }
-                          }
+                          "$ref": "#/components/schemas/InstrumentLogPostResponse"
                         }
                       }
                     }
                   ]
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -13806,24 +13773,6 @@
             "description": "The instrument ID to update the status for"
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "description": "The status of the instrument\n"
-                  }
-                },
-                "required": [
-                  "status"
-                ]
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -13840,6 +13789,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InstrumentStatusPutBody"
               }
             }
           }
@@ -21591,31 +21550,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/AnnotationNoID"
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "group_ids": {
-                        "type": "array",
-                        "items": {
-                          "type": "integer"
-                        },
-                        "description": "List of group IDs corresponding to which groups should be\nable to view the annotation.\n"
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -21632,6 +21566,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnnotationPutBody"
               }
             }
           }
@@ -21781,31 +21725,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "allOf": [
-                  {
-                    "$ref": "#/components/schemas/AnnotationNoID"
-                  },
-                  {
-                    "type": "object",
-                    "properties": {
-                      "group_ids": {
-                        "type": "array",
-                        "items": {
-                          "type": "integer"
-                        },
-                        "description": "List of group IDs corresponding to which groups should be\nable to view the annotation.\n"
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -21822,6 +21741,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnnotationPutBody"
               }
             }
           }
@@ -26065,33 +25994,12 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ThumbnailNoID"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
               "application/json": {
                 "schema": {
-                  "allOf": [
-                    {
-                      "$ref": "#/components/schemas/Success"
-                    },
-                    {
-                      "type": "object",
-                      "properties": {
-                        "data": {
-                          "$ref": "#/components/schemas/Thumbnail"
-                        }
-                      }
-                    }
-                  ]
+                  "$ref": "#/components/schemas/Success"
                 }
               }
             }
@@ -26102,6 +26010,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ThumbnailPutBody"
               }
             }
           }
@@ -26153,29 +26071,11 @@
           "thumbnails"
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "obj_id": {
-                    "type": "string",
-                    "description": "ID of object associated with thumbnails."
-                  },
-                  "data": {
-                    "type": "string",
-                    "format": "byte",
-                    "description": "base64-encoded PNG image file contents. Image size must be between 16px and 500px on a side."
-                  },
-                  "ttype": {
-                    "type": "string",
-                    "description": "Thumbnail type. Must be one of 'new', 'ref', 'sub', 'sdss', 'dr8', 'new_gz', 'ref_gz', 'sub_gz'"
-                  }
-                },
-                "required": [
-                  "data",
-                  "ttype"
-                ]
+                "$ref": "#/components/schemas/ThumbnailPostBody"
               }
             }
           }
@@ -26193,26 +26093,11 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "integer",
-                              "description": "New thumbnail ID"
-                            }
-                          }
+                          "$ref": "#/components/schemas/ThumbnailPostResponse"
                         }
                       }
                     }
                   ]
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -78145,6 +78030,80 @@
         "title": "GroupAdmissionRequestPatchBody",
         "type": "object"
       },
+      "InstrumentLogPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for posting instrument logs.",
+        "properties": {
+          "start_date": {
+            "description": "Arrow-parseable date string (e.g. 2020-01-01).",
+            "title": "Start Date",
+            "type": "string"
+          },
+          "end_date": {
+            "description": "Arrow-parseable date string (e.g. 2020-01-01).",
+            "title": "End Date",
+            "type": "string"
+          },
+          "log": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
+              }
+            ],
+            "description": "Nested JSON containing the log messages, or a parsable string of log lines.",
+            "title": "Log"
+          }
+        },
+        "required": [
+          "start_date",
+          "end_date",
+          "log"
+        ],
+        "title": "InstrumentLogPostBody",
+        "type": "object"
+      },
+      "InstrumentLogPostResponse": {
+        "description": "Data payload returned when posting instrument logs.",
+        "properties": {
+          "id": {
+            "description": "The id of the InstrumentLog",
+            "title": "Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "InstrumentLogPostResponse",
+        "type": "object"
+      },
+      "InstrumentStatusPutBody": {
+        "additionalProperties": false,
+        "description": "Request body for updating an instrument's status.",
+        "properties": {
+          "status": {
+            "default": null,
+            "description": "The status of the instrument, as a JSON object or a JSON-encoded string. When empty or omitted, the status is instead refreshed from the instrument's remote API.",
+            "title": "Status",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "additionalProperties": true,
+                "type": "object"
+              }
+            ],
+            "nullable": true
+          }
+        },
+        "title": "InstrumentStatusPutBody",
+        "type": "object"
+      },
       "InvitationPostBody": {
         "additionalProperties": false,
         "description": "Request body for inviting a new user.",
@@ -78639,6 +78598,39 @@
           "annotation_id"
         ],
         "title": "AnnotationPostResponse",
+        "type": "object"
+      },
+      "AnnotationPutBody": {
+        "additionalProperties": false,
+        "description": "Request body for updating an annotation.",
+        "properties": {
+          "data": {
+            "default": null,
+            "description": "Annotation data as {key: value} pairs.",
+            "title": "Data",
+            "additionalProperties": true,
+            "type": "object",
+            "nullable": true
+          },
+          "origin": {
+            "default": null,
+            "description": "String describing the source of this information.",
+            "title": "Origin",
+            "type": "string",
+            "nullable": true
+          },
+          "group_ids": {
+            "default": null,
+            "description": "List of group IDs corresponding to which groups should be able to view the annotation.",
+            "title": "Group Ids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
+          }
+        },
+        "title": "AnnotationPutBody",
         "type": "object"
       },
       "SourceGroupsPostBody": {
@@ -79306,6 +79298,99 @@
           }
         },
         "title": "TelescopePutBody",
+        "type": "object"
+      },
+      "ThumbnailPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for uploading a thumbnail.",
+        "properties": {
+          "obj_id": {
+            "description": "ID of object associated with thumbnails.",
+            "title": "Obj Id",
+            "type": "string"
+          },
+          "data": {
+            "description": "base64-encoded PNG image file contents. Image size must be between 16px and 500px on a side.",
+            "title": "Data",
+            "type": "string"
+          },
+          "ttype": {
+            "description": "Thumbnail type. Must be one of 'new', 'ref', 'sub', 'sdss', 'dr8', 'new_gz', 'ref_gz', 'sub_gz'",
+            "title": "Ttype",
+            "type": "string"
+          }
+        },
+        "required": [
+          "obj_id",
+          "data",
+          "ttype"
+        ],
+        "title": "ThumbnailPostBody",
+        "type": "object"
+      },
+      "ThumbnailPostResponse": {
+        "description": "Data payload returned when uploading a thumbnail.",
+        "properties": {
+          "id": {
+            "description": "New thumbnail ID",
+            "title": "Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "ThumbnailPostResponse",
+        "type": "object"
+      },
+      "ThumbnailPutBody": {
+        "additionalProperties": false,
+        "description": "Request body for updating a thumbnail.",
+        "properties": {
+          "obj_id": {
+            "default": null,
+            "description": "ID of the thumbnail's obj.",
+            "title": "Obj Id",
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "default": null,
+            "description": "Thumbnail type (e.g., ref, new, sub, ls, ps1, ...)",
+            "title": "Type",
+            "type": "string",
+            "nullable": true
+          },
+          "file_uri": {
+            "default": null,
+            "description": "Path of the Thumbnail on the machine running SkyPortal.",
+            "title": "File Uri",
+            "type": "string",
+            "nullable": true
+          },
+          "public_url": {
+            "default": null,
+            "description": "Publically accessible URL of the thumbnail.",
+            "title": "Public Url",
+            "type": "string",
+            "nullable": true
+          },
+          "origin": {
+            "default": null,
+            "description": "Origin of the Thumbnail.",
+            "title": "Origin",
+            "type": "string",
+            "nullable": true
+          },
+          "is_grayscale": {
+            "default": null,
+            "description": "Whether the thumbnail is (mostly) grayscale.",
+            "title": "Is Grayscale",
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "title": "ThumbnailPutBody",
         "type": "object"
       },
       "UserACLPostBody": {
