@@ -14562,55 +14562,11 @@
           "invitations"
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "userEmail": {
-                    "type": "string"
-                  },
-                  "role": {
-                    "type": "string",
-                    "description": "The role the new user will have in the system.\nIf provided, must be one of either \"Full user\" or \"View only\".\nDefaults to \"Full user\".\n"
-                  },
-                  "streamIDs": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer"
-                    },
-                    "description": "List of IDs of streams invited user will be given access to. If\nnot provided, user will be granted access to all streams associated\nwith the groups specified by `groupIDs`.\n"
-                  },
-                  "groupIDs": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer"
-                    },
-                    "description": "List of IDs of groups invited user will be added to. If `streamIDs`\nis not provided, invited user will be given accesss to all streams\nassociated with the groups specified by this field.\n"
-                  },
-                  "groupAdmin": {
-                    "type": "array",
-                    "items": {
-                      "type": "boolean"
-                    },
-                    "description": "List of booleans indicating whether user should be granted admin\nstatus for respective specified group(s). Defaults to all false.\n"
-                  },
-                  "canSave": {
-                    "type": "array",
-                    "items": {
-                      "type": "boolean"
-                    },
-                    "description": "List of booleans indicating whether user should be able to save\nsources to respective specified group(s). Defaults to all true.\n"
-                  },
-                  "userExpirationDate": {
-                    "type": "string",
-                    "description": "Arrow-parseable date string (e.g. 2020-01-01). Set a user's expiration\ndate, after which the user's account will be deactivated and will be unable\nto access the application.\n"
-                  }
-                },
-                "required": [
-                  "userEmail",
-                  "groupIDs"
-                ]
+                "$ref": "#/components/schemas/InvitationPostBody"
               }
             }
           }
@@ -14628,13 +14584,7 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "string",
-                              "description": "New invitation ID"
-                            }
-                          }
+                          "$ref": "#/components/schemas/InvitationPostResponse"
                         }
                       }
                     }
@@ -14653,36 +14603,6 @@
         "tags": [
           "invitations"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "groupIDs": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer"
-                    }
-                  },
-                  "streamIDs": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer"
-                    }
-                  },
-                  "role": {
-                    "type": "string"
-                  },
-                  "userExpirationDate": {
-                    "type": "string",
-                    "description": "Arrow-parseable date string (e.g. 2020-01-01). Set a user's expiration\ndate, after which the user's account will be deactivated and will be unable\nto access the application.\n"
-                  }
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -14690,6 +14610,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Success"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InvitationPatchBody"
               }
             }
           }
@@ -25901,15 +25831,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TelescopeNoID"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -25926,6 +25847,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TelescopePutBody"
               }
             }
           }
@@ -26046,10 +25977,11 @@
           "telescopes"
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/TelescopeNoID"
+                "$ref": "#/components/schemas/TelescopePostBody"
               }
             }
           }
@@ -26067,26 +25999,11 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "integer",
-                              "description": "New telescope ID"
-                            }
-                          }
+                          "$ref": "#/components/schemas/TelescopePostResponse"
                         }
                       }
                     }
                   ]
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -78228,6 +78145,131 @@
         "title": "GroupAdmissionRequestPatchBody",
         "type": "object"
       },
+      "InvitationPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for inviting a new user.",
+        "properties": {
+          "userEmail": {
+            "description": "Email address to send the invitation to.",
+            "title": "Useremail",
+            "type": "string"
+          },
+          "groupIDs": {
+            "description": "List of IDs of groups invited user will be added to. If `streamIDs` is not provided, invited user will be given accesss to all streams associated with the groups specified by this field.",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Groupids",
+            "type": "array"
+          },
+          "role": {
+            "default": "Full user",
+            "description": "The role the new user will have in the system. If provided, must be one of either \"Full user\" or \"View only\". Defaults to \"Full user\".",
+            "title": "Role",
+            "type": "string"
+          },
+          "streamIDs": {
+            "default": null,
+            "description": "List of IDs of streams invited user will be given access to. If not provided, user will be granted access to all streams associated with the groups specified by `groupIDs`.",
+            "title": "Streamids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
+          },
+          "groupAdmin": {
+            "default": null,
+            "description": "List of booleans indicating whether user should be granted admin status for respective specified group(s). Defaults to all false.",
+            "title": "Groupadmin",
+            "items": {
+              "type": "boolean"
+            },
+            "type": "array",
+            "nullable": true
+          },
+          "canSave": {
+            "default": null,
+            "description": "List of booleans indicating whether user should be able to save sources to respective specified group(s). Defaults to all true.",
+            "title": "Cansave",
+            "items": {
+              "type": "boolean"
+            },
+            "type": "array",
+            "nullable": true
+          },
+          "userExpirationDate": {
+            "default": null,
+            "description": "Arrow-parseable date string (e.g. 2020-01-01). Set a user's expiration date, after which the user's account will be deactivated and will be unable to access the application.",
+            "title": "Userexpirationdate",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "userEmail",
+          "groupIDs"
+        ],
+        "title": "InvitationPostBody",
+        "type": "object"
+      },
+      "InvitationPostResponse": {
+        "description": "Data payload returned when creating an invitation.",
+        "properties": {
+          "id": {
+            "description": "New invitation ID",
+            "title": "Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "InvitationPostResponse",
+        "type": "object"
+      },
+      "InvitationPatchBody": {
+        "additionalProperties": false,
+        "description": "Request body for updating a pending invitation.",
+        "properties": {
+          "groupIDs": {
+            "default": null,
+            "description": "List of IDs of groups the user is invited to.",
+            "title": "Groupids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
+          },
+          "streamIDs": {
+            "default": null,
+            "description": "List of IDs of streams invited user will be given access to.",
+            "title": "Streamids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
+          },
+          "role": {
+            "default": null,
+            "description": "The role the new user will have in the system.",
+            "title": "Role",
+            "type": "string",
+            "nullable": true
+          },
+          "userExpirationDate": {
+            "default": null,
+            "description": "Arrow-parseable date string (e.g. 2020-01-01). Set a user's expiration date, after which the user's account will be deactivated and will be unable to access the application.",
+            "title": "Userexpirationdate",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "title": "InvitationPatchBody",
+        "type": "object"
+      },
       "ObservationHandlerPost": {
         "type": "object",
         "properties": {
@@ -79095,6 +79137,175 @@
           "id"
         ],
         "title": "TeamPutResponse",
+        "type": "object"
+      },
+      "TelescopePostBody": {
+        "additionalProperties": false,
+        "description": "Request body for creating a telescope.",
+        "properties": {
+          "name": {
+            "description": "Unabbreviated facility name (e.g., Palomar 200-inch Hale Telescope).",
+            "title": "Name",
+            "type": "string"
+          },
+          "nickname": {
+            "description": "Abbreviated facility name (e.g., P200).",
+            "title": "Nickname",
+            "type": "string"
+          },
+          "diameter": {
+            "description": "Diameter in meters.",
+            "title": "Diameter",
+            "type": "number"
+          },
+          "lat": {
+            "default": null,
+            "description": "Latitude in deg.",
+            "title": "Lat",
+            "type": "number",
+            "nullable": true
+          },
+          "lon": {
+            "default": null,
+            "description": "Longitude in deg.",
+            "title": "Lon",
+            "type": "number",
+            "nullable": true
+          },
+          "elevation": {
+            "default": null,
+            "description": "Elevation in meters.",
+            "title": "Elevation",
+            "type": "number",
+            "nullable": true
+          },
+          "skycam_link": {
+            "default": null,
+            "description": "Link to the telescope's sky camera.",
+            "title": "Skycam Link",
+            "type": "string",
+            "nullable": true
+          },
+          "weather_link": {
+            "default": null,
+            "description": "Link to the preferred weather site.",
+            "title": "Weather Link",
+            "type": "string",
+            "nullable": true
+          },
+          "robotic": {
+            "default": false,
+            "description": "Is this telescope robotic?",
+            "title": "Robotic",
+            "type": "boolean"
+          },
+          "fixed_location": {
+            "default": null,
+            "description": "Does this telescope have a fixed location (lon, lat, elev)? Defaults to true.",
+            "title": "Fixed Location",
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "required": [
+          "name",
+          "nickname",
+          "diameter"
+        ],
+        "title": "TelescopePostBody",
+        "type": "object"
+      },
+      "TelescopePostResponse": {
+        "description": "Data payload returned when creating a telescope.",
+        "properties": {
+          "id": {
+            "description": "New telescope ID",
+            "title": "Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "TelescopePostResponse",
+        "type": "object"
+      },
+      "TelescopePutBody": {
+        "additionalProperties": false,
+        "description": "Request body for updating a telescope.",
+        "properties": {
+          "name": {
+            "default": null,
+            "description": "Unabbreviated facility name (e.g., Palomar 200-inch Hale Telescope).",
+            "title": "Name",
+            "type": "string",
+            "nullable": true
+          },
+          "nickname": {
+            "default": null,
+            "description": "Abbreviated facility name (e.g., P200).",
+            "title": "Nickname",
+            "type": "string",
+            "nullable": true
+          },
+          "diameter": {
+            "default": null,
+            "description": "Diameter in meters.",
+            "title": "Diameter",
+            "type": "number",
+            "nullable": true
+          },
+          "lat": {
+            "default": null,
+            "description": "Latitude in deg.",
+            "title": "Lat",
+            "type": "number",
+            "nullable": true
+          },
+          "lon": {
+            "default": null,
+            "description": "Longitude in deg.",
+            "title": "Lon",
+            "type": "number",
+            "nullable": true
+          },
+          "elevation": {
+            "default": null,
+            "description": "Elevation in meters.",
+            "title": "Elevation",
+            "type": "number",
+            "nullable": true
+          },
+          "skycam_link": {
+            "default": null,
+            "description": "Link to the telescope's sky camera.",
+            "title": "Skycam Link",
+            "type": "string",
+            "nullable": true
+          },
+          "weather_link": {
+            "default": null,
+            "description": "Link to the preferred weather site.",
+            "title": "Weather Link",
+            "type": "string",
+            "nullable": true
+          },
+          "robotic": {
+            "default": null,
+            "description": "Is this telescope robotic?",
+            "title": "Robotic",
+            "type": "boolean",
+            "nullable": true
+          },
+          "fixed_location": {
+            "default": null,
+            "description": "Does this telescope have a fixed location (lon, lat, elev)?",
+            "title": "Fixed Location",
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "title": "TelescopePutBody",
         "type": "object"
       },
       "UserACLPostBody": {
