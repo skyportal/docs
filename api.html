@@ -13275,31 +13275,11 @@
           "listings"
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "user_id": {
-                    "type": "integer",
-                    "required": false,
-                    "description": "ID of user that you want to add the listing to.\nIf not given, will default to the associated user object that is posting.\n"
-                  },
-                  "obj_id": {
-                    "type": "string",
-                    "required": true
-                  },
-                  "list_name": {
-                    "type": "string",
-                    "required": true,
-                    "description": "Listing name for this item, e.g., \"favorites\".\nMultiple objects can be saved by the same user to different\nlists, where the list names are user-defined.\nList name must be a non-empty string starting with an\nalphanumeric character or underscore.\n(it must match the regex: /^\\w+/)\n"
-                  },
-                  "params": {
-                    "type": "object",
-                    "required": false,
-                    "description": "Optional parameters for \"watchlist\" type listings, when searching for new candidates around a given object.\nFor example, if you want to search for new candidates around a given object, you can specify the search radius\nand the number of candidates to return.\nThe parameters are passed to the microservice that is responsible for processing the listing.\nThe microservice will return a list of candidates that match the given parameters, and ingest them.\n"
-                  }
-                }
+                "$ref": "#/components/schemas/ListingPostBody"
               }
             }
           }
@@ -13317,13 +13297,7 @@
                       "type": "object",
                       "properties": {
                         "data": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "integer",
-                              "description": "New listing ID"
-                            }
-                          }
+                          "$ref": "#/components/schemas/ListingPostResponse"
                         }
                       }
                     }
@@ -13352,30 +13326,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "user_id": {
-                    "type": "integer",
-                    "required": true
-                  },
-                  "obj_id": {
-                    "type": "string",
-                    "required": true
-                  },
-                  "list_name": {
-                    "type": "string",
-                    "required": true,
-                    "description": "Listing name for this item, e.g., \"favorites\".\nMultiple objects can be saved by the same user to different\nlists, where the list names are user-defined.\nList name must be a non-empty string starting with an\nalphanumeric character or underscore.\n(it must match the regex: /^\\w+/)\n"
-                  }
-                }
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -13383,6 +13333,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Success"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ListingPatchBody"
               }
             }
           }
@@ -16830,28 +16790,6 @@
         "tags": [
           "object tags"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "description": "Tag name (letters and numbers only)"
-                  },
-                  "color": {
-                    "type": "string",
-                    "description": "Hex color code (e.g.,"
-                  }
-                },
-                "required": [
-                  "name"
-                ]
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -16892,6 +16830,16 @@
               }
             }
           }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObjTagOptionPostBody"
+              }
+            }
+          }
         }
       }
     },
@@ -16912,28 +16860,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string",
-                    "description": "New tag name"
-                  },
-                  "color": {
-                    "type": "string",
-                    "description": "New hex color code (e.g.,"
-                  }
-                },
-                "required": [
-                  "name"
-                ]
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -16959,6 +16885,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObjTagOptionPatchBody"
               }
             }
           }
@@ -17071,37 +17007,6 @@
         "tags": [
           "object tags"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "objtagoption_id": {
-                    "type": "integer",
-                    "description": "ID of the tag option to associate"
-                  },
-                  "obj_id": {
-                    "type": "string",
-                    "description": "ID of the object to tag"
-                  },
-                  "group_ids": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer"
-                    },
-                    "description": "IDs of groups that can access this tag association"
-                  }
-                },
-                "required": [
-                  "objtagoption_id",
-                  "obj_id",
-                  "group_ids"
-                ]
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -17139,6 +17044,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObjTagPostBody"
               }
             }
           }
@@ -23345,50 +23260,6 @@
         "tags": [
           "sources"
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "objId": {
-                    "type": "string",
-                    "description": "ID of the object in question."
-                  },
-                  "inviteGroupIds": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer"
-                    },
-                    "description": "List of group IDs to save or invite to save specified source.\n"
-                  },
-                  "unsaveGroupIds": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer"
-                    },
-                    "description": "List of group IDs from which specified source is to be unsaved.\n"
-                  }
-                },
-                "required": [
-                  "objId"
-                ],
-                "anyOf": [
-                  {
-                    "required": [
-                      "inviteGroupIds"
-                    ]
-                  },
-                  {
-                    "required": [
-                      "unsaveGroupIds"
-                    ]
-                  }
-                ]
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -23396,6 +23267,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Success"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SourceGroupsPostBody"
               }
             }
           }
@@ -23419,31 +23300,6 @@
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "groupID": {
-                    "type": "integer"
-                  },
-                  "active": {
-                    "type": "boolean"
-                  },
-                  "requested": {
-                    "type": "boolean"
-                  }
-                },
-                "required": [
-                  "groupID",
-                  "active",
-                  "requested"
-                ]
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "content": {
@@ -23451,6 +23307,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Success"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SourceGroupsPatchBody"
               }
             }
           }
@@ -26003,10 +25869,11 @@
           }
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object"
+                "$ref": "#/components/schemas/TeamPutBody"
               }
             }
           }
@@ -26016,16 +25883,19 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/TeamPutResponse"
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -26096,21 +25966,11 @@
           "teams"
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "group_ids": {
-                    "type": "array",
-                    "items": {
-                      "type": "integer"
-                    }
-                  }
-                }
+                "$ref": "#/components/schemas/TeamPostBody"
               }
             }
           }
@@ -26120,16 +25980,19 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Success"
-                }
-              }
-            }
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/TeamPostResponse"
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -78401,6 +78264,87 @@
         },
         "additionalProperties": false
       },
+      "ListingPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for adding a listing.",
+        "properties": {
+          "obj_id": {
+            "description": "ID of the object to add to the list.",
+            "title": "Obj Id",
+            "type": "string"
+          },
+          "list_name": {
+            "description": "Listing name for this item, e.g., \"favorites\". Multiple objects can be saved by the same user to different lists, where the list names are user-defined. List name must be a non-empty string starting with an alphanumeric character or underscore. (it must match the regex: /^\\w+/)",
+            "title": "List Name",
+            "type": "string"
+          },
+          "user_id": {
+            "default": null,
+            "description": "ID of user that you want to add the listing to. If not given, will default to the associated user object that is posting.",
+            "title": "User Id",
+            "type": "integer",
+            "nullable": true
+          },
+          "params": {
+            "default": null,
+            "description": "Optional parameters for \"watchlist\" type listings, when searching for new candidates around a given object. For example, if you want to search for new candidates around a given object, you can specify the search radius and the number of candidates to return. The parameters are passed to the microservice that is responsible for processing the listing. The microservice will return a list of candidates that match the given parameters, and ingest them.",
+            "title": "Params",
+            "additionalProperties": true,
+            "type": "object",
+            "nullable": true
+          }
+        },
+        "required": [
+          "obj_id",
+          "list_name"
+        ],
+        "title": "ListingPostBody",
+        "type": "object"
+      },
+      "ListingPostResponse": {
+        "description": "Data payload returned when adding a listing.",
+        "properties": {
+          "id": {
+            "description": "New listing ID",
+            "title": "Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "ListingPostResponse",
+        "type": "object"
+      },
+      "ListingPatchBody": {
+        "additionalProperties": false,
+        "description": "Request body for updating a listing.",
+        "properties": {
+          "user_id": {
+            "default": null,
+            "description": "ID of the user the listing belongs to.",
+            "title": "User Id",
+            "type": "integer",
+            "nullable": true
+          },
+          "obj_id": {
+            "default": null,
+            "description": "ID of the listed object.",
+            "title": "Obj Id",
+            "type": "string",
+            "nullable": true
+          },
+          "list_name": {
+            "default": null,
+            "description": "Listing name for this item, e.g., \"favorites\". Multiple objects can be saved by the same user to different lists, where the list names are user-defined. List name must be a non-empty string starting with an alphanumeric character or underscore. (it must match the regex: /^\\w+/)",
+            "title": "List Name",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "title": "ListingPatchBody",
+        "type": "object"
+      },
       "GroupAdmissionRequestPostBody": {
         "additionalProperties": false,
         "description": "Request body for creating a group admission request.",
@@ -78540,6 +78484,84 @@
         ],
         "additionalProperties": false
       },
+      "ObjTagOptionPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for creating a tag option.",
+        "properties": {
+          "name": {
+            "description": "Tag name (letters and numbers only)",
+            "title": "Name",
+            "type": "string"
+          },
+          "color": {
+            "default": null,
+            "description": "Hex color code (e.g., #3a87ad)",
+            "title": "Color",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "ObjTagOptionPostBody",
+        "type": "object"
+      },
+      "ObjTagOptionPatchBody": {
+        "additionalProperties": false,
+        "description": "Request body for updating a tag option.",
+        "properties": {
+          "name": {
+            "description": "New tag name",
+            "title": "Name",
+            "type": "string"
+          },
+          "color": {
+            "default": null,
+            "description": "New hex color code (e.g., #3a87ad)",
+            "title": "Color",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "ObjTagOptionPatchBody",
+        "type": "object"
+      },
+      "ObjTagPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for creating an object-tag association.",
+        "properties": {
+          "objtagoption_id": {
+            "description": "ID of the tag option to associate",
+            "title": "Objtagoption Id",
+            "type": "integer"
+          },
+          "obj_id": {
+            "description": "ID of the object to tag",
+            "title": "Obj Id",
+            "type": "string"
+          },
+          "group_ids": {
+            "default": null,
+            "description": "IDs of groups that can access this tag association. Defaults to the public group.",
+            "title": "Group Ids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
+          }
+        },
+        "required": [
+          "objtagoption_id",
+          "obj_id"
+        ],
+        "title": "ObjTagPostBody",
+        "type": "object"
+      },
       "SkymapQueueAPIHandlerPost": {
         "type": "object",
         "properties": {
@@ -78649,6 +78671,66 @@
         "title": "AnnotationPostResponse",
         "type": "object"
       },
+      "SourceGroupsPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for saving/unsaving a source to/from groups.",
+        "properties": {
+          "objId": {
+            "description": "ID of the object in question.",
+            "title": "Objid",
+            "type": "string"
+          },
+          "inviteGroupIds": {
+            "description": "List of group IDs to save or invite to save specified source.",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Invitegroupids",
+            "type": "array"
+          },
+          "unsaveGroupIds": {
+            "description": "List of group IDs from which specified source is to be unsaved.",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Unsavegroupids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "objId"
+        ],
+        "title": "SourceGroupsPostBody",
+        "type": "object"
+      },
+      "SourceGroupsPatchBody": {
+        "additionalProperties": false,
+        "description": "Request body for updating a Source table row.",
+        "properties": {
+          "groupID": {
+            "description": "ID of the group whose Source row to update.",
+            "title": "Groupid",
+            "type": "integer"
+          },
+          "active": {
+            "description": "Whether the source is saved to the group.",
+            "title": "Active",
+            "type": "boolean"
+          },
+          "requested": {
+            "description": "Whether the source is requested to be saved to the group.",
+            "title": "Requested",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "groupID",
+          "active",
+          "requested"
+        ],
+        "title": "SourceGroupsPatchBody",
+        "type": "object"
+      },
       "SpatialCatalogASCIIFileHandlerPost": {
         "type": "object",
         "properties": {
@@ -78681,6 +78763,169 @@
           }
         },
         "additionalProperties": false
+      },
+      "TeamPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for creating a team.",
+        "properties": {
+          "name": {
+            "description": "Team name.",
+            "title": "Name",
+            "type": "string"
+          },
+          "nickname": {
+            "default": null,
+            "description": "Team nickname.",
+            "title": "Nickname",
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "default": null,
+            "description": "Team description.",
+            "title": "Description",
+            "type": "string",
+            "nullable": true
+          },
+          "primary_color": {
+            "default": null,
+            "description": "Primary color.",
+            "title": "Primary Color",
+            "type": "string",
+            "nullable": true
+          },
+          "secondary_color": {
+            "default": null,
+            "description": "Secondary color.",
+            "title": "Secondary Color",
+            "type": "string",
+            "nullable": true
+          },
+          "logo_url": {
+            "default": null,
+            "description": "Logo URL or data URI.",
+            "title": "Logo Url",
+            "type": "string",
+            "nullable": true
+          },
+          "background_url": {
+            "default": null,
+            "description": "Background image URL or data URI.",
+            "title": "Background Url",
+            "type": "string",
+            "nullable": true
+          },
+          "group_ids": {
+            "description": "IDs of the groups making up the team. The current user must be an admin of each group added to the team.",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Group Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "TeamPostBody",
+        "type": "object"
+      },
+      "TeamPostResponse": {
+        "description": "Data payload returned when creating a team.",
+        "properties": {
+          "id": {
+            "description": "New team ID",
+            "title": "Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "TeamPostResponse",
+        "type": "object"
+      },
+      "TeamPutBody": {
+        "additionalProperties": false,
+        "description": "Request body for updating a team.",
+        "properties": {
+          "name": {
+            "default": null,
+            "description": "Team name.",
+            "title": "Name",
+            "type": "string",
+            "nullable": true
+          },
+          "nickname": {
+            "default": null,
+            "description": "Team nickname.",
+            "title": "Nickname",
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "default": null,
+            "description": "Team description.",
+            "title": "Description",
+            "type": "string",
+            "nullable": true
+          },
+          "primary_color": {
+            "default": null,
+            "description": "Primary color.",
+            "title": "Primary Color",
+            "type": "string",
+            "nullable": true
+          },
+          "secondary_color": {
+            "default": null,
+            "description": "Secondary color.",
+            "title": "Secondary Color",
+            "type": "string",
+            "nullable": true
+          },
+          "logo_url": {
+            "default": null,
+            "description": "Logo URL or data URI.",
+            "title": "Logo Url",
+            "type": "string",
+            "nullable": true
+          },
+          "background_url": {
+            "default": null,
+            "description": "Background image URL or data URI.",
+            "title": "Background Url",
+            "type": "string",
+            "nullable": true
+          },
+          "group_ids": {
+            "default": null,
+            "description": "When provided, replaces the team's groups; the user must be an admin of each group added or removed.",
+            "title": "Group Ids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
+          }
+        },
+        "title": "TeamPutBody",
+        "type": "object"
+      },
+      "TeamPutResponse": {
+        "description": "Data payload returned when updating a team.",
+        "properties": {
+          "id": {
+            "description": "Updated team ID",
+            "title": "Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "TeamPutResponse",
+        "type": "object"
       }
     },
     "securitySchemes": {
