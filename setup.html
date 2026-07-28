@@ -630,7 +630,7 @@ error: incompatible pointer to integer conversion
 <span class="n">make</span><span class="p">:</span> <span class="o">***</span> <span class="p">[</span><span class="n">run</span><span class="p">]</span> <span class="n">Error</span> <span class="mi">2</span>
 </pre></div>
 </div>
-<p>You may need to run <code class="docutils literal notranslate"><span class="pre">npm</span> <span class="pre">install</span> <span class="pre">--legacy-peer-deps</span></code> and then try <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code> again.</p>
+<p>You may need to run <code class="docutils literal notranslate"><span class="pre">bun</span> <span class="pre">install</span> <span class="pre">--frozen-lockfile</span></code> and then try <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code> again.</p>
 <hr class="docutils" />
 <p>If you have trouble getting the demo data try doing:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">db_clear</span> <span class="o">&amp;&amp;</span> <span class="n">make</span> <span class="n">db_init</span> <span class="o">&amp;&amp;</span> <span class="n">make</span> <span class="n">run</span>
