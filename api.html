@@ -6444,10 +6444,10 @@
         }
       }
     },
-    "/api/galaxy_catalog/glade": {
+    "/api/galaxy_catalog/regalade": {
       "post": {
-        "summary": "Upload galaxies from GLADE+ catalog",
-        "description": "<b>Permission(s) required:</b> <em>System Admin (or System admin)</em><br><br>Upload galaxies from GLADE+ catalog. If no file_name or file_url is provided, will look for the GLADE+ catalog in the data directory. If it can't be found, it will download it.",
+        "summary": "Upload galaxies from the REGALADE catalog",
+        "description": "<b>Permission(s) required:</b> <em>System Admin (or System admin)</em><br><br>Upload galaxies from the REGALADE catalog (FITS). If no file_name or file_url is provided, looks for regalade_v2.fits in the data directory.",
         "tags": [
           "galaxies"
         ],
@@ -6459,11 +6459,59 @@
                 "properties": {
                   "file_name": {
                     "type": "string",
-                    "description": "Name of the file containing the galaxies (in the data directory)"
+                    "description": "Name of the .fits file containing the galaxies (in the data directory)"
                   },
                   "file_url": {
                     "type": "string",
-                    "description": "URL of the file containing the galaxies"
+                    "description": "URL of the .fits file containing the galaxies"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/galaxy_catalog/ned": {
+      "post": {
+        "summary": "Upload galaxies from the NEDLVS catalog",
+        "description": "<b>Permission(s) required:</b> <em>System Admin (or System admin)</em><br><br>Upload galaxies from the NEDLVS catalog (FITS). If no file_name or file_url is provided, looks for NEDLVS_20260424.fits in the data directory.",
+        "tags": [
+          "galaxies"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file_name": {
+                    "type": "string",
+                    "description": "Name of the .fits file containing the galaxies (in the data directory)"
+                  },
+                  "file_url": {
+                    "type": "string",
+                    "description": "URL of the .fits file containing the galaxies"
                   }
                 }
               }
