@@ -3162,7 +3162,36 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ArrayOfScanReports"
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "reports": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "#/components/schemas/ScanReport"
+                              }
+                            },
+                            "totalMatches": {
+                              "type": "integer"
+                            },
+                            "pageNumber": {
+                              "type": "integer"
+                            },
+                            "numPerPage": {
+                              "type": "integer"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -3225,6 +3254,14 @@
                         }
                       }
                     }
+                  },
+                  "passed_filters_window_hours": {
+                    "type": "number",
+                    "description": "Alternative to passed_filters_range: a rolling window of this\nmany hours ending now. Ignored if passed_filters_range is given.\nLets a recurring caller generate reports on a schedule.\n"
+                  },
+                  "saved_candidates_window_hours": {
+                    "type": "number",
+                    "description": "Alternative to saved_candidates_range: a rolling window of this\nmany hours ending now. Ignored if saved_candidates_range is given.\n"
                   }
                 }
               }
