@@ -2229,6 +2229,139 @@
         }
       }
     },
+    "/api/brokers/filters": {
+      "get": {
+        "summary": "List filters and their broker",
+        "description": "Paginated list of the skyportal Filters accessible to the user, optionally restricted to the ones attached to no broker.",
+        "tags": [
+          "brokers",
+          "filters"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "pageNumber",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "numPerPage",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Case-insensitive substring of the filter name."
+          },
+          {
+            "in": "query",
+            "name": "groupID",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "streamID",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "brokerID",
+            "schema": {
+              "type": "string"
+            },
+            "description": "A broker id, or \"none\" for filters attached to no broker."
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/brokers/filters/{filter_id}/attach": {
+      "post": {
+        "summary": "Attach a filter to a broker",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Bind an unattached skyportal Filter to a broker.",
+        "tags": [
+          "brokers",
+          "filters"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "filter_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "broker_id"
+                ],
+                "properties": {
+                  "broker_id": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/brokers/{broker_id}/filters/{filter_id})?": {
       "get": {
         "summary": "Get broker filter(s)",
@@ -2863,6 +2996,7 @@
       },
       "patch": {
         "summary": "Update a broker",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Activating a broker whose provider implements ``test_connection``, or editing an active one's credentials, first reaches the broker, and fails if the credentials are refused.",
         "tags": [
           "brokers"
         ],
@@ -2880,7 +3014,26 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object"
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "active": {
+                    "type": "boolean"
+                  },
+                  "altdata": {
+                    "type": "object"
+                  },
+                  "default_alert_search": {
+                    "type": "boolean",
+                    "description": "Make this the broker the source page searches alerts on."
+                  },
+                  "default_crossmatch": {
+                    "type": "boolean",
+                    "description": "Make this the broker cross-matches are run against."
+                  }
+                }
               }
             }
           }
@@ -2904,8 +3057,7 @@
               }
             }
           }
-        },
-        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>"
+        }
       },
       "delete": {
         "summary": "Delete a broker",
@@ -2948,7 +3100,7 @@
     "/api/brokers/)?": {
       "post": {
         "summary": "Create a broker",
-        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Register a configured connection to an external alert broker.",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Register a configured connection to an external alert broker. A broker whose provider implements ``test_connection`` is always created inactive, since activating it is what checks its credentials.",
         "tags": [
           "brokers"
         ],
@@ -2975,6 +3127,14 @@
                   },
                   "active": {
                     "type": "boolean"
+                  },
+                  "default_alert_search": {
+                    "type": "boolean",
+                    "description": "Make this the broker the source page searches alerts on."
+                  },
+                  "default_crossmatch": {
+                    "type": "boolean",
+                    "description": "Make this the broker cross-matches are run against."
                   }
                 }
               }
@@ -30600,6 +30760,13 @@
       "Broker": {
         "type": "object",
         "properties": {
+          "filters": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            }
+          },
           "name": {
             "type": "string",
             "description": "Unique name of the broker."
@@ -30623,6 +30790,14 @@
           "active": {
             "type": "boolean",
             "description": "Whether this broker is enabled."
+          },
+          "default_alert_search": {
+            "type": "boolean",
+            "description": "Whether this broker is the one the source page's alert search targets."
+          },
+          "default_crossmatch": {
+            "type": "boolean",
+            "description": "Whether this broker is the one cross-matches (cone searches) target."
           },
           "_altdata": {
             "type": "string",
@@ -30688,6 +30863,13 @@
       "BrokerNoID": {
         "type": "object",
         "properties": {
+          "filters": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            }
+          },
           "name": {
             "type": "string",
             "description": "Unique name of the broker."
@@ -30711,6 +30893,14 @@
           "active": {
             "type": "boolean",
             "description": "Whether this broker is enabled."
+          },
+          "default_alert_search": {
+            "type": "boolean",
+            "description": "Whether this broker is the one the source page's alert search targets."
+          },
+          "default_crossmatch": {
+            "type": "boolean",
+            "description": "Whether this broker is the one cross-matches (cone searches) target."
           },
           "_altdata": {
             "type": "string",
@@ -37002,6 +37192,15 @@
             "description": "The Filter's Group.",
             "readOnly": true
           },
+          "broker": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Broker"
+              }
+            ],
+            "description": "The Broker this Filter runs on.",
+            "readOnly": true
+          },
           "candidates": {
             "type": "array",
             "readOnly": true,
@@ -37026,6 +37225,11 @@
           "group_id": {
             "type": "integer",
             "description": "ID of the Filter's Group."
+          },
+          "broker_id": {
+            "type": "integer",
+            "description": "ID of the Broker this Filter runs on, if any.",
+            "nullable": true
           },
           "id": {
             "type": "integer",
@@ -37105,6 +37309,15 @@
             "description": "The Filter's Group.",
             "readOnly": true
           },
+          "broker": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Broker"
+              }
+            ],
+            "description": "The Broker this Filter runs on.",
+            "readOnly": true
+          },
           "candidates": {
             "type": "array",
             "readOnly": true,
@@ -37129,6 +37342,11 @@
           "group_id": {
             "type": "integer",
             "description": "ID of the Filter's Group."
+          },
+          "broker_id": {
+            "type": "integer",
+            "description": "ID of the Broker this Filter runs on, if any.",
+            "nullable": true
           }
         },
         "required": [
@@ -77841,6 +78059,13 @@
             "description": "ID of the Filter's Group.",
             "title": "Group Id",
             "type": "integer"
+          },
+          "broker_id": {
+            "default": null,
+            "description": "ID of the Broker this Filter runs on, if any.",
+            "title": "Broker Id",
+            "type": "integer",
+            "nullable": true
           },
           "altdata": {
             "default": null,

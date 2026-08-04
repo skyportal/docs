@@ -462,9 +462,10 @@ used ones:</p>
 </ul>
 <p>DB preparation:</p>
 <ul class="simple">
-<li><p>db_init : Create database</p></li>
-<li><p>db_clear : Drop and re-create DB</p></li>
+<li><p>db_init : Create the databases if they don’t exist yet</p></li>
+<li><p>db_clear : Drop and re-create the databases, wiping all data</p></li>
 </ul>
+<p>Neither creates the tables: <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code> does it on startup.</p>
 <p>Launching:</p>
 <ul class="simple">
 <li><p>run : Launch the web application</p></li>
