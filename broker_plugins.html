@@ -329,6 +329,14 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concepts">Concepts</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operations">Operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ingestion-and-filters-end-to-end">Ingestion and filters (end to end)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enable-the-ingestion-service">1. Enable the ingestion service</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#attach-filters">2. Attach filters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-and-how-often">3. When and how often</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-results-land">4. Where results land</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-save">5. Auto-save</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#endpoints">Endpoints</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-a-provider">Writing a provider</a></li>
 </ul>
@@ -354,23 +362,23 @@ of forking SkyPortal or re-deriving the same integration in every deployment.</p
 <section id="concepts">
 <h2>Concepts<a class="headerlink" href="#concepts" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">BrokerAPI</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">skyportal/broker_apis/interface.py</span></code>) — the base class. Every
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">BrokerAPI</span></code></strong> (<code class="docutils literal notranslate"><span class="pre">skyportal/broker_apis/interface.py</span></code>), the base class. Every
 operation is a stub that raises <code class="docutils literal notranslate"><span class="pre">NotImplementedError</span></code>; a provider overrides
 only what it supports.</p></li>
-<li><p><strong>Registry</strong> — providers are listed in the <code class="docutils literal notranslate"><span class="pre">BROKERS</span></code> tuple in
+<li><p><strong>Registry</strong>, providers are listed in the <code class="docutils literal notranslate"><span class="pre">BROKERS</span></code> tuple in
 <code class="docutils literal notranslate"><span class="pre">skyportal/broker_apis/__init__.py</span></code>. The <code class="docutils literal notranslate"><span class="pre">broker_classnames</span></code> Postgres enum
 (<code class="docutils literal notranslate"><span class="pre">skyportal/enum_types.py</span></code>) is derived from it, so provider names are
 validated at the database level (mirrors <code class="docutils literal notranslate"><span class="pre">api_classnames</span></code>). Append new
 providers to the end of the tuple to keep the enum stable.</p></li>
-<li><p><strong>Capabilities</strong> — <code class="docutils literal notranslate"><span class="pre">BrokerAPI.implements()</span></code> reports which operations a
+<li><p><strong>Capabilities</strong>, <code class="docutils literal notranslate"><span class="pre">BrokerAPI.implements()</span></code> reports which operations a
 provider overrode. Handlers gate on it, and the frontend can show/hide
 features accordingly.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Broker</span></code> model</strong> (<code class="docutils literal notranslate"><span class="pre">skyportal/models/broker.py</span></code>) — one configured broker:
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">Broker</span></code> model</strong> (<code class="docutils literal notranslate"><span class="pre">skyportal/models/broker.py</span></code>), one configured broker:
 <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">broker_classname</span></code> (which provider), <code class="docutils literal notranslate"><span class="pre">active</span></code>, and encrypted
 <code class="docutils literal notranslate"><span class="pre">altdata</span></code> (endpoints/credentials, mirroring <code class="docutils literal notranslate"><span class="pre">Allocation.altdata</span></code>). Only system
 admins may create/update/delete brokers, and <code class="docutils literal notranslate"><span class="pre">altdata</span></code> is redacted from
 non-admins.</p></li>
-<li><p><strong>Site defaults</strong> — <code class="docutils literal notranslate"><span class="pre">default_alert_search</span></code> and <code class="docutils literal notranslate"><span class="pre">default_crossmatch</span></code> name the
+<li><p><strong>Site defaults</strong>, <code class="docutils literal notranslate"><span class="pre">default_alert_search</span></code> and <code class="docutils literal notranslate"><span class="pre">default_crossmatch</span></code> name the
 broker the source page’s “Search alerts” button opens and the one its
 cross-matches (cone searches) run against. At most one broker holds each; pick them on the brokers page. The
 seeded data makes ALeRCE both.</p></li>
@@ -382,16 +390,71 @@ seeded data makes ALeRCE both.</p></li>
 <code class="docutils literal notranslate"><span class="pre">cone_search</span></code>, <code class="docutils literal notranslate"><span class="pre">save_as_source</span></code>, and filter management (<code class="docutils literal notranslate"><span class="pre">get_filters</span></code>,
 <code class="docutils literal notranslate"><span class="pre">create_filter</span></code>, <code class="docutils literal notranslate"><span class="pre">update_filter</span></code>, <code class="docutils literal notranslate"><span class="pre">delete_filter</span></code>, <code class="docutils literal notranslate"><span class="pre">test_filter</span></code>,
 <code class="docutils literal notranslate"><span class="pre">filter_modules</span></code>).</p>
-<p>Ingestion (broker → SkyPortal): <code class="docutils literal notranslate"><span class="pre">run_ingestion</span></code> — a long-lived consumer/poller,
-implemented on top of shared ETL helpers in a later stage.</p>
+<p>Ingestion (broker → SkyPortal): <code class="docutils literal notranslate"><span class="pre">run_ingestion</span></code>, a long-lived consumer/poller
+(see “Ingestion and filters” below).</p>
+</section>
+<section id="ingestion-and-filters-end-to-end">
+<h2>Ingestion and filters (end to end)<a class="headerlink" href="#ingestion-and-filters-end-to-end" title="Link to this heading">#</a></h2>
+<p>Once a broker is configured (a <code class="docutils literal notranslate"><span class="pre">Broker</span></code> record with valid <code class="docutils literal notranslate"><span class="pre">altdata</span></code>), ingestion,
+running its filters and pulling in matching alerts, is driven by a background
+service and gated by config.</p>
+<section id="enable-the-ingestion-service">
+<h3>1. Enable the ingestion service<a class="headerlink" href="#enable-the-ingestion-service" title="Link to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">broker_ingest</span></code> service (<code class="docutils literal notranslate"><span class="pre">services/broker_ingest/</span></code>) runs one task per active
+broker whose provider implements <code class="docutils literal notranslate"><span class="pre">run_ingestion</span></code>. It is <strong>off by default</strong>; enable
+it in your config and <strong>restart</strong> the app:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">brokers</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ingest_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</pre></div>
+</div>
+<p>With it disabled the service idles (it does not exit), so nothing is ever polled.
+Confirm it via <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">monitor</span></code> (the <code class="docutils literal notranslate"><span class="pre">broker_ingest</span></code> entry should be <code class="docutils literal notranslate"><span class="pre">RUNNING</span></code>) and
+<code class="docutils literal notranslate"><span class="pre">log/broker_ingest.log</span></code>, which prints either <code class="docutils literal notranslate"><span class="pre">broker</span> <span class="pre">ingestion</span> <span class="pre">disabled</span> <span class="pre">...</span></code> or
+<code class="docutils literal notranslate"><span class="pre">starting</span> <span class="pre">ingestion</span> <span class="pre">for</span> <span class="pre">broker</span> <span class="pre">&lt;id&gt;</span> <span class="pre">(&lt;name&gt;)</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">brokers.ingest_enabled</span></code> is a <strong>config value</strong>, not in the database, not in a
+broker’s <code class="docutils literal notranslate"><span class="pre">altdata</span></code>, and not exposed via the API. A broker’s <code class="docutils literal notranslate"><span class="pre">run_ingestion:</span> <span class="pre">true</span></code>
+capability only means the provider <em>supports</em> ingestion, not that it is running.</p>
+</section>
+<section id="attach-filters">
+<h3>2. Attach filters<a class="headerlink" href="#attach-filters" title="Link to this heading">#</a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">filter_kind:</span> <span class="pre">&quot;query&quot;</span></code> broker (e.g. Lasair) runs one query per SkyPortal <code class="docutils literal notranslate"><span class="pre">Filter</span></code>
+linked to it. Create a <code class="docutils literal notranslate"><span class="pre">Filter</span></code> (on a <code class="docutils literal notranslate"><span class="pre">Stream</span></code> + your <code class="docutils literal notranslate"><span class="pre">Group</span></code>), then attach the
+query, for Lasair the <code class="docutils literal notranslate"><span class="pre">SELECT</span> <span class="pre">/</span> <span class="pre">FROM</span> <span class="pre">/</span> <span class="pre">WHERE</span></code> parts, from the broker page (or
+<code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/brokers/&lt;id&gt;/filters/&lt;filter_id&gt;</span></code>). Filters are re-read every poll
+cycle, so adding/editing one does <strong>not</strong> require a restart.</p>
+</section>
+<section id="when-and-how-often">
+<h3>3. When and how often<a class="headerlink" href="#when-and-how-often" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">run_ingestion</span></code> polls <strong>immediately</strong> on start, then sleeps <code class="docutils literal notranslate"><span class="pre">altdata.poll_interval</span></code>
+seconds (provider default; e.g. Lasair 86400 = daily, ALeRCE/ANTARES 3600), so the
+first batch appears within seconds of the service starting, not after a full
+interval. Changing <code class="docutils literal notranslate"><span class="pre">poll_interval</span></code> (or other broker <code class="docutils literal notranslate"><span class="pre">altdata</span></code>) is read once when a
+broker’s task starts, so <strong>restart the ingestion service</strong> to apply it.</p>
+</section>
+<section id="where-results-land">
+<h3>4. Where results land<a class="headerlink" href="#where-results-land" title="Link to this heading">#</a></h3>
+<p>Matching objects are registered as <strong>Candidates</strong> under the passing filter and
+appear on the <strong>Candidates / Scanning page</strong> filtered by it, not as Sources. From
+there you review and save the ones worth keeping.</p>
+</section>
+<section id="auto-save">
+<h3>5. Auto-save<a class="headerlink" href="#auto-save" title="Link to this heading">#</a></h3>
+<p>To save passing objects as <strong>Sources</strong> automatically (into the filter’s group)
+instead of only registering candidates, set the filter’s <strong><code class="docutils literal notranslate"><span class="pre">autosave</span></code></strong> flag, the
+“Auto-save passing objects as sources” checkbox in the Lasair filter builder, or
+<code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/brokers/&lt;id&gt;/filters/&lt;filter_id&gt;</span></code> with <code class="docutils literal notranslate"><span class="pre">{&quot;autosave&quot;:</span> <span class="pre">true}</span></code>. Objects
+already saved to that group are skipped. Use it only when the filter is selective
+enough to trust everything it passes; otherwise keep it off and tighten the
+filter’s conditions so scanning stays manageable.</p>
+</section>
 </section>
 <section id="endpoints">
 <h2>Endpoints<a class="headerlink" href="#endpoints" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">GET/POST/PATCH/DELETE</span> <span class="pre">/api/brokers[/{id}]</span></code> — manage <code class="docutils literal notranslate"><span class="pre">Broker</span></code> records.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/brokers/{id}/alerts[/{alert_id}]</span></code> — query alerts (dispatched to the
+<li><p><code class="docutils literal notranslate"><span class="pre">GET/POST/PATCH/DELETE</span> <span class="pre">/api/brokers[/{id}]</span></code>, manage <code class="docutils literal notranslate"><span class="pre">Broker</span></code> records.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/brokers/{id}/alerts[/{alert_id}]</span></code>, query alerts (dispatched to the
 broker’s provider).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/internal/broker_apis</span></code> — capabilities + config schema of every
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/internal/broker_apis</span></code>, capabilities + config schema of every
 registered provider (for the frontend).</p></li>
 </ul>
 </section>
@@ -440,6 +503,14 @@ that talks to any REST broker via a configured <code class="docutils literal not
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concepts">Concepts</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#operations">Operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ingestion-and-filters-end-to-end">Ingestion and filters (end to end)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enable-the-ingestion-service">1. Enable the ingestion service</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#attach-filters">2. Attach filters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-and-how-often">3. When and how often</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-results-land">4. Where results land</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-save">5. Auto-save</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#endpoints">Endpoints</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-a-provider">Writing a provider</a></li>
 </ul>

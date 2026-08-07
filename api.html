@@ -37231,6 +37231,10 @@
             "description": "ID of the Broker this Filter runs on, if any.",
             "nullable": true
           },
+          "autosave": {
+            "type": "boolean",
+            "description": "If set, objects passing this filter during broker ingestion are auto-saved as Sources to the Filter's Group (in addition to being registered as Candidates)."
+          },
           "id": {
             "type": "integer",
             "description": "Unique object identifier."
@@ -37347,6 +37351,10 @@
             "type": "integer",
             "description": "ID of the Broker this Filter runs on, if any.",
             "nullable": true
+          },
+          "autosave": {
+            "type": "boolean",
+            "description": "If set, objects passing this filter during broker ingestion are auto-saved as Sources to the Filter's Group (in addition to being registered as Candidates)."
           }
         },
         "required": [
