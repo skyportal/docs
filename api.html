@@ -9168,6 +9168,82 @@
         }
       }
     },
+    "/api/gcn_event/{dateobs}/crossmatch": {
+      "get": {
+        "summary": "Crossmatch progress for a GCN event",
+        "description": "Per-broker state of the alert crossmatch for this event: when it was\nlast queried, how far through the alert stream it has got, how many\nmatches it has saved, and any error.\n",
+        "tags": [
+          "gcn events"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dateobs",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Requeue the alert crossmatch for a GCN event",
+        "description": "<b>Permission(s) required:</b> <em>Manage GCNs (or System admin)</em><br><br>Reset this event's crossmatch progress so the next service pass\nre-queries every broker from the start of the window, including the\none-shot archival pass.\n\nExisting sources and annotations are left alone: the crossmatch\nupdates them in place, so re-running refreshes rather than\nduplicates. Use this after changing the quality-cut filter or the\nsearch parameters.\n",
+        "tags": [
+          "gcn events"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dateobs",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/gcn_event/{dateobs}/report/{report_id}": {
       "get": {
         "summary": "Get a GCN report",
@@ -10281,6 +10357,14 @@
               "type": "string"
             },
             "description": "Comma-separated string of `GcnTag`s. Returns events that do not have any of these tags.\n"
+          },
+          {
+            "in": "query",
+            "name": "groupIds",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated group ids; return only events shared with at\nleast one of them. Narrows within what the user can already\nread, it does not widen access.\n"
           },
           {
             "in": "query",
@@ -38698,6 +38782,13 @@
       "GcnEvent": {
         "type": "object",
         "properties": {
+          "groups": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/Group"
+            }
+          },
           "sent_by": {
             "allOf": [
               {
@@ -38856,6 +38947,13 @@
             "items": {
               "type": "integer"
             }
+          },
+          "crossmatch_states": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/GcnEventCrossmatchState"
+            }
           }
         },
         "required": [
@@ -38901,6 +38999,228 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GcnEvent"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "GcnEventCrossmatchState": {
+        "type": "object",
+        "properties": {
+          "gcnevent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The GcnEvent being crossmatched.",
+            "readOnly": true
+          },
+          "broker": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Broker"
+              }
+            ],
+            "description": "The Broker this state tracks progress against.",
+            "readOnly": true
+          },
+          "gcnevent_id": {
+            "type": "integer",
+            "description": "The GcnEvent being crossmatched."
+          },
+          "broker_id": {
+            "type": "integer",
+            "description": "The Broker this state tracks progress against."
+          },
+          "last_queried": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When this event was last queried against this broker.",
+            "nullable": true
+          },
+          "last_alert_jd": {
+            "type": "number",
+            "description": "JD of the newest alert seen for this event from this broker. Used as the lower bound of the next query so late-arriving alerts are not missed, mirroring the watchlist service's last_got_candidates_at.",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "description": "One of: pending, processing, done, failed."
+          },
+          "error": {
+            "type": "string",
+            "description": "Message from the most recent failure, if any.",
+            "nullable": true
+          },
+          "archival_done": {
+            "type": "boolean",
+            "description": "Whether the one-shot pre-event (archival) search has run for this event/broker pair. That window is closed, so it never needs redoing."
+          },
+          "n_matches": {
+            "type": "integer",
+            "description": "Cumulative count of alerts matched for this event from this broker."
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "broker_id",
+          "gcnevent_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGcnEventCrossmatchState": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GcnEventCrossmatchState"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGcnEventCrossmatchStates": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GcnEventCrossmatchState"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "GcnEventCrossmatchStateNoID": {
+        "type": "object",
+        "properties": {
+          "gcnevent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The GcnEvent being crossmatched.",
+            "readOnly": true
+          },
+          "broker": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Broker"
+              }
+            ],
+            "description": "The Broker this state tracks progress against.",
+            "readOnly": true
+          },
+          "gcnevent_id": {
+            "type": "integer",
+            "description": "The GcnEvent being crossmatched."
+          },
+          "broker_id": {
+            "type": "integer",
+            "description": "The Broker this state tracks progress against."
+          },
+          "last_queried": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When this event was last queried against this broker.",
+            "nullable": true
+          },
+          "last_alert_jd": {
+            "type": "number",
+            "description": "JD of the newest alert seen for this event from this broker. Used as the lower bound of the next query so late-arriving alerts are not missed, mirroring the watchlist service's last_got_candidates_at.",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "description": "One of: pending, processing, done, failed."
+          },
+          "error": {
+            "type": "string",
+            "description": "Message from the most recent failure, if any.",
+            "nullable": true
+          },
+          "archival_done": {
+            "type": "boolean",
+            "description": "Whether the one-shot pre-event (archival) search has run for this event/broker pair. That window is closed, so it never needs redoing."
+          },
+          "n_matches": {
+            "type": "integer",
+            "description": "Cumulative count of alerts matched for this event from this broker."
+          }
+        },
+        "required": [
+          "broker_id",
+          "gcnevent_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGcnEventCrossmatchStateNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GcnEventCrossmatchStateNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGcnEventCrossmatchStateNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GcnEventCrossmatchStateNoID"
             }
           }
         },
@@ -39070,6 +39390,13 @@
       "GcnEventNoID": {
         "type": "object",
         "properties": {
+          "groups": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/Group"
+            }
+          },
           "sent_by": {
             "allOf": [
               {
@@ -39223,6 +39550,13 @@
             "readOnly": true,
             "items": {
               "type": "integer"
+            }
+          },
+          "crossmatch_states": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/GcnEventCrossmatchState"
             }
           }
         },
@@ -39438,6 +39772,15 @@
       "GcnNotice": {
         "type": "object",
         "properties": {
+          "gcnevent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The GcnEvent this notice belongs to.",
+            "readOnly": true
+          },
           "sent_by": {
             "allOf": [
               {
@@ -39554,6 +39897,15 @@
       "GcnNoticeNoID": {
         "type": "object",
         "properties": {
+          "gcnevent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The GcnEvent this notice belongs to.",
+            "readOnly": true
+          },
           "sent_by": {
             "allOf": [
               {
@@ -39666,6 +40018,15 @@
       "GcnProperty": {
         "type": "object",
         "properties": {
+          "gcnevent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The GcnEvent this property belongs to.",
+            "readOnly": true
+          },
           "sent_by": {
             "allOf": [
               {
@@ -39748,6 +40109,15 @@
       "GcnPropertyNoID": {
         "type": "object",
         "properties": {
+          "gcnevent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The GcnEvent this property belongs to.",
+            "readOnly": true
+          },
           "sent_by": {
             "allOf": [
               {
@@ -39826,6 +40196,15 @@
       "GcnReport": {
         "type": "object",
         "properties": {
+          "gcnevent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The GcnEvent this report belongs to.",
+            "readOnly": true
+          },
           "sent_by": {
             "allOf": [
               {
@@ -39930,6 +40309,15 @@
       "GcnReportNoID": {
         "type": "object",
         "properties": {
+          "gcnevent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The GcnEvent this report belongs to.",
+            "readOnly": true
+          },
           "sent_by": {
             "allOf": [
               {
@@ -40030,6 +40418,15 @@
       "GcnSummary": {
         "type": "object",
         "properties": {
+          "gcnevent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The GcnEvent this summary belongs to.",
+            "readOnly": true
+          },
           "sent_by": {
             "allOf": [
               {
@@ -40128,6 +40525,15 @@
       "GcnSummaryNoID": {
         "type": "object",
         "properties": {
+          "gcnevent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The GcnEvent this summary belongs to.",
+            "readOnly": true
+          },
           "sent_by": {
             "allOf": [
               {
@@ -40222,6 +40628,15 @@
       "GcnTag": {
         "type": "object",
         "properties": {
+          "gcnevent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The GcnEvent this tag belongs to.",
+            "readOnly": true
+          },
           "sent_by": {
             "allOf": [
               {
@@ -40302,6 +40717,15 @@
       "GcnTagNoID": {
         "type": "object",
         "properties": {
+          "gcnevent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The GcnEvent this tag belongs to.",
+            "readOnly": true
+          },
           "sent_by": {
             "allOf": [
               {
@@ -42677,6 +43101,164 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GroupDefaultAnalysisNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "GroupGcnEvent": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Group"
+              }
+            ],
+            "readOnly": true
+          },
+          "gcnevent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "readOnly": true
+          },
+          "group_id": {
+            "type": "integer"
+          },
+          "gcnevent_id": {
+            "type": "integer"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "gcnevent_id",
+          "group_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGroupGcnEvent": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GroupGcnEvent"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGroupGcnEvents": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupGcnEvent"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "GroupGcnEventNoID": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Group"
+              }
+            ],
+            "readOnly": true
+          },
+          "gcnevent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "readOnly": true
+          },
+          "group_id": {
+            "type": "integer"
+          },
+          "gcnevent_id": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "gcnevent_id",
+          "group_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGroupGcnEventNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GroupGcnEventNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGroupGcnEventNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupGcnEventNoID"
             }
           }
         },
@@ -48532,6 +49114,15 @@
       "Localization": {
         "type": "object",
         "properties": {
+          "gcnevent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The GcnEvent this localization belongs to.",
+            "readOnly": true
+          },
           "sent_by": {
             "allOf": [
               {
@@ -48698,6 +49289,15 @@
       "LocalizationNoID": {
         "type": "object",
         "properties": {
+          "gcnevent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The GcnEvent this localization belongs to.",
+            "readOnly": true
+          },
           "sent_by": {
             "allOf": [
               {
@@ -48860,6 +49460,15 @@
       "LocalizationProperty": {
         "type": "object",
         "properties": {
+          "localization": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Localization"
+              }
+            ],
+            "description": "The Localization this property belongs to.",
+            "readOnly": true
+          },
           "sent_by": {
             "allOf": [
               {
@@ -48942,6 +49551,15 @@
       "LocalizationPropertyNoID": {
         "type": "object",
         "properties": {
+          "localization": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Localization"
+              }
+            ],
+            "description": "The Localization this property belongs to.",
+            "readOnly": true
+          },
           "sent_by": {
             "allOf": [
               {
@@ -49020,6 +49638,15 @@
       "LocalizationTag": {
         "type": "object",
         "properties": {
+          "localization": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Localization"
+              }
+            ],
+            "description": "The Localization this tag belongs to.",
+            "readOnly": true
+          },
           "sent_by": {
             "allOf": [
               {
@@ -49100,6 +49727,15 @@
       "LocalizationTagNoID": {
         "type": "object",
         "properties": {
+          "localization": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Localization"
+              }
+            ],
+            "description": "The Localization this tag belongs to.",
+            "readOnly": true
+          },
           "sent_by": {
             "allOf": [
               {

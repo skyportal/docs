@@ -1,0 +1,580 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Scanning GCN events for optical counterparts &#8212; skyportal 1.4.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/output_cells.css?v=4c393c42" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=bc4b15cc"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'gcn_crossmatch';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Periodic Timeseries Features" href="period.html" />
+    <link rel="prev" title="MMA Features" href="mma.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">skyportal 1.4.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="design.html">System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Developer notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observability.html">Observability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="versioning.html">Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_loader.html">Data loader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_features.html">Adding new features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_comments_annotation_types.html">Adding a new type of Comment or Annotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="styling.html">Styling components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migrations.html">Database migrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="query_analysis.html">Analyzing database queries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions.html">Access controls</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slack.html">Slack Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="followup.html">Follow-up triggering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mma.html">MMA Features</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Scanning GCN events for optical counterparts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="period.html">Periodic Timeseries Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spatial_catalog.html">Spatial Catalogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_usage.html">Advanced usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="photometric_series.html">How to work with photometric series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="external_services.html">External Services (Plugins)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">SkyPortal Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages.html">Front-end Pages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thumbnails.html">Object Thumbnails</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/gcn_crossmatch.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Scanning GCN events for optical counterparts</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How it works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-the-quality-cut-filter">Configuring the quality-cut filter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-reference">Configuration reference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scanning-the-results">Scanning the results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#per-event-progress-and-requeuing">Per-event progress and requeuing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-events">Finding the events</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="scanning-gcn-events-for-optical-counterparts">
+<h1>Scanning GCN events for optical counterparts<a class="headerlink" href="#scanning-gcn-events-for-optical-counterparts" title="Link to this heading">#</a></h1>
+<p>SkyPortal can crossmatch broker alerts against the localization of a GCN event
+and raise whatever falls inside it as candidates to scan. This works for any
+event with a localization, e.g. Einstein Probe and Swift XRT
+error circles, Fermi and GW skymaps, against any broker implementing
+<code class="docutils literal notranslate"><span class="pre">query_alerts</span></code> (BOOM, Babamul, ALeRCE, Fink, Lasair, …).</p>
+<section id="how-it-works">
+<h2>How it works<a class="headerlink" href="#how-it-works" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">gcn_crossmatch</span></code> service walks every event still inside its active window.
+For each one, and for each active broker:</p>
+<ol class="simple">
+<li><p>The localization is reduced to a <strong>search cone</strong>. Cone localizations (EP,
+Swift XRT) give this directly; skymaps are bounded using the stored 90%
+credible contour. A localization that cannot be bounded, or whose bound
+exceeds <code class="docutils literal notranslate"><span class="pre">max_radius_deg</span></code>, is skipped and logged — never guessed at.</p></li>
+<li><p>The broker is queried inside that cone, restricted to an alert-JD window
+around the event, with <strong>quality cuts applied broker-side</strong> (see below).</p></li>
+<li><p>Returned alerts are checked for <strong>real containment</strong> against the
+localization’s HEALPix tiles. As the cone over-selects, this decides
+candidate membership.</p></li>
+<li><p>Survivors become an <code class="docutils literal notranslate"><span class="pre">Obj</span></code> plus a <code class="docutils literal notranslate"><span class="pre">Candidate</span></code> against the configured filter,
+so they appear on the scanning page.</p></li>
+<li><p>Each match is annotated with how it relates to the event (below).</p></li>
+</ol>
+<p>Events are re-queried while they stay active, because alerts keep arriving after
+the trigger. Each pass resumes from the newest alert already seen rather than
+from wall-clock time, so late-arriving alerts are not skipped.</p>
+<p>A one-shot <strong>archival</strong> pass also searches the window <em>before</em> the event. Those
+alerts cannot have been caused by it, so they rule a candidate out: a position
+already flaring last month is a variable, not a counterpart. Such matches carry
+<code class="docutils literal notranslate"><span class="pre">prior_activity:</span> <span class="pre">true</span></code> on the annotation.</p>
+</section>
+<section id="configuring-the-quality-cut-filter">
+<h2>Configuring the quality-cut filter<a class="headerlink" href="#configuring-the-quality-cut-filter" title="Link to this heading">#</a></h2>
+<p>Without cuts, every artifact, asteroid and variable star inside the error region
+is reported. The cuts are expressed as a <strong>broker filter</strong>, so they are
+versioned and editable in the filter builder rather than frozen in code.</p>
+<ol class="simple">
+<li><p>Create a filter on the broker (for BOOM, an aggregation pipeline) holding the
+cuts you want. A reasonable ZTF starting point is in <code class="docutils literal notranslate"><span class="pre">ZTF_QUALITY_CUTS</span></code> in
+<code class="docutils literal notranslate"><span class="pre">skyportal/utils/gcn_crossmatch.py</span></code>: real/bogus thresholds (<code class="docutils literal notranslate"><span class="pre">rb</span></code>, <code class="docutils literal notranslate"><span class="pre">drb</span></code>),
+positive subtractions only, solar-system rejection, stellar rejection by
+<code class="docutils literal notranslate"><span class="pre">sgscore</span></code>/<code class="docutils literal notranslate"><span class="pre">distpsnr</span></code>, and a PS1 red-star colour cut.</p></li>
+<li><p>Create the corresponding SkyPortal <code class="docutils literal notranslate"><span class="pre">Filter</span></code>, whose <code class="docutils literal notranslate"><span class="pre">altdata</span></code> carries
+<code class="docutils literal notranslate"><span class="pre">{&quot;boom&quot;:</span> <span class="pre">{&quot;filter_id&quot;:</span> <span class="pre">&quot;&lt;broker</span> <span class="pre">filter</span> <span class="pre">uuid&gt;&quot;}}</span></code>.</p></li>
+<li><p>Point the service at it:</p></li>
+</ol>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">gcn_crossmatch</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">  </span><span class="nt">filter_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">42</span><span class="w">        </span><span class="c1"># the SkyPortal Filter id</span>
+</pre></div>
+</div>
+<p>The service reads that filter’s <strong>active version</strong> and prepends the cone to it,
+so cuts run on the broker and only survivors cross the wire. With <code class="docutils literal notranslate"><span class="pre">filter_id</span></code>
+unset it falls back to the built-in cuts, which works but is frozen — and
+without a filter no <code class="docutils literal notranslate"><span class="pre">Candidate</span></code> can be created, so nothing reaches the scanning
+page.</p>
+<blockquote>
+<div><p><strong>Choose the filter’s group deliberately.</strong> A candidate is visible to the
+filter’s group. Annotations inherit the <em>event’s</em> groups, so the link between
+an object and a restricted event stays restricted, but the candidate itself
+does not. For a proprietary stream, point <code class="docutils literal notranslate"><span class="pre">filter_id</span></code> at a filter whose group
+matches that stream’s audience.</p>
+</div></blockquote>
+</section>
+<section id="configuration-reference">
+<h2>Configuration reference<a class="headerlink" href="#configuration-reference" title="Link to this heading">#</a></h2>
+<p>All settings live under <code class="docutils literal notranslate"><span class="pre">gcn_crossmatch</span></code> in <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>:</p>
+<p>| Setting | Default | Meaning |
+|—|—|—|
+| <code class="docutils literal notranslate"><span class="pre">enabled</span></code> | <code class="docutils literal notranslate"><span class="pre">False</span></code> | Run the service at all |
+| <code class="docutils literal notranslate"><span class="pre">poll_interval</span></code> | <code class="docutils literal notranslate"><span class="pre">300</span></code> | Seconds between passes |
+| <code class="docutils literal notranslate"><span class="pre">filter_id</span></code> | unset | SkyPortal Filter holding the quality cuts |
+| <code class="docutils literal notranslate"><span class="pre">survey</span></code> | <code class="docutils literal notranslate"><span class="pre">ZTF</span></code> | Survey whose alerts are searched |
+| <code class="docutils literal notranslate"><span class="pre">max_event_age</span></code> | <code class="docutils literal notranslate"><span class="pre">31.0</span></code> | Days; older events are no longer crossmatched |
+| <code class="docutils literal notranslate"><span class="pre">recheck_interval_minutes</span></code> | <code class="docutils literal notranslate"><span class="pre">10.0</span></code> | Minimum gap before re-querying an event |
+| <code class="docutils literal notranslate"><span class="pre">delta_t_before</span></code> / <code class="docutils literal notranslate"><span class="pre">delta_t_after</span></code> | <code class="docutils literal notranslate"><span class="pre">1.0</span></code> / <code class="docutils literal notranslate"><span class="pre">31.0</span></code> | Query window around the event, in days |
+| <code class="docutils literal notranslate"><span class="pre">archival</span></code> / <code class="docutils literal notranslate"><span class="pre">archival_days</span></code> | <code class="docutils literal notranslate"><span class="pre">True</span></code> / <code class="docutils literal notranslate"><span class="pre">31.0</span></code> | One-shot pre-event search |
+| <code class="docutils literal notranslate"><span class="pre">max_radius_deg</span></code> | <code class="docutils literal notranslate"><span class="pre">5.0</span></code> | Skip localizations bounding wider than this |
+| <code class="docutils literal notranslate"><span class="pre">credible_level</span></code> | <code class="docutils literal notranslate"><span class="pre">90</span></code> | Contour used to bound non-cone localizations |
+| <code class="docutils literal notranslate"><span class="pre">cumprob</span></code> | <code class="docutils literal notranslate"><span class="pre">0.95</span></code> | Cumulative probability defining “inside” |
+| <code class="docutils literal notranslate"><span class="pre">max_alerts</span></code> | <code class="docutils literal notranslate"><span class="pre">500</span></code> | Cap per event, per broker, per pass |</p>
+</section>
+<section id="scanning-the-results">
+<h2>Scanning the results<a class="headerlink" href="#scanning-the-results" title="Link to this heading">#</a></h2>
+<p>Matches appear on the <strong>candidates</strong> page under the configured filter, like any
+other candidates. Each carries an annotation with origin <code class="docutils literal notranslate"><span class="pre">GCN-crossmatch</span></code>, keyed
+by event, holding the fields the reviewer needs:</p>
+<p>| Field | Meaning |
+|—|—|
+| <code class="docutils literal notranslate"><span class="pre">delta_t</span></code> | Days between the event and the alert |
+| <code class="docutils literal notranslate"><span class="pre">distance_arcmin</span></code> | Separation from the localization centre |
+| <code class="docutils literal notranslate"><span class="pre">distance_ratio</span></code> | That separation as a fraction of the error radius |
+| <code class="docutils literal notranslate"><span class="pre">age</span></code> | Days since the object’s first detection |
+| <code class="docutils literal notranslate"><span class="pre">drb</span></code> | Deep-learning real/bogus score |
+| <code class="docutils literal notranslate"><span class="pre">sgscore</span></code>, <code class="docutils literal notranslate"><span class="pre">distpsnr</span></code> | Star/galaxy score and distance to the nearest PS1 source |
+| <code class="docutils literal notranslate"><span class="pre">ssdistnr</span></code>, <code class="docutils literal notranslate"><span class="pre">ssmagnr</span></code> | Proximity to a known solar-system object |
+| <code class="docutils literal notranslate"><span class="pre">ndethist</span></code> | Number of prior detections |
+| <code class="docutils literal notranslate"><span class="pre">event_mjd</span></code> | Event time, MJD |
+| <code class="docutils literal notranslate"><span class="pre">prior_activity</span></code> | Set when the position was already active before the event |</p>
+<p>Because these are annotations, they can be sorted and filtered on the scanning
+page — <code class="docutils literal notranslate"><span class="pre">delta_t</span></code> and <code class="docutils literal notranslate"><span class="pre">distance_arcmin</span></code> are the usual first cut, and
+<code class="docutils literal notranslate"><span class="pre">prior_activity</span></code> is the quickest way to discard variables.</p>
+<p>Once a candidate is saved to a group, it appears as a source on that event’s
+page in the usual way.</p>
+</section>
+<section id="per-event-progress-and-requeuing">
+<h2>Per-event progress and requeuing<a class="headerlink" href="#per-event-progress-and-requeuing" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">GET</span>  <span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">gcn_event</span><span class="o">/</span><span class="p">{</span><span class="n">dateobs</span><span class="p">}</span><span class="o">/</span><span class="n">crossmatch</span>
+<span class="n">POST</span> <span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">gcn_event</span><span class="o">/</span><span class="p">{</span><span class="n">dateobs</span><span class="p">}</span><span class="o">/</span><span class="n">crossmatch</span>     <span class="c1"># requires Manage GCNs</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">GET</span></code> returns per-broker progress: when the event was last queried, how far
+through the alert stream it has got, how many matches it has produced, and any
+error. <code class="docutils literal notranslate"><span class="pre">POST</span></code> resets that state so the next pass re-queries from the start of
+the window, archival pass included; you can use it after changing the filter or the
+search parameters.</p>
+</section>
+<section id="finding-the-events">
+<h2>Finding the events<a class="headerlink" href="#finding-the-events" title="Link to this heading">#</a></h2>
+<p>The <strong>gcn_events</strong> page filters by group, so a proprietary stream can be
+separated from public alerts. Group filtering narrows within what you can
+already read; it never widens access.</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="mma.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">MMA Features</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="period.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Periodic Timeseries Features</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How it works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-the-quality-cut-filter">Configuring the quality-cut filter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-reference">Configuration reference</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scanning-the-results">Scanning the results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#per-event-progress-and-requeuing">Per-event progress and requeuing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-events">Finding the events</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The SkyPortal Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2020–2023, The SkyPortal Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
