@@ -330,6 +330,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How it works</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-the-quality-cut-filter">Configuring the quality-cut filter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-gets-crossmatched">What gets crossmatched</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-reference">Configuration reference</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scanning-the-results">Scanning the results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#per-event-progress-and-requeuing">Per-event progress and requeuing</a></li>
@@ -407,21 +408,43 @@ page.</p>
 <div><p><strong>Choose the filter’s group deliberately.</strong> A candidate is visible to the
 filter’s group. Annotations inherit the <em>event’s</em> groups, so the link between
 an object and a restricted event stays restricted, but the candidate itself
-does not. For a proprietary stream, point <code class="docutils literal notranslate"><span class="pre">filter_id</span></code> at a filter whose group
-matches that stream’s audience.</p>
+does not. For a proprietary stream, use a filter whose group matches that
+stream’s audience.</p>
 </div></blockquote>
+</section>
+<section id="what-gets-crossmatched">
+<h2>What gets crossmatched<a class="headerlink" href="#what-gets-crossmatched" title="Link to this heading">#</a></h2>
+<p>A <strong>Filter</strong> is one crossmatch configuration. It already names the broker, the
+stream (hence the survey and the alert programs) and the group that sees the
+candidates, so nothing about <em>which</em> alerts to search lives in <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>.
+Opt a filter in through its <code class="docutils literal notranslate"><span class="pre">altdata</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">altdata</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">gcn_crossmatch</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="c1"># optional: restrict to matching events. Same shape as DefaultGcnTag --</span>
+<span class="w">    </span><span class="c1"># an absent or empty list means no restriction.</span>
+<span class="w">    </span><span class="nt">filters</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">gcn_tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;Einstein</span><span class="nv"> </span><span class="s">Probe&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="c1"># optional: any setting from the table below, for this filter alone</span>
+<span class="w">    </span><span class="nt">delta_t_after</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">7.0</span>
+</pre></div>
+</div>
+<p>Adding a second survey is a second filter, not a code change: point it at an
+LSST stream and the matching broker, and it runs alongside with its own
+windows, its own cuts and its own audience.</p>
+<p>Progress is tracked per (event, filter), so two filters sharing a broker never
+interfere.</p>
 </section>
 <section id="configuration-reference">
 <h2>Configuration reference<a class="headerlink" href="#configuration-reference" title="Link to this heading">#</a></h2>
-<p>All settings live under <code class="docutils literal notranslate"><span class="pre">gcn_crossmatch</span></code> in <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>:</p>
+<p>These are the defaults every opted-in filter inherits, under <code class="docutils literal notranslate"><span class="pre">gcn_crossmatch</span></code>
+in <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>. Any of them can be overridden per filter.</p>
 <p>| Setting | Default | Meaning |
 |—|—|—|
 | <code class="docutils literal notranslate"><span class="pre">enabled</span></code> | <code class="docutils literal notranslate"><span class="pre">False</span></code> | Run the service at all |
 | <code class="docutils literal notranslate"><span class="pre">poll_interval</span></code> | <code class="docutils literal notranslate"><span class="pre">300</span></code> | Seconds between passes |
-| <code class="docutils literal notranslate"><span class="pre">filter_id</span></code> | unset | SkyPortal Filter holding the quality cuts |
-| <code class="docutils literal notranslate"><span class="pre">survey</span></code> | <code class="docutils literal notranslate"><span class="pre">ZTF</span></code> | Survey whose alerts are searched |
 | <code class="docutils literal notranslate"><span class="pre">max_event_age</span></code> | <code class="docutils literal notranslate"><span class="pre">31.0</span></code> | Days; older events are no longer crossmatched |
-| <code class="docutils literal notranslate"><span class="pre">recheck_interval_minutes</span></code> | <code class="docutils literal notranslate"><span class="pre">10.0</span></code> | Minimum gap before re-querying an event |
+| <code class="docutils literal notranslate"><span class="pre">recheck_interval_minutes</span></code> | <code class="docutils literal notranslate"><span class="pre">60.0</span></code> | Minimum gap before re-querying an event |
 | <code class="docutils literal notranslate"><span class="pre">delta_t_before</span></code> / <code class="docutils literal notranslate"><span class="pre">delta_t_after</span></code> | <code class="docutils literal notranslate"><span class="pre">1.0</span></code> / <code class="docutils literal notranslate"><span class="pre">31.0</span></code> | Query window around the event, in days |
 | <code class="docutils literal notranslate"><span class="pre">archival</span></code> / <code class="docutils literal notranslate"><span class="pre">archival_days</span></code> | <code class="docutils literal notranslate"><span class="pre">True</span></code> / <code class="docutils literal notranslate"><span class="pre">31.0</span></code> | One-shot pre-event search |
 | <code class="docutils literal notranslate"><span class="pre">max_radius_deg</span></code> | <code class="docutils literal notranslate"><span class="pre">5.0</span></code> | Skip localizations bounding wider than this |
@@ -445,10 +468,16 @@ by event, holding the fields the reviewer needs:</p>
 | <code class="docutils literal notranslate"><span class="pre">ssdistnr</span></code>, <code class="docutils literal notranslate"><span class="pre">ssmagnr</span></code> | Proximity to a known solar-system object |
 | <code class="docutils literal notranslate"><span class="pre">ndethist</span></code> | Number of prior detections |
 | <code class="docutils literal notranslate"><span class="pre">event_mjd</span></code> | Event time, MJD |
-| <code class="docutils literal notranslate"><span class="pre">prior_activity</span></code> | Set when the position was already active before the event |</p>
+| <code class="docutils literal notranslate"><span class="pre">prior_activity</span></code> | Set when the position was already active before the event |
+| <code class="docutils literal notranslate"><span class="pre">dist_mean</span></code>, <code class="docutils literal notranslate"><span class="pre">dist_std</span></code> | For a 3D (GW) skymap: the distance the event implies <em>at this position</em>, in Mpc |</p>
 <p>Because these are annotations, they can be sorted and filtered on the scanning
 page — <code class="docutils literal notranslate"><span class="pre">delta_t</span></code> and <code class="docutils literal notranslate"><span class="pre">distance_arcmin</span></code> are the usual first cut, and
 <code class="docutils literal notranslate"><span class="pre">prior_activity</span></code> is the quickest way to discard variables.</p>
+<p><code class="docutils literal notranslate"><span class="pre">dist_mean</span></code>/<code class="docutils literal notranslate"><span class="pre">dist_std</span></code> are the <em>conditional</em> distance at the candidate’s own
+pixel, not the skymap’s marginal distance: for a localization spanning a range
+of distances the two differ, and “inside the localization volume” means the
+former. They are recorded rather than cut on, because an alert rarely has a host
+redshift at discovery — compare them against one when it is known.</p>
 <p>Once a candidate is saved to a group, it appears as a source on that event’s
 page in the usual way.</p>
 </section>
@@ -519,6 +548,7 @@ already read; it never widens access.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How it works</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-the-quality-cut-filter">Configuring the quality-cut filter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-gets-crossmatched">What gets crossmatched</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuration-reference">Configuration reference</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scanning-the-results">Scanning the results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#per-event-progress-and-requeuing">Per-event progress and requeuing</a></li>

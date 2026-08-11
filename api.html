@@ -9171,7 +9171,7 @@
     "/api/gcn_event/{dateobs}/crossmatch": {
       "get": {
         "summary": "Crossmatch progress for a GCN event",
-        "description": "Per-broker state of the alert crossmatch for this event: when it was\nlast queried, how far through the alert stream it has got, how many\nmatches it has saved, and any error.\n",
+        "description": "Per-filter state of the alert crossmatch for this event: when it was\nlast queried, how far through the alert stream it has got, how many\nmatches it has saved, and any error.\n",
         "tags": [
           "gcn events"
         ],
@@ -9208,7 +9208,7 @@
       },
       "post": {
         "summary": "Requeue the alert crossmatch for a GCN event",
-        "description": "<b>Permission(s) required:</b> <em>Manage GCNs (or System admin)</em><br><br>Reset this event's crossmatch progress so the next service pass\nre-queries every broker from the start of the window, including the\none-shot archival pass.\n\nExisting sources and annotations are left alone: the crossmatch\nupdates them in place, so re-running refreshes rather than\nduplicates. Use this after changing the quality-cut filter or the\nsearch parameters.\n",
+        "description": "<b>Permission(s) required:</b> <em>Manage GCNs (or System admin)</em><br><br>Reset this event's crossmatch progress so the next service pass\nre-queries every filter from the start of the window, including the\none-shot archival pass.\n\nExisting sources and annotations are left alone: the crossmatch\nupdates them in place, so re-running refreshes rather than\nduplicates. Use this after changing the quality-cut filter or the\nsearch parameters.\n",
         "tags": [
           "gcn events"
         ],
@@ -39019,32 +39019,32 @@
             "description": "The GcnEvent being crossmatched.",
             "readOnly": true
           },
-          "broker": {
+          "filter": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/Broker"
+                "$ref": "#/components/schemas/Filter"
               }
             ],
-            "description": "The Broker this state tracks progress against.",
+            "description": "The Filter this state tracks progress against.",
             "readOnly": true
           },
           "gcnevent_id": {
             "type": "integer",
             "description": "The GcnEvent being crossmatched."
           },
-          "broker_id": {
+          "filter_id": {
             "type": "integer",
-            "description": "The Broker this state tracks progress against."
+            "description": "The Filter this state tracks progress against."
           },
           "last_queried": {
             "type": "string",
             "format": "date-time",
-            "description": "When this event was last queried against this broker.",
+            "description": "When this event was last queried for this filter.",
             "nullable": true
           },
           "last_alert_jd": {
             "type": "number",
-            "description": "JD of the newest alert seen for this event from this broker. Used as the lower bound of the next query so late-arriving alerts are not missed, mirroring the watchlist service's last_got_candidates_at.",
+            "description": "JD of the newest alert seen for this event through this filter. Used as the lower bound of the next query so late-arriving alerts are not missed, mirroring the watchlist service's last_got_candidates_at.",
             "nullable": true
           },
           "status": {
@@ -39070,7 +39070,7 @@
           }
         },
         "required": [
-          "broker_id",
+          "filter_id",
           "gcnevent_id"
         ],
         "additionalProperties": false
@@ -39132,32 +39132,32 @@
             "description": "The GcnEvent being crossmatched.",
             "readOnly": true
           },
-          "broker": {
+          "filter": {
             "allOf": [
               {
-                "$ref": "#/components/schemas/Broker"
+                "$ref": "#/components/schemas/Filter"
               }
             ],
-            "description": "The Broker this state tracks progress against.",
+            "description": "The Filter this state tracks progress against.",
             "readOnly": true
           },
           "gcnevent_id": {
             "type": "integer",
             "description": "The GcnEvent being crossmatched."
           },
-          "broker_id": {
+          "filter_id": {
             "type": "integer",
-            "description": "The Broker this state tracks progress against."
+            "description": "The Filter this state tracks progress against."
           },
           "last_queried": {
             "type": "string",
             "format": "date-time",
-            "description": "When this event was last queried against this broker.",
+            "description": "When this event was last queried for this filter.",
             "nullable": true
           },
           "last_alert_jd": {
             "type": "number",
-            "description": "JD of the newest alert seen for this event from this broker. Used as the lower bound of the next query so late-arriving alerts are not missed, mirroring the watchlist service's last_got_candidates_at.",
+            "description": "JD of the newest alert seen for this event through this filter. Used as the lower bound of the next query so late-arriving alerts are not missed, mirroring the watchlist service's last_got_candidates_at.",
             "nullable": true
           },
           "status": {
@@ -39179,7 +39179,7 @@
           }
         },
         "required": [
-          "broker_id",
+          "filter_id",
           "gcnevent_id"
         ],
         "additionalProperties": false
