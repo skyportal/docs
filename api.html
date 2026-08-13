@@ -62955,7 +62955,7 @@
                 }
               }
             ],
-            "description": "Limiting magnitude of the image in the magnitude system `magsys`. Can be given as a scalar or a 1D list. If a scalar, will be broadcast to all values given as lists. Null values not allowed."
+            "description": "Limiting magnitude of the image in the magnitude system `magsys`. Can be given as a scalar or a 1D list. If a scalar, will be broadcast to all values given as lists. Required for non-detections (when mag is null)."
           },
           "limiting_mag_nsigma": {
             "oneOf": [
@@ -63003,7 +63003,6 @@
         "required": [
           "filter",
           "instrument_id",
-          "limiting_mag",
           "magsys",
           "mjd",
           "obj_id"
