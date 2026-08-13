@@ -12379,6 +12379,10 @@
                   "canSave": {
                     "type": "boolean",
                     "description": "Boolean indicating whether user can save sources to group. Defaults to true."
+                  },
+                  "canSharePhotometry": {
+                    "type": "boolean",
+                    "description": "Boolean indicating whether user can share photometry points to other groups. Defaults to false."
                   }
                 },
                 "required": [
@@ -47159,6 +47163,10 @@
           "can_save": {
             "type": "boolean",
             "description": "Boolean flag indicating whether the user should be able to save sources to the group"
+          },
+          "can_share_photometry": {
+            "type": "boolean",
+            "description": "Boolean flag indicating whether the user should be able to share photometry points to other groups even if the user is not the owner of the photometry data"
           }
         },
         "required": [
@@ -47244,6 +47252,10 @@
           "can_save": {
             "type": "boolean",
             "description": "Boolean flag indicating whether the user should be able to save sources to the group"
+          },
+          "can_share_photometry": {
+            "type": "boolean",
+            "description": "Boolean flag indicating whether the user should be able to share photometry points to other groups even if the user is not the owner of the photometry data"
           }
         },
         "required": [
@@ -48750,6 +48762,12 @@
               "type": "boolean"
             }
           },
+          "can_share_photometry_for_groups": {
+            "type": "array",
+            "items": {
+              "type": "boolean"
+            }
+          },
           "user_email": {
             "type": "string",
             "maxLength": 255,
@@ -48771,6 +48789,7 @@
         "required": [
           "admin_for_groups",
           "can_save_to_groups",
+          "can_share_photometry_for_groups",
           "role_id",
           "token"
         ],
@@ -48872,6 +48891,12 @@
               "type": "boolean"
             }
           },
+          "can_share_photometry_for_groups": {
+            "type": "array",
+            "items": {
+              "type": "boolean"
+            }
+          },
           "user_email": {
             "type": "string",
             "maxLength": 255,
@@ -48889,6 +48914,7 @@
         "required": [
           "admin_for_groups",
           "can_save_to_groups",
+          "can_share_photometry_for_groups",
           "role_id",
           "token"
         ],
@@ -79268,6 +79294,16 @@
             "default": null,
             "description": "List of booleans indicating whether user should be able to save sources to respective specified group(s). Defaults to all true.",
             "title": "Cansave",
+            "items": {
+              "type": "boolean"
+            },
+            "type": "array",
+            "nullable": true
+          },
+          "canSharePhotometry": {
+            "default": null,
+            "description": "List of booleans indicating whether user should be able to share photometry points to respective specified group(s). Defaults to all false.",
+            "title": "Cansharephotometry",
             "items": {
               "type": "boolean"
             },
