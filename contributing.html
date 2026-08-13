@@ -410,6 +410,13 @@ Selenium with Geckodriver.  PRs can only be merged once tests have
 been added and pass.  The continuous integration system indicates this
 with a green checkmark, hence you may see developers talking about “PR
 599 being green” ✅.</p>
+<p>A pull request only runs the suites its changes can affect: a
+frontend-only PR skips the API, external and model tests, a backend PR
+runs everything, and the docs are only built when <code class="docutils literal notranslate"><span class="pre">skyportal/handlers</span></code>
+or <code class="docutils literal notranslate"><span class="pre">doc/</span></code> change. Anything unrecognized (a CI change, say) runs the
+full set, as does every push to <code class="docutils literal notranslate"><span class="pre">main</span></code>. Add the <code class="docutils literal notranslate"><span class="pre">run-all-tests</span></code> label
+and re-run the workflow to force a full run; see
+<code class="docutils literal notranslate"><span class="pre">.github/workflows/ci_scope.yaml</span></code>.</p>
 </section>
 <section id="reviews">
 <h3>Reviews<a class="headerlink" href="#reviews" title="Link to this heading">#</a></h3>
