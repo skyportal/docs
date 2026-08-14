@@ -25398,6 +25398,278 @@
         }
       }
     },
+    "/api/super_objs/{super_obj_id}": {
+      "get": {
+        "summary": "Retrieve a SuperObj",
+        "tags": [
+          "super objs"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "super_obj_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Update a SuperObj",
+        "description": "Update a SuperObj's metadata or membership. `obj_ids` replaces the\nmembership wholesale; `add_obj_ids` and `remove_obj_ids` modify it\nincrementally and may not be combined with `obj_ids`.\n",
+        "tags": [
+          "super objs"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "super_obj_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "is_roid": {
+                    "type": "boolean"
+                  },
+                  "obj_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "add_obj_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "remove_obj_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a SuperObj",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Delete a SuperObj. The Objs it links are left untouched; only the\nassociation is removed.\n",
+        "tags": [
+          "super objs"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "super_obj_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/super_objs": {
+      "get": {
+        "summary": "Retrieve multiple SuperObjs",
+        "tags": [
+          "super objs"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by (partial) name"
+          },
+          {
+            "in": "query",
+            "name": "isRoid",
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Filter by moving-object status"
+          },
+          {
+            "in": "query",
+            "name": "objID",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Only SuperObjs linking this Obj"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a SuperObj",
+        "description": "Create a SuperObj linking multiple Objs that represent the same\nastrophysical object, e.g. detections of one asteroid on separate\nnights, or the same transient reported by different surveys.\n",
+        "tags": [
+          "super objs"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the super-object, e.g. an MPC designation."
+                  },
+                  "is_roid": {
+                    "type": "boolean",
+                    "description": "Whether the super-object is a moving object."
+                  },
+                  "obj_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "IDs of the Objs to link."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "description": "New SuperObj ID"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/survey_efficiency/observations/{survey_efficiency_analysis_id}": {
       "get": {
         "tags": [
@@ -75892,6 +76164,11 @@
             "description": "Elevation in meters.",
             "nullable": true
           },
+          "mpc_obscode": {
+            "type": "string",
+            "description": "Minor Planet Center observatory code, e.g. 'X05' (Rubin) or 'I41' (ZTF). Required to query moving-object ephemerides for this site.",
+            "nullable": true
+          },
           "diameter": {
             "type": "number",
             "description": "Diameter in meters."
@@ -76002,6 +76279,11 @@
           "elevation": {
             "type": "number",
             "description": "Elevation in meters.",
+            "nullable": true
+          },
+          "mpc_obscode": {
+            "type": "string",
+            "description": "Minor Planet Center observatory code, e.g. 'X05' (Rubin) or 'I41' (ZTF). Required to query moving-object ephemerides for this site.",
             "nullable": true
           },
           "diameter": {
