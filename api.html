@@ -76129,6 +76129,11 @@
             "description": "Origin of the Thumbnail.",
             "nullable": true
           },
+          "survey": {
+            "type": "string",
+            "description": "Survey the cutout came from (e.g. ZTF, LSST), for per-survey labeling; NULL for all-sky archival thumbnails (sdss, ps1, ...) and legacy rows.",
+            "nullable": true
+          },
           "obj_id": {
             "type": "string",
             "description": "ID of the thumbnail's obj."
@@ -76241,6 +76246,11 @@
           "origin": {
             "type": "string",
             "description": "Origin of the Thumbnail.",
+            "nullable": true
+          },
+          "survey": {
+            "type": "string",
+            "description": "Survey the cutout came from (e.g. ZTF, LSST), for per-survey labeling; NULL for all-sky archival thumbnails (sdss, ps1, ...) and legacy rows.",
             "nullable": true
           },
           "obj_id": {
@@ -80468,6 +80478,13 @@
             "description": "Thumbnail type. Must be one of 'new', 'ref', 'sub', 'sdss', 'dr8', 'new_gz', 'ref_gz', 'sub_gz'",
             "title": "Ttype",
             "type": "string"
+          },
+          "survey": {
+            "default": null,
+            "description": "Survey the cutout came from (e.g. ZTF, LSST). NULL for all-sky archival thumbnails.",
+            "title": "Survey",
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
