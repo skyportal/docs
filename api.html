@@ -10585,7 +10585,7 @@
                         "data": {
                           "type": "array",
                           "items": {
-                            "$ref": "#/components/schemas/SourcesConfirmedInGCN"
+                            "$ref": "#/components/schemas/GcnEventObj"
                           }
                         }
                       }
@@ -10608,7 +10608,7 @@
       },
       "post": {
         "summary": "Confirm or reject a source in a gcn",
-        "description": "<b>Permission(s) required:</b> <em>Manage GCNs (or System admin)</em><br><br>Confirm or reject a source in a gcn",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Confirm or reject a source in a gcn",
         "tags": [
           "gcn events",
           "sources"
@@ -10642,9 +10642,15 @@
                     "type": "string",
                     "description": "The source_id of the source to confirm or reject"
                   },
-                  "confirmed": {
-                    "type": "boolean",
-                    "description": "Whether the source is confirmed (True) or rejected (False)"
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "pending",
+                      "confirmed",
+                      "ambiguous",
+                      "rejected"
+                    ],
+                    "description": "Standing of the source against the event."
                   },
                   "start_date": {
                     "type": "string",
@@ -10659,7 +10665,7 @@
                   "localization_name",
                   "localization_cumprob",
                   "source_id",
-                  "confirmed",
+                  "status",
                   "start_date",
                   "end_date"
                 ]
@@ -10684,7 +10690,7 @@
                           "properties": {
                             "id": {
                               "type": "integer",
-                              "description": "The id of the source_confirmed_in_gcn"
+                              "description": "The id of the gcn_event_obj"
                             }
                           }
                         }
@@ -10708,7 +10714,7 @@
       },
       "patch": {
         "summary": "Update the confirmed/rejected status of a source in a GCN",
-        "description": "<b>Permission(s) required:</b> <em>Manage GCNs (or System admin)</em><br><br>Update the confirmed or rejected status of a source in a GCN",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update the confirmed or rejected status of a source in a GCN",
         "tags": [
           "gcn events",
           "sources"
@@ -10737,13 +10743,19 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "confirmed": {
-                    "type": "boolean",
-                    "description": "Whether the source is confirmed (True) or rejected (False)"
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "pending",
+                      "confirmed",
+                      "ambiguous",
+                      "rejected"
+                    ],
+                    "description": "Standing of the source against the event."
                   }
                 },
                 "required": [
-                  "confirmed"
+                  "status"
                 ]
               }
             }
@@ -10766,7 +10778,7 @@
                           "properties": {
                             "id": {
                               "type": "integer",
-                              "description": "The id of the modified source_confirmed_in_gcn"
+                              "description": "The id of the modified gcn_event_obj"
                             }
                           }
                         }
@@ -10790,7 +10802,7 @@
       },
       "delete": {
         "summary": "Remove the confirmed/rejected status of a source in a GCN",
-        "description": "<b>Permission(s) required:</b> <em>Manage GCNs (or System admin)</em><br><br>Deletes the confirmed or rejected status of source in a GCN.\nIts status can be considered as 'undefined'.\n",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Deletes the confirmed or rejected status of source in a GCN.\nIts status can be considered as 'undefined'.\n",
         "tags": [
           "gcn events",
           "sources"
@@ -10830,7 +10842,7 @@
                           "properties": {
                             "id": {
                               "type": "integer",
-                              "description": "The id of the deleted source_confirmed_in_gcn"
+                              "description": "The id of the deleted gcn_event_obj"
                             }
                           }
                         }
@@ -10896,7 +10908,7 @@
                         "data": {
                           "type": "array",
                           "items": {
-                            "$ref": "#/components/schemas/SourcesConfirmedInGCN"
+                            "$ref": "#/components/schemas/GcnEventObj"
                           }
                         }
                       }
@@ -39316,6 +39328,15 @@
             "description": "The Filter this state tracks progress against.",
             "readOnly": true
           },
+          "localization": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Localization"
+              }
+            ],
+            "description": "The Localization this state tracks progress against.",
+            "readOnly": true
+          },
           "gcnevent_id": {
             "type": "integer",
             "description": "The GcnEvent being crossmatched."
@@ -39323,6 +39344,10 @@
           "filter_id": {
             "type": "integer",
             "description": "The Filter this state tracks progress against."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "The Localization (one patch of sky) this state tracks."
           },
           "last_queried": {
             "type": "string",
@@ -39359,7 +39384,8 @@
         },
         "required": [
           "filter_id",
-          "gcnevent_id"
+          "gcnevent_id",
+          "localization_id"
         ],
         "additionalProperties": false
       },
@@ -39429,6 +39455,15 @@
             "description": "The Filter this state tracks progress against.",
             "readOnly": true
           },
+          "localization": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Localization"
+              }
+            ],
+            "description": "The Localization this state tracks progress against.",
+            "readOnly": true
+          },
           "gcnevent_id": {
             "type": "integer",
             "description": "The GcnEvent being crossmatched."
@@ -39436,6 +39471,10 @@
           "filter_id": {
             "type": "integer",
             "description": "The Filter this state tracks progress against."
+          },
+          "localization_id": {
+            "type": "integer",
+            "description": "The Localization (one patch of sky) this state tracks."
           },
           "last_queried": {
             "type": "string",
@@ -39468,7 +39507,8 @@
         },
         "required": [
           "filter_id",
-          "gcnevent_id"
+          "gcnevent_id",
+          "localization_id"
         ],
         "additionalProperties": false
       },
@@ -39891,6 +39931,244 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GcnEventNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "GcnEventObj": {
+        "type": "object",
+        "properties": {
+          "obj": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Obj"
+              }
+            ],
+            "description": "The assigned Obj.",
+            "readOnly": true
+          },
+          "gcnevent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The GcnEvent this association belongs to.",
+            "readOnly": true
+          },
+          "confirmer": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User who created this GcnEventObj.",
+            "readOnly": true
+          },
+          "obj_id": {
+            "type": "string",
+            "description": "ID of the Obj."
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC event timestamp"
+          },
+          "status": {
+            "enum": [
+              "pending",
+              "confirmed",
+              "ambiguous",
+              "rejected"
+            ],
+            "maxLength": 9,
+            "description": "Standing of this obj against the event: 'pending' (proposed, awaiting review), 'confirmed', 'ambiguous' (reviewed, undecided) or 'rejected'.",
+            "type": "string"
+          },
+          "confirmer_id": {
+            "type": "integer",
+            "description": "The ID of the User who created this GcnEventObj."
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Explanation on the nature of confirmation or rejection.",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "description": "Extra information about the source.",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "confirmer_id",
+          "dateobs",
+          "obj_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGcnEventObj": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GcnEventObj"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGcnEventObjs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GcnEventObj"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "GcnEventObjNoID": {
+        "type": "object",
+        "properties": {
+          "obj": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Obj"
+              }
+            ],
+            "description": "The assigned Obj.",
+            "readOnly": true
+          },
+          "gcnevent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The GcnEvent this association belongs to.",
+            "readOnly": true
+          },
+          "confirmer": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User who created this GcnEventObj.",
+            "readOnly": true
+          },
+          "obj_id": {
+            "type": "string",
+            "description": "ID of the Obj."
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC event timestamp"
+          },
+          "status": {
+            "enum": [
+              "pending",
+              "confirmed",
+              "ambiguous",
+              "rejected"
+            ],
+            "maxLength": 9,
+            "description": "Standing of this obj against the event: 'pending' (proposed, awaiting review), 'confirmed', 'ambiguous' (reviewed, undecided) or 'rejected'.",
+            "type": "string"
+          },
+          "confirmer_id": {
+            "type": "integer",
+            "description": "The ID of the User who created this GcnEventObj."
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Explanation on the nature of confirmation or rejection.",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "description": "Extra information about the source.",
+            "nullable": true
+          }
+        },
+        "required": [
+          "confirmer_id",
+          "dateobs",
+          "obj_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGcnEventObjNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GcnEventObjNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGcnEventObjNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GcnEventObjNoID"
             }
           }
         },
@@ -59410,11 +59688,11 @@
               "$ref": "#/components/schemas/ObjAnalysis"
             }
           },
-          "sources_in_gcns": {
+          "gcn_events": {
             "type": "array",
             "readOnly": true,
             "items": {
-              "$ref": "#/components/schemas/SourcesConfirmedInGCN"
+              "$ref": "#/components/schemas/GcnEventObj"
             }
           },
           "sharing_service_submissions": {
@@ -59534,14 +59812,6 @@
           "mpc_name": {
             "type": "string",
             "description": "Minor planet center name.",
-            "nullable": true
-          },
-          "gcn_crossmatch": {
-            "type": "array",
-            "description": "List of GCN event dateobs for crossmatched events.",
-            "items": {
-              "type": "string"
-            },
             "nullable": true
           },
           "tns_name": {
@@ -60270,11 +60540,11 @@
               "$ref": "#/components/schemas/ObjAnalysis"
             }
           },
-          "sources_in_gcns": {
+          "gcn_events": {
             "type": "array",
             "readOnly": true,
             "items": {
-              "$ref": "#/components/schemas/SourcesConfirmedInGCN"
+              "$ref": "#/components/schemas/GcnEventObj"
             }
           },
           "sharing_service_submissions": {
@@ -60390,14 +60660,6 @@
           "mpc_name": {
             "type": "string",
             "description": "Minor planet center name.",
-            "nullable": true
-          },
-          "gcn_crossmatch": {
-            "type": "array",
-            "description": "List of GCN event dateobs for crossmatched events.",
-            "items": {
-              "type": "string"
-            },
             "nullable": true
           },
           "tns_name": {
@@ -60653,11 +60915,11 @@
               "$ref": "#/components/schemas/ObjAnalysis"
             }
           },
-          "sources_in_gcns": {
+          "gcn_events": {
             "type": "array",
             "readOnly": true,
             "items": {
-              "$ref": "#/components/schemas/SourcesConfirmedInGCN"
+              "$ref": "#/components/schemas/GcnEventObj"
             }
           },
           "sharing_service_submissions": {
@@ -60771,14 +61033,6 @@
           "mpc_name": {
             "type": "string",
             "description": "Minor planet center name.",
-            "nullable": true
-          },
-          "gcn_crossmatch": {
-            "type": "array",
-            "description": "List of GCN event dateobs for crossmatched events.",
-            "items": {
-              "type": "string"
-            },
             "nullable": true
           },
           "tns_name": {
@@ -71867,232 +72121,6 @@
         ],
         "additionalProperties": false
       },
-      "SourcesConfirmedInGCN": {
-        "type": "object",
-        "properties": {
-          "obj": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Obj"
-              }
-            ],
-            "description": "The assigned Obj.",
-            "readOnly": true
-          },
-          "gcnevent": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/GcnEvent"
-              }
-            ],
-            "description": "The GcnEvent this association belongs to.",
-            "readOnly": true
-          },
-          "confirmer": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/User"
-              }
-            ],
-            "description": "The User who created this SourcesConfirmedInGCN.",
-            "readOnly": true
-          },
-          "obj_id": {
-            "type": "string",
-            "description": "ID of the Obj."
-          },
-          "dateobs": {
-            "type": "string",
-            "format": "date-time",
-            "description": "UTC event timestamp"
-          },
-          "confirmed": {
-            "type": "boolean",
-            "description": "If True, the source is confirmed in the GCN. If False, the source is rejected in the GCN.If undefined, the source is not yet confirmed or rejected in the GCN.",
-            "nullable": true
-          },
-          "confirmer_id": {
-            "type": "integer",
-            "description": "The ID of the User who created this SourcesConfirmedInGCN."
-          },
-          "explanation": {
-            "type": "string",
-            "description": "Explanation on the nature of confirmation or rejection.",
-            "nullable": true
-          },
-          "notes": {
-            "type": "string",
-            "description": "Extra information about the source.",
-            "nullable": true
-          },
-          "id": {
-            "type": "integer",
-            "description": "Unique object identifier."
-          }
-        },
-        "required": [
-          "confirmer_id",
-          "dateobs",
-          "obj_id"
-        ],
-        "additionalProperties": false
-      },
-      "SingleSourcesConfirmedInGCN": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ],
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "$ref": "#/components/schemas/SourcesConfirmedInGCN"
-          }
-        },
-        "required": [
-          "status"
-        ],
-        "additionalProperties": false
-      },
-      "ArrayOfSourcesConfirmedInGCNs": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ],
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SourcesConfirmedInGCN"
-            }
-          }
-        },
-        "required": [
-          "status"
-        ],
-        "additionalProperties": false
-      },
-      "SourcesConfirmedInGCNNoID": {
-        "type": "object",
-        "properties": {
-          "obj": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Obj"
-              }
-            ],
-            "description": "The assigned Obj.",
-            "readOnly": true
-          },
-          "gcnevent": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/GcnEvent"
-              }
-            ],
-            "description": "The GcnEvent this association belongs to.",
-            "readOnly": true
-          },
-          "confirmer": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/User"
-              }
-            ],
-            "description": "The User who created this SourcesConfirmedInGCN.",
-            "readOnly": true
-          },
-          "obj_id": {
-            "type": "string",
-            "description": "ID of the Obj."
-          },
-          "dateobs": {
-            "type": "string",
-            "format": "date-time",
-            "description": "UTC event timestamp"
-          },
-          "confirmed": {
-            "type": "boolean",
-            "description": "If True, the source is confirmed in the GCN. If False, the source is rejected in the GCN.If undefined, the source is not yet confirmed or rejected in the GCN.",
-            "nullable": true
-          },
-          "confirmer_id": {
-            "type": "integer",
-            "description": "The ID of the User who created this SourcesConfirmedInGCN."
-          },
-          "explanation": {
-            "type": "string",
-            "description": "Explanation on the nature of confirmation or rejection.",
-            "nullable": true
-          },
-          "notes": {
-            "type": "string",
-            "description": "Extra information about the source.",
-            "nullable": true
-          }
-        },
-        "required": [
-          "confirmer_id",
-          "dateobs",
-          "obj_id"
-        ],
-        "additionalProperties": false
-      },
-      "SingleSourcesConfirmedInGCNNoID": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ],
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "$ref": "#/components/schemas/SourcesConfirmedInGCNNoID"
-          }
-        },
-        "required": [
-          "status"
-        ],
-        "additionalProperties": false
-      },
-      "ArrayOfSourcesConfirmedInGCNNoIDs": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "enum": [
-              "success"
-            ],
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SourcesConfirmedInGCNNoID"
-            }
-          }
-        },
-        "required": [
-          "status"
-        ],
-        "additionalProperties": false
-      },
       "SpatialCatalog": {
         "type": "object",
         "properties": {
@@ -77332,11 +77360,11 @@
               "$ref": "#/components/schemas/ObservingRun"
             }
           },
-          "sources_in_gcn": {
+          "gcn_event_objs": {
             "type": "array",
             "readOnly": true,
             "items": {
-              "$ref": "#/components/schemas/SourcesConfirmedInGCN"
+              "$ref": "#/components/schemas/GcnEventObj"
             }
           },
           "photometryvalidations": {
@@ -78167,11 +78195,11 @@
               "$ref": "#/components/schemas/ObservingRun"
             }
           },
-          "sources_in_gcn": {
+          "gcn_event_objs": {
             "type": "array",
             "readOnly": true,
             "items": {
-              "$ref": "#/components/schemas/SourcesConfirmedInGCN"
+              "$ref": "#/components/schemas/GcnEventObj"
             }
           },
           "photometryvalidations": {
