@@ -32314,6 +32314,13 @@
               "$ref": "#/components/schemas/ClassificationVote"
             }
           },
+          "edits": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/ClassificationEdit"
+            }
+          },
           "classification": {
             "type": "string",
             "description": "The assigned class."
@@ -32407,6 +32414,202 @@
         ],
         "additionalProperties": false
       },
+      "ClassificationEdit": {
+        "type": "object",
+        "properties": {
+          "classification": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Classification"
+              }
+            ],
+            "description": "The Classification this edit was made to.",
+            "readOnly": true
+          },
+          "editor": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User that made this edit.",
+            "readOnly": true
+          },
+          "classification_id": {
+            "type": "integer",
+            "description": "ID of the Classification that was edited."
+          },
+          "editor_id": {
+            "type": "integer",
+            "description": "ID of the User that made this edit."
+          },
+          "editor_name": {
+            "type": "string",
+            "description": "User.username or Token.id of the editor."
+          },
+          "old_probability": {
+            "type": "number",
+            "description": "Probability before the edit.",
+            "nullable": true
+          },
+          "new_probability": {
+            "type": "number",
+            "description": "Probability after the edit.",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "classification_id",
+          "editor_id",
+          "editor_name"
+        ],
+        "additionalProperties": false
+      },
+      "SingleClassificationEdit": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ClassificationEdit"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfClassificationEdits": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClassificationEdit"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ClassificationEditNoID": {
+        "type": "object",
+        "properties": {
+          "classification": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Classification"
+              }
+            ],
+            "description": "The Classification this edit was made to.",
+            "readOnly": true
+          },
+          "editor": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User that made this edit.",
+            "readOnly": true
+          },
+          "classification_id": {
+            "type": "integer",
+            "description": "ID of the Classification that was edited."
+          },
+          "editor_id": {
+            "type": "integer",
+            "description": "ID of the User that made this edit."
+          },
+          "editor_name": {
+            "type": "string",
+            "description": "User.username or Token.id of the editor."
+          },
+          "old_probability": {
+            "type": "number",
+            "description": "Probability before the edit.",
+            "nullable": true
+          },
+          "new_probability": {
+            "type": "number",
+            "description": "Probability after the edit.",
+            "nullable": true
+          }
+        },
+        "required": [
+          "classification_id",
+          "editor_id",
+          "editor_name"
+        ],
+        "additionalProperties": false
+      },
+      "SingleClassificationEditNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ClassificationEditNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfClassificationEditNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClassificationEditNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
       "ClassificationNoID": {
         "type": "object",
         "properties": {
@@ -32449,6 +32652,13 @@
             "readOnly": true,
             "items": {
               "$ref": "#/components/schemas/ClassificationVote"
+            }
+          },
+          "edits": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/ClassificationEdit"
             }
           },
           "classification": {
