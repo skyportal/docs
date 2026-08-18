@@ -21422,6 +21422,72 @@
         }
       }
     },
+    "/api/sources/{obj_id}/comments/channels": {
+      "get": {
+        "summary": "List the conversations opened on a source",
+        "description": "Retrieve the names of the source's named conversations. A conversation exists as soon as a comment carries its name.\n",
+        "tags": [
+          "comments"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "obj_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a conversation on a source",
+        "description": "<b>Permission(s) required:</b> <em>Comment (or System admin)</em><br><br>Delete a named conversation and every comment it holds. Restricted to the user who opened it (the author of its first comment) and to system admins.\n",
+        "tags": [
+          "comments"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "obj_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "channel",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/{associated_resource_type}/{resource_id}": {
       "get": {
         "summary": "Get all annotations",
@@ -33084,6 +33150,11 @@
             "type": "string",
             "description": "ID of the Comment's Obj."
           },
+          "channel": {
+            "type": "string",
+            "description": "Conversation the comment belongs to, NULL for the main thread.",
+            "nullable": true
+          },
           "id": {
             "type": "integer",
             "description": "Unique object identifier."
@@ -33204,6 +33275,11 @@
           "obj_id": {
             "type": "string",
             "description": "ID of the Comment's Obj."
+          },
+          "channel": {
+            "type": "string",
+            "description": "Conversation the comment belongs to, NULL for the main thread.",
+            "nullable": true
           },
           "text": {
             "type": "string",
