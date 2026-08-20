@@ -20939,6 +20939,140 @@
         ]
       }
     },
+    "/api/sources/{obj_id}/interests": {
+      "get": {
+        "summary": "Retrieve the interests registered on a source",
+        "description": "Retrieve the users interested in working on a source.",
+        "tags": [
+          "sources"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "obj_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Register an interest in a source",
+        "description": "Register an interest in a source. A user may register several, one per planned publication.\n",
+        "tags": [
+          "sources"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "obj_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SourceInterestPostBody"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Withdraw an interest in a source",
+        "description": "Delete one of the requesting user's interests.",
+        "tags": [
+          "sources"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "obj_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/sources/{obj_id}/interests/{interest_id}": {
+      "delete": {
+        "summary": "Withdraw an interest in a source",
+        "description": "Delete one of the requesting user's interests.",
+        "tags": [
+          "sources"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "obj_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "interest_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/sources/{obj_id}/color_mag": {
       "get": {
         "summary": "Get color and absolute magnitude of a source",
@@ -33182,6 +33316,10 @@
             "description": "Conversation the comment belongs to, NULL for the main thread.",
             "nullable": true
           },
+          "system": {
+            "type": "boolean",
+            "description": "Whether the comment was posted by the app rather than typed by its author."
+          },
           "id": {
             "type": "integer",
             "description": "Unique object identifier."
@@ -33307,6 +33445,10 @@
             "type": "string",
             "description": "Conversation the comment belongs to, NULL for the main thread.",
             "nullable": true
+          },
+          "system": {
+            "type": "boolean",
+            "description": "Whether the comment was posted by the app rather than typed by its author."
           },
           "text": {
             "type": "string",
@@ -71924,6 +72066,202 @@
         ],
         "additionalProperties": false
       },
+      "SourceInterest": {
+        "type": "object",
+        "properties": {
+          "obj": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Obj"
+              }
+            ],
+            "description": "The Obj the record relates to.",
+            "readOnly": true
+          },
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User the record belongs to.",
+            "readOnly": true
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the planned work."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the planned work.",
+            "nullable": true
+          },
+          "link": {
+            "type": "string",
+            "description": "Link to a related page or document.",
+            "nullable": true
+          },
+          "obj_id": {
+            "type": "string",
+            "description": "ID of the Obj the record relates to."
+          },
+          "user_id": {
+            "type": "integer",
+            "description": "ID of the User the record belongs to."
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "obj_id",
+          "title",
+          "user_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleSourceInterest": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SourceInterest"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfSourceInterests": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SourceInterest"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "SourceInterestNoID": {
+        "type": "object",
+        "properties": {
+          "obj": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Obj"
+              }
+            ],
+            "description": "The Obj the record relates to.",
+            "readOnly": true
+          },
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User the record belongs to.",
+            "readOnly": true
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the planned work."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the planned work.",
+            "nullable": true
+          },
+          "link": {
+            "type": "string",
+            "description": "Link to a related page or document.",
+            "nullable": true
+          },
+          "obj_id": {
+            "type": "string",
+            "description": "ID of the Obj the record relates to."
+          },
+          "user_id": {
+            "type": "integer",
+            "description": "ID of the User the record belongs to."
+          }
+        },
+        "required": [
+          "obj_id",
+          "title",
+          "user_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleSourceInterestNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SourceInterestNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfSourceInterestNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SourceInterestNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
       "SourceLabel": {
         "type": "object",
         "properties": {
@@ -80341,6 +80679,36 @@
           "groupIds"
         ],
         "title": "SourceLabelsDeleteBody",
+        "type": "object"
+      },
+      "SourceInterestPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for registering an interest in a source.",
+        "properties": {
+          "title": {
+            "description": "Title of the planned work",
+            "title": "Title",
+            "type": "string"
+          },
+          "description": {
+            "default": null,
+            "description": "Description of the planned work",
+            "title": "Description",
+            "type": "string",
+            "nullable": true
+          },
+          "link": {
+            "default": null,
+            "description": "Link to a related page or document",
+            "title": "Link",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "title"
+        ],
+        "title": "SourceInterestPostBody",
         "type": "object"
       },
       "AnnotationPostBody": {
