@@ -81665,6 +81665,13 @@
             "type": "integer",
             "nullable": true
           },
+          "broker_id": {
+            "default": null,
+            "description": "ID of the Broker this Filter runs on. Can only be set while the filter has none: moving a filter between brokers would orphan whatever the first one holds for it.",
+            "title": "Broker Id",
+            "type": "integer",
+            "nullable": true
+          },
           "autosave": {
             "default": null,
             "description": "Whether objects passing this filter during broker ingestion are auto-saved as Sources to the Filter's Group.",
