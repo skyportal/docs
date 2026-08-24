@@ -9686,6 +9686,303 @@
         ]
       }
     },
+    "/api/gcn_event/{dateobs}/associations/{association_id})?": {
+      "get": {
+        "summary": "Events associated with this one",
+        "description": "Other GCN events whose localization overlaps this one's, as found by\nthe crossmatch service, ranked by RAVEN's sky-map overlap integral.\n",
+        "tags": [
+          "gcn events"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dateobs",
+            "required": true,
+            "description": "The dateobs of the event, as an arrow parseable string",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "association_id",
+            "required": true,
+            "description": "Unused; the listing is per event",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "minConsistency",
+            "required": false,
+            "description": "Minimum sky-map consistency, 0 to 1. Defaults to your rule for this pair of messengers.",
+            "schema": {
+              "type": "number",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "maxDays",
+            "required": false,
+            "description": "Maximum separation in days. Defaults to the configured window for the detector pair: a neutrino-GW coincidence is judged on seconds, a GRB-GW one on minutes.",
+            "schema": {
+              "type": "number",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "includeRejected",
+            "required": false,
+            "description": "Include associations already rejected.",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Search for associations now",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Runs the sky-map overlap against every other event in range, rather\nthan waiting for the crossmatch service's next pass. Existing\nassociations keep their verdict.\n",
+        "tags": [
+          "gcn events"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dateobs",
+            "required": true,
+            "description": "The dateobs of the event",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "association_id",
+            "required": true,
+            "description": "Unused; the search is per event",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Rule on an association",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Confirm, reject, or mark ambiguous a pair of events.",
+        "tags": [
+          "gcn events"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dateobs",
+            "required": true,
+            "description": "The dateobs of the event",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "association_id",
+            "required": true,
+            "description": "ID of the association being ruled on",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GcnEventAssociationPatch"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/gcn_association_rules/{rule_id}": {
+      "get": {
+        "summary": "Get the association rules you can see",
+        "description": "The cuts your groups apply to event-to-event associations, one per\npair of messengers per group.\n",
+        "tags": [
+          "gcn events"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "rule_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "post": {
+        "summary": "Create or update an association rule",
+        "description": "Sets your cut for one pair of messengers; posting the same pair again\nreplaces it.\n",
+        "tags": [
+          "gcn events"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GcnAssociationRuleBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "rule_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete an association rule",
+        "description": "Removes one of your cuts.",
+        "tags": [
+          "gcn events"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "rule_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/gcn_event/{dateobs}/gracedb": {
       "post": {
         "summary": "Retrieve GW Event data from GraceDB",
@@ -11158,6 +11455,19 @@
             "description": "Comma-separated string of group IDs. If provided, only return events shared with those groups.",
             "schema": {
               "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "mmadetectorIds",
+            "required": false,
+            "description": "Comma-separated string of `MMADetector` IDs. Returns events any of them contributed to.",
+            "schema": {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array",
               "nullable": true
             }
           }
@@ -41321,6 +41631,238 @@
         ],
         "additionalProperties": false
       },
+      "GcnAssociationRule": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Group"
+              }
+            ],
+            "description": "The Group whose rule this is.",
+            "readOnly": true
+          },
+          "group_id": {
+            "type": "integer",
+            "description": "ID of the Group whose rule this is."
+          },
+          "detector_type_1": {
+            "enum": [
+              "gravitational-wave",
+              "neutrino",
+              "gamma-ray-burst",
+              "x-ray"
+            ],
+            "maxLength": 18,
+            "description": "First messenger of the pair, sorted.",
+            "type": "string"
+          },
+          "detector_type_2": {
+            "enum": [
+              "gravitational-wave",
+              "neutrino",
+              "gamma-ray-burst",
+              "x-ray"
+            ],
+            "maxLength": 18,
+            "description": "Second messenger of the pair, sorted.",
+            "type": "string"
+          },
+          "tags_1": {
+            "type": "array",
+            "description": "Tags the detector_type_1 event must carry at least one of, e.g. BNS or NSBH so only those GW events pair with GRBs. Empty means no restriction. Same 'any of' rule as a crossmatch filter's gcn_tags.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tags_2": {
+            "type": "array",
+            "description": "Tags the detector_type_2 event must carry at least one of. Empty means no restriction.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "days": {
+            "type": "number",
+            "description": "Widest separation in days for this pair to count as coincident."
+          },
+          "min_consistency": {
+            "type": "number",
+            "description": "Smallest sky-map consistency for this pair: how well the two localizations must agree, as a fraction of the most they could. The cut is on consistency rather than the raw overlap because the overlap's ceiling depends on the localization areas, so one threshold would mean different things for a cone and a wide skymap."
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "days",
+          "detector_type_1",
+          "detector_type_2",
+          "group_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGcnAssociationRule": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GcnAssociationRule"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGcnAssociationRules": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GcnAssociationRule"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "GcnAssociationRuleNoID": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Group"
+              }
+            ],
+            "description": "The Group whose rule this is.",
+            "readOnly": true
+          },
+          "group_id": {
+            "type": "integer",
+            "description": "ID of the Group whose rule this is."
+          },
+          "detector_type_1": {
+            "enum": [
+              "gravitational-wave",
+              "neutrino",
+              "gamma-ray-burst",
+              "x-ray"
+            ],
+            "maxLength": 18,
+            "description": "First messenger of the pair, sorted.",
+            "type": "string"
+          },
+          "detector_type_2": {
+            "enum": [
+              "gravitational-wave",
+              "neutrino",
+              "gamma-ray-burst",
+              "x-ray"
+            ],
+            "maxLength": 18,
+            "description": "Second messenger of the pair, sorted.",
+            "type": "string"
+          },
+          "tags_1": {
+            "type": "array",
+            "description": "Tags the detector_type_1 event must carry at least one of, e.g. BNS or NSBH so only those GW events pair with GRBs. Empty means no restriction. Same 'any of' rule as a crossmatch filter's gcn_tags.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tags_2": {
+            "type": "array",
+            "description": "Tags the detector_type_2 event must carry at least one of. Empty means no restriction.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "days": {
+            "type": "number",
+            "description": "Widest separation in days for this pair to count as coincident."
+          },
+          "min_consistency": {
+            "type": "number",
+            "description": "Smallest sky-map consistency for this pair: how well the two localizations must agree, as a fraction of the most they could. The cut is on consistency rather than the raw overlap because the overlap's ceiling depends on the localization areas, so one threshold would mean different things for a cone and a wide skymap."
+          }
+        },
+        "required": [
+          "days",
+          "detector_type_1",
+          "detector_type_2",
+          "group_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGcnAssociationRuleNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GcnAssociationRuleNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGcnAssociationRuleNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GcnAssociationRuleNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
       "GcnEvent": {
         "type": "object",
         "properties": {
@@ -41541,6 +42083,266 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GcnEvent"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "GcnEventAssociation": {
+        "type": "object",
+        "properties": {
+          "gcnevent_1": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The earlier GcnEvent.",
+            "readOnly": true
+          },
+          "gcnevent_2": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The later GcnEvent.",
+            "readOnly": true
+          },
+          "confirmer": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User who last ruled on this association.",
+            "readOnly": true
+          },
+          "dateobs_1": {
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC timestamp of the earlier event."
+          },
+          "dateobs_2": {
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC timestamp of the later event."
+          },
+          "overlap": {
+            "type": "number",
+            "description": "RAVEN sky-map overlap integral: 1 is what unrelated maps average, higher means the localizations agree more than chance."
+          },
+          "consistency": {
+            "type": "number",
+            "description": "Overlap as a fraction of the most these two maps could overlap (their correlation): 1 when they agree as well as localizations of these shapes can, 0 when disjoint. Comparable across pairs, which the raw overlap is not -- its ceiling is set by the localization areas.",
+            "nullable": true
+          },
+          "dt_days": {
+            "type": "number",
+            "description": "dateobs_2 - dateobs_1, in days. Always positive."
+          },
+          "status": {
+            "enum": [
+              "pending",
+              "confirmed",
+              "ambiguous",
+              "rejected"
+            ],
+            "maxLength": 9,
+            "description": "Standing of this association: 'pending' (proposed, awaiting review), 'confirmed', 'ambiguous' (reviewed, undecided) or 'rejected'.",
+            "type": "string"
+          },
+          "confirmer_id": {
+            "type": "integer",
+            "description": "The ID of the User who last ruled on this association."
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Why this association was confirmed or rejected.",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "confirmer_id",
+          "dateobs_1",
+          "dateobs_2",
+          "dt_days",
+          "overlap"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGcnEventAssociation": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GcnEventAssociation"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGcnEventAssociations": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GcnEventAssociation"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "GcnEventAssociationNoID": {
+        "type": "object",
+        "properties": {
+          "gcnevent_1": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The earlier GcnEvent.",
+            "readOnly": true
+          },
+          "gcnevent_2": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The later GcnEvent.",
+            "readOnly": true
+          },
+          "confirmer": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User who last ruled on this association.",
+            "readOnly": true
+          },
+          "dateobs_1": {
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC timestamp of the earlier event."
+          },
+          "dateobs_2": {
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC timestamp of the later event."
+          },
+          "overlap": {
+            "type": "number",
+            "description": "RAVEN sky-map overlap integral: 1 is what unrelated maps average, higher means the localizations agree more than chance."
+          },
+          "consistency": {
+            "type": "number",
+            "description": "Overlap as a fraction of the most these two maps could overlap (their correlation): 1 when they agree as well as localizations of these shapes can, 0 when disjoint. Comparable across pairs, which the raw overlap is not -- its ceiling is set by the localization areas.",
+            "nullable": true
+          },
+          "dt_days": {
+            "type": "number",
+            "description": "dateobs_2 - dateobs_1, in days. Always positive."
+          },
+          "status": {
+            "enum": [
+              "pending",
+              "confirmed",
+              "ambiguous",
+              "rejected"
+            ],
+            "maxLength": 9,
+            "description": "Standing of this association: 'pending' (proposed, awaiting review), 'confirmed', 'ambiguous' (reviewed, undecided) or 'rejected'.",
+            "type": "string"
+          },
+          "confirmer_id": {
+            "type": "integer",
+            "description": "The ID of the User who last ruled on this association."
+          },
+          "explanation": {
+            "type": "string",
+            "description": "Why this association was confirmed or rejected.",
+            "nullable": true
+          }
+        },
+        "required": [
+          "confirmer_id",
+          "dateobs_1",
+          "dateobs_2",
+          "dt_days",
+          "overlap"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGcnEventAssociationNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GcnEventAssociationNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGcnEventAssociationNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GcnEventAssociationNoID"
             }
           }
         },
@@ -60935,14 +61737,22 @@
             "type": "string",
             "description": "Abbreviated facility name (e.g., H1)."
           },
+          "aliases": {
+            "type": "array",
+            "description": "Other names GCN notices use for this detector (e.g. Fermi for FermiGBM). An event is linked when a tag matches the nickname or any alias.",
+            "items": {
+              "type": "string"
+            }
+          },
           "type": {
             "enum": [
               "gravitational-wave",
               "neutrino",
-              "gamma-ray-burst"
+              "gamma-ray-burst",
+              "x-ray"
             ],
             "maxLength": 18,
-            "description": "MMA detector type, one of gravitational wave, neutrino, or gamma-ray burst.",
+            "description": "MMA detector type, one of gravitational wave, neutrino, gamma-ray burst, or x-ray.",
             "type": "string"
           },
           "lat": {
@@ -61053,14 +61863,22 @@
             "type": "string",
             "description": "Abbreviated facility name (e.g., H1)."
           },
+          "aliases": {
+            "type": "array",
+            "description": "Other names GCN notices use for this detector (e.g. Fermi for FermiGBM). An event is linked when a tag matches the nickname or any alias.",
+            "items": {
+              "type": "string"
+            }
+          },
           "type": {
             "enum": [
               "gravitational-wave",
               "neutrino",
-              "gamma-ray-burst"
+              "gamma-ray-burst",
+              "x-ray"
             ],
             "maxLength": 18,
-            "description": "MMA detector type, one of gravitational wave, neutrino, or gamma-ray burst.",
+            "description": "MMA detector type, one of gravitational wave, neutrino, gamma-ray burst, or x-ray.",
             "type": "string"
           },
           "lat": {
@@ -81746,6 +82564,85 @@
           "catalog_name"
         ],
         "additionalProperties": false
+      },
+      "GcnEventAssociationPatch": {
+        "additionalProperties": false,
+        "description": "Body for ruling on an association.",
+        "properties": {
+          "status": {
+            "description": "One of pending, confirmed, ambiguous, rejected.",
+            "title": "Status",
+            "type": "string"
+          },
+          "explanation": {
+            "default": null,
+            "description": "Why it was confirmed or rejected.",
+            "title": "Explanation",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "title": "GcnEventAssociationPatch",
+        "type": "object"
+      },
+      "GcnAssociationRuleBody": {
+        "additionalProperties": false,
+        "description": "One group's cut for a pair of messengers.",
+        "properties": {
+          "group_id": {
+            "description": "ID of the group the rule belongs to.",
+            "title": "Group Id",
+            "type": "integer"
+          },
+          "detector_type_1": {
+            "description": "One of gravitational-wave, neutrino, gamma-ray-burst, x-ray.",
+            "title": "Detector Type 1",
+            "type": "string"
+          },
+          "detector_type_2": {
+            "description": "One of gravitational-wave, neutrino, gamma-ray-burst, x-ray.",
+            "title": "Detector Type 2",
+            "type": "string"
+          },
+          "tags_1": {
+            "description": "Tags the first messenger's event must carry at least one of (e.g. BNS, NSBH). Empty means no restriction.",
+            "items": {
+              "type": "string"
+            },
+            "title": "Tags 1",
+            "type": "array"
+          },
+          "tags_2": {
+            "description": "Tags the second messenger's event must carry at least one of. Empty means no restriction.",
+            "items": {
+              "type": "string"
+            },
+            "title": "Tags 2",
+            "type": "array"
+          },
+          "days": {
+            "description": "Widest separation in days for this pair to be coincident.",
+            "title": "Days",
+            "type": "number"
+          },
+          "min_consistency": {
+            "default": 0.5,
+            "description": "Smallest sky-map consistency, 0 to 1: how well the two localizations must agree, as a fraction of the most they could.",
+            "title": "Min Consistency",
+            "type": "number"
+          }
+        },
+        "required": [
+          "group_id",
+          "detector_type_1",
+          "detector_type_2",
+          "days"
+        ],
+        "title": "GcnAssociationRuleBody",
+        "type": "object"
       },
       "GcnEventTagPost": {
         "type": "object",
