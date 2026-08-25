@@ -344,6 +344,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-debian-based-linux-and-wsl">Installation: Debian-based Linux and WSL</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#launch">Launch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-an-existing-checkout">Updating an existing checkout</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-configuration">Additional Configuration</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#authentication">Authentication</a></li>
@@ -616,6 +617,40 @@ happen once).</p></li>
 Different users have different privileges and can see more or less of the demo data.</p></li>
 </ol>
 </section>
+<section id="updating-an-existing-checkout">
+<h2>Updating an existing checkout<a class="headerlink" href="#updating-an-existing-checkout" title="Link to this heading">#</a></h2>
+<p>New code usually needs more than <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>: the submodules, the Python
+environment, the Javascript bundle and the database schema all move with it.</p>
+<ol class="simple">
+<li><p>Stop the app with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">stop</span></code>.</p></li>
+<li><p>Get the new code with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> (or <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">v1.2.3</span></code> for a release).</p></li>
+<li><p>Update the submodules with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">submodule</span> <span class="pre">update</span> <span class="pre">--init</span> <span class="pre">--recursive</span></code>.</p></li>
+<li><p>Update the Python environment with <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">sync</span></code>.</p></li>
+<li><p>Apply any pending database migrations with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_migrate</span></code>.</p></li>
+<li><p>Start the app again with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code>, which reinstalls the Javascript
+dependencies and rebuilds the bundle.</p></li>
+</ol>
+<p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_migrate</span></code> runs <code class="docutils literal notranslate"><span class="pre">alembic</span> <span class="pre">upgrade</span> <span class="pre">head</span></code> for you, with <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> and the
+config flag already set. To run alembic yourself, activate the environment and
+supply both:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">.</span><span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+<span class="n">PYTHONPATH</span><span class="o">=.</span> <span class="n">alembic</span> <span class="o">-</span><span class="n">x</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">yaml</span> <span class="n">heads</span>
+</pre></div>
+</div>
+<p>Without them alembic reports <code class="docutils literal notranslate"><span class="pre">ModuleNotFoundError:</span> <span class="pre">No</span> <span class="pre">module</span> <span class="pre">named</span> <span class="pre">'baselayer'</span></code>,
+because its environment imports the app.</p>
+<p>A skipped step rarely names itself in the resulting error:</p>
+<ul class="simple">
+<li><p>Database errors about missing columns or tables mean the migrations have not
+been applied. Run <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_migrate</span></code>.</p></li>
+<li><p>Front-end errors about a module that cannot be found, or that disagree with
+the code you have checked out, mean the Javascript bundle is stale. It is
+rebuilt only when the app starts, so restart the app, then reload the browser
+with Shift held down, since it may be caching the old bundle too.</p></li>
+<li><p>An import error for <code class="docutils literal notranslate"><span class="pre">baselayer</span></code> means the submodules were not updated.</p></li>
+<li><p>If alembic reports more than one head, see <a class="reference internal" href="migrations.html"><span class="doc">Database migrations</span></a>.</p></li>
+</ul>
+</section>
 <section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
 <p>If you have trouble running <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">sync</span></code> and see an error link to <code class="docutils literal notranslate"><span class="pre">python-ligo-lw</span></code>:</p>
@@ -781,6 +816,7 @@ sudo certbot renew</p>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-debian-based-linux-and-wsl">Installation: Debian-based Linux and WSL</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#launch">Launch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#updating-an-existing-checkout">Updating an existing checkout</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-configuration">Additional Configuration</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#authentication">Authentication</a></li>

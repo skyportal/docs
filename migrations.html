@@ -331,6 +331,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up">Setting up</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-migration-script">Generate migration script</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-migration-scripts">Applying migration scripts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-heads">Multiple heads</a></li>
 </ul>
             </nav>
         </div>
@@ -344,6 +345,9 @@ document.write(`
                   
   <section id="database-migrations">
 <h1>Database migrations<a class="headerlink" href="#database-migrations" title="Link to this heading">#</a></h1>
+<p>Applying migrations is one step of upgrading an existing checkout; see
+<a class="reference internal" href="setup.html"><span class="doc">Updating an existing checkout</span></a> for the others. <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_migrate</span></code> applies
+pending migrations with <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> and the config flag already set.</p>
 <section id="setting-up">
 <h2>Setting up<a class="headerlink" href="#setting-up" title="Link to this heading">#</a></h2>
 <p>If you are planning to use database migrations, you need to let
@@ -375,6 +379,23 @@ out the branch with pending migration scripts, and run the following to upgrade:
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PYTHONPATH</span><span class="o">=.</span> <span class="n">alembic</span> <span class="o">-</span><span class="n">x</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">yaml</span> <span class="n">upgrade</span> <span class="n">head</span>
 </pre></div>
 </div>
+</section>
+<section id="multiple-heads">
+<h2>Multiple heads<a class="headerlink" href="#multiple-heads" title="Link to this heading">#</a></h2>
+<p>Alembic refuses to upgrade when a branch adds a migration alongside one that
+landed on main, because it cannot tell which order the two belong in. To see
+them:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PYTHONPATH</span><span class="o">=.</span> <span class="n">alembic</span> <span class="o">-</span><span class="n">x</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">yaml</span> <span class="n">heads</span>
+</pre></div>
+</div>
+<p>If that prints more than one revision, you can either point your migration’s
+<code class="docutils literal notranslate"><span class="pre">down_revision</span></code> at main’s head (the tidiest option while the migration is
+unreleased and nobody has applied it), or merge the two:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PYTHONPATH</span><span class="o">=.</span> <span class="n">alembic</span> <span class="o">-</span><span class="n">x</span> <span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">yaml</span> <span class="n">merge</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;merge heads&quot;</span> <span class="o">&lt;</span><span class="n">rev1</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">rev2</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Test</span> <span class="pre">SkyPortal</span> <span class="pre">migrations</span></code> CI job runs the chain from an empty database, so
+it catches a divergence before it reaches anyone else.</p>
 </section>
 </section>
 
@@ -426,6 +447,7 @@ out the branch with pending migration scripts, and run the following to upgrade:
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setting-up">Setting up</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-migration-script">Generate migration script</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-migration-scripts">Applying migration scripts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-heads">Multiple heads</a></li>
 </ul>
   </nav></div>
 
