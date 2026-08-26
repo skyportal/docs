@@ -6244,6 +6244,26 @@
             "schema": {
               "type": "integer"
             }
+          },
+          {
+            "in": "query",
+            "name": "group_id",
+            "required": false,
+            "description": "Only return filters belonging to this Group.",
+            "schema": {
+              "type": "integer",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "stream_id",
+            "required": false,
+            "description": "Only return filters reading from this Stream.",
+            "schema": {
+              "type": "integer",
+              "nullable": true
+            }
           }
         ]
       },
@@ -6326,7 +6346,7 @@
     "/api/filters": {
       "get": {
         "summary": "Get all filters",
-        "description": "Retrieve all filters",
+        "description": "Retrieve all filters, optionally restricted to one group or stream.\nEach filter is returned without its altdata, which holds the whole\nbroker definition; GET on a single filter returns that.\n",
         "tags": [
           "filters"
         ],
@@ -6335,7 +6355,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ArrayOfFilters"
+                  "$ref": "#/components/schemas/ArrayOfFilterListItems"
                 }
               }
             }
@@ -6349,7 +6369,29 @@
               }
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "group_id",
+            "required": false,
+            "description": "Only return filters belonging to this Group.",
+            "schema": {
+              "type": "integer",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "stream_id",
+            "required": false,
+            "description": "Only return filters reading from this Stream.",
+            "schema": {
+              "type": "integer",
+              "nullable": true
+            }
+          }
+        ]
       },
       "post": {
         "summary": "Create a new filter",
@@ -23337,6 +23379,106 @@
             }
           }
         ]
+      }
+    },
+    "/api/sources/{obj_id}/acknowledgment": {
+      "get": {
+        "summary": "Retrieve the acknowledgment block for an Obj",
+        "description": "Build the citation text for a source from what it actually used: the\ninstance, the filters and brokers that selected it, the facilities\nthat supplied its photometry and spectra, and the programs it was\nobserved under. Returns the assembled paragraph and the components it\nwas built from, so a caller can drop anything unused.\n",
+        "tags": [
+          "objs"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "obj_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "exclude_filter_ids",
+            "required": false,
+            "description": "Filters not to cite. Omit to cite every one detected.",
+            "schema": {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "exclude_instrument_ids",
+            "required": false,
+            "description": "Instruments not to cite. Omit to cite every one detected.",
+            "schema": {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "exclude_allocation_ids",
+            "required": false,
+            "description": "Allocations not to cite. Omit to cite every one detected.",
+            "schema": {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "text": {
+                              "type": "string",
+                              "description": "The assembled acknowledgment paragraph"
+                            },
+                            "components": {
+                              "type": "object",
+                              "description": "The parts the text was built from"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/sources/{obj_id}/observability": {
@@ -40919,6 +41061,90 @@
         ],
         "additionalProperties": false
       },
+      "FilterListItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Filter ID."
+          },
+          "name": {
+            "type": "string",
+            "description": "Filter name."
+          },
+          "group_id": {
+            "type": "integer",
+            "description": "ID of the Filter's Group."
+          },
+          "stream_id": {
+            "type": "integer",
+            "description": "ID of the Filter's Stream."
+          },
+          "broker_id": {
+            "type": "integer",
+            "description": "ID of the Broker this Filter runs on, if any.",
+            "nullable": true
+          },
+          "autosave": {
+            "type": "boolean",
+            "description": "Whether objects passing this filter are auto-saved as Sources to the Filter's Group."
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modified": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SingleFilterListItem": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/FilterListItem"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfFilterListItems": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterListItem"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
       "FilterNoID": {
         "type": "object",
         "properties": {
@@ -51717,6 +51943,11 @@
             "description": "The spectral band covered by the instrument (e.g., Optical, IR).",
             "nullable": true
           },
+          "acknowledgment": {
+            "type": "string",
+            "description": "Sentence to cite this instrument with, used to build a source's acknowledgment block. Falls back to the instrument name when unset.",
+            "nullable": true
+          },
           "telescope_id": {
             "type": "integer",
             "description": "The ID of the Telescope that hosts the Instrument."
@@ -52626,6 +52857,11 @@
           "band": {
             "type": "string",
             "description": "The spectral band covered by the instrument (e.g., Optical, IR).",
+            "nullable": true
+          },
+          "acknowledgment": {
+            "type": "string",
+            "description": "Sentence to cite this instrument with, used to build a source's acknowledgment block. Falls back to the instrument name when unset.",
             "nullable": true
           },
           "telescope_id": {
@@ -80174,6 +80410,11 @@
             "type": "boolean",
             "description": "Does this telescope have a fixed location (lon, lat, elev)?"
           },
+          "acknowledgment": {
+            "type": "string",
+            "description": "Sentence to cite this telescope with, used to build a source's acknowledgment block. Falls back to the telescope name when unset.",
+            "nullable": true
+          },
           "id": {
             "type": "integer",
             "description": "Unique object identifier."
@@ -80290,6 +80531,11 @@
           "fixed_location": {
             "type": "boolean",
             "description": "Does this telescope have a fixed location (lon, lat, elev)?"
+          },
+          "acknowledgment": {
+            "type": "string",
+            "description": "Sentence to cite this telescope with, used to build a source's acknowledgment block. Falls back to the telescope name when unset.",
+            "nullable": true
           }
         },
         "required": [
@@ -84835,6 +85081,13 @@
             "title": "Fixed Location",
             "type": "boolean",
             "nullable": true
+          },
+          "acknowledgment": {
+            "default": null,
+            "description": "Sentence papers should cite this telescope with, used to build a source's acknowledgment block.",
+            "title": "Acknowledgment",
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
@@ -84932,6 +85185,13 @@
             "description": "Does this telescope have a fixed location (lon, lat, elev)?",
             "title": "Fixed Location",
             "type": "boolean",
+            "nullable": true
+          },
+          "acknowledgment": {
+            "default": null,
+            "description": "Sentence papers should cite this telescope with, used to build a source's acknowledgment block.",
+            "title": "Acknowledgment",
+            "type": "string",
             "nullable": true
           }
         },
