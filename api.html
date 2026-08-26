@@ -30437,6 +30437,45 @@
         ]
       }
     },
+    "/api/user/{user_id}/profile": {
+      "get": {
+        "summary": "Get a user's public profile",
+        "description": "Retrieve the profile a user shares with others: their name and avatar, plus the fields they chose to share in their settings.\n",
+        "tags": [
+          "users"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/user/{user_id}/acls": {
       "post": {
         "summary": "Grant ACLs to a user",
@@ -30596,7 +30635,7 @@
     "/api/user/{user_id}": {
       "get": {
         "summary": "Get a user",
-        "description": "Retrieve a user",
+        "description": "Retrieve a user. Without the Manage users ACL, only the user's own record is returned in full; other users are reduced to the profile they chose to share.\n",
         "tags": [
           "users"
         ],
@@ -30715,7 +30754,7 @@
     "/api/user": {
       "get": {
         "summary": "Get all users",
-        "description": "Retrieve all users",
+        "description": "Retrieve all users. Without the Manage users ACL, contact details not shared on a user's public profile are omitted.\n",
         "tags": [
           "users"
         ],
