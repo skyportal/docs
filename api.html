@@ -17370,7 +17370,39 @@
               }
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "upcomingOnly",
+            "required": false,
+            "description": "Only return runs that have not finished yet. Callers offering a run to assign a target to want these, rather than every run ever scheduled.",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "numPerPage",
+            "required": false,
+            "description": "Number of runs to return per paginated request. Defaults to all runs.",
+            "schema": {
+              "type": "integer",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "pageNumber",
+            "required": false,
+            "description": "Page number for paginated query results. Defaults to 1.",
+            "schema": {
+              "default": 1,
+              "type": "integer"
+            }
+          }
+        ]
       },
       "post": {
         "summary": "Create an observing run",
