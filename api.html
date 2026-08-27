@@ -31080,6 +31080,16 @@
           },
           {
             "in": "query",
+            "name": "slim",
+            "required": false,
+            "description": "Return only what is needed to name a user (id, username, first and last name, is_bot). Callers that just label a comment, a redshift or an assignment do not need each user's groups, roles and ACLs, which are most of the response.",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
             "name": "includeExpired",
             "required": false,
             "description": "Include users with expired accounts in the results.",
