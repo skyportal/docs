@@ -84347,6 +84347,7 @@
           },
           "call_delay": {
             "description": "Delay until next API call in days.",
+            "exclusiveMinimum": 0,
             "title": "Call Delay",
             "type": "number"
           },
@@ -84360,6 +84361,7 @@
             "description": "Number of retries before service is deactivated.",
             "title": "Number Of Retries",
             "maximum": 10,
+            "minimum": 1,
             "type": "integer",
             "nullable": true
           }
