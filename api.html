@@ -81429,10 +81429,10 @@
           },
           "altdata": {
             "default": null,
-            "description": "Compiled native filter (pipeline) forwarded to the broker.",
+            "description": "Compiled native filter forwarded to the broker, as an aggregation pipeline: a list of stages, not a mapping.",
             "title": "Altdata",
-            "additionalProperties": true,
-            "type": "object",
+            "items": {},
+            "type": "array",
             "nullable": true
           },
           "filters": {
@@ -86200,6 +86200,16 @@
             "description": "The ID of the group this run is associated with.",
             "title": "Group Id",
             "type": "integer",
+            "nullable": true
+          },
+          "group_ids": {
+            "default": null,
+            "description": "IDs of the groups that can see this run and its target list. Defaults to the sitewide group, which is what a run was visible to before runs became group-scoped.",
+            "title": "Group Ids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
             "nullable": true
           }
         },
