@@ -81369,7 +81369,14 @@
             "default": null,
             "description": "Filter version id (fid) to validate.",
             "title": "Fid",
-            "type": "integer",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              }
+            ],
             "nullable": true
           }
         },
