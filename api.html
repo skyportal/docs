@@ -26556,6 +26556,80 @@
         }
       }
     },
+    "/api/terms_of_service": {
+      "get": {
+        "summary": "Retrieve the terms of service and whether they are accepted",
+        "description": "Returns the instance's configured terms of service, along with\nwhether the requesting user has already accepted this version.\n`required` is false when the instance configures no terms.\n",
+        "tags": [
+          "system_info"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "required": {
+                              "type": "boolean",
+                              "description": "Whether this user still needs to accept.\n"
+                            },
+                            "version": {
+                              "type": "string"
+                            },
+                            "title": {
+                              "type": "string"
+                            },
+                            "text": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Accept the current terms of service",
+        "description": "Records that the requesting user accepted the version of the terms\ncurrently configured. Accepting twice is a no-op.\n",
+        "tags": [
+          "system_info"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/thumbnail/{thumbnail_id}": {
       "get": {
         "summary": "Get a thumbnail",
@@ -77898,6 +77972,154 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/TelescopeNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "TermsOfServiceAcceptance": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User who accepted the terms.",
+            "readOnly": true
+          },
+          "user_id": {
+            "type": "integer",
+            "description": "ID of the User who accepted the terms."
+          },
+          "version": {
+            "type": "string",
+            "description": "`app.terms_of_service.version` that was in force when accepted."
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "user_id",
+          "version"
+        ],
+        "additionalProperties": false
+      },
+      "SingleTermsOfServiceAcceptance": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/TermsOfServiceAcceptance"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfTermsOfServiceAcceptances": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TermsOfServiceAcceptance"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "TermsOfServiceAcceptanceNoID": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User who accepted the terms.",
+            "readOnly": true
+          },
+          "user_id": {
+            "type": "integer",
+            "description": "ID of the User who accepted the terms."
+          },
+          "version": {
+            "type": "string",
+            "description": "`app.terms_of_service.version` that was in force when accepted."
+          }
+        },
+        "required": [
+          "user_id",
+          "version"
+        ],
+        "additionalProperties": false
+      },
+      "SingleTermsOfServiceAcceptanceNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/TermsOfServiceAcceptanceNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfTermsOfServiceAcceptanceNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TermsOfServiceAcceptanceNoID"
             }
           }
         },
