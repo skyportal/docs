@@ -23326,6 +23326,17 @@
           },
           {
             "in": "query",
+            "name": "promptDeltaT",
+            "required": false,
+            "description": "Exempt candidates detected within this many days of the event from the galactic latitude and detection history cuts, which exist to thin late candidates. Those cuts still apply to everything else.",
+            "schema": {
+              "minimum": 0,
+              "type": "number",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
             "name": "alias",
             "required": false,
             "description": "additional name for the same object",
