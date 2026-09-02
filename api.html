@@ -23195,6 +23195,18 @@
           },
           {
             "in": "query",
+            "name": "minAbsGalacticLatitude",
+            "required": false,
+            "description": "Keep only sources at least this many degrees from the galactic plane, i.e. |b| >= this. Use to require extragalactic candidates.",
+            "schema": {
+              "maximum": 90,
+              "minimum": 0,
+              "type": "number",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
             "name": "alias",
             "required": false,
             "description": "additional name for the same object",
