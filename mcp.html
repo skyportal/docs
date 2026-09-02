@@ -333,6 +333,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#authentication">Authentication</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gcn-events">GCN events</a></li>
 </ul>
             </nav>
         </div>
@@ -371,6 +372,22 @@ Tools run with that token’s permissions.</p>
 | <code class="docutils literal notranslate"><span class="pre">server/discover</span></code> | Supported protocol versions, capabilities, server identity |
 | <code class="docutils literal notranslate"><span class="pre">tools/list</span></code>      | Tool definitions with input schemas                       |
 | <code class="docutils literal notranslate"><span class="pre">tools/call</span></code>      | Invoke a tool                                             |</p>
+</section>
+<section id="gcn-events">
+<h2>GCN events<a class="headerlink" href="#gcn-events" title="Link to this heading">#</a></h2>
+<p>Five tools cover multi-messenger events, so an assistant can answer questions
+about a trigger and reply in the discussion on it.</p>
+<p>| Tool                        | Purpose                                            |
+| ————————— | ————————————————– |
+| <code class="docutils literal notranslate"><span class="pre">get_gcn_events</span></code>            | List or search events; <code class="docutils literal notranslate"><span class="pre">partialdateobs</span></code> matches a dateobs prefix or an alias |
+| <code class="docutils literal notranslate"><span class="pre">get_gcn_event</span></code>             | One event in full, including its GCN circulars      |
+| <code class="docutils literal notranslate"><span class="pre">get_gcn_event_extractions</span></code> | Structured data a pipeline extracted from the circulars |
+| <code class="docutils literal notranslate"><span class="pre">get_gcn_event_comments</span></code>    | The discussion on the event                         |
+| <code class="docutils literal notranslate"><span class="pre">post_gcn_event_comment</span></code>    | Reply in that discussion                            |</p>
+<p><code class="docutils literal notranslate"><span class="pre">get_gcn_event_extractions</span></code> reads the <code class="docutils literal notranslate"><span class="pre">gcneventextractions</span></code> table, where any
+producer may store machine-readable values parsed out of an event’s prose.
+<code class="docutils literal notranslate"><span class="pre">origin</span></code> names the producer and the payload is that producer’s own shape, so
+filter by <code class="docutils literal notranslate"><span class="pre">origin</span></code> when you care which pipeline it came from.</p>
 </section>
 </section>
 
@@ -421,6 +438,7 @@ Tools run with that token’s permissions.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#authentication">Authentication</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gcn-events">GCN events</a></li>
 </ul>
   </nav></div>
 
