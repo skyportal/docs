@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="_static/output_cells.css?v=4c393c42" />
+    <link rel="stylesheet" type="text/css" href="_static/output_cells.css?v=dbcb4a85" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -397,7 +397,7 @@ document.write(`
 </pre></div>
 </div>
 <p>Setting <code class="docutils literal notranslate"><span class="pre">upload_only</span></code> to True will set that service as providing the results of a 3rd party analysis that does not make explicit use of SkyPortal data. Setting <code class="docutils literal notranslate"><span class="pre">upload_only</span></code> to False will mean that SkyPortal will package and send data to an external service and that service sends back data via a webhook.</p>
-<p>We support header-based authentication and those authentications described in the <code class="docutils literal notranslate"><span class="pre">requests</span></code> package. You can also GET parameters of an analysis by ID and also modify (PATCH) and delete analyses.  By default we place a cap of 50 completed analyses per object per user/token. Old or outdated analyses should be deleted as appropriate.</p>
+<p>We support header-based authentication and those authentications described in the <code class="docutils literal notranslate"><span class="pre">requests</span></code> package. You can also GET parameters of an analysis by ID and also modify (PATCH) and delete analyses. By default we place a cap of 50 completed analyses per object per user/token. Old or outdated analyses should be deleted as appropriate.</p>
 </section>
 <section id="starting-a-new-analysis-webhook-approach">
 <h3>Starting a new Analysis (Webhook approach)<a class="headerlink" href="#starting-a-new-analysis-webhook-approach" title="Link to this heading">#</a></h3>
@@ -544,7 +544,7 @@ The GET endpoints are:</p>
 <section id="ai-summarization">
 <h3>AI Summarization<a class="headerlink" href="#ai-summarization" title="Link to this heading">#</a></h3>
 <p>Following the dramatic quality, speed, and cost improvements of publicly assessable large language models (LLMs), the ability to programmatically summarize what is known about (many SkyPortal) sources became feasible. Shipped with SkyPortal is a microservice served by default at the endpoint <code class="docutils literal notranslate"><span class="pre">http://localhost:7003/summarize</span></code>. This service packages source information such as comments, redshift, and classification, and obtains a human-readable summary by wrapping the ChatGPT API from OpenAI. Summaries (AI or human generated) appear below the source name on the source page and can be returned as part of a query on <code class="docutils literal notranslate"><span class="pre">objs</span></code>.</p>
-<p>To use this service the SkyPortal config must set a valid API key from OpenAI to be shared with all users of the service or each individual user must supply their own API key and set the OpenAI integration to <code class="docutils literal notranslate"><span class="pre">active</span></code> in their user profiles. Specifics of the  ChatGPT interaction (such as model, model parameters, and prompt) are established in the site-wide config. See the <code class="docutils literal notranslate"><span class="pre">openai_analysis_service</span></code> section of <code class="docutils literal notranslate"><span class="pre">analysis_services</span></code> in the config file.</p>
+<p>To use this service the SkyPortal config must set a valid API key from OpenAI to be shared with all users of the service or each individual user must supply their own API key and set the OpenAI integration to <code class="docutils literal notranslate"><span class="pre">active</span></code> in their user profiles. Specifics of the ChatGPT interaction (such as model, model parameters, and prompt) are established in the site-wide config. See the <code class="docutils literal notranslate"><span class="pre">openai_analysis_service</span></code> section of <code class="docutils literal notranslate"><span class="pre">analysis_services</span></code> in the config file.</p>
 <p>Note: only data that the user who initiates a summary analysis has access to is shipped to the 3rd party. However summaries, like redshifts, are public on the source. So anyone who has access to the source can see the summaries. Users are advised to check for any sensitive information that might leak into summaries that other SkyPortal users might not know otherwise. If information has leaked in an AI summary they can delete the appropriate analysis and manually add a summary as they see fit.</p>
 </section>
 </section>

@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="_static/output_cells.css?v=4c393c42" />
+    <link rel="stylesheet" type="text/css" href="_static/output_cells.css?v=dbcb4a85" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -371,7 +371,7 @@ SkyPortal source tree at build time.</p></li>
 <li><p><strong><a class="reference external" href="analysis.html">External analysis services</a></strong> receive data over HTTP and
 return results via a webhook.</p></li>
 </ul>
-<p>An <em>external service</em> is neither: it is a separate repository that SkyPortal
+<p>An <strong>external service</strong> is neither: it is a separate repository that SkyPortal
 clones and runs as a long-lived background process with direct database access.</p>
 <section id="how-it-works">
 <h2>How it works<a class="headerlink" href="#how-it-works" title="Link to this heading">#</a></h2>
@@ -394,23 +394,23 @@ plugin’s <code class="docutils literal notranslate"><span class="pre">main.py<
 <p>Add a block under <code class="docutils literal notranslate"><span class="pre">services.external</span></code> in your instance’s <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> (in the
 SkyPortal root, alongside <code class="docutils literal notranslate"><span class="pre">config.yaml.defaults</span></code>). Using Lasair as the example:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">services</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">external</span><span class="p">:</span>
-<span class="w">        </span><span class="nt">lasair</span><span class="p">:</span><span class="w">                      </span><span class="c1"># the service name; becomes services/lasair</span>
-<span class="w">            </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/skyportal/lasair-skyportal-plugin.git</span>
-<span class="w">            </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span><span class="w">                </span><span class="c1"># branch, tag, or commit (default: main)</span>
-<span class="w">            </span><span class="nt">params</span><span class="p">:</span><span class="w">                  </span><span class="c1"># arbitrary config handed to the plugin</span>
-<span class="w">                </span><span class="nt">lasair</span><span class="p">:</span>
-<span class="w">                    </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;YOUR_LASAIR_API_TOKEN&gt;</span>
-<span class="w">                </span><span class="nt">ingest</span><span class="p">:</span>
-<span class="w">                    </span><span class="nt">poll_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">86400</span>
-<span class="w">                    </span><span class="nt">group_ids</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">]</span>
-<span class="w">                    </span><span class="nt">lsst_instrument_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LSST</span>
-<span class="w">                    </span><span class="nt">filter_ids</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
-<span class="w">                    </span><span class="nt">queries</span><span class="p">:</span>
-<span class="w">                        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nightly</span>
-<span class="w">                          </span><span class="nt">fields</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;objects.diaObjectId,</span><span class="nv"> </span><span class="s">objects.ra,</span><span class="nv"> </span><span class="s">objects.decl&#39;</span>
-<span class="w">                          </span><span class="nt">tables</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">objects</span>
-<span class="w">                          </span><span class="nt">conditions</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;objects.nDiaSources</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">2</span><span class="nv"> </span><span class="s">AND</span><span class="nv"> </span><span class="s">objects.firstDiaSourceMjdTai</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">(mjdnow()</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">40)&#39;</span>
+<span class="w">  </span><span class="nt">external</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">lasair</span><span class="p">:</span><span class="w"> </span><span class="c1"># the service name; becomes services/lasair</span>
+<span class="w">      </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/skyportal/lasair-skyportal-plugin.git</span>
+<span class="w">      </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">main</span><span class="w"> </span><span class="c1"># branch, tag, or commit (default: main)</span>
+<span class="w">      </span><span class="nt">params</span><span class="p">:</span><span class="w"> </span><span class="c1"># arbitrary config handed to the plugin</span>
+<span class="w">        </span><span class="nt">lasair</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;YOUR_LASAIR_API_TOKEN&gt;</span>
+<span class="w">        </span><span class="nt">ingest</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">poll_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">86400</span>
+<span class="w">          </span><span class="nt">group_ids</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">1</span><span class="p p-Indicator">]</span>
+<span class="w">          </span><span class="nt">lsst_instrument_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LSST</span>
+<span class="w">          </span><span class="nt">filter_ids</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+<span class="w">          </span><span class="nt">queries</span><span class="p">:</span>
+<span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nightly</span>
+<span class="w">              </span><span class="nt">fields</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;objects.diaObjectId,</span><span class="nv"> </span><span class="s">objects.ra,</span><span class="nv"> </span><span class="s">objects.decl&quot;</span>
+<span class="w">              </span><span class="nt">tables</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">objects</span>
+<span class="w">              </span><span class="nt">conditions</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;objects.nDiaSources</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">2</span><span class="nv"> </span><span class="s">AND</span><span class="nv"> </span><span class="s">objects.firstDiaSourceMjdTai</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">(mjdnow()</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">40)&quot;</span>
 </pre></div>
 </div>
 <p>Each entry accepts:</p>
@@ -495,8 +495,8 @@ operators know what to set.</p>
 <p>Remove the block from <code class="docutils literal notranslate"><span class="pre">services.external</span></code>, or add the service name to
 <code class="docutils literal notranslate"><span class="pre">services.disabled</span></code>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">services</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">disabled</span><span class="p">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lasair</span>
+<span class="w">  </span><span class="nt">disabled</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lasair</span>
 </pre></div>
 </div>
 </section>

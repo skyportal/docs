@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="_static/output_cells.css?v=4c393c42" />
+    <link rel="stylesheet" type="text/css" href="_static/output_cells.css?v=dbcb4a85" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -384,7 +384,7 @@ We follow a very similar process; some guidance follows below.</p>
 <section id="bug-reports">
 <h2>Bug Reports<a class="headerlink" href="#bug-reports" title="Link to this heading">#</a></h2>
 <p>While we appreciate code changes, it is also very helpful simply to
-know when SkyPortal does not function correctly.  Please <a class="reference external" href="https://github.com/skyportal/skyportal/issues">file any
+know when SkyPortal does not function correctly. Please <a class="reference external" href="https://github.com/skyportal/skyportal/issues">file any
 issues</a> you run across.</p>
 <p>If possible, provide:</p>
 <ol class="simple">
@@ -403,14 +403,14 @@ development:</p>
 <h3>Code style<a class="headerlink" href="#code-style" title="Link to this heading">#</a></h3>
 <p>We don’t like arguing about code style, and likely you don’t
 either. Therefore, we use code formatters: black for Python, and
-Prettier for JavaScript.  Code is an art, and opinions differ of what
+Prettier for JavaScript. Code is an art, and opinions differ of what
 looks good: we choose to spend our time writing correct, elegant code.</p>
 </section>
 <section id="testing">
 <h3>Testing<a class="headerlink" href="#testing" title="Link to this heading">#</a></h3>
-<p>All functionality should be accompanied by tests.  We use pytest and
-Selenium with Geckodriver.  PRs can only be merged once tests have
-been added and pass.  The continuous integration system indicates this
+<p>All functionality should be accompanied by tests. We use pytest and
+Selenium with Geckodriver. PRs can only be merged once tests have
+been added and pass. The continuous integration system indicates this
 with a green checkmark, hence you may see developers talking about “PR
 599 being green” ✅.</p>
 <p>A pull request only runs the suites its changes can affect: a
@@ -425,20 +425,20 @@ and re-run the workflow to force a full run; see
 <h3>Reviews<a class="headerlink" href="#reviews" title="Link to this heading">#</a></h3>
 <p>All code that goes into SkyPortal is reviewed by two team members
 (team members are persons with commit access) or, if the contributor
-is a team member, by at least one other team member.  We find review
+is a team member, by at least one other team member. We find review
 invaluable for improving code quality, and no author ever merges their
 own work.</p>
 <p>We ask all reviewers to be mindful that there is a human at the other
-side of the PR.  As such, consider the review process as a
+side of the PR. As such, consider the review process as a
 conversation aimed at getting the work mergeable as quickly as
 possible:</p>
 <ul class="simple">
 <li><p>Do not nitpick in comments; add small fixes as suggestions (click
 the <code class="docutils literal notranslate"><span class="pre">±</span></code> button) or push uncontroversial changes as a commit into the
-PR branch.  We prefer suggestions, because that stil gives the
+PR branch. We prefer suggestions, because that stil gives the
 original author a chance to accept/reject the change.</p></li>
 <li><p>Comments should provide provide actionable feedback, and can come in
-two flavors: suggestions and requirements.  Requirements are direct
+two flavors: suggestions and requirements. Requirements are direct
 instructions such as “Define the variable first”, whereas
 suggestions are softer: “Consider whether you’d like to reformat
 this dictionary” or “Recommendation: prefer the shorthand form”.</p></li>
@@ -449,21 +449,21 @@ comments once they are satisfied they’ve been adequately addressed
 </section>
 <section id="focused-prs">
 <h3>Focused PRs<a class="headerlink" href="#focused-prs" title="Link to this heading">#</a></h3>
-<p>In SkyPortal, we squash all PRs before merging them.  Because of this,
+<p>In SkyPortal, we squash all PRs before merging them. Because of this,
 it is okay to merge the main branch into your branch, instead of
 rebasing.</p>
-<p>The resulting squashed commit should deal with one topic only.  For
+<p>The resulting squashed commit should deal with one topic only. For
 example, if you find that, while implementing a new component, you
 also need to fix another, split that out into a separate PR.</p>
-<p>Long PRs take much longer to review than shorter ones.  So, for the
+<p>Long PRs take much longer to review than shorter ones. So, for the
 benefit of the developer and reviewers alike, we ask that PRs are kept
 as small as possible.</p>
 </section>
 <section id="describe-your-work">
 <h3>Describe your work<a class="headerlink" href="#describe-your-work" title="Link to this heading">#</a></h3>
-<p>When a PR is squashed, all commit messages are listed.  Please provide
+<p>When a PR is squashed, all commit messages are listed. Please provide
 information in commit messages on what they do—this helps us
-track bugs down later.  A commit message has a title and a
+track bugs down later. A commit message has a title and a
 description:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Return JSON when accessing invalid API endpoint (#644)
 
@@ -478,15 +478,15 @@ error message in the `message` field.
 <section id="very-large-dependent-sets-of-changes">
 <h3>Very large, dependent sets of changes<a class="headerlink" href="#very-large-dependent-sets-of-changes" title="Link to this heading">#</a></h3>
 <p>Sometimes, you are working on a feature that is large enough that it
-spans several sequential PRs.  In this case, each branch will depend
+spans several sequential PRs. In this case, each branch will depend
 on the previous, so you may have:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">part-1</span></code> (based on main)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">part-2</span></code> (based on feature-part-1)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">part-3</span></code> (based on feature-part-2)</p></li>
 </ul>
-<p>etc.  Turn <code class="docutils literal notranslate"><span class="pre">part-1</span></code> into a PR and, once it is merged, move on to
-<code class="docutils literal notranslate"><span class="pre">part-2</span></code>.  If you would also like others to look at <code class="docutils literal notranslate"><span class="pre">part-2</span></code> while
+<p>etc. Turn <code class="docutils literal notranslate"><span class="pre">part-1</span></code> into a PR and, once it is merged, move on to
+<code class="docutils literal notranslate"><span class="pre">part-2</span></code>. If you would also like others to look at <code class="docutils literal notranslate"><span class="pre">part-2</span></code> while
 <code class="docutils literal notranslate"><span class="pre">part-1</span></code> is still under review, make a PR onto your own <code class="docutils literal notranslate"><span class="pre">part-1</span></code>
 branch, and direct reviewers there.</p>
 </section>

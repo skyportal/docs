@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="_static/output_cells.css?v=4c393c42" />
+    <link rel="stylesheet" type="text/css" href="_static/output_cells.css?v=dbcb4a85" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -377,13 +377,13 @@ Tools run with that token’s permissions.</p>
 <h2>GCN events<a class="headerlink" href="#gcn-events" title="Link to this heading">#</a></h2>
 <p>Five tools cover multi-messenger events, so an assistant can answer questions
 about a trigger and reply in the discussion on it.</p>
-<p>| Tool                        | Purpose                                            |
-| ————————— | ————————————————– |
+<p>| Tool                        | Purpose                                                                      |
+| ————————— | —————————————————————————- |
 | <code class="docutils literal notranslate"><span class="pre">get_gcn_events</span></code>            | List or search events; <code class="docutils literal notranslate"><span class="pre">partialdateobs</span></code> matches a dateobs prefix or an alias |
-| <code class="docutils literal notranslate"><span class="pre">get_gcn_event</span></code>             | One event in full, including its GCN circulars      |
-| <code class="docutils literal notranslate"><span class="pre">get_gcn_event_extractions</span></code> | Structured data a pipeline extracted from the circulars |
-| <code class="docutils literal notranslate"><span class="pre">get_gcn_event_comments</span></code>    | The discussion on the event                         |
-| <code class="docutils literal notranslate"><span class="pre">post_gcn_event_comment</span></code>    | Reply in that discussion                            |</p>
+| <code class="docutils literal notranslate"><span class="pre">get_gcn_event</span></code>             | One event in full, including its GCN circulars                               |
+| <code class="docutils literal notranslate"><span class="pre">get_gcn_event_extractions</span></code> | Structured data a pipeline extracted from the circulars                      |
+| <code class="docutils literal notranslate"><span class="pre">get_gcn_event_comments</span></code>    | The discussion on the event                                                  |
+| <code class="docutils literal notranslate"><span class="pre">post_gcn_event_comment</span></code>    | Reply in that discussion                                                     |</p>
 <p><code class="docutils literal notranslate"><span class="pre">get_gcn_event_extractions</span></code> reads the <code class="docutils literal notranslate"><span class="pre">gcneventextractions</span></code> table, where any
 producer may store machine-readable values parsed out of an event’s prose.
 <code class="docutils literal notranslate"><span class="pre">origin</span></code> names the producer and the payload is that producer’s own shape, so

@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="_static/output_cells.css?v=4c393c42" />
+    <link rel="stylesheet" type="text/css" href="_static/output_cells.css?v=dbcb4a85" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -387,7 +387,7 @@ document.write(`
 </section>
 <section id="create-a-new-policy">
 <h2>Create a New Policy<a class="headerlink" href="#create-a-new-policy" title="Link to this heading">#</a></h2>
-<p>Policies are instances of  <code class="docutils literal notranslate"><span class="pre">UserAccessControl</span></code>  defined in baselayer/app/models.py. The only method of <code class="docutils literal notranslate"><span class="pre">UserAccessControl</span></code> that subclasses must provide is <code class="docutils literal notranslate"><span class="pre">query_accessible_rows</span></code>:</p>
+<p>Policies are instances of <code class="docutils literal notranslate"><span class="pre">UserAccessControl</span></code> defined in baselayer/app/models.py. The only method of <code class="docutils literal notranslate"><span class="pre">UserAccessControl</span></code> that subclasses must provide is <code class="docutils literal notranslate"><span class="pre">query_accessible_rows</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">UserAccessControl</span><span class="p">:</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">query_accessible_rows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">cls</span><span class="p">,</span> <span class="n">user_or_token</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -440,7 +440,7 @@ document.write(`
 <span class="n">accessible_to_owner</span> <span class="o">=</span> <span class="n">AccessibleIfUserMatches</span><span class="p">(</span><span class="s1">&#39;owner&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Bitwise operations can be used to compose access policies. The  <code class="docutils literal notranslate"><span class="pre">accessible_to_owner_or_last_modified_by</span></code> policy below grants access to any user that matches the <code class="docutils literal notranslate"><span class="pre">User</span></code> pointed to by the <code class="docutils literal notranslate"><span class="pre">owner</span></code> relationship of <code class="docutils literal notranslate"><span class="pre">cls</span></code> or the <code class="docutils literal notranslate"><span class="pre">last_modified_by</span></code> relationship of <code class="docutils literal notranslate"><span class="pre">cls</span></code>:</p>
+<p>Bitwise operations can be used to compose access policies. The <code class="docutils literal notranslate"><span class="pre">accessible_to_owner_or_last_modified_by</span></code> policy below grants access to any user that matches the <code class="docutils literal notranslate"><span class="pre">User</span></code> pointed to by the <code class="docutils literal notranslate"><span class="pre">owner</span></code> relationship of <code class="docutils literal notranslate"><span class="pre">cls</span></code> or the <code class="docutils literal notranslate"><span class="pre">last_modified_by</span></code> relationship of <code class="docutils literal notranslate"><span class="pre">cls</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">baselayer.app.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">AccessibleIfUserMatches</span>
 <span class="n">accessible_to_owner_or_last_modified_by</span> <span class="o">=</span> <span class="n">AccessibleIfUserMatches</span><span class="p">(</span><span class="s1">&#39;owner&#39;</span><span class="p">)</span> <span class="o">|</span> <span class="n">AccessibleIfUserMatches</span><span class="p">(</span><span class="s1">&#39;last_modified_by&#39;</span><span class="p">)</span>
 </pre></div>
@@ -566,7 +566,7 @@ with additional support for group-based and stream-based access:</p>
 </section>
 <section id="enforcing-permissions-in-handlers">
 <h2>Enforcing Permissions in Handlers<a class="headerlink" href="#enforcing-permissions-in-handlers" title="Link to this heading">#</a></h2>
-<p>Calling <code class="docutils literal notranslate"><span class="pre">self.verify_and_commit()</span></code> within a SkyPortal API handler will trigger the RLS permission checker to introspect the current database session and verify that all of the records it currently is tracking are being accessed in an allowable way.  If it encounters any permissions violations during this process, it causes the handler to rollback the transaction and return an HTTP status code of 400 with a message that identifies the specific row where an access policy was violated. If no access policies are violated, then the current database transaction will be committed.</p>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">self.verify_and_commit()</span></code> within a SkyPortal API handler will trigger the RLS permission checker to introspect the current database session and verify that all of the records it currently is tracking are being accessed in an allowable way. If it encounters any permissions violations during this process, it causes the handler to rollback the transaction and return an HTTP status code of 400 with a message that identifies the specific row where an access policy was violated. If no access policies are violated, then the current database transaction will be committed.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">self.verify_and_commit()</span></code> is not called in an API handler, the handler will not automatically check for permissions violations. The best practice is to call <code class="docutils literal notranslate"><span class="pre">self.verify_and_commit()</span></code> at the end of a handler’s transaction, immediately before <code class="docutils literal notranslate"><span class="pre">self.success</span></code> or <code class="docutils literal notranslate"><span class="pre">self.error</span></code>.</p>
 <section id="further-examples-of-policies">
 <h3>Further examples of policies:<a class="headerlink" href="#further-examples-of-policies" title="Link to this heading">#</a></h3>

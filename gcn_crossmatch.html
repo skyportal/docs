@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="_static/output_cells.css?v=4c393c42" />
+    <link rel="stylesheet" type="text/css" href="_static/output_cells.css?v=dbcb4a85" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -399,7 +399,7 @@ positive subtractions only, solar-system rejection, stellar rejection by
 </ol>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">gcn_crossmatch</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
-<span class="w">  </span><span class="nt">filter_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">42</span><span class="w">        </span><span class="c1"># the SkyPortal Filter id</span>
+<span class="w">  </span><span class="nt">filter_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">42</span><span class="w"> </span><span class="c1"># the SkyPortal Filter id</span>
 </pre></div>
 </div>
 <p>The service reads that filter’s <strong>active version</strong> and prepends the cone to it,
@@ -442,36 +442,36 @@ interfere.</p>
 <h2>Configuration reference<a class="headerlink" href="#configuration-reference" title="Link to this heading">#</a></h2>
 <p>These are the defaults every opted-in filter inherits, under <code class="docutils literal notranslate"><span class="pre">gcn_crossmatch</span></code>
 in <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>. Any of them can be overridden per filter.</p>
-<p>| Setting | Default | Meaning |
-|—|—|—|
-| <code class="docutils literal notranslate"><span class="pre">enabled</span></code> | <code class="docutils literal notranslate"><span class="pre">False</span></code> | Run the service at all |
-| <code class="docutils literal notranslate"><span class="pre">poll_interval</span></code> | <code class="docutils literal notranslate"><span class="pre">300</span></code> | Seconds between passes |
-| <code class="docutils literal notranslate"><span class="pre">max_event_age</span></code> | <code class="docutils literal notranslate"><span class="pre">31.0</span></code> | Days; older events are no longer crossmatched |
-| <code class="docutils literal notranslate"><span class="pre">recheck_interval_minutes</span></code> | <code class="docutils literal notranslate"><span class="pre">60.0</span></code> | Minimum gap before re-querying an event |
-| <code class="docutils literal notranslate"><span class="pre">delta_t_before</span></code> / <code class="docutils literal notranslate"><span class="pre">delta_t_after</span></code> | <code class="docutils literal notranslate"><span class="pre">1.0</span></code> / <code class="docutils literal notranslate"><span class="pre">31.0</span></code> | Query window around the event, in days |
-| <code class="docutils literal notranslate"><span class="pre">archival</span></code> / <code class="docutils literal notranslate"><span class="pre">archival_days</span></code> | <code class="docutils literal notranslate"><span class="pre">True</span></code> / <code class="docutils literal notranslate"><span class="pre">31.0</span></code> | One-shot pre-event search |
-| <code class="docutils literal notranslate"><span class="pre">max_radius_deg</span></code> | <code class="docutils literal notranslate"><span class="pre">5.0</span></code> | Skip localizations bounding wider than this |
-| <code class="docutils literal notranslate"><span class="pre">credible_level</span></code> | <code class="docutils literal notranslate"><span class="pre">90</span></code> | Contour used to bound non-cone localizations |
-| <code class="docutils literal notranslate"><span class="pre">cumprob</span></code> | <code class="docutils literal notranslate"><span class="pre">0.95</span></code> | Cumulative probability defining “inside” |
-| <code class="docutils literal notranslate"><span class="pre">max_alerts</span></code> | <code class="docutils literal notranslate"><span class="pre">500</span></code> | Cap per event, per broker, per pass |</p>
+<p>| Setting                            | Default         | Meaning                                       |
+| ———————————- | ————— | ——————————————— |
+| <code class="docutils literal notranslate"><span class="pre">enabled</span></code>                          | <code class="docutils literal notranslate"><span class="pre">False</span></code>         | Run the service at all                        |
+| <code class="docutils literal notranslate"><span class="pre">poll_interval</span></code>                    | <code class="docutils literal notranslate"><span class="pre">300</span></code>           | Seconds between passes                        |
+| <code class="docutils literal notranslate"><span class="pre">max_event_age</span></code>                    | <code class="docutils literal notranslate"><span class="pre">31.0</span></code>          | Days; older events are no longer crossmatched |
+| <code class="docutils literal notranslate"><span class="pre">recheck_interval_minutes</span></code>         | <code class="docutils literal notranslate"><span class="pre">60.0</span></code>          | Minimum gap before re-querying an event       |
+| <code class="docutils literal notranslate"><span class="pre">delta_t_before</span></code> / <code class="docutils literal notranslate"><span class="pre">delta_t_after</span></code> | <code class="docutils literal notranslate"><span class="pre">1.0</span></code> / <code class="docutils literal notranslate"><span class="pre">31.0</span></code>  | Query window around the event, in days        |
+| <code class="docutils literal notranslate"><span class="pre">archival</span></code> / <code class="docutils literal notranslate"><span class="pre">archival_days</span></code>       | <code class="docutils literal notranslate"><span class="pre">True</span></code> / <code class="docutils literal notranslate"><span class="pre">31.0</span></code> | One-shot pre-event search                     |
+| <code class="docutils literal notranslate"><span class="pre">max_radius_deg</span></code>                   | <code class="docutils literal notranslate"><span class="pre">5.0</span></code>           | Skip localizations bounding wider than this   |
+| <code class="docutils literal notranslate"><span class="pre">credible_level</span></code>                   | <code class="docutils literal notranslate"><span class="pre">90</span></code>            | Contour used to bound non-cone localizations  |
+| <code class="docutils literal notranslate"><span class="pre">cumprob</span></code>                          | <code class="docutils literal notranslate"><span class="pre">0.95</span></code>          | Cumulative probability defining “inside”      |
+| <code class="docutils literal notranslate"><span class="pre">max_alerts</span></code>                       | <code class="docutils literal notranslate"><span class="pre">500</span></code>           | Cap per event, per broker, per pass           |</p>
 </section>
 <section id="scanning-the-results">
 <h2>Scanning the results<a class="headerlink" href="#scanning-the-results" title="Link to this heading">#</a></h2>
 <p>Matches appear on the <strong>candidates</strong> page under the configured filter, like any
 other candidates. Each carries an annotation with origin <code class="docutils literal notranslate"><span class="pre">GCN-crossmatch</span></code>, keyed
 by event, holding the fields the reviewer needs:</p>
-<p>| Field | Meaning |
-|—|—|
-| <code class="docutils literal notranslate"><span class="pre">delta_t</span></code> | Days between the event and the alert |
-| <code class="docutils literal notranslate"><span class="pre">distance_arcmin</span></code> | Separation from the localization centre |
-| <code class="docutils literal notranslate"><span class="pre">distance_ratio</span></code> | That separation as a fraction of the error radius |
-| <code class="docutils literal notranslate"><span class="pre">age</span></code> | Days since the object’s first detection |
-| <code class="docutils literal notranslate"><span class="pre">drb</span></code> | Deep-learning real/bogus score |
-| <code class="docutils literal notranslate"><span class="pre">sgscore</span></code>, <code class="docutils literal notranslate"><span class="pre">distpsnr</span></code> | Star/galaxy score and distance to the nearest PS1 source |
-| <code class="docutils literal notranslate"><span class="pre">ssdistnr</span></code>, <code class="docutils literal notranslate"><span class="pre">ssmagnr</span></code> | Proximity to a known solar-system object |
-| <code class="docutils literal notranslate"><span class="pre">ndethist</span></code> | Number of prior detections |
-| <code class="docutils literal notranslate"><span class="pre">event_mjd</span></code> | Event time, MJD |
-| <code class="docutils literal notranslate"><span class="pre">prior_activity</span></code> | Set when the position was already active before the event |
+<p>| Field                   | Meaning                                                                         |
+| ———————– | ——————————————————————————- |
+| <code class="docutils literal notranslate"><span class="pre">delta_t</span></code>               | Days between the event and the alert                                            |
+| <code class="docutils literal notranslate"><span class="pre">distance_arcmin</span></code>       | Separation from the localization centre                                         |
+| <code class="docutils literal notranslate"><span class="pre">distance_ratio</span></code>        | That separation as a fraction of the error radius                               |
+| <code class="docutils literal notranslate"><span class="pre">age</span></code>                   | Days since the object’s first detection                                         |
+| <code class="docutils literal notranslate"><span class="pre">drb</span></code>                   | Deep-learning real/bogus score                                                  |
+| <code class="docutils literal notranslate"><span class="pre">sgscore</span></code>, <code class="docutils literal notranslate"><span class="pre">distpsnr</span></code>   | Star/galaxy score and distance to the nearest PS1 source                        |
+| <code class="docutils literal notranslate"><span class="pre">ssdistnr</span></code>, <code class="docutils literal notranslate"><span class="pre">ssmagnr</span></code>   | Proximity to a known solar-system object                                        |
+| <code class="docutils literal notranslate"><span class="pre">ndethist</span></code>              | Number of prior detections                                                      |
+| <code class="docutils literal notranslate"><span class="pre">event_mjd</span></code>             | Event time, MJD                                                                 |
+| <code class="docutils literal notranslate"><span class="pre">prior_activity</span></code>        | Set when the position was already active before the event                       |
 | <code class="docutils literal notranslate"><span class="pre">dist_mean</span></code>, <code class="docutils literal notranslate"><span class="pre">dist_std</span></code> | For a 3D (GW) skymap: the distance the event implies <em>at this position</em>, in Mpc |</p>
 <p>Because these are annotations, they can be sorted and filtered on the scanning
 page — <code class="docutils literal notranslate"><span class="pre">delta_t</span></code> and <code class="docutils literal notranslate"><span class="pre">distance_arcmin</span></code> are the usual first cut, and

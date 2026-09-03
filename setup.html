@@ -30,7 +30,7 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="_static/output_cells.css?v=4c393c42" />
+    <link rel="stylesheet" type="text/css" href="_static/output_cells.css?v=dbcb4a85" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -372,7 +372,7 @@ document.write(`
 <h1>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h1>
 <section id="dependencies">
 <h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">#</a></h2>
-<p>SkyPortal requires the following software to be installed.  We show
+<p>SkyPortal requires the following software to be installed. We show
 how to install them on MacOS and Debian-based systems below.</p>
 <ul class="simple">
 <li><p>Python 3.9 or later (&lt;3.13, since <code class="docutils literal notranslate"><span class="pre">numba</span></code> requires &lt;3.13)</p></li>
@@ -481,7 +481,7 @@ how to install them on MacOS and Debian-based systems below.</p>
 <p><a name="configure-shell-mac"></a></p>
 <section id="configuring-shell-environment-for-development">
 <h3>Configuring Shell Environment for Development<a class="headerlink" href="#configuring-shell-environment-for-development" title="Link to this heading">#</a></h3>
-<p>When developing with SkyPortal on mac, you may  also need to configure your shell enviroment. Here is how you can do that by editing your <code class="docutils literal notranslate"><span class="pre">.zshrc</span></code> file.</p>
+<p>When developing with SkyPortal on mac, you may also need to configure your shell enviroment. Here is how you can do that by editing your <code class="docutils literal notranslate"><span class="pre">.zshrc</span></code> file.</p>
 <section id="open-your-zshrc-file-in-a-text-editor">
 <h4>Open your <code class="docutils literal notranslate"><span class="pre">.zshrc</span></code> file in a text editor:<a class="headerlink" href="#open-your-zshrc-file-in-a-text-editor" title="Link to this heading">#</a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nano</span> <span class="o">~/.</span><span class="n">zshrc</span>
@@ -531,14 +531,14 @@ how to install them on MacOS and Debian-based systems below.</p>
 </div>
 <p>If the command outputs information about a service, it means that port 5000 is already in use. In this case, you may need to configure SkyPortal to use a different port by updating the following lines in <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">server</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5001</span><span class="w">  </span><span class="c1"># Change from 5000 to 5001</span>
+<span class="w">  </span><span class="nt">port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5001</span><span class="w"> </span><span class="c1"># Change from 5000 to 5001</span>
 
 <span class="nt">ports</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5001</span><span class="w">  </span><span class="c1"># Change from 5000 to 5001</span>
+<span class="w">  </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5001</span><span class="w"> </span><span class="c1"># Change from 5000 to 5001</span>
 
 <span class="nt">docs</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">servers</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://localhost:5001</span><span class="w">  </span><span class="c1"># Change from 5000 to 5001</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://localhost:5001</span><span class="w"> </span><span class="c1"># Change from 5000 to 5001</span>
 </pre></div>
 </div>
 <p>Before switching, verify that your chosen alternative port is itself available (e.g., <code class="docutils literal notranslate"><span class="pre">lsof</span> <span class="pre">-i</span> <span class="pre">:5001</span></code>).</p>
@@ -688,7 +688,7 @@ error: incompatible pointer to integer conversion
 <section id="additional-configuration">
 <h2>Additional Configuration<a class="headerlink" href="#additional-configuration" title="Link to this heading">#</a></h2>
 <p>The configuration file lives in <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>, and is meant to be
-self-documenting.  Please modify as you see fit.</p>
+self-documenting. Please modify as you see fit.</p>
 <p><strong>Before deploying this on a public server</strong> change <code class="docutils literal notranslate"><span class="pre">app:secret-key</span></code>
 to a unique value.</p>
 <p>If you want to use a different configuration file, you may launch any
@@ -699,7 +699,7 @@ of the SkyPortal commands with the FLAGS environment variable set:</p>
 <section id="authentication">
 <h3>Authentication<a class="headerlink" href="#authentication" title="Link to this heading">#</a></h3>
 <p>By default, the server allows anyone to log in (even if it presents a
-login screen).  If you are running a public-facing instance of
+login screen). If you are running a public-facing instance of
 SkyPortal, you should enable multi-user login by adding Google
 credentials to the <code class="docutils literal notranslate"><span class="pre">server:auth</span></code> section of the configuration file and
 setting <code class="docutils literal notranslate"><span class="pre">debug_login</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
@@ -725,7 +725,7 @@ You can give this and other permissions to an existing user by running the follo
 </section>
 <section id="test-data">
 <h3>Test data<a class="headerlink" href="#test-data" title="Link to this heading">#</a></h3>
-<p>By default, SkyPortal contains no data.  You can ingest some sample light curves by running</p>
+<p>By default, SkyPortal contains no data. You can ingest some sample light curves by running</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">load_demo_data</span>
 </pre></div>
 </div>
