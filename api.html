@@ -21430,17 +21430,25 @@
         ]
       }
     },
-    "/api/sources/{obj_id}/comments/channels": {
+    "/api/{associated_resource_type}/{resource_id}/comments/channels": {
       "get": {
-        "summary": "List the conversations opened on a source",
-        "description": "Retrieve the names of the source's named conversations. A conversation exists as soon as a comment carries its name.\n",
+        "summary": "List the conversations opened on a resource",
+        "description": "Retrieve the names of the resource's named conversations. A conversation exists as soon as a comment carries its name.\n",
         "tags": [
           "comments"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "obj_id",
+            "name": "associated_resource_type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "resource_id",
             "required": true,
             "schema": {
               "type": "string"
@@ -21460,7 +21468,7 @@
         }
       },
       "delete": {
-        "summary": "Delete a conversation on a source",
+        "summary": "Delete a conversation on a resource",
         "description": "<b>Permission(s) required:</b> <em>Comment (or System admin)</em><br><br>Delete a named conversation and every comment it holds. Restricted to the user who opened it (the author of its first comment) and to system admins.\n",
         "tags": [
           "comments"
@@ -21468,7 +21476,15 @@
         "parameters": [
           {
             "in": "path",
-            "name": "obj_id",
+            "name": "associated_resource_type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "resource_id",
             "required": true,
             "schema": {
               "type": "string"
@@ -33332,6 +33348,14 @@
             "type": "string",
             "description": "ID of the Comment's Obj."
           },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "text": {
+            "type": "string",
+            "description": "Comment body."
+          },
           "channel": {
             "type": "string",
             "description": "Conversation the comment belongs to, NULL for the main thread.",
@@ -33340,14 +33364,6 @@
           "system": {
             "type": "boolean",
             "description": "Whether the comment was posted by the app rather than typed by its author."
-          },
-          "id": {
-            "type": "integer",
-            "description": "Unique object identifier."
-          },
-          "text": {
-            "type": "string",
-            "description": "Comment body."
           },
           "attachment_name": {
             "type": "string",
@@ -33462,6 +33478,10 @@
             "type": "string",
             "description": "ID of the Comment's Obj."
           },
+          "text": {
+            "type": "string",
+            "description": "Comment body."
+          },
           "channel": {
             "type": "string",
             "description": "Conversation the comment belongs to, NULL for the main thread.",
@@ -33470,10 +33490,6 @@
           "system": {
             "type": "boolean",
             "description": "Whether the comment was posted by the app rather than typed by its author."
-          },
-          "text": {
-            "type": "string",
-            "description": "Comment body."
           },
           "attachment_name": {
             "type": "string",
@@ -33596,6 +33612,15 @@
             "type": "string",
             "description": "Comment body."
           },
+          "channel": {
+            "type": "string",
+            "description": "Conversation the comment belongs to, NULL for the main thread.",
+            "nullable": true
+          },
+          "system": {
+            "type": "boolean",
+            "description": "Whether the comment was posted by the app rather than typed by its author."
+          },
           "attachment_name": {
             "type": "string",
             "description": "Filename of the attachment.",
@@ -33712,6 +33737,15 @@
           "text": {
             "type": "string",
             "description": "Comment body."
+          },
+          "channel": {
+            "type": "string",
+            "description": "Conversation the comment belongs to, NULL for the main thread.",
+            "nullable": true
+          },
+          "system": {
+            "type": "boolean",
+            "description": "Whether the comment was posted by the app rather than typed by its author."
           },
           "attachment_name": {
             "type": "string",
@@ -33834,6 +33868,15 @@
             "type": "string",
             "description": "Comment body."
           },
+          "channel": {
+            "type": "string",
+            "description": "Conversation the comment belongs to, NULL for the main thread.",
+            "nullable": true
+          },
+          "system": {
+            "type": "boolean",
+            "description": "Whether the comment was posted by the app rather than typed by its author."
+          },
           "attachment_name": {
             "type": "string",
             "description": "Filename of the attachment.",
@@ -33950,6 +33993,15 @@
           "text": {
             "type": "string",
             "description": "Comment body."
+          },
+          "channel": {
+            "type": "string",
+            "description": "Conversation the comment belongs to, NULL for the main thread.",
+            "nullable": true
+          },
+          "system": {
+            "type": "boolean",
+            "description": "Whether the comment was posted by the app rather than typed by its author."
           },
           "attachment_name": {
             "type": "string",
@@ -34072,6 +34124,15 @@
             "type": "string",
             "description": "Comment body."
           },
+          "channel": {
+            "type": "string",
+            "description": "Conversation the comment belongs to, NULL for the main thread.",
+            "nullable": true
+          },
+          "system": {
+            "type": "boolean",
+            "description": "Whether the comment was posted by the app rather than typed by its author."
+          },
           "attachment_name": {
             "type": "string",
             "description": "Filename of the attachment.",
@@ -34188,6 +34249,15 @@
           "text": {
             "type": "string",
             "description": "Comment body."
+          },
+          "channel": {
+            "type": "string",
+            "description": "Conversation the comment belongs to, NULL for the main thread.",
+            "nullable": true
+          },
+          "system": {
+            "type": "boolean",
+            "description": "Whether the comment was posted by the app rather than typed by its author."
           },
           "attachment_name": {
             "type": "string",
@@ -34323,6 +34393,15 @@
             "type": "string",
             "description": "Comment body."
           },
+          "channel": {
+            "type": "string",
+            "description": "Conversation the comment belongs to, NULL for the main thread.",
+            "nullable": true
+          },
+          "system": {
+            "type": "boolean",
+            "description": "Whether the comment was posted by the app rather than typed by its author."
+          },
           "attachment_name": {
             "type": "string",
             "description": "Filename of the attachment.",
@@ -34453,6 +34532,15 @@
           "text": {
             "type": "string",
             "description": "Comment body."
+          },
+          "channel": {
+            "type": "string",
+            "description": "Conversation the comment belongs to, NULL for the main thread.",
+            "nullable": true
+          },
+          "system": {
+            "type": "boolean",
+            "description": "Whether the comment was posted by the app rather than typed by its author."
           },
           "attachment_name": {
             "type": "string",
