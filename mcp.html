@@ -331,6 +331,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pre-2026-handshake-deprecated">The pre-2026 handshake (deprecated)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#authentication">Authentication</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gcn-events">GCN events</a></li>
@@ -356,9 +357,26 @@ Streamable HTTP transport, and only that revision: there is no <code class="docu
 handshake, no session, and no server-initiated stream. Every request is a
 self-contained JSON-RPC POST that carries its protocol version and client
 capabilities in <code class="docutils literal notranslate"><span class="pre">_meta</span></code>, so requests can be served by any app process behind
-the load balancer. Clients that still use the pre-2026 <code class="docutils literal notranslate"><span class="pre">initialize</span></code> handshake
-are rejected with an <code class="docutils literal notranslate"><span class="pre">UnsupportedProtocolVersion</span></code> error naming the supported
-revision.</p>
+the load balancer. A client that knows this revision but opens with an <code class="docutils literal notranslate"><span class="pre">initialize</span></code>
+handshake anyway gets <code class="docutils literal notranslate"><span class="pre">MethodNotFound</span></code>: its version is fine, and only the
+handshake is not.</p>
+<section id="the-pre-2026-handshake-deprecated">
+<h2>The pre-2026 handshake (deprecated)<a class="headerlink" href="#the-pre-2026-handshake-deprecated" title="Link to this heading">#</a></h2>
+<p>Assistants that do not speak 2026-07-28 yet – Codex, Cursor and others – open
+with <code class="docutils literal notranslate"><span class="pre">initialize</span></code> and then send bare JSON-RPC, with no <code class="docutils literal notranslate"><span class="pre">Mcp-Method</span></code> header and
+no <code class="docutils literal notranslate"><span class="pre">_meta</span></code>. That profile is answered too, so those clients reach the same tools.</p>
+<p>It is deprecated, and is here only until those clients catch up. Two things keep
+it from costing anything structurally:</p>
+<ul class="simple">
+<li><p><strong>No session is issued.</strong> The old transport makes <code class="docutils literal notranslate"><span class="pre">Mcp-Session-Id</span></code> optional,
+and declining to send one leaves every request independent of the process that
+served the handshake – the same property the modern profile has by design.</p></li>
+<li><p><strong>Nothing new is built on it.</strong> <code class="docutils literal notranslate"><span class="pre">server/discover</span></code> does not advertise it, the
+strict header and <code class="docutils literal notranslate"><span class="pre">_meta</span></code> checks still apply to every 2026-07-28 request, and
+each handshake is logged with the client that sent it, so it is possible to
+tell when the path is safe to delete.</p></li>
+</ul>
+</section>
 <section id="authentication">
 <h2>Authentication<a class="headerlink" href="#authentication" title="Link to this heading">#</a></h2>
 <p>Send a SkyPortal API token in the <code class="docutils literal notranslate"><span class="pre">Authorization</span></code> header, either as
@@ -436,6 +454,7 @@ filter by <code class="docutils literal notranslate"><span class="pre">origin</s
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pre-2026-handshake-deprecated">The pre-2026 handshake (deprecated)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#authentication">Authentication</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gcn-events">GCN events</a></li>
