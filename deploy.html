@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/output_cells.css?v=dbcb4a85" />
+    <link rel="stylesheet" type="text/css" href="_static/erd.css?v=3f516bd9" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -40,6 +41,7 @@
     <script src="_static/documentation_options.js?v=bc4b15cc"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script defer="defer" src="_static/erd.js?v=8145b4cc"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'deploy';</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -419,19 +421,18 @@ The database is stored and persisted in a local docker volume called <code class
 <section id="customizing-the-deployment-configuration">
 <h2>Customizing the deployment configuration<a class="headerlink" href="#customizing-the-deployment-configuration" title="Link to this heading">#</a></h2>
 <p>If you want to use a specific configuration file at runtime (that can then be different from the one used to build the image), you can mount it as a volume when starting the container. For example, if you had a <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> file in a directory called <code class="docutils literal notranslate"><span class="pre">config</span></code>, you would add to your <code class="docutils literal notranslate"><span class="pre">docker-compose.yaml</span></code> file:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">web</span><span class="p">:</span>
-<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">...</span>
-<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">volumes</span><span class="p p-Indicator">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./config/config.yaml:/etc/skyportal/config.yaml</span>
-<span class="w">    </span><span class="err">```</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">web</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># ...</span>
+<span class="w">  </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./config/config.yaml:/etc/skyportal/config.yaml</span>
 </pre></div>
 </div>
 <p>This will mount the <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code> file from the <code class="docutils literal notranslate"><span class="pre">config</span></code> directory to the <code class="docutils literal notranslate"><span class="pre">/etc/skyportal/config.yaml</span></code> path in the container. You could technically directly have it mounted to <code class="docutils literal notranslate"><span class="pre">/skyportal/config.yaml</span></code>, but we recommend using a different path to not lose track of the original configuration file used to build the image.</p>
 <p>You would need to pass the <code class="docutils literal notranslate"><span class="pre">--config=config.yaml</span></code> flag when calling any <code class="docutils literal notranslate"><span class="pre">make</span></code> commands. For the container to use this configuration file on startup, set the FLAG environment variable in the <code class="docutils literal notranslate"><span class="pre">docker-compose.yaml</span></code> file:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">web</span><span class="p">:</span>
-<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">...</span>
-<span class="w">        </span><span class="l l-Scalar l-Scalar-Plain">environment</span><span class="p p-Indicator">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FLAGS=--config=/etc/skyportal/config.yaml</span>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">web</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># ...</span>
+<span class="w">  </span><span class="nt">environment</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FLAGS=--config=/etc/skyportal/config.yaml</span>
 </pre></div>
 </div>
 <p><strong>Note: Elements of the configuration used to customize the frontend need to be set in the configuration file used to build the image (<code class="docutils literal notranslate"><span class="pre">docker.yaml</span></code>), as they are used to build the web application’s bundle which only happens once at build time, and will not take effect if changed at runtime.</strong></p>
@@ -583,7 +584,7 @@ By The SkyPortal Team
 
   <p class="copyright">
     
-      © Copyright 2020–2023, The SkyPortal Team.
+      © Copyright 2026, The SkyPortal Team.
       <br/>
     
   </p>

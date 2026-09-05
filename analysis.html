@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/output_cells.css?v=dbcb4a85" />
+    <link rel="stylesheet" type="text/css" href="_static/erd.css?v=3f516bd9" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -40,6 +41,7 @@
     <script src="_static/documentation_options.js?v=bc4b15cc"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script defer="defer" src="_static/erd.js?v=8145b4cc"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'analysis';</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -540,7 +542,7 @@ The GET endpoints are:</p>
 </section>
 <section id="summaries">
 <h2>Summaries<a class="headerlink" href="#summaries" title="Link to this heading">#</a></h2>
-<p><a class="reference external" href="analysis_services">Analysis services</a> in SkyPortal can be declared as providing a summary of a source. When <code class="docutils literal notranslate"><span class="pre">is_summary</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> in an analysis service, the results of an analysis using this service will be stored in the <code class="docutils literal notranslate"><span class="pre">obj.summary</span></code> and <code class="docutils literal notranslate"><span class="pre">obj.summary_history</span></code> (akin to how redshifts are stored and updated). If the associated analysis is deleted then it will be removed from <code class="docutils literal notranslate"><span class="pre">obj.summary_history</span></code>. The frontend allows a user to see the summary history and edit the results of a summary analysis.</p>
+<p><a class="reference external" href="#external-analysis-services">Analysis services</a> in SkyPortal can be declared as providing a summary of a source. When <code class="docutils literal notranslate"><span class="pre">is_summary</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code> in an analysis service, the results of an analysis using this service will be stored in the <code class="docutils literal notranslate"><span class="pre">obj.summary</span></code> and <code class="docutils literal notranslate"><span class="pre">obj.summary_history</span></code> (akin to how redshifts are stored and updated). If the associated analysis is deleted then it will be removed from <code class="docutils literal notranslate"><span class="pre">obj.summary_history</span></code>. The frontend allows a user to see the summary history and edit the results of a summary analysis.</p>
 <section id="ai-summarization">
 <h3>AI Summarization<a class="headerlink" href="#ai-summarization" title="Link to this heading">#</a></h3>
 <p>Following the dramatic quality, speed, and cost improvements of publicly assessable large language models (LLMs), the ability to programmatically summarize what is known about (many SkyPortal) sources became feasible. Shipped with SkyPortal is a microservice served by default at the endpoint <code class="docutils literal notranslate"><span class="pre">http://localhost:7003/summarize</span></code>. This service packages source information such as comments, redshift, and classification, and obtains a human-readable summary by wrapping the ChatGPT API from OpenAI. Summaries (AI or human generated) appear below the source name on the source page and can be returned as part of a query on <code class="docutils literal notranslate"><span class="pre">objs</span></code>.</p>
@@ -632,7 +634,7 @@ By The SkyPortal Team
 
   <p class="copyright">
     
-      © Copyright 2020–2023, The SkyPortal Team.
+      © Copyright 2026, The SkyPortal Team.
       <br/>
     
   </p>

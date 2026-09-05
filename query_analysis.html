@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="_static/output_cells.css?v=dbcb4a85" />
+    <link rel="stylesheet" type="text/css" href="_static/erd.css?v=3f516bd9" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -40,6 +41,7 @@
     <script src="_static/documentation_options.js?v=bc4b15cc"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script defer="defer" src="_static/erd.js?v=8145b4cc"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'query_analysis';</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -395,7 +397,7 @@ based on whether the PostgreSQL dialect is specified or not:</p>
 </pre></div>
 </div>
 <p>Finally, you should note that in the SkyPortal API handlers, most of the SQLAlchemy <code class="docutils literal notranslate"><span class="pre">Query</span></code> objects
-that you would print out in this manner originate from our <a class="reference external" href="permissions.html">permissions framework</a>
+that you would print out in this manner originate from our <a class="reference external" href="permissions.html#create-a-new-policy">permissions framework</a>
 through the <code class="docutils literal notranslate"><span class="pre">query_accessible_rows()</span></code> method. Thus, if you’re ever lost looking for those
 <code class="docutils literal notranslate"><span class="pre">DBSession().query()...</span></code> lines to do this sort of print-debugging, you may want to look for the
 <code class="docutils literal notranslate"><span class="pre">query_accessible_rows()</span></code> lines instead. Similarly, if you’re ever wondering where certain parts of
@@ -508,7 +510,7 @@ By The SkyPortal Team
 
   <p class="copyright">
     
-      © Copyright 2020–2023, The SkyPortal Team.
+      © Copyright 2026, The SkyPortal Team.
       <br/>
     
   </p>
