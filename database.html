@@ -528,8 +528,10 @@ document.write(`
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.async_bulk_verify"><code class="docutils literal notranslate"><span class="pre">async_bulk_verify()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.bulk_verify"><code class="docutils literal notranslate"><span class="pre">bulk_verify()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.inaccessible_pks_stmt"><code class="docutils literal notranslate"><span class="pre">inaccessible_pks_stmt()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.init_db"><code class="docutils literal notranslate"><span class="pre">init_db()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.join_model"><code class="docutils literal notranslate"><span class="pre">join_model()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.pks_of"><code class="docutils literal notranslate"><span class="pre">pks_of()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.primary_key_keys"><code class="docutils literal notranslate"><span class="pre">primary_key_keys()</span></code></a></li>
 </ul>
 </li>
@@ -2971,6 +2973,33 @@ record type.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="baselayer.app.models.inaccessible_pks_stmt">
+<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">inaccessible_pks_stmt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accessible_rows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk_cols</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.inaccessible_pks_stmt" title="Link to this definition">#</a></dt>
+<dd><p>Build the statement selecting the primary keys of <code class="docutils literal notranslate"><span class="pre">collection</span></code> that are
+missing from <code class="docutils literal notranslate"><span class="pre">accessible_rows</span></code>.</p>
+<p>Records are matched on every column of their primary key, so a composite key
+is checked like a surrogate <code class="docutils literal notranslate"><span class="pre">id</span></code>.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>collection</strong><span class="classifier">list of <cite>baselayer.app.models.Base</cite></span></dt><dd><p>The records to check, all of the type whose PK columns are <code class="docutils literal notranslate"><span class="pre">pk_cols</span></code>.</p>
+</dd>
+<dt><strong>accessible_rows</strong><span class="classifier">sqlalchemy.Query or sqlalchemy select object</span></dt><dd><p>Query of the <code class="docutils literal notranslate"><span class="pre">pk_cols</span></code> of the rows the accessor may access.</p>
+</dd>
+<dt><strong>pk_cols</strong><span class="classifier">list of sqlalchemy.Column</span></dt><dd><p>The primary key columns of the records.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>sqlalchemy select object</dt><dd><p>One row per inaccessible record, one column per primary key column.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="baselayer.app.models.init_db">
 <span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">init_db</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">database</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autoflush</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pooler</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.init_db" title="Link to this definition">#</a></dt>
 <dd><dl class="field-list">
@@ -3044,6 +3073,28 @@ Defaults to False.</p>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt>sqlalchemy.ext.declarative.api.DeclarativeMeta</dt><dd><p>SQLAlchemy association model class</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="baselayer.app.models.pks_of">
+<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">pks_of</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk_cols</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.pks_of" title="Link to this definition">#</a></dt>
+<dd><p>Collect the primary keys of the rows returned by <cite>inaccessible_pks_stmt</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>rows</strong><span class="classifier">list of sqlalchemy.Row</span></dt><dd><p>The rows returned by <cite>inaccessible_pks_stmt</cite>.</p>
+</dd>
+<dt><strong>pk_cols</strong><span class="classifier">list of sqlalchemy.Column</span></dt><dd><p>The primary key columns the rows were selected on.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>set</dt><dd><p>The primary keys, scalars for a single column and tuples for several.</p>
 </dd>
 </dl>
 </dd>
@@ -3314,8 +3365,10 @@ SkyPortal database.</p>
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.async_bulk_verify"><code class="docutils literal notranslate"><span class="pre">async_bulk_verify()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.bulk_verify"><code class="docutils literal notranslate"><span class="pre">bulk_verify()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.inaccessible_pks_stmt"><code class="docutils literal notranslate"><span class="pre">inaccessible_pks_stmt()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.init_db"><code class="docutils literal notranslate"><span class="pre">init_db()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.join_model"><code class="docutils literal notranslate"><span class="pre">join_model()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.pks_of"><code class="docutils literal notranslate"><span class="pre">pks_of()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.primary_key_keys"><code class="docutils literal notranslate"><span class="pre">primary_key_keys()</span></code></a></li>
 </ul>
 </li>
