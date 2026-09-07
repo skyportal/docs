@@ -26228,6 +26228,156 @@
         }
       }
     },
+    "/api/assistant/conversations": {
+      "get": {
+        "summary": "List the requesting user's conversations with the assistant",
+        "description": "Retrieve the names of the user's named conversations. A conversation exists as soon as a message carries its name.\n",
+        "tags": [
+          "assistant"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Rename a conversation with the assistant",
+        "description": "Rename a conversation and every message it holds.",
+        "tags": [
+          "assistant"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "channel",
+            "required": false,
+            "description": "Conversation name. The one with no name when omitted.",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssistantConversationPatchBody"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a conversation with the assistant",
+        "description": "Delete a named conversation and every message it holds.",
+        "tags": [
+          "assistant"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "channel",
+            "required": false,
+            "description": "Conversation name. The one with no name when omitted.",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ]
+      }
+    },
+    "/api/assistant/messages": {
+      "get": {
+        "summary": "Read a conversation with the assistant",
+        "description": "Retrieve the requesting user's messages in one conversation.",
+        "tags": [
+          "assistant"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "channel",
+            "required": false,
+            "description": "Conversation name. The one with no name when omitted.",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ]
+      },
+      "post": {
+        "summary": "Ask the assistant something",
+        "description": "Post a message to the assistant. The answer is written back into the same conversation out of band, once the assistant has worked it out.\n",
+        "tags": [
+          "assistant"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssistantMessagePostBody"
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/taxonomy/{taxonomy_id}": {
       "get": {
         "summary": "Get a taxonomy",
@@ -31235,6 +31385,192 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AssignmentSchema"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "AssistantMessage": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User the conversation belongs to.",
+            "readOnly": true
+          },
+          "user_id": {
+            "type": "integer",
+            "description": "ID of the User the conversation belongs to."
+          },
+          "channel": {
+            "type": "string",
+            "description": "Conversation the message belongs to, NULL for the default one.",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "description": "Message body."
+          },
+          "system": {
+            "type": "boolean",
+            "description": "Whether the assistant wrote the message rather than the user."
+          },
+          "context_type": {
+            "type": "string",
+            "description": "Kind of resource the user was looking at when they asked, if any.",
+            "nullable": true
+          },
+          "context_id": {
+            "type": "string",
+            "description": "ID of that resource, if any.",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "text",
+          "user_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleAssistantMessage": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/AssistantMessage"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfAssistantMessages": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssistantMessage"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "AssistantMessageNoID": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User the conversation belongs to.",
+            "readOnly": true
+          },
+          "user_id": {
+            "type": "integer",
+            "description": "ID of the User the conversation belongs to."
+          },
+          "channel": {
+            "type": "string",
+            "description": "Conversation the message belongs to, NULL for the default one.",
+            "nullable": true
+          },
+          "text": {
+            "type": "string",
+            "description": "Message body."
+          },
+          "system": {
+            "type": "boolean",
+            "description": "Whether the assistant wrote the message rather than the user."
+          },
+          "context_type": {
+            "type": "string",
+            "description": "Kind of resource the user was looking at when they asked, if any.",
+            "nullable": true
+          },
+          "context_id": {
+            "type": "string",
+            "description": "ID of that resource, if any.",
+            "nullable": true
+          }
+        },
+        "required": [
+          "text",
+          "user_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleAssistantMessageNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/AssistantMessageNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfAssistantMessageNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssistantMessageNoID"
             }
           }
         },
@@ -79493,6 +79829,13 @@
               "$ref": "#/components/schemas/Comment"
             }
           },
+          "assistant_messages": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/AssistantMessage"
+            }
+          },
           "reminders": {
             "type": "array",
             "readOnly": true,
@@ -80333,6 +80676,13 @@
             "readOnly": true,
             "items": {
               "$ref": "#/components/schemas/Comment"
+            }
+          },
+          "assistant_messages": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/AssistantMessage"
             }
           },
           "reminders": {
@@ -91734,6 +92084,59 @@
           }
         },
         "title": "SuperObjPatchBody",
+        "type": "object"
+      },
+      "AssistantConversationPatchBody": {
+        "additionalProperties": false,
+        "description": "Request body for renaming a conversation.",
+        "properties": {
+          "name": {
+            "description": "New name for the conversation",
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "AssistantConversationPatchBody",
+        "type": "object"
+      },
+      "AssistantMessagePostBody": {
+        "additionalProperties": false,
+        "description": "Request body for asking the assistant something.",
+        "properties": {
+          "text": {
+            "description": "Message body",
+            "title": "Text",
+            "type": "string"
+          },
+          "channel": {
+            "default": null,
+            "description": "Conversation the message belongs to; the default one if unset.",
+            "title": "Channel",
+            "type": "string",
+            "nullable": true
+          },
+          "context_type": {
+            "default": null,
+            "description": "Kind of resource the user is looking at, e.g. source or gcn_event.",
+            "title": "Context Type",
+            "type": "string",
+            "nullable": true
+          },
+          "context_id": {
+            "default": null,
+            "description": "ID of the resource the user is looking at.",
+            "title": "Context Id",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "title": "AssistantMessagePostBody",
         "type": "object"
       },
       "TaxonomyPostBody": {
