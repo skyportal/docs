@@ -10145,6 +10145,45 @@
         }
       }
     },
+    "/api/gcn_event/{dateobs}/summarize": {
+      "post": {
+        "summary": "Summarize a GCN event",
+        "description": "Describes the event from its extractions using the configured model.\nThe previous summary stays in `summary_history`.\n",
+        "tags": [
+          "gcn events"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dateobs",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
     "/api/gcn_event/{dateobs}": {
       "get": {
         "summary": "Get a GCN Event",
@@ -10214,9 +10253,9 @@
           }
         ]
       },
-      "delete": {
-        "summary": "Delete a GCN Event",
-        "description": "<b>Permission(s) required:</b> <em>Manage GCNs (or System admin)</em><br><br>Delete a GCN event",
+      "patch": {
+        "summary": "Update a GCN Event",
+        "description": "<b>Permission(s) required:</b> <em>Manage GCNs (or System admin)</em><br><br>Sets the event summary, prepending the previous one to\n`summary_history`.\n",
         "tags": [
           "gcn events"
         ],
@@ -10240,6 +10279,56 @@
             }
           }
         },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GcnEventPatchBody"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dateobs",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete a GCN Event",
+        "description": "Delete a GCN event",
+        "tags": [
+          "gcn events"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {}
+        ],
         "parameters": [
           {
             "in": "path",
@@ -40924,6 +41013,17 @@
             "description": "Trigger ID supplied by instrument",
             "nullable": true
           },
+          "summary": {
+            "type": "string",
+            "description": "Narrative summary of what is known about the event.",
+            "nullable": true
+          },
+          "summary_history": {
+            "description": "Record of the summaries generated and written about this event",
+            "nullable": true,
+            "type": "object",
+            "additionalProperties": true
+          },
           "aliases": {
             "type": "array",
             "description": "List of different names for this event, parsed from different GCN notices.",
@@ -42036,6 +42136,17 @@
             "type": "string",
             "description": "Trigger ID supplied by instrument",
             "nullable": true
+          },
+          "summary": {
+            "type": "string",
+            "description": "Narrative summary of what is known about the event.",
+            "nullable": true
+          },
+          "summary_history": {
+            "description": "Record of the summaries generated and written about this event",
+            "nullable": true,
+            "type": "object",
+            "additionalProperties": true
           },
           "aliases": {
             "type": "array",
@@ -85745,6 +85856,34 @@
           "notice_id"
         ],
         "title": "GcnEventPostResponse",
+        "type": "object"
+      },
+      "GcnEventPatchBody": {
+        "additionalProperties": false,
+        "properties": {
+          "summary": {
+            "default": null,
+            "description": "Narrative summary of the event. Null clears it.",
+            "title": "Summary",
+            "type": "string",
+            "nullable": true
+          },
+          "summary_origin": {
+            "default": null,
+            "description": "What produced this summary, recorded in the history.",
+            "title": "Summary Origin",
+            "type": "string",
+            "nullable": true
+          },
+          "is_bot": {
+            "default": null,
+            "description": "Whether a bot wrote this summary.",
+            "title": "Is Bot",
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "title": "GcnEventPatchBody",
         "type": "object"
       },
       "GcnEventObjPostBody": {
