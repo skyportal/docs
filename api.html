@@ -26119,6 +26119,122 @@
         }
       }
     },
+    "/api/db_stats/history": {
+      "get": {
+        "summary": "Get DB row counts per time interval",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Number of rows added per time interval (bucketed on created_at) for a\nselection of tables, for plotting ingest rates on the DB Stats page.\nBuckets with no rows are returned with a count of zero.\n",
+        "tags": [
+          "system info"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "tables",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated list of tables to count. Defaults to `candidates`.\nAllowed values are returned in the `tables` field of the response.\n"
+          },
+          {
+            "in": "query",
+            "name": "interval",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "hour",
+                "day",
+                "week",
+                "month"
+              ]
+            },
+            "description": "Bucket width. Defaults to `day`."
+          },
+          {
+            "in": "query",
+            "name": "startDate",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Arrow-parseable UTC datetime; only rows created at or after this\ntime are counted, rounded down to the start of its bucket so the\nfirst bin is complete. Defaults to 30 days ago.\n"
+          },
+          {
+            "in": "query",
+            "name": "endDate",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Arrow-parseable UTC datetime; only rows created before this time\nare counted. Defaults to now.\n"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "properties": {
+                            "interval": {
+                              "type": "string"
+                            },
+                            "startDate": {
+                              "type": "string"
+                            },
+                            "endDate": {
+                              "type": "string"
+                            },
+                            "bins": {
+                              "type": "array",
+                              "description": "Start of each bucket, as a UTC datetime without\nan offset (as are `startDate` and `endDate`).\n",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "tables": {
+                              "type": "array",
+                              "description": "Every table this endpoint can count.",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "counts": {
+                              "type": "object",
+                              "description": "Per requested table, one count per entry of `bins`.\n",
+                              "additionalProperties": {
+                                "type": "array",
+                                "items": {
+                                  "type": "integer"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/sysinfo": {
       "get": {
         "summary": "Retrieve system/deployment info",
