@@ -2641,7 +2641,7 @@
     "/api/brokers/{broker_id}/alerts/{alert_id}/photometry": {
       "get": {
         "summary": "Display photometry for an object (DB + on-demand broker)",
-        "description": "Return an object's photometry for display: the persisted,\naccess-controlled photometry from the database merged with photometry\nfetched on demand from the broker (deduped by instrument/filter/mjd,\nso the broker only augments saved points). The broker half is held in\na read-through cache keyed by the object and the requester's access\nscope, and is never written to the database. Returns a bare list of\npoints, matching GET /sources/{id}/photometry.\n",
+        "description": "Return an object's photometry for display: the persisted,\naccess-controlled photometry from the database merged with photometry\nfetched on demand from the broker (deduped by instrument/filter/mjd,\nso the broker only augments saved points). The broker half is\nscope-filtered and never written to the database. Returns a bare list\nof points, matching GET /sources/{id}/photometry.\n",
         "tags": [
           "brokers",
           "photometry"
@@ -2726,16 +2726,6 @@
               ],
               "type": "string"
             }
-          },
-          {
-            "in": "query",
-            "name": "refresh",
-            "required": false,
-            "description": "Bypass any cached broker payload and re-fetch.",
-            "schema": {
-              "default": false,
-              "type": "boolean"
-            }
           }
         ]
       }
@@ -2818,16 +2808,6 @@
                 "ab-b12"
               ],
               "type": "string"
-            }
-          },
-          {
-            "in": "query",
-            "name": "refresh",
-            "required": false,
-            "description": "Bypass any cached broker payload and re-fetch.",
-            "schema": {
-              "default": false,
-              "type": "boolean"
             }
           },
           {
@@ -23513,6 +23493,26 @@
             "name": "hasNoTNSname",
             "required": false,
             "description": "If true, return only those matches without TNS names",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "isRoid",
+            "required": false,
+            "description": "If true, return only moving objects (solar system bodies)",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "isNotRoid",
+            "required": false,
+            "description": "If true, exclude moving objects",
             "schema": {
               "default": false,
               "type": "boolean"
