@@ -3887,9 +3887,20 @@
           },
           {
             "in": "query",
+            "name": "maxDeltaT",
+            "required": false,
+            "description": "Keep only candidates detected within this many days of the event, i.e. |delta_t| <= this. Applies to every candidate.",
+            "schema": {
+              "minimum": 0,
+              "type": "number",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
             "name": "promptDeltaT",
             "required": false,
-            "description": "Exempt candidates detected within this many days of the event from the galactic latitude and detection history cuts, which exist to thin late candidates. Those cuts still apply to everything else.",
+            "description": "Exempt candidates detected within this many days of the event from the galactic latitude and detection history cuts, which exist to thin late candidates. Those cuts still apply to everything else. With neither of those cuts set there is nothing to exempt, so this acts as maxDeltaT.",
             "schema": {
               "minimum": 0,
               "type": "number",
@@ -17446,6 +17457,16 @@
               "default": false,
               "type": "boolean"
             }
+          },
+          {
+            "in": "query",
+            "name": "overwrite_altdata",
+            "required": false,
+            "description": "If true, merge the posted altdata into existing rows that duplicate the new points. Only applies when duplicate_ignore_flux is false, so the duplicate is matched on the full deduplication index and is therefore a single identified row; unlike overwrite_flux this needs no origin and never changes a measurement.",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
           }
         ],
         "requestBody": {
@@ -23538,9 +23559,20 @@
           },
           {
             "in": "query",
+            "name": "maxDeltaT",
+            "required": false,
+            "description": "Keep only sources detected within this many days of the event, i.e. |delta_t| <= this. Applies to every source.",
+            "schema": {
+              "minimum": 0,
+              "type": "number",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
             "name": "promptDeltaT",
             "required": false,
-            "description": "Exempt candidates detected within this many days of the event from the galactic latitude and detection history cuts, which exist to thin late candidates. Those cuts still apply to everything else.",
+            "description": "Exempt candidates detected within this many days of the event from the galactic latitude and detection history cuts, which exist to thin late candidates. Those cuts still apply to everything else. With neither of those cuts set there is nothing to exempt, so this acts as maxDeltaT.",
             "schema": {
               "minimum": 0,
               "type": "number",
