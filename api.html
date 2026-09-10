@@ -2641,7 +2641,7 @@
     "/api/brokers/{broker_id}/alerts/{alert_id}/photometry": {
       "get": {
         "summary": "Display photometry for an object (DB + on-demand broker)",
-        "description": "Return an object's photometry for display: the persisted,\naccess-controlled photometry from the database merged with photometry\nfetched on demand from the broker (deduped by instrument/filter/mjd,\nso the broker only augments saved points). The broker half is\nscope-filtered and never written to the database. Returns a bare list\nof points, matching GET /sources/{id}/photometry.\n",
+        "description": "Return an object's photometry for display: the persisted,\naccess-controlled photometry from the database merged with photometry\nfetched on demand from the broker (deduped by instrument/filter/mjd,\nso the broker only augments saved points). The broker half is cached\nper object and never written to the database. Returns a bare list of\npoints, matching GET /sources/{id}/photometry.\n",
         "tags": [
           "brokers",
           "photometry"
@@ -2657,6 +2657,15 @@
             }
           },
           "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
             "content": {
               "application/json": {
                 "schema": {
@@ -2726,14 +2735,74 @@
               ],
               "type": "string"
             }
+          },
+          {
+            "in": "query",
+            "name": "includeSuperObjsPhotometry",
+            "required": false,
+            "description": "Also serve the objs sharing a SuperObj with this one.",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "includeOwnerInfo",
+            "required": false,
+            "description": "Include each saved point's owner.",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "includeStreamInfo",
+            "required": false,
+            "description": "Include each saved point's streams.",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "includeValidationInfo",
+            "required": false,
+            "description": "Include each saved point's validations.",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "includeAnnotationInfo",
+            "required": false,
+            "description": "Include each saved point's annotations.",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "includeExtinction",
+            "required": false,
+            "description": "Include Galactic extinction and extinction-corrected values.",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
           }
         ]
       }
     },
     "/api/brokers/photometry/{object_id}": {
       "get": {
-        "summary": "Display photometry for an object via the survey's broker",
-        "description": "Broker-address-free variant of the photometry passthrough for the\nsource-page lightcurve: resolves the active provider that supports\nget_photometry for ``?survey=`` server-side, so a deployment can set\n`photometry_display_endpoint:\n/api/brokers/photometry/{id}?survey=ZTF` without pinning a broker id.\nIf no such broker is configured, degrades to the object's DB\nphotometry. Returns a bare list of points, matching\nGET /sources/{id}/photometry.\n",
+        "summary": "Display photometry for an object via the default broker",
+        "description": "Broker-address-free variant of the photometry passthrough, backing the\nsource page's lightcurve: the broker flagged ``default_photometry`` is\nresolved server-side, so the frontend does not pin a broker id. If no\nsuch broker is configured, or it cannot be reached, degrades to the\nobject's DB photometry (the failure is logged, never returned as an\nerror, so the lightcurve always renders). Returns a bare list of\npoints, matching GET /sources/{id}/photometry.\n",
         "tags": [
           "brokers",
           "photometry"
@@ -2756,6 +2825,15 @@
                 }
               }
             }
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -2770,11 +2848,11 @@
           {
             "in": "query",
             "name": "survey",
-            "required": true,
-            "description": "Survey whose configured broker serves the photometry.",
+            "required": false,
+            "description": "Survey the photometry is fetched for.",
             "schema": {
-              "minLength": 1,
-              "type": "string"
+              "type": "string",
+              "nullable": true
             }
           },
           {
@@ -2812,9 +2890,19 @@
           },
           {
             "in": "query",
+            "name": "includeSuperObjsPhotometry",
+            "required": false,
+            "description": "Also serve the objs sharing a SuperObj with this one.",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
             "name": "includeOwnerInfo",
             "required": false,
-            "description": "Ignored.",
+            "description": "Include each saved point's owner.",
             "schema": {
               "default": false,
               "type": "boolean"
@@ -2824,7 +2912,7 @@
             "in": "query",
             "name": "includeStreamInfo",
             "required": false,
-            "description": "Ignored.",
+            "description": "Include each saved point's streams.",
             "schema": {
               "default": false,
               "type": "boolean"
@@ -2834,7 +2922,17 @@
             "in": "query",
             "name": "includeValidationInfo",
             "required": false,
-            "description": "Ignored.",
+            "description": "Include each saved point's validations.",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "includeAnnotationInfo",
+            "required": false,
+            "description": "Include each saved point's annotations.",
             "schema": {
               "default": false,
               "type": "boolean"
@@ -2844,17 +2942,7 @@
             "in": "query",
             "name": "includeExtinction",
             "required": false,
-            "description": "Ignored.",
-            "schema": {
-              "default": false,
-              "type": "boolean"
-            }
-          },
-          {
-            "in": "query",
-            "name": "includeSuperObjsPhotometry",
-            "required": false,
-            "description": "Ignored.",
+            "description": "Include Galactic extinction and extinction-corrected values.",
             "schema": {
               "default": false,
               "type": "boolean"
@@ -32020,6 +32108,10 @@
             "type": "boolean",
             "description": "Whether this broker is the one cross-matches (cone searches) target."
           },
+          "default_photometry": {
+            "type": "boolean",
+            "description": "Whether this broker is the one serving the source page's photometry."
+          },
           "_altdata": {
             "type": "string",
             "description": "Encrypted per-instance configuration (endpoints, credentials).",
@@ -32122,6 +32214,10 @@
           "default_crossmatch": {
             "type": "boolean",
             "description": "Whether this broker is the one cross-matches (cone searches) target."
+          },
+          "default_photometry": {
+            "type": "boolean",
+            "description": "Whether this broker is the one serving the source page's photometry."
           },
           "_altdata": {
             "type": "string",
@@ -83173,6 +83269,12 @@
             "description": "Make this the broker cross-matches are run against.",
             "title": "Default Crossmatch",
             "type": "boolean"
+          },
+          "default_photometry": {
+            "default": false,
+            "description": "Make this the broker serving the source page's photometry.",
+            "title": "Default Photometry",
+            "type": "boolean"
           }
         },
         "title": "BrokerPostBody",
@@ -83215,6 +83317,13 @@
             "default": null,
             "description": "Make this the broker cross-matches are run against.",
             "title": "Default Crossmatch",
+            "type": "boolean",
+            "nullable": true
+          },
+          "default_photometry": {
+            "default": null,
+            "description": "Make this the broker serving the source page's photometry.",
+            "title": "Default Photometry",
             "type": "boolean",
             "nullable": true
           }

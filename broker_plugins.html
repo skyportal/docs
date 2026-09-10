@@ -384,18 +384,41 @@ features accordingly.</p></li>
 <code class="docutils literal notranslate"><span class="pre">altdata</span></code> (endpoints/credentials, mirroring <code class="docutils literal notranslate"><span class="pre">Allocation.altdata</span></code>). Only system
 admins may create/update/delete brokers, and <code class="docutils literal notranslate"><span class="pre">altdata</span></code> is redacted from
 non-admins.</p></li>
-<li><p><strong>Site defaults</strong>, <code class="docutils literal notranslate"><span class="pre">default_alert_search</span></code> and <code class="docutils literal notranslate"><span class="pre">default_crossmatch</span></code> name the
-broker the source page’s “Search alerts” button opens and the one its
-cross-matches (cone searches) run against. At most one broker holds each; pick them on the brokers page. The
-seeded data makes ALeRCE both.</p></li>
+<li><p><strong>Site defaults</strong>, <code class="docutils literal notranslate"><span class="pre">default_alert_search</span></code>, <code class="docutils literal notranslate"><span class="pre">default_crossmatch</span></code> and
+<code class="docutils literal notranslate"><span class="pre">default_photometry</span></code> name the broker the source page’s “Search alerts” button
+opens, the one its cross-matches (cone searches) run against, and the one
+serving the photometry the source page displays (its saved points merged with
+photometry pulled from the broker on demand, cached on disk for
+<code class="docutils literal notranslate"><span class="pre">misc.minutes_to_keep_broker_photometry_cache</span></code> and never written to the
+database). At most one broker holds each; pick them on the brokers page. The
+seeded data makes ALeRCE the alert search and cross-match one; no broker
+serves photometry until one is picked. The fetched points are scoped to the
+requester exactly like the alert search: a <code class="docutils literal notranslate"><span class="pre">(survey,</span> <span class="pre">programid)</span></code> group is only
+displayed to users whose streams cover that programid, so ZTF partnership and
+Caltech points stay hidden from a public-only user. <code class="docutils literal notranslate"><span class="pre">PhotStat</span></code> is still
+recomputed over everything fetched, matching how it is already computed over
+every saved row regardless of who is looking. Making an active broker a
+default re-runs its <code class="docutils literal notranslate"><span class="pre">test_connection</span></code>, so an unreachable one is refused; a
+broker that goes down later never breaks a source page, the lightcurve falls
+back to the saved photometry, the failure is logged, and a broker that times
+out is skipped for a minute so an outage does not make every source page wait
+for one. An object the broker simply does not know (a 404) is cached as empty
+and leaves the passthrough on for every other object.</p></li>
 </ul>
 </section>
 <section id="operations">
 <h2>Operations<a class="headerlink" href="#operations" title="Link to this heading">#</a></h2>
 <p>Interactive (SkyPortal → broker): <code class="docutils literal notranslate"><span class="pre">query_alerts</span></code>, <code class="docutils literal notranslate"><span class="pre">get_alert</span></code>, <code class="docutils literal notranslate"><span class="pre">get_cutouts</span></code>,
-<code class="docutils literal notranslate"><span class="pre">cone_search</span></code>, <code class="docutils literal notranslate"><span class="pre">save_as_source</span></code>, and filter management (<code class="docutils literal notranslate"><span class="pre">get_filters</span></code>,
-<code class="docutils literal notranslate"><span class="pre">create_filter</span></code>, <code class="docutils literal notranslate"><span class="pre">update_filter</span></code>, <code class="docutils literal notranslate"><span class="pre">delete_filter</span></code>, <code class="docutils literal notranslate"><span class="pre">test_filter</span></code>,
-<code class="docutils literal notranslate"><span class="pre">filter_modules</span></code>).</p>
+<code class="docutils literal notranslate"><span class="pre">cone_search</span></code>, <code class="docutils literal notranslate"><span class="pre">save_as_source</span></code>, <code class="docutils literal notranslate"><span class="pre">get_photometry</span></code>, and filter management
+(<code class="docutils literal notranslate"><span class="pre">get_filters</span></code>, <code class="docutils literal notranslate"><span class="pre">create_filter</span></code>, <code class="docutils literal notranslate"><span class="pre">update_filter</span></code>, <code class="docutils literal notranslate"><span class="pre">delete_filter</span></code>,
+<code class="docutils literal notranslate"><span class="pre">test_filter</span></code>, <code class="docutils literal notranslate"><span class="pre">filter_modules</span></code>).</p>
+<p><code class="docutils literal notranslate"><span class="pre">save_as_source</span></code> and <code class="docutils literal notranslate"><span class="pre">get_photometry</span></code> come free with <code class="docutils literal notranslate"><span class="pre">get_alert</span></code>, but the
+photometry passthrough runs on every source page view under a 10s bound, so a
+provider whose object fetch cannot meet that sets <code class="docutils literal notranslate"><span class="pre">photometry_passthrough</span> <span class="pre">=</span> <span class="pre">False</span></code> and stops advertising the capability. ANTARES (walks its whole paginated
+alert history) and Pitt-Google (bills the deployment for a BigQuery job per view)
+opt out. Lasair advertises it, but its API is throttled per token per hour (100
+calls for a user token, 10,000 for a power user), so only pick it as the
+photometry default on a power-user token.</p>
 <p>Ingestion (broker → SkyPortal): <code class="docutils literal notranslate"><span class="pre">run_ingestion</span></code>, a long-lived consumer/poller
 (see “Ingestion and filters” below).</p>
 </section>
