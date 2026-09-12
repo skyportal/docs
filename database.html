@@ -517,11 +517,15 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.async_bulk_verify"><code class="docutils literal notranslate"><span class="pre">async_bulk_verify()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.bulk_verify"><code class="docutils literal notranslate"><span class="pre">bulk_verify()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.db_engine"><code class="docutils literal notranslate"><span class="pre">db_engine()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.group_by_type"><code class="docutils literal notranslate"><span class="pre">group_by_type()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.inaccessible_pks_stmt"><code class="docutils literal notranslate"><span class="pre">inaccessible_pks_stmt()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.join_model"><code class="docutils literal notranslate"><span class="pre">join_model()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.new_async_session"><code class="docutils literal notranslate"><span class="pre">new_async_session()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.new_session"><code class="docutils literal notranslate"><span class="pre">new_session()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.pending_rows"><code class="docutils literal notranslate"><span class="pre">pending_rows()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.pks_of"><code class="docutils literal notranslate"><span class="pre">pks_of()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.primary_key_keys"><code class="docutils literal notranslate"><span class="pre">primary_key_keys()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.resolve_pooler"><code class="docutils literal notranslate"><span class="pre">resolve_pooler()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entity-relationship-diagram">Entity Relationship Diagram</a></li>
@@ -2092,6 +2096,12 @@ record type.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="baselayer.app.models.group_by_type">
+<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">group_by_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.group_by_type" title="Link to this definition">#</a></dt>
+<dd><p>Group records by mapped class, so each class needs a single query.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="baselayer.app.models.inaccessible_pks_stmt">
 <span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">inaccessible_pks_stmt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accessible_rows</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pk_cols</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.inaccessible_pks_stmt" title="Link to this definition">#</a></dt>
 <dd><p>Build the statement selecting the primary keys of <code class="docutils literal notranslate"><span class="pre">collection</span></code> that are
@@ -2169,12 +2179,25 @@ Defaults to False.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="baselayer.app.models.new_async_session">
+<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">new_async_session</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.new_async_session" title="Link to this definition">#</a></dt>
+<dd><p>The async counterpart of <cite>new_session()</cite>: a session of its own, with no
+access-control check. Close it when the work is done.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="baselayer.app.models.new_session">
 <span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">new_session</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.new_session" title="Link to this definition">#</a></dt>
 <dd><p>A session of its own, independent of the request-scoped <cite>DBSession</cite>.</p>
 <p>For work running outside a web request, where sharing one session between
 callers would let one caller’s rollback discard another’s pending work.
 Applies no access-control check; close it when the work is done.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="baselayer.app.models.pending_rows">
+<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">pending_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.pending_rows" title="Link to this definition">#</a></dt>
+<dd><p>The rows of <cite>session</cite> to check, as (read, updated, deleted, new).</p>
 </dd></dl>
 
 <dl class="py function">
@@ -2209,6 +2232,14 @@ control joins on the primary key, so deriving it here keeps that logic
 PK-agnostic instead of assuming a column named <code class="docutils literal notranslate"><span class="pre">id</span></code>.</p>
 <p>Uses <code class="docutils literal notranslate"><span class="pre">.mapper.primary_key</span></code> so it works for both mapped classes and aliased
 classes (an <code class="docutils literal notranslate"><span class="pre">AliasedInsp</span></code> has no <code class="docutils literal notranslate"><span class="pre">primary_key</span></code> of its own).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="baselayer.app.models.resolve_pooler">
+<span class="sig-prename descclassname"><span class="pre">baselayer.app.models.</span></span><span class="sig-name descname"><span class="pre">resolve_pooler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">engine_args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pooler</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.resolve_pooler" title="Link to this definition">#</a></dt>
+<dd><p>Route the connection through a transaction pooler (pgbouncer/pgcat) when
+enabled, so backend connections stay bounded across all processes. Returns
+adjusted <code class="docutils literal notranslate"><span class="pre">(host,</span> <span class="pre">port,</span> <span class="pre">engine_args)</span></code>.</p>
 </dd></dl>
 
 </section>
@@ -12595,11 +12626,15 @@ the tables it is related to.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.async_bulk_verify"><code class="docutils literal notranslate"><span class="pre">async_bulk_verify()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.bulk_verify"><code class="docutils literal notranslate"><span class="pre">bulk_verify()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.db_engine"><code class="docutils literal notranslate"><span class="pre">db_engine()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.group_by_type"><code class="docutils literal notranslate"><span class="pre">group_by_type()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.inaccessible_pks_stmt"><code class="docutils literal notranslate"><span class="pre">inaccessible_pks_stmt()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.join_model"><code class="docutils literal notranslate"><span class="pre">join_model()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.new_async_session"><code class="docutils literal notranslate"><span class="pre">new_async_session()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.new_session"><code class="docutils literal notranslate"><span class="pre">new_session()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.pending_rows"><code class="docutils literal notranslate"><span class="pre">pending_rows()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.pks_of"><code class="docutils literal notranslate"><span class="pre">pks_of()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.primary_key_keys"><code class="docutils literal notranslate"><span class="pre">primary_key_keys()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer.app.models.resolve_pooler"><code class="docutils literal notranslate"><span class="pre">resolve_pooler()</span></code></a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entity-relationship-diagram">Entity Relationship Diagram</a></li>
