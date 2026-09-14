@@ -21860,6 +21860,56 @@
         ]
       }
     },
+    "/api/sources/{obj_id}/annotations/alma": {
+      "post": {
+        "summary": "Add ALMA archive annotations",
+        "description": "Ask the ALMA Science Archive what it holds at this source's position\nand post a summary of the coverage as an annotation. Records the\ndataset identifiers too, which is what an ALMA reduction needs.\n",
+        "tags": [
+          "annotations"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ALMAQueryBody"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "obj_id",
+            "required": true,
+            "description": "ID of the object to retrieve the Vizier crossmatch for",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
     "/api/sources/{obj_id}/annotations/gaia": {
       "post": {
         "summary": "Add Gaia annotations",
@@ -91277,6 +91327,38 @@
           }
         },
         "title": "ObjMPCPostBody",
+        "type": "object"
+      },
+      "ALMAQueryBody": {
+        "additionalProperties": false,
+        "description": "Request body for posting ALMA archive coverage annotations.",
+        "properties": {
+          "crossmatchRadius": {
+            "default": 30.0,
+            "description": "Search radius (in arcseconds) around the source. Default is 30.",
+            "title": "Crossmatchradius",
+            "type": "number",
+            "nullable": true
+          },
+          "publicOnly": {
+            "default": true,
+            "description": "Only observations whose proprietary period has lapsed. Default is true.",
+            "title": "Publiconly",
+            "type": "boolean",
+            "nullable": true
+          },
+          "group_ids": {
+            "default": null,
+            "description": "List of group IDs corresponding to which groups should be able to view annotation. Defaults to all of requesting user's groups.",
+            "title": "Group Ids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
+          }
+        },
+        "title": "ALMAQueryBody",
         "type": "object"
       },
       "GaiaQueryBody": {
