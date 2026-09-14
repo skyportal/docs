@@ -1304,6 +1304,61 @@
       }
     },
     "/api/{analysis_resource_type}/{analysis_id}/analysis": {
+      "patch": {
+        "summary": "Re-share an analysis with a set of groups",
+        "description": "<b>Permission(s) required:</b> <em>Run Analyses (or System admin)</em><br><br>Change which groups can see an existing analysis and its annotation,\ne.g. share a privately-run fit with a group later, or make it private\nagain by scoping it to only the requester's single-user group. Author\nonly.\n",
+        "tags": [
+          "analysis"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnalysisPatchBody"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "analysis_resource_type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "analysis_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
       "delete": {
         "summary": "Delete an Analysis.",
         "description": "<b>Permission(s) required:</b> <em>Run Analyses (or System admin)</em><br><br>Delete an Analysis.",
@@ -1578,6 +1633,61 @@
       }
     },
     "/api/{analysis_resource_type}/analysis/{analysis_id}": {
+      "patch": {
+        "summary": "Re-share an analysis with a set of groups",
+        "description": "<b>Permission(s) required:</b> <em>Run Analyses (or System admin)</em><br><br>Change which groups can see an existing analysis and its annotation,\ne.g. share a privately-run fit with a group later, or make it private\nagain by scoping it to only the requester's single-user group. Author\nonly.\n",
+        "tags": [
+          "analysis"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnalysisPatchBody"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "analysis_resource_type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "analysis_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
       "delete": {
         "summary": "Delete an Analysis.",
         "description": "<b>Permission(s) required:</b> <em>Run Analyses (or System admin)</em><br><br>Delete an Analysis.",
@@ -83260,6 +83370,25 @@
           }
         },
         "title": "AnalysisPostBody",
+        "type": "object"
+      },
+      "AnalysisPatchBody": {
+        "additionalProperties": false,
+        "description": "Request body for re-sharing an existing analysis with a set of groups.",
+        "properties": {
+          "group_ids": {
+            "description": "Group IDs the analysis and its annotation should be visible to. Set to only the requester's single-user group to keep it private.",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Group Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "group_ids"
+        ],
+        "title": "AnalysisPatchBody",
         "type": "object"
       },
       "AssignmentPostBody": {
