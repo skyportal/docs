@@ -24357,8 +24357,8 @@
     },
     "/api/data_sharing/bulk": {
       "post": {
-        "summary": "Bulk-share one group's data with another group",
-        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Grant (or revoke) a target group's access to every spectrum and/or\nphotometry point already shared with a source group, in one\nset-based operation. Additive and idempotent: it only inserts or\ndeletes group associations and never touches the data itself. This\nis the supported way to re-expose narrowly-shared legacy/imported\ndata collaboration-wide.\n",
+        "summary": "Bulk-share spectra/photometry with a group",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Grant (or revoke) a target group's access to every spectrum and/or\nphotometry point selected either by a source group (`from_group_id`)\nor by a set of objects (`obj_ids`), in one set-based operation.\nAdditive and idempotent: it only inserts or deletes group\nassociations and never touches the data itself. The supported way to\nre-expose narrowly-shared legacy/imported data collaboration-wide.\n",
         "tags": [
           "groups"
         ],
@@ -24368,12 +24368,19 @@
               "schema": {
                 "type": "object",
                 "required": [
-                  "from_group_id",
                   "to_group_id"
                 ],
                 "properties": {
                   "from_group_id": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "Source group; mutually exclusive with obj_ids."
+                  },
+                  "obj_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "description": "Source objects; mutually exclusive with from_group_id."
                   },
                   "to_group_id": {
                     "type": "integer"
