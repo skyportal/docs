@@ -28397,6 +28397,63 @@
           }
         ]
       },
+      "patch": {
+        "summary": "Reorder the coauthors of an external sharing service",
+        "description": "<b>Permission(s) required:</b> <em>Manage sharing services (or System admin)</em><br><br>Reorder the coauthors of an external sharing service, the order is the one used to publish",
+        "tags": [
+          "external sharing service"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SharingServiceCoauthorPatchBody"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "sharing_service_id",
+            "required": true,
+            "description": "ID of the external sharing service",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "description": "Unused, the order is given in the body",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
       "delete": {
         "summary": "Remove a coauthor from an external sharing service",
         "description": "<b>Permission(s) required:</b> <em>Manage sharing services (or System admin)</em><br><br>Remove a coauthor from an external sharing service",
@@ -73564,6 +73621,10 @@
           "user_id": {
             "type": "integer"
           },
+          "order": {
+            "type": "integer",
+            "description": "Position of the coauthor in the published author list, ascending."
+          },
           "id": {
             "type": "integer",
             "description": "Unique object identifier."
@@ -73637,6 +73698,10 @@
           },
           "user_id": {
             "type": "integer"
+          },
+          "order": {
+            "type": "integer",
+            "description": "Position of the coauthor in the published author list, ascending."
           }
         },
         "required": [
@@ -93932,6 +93997,25 @@
           "id"
         ],
         "title": "SharingServiceCoauthorPostResponse",
+        "type": "object"
+      },
+      "SharingServiceCoauthorPatchBody": {
+        "additionalProperties": false,
+        "description": "Request body for reordering the coauthors of an external sharing service.",
+        "properties": {
+          "user_ids": {
+            "description": "IDs of all the coauthors of the sharing service, in the order they should be published",
+            "items": {
+              "type": "integer"
+            },
+            "title": "User Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "user_ids"
+        ],
+        "title": "SharingServiceCoauthorPatchBody",
         "type": "object"
       },
       "SharingServiceGroupPutBody": {
