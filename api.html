@@ -36506,8 +36506,12 @@
             "description": "Optional parameters that are passed to the analysis service",
             "nullable": true
           },
+          "analysis_resource_type": {
+            "type": "string",
+            "description": "Resource this default triggers on: 'obj' (classifications) or 'gcn_event' (incoming GCN triggers)."
+          },
           "source_filter": {
-            "description": "\n            JSONB column that defines the criteria for which this default analysis will be triggered.\n            Example: {\"classifications\": {\"name\": \"Kilonova\", \"probability\": 0.9}}\n        ",
+            "description": "\n            JSONB column that defines the criteria for which this default analysis will be triggered.\n            For 'obj': {\"classifications\": [{\"name\": \"Kilonova\", \"probability\": 0.9}]}.\n            For 'gcn_event': {\"gcn_tags\": [\"GRB\"], \"notice_types\": [...]} (either, matched as OR).\n        ",
             "type": "object",
             "additionalProperties": true
           },
@@ -36626,8 +36630,12 @@
             "description": "Optional parameters that are passed to the analysis service",
             "nullable": true
           },
+          "analysis_resource_type": {
+            "type": "string",
+            "description": "Resource this default triggers on: 'obj' (classifications) or 'gcn_event' (incoming GCN triggers)."
+          },
           "source_filter": {
-            "description": "\n            JSONB column that defines the criteria for which this default analysis will be triggered.\n            Example: {\"classifications\": {\"name\": \"Kilonova\", \"probability\": 0.9}}\n        ",
+            "description": "\n            JSONB column that defines the criteria for which this default analysis will be triggered.\n            For 'obj': {\"classifications\": [{\"name\": \"Kilonova\", \"probability\": 0.9}]}.\n            For 'gcn_event': {\"gcn_tags\": [\"GRB\"], \"notice_types\": [...]} (either, matched as OR).\n        ",
             "type": "object",
             "additionalProperties": true
           },
@@ -83567,6 +83575,12 @@
         "additionalProperties": false,
         "description": "Request body for creating a default analysis.",
         "properties": {
+          "analysis_resource_type": {
+            "default": "obj",
+            "description": "Resource this default triggers on: 'obj' (classifications) or 'gcn_event' (incoming GCN triggers).",
+            "title": "Analysis Resource Type",
+            "type": "string"
+          },
           "default_analysis_parameters": {
             "anyOf": [
               {
