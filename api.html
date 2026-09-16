@@ -31092,6 +31092,13 @@
               "$ref": "#/components/schemas/ObjAnalysis"
             }
           },
+          "gcnevent_analyses": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/GcnEventAnalysis"
+            }
+          },
           "default_analyses": {
             "type": "array",
             "readOnly": true,
@@ -31270,6 +31277,13 @@
             "readOnly": true,
             "items": {
               "$ref": "#/components/schemas/ObjAnalysis"
+            }
+          },
+          "gcnevent_analyses": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/GcnEventAnalysis"
             }
           },
           "default_analyses": {
@@ -41706,6 +41720,13 @@
               "$ref": "#/components/schemas/Localization"
             }
           },
+          "gcnevent_analyses": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/GcnEventAnalysis"
+            }
+          },
           "observationplan_requests": {
             "type": "array",
             "readOnly": true,
@@ -41876,6 +41897,376 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GcnEvent"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "GcnEventAnalysis": {
+        "type": "object",
+        "properties": {
+          "gcnevent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The GcnEventAnalysis's GcnEvent.",
+            "readOnly": true
+          },
+          "author": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "Annotation's author.",
+            "readOnly": true
+          },
+          "analysis_service": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AnalysisService"
+              }
+            ],
+            "description": "Analysis Service associated with this analysis.",
+            "readOnly": true
+          },
+          "groups": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/Group"
+            }
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC event timestamp of the GcnEventAnalysis's GcnEvent."
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          },
+          "_unique_id": {
+            "type": "string",
+            "description": "Unique identifier for this analysis result."
+          },
+          "hash": {
+            "type": "string",
+            "description": "MD5sum hash of the data to be saved to file. Helps identify duplicate results.",
+            "nullable": true
+          },
+          "_full_name": {
+            "type": "string",
+            "description": "full name of the file path where the data is saved.",
+            "nullable": true
+          },
+          "show_parameters": {
+            "type": "boolean",
+            "description": "Whether to render the parameters of this analysis"
+          },
+          "show_plots": {
+            "type": "boolean",
+            "description": "Whether to render the plots of this analysis"
+          },
+          "show_corner": {
+            "type": "boolean",
+            "description": "Whether to render the corner plots of this analysis"
+          },
+          "analysis_parameters": {
+            "type": "string",
+            "description": "Optional parameters that are passed to the analysis service",
+            "nullable": true
+          },
+          "input_filters": {
+            "type": "string",
+            "description": "Optional filters that are applied to the input data that is passed to the analysis service",
+            "nullable": true
+          },
+          "author_id": {
+            "type": "integer",
+            "description": "ID of the Annotation author's User instance."
+          },
+          "analysis_service_id": {
+            "type": "integer",
+            "description": "ID of the associated analysis service."
+          },
+          "invalid_after": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time after which the webhook is invalid. Default: 1 day from now."
+          },
+          "token": {
+            "type": "string",
+            "description": "Unique identifier for this webhook."
+          },
+          "handled_by_url": {
+            "type": "string",
+            "description": "url for internal API to handle the incoming callback."
+          },
+          "status": {
+            "enum": [
+              "queued",
+              "pending",
+              "completed",
+              "failure",
+              "cancelled",
+              "timed_out"
+            ],
+            "maxLength": 9,
+            "description": "Status of the Webhook. One of: 'queued', 'pending', 'completed', 'failure', 'cancelled', 'timed_out'.",
+            "type": "string"
+          },
+          "duration": {
+            "type": "number",
+            "description": "How long did this take to run and return this webhook?",
+            "nullable": true
+          },
+          "last_activity": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When was the last time this webhook was accessed?",
+            "nullable": true
+          },
+          "status_message": {
+            "type": "string",
+            "description": "A message describing the status of the webhook.",
+            "nullable": true
+          }
+        },
+        "required": [
+          "analysis_service_id",
+          "author_id",
+          "dateobs",
+          "handled_by_url",
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGcnEventAnalysis": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GcnEventAnalysis"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGcnEventAnalysiss": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GcnEventAnalysis"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "GcnEventAnalysisNoID": {
+        "type": "object",
+        "properties": {
+          "gcnevent": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEvent"
+              }
+            ],
+            "description": "The GcnEventAnalysis's GcnEvent.",
+            "readOnly": true
+          },
+          "author": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "Annotation's author.",
+            "readOnly": true
+          },
+          "analysis_service": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AnalysisService"
+              }
+            ],
+            "description": "Analysis Service associated with this analysis.",
+            "readOnly": true
+          },
+          "groups": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/Group"
+            }
+          },
+          "dateobs": {
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC event timestamp of the GcnEventAnalysis's GcnEvent."
+          },
+          "_unique_id": {
+            "type": "string",
+            "description": "Unique identifier for this analysis result."
+          },
+          "hash": {
+            "type": "string",
+            "description": "MD5sum hash of the data to be saved to file. Helps identify duplicate results.",
+            "nullable": true
+          },
+          "_full_name": {
+            "type": "string",
+            "description": "full name of the file path where the data is saved.",
+            "nullable": true
+          },
+          "show_parameters": {
+            "type": "boolean",
+            "description": "Whether to render the parameters of this analysis"
+          },
+          "show_plots": {
+            "type": "boolean",
+            "description": "Whether to render the plots of this analysis"
+          },
+          "show_corner": {
+            "type": "boolean",
+            "description": "Whether to render the corner plots of this analysis"
+          },
+          "analysis_parameters": {
+            "type": "string",
+            "description": "Optional parameters that are passed to the analysis service",
+            "nullable": true
+          },
+          "input_filters": {
+            "type": "string",
+            "description": "Optional filters that are applied to the input data that is passed to the analysis service",
+            "nullable": true
+          },
+          "author_id": {
+            "type": "integer",
+            "description": "ID of the Annotation author's User instance."
+          },
+          "analysis_service_id": {
+            "type": "integer",
+            "description": "ID of the associated analysis service."
+          },
+          "invalid_after": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time after which the webhook is invalid. Default: 1 day from now."
+          },
+          "token": {
+            "type": "string",
+            "description": "Unique identifier for this webhook."
+          },
+          "handled_by_url": {
+            "type": "string",
+            "description": "url for internal API to handle the incoming callback."
+          },
+          "status": {
+            "enum": [
+              "queued",
+              "pending",
+              "completed",
+              "failure",
+              "cancelled",
+              "timed_out"
+            ],
+            "maxLength": 9,
+            "description": "Status of the Webhook. One of: 'queued', 'pending', 'completed', 'failure', 'cancelled', 'timed_out'.",
+            "type": "string"
+          },
+          "duration": {
+            "type": "number",
+            "description": "How long did this take to run and return this webhook?",
+            "nullable": true
+          },
+          "last_activity": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When was the last time this webhook was accessed?",
+            "nullable": true
+          },
+          "status_message": {
+            "type": "string",
+            "description": "A message describing the status of the webhook.",
+            "nullable": true
+          }
+        },
+        "required": [
+          "analysis_service_id",
+          "author_id",
+          "dateobs",
+          "handled_by_url",
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGcnEventAnalysisNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GcnEventAnalysisNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGcnEventAnalysisNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GcnEventAnalysisNoID"
             }
           }
         },
@@ -42828,6 +43219,13 @@
             "readOnly": true,
             "items": {
               "$ref": "#/components/schemas/Localization"
+            }
+          },
+          "gcnevent_analyses": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/GcnEventAnalysis"
             }
           },
           "observationplan_requests": {
@@ -46817,6 +47215,164 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GroupGcnEvent"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "GroupGcnEventAnalysis": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Group"
+              }
+            ],
+            "readOnly": true
+          },
+          "gcneventanalysis": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEventAnalysis"
+              }
+            ],
+            "readOnly": true
+          },
+          "group_id": {
+            "type": "integer"
+          },
+          "gcnevent_analyse_id": {
+            "type": "integer"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "gcnevent_analyse_id",
+          "group_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGroupGcnEventAnalysis": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GroupGcnEventAnalysis"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGroupGcnEventAnalysiss": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupGcnEventAnalysis"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "GroupGcnEventAnalysisNoID": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Group"
+              }
+            ],
+            "readOnly": true
+          },
+          "gcneventanalysis": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GcnEventAnalysis"
+              }
+            ],
+            "readOnly": true
+          },
+          "group_id": {
+            "type": "integer"
+          },
+          "gcnevent_analyse_id": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "gcnevent_analyse_id",
+          "group_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGroupGcnEventAnalysisNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GroupGcnEventAnalysisNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGroupGcnEventAnalysisNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupGcnEventAnalysisNoID"
             }
           }
         },
