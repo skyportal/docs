@@ -353,6 +353,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-configuration">Additional Configuration</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#authentication">Authentication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#account-applications">Account applications</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#username-generation">Username generation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-an-administrative-user">Creating an administrative user</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-data">Test data</a></li>
@@ -706,6 +707,27 @@ SkyPortal, you should enable multi-user login by adding Google
 credentials to the <code class="docutils literal notranslate"><span class="pre">server:auth</span></code> section of the configuration file and
 setting <code class="docutils literal notranslate"><span class="pre">debug_login</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
 </section>
+<section id="account-applications">
+<h3>Account applications<a class="headerlink" href="#account-applications" title="Link to this heading">#</a></h3>
+<p>Where <code class="docutils literal notranslate"><span class="pre">invitations.enabled</span></code> is set, only an administrator holding the
+<code class="docutils literal notranslate"><span class="pre">Manage</span> <span class="pre">users</span></code> ACL can bring someone onto the instance. Setting
+<code class="docutils literal notranslate"><span class="pre">user_applications.enabled</span></code> opens a second route: people without an account
+apply from a form on the login page, or at <code class="docutils literal notranslate"><span class="pre">/apply</span></code>, naming an existing user who
+can vouch for them. Approving an application issues the invitation and emails it
+to the applicant, who then signs in through the usual OAuth flow.</p>
+<p>Applications are off by default, and that one flag covers everything the feature
+adds: the form on the login page, the <code class="docutils literal notranslate"><span class="pre">/apply</span></code> page, the API endpoints and the
+sidebar entry.</p>
+<p><code class="docutils literal notranslate"><span class="pre">user_applications.peer_endorsement</span></code> decides who acts on an application. Left
+<code class="docutils literal notranslate"><span class="pre">False</span></code>, only <code class="docutils literal notranslate"><span class="pre">Manage</span> <span class="pre">users</span></code> administrators approve. Set <code class="docutils literal notranslate"><span class="pre">True</span></code>, any user
+holding the <code class="docutils literal notranslate"><span class="pre">Endorse</span> <span class="pre">users</span></code> ACL can vouch for one, as arXiv and GCN do;
+administrators still can either way. <code class="docutils literal notranslate"><span class="pre">Endorse</span> <span class="pre">users</span></code> is granted to the
+<code class="docutils literal notranslate"><span class="pre">Full</span> <span class="pre">user</span></code> and <code class="docutils literal notranslate"><span class="pre">Group</span> <span class="pre">admin</span></code> roles by default, and does nothing until peer
+endorsement is on.</p>
+<p>Whoever decides chooses the new user’s role, and may add them only to groups
+they themselves belong to, so an endorsement cannot hand out access the endorser
+does not have.</p>
+</section>
 <section id="username-generation">
 <h3>Username generation<a class="headerlink" href="#username-generation" title="Link to this heading">#</a></h3>
 <p>When <code class="docutils literal notranslate"><span class="pre">server.auth.username_is_email</span></code> is set to <code class="docutils literal notranslate"><span class="pre">True</span></code> (the default), the user’s username is generated from their email address (e.g., <code class="docutils literal notranslate"><span class="pre">testuser&#64;cesium-ml.org</span></code> → <code class="docutils literal notranslate"><span class="pre">testuser-cesium-ml-org</span></code>).</p>
@@ -829,6 +851,7 @@ sudo certbot renew</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-configuration">Additional Configuration</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#authentication">Authentication</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#account-applications">Account applications</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#username-generation">Username generation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-an-administrative-user">Creating an administrative user</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-data">Test data</a></li>
