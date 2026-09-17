@@ -26435,6 +26435,36 @@
               "type": "string",
               "nullable": true
             }
+          },
+          {
+            "in": "query",
+            "name": "includeEpochs",
+            "required": false,
+            "description": "Include each linked Obj's thumbnails and annotations. A scanning view needs them; a plain listing does not, and they cost a query each.",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "pageNumber",
+            "required": false,
+            "description": "Page number, starting at 1.",
+            "schema": {
+              "default": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "numPerPage",
+            "required": false,
+            "description": "SuperObjs per page, capped at 500.",
+            "schema": {
+              "default": 100,
+              "type": "integer"
+            }
           }
         ]
       },
@@ -74390,6 +74420,10 @@
             "description": "Whether to publish objects that already exist in TNS but not reported under this internal name (e.g., reported by another survey).",
             "nullable": true
           },
+          "_mpc_altdata": {
+            "type": "string",
+            "nullable": true
+          },
           "id": {
             "type": "integer",
             "description": "Unique object identifier."
@@ -74638,6 +74672,9 @@
             "type": "boolean"
           },
           "auto_share_to_hermes": {
+            "type": "boolean"
+          },
+          "auto_share_to_mpc": {
             "type": "boolean"
           },
           "auto_sharing_allow_bots": {
@@ -74894,6 +74931,9 @@
           "auto_share_to_hermes": {
             "type": "boolean"
           },
+          "auto_share_to_mpc": {
+            "type": "boolean"
+          },
           "auto_sharing_allow_bots": {
             "type": "boolean"
           }
@@ -75036,6 +75076,10 @@
             "type": "boolean",
             "description": "Whether to publish objects that already exist in TNS but not reported under this internal name (e.g., reported by another survey).",
             "nullable": true
+          },
+          "_mpc_altdata": {
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
@@ -75159,6 +75203,32 @@
           },
           "tns_payload": {
             "description": "Payload to publish to TNS.",
+            "nullable": true,
+            "type": "object",
+            "additionalProperties": true
+          },
+          "publish_to_mpc": {
+            "type": "boolean",
+            "description": "Whether to publish to the Minor Planet Center or not."
+          },
+          "mpc_status": {
+            "type": "string",
+            "description": "Status of the MPC submission.",
+            "nullable": true
+          },
+          "mpc_submission_id": {
+            "type": "string",
+            "description": "Designation or tracking id the MPC submission was filed under.",
+            "nullable": true
+          },
+          "mpc_response": {
+            "description": "Serialized HTTP response from the MPC.",
+            "nullable": true,
+            "type": "object",
+            "additionalProperties": true
+          },
+          "mpc_payload": {
+            "description": "ADES payload submitted to the MPC.",
             "nullable": true,
             "type": "object",
             "additionalProperties": true
@@ -75341,6 +75411,32 @@
           },
           "tns_payload": {
             "description": "Payload to publish to TNS.",
+            "nullable": true,
+            "type": "object",
+            "additionalProperties": true
+          },
+          "publish_to_mpc": {
+            "type": "boolean",
+            "description": "Whether to publish to the Minor Planet Center or not."
+          },
+          "mpc_status": {
+            "type": "string",
+            "description": "Status of the MPC submission.",
+            "nullable": true
+          },
+          "mpc_submission_id": {
+            "type": "string",
+            "description": "Designation or tracking id the MPC submission was filed under.",
+            "nullable": true
+          },
+          "mpc_response": {
+            "description": "Serialized HTTP response from the MPC.",
+            "nullable": true,
+            "type": "object",
+            "additionalProperties": true
+          },
+          "mpc_payload": {
+            "description": "ADES payload submitted to the MPC.",
             "nullable": true,
             "type": "object",
             "additionalProperties": true
