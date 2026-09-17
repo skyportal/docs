@@ -384,6 +384,7 @@ how to install them on MacOS and Debian-based systems below.</p>
 <li><p>PostgreSQL (v&gt;=14.0)</p></li>
 <li><p>Node.JS/npm (v&gt;=16.14.0/8.3.2)</p></li>
 <li><p>Bun</p></li>
+<li><p>pgvector, the PostgreSQL extension supplying the <code class="docutils literal notranslate"><span class="pre">vector</span></code> type</p></li>
 </ul>
 <p>When installing SkyPortal on Debian-based systems, 2 additional packages are required to be able to install <code class="docutils literal notranslate"><span class="pre">pycurl</span></code> later on:</p>
 <ul class="simple">
@@ -439,9 +440,10 @@ how to install them on MacOS and Debian-based systems below.</p>
 <li><p>Install project dependencies</p></li>
 </ol>
 <p>Using Homebrew, install core dependencies:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">supervisor</span> <span class="n">nginx</span> <span class="n">postgresql</span> <span class="n">node</span> <span class="n">llvm</span> <span class="n">libomp</span> <span class="n">gsl</span> <span class="n">rust</span> <span class="n">bun</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">supervisor</span> <span class="n">nginx</span> <span class="n">postgresql</span> <span class="n">node</span> <span class="n">llvm</span> <span class="n">libomp</span> <span class="n">gsl</span> <span class="n">rust</span> <span class="n">bun</span> <span class="n">pgvector</span>
 </pre></div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">pgvector</span></code> supplies the <code class="docutils literal notranslate"><span class="pre">vector</span></code> type the source-summary embeddings table uses. The table is created when the database is initialised, so pgvector has to be present even if you never turn the summary search on. <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_init</span></code> enables it in each database.</p>
 <p>If you want to use <a class="reference external" href="https://en.wikipedia.org/wiki/Brotli">brotli compression</a> with NGINX (better compression rates for the frontend), you can install NGINX with the <code class="docutils literal notranslate"><span class="pre">ngx_brotli</span></code> module with this command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">tap</span> <span class="n">denji</span><span class="o">/</span><span class="n">nginx</span> <span class="o">&amp;&amp;</span> <span class="n">brew</span> <span class="n">install</span> <span class="n">nginx</span><span class="o">-</span><span class="n">full</span> <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">brotli</span>
 </pre></div>
@@ -552,11 +554,20 @@ how to install them on MacOS and Debian-based systems below.</p>
 <h2>Installation: Debian-based Linux and WSL<a class="headerlink" href="#installation-debian-based-linux-and-wsl" title="Link to this heading">#</a></h2>
 <ol>
 <li><p>Install dependencies</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">supervisor</span> <span class="n">postgresql</span> \
-      <span class="n">libpq</span><span class="o">-</span><span class="n">dev</span> <span class="n">npm</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span> \
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">supervisor</span> <span class="n">postgresql</span> <span class="n">libpq</span><span class="o">-</span><span class="n">dev</span> <span class="n">npm</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span> \
       <span class="n">libcurl4</span><span class="o">-</span><span class="n">gnutls</span><span class="o">-</span><span class="n">dev</span> <span class="n">libgnutls28</span><span class="o">-</span><span class="n">dev</span>
 </pre></div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">pgvector</span></code> supplies the <code class="docutils literal notranslate"><span class="pre">vector</span></code> type the source-summary embeddings table
+uses. The table is created when the database is initialised, so pgvector has
+to be present even if you never turn the summary search on. Its package is
+named for the PostgreSQL version, which <code class="docutils literal notranslate"><span class="pre">pg_config</span></code> reports once the command
+above has run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>sudo apt install postgresql-$(pg_config --version | \
+      grep -oE &#39;[0-9]+&#39; | head -1)-pgvector
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_init</span></code> enables it in each database.</p>
 <p>If you want to use <a class="reference external" href="https://en.wikipedia.org/wiki/Brotli">brotli compression</a> with NGINX (better compression rates for the frontend), you have to install NGINX and the brotli module from another source with:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">remove</span> <span class="o">-</span><span class="n">y</span> <span class="n">nginx</span> <span class="n">nginx</span><span class="o">-</span><span class="n">common</span> <span class="n">nginx</span><span class="o">-</span><span class="n">core</span>
 <span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="n">ppa</span><span class="p">:</span><span class="n">ondrej</span><span class="o">/</span><span class="n">nginx</span><span class="o">-</span><span class="n">mainline</span> <span class="o">-</span><span class="n">y</span>
@@ -632,10 +643,16 @@ environment, the Javascript bundle and the database schema all change with it.</
 <li><p>Get the new code with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> (or <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">v1.2.3</span></code> for a release).</p></li>
 <li><p>Update the submodules with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">submodule</span> <span class="pre">update</span> <span class="pre">--init</span> <span class="pre">--recursive</span></code>.</p></li>
 <li><p>Update the Python environment with <code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">sync</span></code>.</p></li>
+<li><p>Install pgvector, which every database now needs whether or not the summary
+search is on. The installation section for your platform gives the command.</p></li>
 <li><p>Apply any pending database migrations with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_migrate</span></code>.</p></li>
 <li><p>Start the app again with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code>, which reinstalls the Javascript
 dependencies and rebuilds the bundle.</p></li>
 </ol>
+<p>The source-summary search used to keep its vectors in Pinecone, and now keeps
+them in SkyPortal’s own database. An installation whose config still says
+<code class="docutils literal notranslate"><span class="pre">location:</span> <span class="pre">pinecone</span></code> loses the search until that is changed to <code class="docutils literal notranslate"><span class="pre">pgvector</span></code>, and
+each summary is written again so its vector is stored.</p>
 <p><code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_migrate</span></code> runs <code class="docutils literal notranslate"><span class="pre">alembic</span> <span class="pre">upgrade</span> <span class="pre">head</span></code>, with <code class="docutils literal notranslate"><span class="pre">PYTHONPATH</span></code> and the config
 flag already set. To run alembic directly, activate the environment and supply
 both:</p>
@@ -659,6 +676,11 @@ Shift held down, in case it has cached the old bundle.</p></li>
 was run without <code class="docutils literal notranslate"><span class="pre">PYTHONPATH=.</span></code>, or outside the environment, rather than the
 submodules being missing. The <code class="docutils literal notranslate"><span class="pre">make</span></code> targets set both.</p></li>
 <li><p>If alembic reports more than one head, see <a class="reference internal" href="migrations.html"><span class="doc">Database migrations</span></a>.</p></li>
+<li><p>A migration that stops on the <code class="docutils literal notranslate"><span class="pre">vector</span></code> type means that database has no
+pgvector. Installing an extension takes a superuser, so <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">db_init</span></code> does
+it; where the application role may not, an administrator runs
+<code class="docutils literal notranslate"><span class="pre">CREATE</span> <span class="pre">EXTENSION</span> <span class="pre">vector;</span></code> once per database. If that fails in turn, pgvector
+is missing from the machine.</p></li>
 </ul>
 </section>
 <section id="troubleshooting">
