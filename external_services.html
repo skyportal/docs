@@ -159,6 +159,7 @@
 <li class="toctree-l1"><a class="reference internal" href="mcp.html">MCP server</a></li>
 <li class="toctree-l1"><a class="reference internal" href="dev.html">Developer notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="deploy.html">Deployment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="services.html">Services</a></li>
 <li class="toctree-l1"><a class="reference internal" href="observability.html">Observability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="versioning.html">Versioning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="data_loader.html">Data loader</a></li>
@@ -495,7 +496,7 @@ operators know what to set.</p>
 <section id="disabling-a-service">
 <h2>Disabling a service<a class="headerlink" href="#disabling-a-service" title="Link to this heading">#</a></h2>
 <p>Remove the block from <code class="docutils literal notranslate"><span class="pre">services.external</span></code>, or add the service name to
-<code class="docutils literal notranslate"><span class="pre">services.disabled</span></code>:</p>
+<code class="docutils literal notranslate"><span class="pre">services.disabled</span></code>, the same list that turns off the built-in <a class="reference internal" href="services.html"><span class="doc">services</span></a>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">disabled</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lasair</span>

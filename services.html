@@ -1,0 +1,530 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Services &#8212; skyportal 1.4.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/output_cells.css?v=dbcb4a85" />
+    <link rel="stylesheet" type="text/css" href="_static/erd.css?v=3f516bd9" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=bc4b15cc"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script defer="defer" src="_static/erd.js?v=8145b4cc"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'services';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Observability" href="observability.html" />
+    <link rel="prev" title="Deployment" href="deploy.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">skyportal 1.4.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="design.html">System Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mcp.html">MCP server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dev.html">Developer notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">Deployment</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Services</a></li>
+<li class="toctree-l1"><a class="reference internal" href="observability.html">Observability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="versioning.html">Versioning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_loader.html">Data loader</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_features.html">Adding new features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adding_comments_annotation_types.html">Adding a new type of Comment or Annotation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="styling.html">Styling components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Database Schema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migrations.html">Database migrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="query_analysis.html">Analyzing database queries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="permissions.html">Access controls</a></li>
+<li class="toctree-l1"><a class="reference internal" href="slack.html">Slack Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="followup.html">Follow-up triggering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mma.html">MMA Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gcn_crossmatch.html">Scanning GCN events for optical counterparts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="period.html">Periodic Timeseries Features</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spatial_catalog.html">Spatial Catalogs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_usage.html">Advanced usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="photometric_series.html">How to work with photometric series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="analysis.html">Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="external_services.html">External Services (Plugins)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="broker_plugins.html">Broker plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="broker_ingestion.html">Broker ingestion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">SkyPortal Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages.html">Front-end Pages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="thumbnails.html">Object Thumbnails</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/services.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Services</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disabling-services">Disabling services</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer-services">baselayer services</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#skyportal-services">SkyPortal services</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="services">
+<h1>Services<a class="headerlink" href="#services" title="Link to this heading">#</a></h1>
+<p>SkyPortal runs as a set of supervised background processes. On <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code>, every
+directory under <code class="docutils literal notranslate"><span class="pre">services.paths</span></code> (<code class="docutils literal notranslate"><span class="pre">baselayer/services/</span></code> and <code class="docutils literal notranslate"><span class="pre">services/</span></code>, plus any
+<a class="reference internal" href="external_services.html"><span class="doc">external service</span></a> you cloned) becomes a supervisor program.</p>
+<section id="disabling-services">
+<h2>Disabling services<a class="headerlink" href="#disabling-services" title="Link to this heading">#</a></h2>
+<p>Everything runs by default. Name what you do not want in your <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">disabled</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dask</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">slack</span>
+</pre></div>
+</div>
+<p>Or invert the choice, turning everything off and naming what to run:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">services</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">disabled</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;*&quot;</span>
+<span class="w">  </span><span class="nt">enabled</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+</pre></div>
+</div>
+<p>A name matching no service is ignored silently, so check the spelling below when
+a service you meant to disable keeps starting.</p>
+<p>Most services already sleep when the feature they serve is unconfigured, so
+disabling them saves a process and its database connections, not CPU. The ones
+worth listing are those that poll for something you do not use.</p>
+</section>
+<section id="baselayer-services">
+<h2>baselayer services<a class="headerlink" href="#baselayer-services" title="Link to this heading">#</a></h2>
+<p>| Service             | Role                                                                          | Disable                                    |
+| ——————- | —————————————————————————– | —————————————— |
+| <code class="docutils literal notranslate"><span class="pre">app</span></code>               | Tornado backends serving the API and the frontend, <code class="docutils literal notranslate"><span class="pre">server.processes</span></code> of them | Required                                   |
+| <code class="docutils literal notranslate"><span class="pre">nginx</span></code>             | Reverse proxy in front of the app processes                                   | Required                                   |
+| <code class="docutils literal notranslate"><span class="pre">migration_manager</span></code> | Applies alembic migrations at startup, then answers readiness checks          | Required                                   |
+| <code class="docutils literal notranslate"><span class="pre">message_proxy</span></code>     | ZeroMQ proxy carrying internal messages to <code class="docutils literal notranslate"><span class="pre">websocket_server</span></code>                 | Required                                   |
+| <code class="docutils literal notranslate"><span class="pre">websocket_server</span></code>  | Pushes live updates to open browsers                                          | Required                                   |
+| <code class="docutils literal notranslate"><span class="pre">status_server</span></code>     | Serves the “being provisioned” page until the app answers                     | Never, it only serves the boot page        |
+| <code class="docutils literal notranslate"><span class="pre">cron</span></code>              | Runs the jobs declared under <code class="docutils literal notranslate"><span class="pre">cron</span></code> in the config                             | No jobs declared                           |
+| <code class="docutils literal notranslate"><span class="pre">external_logging</span></code>  | Tails the logs and forwards them to a remote syslog                           | Not shipping logs                          |
+| <code class="docutils literal notranslate"><span class="pre">fake_oauth2</span></code>       | Stub Google OAuth provider for <code class="docutils literal notranslate"><span class="pre">server.auth.debug_login</span></code>                      | Real OAuth                                 |
+| <code class="docutils literal notranslate"><span class="pre">rspack</span></code>            | Watches the frontend sources and rebuilds the bundle                          | Production, where the bundle is built once |
+| <code class="docutils literal notranslate"><span class="pre">dask</span></code>              | Scheduler and four workers that nothing in SkyPortal connects to              | Always, disabled by default                |</p>
+</section>
+<section id="skyportal-services">
+<h2>SkyPortal services<a class="headerlink" href="#skyportal-services" title="Link to this heading">#</a></h2>
+<p>| Service                            | Role                                                                                    | Disable                                           |
+| ———————————- | ————————————————————————————— | ————————————————- |
+| <code class="docutils literal notranslate"><span class="pre">health_monitor</span></code>                   | Polls each app process and restarts the ones that stop answering                        | Supervising the processes yourself                |
+| <code class="docutils literal notranslate"><span class="pre">pgbouncer</span></code>                        | Bundled connection pooler                                                               | Already inert without <code class="docutils literal notranslate"><span class="pre">database.pooler.enabled</span></code>   |
+| <code class="docutils literal notranslate"><span class="pre">notification_queue</span></code>               | Delivers user notifications (email, SMS, Slack, push)                                   | Never, notifications stop being delivered         |
+| <code class="docutils literal notranslate"><span class="pre">facility_queue</span></code>                   | Submits and polls follow-up requests to observing facilities                            | No follow-up                                      |
+| <code class="docutils literal notranslate"><span class="pre">observation_plan_queue</span></code>           | Builds and submits the observation plans of the <a class="reference internal" href="mma.html"><span class="doc">MMA</span></a> workflow                     | No MMA                                            |
+| <code class="docutils literal notranslate"><span class="pre">recurring_apis</span></code>                   | Calls the <code class="docutils literal notranslate"><span class="pre">RecurringAPI</span></code> records users created                                          | Feature unused                                    |
+| <code class="docutils literal notranslate"><span class="pre">reminders</span></code>                        | Delivers the reminders users set on sources, GCN events and shifts                      | Feature unused                                    |
+| <code class="docutils literal notranslate"><span class="pre">thumbnail_queue</span></code>                  | Fetches SDSS/LS/PS1 cutouts for new objects                                             | No outbound network                               |
+| <code class="docutils literal notranslate"><span class="pre">tns_retrieval_queue</span></code>              | Matches your objects against TNS reports                                                | Idles without <code class="docutils literal notranslate"><span class="pre">app.tns.*</span></code>                         |
+| <code class="docutils literal notranslate"><span class="pre">sharing_service_submission_queue</span></code> | Submits sources to TNS and Hermes for the sharing services                              | No sharing service                                |
+| <code class="docutils literal notranslate"><span class="pre">jpl_sbident_queue</span></code>                | Answers “is this a known minor planet?” through JPL SBIdent                             | Feature unused                                    |
+| <code class="docutils literal notranslate"><span class="pre">gcn_service</span></code>                      | Consumes GCN Kafka notices                                                              | Idles without <code class="docutils literal notranslate"><span class="pre">gcn.client_id</span></code>/<code class="docutils literal notranslate"><span class="pre">gcn.client_secret</span></code> |
+| <code class="docutils literal notranslate"><span class="pre">gcn_crossmatch</span></code>                   | Crossmatches GCN alerts against sources, see <a class="reference internal" href="gcn_crossmatch.html"><span class="doc">GCN crossmatch</span></a>           | Idles without <code class="docutils literal notranslate"><span class="pre">gcn_crossmatch.enabled</span></code>            |
+| <code class="docutils literal notranslate"><span class="pre">ep_service</span></code>                       | Ingests candidates from the proprietary Einstein Probe feed                             | Idles without <code class="docutils literal notranslate"><span class="pre">einstein_probe.enabled</span></code>            |
+| <code class="docutils literal notranslate"><span class="pre">scout_service</span></code>                    | Consumes the JPL Scout NEO ToO Kafka stream                                             | Idles without <code class="docutils literal notranslate"><span class="pre">scout.*</span></code>                           |
+| <code class="docutils literal notranslate"><span class="pre">neofixer_service</span></code>                 | Polls NEOFixer target lists and annotates solar system objects                          | Idles without <code class="docutils literal notranslate"><span class="pre">neofixer.enabled</span></code>                  |
+| <code class="docutils literal notranslate"><span class="pre">tess_sector</span></code>                      | Loads TESS sector footprints and annotates coverage                                     | Idles without <code class="docutils literal notranslate"><span class="pre">tess.enabled</span></code>                      |
+| <code class="docutils literal notranslate"><span class="pre">broker_ingest</span></code>                    | Runs the ingestion loop of each active broker, see <a class="reference internal" href="broker_ingestion.html"><span class="doc">broker ingestion</span></a> | Idles without <code class="docutils literal notranslate"><span class="pre">brokers.ingest_enabled</span></code>            |
+| <code class="docutils literal notranslate"><span class="pre">hermes_skyportal_sync</span></code>            | Consumes the Hermes Kafka topic into sources and photometry                             | Idles without <code class="docutils literal notranslate"><span class="pre">app.hermes.sync.*</span></code>                 |
+| <code class="docutils literal notranslate"><span class="pre">pdl_service</span></code>                      | Watches a PDL receiver directory and ingests earthquake QuakeML                         | No PDL client feeding it                          |
+| <code class="docutils literal notranslate"><span class="pre">slack</span></code>                            | Proxies Slack notifications so the token stays server-side                              | No Slack integration                              |
+| <code class="docutils literal notranslate"><span class="pre">assistant</span></code>                        | Answers posted assistant messages through the MCP endpoint                              | No <code class="docutils literal notranslate"><span class="pre">app.assistant</span></code> configured                     |
+| <code class="docutils literal notranslate"><span class="pre">openai_analysis_service</span></code>          | <a class="reference internal" href="analysis.html"><span class="doc">Analysis</span></a> backend: LLM summaries and embeddings                              | No <code class="docutils literal notranslate"><span class="pre">AnalysisService</span></code> record points at it          |
+| <code class="docutils literal notranslate"><span class="pre">sn_analysis_service</span></code>              | <a class="reference internal" href="analysis.html"><span class="doc">Analysis</span></a> backend: supernova light curve fitting                             | No <code class="docutils literal notranslate"><span class="pre">AnalysisService</span></code> record points at it          |
+| <code class="docutils literal notranslate"><span class="pre">ngsf_analysis_service</span></code>            | <a class="reference internal" href="analysis.html"><span class="doc">Analysis</span></a> backend: NGSF spectral fitting                                     | No <code class="docutils literal notranslate"><span class="pre">AnalysisService</span></code> record points at it          |
+| <code class="docutils literal notranslate"><span class="pre">spectral_cube_analysis_service</span></code>   | <a class="reference internal" href="analysis.html"><span class="doc">Analysis</span></a> backend: spectral cube extraction                                  | No <code class="docutils literal notranslate"><span class="pre">AnalysisService</span></code> record points at it          |</p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="deploy.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Deployment</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="observability.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Observability</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disabling-services">Disabling services</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#baselayer-services">baselayer services</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#skyportal-services">SkyPortal services</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The SkyPortal Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026, The SkyPortal Team.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
