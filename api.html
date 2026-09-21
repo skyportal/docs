@@ -5381,6 +5381,53 @@
           }
         ]
       },
+      "patch": {
+        "summary": "Update a default follow-up request",
+        "description": "Update a default follow-up request in place, leaving the fields that were not supplied untouched.",
+        "tags": [
+          "default followup requests"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DefaultFollowupRequestPatchBody"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "default_followup_request_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
       "delete": {
         "summary": "Delete a default follow-up request",
         "description": "Delete a default follow-up request",
@@ -31470,10 +31517,12 @@
             "enum": [
               "lightcurve_fitting",
               "spectrum_fitting",
-              "meta_analysis"
+              "meta_analysis",
+              "gw_search",
+              "period_finding"
             ],
             "maxLength": 18,
-            "description": "Type of analysis. One of: 'lightcurve_fitting', 'spectrum_fitting', 'meta_analysis'",
+            "description": "Type of analysis. One of: 'lightcurve_fitting', 'spectrum_fitting', 'meta_analysis', 'gw_search', 'period_finding'",
             "type": "string"
           },
           "input_data_types": {
@@ -31657,10 +31706,12 @@
             "enum": [
               "lightcurve_fitting",
               "spectrum_fitting",
-              "meta_analysis"
+              "meta_analysis",
+              "gw_search",
+              "period_finding"
             ],
             "maxLength": 18,
-            "description": "Type of analysis. One of: 'lightcurve_fitting', 'spectrum_fitting', 'meta_analysis'",
+            "description": "Type of analysis. One of: 'lightcurve_fitting', 'spectrum_fitting', 'meta_analysis', 'gw_search', 'period_finding'",
             "type": "string"
           },
           "input_data_types": {
@@ -86170,6 +86221,156 @@
         "title": "DefaultFollowupRequestPostResponse",
         "type": "object"
       },
+      "DefaultFollowupRequestPatchBody": {
+        "additionalProperties": false,
+        "description": "Fields to change on a default follow-up request; all are optional.\n\nConstraint keys are merged into the stored constraints rather than\nreplacing them, so changing one leaves the rest intact.",
+        "properties": {
+          "payload": {
+            "default": null,
+            "description": "Follow-up request payload.",
+            "title": "Payload",
+            "additionalProperties": true,
+            "type": "object",
+            "nullable": true
+          },
+          "allocation_id": {
+            "default": null,
+            "description": "Follow-up request allocation ID.",
+            "title": "Allocation Id",
+            "type": "integer",
+            "nullable": true
+          },
+          "target_group_ids": {
+            "default": null,
+            "description": "IDs of groups the results are shared with. Replaces the existing set.",
+            "title": "Target Group Ids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
+          },
+          "default_followup_name": {
+            "default": null,
+            "description": "Name of the default follow-up request.",
+            "title": "Default Followup Name",
+            "type": "string",
+            "nullable": true
+          },
+          "source_filter": {
+            "default": null,
+            "description": "Which sources this applies to. An absent name matches every object in the group.",
+            "title": "Source Filter",
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true
+          },
+          "not_if_duplicates": {
+            "default": null,
+            "title": "Not If Duplicates",
+            "type": "boolean",
+            "nullable": true
+          },
+          "source_group_ids": {
+            "default": null,
+            "title": "Source Group Ids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
+          },
+          "ignore_source_group_ids": {
+            "default": null,
+            "title": "Ignore Source Group Ids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
+          },
+          "not_if_classified": {
+            "default": null,
+            "title": "Not If Classified",
+            "type": "boolean",
+            "nullable": true
+          },
+          "not_if_spectra_exist": {
+            "default": null,
+            "title": "Not If Spectra Exist",
+            "type": "boolean",
+            "nullable": true
+          },
+          "not_if_tns_classified": {
+            "default": null,
+            "title": "Not If Tns Classified",
+            "type": "boolean",
+            "nullable": true
+          },
+          "not_if_tns_reported": {
+            "default": null,
+            "title": "Not If Tns Reported",
+            "type": "number",
+            "nullable": true
+          },
+          "not_if_assignment_exists": {
+            "default": null,
+            "title": "Not If Assignment Exists",
+            "type": "boolean",
+            "nullable": true
+          },
+          "ignore_allocation_ids": {
+            "default": null,
+            "title": "Ignore Allocation Ids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
+          },
+          "radius": {
+            "default": null,
+            "description": "Radius (arcsec) used when checking constraints.",
+            "title": "Radius",
+            "type": "number",
+            "nullable": true
+          },
+          "priority_order": {
+            "default": null,
+            "description": "One of 'asc' or 'desc'.",
+            "title": "Priority Order",
+            "type": "string",
+            "nullable": true
+          },
+          "validity_days": {
+            "default": null,
+            "title": "Validity Days",
+            "type": "integer",
+            "nullable": true
+          },
+          "comment": {
+            "default": null,
+            "title": "Comment",
+            "type": "string",
+            "nullable": true
+          },
+          "implements_update": {
+            "default": null,
+            "title": "Implements Update",
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "title": "DefaultFollowupRequestPatchBody",
+        "type": "object"
+      },
       "DefaultGcnTagPostBody": {
         "additionalProperties": false,
         "properties": {
@@ -95675,6 +95876,16 @@
             ],
             "title": "Status",
             "type": "string"
+          },
+          "streamIDs": {
+            "default": null,
+            "description": "IDs of streams to grant the applicant. The endorser must have each of them, and they must cover every stream the chosen groups read. Omitted, the groups' own streams are granted.",
+            "title": "Streamids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
           },
           "groupIDs": {
             "default": null,
