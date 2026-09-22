@@ -27188,6 +27188,168 @@
         }
       }
     },
+    "/api/assistant_queries/{query_id}": {
+      "get": {
+        "summary": "Retrieve one shared assistant query",
+        "tags": [
+          "assistant"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "query_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete a shared assistant query",
+        "description": "Only the query's owner may delete it.",
+        "tags": [
+          "assistant"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "query_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/assistant_queries": {
+      "get": {
+        "summary": "List the shared assistant queries visible to the user",
+        "description": "Queries tied to a group the requesting user belongs to.",
+        "tags": [
+          "assistant"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a shared assistant query",
+        "description": "The creator must be a member of the query's group.",
+        "tags": [
+          "assistant"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssistantQueryPostBody"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/assistant_queries/{query_id}/subscription": {
+      "post": {
+        "summary": "Subscribe the requesting user to a query's notifications",
+        "description": "Allowed only for a query the user can see (in its group).",
+        "tags": [
+          "assistant"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "query_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Unsubscribe the requesting user from a query's notifications",
+        "tags": [
+          "assistant"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "query_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
     "/api/taxonomy/{taxonomy_id}": {
       "get": {
         "summary": "Get a taxonomy",
@@ -32580,6 +32742,12 @@
             "description": "ID of that resource, if any.",
             "nullable": true
           },
+          "notify": {
+            "description": "Who to notify with the answer, as {'users': [ids], 'groups': [ids]}. Used by scheduled/triggered runs; a person chatting reads it in the panel.",
+            "nullable": true,
+            "type": "object",
+            "additionalProperties": true
+          },
           "id": {
             "type": "integer",
             "description": "Unique object identifier."
@@ -32674,6 +32842,12 @@
             "type": "string",
             "description": "ID of that resource, if any.",
             "nullable": true
+          },
+          "notify": {
+            "description": "Who to notify with the answer, as {'users': [ids], 'groups': [ids]}. Used by scheduled/triggered runs; a person chatting reads it in the panel.",
+            "nullable": true,
+            "type": "object",
+            "additionalProperties": true
           }
         },
         "required": [
@@ -32719,6 +32893,423 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AssistantMessageNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "AssistantQuery": {
+        "type": "object",
+        "properties": {
+          "owner": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "User who created the query.",
+            "readOnly": true
+          },
+          "group": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Group"
+              }
+            ],
+            "description": "Group the query is tied to.",
+            "readOnly": true
+          },
+          "subscriptions": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/AssistantQuerySubscription"
+            }
+          },
+          "owner_id": {
+            "type": "integer",
+            "description": "User who created the query."
+          },
+          "group_id": {
+            "type": "integer",
+            "description": "Group the query is tied to; its members can see and subscribe."
+          },
+          "name": {
+            "type": "string",
+            "description": "Short name shown in the list."
+          },
+          "description": {
+            "type": "string",
+            "description": "What the query does.",
+            "nullable": true
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Instruction run by the assistant."
+          },
+          "context_type": {
+            "type": "string",
+            "description": "Resource the query runs on (currently 'source')."
+          },
+          "analysis_service_match": {
+            "type": "string",
+            "description": "Substring of an analysis service name; a completed matching analysis triggers the query. NULL for a query that is not analysis-triggered.",
+            "nullable": true
+          },
+          "notify_groups": {
+            "description": "Group ids always notified with the answer, besides the subscribers.",
+            "nullable": true,
+            "type": "object",
+            "additionalProperties": true
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Whether the query runs."
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Run but notify no one (validation mode)."
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "group_id",
+          "name",
+          "owner_id",
+          "prompt"
+        ],
+        "additionalProperties": false
+      },
+      "SingleAssistantQuery": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/AssistantQuery"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfAssistantQuerys": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssistantQuery"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "AssistantQueryNoID": {
+        "type": "object",
+        "properties": {
+          "owner": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "User who created the query.",
+            "readOnly": true
+          },
+          "group": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Group"
+              }
+            ],
+            "description": "Group the query is tied to.",
+            "readOnly": true
+          },
+          "subscriptions": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/AssistantQuerySubscription"
+            }
+          },
+          "group_id": {
+            "type": "integer",
+            "description": "Group the query is tied to; its members can see and subscribe."
+          },
+          "name": {
+            "type": "string",
+            "description": "Short name shown in the list."
+          },
+          "description": {
+            "type": "string",
+            "description": "What the query does.",
+            "nullable": true
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Instruction run by the assistant."
+          },
+          "context_type": {
+            "type": "string",
+            "description": "Resource the query runs on (currently 'source')."
+          },
+          "analysis_service_match": {
+            "type": "string",
+            "description": "Substring of an analysis service name; a completed matching analysis triggers the query. NULL for a query that is not analysis-triggered.",
+            "nullable": true
+          },
+          "notify_groups": {
+            "description": "Group ids always notified with the answer, besides the subscribers.",
+            "nullable": true,
+            "type": "object",
+            "additionalProperties": true
+          },
+          "active": {
+            "type": "boolean",
+            "description": "Whether the query runs."
+          },
+          "dry_run": {
+            "type": "boolean",
+            "description": "Run but notify no one (validation mode)."
+          }
+        },
+        "required": [
+          "group_id",
+          "name",
+          "prompt"
+        ],
+        "additionalProperties": false
+      },
+      "SingleAssistantQueryNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/AssistantQueryNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfAssistantQueryNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssistantQueryNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "AssistantQuerySubscription": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AssistantQuery"
+              }
+            ],
+            "description": "The query subscribed to.",
+            "readOnly": true
+          },
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The subscribing user.",
+            "readOnly": true
+          },
+          "query_id": {
+            "type": "integer",
+            "description": "The query subscribed to."
+          },
+          "user_id": {
+            "type": "integer",
+            "description": "The subscribing user."
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "query_id",
+          "user_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleAssistantQuerySubscription": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/AssistantQuerySubscription"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfAssistantQuerySubscriptions": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssistantQuerySubscription"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "AssistantQuerySubscriptionNoID": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/AssistantQuery"
+              }
+            ],
+            "description": "The query subscribed to.",
+            "readOnly": true
+          },
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The subscribing user.",
+            "readOnly": true
+          },
+          "query_id": {
+            "type": "integer",
+            "description": "The query subscribed to."
+          },
+          "user_id": {
+            "type": "integer",
+            "description": "The subscribing user."
+          }
+        },
+        "required": [
+          "query_id",
+          "user_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleAssistantQuerySubscriptionNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/AssistantQuerySubscriptionNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfAssistantQuerySubscriptionNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssistantQuerySubscriptionNoID"
             }
           }
         },
@@ -94734,12 +95325,90 @@
             "title": "Context Id",
             "type": "string",
             "nullable": true
+          },
+          "notify": {
+            "default": null,
+            "description": "Who to notify with the answer once it is ready, as {\"users\": [ids], \"groups\": [ids]}. The author is always notified; named recipients must share a group with the author.",
+            "title": "Notify",
+            "additionalProperties": true,
+            "type": "object",
+            "nullable": true
           }
         },
         "required": [
           "text"
         ],
         "title": "AssistantMessagePostBody",
+        "type": "object"
+      },
+      "AssistantQueryPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for creating a shared assistant query.",
+        "properties": {
+          "name": {
+            "description": "Short name shown in the query list.",
+            "title": "Name",
+            "type": "string"
+          },
+          "group_id": {
+            "description": "Group the query is tied to; its members subscribe.",
+            "title": "Group Id",
+            "type": "integer"
+          },
+          "prompt": {
+            "description": "Instruction the assistant runs.",
+            "title": "Prompt",
+            "type": "string"
+          },
+          "description": {
+            "default": null,
+            "description": "What the query does.",
+            "title": "Description",
+            "type": "string",
+            "nullable": true
+          },
+          "analysis_service_match": {
+            "default": null,
+            "description": "Substring of an analysis service name; a completed matching analysis triggers the query.",
+            "title": "Analysis Service Match",
+            "type": "string",
+            "nullable": true
+          },
+          "notify_groups": {
+            "default": null,
+            "description": "Group ids always notified, besides the subscribers.",
+            "title": "Notify Groups",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
+          },
+          "context_type": {
+            "default": "source",
+            "description": "Resource the query runs on.",
+            "title": "Context Type",
+            "type": "string"
+          },
+          "active": {
+            "default": true,
+            "description": "Whether the query runs.",
+            "title": "Active",
+            "type": "boolean"
+          },
+          "dry_run": {
+            "default": false,
+            "description": "Run but notify no one.",
+            "title": "Dry Run",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "group_id",
+          "prompt"
+        ],
+        "title": "AssistantQueryPostBody",
         "type": "object"
       },
       "TaxonomyPostBody": {
