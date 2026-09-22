@@ -381,10 +381,12 @@ providers to the end of the tuple to keep the enum stable.</p></li>
 provider overrode. Handlers gate on it, and the frontend can show/hide
 features accordingly.</p></li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">Broker</span></code> model</strong> (<code class="docutils literal notranslate"><span class="pre">skyportal/models/broker.py</span></code>), one configured broker:
-<code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">broker_classname</span></code> (which provider), <code class="docutils literal notranslate"><span class="pre">active</span></code>, and encrypted
+<code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">broker_classname</span></code> (which provider), <code class="docutils literal notranslate"><span class="pre">active</span></code>, <code class="docutils literal notranslate"><span class="pre">ingest</span></code>, and encrypted
 <code class="docutils literal notranslate"><span class="pre">altdata</span></code> (endpoints/credentials, mirroring <code class="docutils literal notranslate"><span class="pre">Allocation.altdata</span></code>). Only system
 admins may create/update/delete brokers, and <code class="docutils literal notranslate"><span class="pre">altdata</span></code> is redacted from
-non-admins.</p></li>
+non-admins. <code class="docutils literal notranslate"><span class="pre">active</span></code> makes the connection usable on demand; <code class="docutils literal notranslate"><span class="pre">ingest</span></code> is what
+subscribes the instance to its stream, and the two are set separately because
+a broker worth searching by hand is not necessarily one to consume in full.</p></li>
 <li><p><strong>Site defaults</strong>, <code class="docutils literal notranslate"><span class="pre">default_alert_search</span></code>, <code class="docutils literal notranslate"><span class="pre">default_crossmatch</span></code> and
 <code class="docutils literal notranslate"><span class="pre">default_photometry</span></code> name the broker the source page’s “Search alerts” button
 opens, the one its cross-matches (cone searches) run against, and the one
@@ -430,8 +432,8 @@ running its filters and pulling in matching alerts, is driven by a background
 service and gated by config.</p>
 <section id="enable-the-ingestion-service">
 <h3>1. Enable the ingestion service<a class="headerlink" href="#enable-the-ingestion-service" title="Link to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">broker_ingest</span></code> service (<code class="docutils literal notranslate"><span class="pre">services/broker_ingest/</span></code>) runs one task per active
-broker whose provider implements <code class="docutils literal notranslate"><span class="pre">run_ingestion</span></code>. It is <strong>off by default</strong>; enable
+<p>The <code class="docutils literal notranslate"><span class="pre">broker_ingest</span></code> service (<code class="docutils literal notranslate"><span class="pre">services/broker_ingest/</span></code>) runs one task per broker
+that is <code class="docutils literal notranslate"><span class="pre">active</span></code>, has <code class="docutils literal notranslate"><span class="pre">ingest</span></code> set, and whose provider implements <code class="docutils literal notranslate"><span class="pre">run_ingestion</span></code>. It is <strong>off by default</strong>; enable
 it in your config and <strong>restart</strong> the app:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">brokers</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">ingest_enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>

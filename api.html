@@ -33514,6 +33514,10 @@
             "type": "boolean",
             "description": "Whether this broker is enabled."
           },
+          "ingest": {
+            "type": "boolean",
+            "description": "Whether the ingestion service consumes this broker's stream. Separate from `active`, which only makes the connection usable on demand."
+          },
           "default_alert_search": {
             "type": "boolean",
             "description": "Whether this broker is the one the source page's alert search targets."
@@ -33798,6 +33802,10 @@
           "active": {
             "type": "boolean",
             "description": "Whether this broker is enabled."
+          },
+          "ingest": {
+            "type": "boolean",
+            "description": "Whether the ingestion service consumes this broker's stream. Separate from `active`, which only makes the connection usable on demand."
           },
           "default_alert_search": {
             "type": "boolean",
@@ -85866,6 +85874,12 @@
             "title": "Active",
             "type": "boolean"
           },
+          "ingest": {
+            "default": false,
+            "description": "Have the ingestion service consume this broker's stream.",
+            "title": "Ingest",
+            "type": "boolean"
+          },
           "default_alert_search": {
             "default": false,
             "description": "Make this the broker the source page searches alerts on.",
@@ -85903,6 +85917,13 @@
             "default": null,
             "description": "Whether the broker connection is active.",
             "title": "Active",
+            "type": "boolean",
+            "nullable": true
+          },
+          "ingest": {
+            "default": null,
+            "description": "Have the ingestion service consume this broker's stream.",
+            "title": "Ingest",
             "type": "boolean",
             "nullable": true
           },
