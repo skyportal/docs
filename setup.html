@@ -724,11 +724,12 @@ of the SkyPortal commands with the FLAGS environment variable set:</p>
 </div>
 <section id="authentication">
 <h3>Authentication<a class="headerlink" href="#authentication" title="Link to this heading">#</a></h3>
-<p>By default, the server allows anyone to log in (even if it presents a
-login screen). If you are running a public-facing instance of
-SkyPortal, you should enable multi-user login by adding Google
-credentials to the <code class="docutils literal notranslate"><span class="pre">server:auth</span></code> section of the configuration file and
-setting <code class="docutils literal notranslate"><span class="pre">debug_login</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>Signing in goes through an OAuth provider: add Google credentials to the
+<code class="docutils literal notranslate"><span class="pre">server:auth</span></code> section of the configuration file, or configure another
+provider under <code class="docutils literal notranslate"><span class="pre">server:auth:backends</span></code> (see <code class="docutils literal notranslate"><span class="pre">baselayer/config.yaml.defaults</span></code>).</p>
+<p>For local development, setting <code class="docutils literal notranslate"><span class="pre">debug_login</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> signs everyone in as a
+single test user, with no provider at all. Never set it on an instance others
+can reach: it lets anyone log in as that user.</p>
 </section>
 <section id="account-applications">
 <h3>Account applications<a class="headerlink" href="#account-applications" title="Link to this heading">#</a></h3>
