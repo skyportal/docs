@@ -338,6 +338,8 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#authentication">Authentication</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gcn-events">GCN events</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broker-filters">Broker filters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-the-assistant-may-call">What the assistant may call</a></li>
 </ul>
             </nav>
         </div>
@@ -410,6 +412,61 @@ producer may store machine-readable values parsed out of an event’s prose.
 <code class="docutils literal notranslate"><span class="pre">origin</span></code> names the producer and the payload is that producer’s own shape, so
 filter by <code class="docutils literal notranslate"><span class="pre">origin</span></code> when you care which pipeline it came from.</p>
 </section>
+<section id="broker-filters">
+<h2>Broker filters<a class="headerlink" href="#broker-filters" title="Link to this heading">#</a></h2>
+<p>Nine tools cover a filter from nothing to running on the live alert stream, so
+an assistant can build one from a description of what the user wants to catch.</p>
+<p>| Tool                             | Purpose                                                              |
+| ——————————– | ——————————————————————– |
+| <code class="docutils literal notranslate"><span class="pre">get_filter_targets</span></code>             | The groups, streams and filter-capable brokers the token can use     |
+| <code class="docutils literal notranslate"><span class="pre">get_alert_schema</span></code>               | Fields a pipeline may reference, as dotted paths with their types    |
+| <code class="docutils literal notranslate"><span class="pre">post_filter</span></code>                    | Create the filter on a group and stream                              |
+| <code class="docutils literal notranslate"><span class="pre">run_broker_filter</span></code>              | Preview: a count, or the alerts themselves when <code class="docutils literal notranslate"><span class="pre">sort_by</span></code> is given   |
+| <code class="docutils literal notranslate"><span class="pre">post_broker_filter_version</span></code>     | Add a compiled pipeline as a new version                             |
+| <code class="docutils literal notranslate"><span class="pre">validate_broker_filter_version</span></code> | Ask the broker whether a version is fit to run                       |
+| <code class="docutils literal notranslate"><span class="pre">activate_broker_filter_version</span></code> | Make a version the one the broker runs                               |
+| <code class="docutils literal notranslate"><span class="pre">get_broker_filter</span></code>              | Read a filter: its versions, which is active, its auto-save settings |
+| <code class="docutils literal notranslate"><span class="pre">diff_broker_filter_versions</span></code>    | Unified diff of two versions’ pipelines                              |</p>
+<p>Three things about this sequence are not visible from the schemas, so they are
+also stated in the server’s <code class="docutils literal notranslate"><span class="pre">instructions</span></code>:</p>
+<ul class="simple">
+<li><p><strong>The stream bounds what the filter can see.</strong> A cut on data the stream does
+not carry passes nothing, and looks identical to a cut nothing satisfies.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">get_alert_schema</span></code> is not optional.</strong> A pipeline that references a path the
+survey does not have matches no alerts and reports no error, which is the
+same outcome as a filter that is merely too tight. The tool flattens the
+broker’s Avro schema to dotted paths, marking nullable fields with <code class="docutils literal notranslate"><span class="pre">?</span></code> and
+arrays with <code class="docutils literal notranslate"><span class="pre">[]</span></code>, and takes <code class="docutils literal notranslate"><span class="pre">search</span></code> or <code class="docutils literal notranslate"><span class="pre">prefix</span></code> because the full ZTF schema
+is about a thousand paths.</p></li>
+<li><p><strong>Activation is gated on validation.</strong> Posting a version validates it and
+<code class="docutils literal notranslate"><span class="pre">post_broker_filter_version</span></code> returns that verdict; activating a version with
+no passing verdict is refused.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">get_filter_targets</span></code> passes on only the broker fields a filter needs.
+<code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/brokers</span></code> returns each broker’s <code class="docutils literal notranslate"><span class="pre">altdata</span></code>, which holds its Kafka
+credentials, and none of that reaches the model.</p>
+</section>
+<section id="what-the-assistant-may-call">
+<h2>What the assistant may call<a class="headerlink" href="#what-the-assistant-may-call" title="Link to this heading">#</a></h2>
+<p>The assistant service runs the tool loop itself, and does not offer the model
+every tool the endpoint exposes. Read-only tools are always offered. A tool that
+writes is offered only on the page whose subject it writes to: the five filter
+write tools in <code class="docutils literal notranslate"><span class="pre">FILTER_WRITE_TOOLS</span></code> are offered when the user asks from a
+filter page, and nowhere else. <code class="docutils literal notranslate"><span class="pre">call_tool</span></code> then refuses anything that was not
+offered, so the selection is enforced twice.</p>
+<p>The reason is that most of what the assistant reads was written by someone else
+– GCN circulars, comments, annotations – and a model can be talked into a
+write by the text of what it read. Scoping the write tools to the page keeps
+the reachable damage to the one filter the user is already editing, and every
+call still runs under that user’s own token with the usual permission checks.
+Activating a version remains gated on a passing validation.</p>
+<p>Each answer records what it ran. <code class="docutils literal notranslate"><span class="pre">AssistantMessage.tool_calls</span></code> holds the calls
+in order as <code class="docutils literal notranslate"><span class="pre">[{name,</span> <span class="pre">arguments,</span> <span class="pre">ok,</span> <span class="pre">summary}]</span></code>, and <code class="docutils literal notranslate"><span class="pre">AssistantMessage.proposal</span></code>
+holds a filter pipeline the assistant arrived at, read back out of that trace.
+A pipeline it never previewed is not offered: the preview is the evidence that
+it matches anything, and offering one without it invites saving a filter that
+passes nothing. The filter page renders both under the answer.</p>
+</section>
 </section>
 
 
@@ -461,6 +518,8 @@ filter by <code class="docutils literal notranslate"><span class="pre">origin</s
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#authentication">Authentication</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gcn-events">GCN events</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broker-filters">Broker filters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-the-assistant-may-call">What the assistant may call</a></li>
 </ul>
   </nav></div>
 

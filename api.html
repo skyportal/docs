@@ -32799,6 +32799,18 @@
             "type": "object",
             "additionalProperties": true
           },
+          "tool_calls": {
+            "description": "The tools the assistant ran to reach this answer, in order, as [{name, arguments, ok, summary}]. Shown so the reader can see what the answer rests on rather than taking the prose for it.",
+            "nullable": true,
+            "type": "object",
+            "additionalProperties": true
+          },
+          "proposal": {
+            "description": "A filter pipeline the assistant arrived at, with whatever preview it ran, so the page can offer it for saving. Read out of tool_calls.",
+            "nullable": true,
+            "type": "object",
+            "additionalProperties": true
+          },
           "id": {
             "type": "integer",
             "description": "Unique object identifier."
@@ -32896,6 +32908,18 @@
           },
           "notify": {
             "description": "Who to notify with the answer, as {'users': [ids], 'groups': [ids]}. Used by scheduled/triggered runs; a person chatting reads it in the panel.",
+            "nullable": true,
+            "type": "object",
+            "additionalProperties": true
+          },
+          "tool_calls": {
+            "description": "The tools the assistant ran to reach this answer, in order, as [{name, arguments, ok, summary}]. Shown so the reader can see what the answer rests on rather than taking the prose for it.",
+            "nullable": true,
+            "type": "object",
+            "additionalProperties": true
+          },
+          "proposal": {
+            "description": "A filter pipeline the assistant arrived at, with whatever preview it ran, so the page can offer it for saving. Read out of tool_calls.",
             "nullable": true,
             "type": "object",
             "additionalProperties": true
