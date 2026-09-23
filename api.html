@@ -3028,6 +3028,76 @@
         ]
       }
     },
+    "/api/brokers/photometry/{photometry_id}/alert": {
+      "get": {
+        "summary": "Get the alert a photometry point came from",
+        "description": "Return the alert id, survey and broker for the alert a photometry point was ingested from, enough to fetch its cutouts. Forced photometry has no alert behind it and reports that.",
+        "tags": [
+          "brokers",
+          "photometry"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "photometry_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/brokers/photometry/alert": {
+      "get": {
+        "summary": "Get the alert a photometry point came from",
+        "description": "Return the alert id, survey and broker for the alert a photometry point was ingested from, enough to fetch its cutouts. Forced photometry has no alert behind it and reports that.",
+        "tags": [
+          "brokers",
+          "photometry"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/brokers/photometry/{object_id}": {
       "get": {
         "summary": "Display photometry for an object via the default broker",
