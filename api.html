@@ -4193,6 +4193,29 @@
           },
           {
             "in": "query",
+            "name": "maxCredibleLevel",
+            "required": false,
+            "description": "Keep only candidates at or inside this credible level of the event's localization, so 0.9 keeps the 90 percent region. A candidate near 1 sits in the tail, which for a wide localization can be tens of degrees from the event.",
+            "schema": {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "minDistpsnr",
+            "required": false,
+            "description": "Keep only candidates at least this many arcseconds from the nearest PS1 source, to drop those sitting on a catalogued object. A candidate with no PS1 match at all is kept.",
+            "schema": {
+              "minimum": 0,
+              "type": "number",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
             "name": "minNdethist",
             "required": false,
             "description": "Keep only candidates with at least this many detections in their alert history.",
@@ -27191,6 +27214,34 @@
     "/api/assistant_queries/{query_id}": {
       "get": {
         "summary": "Retrieve one shared assistant query",
+        "tags": [
+          "assistant"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "query_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "patch": {
+        "summary": "Update a shared assistant query",
+        "description": "Only the query's owner may edit it; only the sent fields change.",
         "tags": [
           "assistant"
         ],
