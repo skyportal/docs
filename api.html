@@ -8928,6 +8928,84 @@
         ]
       }
     },
+    "/api/moving_object/track": {
+      "post": {
+        "summary": "Measure a linked moving-object track",
+        "description": "Measure each detection of a track in its difference cutout and report\nwhat decides whether the track is one real object: per-epoch\nsignificance and centroid offset, how the position angle turns along\nthe arc, the residual about a smooth motion model, and whether the\npixels order the bands the way the photometry does.\n\nMeasuring needs real pixel values, so this requires a broker that\nreturns FITS. A broker serving rendered PNGs is refused rather than\nmeasured, because a display stretch has already destroyed the flux\nscale.\n",
+        "tags": [
+          "moving objects"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MovingObjectTrackPostBody"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/moving_object/track/{track_id}": {
+      "get": {
+        "summary": "Get a linked track and its detections",
+        "description": "Fetch one track from the broker by its id, with the detections that\nmake it up. The track stores candids only, so the positions are\nfetched alongside them: a vetting view needs jd/ra/dec/mag/band.\n\nDetections the requester's streams do not cover are omitted and\ncounted, so a partially visible track cannot pass for a short one.\n",
+        "tags": [
+          "moving objects"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "track_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
     "/api/earthquake/status": {
       "get": {
         "summary": "Retrieve all Earthquake status tags",
@@ -88270,6 +88348,116 @@
           }
         },
         "title": "MovingObjectFollowupPostBody",
+        "type": "object"
+      },
+      "TrackDetection": {
+        "additionalProperties": false,
+        "description": "One detection in a linked track, as the linker reports it.",
+        "properties": {
+          "candid": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "description": "Alert id the cutouts are keyed on.",
+            "title": "Candid"
+          },
+          "jd": {
+            "description": "Julian date of the detection.",
+            "title": "Jd",
+            "type": "number"
+          },
+          "ra": {
+            "description": "Right ascension in degrees.",
+            "title": "Ra",
+            "type": "number"
+          },
+          "dec": {
+            "description": "Declination in degrees.",
+            "title": "Dec",
+            "type": "number"
+          },
+          "mag": {
+            "default": null,
+            "description": "Reported magnitude.",
+            "title": "Mag",
+            "type": "number",
+            "nullable": true
+          },
+          "band": {
+            "default": null,
+            "description": "Filter the detection is in.",
+            "title": "Band",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "candid",
+          "jd",
+          "ra",
+          "dec"
+        ],
+        "title": "TrackDetection",
+        "type": "object"
+      },
+      "MovingObjectTrackPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for measuring a linked track from its cutouts.",
+        "properties": {
+          "detections": {
+            "description": "The track's detections. Not keyed on obj_id: a moving object gets a new one almost every epoch, which is the whole problem.",
+            "items": {
+              "$ref": "#/components/schemas/TrackDetection"
+            },
+            "title": "Detections",
+            "type": "array"
+          },
+          "broker_id": {
+            "description": "Broker to fetch the cutouts from.",
+            "title": "Broker Id",
+            "type": "integer"
+          },
+          "survey": {
+            "default": "ZTF",
+            "description": "Survey the alerts are from.",
+            "title": "Survey",
+            "type": "string"
+          },
+          "cutout": {
+            "default": "cutoutDifference",
+            "description": "Which cutout to measure. Only the difference image is meaningful for a moving object.",
+            "title": "Cutout",
+            "type": "string"
+          },
+          "include_images": {
+            "default": true,
+            "description": "Render each epoch as a PNG stretched to its own background. Off returns the numbers alone.",
+            "title": "Include Images",
+            "type": "boolean"
+          },
+          "check_known": {
+            "default": false,
+            "description": "Ask JPL whether the track is an already-known small body. Costs a few queries, and reports a negative only when a control observation proves the query path still works.",
+            "title": "Check Known",
+            "type": "boolean"
+          },
+          "measure_cutouts": {
+            "default": true,
+            "description": "Measure each epoch's pixels. Off returns the geometry alone, which needs no cutouts and so no broker call: a scanning page can show it for every candidate, where measuring cannot.",
+            "title": "Measure Cutouts",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "detections",
+          "broker_id"
+        ],
+        "title": "MovingObjectTrackPostBody",
         "type": "object"
       },
       "EarthquakePostBody": {
