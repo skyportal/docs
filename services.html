@@ -358,8 +358,8 @@ directory under <code class="docutils literal notranslate"><span class="pre">ser
 <p>Everything runs by default. Name what you do not want in your <code class="docutils literal notranslate"><span class="pre">config.yaml</span></code>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">services</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">disabled</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dask</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">slack</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">thumbnail_queue</span>
 </pre></div>
 </div>
 <p>Or invert the choice, turning everything off and naming what to run:</p>
@@ -389,8 +389,7 @@ worth listing are those that poll for something you do not use.</p>
 | <code class="docutils literal notranslate"><span class="pre">cron</span></code>              | Runs the jobs declared under <code class="docutils literal notranslate"><span class="pre">cron</span></code> in the config                             | No jobs declared                           |
 | <code class="docutils literal notranslate"><span class="pre">external_logging</span></code>  | Tails the logs and forwards them to a remote syslog                           | Not shipping logs                          |
 | <code class="docutils literal notranslate"><span class="pre">fake_oauth2</span></code>       | Stub Google OAuth provider for <code class="docutils literal notranslate"><span class="pre">server.auth.debug_login</span></code>                      | Real OAuth                                 |
-| <code class="docutils literal notranslate"><span class="pre">rspack</span></code>            | Watches the frontend sources and rebuilds the bundle                          | Production, where the bundle is built once |
-| <code class="docutils literal notranslate"><span class="pre">dask</span></code>              | Scheduler and four workers that nothing in SkyPortal connects to              | Always, disabled by default                |</p>
+| <code class="docutils literal notranslate"><span class="pre">rspack</span></code>            | Watches the frontend sources and rebuilds the bundle                          | Production, where the bundle is built once |</p>
 </section>
 <section id="skyportal-services">
 <h2>SkyPortal services<a class="headerlink" href="#skyportal-services" title="Link to this heading">#</a></h2>
