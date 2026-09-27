@@ -21355,6 +21355,26 @@
         }
       }
     },
+    "/api/source_interests": {
+      "get": {
+        "summary": "Retrieve all source interests",
+        "description": "Retrieve every interest registered on the sources the user can access.",
+        "tags": [
+          "sources"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/sources/{obj_id}/interests": {
       "get": {
         "summary": "Retrieve the interests registered on a source",
