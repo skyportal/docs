@@ -27156,6 +27156,155 @@
         ]
       }
     },
+    "/api/deployments": {
+      "get": {
+        "summary": "Get deployments and instance information",
+        "description": "Running version, deployment history with the commits each deployment\nbrought, and (for system admins) details on the host, database and\nservices.\n",
+        "tags": [
+          "system info"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/DeploymentsResponse"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/feedback/{feedback_id}": {
+      "get": {
+        "summary": "Retrieve messages left to the admins",
+        "description": "The requesting user's own messages, or every message for system admins.",
+        "tags": [
+          "system info"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/FeedbackListResponse"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "feedback_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "patch": {
+        "summary": "Mark a message left to the admins as handled, or reopen it",
+        "tags": [
+          "system info"
+        ],
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeedbackPatchBody"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "feedback_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/feedback": {
+      "post": {
+        "summary": "Leave a message to the admins",
+        "description": "Report a bug, request a change or say anything else. System admins are notified.",
+        "tags": [
+          "system info"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeedbackPostBody"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/feedback/{feedback_id}/replies": {
+      "post": {
+        "summary": "Reply to a message left to the admins",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>The author of the message is notified.",
+        "tags": [
+          "system info"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeedbackReplyPostBody"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "feedback_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
     "/api/config": {
       "get": {
         "summary": "Retrieve instance config",
@@ -39013,6 +39162,138 @@
         ],
         "additionalProperties": false
       },
+      "Deployment": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "SkyPortal version string"
+          },
+          "commit": {
+            "description": "Git log entry of the deployed commit (see `utils.gitlog.parse_gitlog`)",
+            "nullable": true,
+            "type": "object",
+            "additionalProperties": true
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "version"
+        ],
+        "additionalProperties": false
+      },
+      "SingleDeployment": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Deployment"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfDeployments": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Deployment"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "DeploymentNoID": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "SkyPortal version string"
+          },
+          "commit": {
+            "description": "Git log entry of the deployed commit (see `utils.gitlog.parse_gitlog`)",
+            "nullable": true,
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "required": [
+          "version"
+        ],
+        "additionalProperties": false
+      },
+      "SingleDeploymentNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DeploymentNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfDeploymentNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeploymentNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
       "EarthquakeEvent": {
         "type": "object",
         "properties": {
@@ -41006,6 +41287,362 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/FacilityTransactionRequestNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "Feedback": {
+        "type": "object",
+        "properties": {
+          "author": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User who wrote the message",
+            "readOnly": true
+          },
+          "replies": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/FeedbackReply"
+            }
+          },
+          "author_id": {
+            "type": "integer",
+            "description": "ID of the User who wrote the message"
+          },
+          "category": {
+            "type": "string",
+            "description": "Kind of message: bug, change or other"
+          },
+          "text": {
+            "type": "string",
+            "description": "The message"
+          },
+          "resolved": {
+            "type": "boolean",
+            "description": "Whether an admin has handled the message"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "author_id",
+          "category",
+          "text"
+        ],
+        "additionalProperties": false
+      },
+      "SingleFeedback": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Feedback"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfFeedbacks": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Feedback"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "FeedbackNoID": {
+        "type": "object",
+        "properties": {
+          "author": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User who wrote the message",
+            "readOnly": true
+          },
+          "replies": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/FeedbackReply"
+            }
+          },
+          "author_id": {
+            "type": "integer",
+            "description": "ID of the User who wrote the message"
+          },
+          "category": {
+            "type": "string",
+            "description": "Kind of message: bug, change or other"
+          },
+          "text": {
+            "type": "string",
+            "description": "The message"
+          },
+          "resolved": {
+            "type": "boolean",
+            "description": "Whether an admin has handled the message"
+          }
+        },
+        "required": [
+          "author_id",
+          "category",
+          "text"
+        ],
+        "additionalProperties": false
+      },
+      "SingleFeedbackNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/FeedbackNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfFeedbackNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FeedbackNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "FeedbackReply": {
+        "type": "object",
+        "properties": {
+          "feedback": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Feedback"
+              }
+            ],
+            "description": "The message replied to",
+            "readOnly": true
+          },
+          "author": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The admin who replied",
+            "readOnly": true
+          },
+          "feedback_id": {
+            "type": "integer",
+            "description": "ID of the message replied to"
+          },
+          "author_id": {
+            "type": "integer",
+            "description": "ID of the admin who replied"
+          },
+          "text": {
+            "type": "string",
+            "description": "The reply"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "author_id",
+          "feedback_id",
+          "text"
+        ],
+        "additionalProperties": false
+      },
+      "SingleFeedbackReply": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/FeedbackReply"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfFeedbackReplys": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FeedbackReply"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "FeedbackReplyNoID": {
+        "type": "object",
+        "properties": {
+          "feedback": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Feedback"
+              }
+            ],
+            "description": "The message replied to",
+            "readOnly": true
+          },
+          "author": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The admin who replied",
+            "readOnly": true
+          },
+          "feedback_id": {
+            "type": "integer",
+            "description": "ID of the message replied to"
+          },
+          "author_id": {
+            "type": "integer",
+            "description": "ID of the admin who replied"
+          },
+          "text": {
+            "type": "string",
+            "description": "The reply"
+          }
+        },
+        "required": [
+          "author_id",
+          "feedback_id",
+          "text"
+        ],
+        "additionalProperties": false
+      },
+      "SingleFeedbackReplyNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/FeedbackReplyNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfFeedbackReplyNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FeedbackReplyNoID"
             }
           }
         },
@@ -95652,6 +96289,562 @@
           }
         },
         "title": "SuperObjPatchBody",
+        "type": "object"
+      },
+      "DeploymentResponse": {
+        "additionalProperties": false,
+        "description": "One version of the code that started serving the instance.",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string"
+          },
+          "commit": {
+            "default": null,
+            "$ref": "#/components/schemas/GitLogEntryResponse",
+            "nullable": true
+          },
+          "created_at": {
+            "description": "When this version started (UTC)",
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "changes": {
+            "default": null,
+            "description": "Commits brought over the previous deployment, newest first (capped); null when either commit is not in the running git log",
+            "title": "Changes",
+            "items": {
+              "$ref": "#/components/schemas/GitLogEntryResponse"
+            },
+            "type": "array",
+            "nullable": true
+          },
+          "n_changes": {
+            "default": null,
+            "title": "N Changes",
+            "type": "integer",
+            "nullable": true
+          },
+          "rollback": {
+            "default": false,
+            "description": "Whether this deployed an older commit",
+            "title": "Rollback",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "created_at"
+        ],
+        "title": "DeploymentResponse",
+        "type": "object"
+      },
+      "GitLogEntryResponse": {
+        "additionalProperties": false,
+        "description": "One parsed commit from the deployed SkyPortal git log.",
+        "properties": {
+          "time": {
+            "default": null,
+            "title": "Time",
+            "type": "string",
+            "nullable": true
+          },
+          "sha": {
+            "default": null,
+            "title": "Sha",
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "default": null,
+            "title": "Email",
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "default": null,
+            "title": "Description",
+            "type": "string",
+            "nullable": true
+          },
+          "pr_nr": {
+            "default": null,
+            "title": "Pr Nr",
+            "type": "string",
+            "nullable": true
+          },
+          "pr_url": {
+            "default": null,
+            "title": "Pr Url",
+            "type": "string",
+            "nullable": true
+          },
+          "commit_url": {
+            "default": null,
+            "title": "Commit Url",
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "default": null,
+            "title": "Name",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "title": "GitLogEntryResponse",
+        "type": "object"
+      },
+      "HostResourcesResponse": {
+        "additionalProperties": false,
+        "description": "CPU, memory and disk of the instance host (the node, in a container).",
+        "properties": {
+          "cpu_count": {
+            "default": null,
+            "title": "Cpu Count",
+            "type": "integer",
+            "nullable": true
+          },
+          "load_average": {
+            "default": null,
+            "title": "Load Average",
+            "items": {
+              "type": "number"
+            },
+            "type": "array",
+            "nullable": true
+          },
+          "memory_total": {
+            "default": null,
+            "title": "Memory Total",
+            "type": "integer",
+            "nullable": true
+          },
+          "memory_available": {
+            "default": null,
+            "title": "Memory Available",
+            "type": "integer",
+            "nullable": true
+          },
+          "disk_total": {
+            "default": null,
+            "title": "Disk Total",
+            "type": "integer",
+            "nullable": true
+          },
+          "disk_free": {
+            "default": null,
+            "title": "Disk Free",
+            "type": "integer",
+            "nullable": true
+          }
+        },
+        "title": "HostResourcesResponse",
+        "type": "object"
+      },
+      "InstanceSystemResponse": {
+        "additionalProperties": false,
+        "description": "Host, database and service details, only returned to system admins.",
+        "properties": {
+          "hostname": {
+            "title": "Hostname",
+            "type": "string"
+          },
+          "platform": {
+            "title": "Platform",
+            "type": "string"
+          },
+          "python_version": {
+            "title": "Python Version",
+            "type": "string"
+          },
+          "packages": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Packages",
+            "type": "object"
+          },
+          "supervisor_available": {
+            "default": false,
+            "title": "Supervisor Available",
+            "type": "boolean"
+          },
+          "services": {
+            "items": {
+              "$ref": "#/components/schemas/ServiceResponse"
+            },
+            "title": "Services",
+            "type": "array"
+          },
+          "resources": {
+            "default": null,
+            "$ref": "#/components/schemas/HostResourcesResponse",
+            "nullable": true
+          },
+          "database_name": {
+            "default": null,
+            "title": "Database Name",
+            "type": "string",
+            "nullable": true
+          },
+          "postgres_version": {
+            "default": null,
+            "title": "Postgres Version",
+            "type": "string",
+            "nullable": true
+          },
+          "database_size": {
+            "default": null,
+            "title": "Database Size",
+            "type": "string",
+            "nullable": true
+          },
+          "migration": {
+            "default": null,
+            "title": "Migration",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "hostname",
+          "platform",
+          "python_version"
+        ],
+        "title": "InstanceSystemResponse",
+        "type": "object"
+      },
+      "ServiceResponse": {
+        "additionalProperties": false,
+        "description": "A service of the instance and the processes supervisor runs for it.",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "status": {
+            "description": "`disabled` in `services.disabled`; `not_configured` when enabled but supervisor runs no program for it, as its template only defines one when the config calls for the service",
+            "enum": [
+              "enabled",
+              "disabled",
+              "not_configured"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "processes": {
+            "items": {
+              "$ref": "#/components/schemas/SupervisorProcessResponse"
+            },
+            "title": "Processes",
+            "type": "array"
+          }
+        },
+        "required": [
+          "name",
+          "status"
+        ],
+        "title": "ServiceResponse",
+        "type": "object"
+      },
+      "SupervisorProcessResponse": {
+        "additionalProperties": false,
+        "description": "A process run by supervisor on the instance host.",
+        "properties": {
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "group": {
+            "title": "Group",
+            "type": "string"
+          },
+          "state": {
+            "title": "State",
+            "type": "string"
+          },
+          "pid": {
+            "default": null,
+            "title": "Pid",
+            "type": "integer",
+            "nullable": true
+          },
+          "memory": {
+            "default": null,
+            "description": "Resident memory of the process and its children, in bytes",
+            "title": "Memory",
+            "type": "integer",
+            "nullable": true
+          },
+          "started_at": {
+            "default": null,
+            "title": "Started At",
+            "format": "date-time",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "name",
+          "group",
+          "state"
+        ],
+        "title": "SupervisorProcessResponse",
+        "type": "object"
+      },
+      "DeploymentsResponse": {
+        "additionalProperties": false,
+        "description": "Running version and deployment history of the instance.",
+        "properties": {
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string"
+          },
+          "commit": {
+            "default": null,
+            "$ref": "#/components/schemas/GitLogEntryResponse",
+            "nullable": true
+          },
+          "started_at": {
+            "description": "When this app process started (UTC)",
+            "format": "date-time",
+            "title": "Started At",
+            "type": "string"
+          },
+          "deployed_at": {
+            "default": null,
+            "title": "Deployed At",
+            "format": "date-time",
+            "type": "string",
+            "nullable": true
+          },
+          "deployments": {
+            "items": {
+              "$ref": "#/components/schemas/DeploymentResponse"
+            },
+            "title": "Deployments",
+            "type": "array"
+          },
+          "system": {
+            "default": null,
+            "$ref": "#/components/schemas/InstanceSystemResponse",
+            "nullable": true
+          }
+        },
+        "required": [
+          "title",
+          "version",
+          "started_at"
+        ],
+        "title": "DeploymentsResponse",
+        "type": "object"
+      },
+      "FeedbackAuthorResponse": {
+        "additionalProperties": false,
+        "description": "The user who wrote a message or a reply.",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "username": {
+            "title": "Username",
+            "type": "string"
+          },
+          "first_name": {
+            "default": null,
+            "title": "First Name",
+            "type": "string",
+            "nullable": true
+          },
+          "last_name": {
+            "default": null,
+            "title": "Last Name",
+            "type": "string",
+            "nullable": true
+          },
+          "gravatar_url": {
+            "default": null,
+            "title": "Gravatar Url",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "username"
+        ],
+        "title": "FeedbackAuthorResponse",
+        "type": "object"
+      },
+      "FeedbackReplyResponse": {
+        "additionalProperties": false,
+        "description": "An admin's reply to a message.",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "author": {
+            "$ref": "#/components/schemas/FeedbackAuthorResponse"
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "created_at",
+          "author"
+        ],
+        "title": "FeedbackReplyResponse",
+        "type": "object"
+      },
+      "FeedbackResponse": {
+        "additionalProperties": false,
+        "description": "A message left to the admins, with their replies.",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "category": {
+            "enum": [
+              "bug",
+              "change",
+              "other"
+            ],
+            "title": "Category",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          },
+          "resolved": {
+            "title": "Resolved",
+            "type": "boolean"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "author": {
+            "$ref": "#/components/schemas/FeedbackAuthorResponse"
+          },
+          "replies": {
+            "items": {
+              "$ref": "#/components/schemas/FeedbackReplyResponse"
+            },
+            "title": "Replies",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "category",
+          "text",
+          "resolved",
+          "created_at",
+          "author"
+        ],
+        "title": "FeedbackResponse",
+        "type": "object"
+      },
+      "FeedbackListResponse": {
+        "additionalProperties": false,
+        "description": "The messages the requesting user can read: their own, or all for admins.",
+        "properties": {
+          "messages": {
+            "items": {
+              "$ref": "#/components/schemas/FeedbackResponse"
+            },
+            "title": "Messages",
+            "type": "array"
+          }
+        },
+        "title": "FeedbackListResponse",
+        "type": "object"
+      },
+      "FeedbackPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for leaving a message to the admins.",
+        "properties": {
+          "category": {
+            "description": "bug report, change request, or other",
+            "enum": [
+              "bug",
+              "change",
+              "other"
+            ],
+            "title": "Category",
+            "type": "string"
+          },
+          "text": {
+            "description": "The message",
+            "maxLength": 10000,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "category",
+          "text"
+        ],
+        "title": "FeedbackPostBody",
+        "type": "object"
+      },
+      "FeedbackPatchBody": {
+        "additionalProperties": false,
+        "description": "Request body for marking a message as handled.",
+        "properties": {
+          "resolved": {
+            "title": "Resolved",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "resolved"
+        ],
+        "title": "FeedbackPatchBody",
+        "type": "object"
+      },
+      "FeedbackReplyPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for an admin replying to a message.",
+        "properties": {
+          "text": {
+            "description": "The reply",
+            "maxLength": 10000,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "title": "FeedbackReplyPostBody",
         "type": "object"
       },
       "AssistantConversationPatchBody": {
