@@ -75926,6 +75926,10 @@
             "type": "boolean",
             "description": "Whether to enable publishing to TNS or not."
           },
+          "enable_sharing_with_trove": {
+            "type": "boolean",
+            "description": "Whether to enable publishing to TROVE or not."
+          },
           "tns_bot_name": {
             "type": "string",
             "description": "Name of the TNS bot.",
@@ -75951,6 +75955,10 @@
             "nullable": true
           },
           "_mpc_altdata": {
+            "type": "string",
+            "nullable": true
+          },
+          "_trove_altdata": {
             "type": "string",
             "nullable": true
           },
@@ -76205,6 +76213,9 @@
             "type": "boolean"
           },
           "auto_share_to_mpc": {
+            "type": "boolean"
+          },
+          "auto_share_to_trove": {
             "type": "boolean"
           },
           "auto_sharing_allow_bots": {
@@ -76464,6 +76475,9 @@
           "auto_share_to_mpc": {
             "type": "boolean"
           },
+          "auto_share_to_trove": {
+            "type": "boolean"
+          },
           "auto_sharing_allow_bots": {
             "type": "boolean"
           }
@@ -76583,6 +76597,10 @@
             "type": "boolean",
             "description": "Whether to enable publishing to TNS or not."
           },
+          "enable_sharing_with_trove": {
+            "type": "boolean",
+            "description": "Whether to enable publishing to TROVE or not."
+          },
           "tns_bot_name": {
             "type": "string",
             "description": "Name of the TNS bot.",
@@ -76608,6 +76626,10 @@
             "nullable": true
           },
           "_mpc_altdata": {
+            "type": "string",
+            "nullable": true
+          },
+          "_trove_altdata": {
             "type": "string",
             "nullable": true
           }
@@ -76774,6 +76796,27 @@
           },
           "hermes_response": {
             "description": "Serialized HTTP response from Hermes.",
+            "nullable": true,
+            "type": "object",
+            "additionalProperties": true
+          },
+          "publish_to_trove": {
+            "type": "boolean",
+            "description": "Whether to publish to TROVE or not."
+          },
+          "trove_status": {
+            "type": "string",
+            "description": "Status of the TROVE submission.",
+            "nullable": true
+          },
+          "trove_response": {
+            "description": "Serialized HTTP response from TROVE.",
+            "nullable": true,
+            "type": "object",
+            "additionalProperties": true
+          },
+          "trove_payload": {
+            "description": "Payload published to TROVE.",
             "nullable": true,
             "type": "object",
             "additionalProperties": true
@@ -76982,6 +77025,27 @@
           },
           "hermes_response": {
             "description": "Serialized HTTP response from Hermes.",
+            "nullable": true,
+            "type": "object",
+            "additionalProperties": true
+          },
+          "publish_to_trove": {
+            "type": "boolean",
+            "description": "Whether to publish to TROVE or not."
+          },
+          "trove_status": {
+            "type": "string",
+            "description": "Status of the TROVE submission.",
+            "nullable": true
+          },
+          "trove_response": {
+            "description": "Serialized HTTP response from TROVE.",
+            "nullable": true,
+            "type": "object",
+            "additionalProperties": true
+          },
+          "trove_payload": {
+            "description": "Payload published to TROVE.",
             "nullable": true,
             "type": "object",
             "additionalProperties": true
@@ -97651,6 +97715,13 @@
             "title": "Publish To Hermes",
             "type": "boolean",
             "nullable": true
+          },
+          "publish_to_trove": {
+            "default": false,
+            "description": "Flag to indicate if the submission should be published to TROVE",
+            "title": "Publish To Trove",
+            "type": "boolean",
+            "nullable": true
           }
         },
         "title": "SharingServiceSubmissionPostBody",
@@ -97734,6 +97805,20 @@
             "default": null,
             "description": "Whether to automatically publish to Hermes",
             "title": "Auto Share To Hermes",
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true
+          },
+          "auto_share_to_trove": {
+            "default": null,
+            "description": "Whether to automatically publish to TROVE",
+            "title": "Auto Share To Trove",
             "anyOf": [
               {
                 "type": "boolean"
@@ -97969,6 +98054,13 @@
             "type": "boolean",
             "nullable": true
           },
+          "enable_sharing_with_trove": {
+            "default": null,
+            "description": "Whether to enable publishing to TROVE or not.",
+            "title": "Enable Sharing With Trove",
+            "type": "boolean",
+            "nullable": true
+          },
           "enable_sharing_with_tns": {
             "default": null,
             "description": "Whether to enable publishing to TNS or not.",
@@ -98001,6 +98093,21 @@
             "default": null,
             "description": "TNS altdata (e.g. the API key), as a JSON object or string.",
             "title": "Tns Altdata",
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true
+          },
+          "_trove_altdata": {
+            "default": null,
+            "description": "TROVE altdata (the account username and password), as a JSON object or string.",
+            "title": "Trove Altdata",
             "anyOf": [
               {
                 "additionalProperties": true,
