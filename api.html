@@ -2363,6 +2363,34 @@
               "type": "string",
               "nullable": true
             }
+          },
+          {
+            "in": "query",
+            "name": "sortBy",
+            "required": false,
+            "description": "Field to sort by. Options are 'name' (default) or 'active' (the broker-side state, filters the broker can't report last).",
+            "schema": {
+              "default": "name",
+              "enum": [
+                "name",
+                "active"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "sortOrder",
+            "required": false,
+            "description": "Sort order - 'asc' for ascending (default) or 'desc' for descending.",
+            "schema": {
+              "default": "asc",
+              "enum": [
+                "asc",
+                "desc"
+              ],
+              "type": "string"
+            }
           }
         ]
       }
