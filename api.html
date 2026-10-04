@@ -82765,6 +82765,12 @@
             "type": "string",
             "description": "ID of the thumbnail's obj."
           },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC time of the alert observation the cutout comes from; NULL for archival thumbnails and when unknown.",
+            "nullable": true
+          },
           "is_grayscale": {
             "type": "boolean",
             "description": "Whether the thumbnail is (mostly) grayscale. NULL until a remote (public_url-only) thumbnail is classified by the thumbnail_queue service.",
@@ -82883,6 +82889,12 @@
           "obj_id": {
             "type": "string",
             "description": "ID of the thumbnail's obj."
+          },
+          "observed_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "UTC time of the alert observation the cutout comes from; NULL for archival thumbnails and when unknown.",
+            "nullable": true
           },
           "is_grayscale": {
             "type": "boolean",
