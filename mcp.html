@@ -339,6 +339,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gcn-events">GCN events</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broker-filters">Broker filters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broker-data">Broker data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-the-assistant-may-call">What the assistant may call</a></li>
 </ul>
             </nav>
@@ -414,19 +415,20 @@ filter by <code class="docutils literal notranslate"><span class="pre">origin</s
 </section>
 <section id="broker-filters">
 <h2>Broker filters<a class="headerlink" href="#broker-filters" title="Link to this heading">#</a></h2>
-<p>Nine tools cover a filter from nothing to running on the live alert stream, so
+<p>Ten tools cover a filter from nothing to running on the live alert stream, so
 an assistant can build one from a description of what the user wants to catch.</p>
-<p>| Tool                             | Purpose                                                              |
-| ——————————– | ——————————————————————– |
-| <code class="docutils literal notranslate"><span class="pre">get_filter_targets</span></code>             | The groups, streams and filter-capable brokers the token can use     |
-| <code class="docutils literal notranslate"><span class="pre">get_alert_schema</span></code>               | Fields a pipeline may reference, as dotted paths with their types    |
-| <code class="docutils literal notranslate"><span class="pre">post_filter</span></code>                    | Create the filter on a group and stream                              |
-| <code class="docutils literal notranslate"><span class="pre">run_broker_filter</span></code>              | Preview: a count, or the alerts themselves when <code class="docutils literal notranslate"><span class="pre">sort_by</span></code> is given   |
-| <code class="docutils literal notranslate"><span class="pre">post_broker_filter_version</span></code>     | Add a compiled pipeline as a new version                             |
-| <code class="docutils literal notranslate"><span class="pre">validate_broker_filter_version</span></code> | Ask the broker whether a version is fit to run                       |
-| <code class="docutils literal notranslate"><span class="pre">activate_broker_filter_version</span></code> | Make a version the one the broker runs                               |
-| <code class="docutils literal notranslate"><span class="pre">get_broker_filter</span></code>              | Read a filter: its versions, which is active, its auto-save settings |
-| <code class="docutils literal notranslate"><span class="pre">diff_broker_filter_versions</span></code>    | Unified diff of two versions’ pipelines                              |</p>
+<p>| Tool                              | Purpose                                                              |
+| ——————————— | ——————————————————————– |
+| <code class="docutils literal notranslate"><span class="pre">get_filter_targets</span></code>              | The groups, streams and filter-capable brokers the token can use     |
+| <code class="docutils literal notranslate"><span class="pre">get_counterpart_search_defaults</span></code> | ZTF quality cuts and window to start from, as an editable pipeline   |
+| <code class="docutils literal notranslate"><span class="pre">get_alert_schema</span></code>                | Fields a pipeline may reference, as dotted paths with their types    |
+| <code class="docutils literal notranslate"><span class="pre">post_filter</span></code>                     | Create the filter on a group and stream                              |
+| <code class="docutils literal notranslate"><span class="pre">run_broker_filter</span></code>               | Preview: a count, or the alerts themselves when <code class="docutils literal notranslate"><span class="pre">sort_by</span></code> is given   |
+| <code class="docutils literal notranslate"><span class="pre">post_broker_filter_version</span></code>      | Add a compiled pipeline as a new version                             |
+| <code class="docutils literal notranslate"><span class="pre">validate_broker_filter_version</span></code>  | Ask the broker whether a version is fit to run                       |
+| <code class="docutils literal notranslate"><span class="pre">activate_broker_filter_version</span></code>  | Make a version the one the broker runs                               |
+| <code class="docutils literal notranslate"><span class="pre">get_broker_filter</span></code>               | Read a filter: its versions, which is active, its auto-save settings |
+| <code class="docutils literal notranslate"><span class="pre">diff_broker_filter_versions</span></code>     | Unified diff of two versions’ pipelines                              |</p>
 <p>Three things about this sequence are not visible from the schemas, so they are
 also stated in the server’s <code class="docutils literal notranslate"><span class="pre">instructions</span></code>:</p>
 <ul class="simple">
@@ -441,10 +443,49 @@ is about a thousand paths.</p></li>
 <li><p><strong>Activation is gated on validation.</strong> Posting a version validates it and
 <code class="docutils literal notranslate"><span class="pre">post_broker_filter_version</span></code> returns that verdict; activating a version with
 no passing verdict is refused.</p></li>
+<li><p><strong>There is a starting point, so nobody writes cuts from nothing.</strong>
+<code class="docutils literal notranslate"><span class="pre">get_counterpart_search_defaults</span></code> returns the cuts and window the GCN
+crossmatch service runs with, deep-copied so editing the result does not
+touch what the service uses. It suggests <code class="docutils literal notranslate"><span class="pre">sort_order:</span> <span class="pre">Ascending</span></code>, which
+keeps the alerts nearest the trigger, where the service’s own default keeps
+the newest.</p></li>
 </ul>
 <p><code class="docutils literal notranslate"><span class="pre">get_filter_targets</span></code> passes on only the broker fields a filter needs.
 <code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/brokers</span></code> returns each broker’s <code class="docutils literal notranslate"><span class="pre">altdata</span></code>, which holds its Kafka
 credentials, and none of that reaches the model.</p>
+</section>
+<section id="broker-data">
+<h2>Broker data<a class="headerlink" href="#broker-data" title="Link to this heading">#</a></h2>
+<p>Four tools read the alert stream itself, rather than the filters that run on
+it: what a survey saw at a position, what an object did over time, and what
+catalogs say is already there.</p>
+<p>| Tool                          | Purpose                                                         |
+| —————————– | ————————————————————— |
+| <code class="docutils literal notranslate"><span class="pre">list_brokers</span></code>                | Broker ids and the operations each one supports                 |
+| <code class="docutils literal notranslate"><span class="pre">get_broker_alerts</span></code>           | Alerts by object, by position and time window, or one by candid |
+| <code class="docutils literal notranslate"><span class="pre">get_broker_alert_photometry</span></code> | An object’s alert photometry as a light curve                   |
+| <code class="docutils literal notranslate"><span class="pre">crossmatch_broker_catalogs</span></code>  | A position against the broker’s reference catalogs              |</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">broker_id</span></code> is not guessable, and capabilities differ.</strong> <code class="docutils literal notranslate"><span class="pre">list_brokers</span></code>
+reports both, and strips <code class="docutils literal notranslate"><span class="pre">altdata</span></code> for the reason given above. A broker
+answers only the operations it lists.</p></li>
+<li><p><strong>Alerts come back trimmed.</strong> A ZTF packet carries three cutouts and the
+object’s whole previous-detection history; <code class="docutils literal notranslate"><span class="pre">get_broker_alerts</span></code> returns the
+photometry and vetting fields with the history reduced to a count, and
+<code class="docutils literal notranslate"><span class="pre">full=true</span></code> for the whole packet when that is really wanted.</p></li>
+<li><p><strong>Bound a positional search in time.</strong> Without <code class="docutils literal notranslate"><span class="pre">jd_start</span></code> and <code class="docutils literal notranslate"><span class="pre">jd_end</span></code> a cone
+search returns every alert ever recorded at that position, which for a
+well-observed field is large and rarely what was meant. <code class="docutils literal notranslate"><span class="pre">convert_time</span></code> turns
+a date into the JD these take.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">crossmatch_broker_catalogs</span></code> searches catalogs, not alerts.</strong> It answers
+whether a candidate sits on a known star or galaxy, which is a different
+question from what the survey detected there.</p></li>
+<li><p><strong>A GCN region is not a cone.</strong> <code class="docutils literal notranslate"><span class="pre">get_broker_alerts</span></code> searches a cone in time;
+an event’s credible region reaches the broker only through
+<code class="docutils literal notranslate"><span class="pre">run_broker_filter</span></code> with <code class="docutils literal notranslate"><span class="pre">dateobs</span></code>, which the preview endpoint turns into a
+MOC. Searching an old GRB means that tool, with
+<code class="docutils literal notranslate"><span class="pre">get_counterpart_search_defaults</span></code> for the pipeline to start from.</p></li>
+</ul>
 </section>
 <section id="what-the-assistant-may-call">
 <h2>What the assistant may call<a class="headerlink" href="#what-the-assistant-may-call" title="Link to this heading">#</a></h2>
@@ -519,6 +560,7 @@ passes nothing. The filter page renders both under the answer.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gcn-events">GCN events</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broker-filters">Broker filters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#broker-data">Broker data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-the-assistant-may-call">What the assistant may call</a></li>
 </ul>
   </nav></div>
