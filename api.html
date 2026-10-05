@@ -2667,7 +2667,7 @@
       },
       "patch": {
         "summary": "Update a broker filter",
-        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Activate a version (``active``/``active_fid``, forwarded to the broker) or toggle autoAnnotate/autoSave/autoFollowup flags.",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Activate a version (``active``/``active_fid``, forwarded to the broker), comment on a version (``fid``/``comment``) or toggle autoAnnotate/autoSave/autoFollowup flags.",
         "tags": [
           "brokers"
         ],
@@ -86696,6 +86696,19 @@
             "title": "Autosave",
             "type": "boolean",
             "nullable": true
+          },
+          "comment": {
+            "default": null,
+            "description": "Why this version was made, shown in the filter's version history.",
+            "title": "Comment",
+            "type": "string",
+            "nullable": true
+          },
+          "set_as_active": {
+            "default": false,
+            "description": "Make the new version the active one. On an active filter, the switch happens once that version passes validation, and the current version keeps running until then.",
+            "title": "Set As Active",
+            "type": "boolean"
           }
         },
         "title": "BrokerFiltersPostBody",
@@ -86724,6 +86737,27 @@
                 "type": "string"
               }
             ],
+            "nullable": true
+          },
+          "previous_active_fid": {
+            "default": null,
+            "description": "Active version before this change, as the client last saw it. Read from the broker when omitted.",
+            "title": "Previous Active Fid",
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true
+          },
+          "previous_active": {
+            "default": null,
+            "description": "Whether the filter was active before this change, as the client last saw it. Read from the broker when omitted.",
+            "title": "Previous Active",
+            "type": "boolean",
             "nullable": true
           },
           "autoAnnotate": {
@@ -86804,6 +86838,20 @@
                 "type": "string"
               }
             ],
+            "nullable": true
+          },
+          "fid": {
+            "default": null,
+            "description": "Filter version (fid) that `comment` applies to.",
+            "title": "Fid",
+            "type": "string",
+            "nullable": true
+          },
+          "comment": {
+            "default": null,
+            "description": "Comment on version `fid`, shown in the filter's version history. Null or empty string clears it.",
+            "title": "Comment",
+            "type": "string",
             "nullable": true
           }
         },
