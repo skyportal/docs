@@ -387,10 +387,13 @@ back to the SkyPortal filter.</p></li>
 </section>
 <section id="names-do-not-have-to-match">
 <h2>Names do not have to match<a class="headerlink" href="#names-do-not-have-to-match" title="Link to this heading">#</a></h2>
-<p>Three names are involved and they are set independently.</p>
+<p>Four names are involved and they are set independently.</p>
 <ul class="simple">
 <li><p>The <strong>survey</strong> name is what the alert carries, and it is the key into
 <code class="docutils literal notranslate"><span class="pre">ZP_PER_SURVEY</span></code>.</p></li>
+<li><p>The <strong>instrument</strong> is the one named after the survey, unless
+<code class="docutils literal notranslate"><span class="pre">INSTRUMENT_PER_SURVEY</span></code> in <code class="docutils literal notranslate"><span class="pre">skyportal/utils/survey.py</span></code> maps it to another
+(<code class="docutils literal notranslate"><span class="pre">DECAM</span></code> is stored under <code class="docutils literal notranslate"><span class="pre">DECam</span></code>).</p></li>
 <li><p>The <strong>stream</strong> name is a SkyPortal label for the same data.</p></li>
 <li><p>The <strong>topic</strong> is the broker’s, usually <code class="docutils literal notranslate"><span class="pre">&lt;survey&gt;_alerts_results</span></code>.</p></li>
 </ul>
