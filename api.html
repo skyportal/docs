@@ -5089,6 +5089,16 @@
               "type": "string",
               "nullable": true
             }
+          },
+          {
+            "in": "query",
+            "name": "origin",
+            "required": false,
+            "description": "Comma separated string of origins. If provided, only classifications from these origins are returned, matched without regard to case. A classification with no origin is never returned when this is given.",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
           }
         ]
       }
@@ -5293,6 +5303,16 @@
             "name": "endDate",
             "required": false,
             "description": "Arrow-parseable date string (e.g. 2020-01-01). If provided, filter by created_at <= endDate",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "origin",
+            "required": false,
+            "description": "Comma separated string of origins. If provided, only classifications from these origins are returned, matched without regard to case. A classification with no origin is never returned when this is given.",
             "schema": {
               "type": "string",
               "nullable": true
