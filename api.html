@@ -34071,6 +34071,11 @@
             "type": "object",
             "additionalProperties": true
           },
+          "topic_status": {
+            "description": "Per topic, what the ingestion loop last saw of it: whether its alerts can be ingested and, when they cannot, why. A topic absent from here has had nothing consumed from it yet. Shown on the pages of the filters the topic feeds.",
+            "type": "object",
+            "additionalProperties": true
+          },
           "_altdata": {
             "type": "string",
             "description": "The credentials themselves: the upstream API token and any stream username/password. Never serialized back to a client.",
@@ -34159,6 +34164,11 @@
           },
           "topic_filter_ids": {
             "description": "Maps a topic to the skyportal Filter ids its objects become candidates for, mirroring the broker-level routing.",
+            "type": "object",
+            "additionalProperties": true
+          },
+          "topic_status": {
+            "description": "Per topic, what the ingestion loop last saw of it: whether its alerts can be ingested and, when they cannot, why. A topic absent from here has had nothing consumed from it yet. Shown on the pages of the filters the topic feeds.",
             "type": "object",
             "additionalProperties": true
           },
