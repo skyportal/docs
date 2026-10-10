@@ -27354,6 +27354,464 @@
         ]
       }
     },
+    "/api/discussions/{discussion_id}": {
+      "get": {
+        "summary": "Retrieve your discussions",
+        "description": "The direct messages and group discussions the requesting user takes part in, latest activity first, with their unread message count.\n",
+        "tags": [
+          "discussions"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/DiscussionListResponse"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "discussion_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "patch": {
+        "summary": "Rename a discussion",
+        "tags": [
+          "discussions"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiscussionPatchBody"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "discussion_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete a discussion",
+        "description": "Delete a discussion and all its messages. Restricted to whoever started it.",
+        "tags": [
+          "discussions"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "discussion_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/discussions": {
+      "post": {
+        "summary": "Start a discussion",
+        "description": "Start a group discussion with chosen users, or with every member of a group you belong to, or a direct message with one user (the one you already have with them is returned if it exists).\n",
+        "tags": [
+          "discussions"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiscussionPostBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/DiscussionPostResponse"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/discussions/{discussion_id}/messages": {
+      "get": {
+        "summary": "Read a discussion",
+        "description": "The latest messages of a discussion, oldest first. Pass the ID of the oldest one received as `before` to get the ones preceding it.\n",
+        "tags": [
+          "discussions"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "discussion_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "before",
+            "required": false,
+            "description": "Only messages older than this message ID.",
+            "schema": {
+              "type": "integer",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/DiscussionMessageListResponse"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Send a message",
+        "description": "Post a message in a discussion. Participants are notified according to their preferences, unless they muted the discussion.\n",
+        "tags": [
+          "discussions"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiscussionMessagePostBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/DiscussionPostResponse"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "discussion_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/discussions/{discussion_id}/messages/{message_id}": {
+      "patch": {
+        "summary": "Edit a message",
+        "description": "Restricted to the author of the message.",
+        "tags": [
+          "discussions"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiscussionMessagePostBody"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "discussion_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "message_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete a message",
+        "description": "Restricted to the author of the message.",
+        "tags": [
+          "discussions"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "discussion_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "message_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/discussions/{discussion_id}/members": {
+      "get": {
+        "summary": "List the members of a discussion",
+        "description": "The chosen members, or every member of the discussion's group.",
+        "tags": [
+          "discussions"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/DiscussionMemberListResponse"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "discussion_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "post": {
+        "summary": "Add users to a discussion",
+        "description": "Any member can add users to a discussion between chosen users.",
+        "tags": [
+          "discussions"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiscussionMembersPostBody"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "discussion_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/discussions/{discussion_id}/members/{user_id}": {
+      "delete": {
+        "summary": "Remove a user from a discussion",
+        "description": "Leave a discussion between chosen users, or remove someone from one you started. The discussion is deleted when its last member leaves.\n",
+        "tags": [
+          "discussions"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "discussion_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/discussions/{discussion_id}/membership": {
+      "patch": {
+        "summary": "Mark a discussion as read, or mute it",
+        "tags": [
+          "discussions"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiscussionMembershipPatchBody"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "discussion_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/comment_threads": {
+      "get": {
+        "summary": "Retrieve the comment threads you are involved in",
+        "description": "The comment threads, on sources, GCN events, earthquakes and shifts, where the requesting user wrote, latest activity first. Comments posted through the API (bots) are left out.\n",
+        "tags": [
+          "comments"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/CommentThreadListResponse"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/config": {
       "get": {
         "summary": "Retrieve instance config",
@@ -39345,6 +39803,576 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/DeploymentNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "Discussion": {
+        "type": "object",
+        "properties": {
+          "creator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User who started the discussion.",
+            "readOnly": true
+          },
+          "group": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Group"
+              }
+            ],
+            "description": "Group whose members take part, if any.",
+            "readOnly": true
+          },
+          "members": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/DiscussionMember"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/DiscussionMessage"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the discussion, NULL for a direct message.",
+            "nullable": true
+          },
+          "is_direct": {
+            "type": "boolean",
+            "description": "Whether this is a direct message between two users."
+          },
+          "creator_id": {
+            "type": "integer",
+            "description": "ID of the User who started the discussion.",
+            "nullable": true
+          },
+          "group_id": {
+            "type": "integer",
+            "description": "Group whose members all take part in the discussion, if any.",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "additionalProperties": false
+      },
+      "SingleDiscussion": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Discussion"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfDiscussions": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Discussion"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "DiscussionMember": {
+        "type": "object",
+        "properties": {
+          "discussion": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Discussion"
+              }
+            ],
+            "description": "The Discussion.",
+            "readOnly": true
+          },
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The member.",
+            "readOnly": true
+          },
+          "discussion_id": {
+            "type": "integer",
+            "description": "ID of the Discussion."
+          },
+          "user_id": {
+            "type": "integer",
+            "description": "ID of the member."
+          },
+          "last_read_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the member last read the discussion.",
+            "nullable": true
+          },
+          "muted": {
+            "type": "boolean",
+            "description": "Whether the member is notified of new messages."
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "discussion_id",
+          "user_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleDiscussionMember": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DiscussionMember"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfDiscussionMembers": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiscussionMember"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "DiscussionMemberNoID": {
+        "type": "object",
+        "properties": {
+          "discussion": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Discussion"
+              }
+            ],
+            "description": "The Discussion.",
+            "readOnly": true
+          },
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The member.",
+            "readOnly": true
+          },
+          "discussion_id": {
+            "type": "integer",
+            "description": "ID of the Discussion."
+          },
+          "user_id": {
+            "type": "integer",
+            "description": "ID of the member."
+          },
+          "last_read_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the member last read the discussion.",
+            "nullable": true
+          },
+          "muted": {
+            "type": "boolean",
+            "description": "Whether the member is notified of new messages."
+          }
+        },
+        "required": [
+          "discussion_id",
+          "user_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleDiscussionMemberNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DiscussionMemberNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfDiscussionMemberNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiscussionMemberNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "DiscussionMessage": {
+        "type": "object",
+        "properties": {
+          "discussion": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Discussion"
+              }
+            ],
+            "description": "The Discussion.",
+            "readOnly": true
+          },
+          "author": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User who wrote the message.",
+            "readOnly": true
+          },
+          "discussion_id": {
+            "type": "integer",
+            "description": "ID of the Discussion."
+          },
+          "author_id": {
+            "type": "integer",
+            "description": "ID of the User who wrote the message."
+          },
+          "text": {
+            "type": "string",
+            "description": "Message body."
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "author_id",
+          "discussion_id",
+          "text"
+        ],
+        "additionalProperties": false
+      },
+      "SingleDiscussionMessage": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DiscussionMessage"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfDiscussionMessages": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiscussionMessage"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "DiscussionMessageNoID": {
+        "type": "object",
+        "properties": {
+          "discussion": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Discussion"
+              }
+            ],
+            "description": "The Discussion.",
+            "readOnly": true
+          },
+          "author": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User who wrote the message.",
+            "readOnly": true
+          },
+          "discussion_id": {
+            "type": "integer",
+            "description": "ID of the Discussion."
+          },
+          "author_id": {
+            "type": "integer",
+            "description": "ID of the User who wrote the message."
+          },
+          "text": {
+            "type": "string",
+            "description": "Message body."
+          }
+        },
+        "required": [
+          "author_id",
+          "discussion_id",
+          "text"
+        ],
+        "additionalProperties": false
+      },
+      "SingleDiscussionMessageNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DiscussionMessageNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfDiscussionMessageNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiscussionMessageNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "DiscussionNoID": {
+        "type": "object",
+        "properties": {
+          "creator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User who started the discussion.",
+            "readOnly": true
+          },
+          "group": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Group"
+              }
+            ],
+            "description": "Group whose members take part, if any.",
+            "readOnly": true
+          },
+          "members": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/DiscussionMember"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/DiscussionMessage"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the discussion, NULL for a direct message.",
+            "nullable": true
+          },
+          "is_direct": {
+            "type": "boolean",
+            "description": "Whether this is a direct message between two users."
+          },
+          "creator_id": {
+            "type": "integer",
+            "description": "ID of the User who started the discussion.",
+            "nullable": true
+          },
+          "group_id": {
+            "type": "integer",
+            "description": "Group whose members all take part in the discussion, if any.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SingleDiscussionNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DiscussionNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfDiscussionNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiscussionNoID"
             }
           }
         },
@@ -97028,6 +98056,465 @@
           "text"
         ],
         "title": "FeedbackReplyPostBody",
+        "type": "object"
+      },
+      "DiscussionGroupResponse": {
+        "additionalProperties": false,
+        "description": "The group whose members take part in a discussion.",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "DiscussionGroupResponse",
+        "type": "object"
+      },
+      "DiscussionMessageResponse": {
+        "additionalProperties": false,
+        "description": "A message of a discussion.",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "discussion_id": {
+            "title": "Discussion Id",
+            "type": "integer"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "modified": {
+            "format": "date-time",
+            "title": "Modified",
+            "type": "string"
+          },
+          "author": {
+            "$ref": "#/components/schemas/DiscussionUserResponse"
+          }
+        },
+        "required": [
+          "id",
+          "discussion_id",
+          "text",
+          "created_at",
+          "modified",
+          "author"
+        ],
+        "title": "DiscussionMessageResponse",
+        "type": "object"
+      },
+      "DiscussionResponse": {
+        "additionalProperties": false,
+        "description": "A discussion, as seen by the requesting user.",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "name": {
+            "default": null,
+            "title": "Name",
+            "type": "string",
+            "nullable": true
+          },
+          "is_direct": {
+            "title": "Is Direct",
+            "type": "boolean"
+          },
+          "creator_id": {
+            "default": null,
+            "title": "Creator Id",
+            "type": "integer",
+            "nullable": true
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "group": {
+            "default": null,
+            "$ref": "#/components/schemas/DiscussionGroupResponse",
+            "nullable": true
+          },
+          "members": {
+            "description": "Chosen members; empty for a group discussion.",
+            "items": {
+              "$ref": "#/components/schemas/DiscussionUserResponse"
+            },
+            "title": "Members",
+            "type": "array"
+          },
+          "member_count": {
+            "title": "Member Count",
+            "type": "integer"
+          },
+          "muted": {
+            "title": "Muted",
+            "type": "boolean"
+          },
+          "unread": {
+            "title": "Unread",
+            "type": "integer"
+          },
+          "last_message": {
+            "default": null,
+            "$ref": "#/components/schemas/DiscussionMessageResponse",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "is_direct",
+          "created_at",
+          "member_count",
+          "muted",
+          "unread"
+        ],
+        "title": "DiscussionResponse",
+        "type": "object"
+      },
+      "DiscussionUserResponse": {
+        "additionalProperties": false,
+        "description": "A user taking part in a discussion.",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "username": {
+            "title": "Username",
+            "type": "string"
+          },
+          "first_name": {
+            "default": null,
+            "title": "First Name",
+            "type": "string",
+            "nullable": true
+          },
+          "last_name": {
+            "default": null,
+            "title": "Last Name",
+            "type": "string",
+            "nullable": true
+          },
+          "gravatar_url": {
+            "default": null,
+            "title": "Gravatar Url",
+            "type": "string",
+            "nullable": true
+          },
+          "is_bot": {
+            "default": false,
+            "title": "Is Bot",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "username"
+        ],
+        "title": "DiscussionUserResponse",
+        "type": "object"
+      },
+      "DiscussionListResponse": {
+        "additionalProperties": false,
+        "description": "The discussions the requesting user takes part in, latest activity first.",
+        "properties": {
+          "discussions": {
+            "items": {
+              "$ref": "#/components/schemas/DiscussionResponse"
+            },
+            "title": "Discussions",
+            "type": "array"
+          }
+        },
+        "title": "DiscussionListResponse",
+        "type": "object"
+      },
+      "DiscussionPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for starting a discussion.",
+        "properties": {
+          "direct": {
+            "default": false,
+            "description": "Open (or reopen) a direct message with the single user in user_ids.",
+            "title": "Direct",
+            "type": "boolean"
+          },
+          "user_ids": {
+            "description": "Users to talk with.",
+            "items": {
+              "type": "integer"
+            },
+            "title": "User Ids",
+            "type": "array"
+          },
+          "group_id": {
+            "default": null,
+            "description": "Group whose members all take part, instead of chosen users.",
+            "title": "Group Id",
+            "type": "integer",
+            "nullable": true
+          },
+          "name": {
+            "default": null,
+            "title": "Name",
+            "maxLength": 200,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "title": "DiscussionPostBody",
+        "type": "object"
+      },
+      "DiscussionPostResponse": {
+        "additionalProperties": false,
+        "description": "The discussion started, or the existing direct message.",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "DiscussionPostResponse",
+        "type": "object"
+      },
+      "DiscussionPatchBody": {
+        "additionalProperties": false,
+        "description": "Request body for renaming a discussion.",
+        "properties": {
+          "name": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "DiscussionPatchBody",
+        "type": "object"
+      },
+      "DiscussionMessageListResponse": {
+        "additionalProperties": false,
+        "description": "A page of the messages of a discussion, oldest first.",
+        "properties": {
+          "messages": {
+            "items": {
+              "$ref": "#/components/schemas/DiscussionMessageResponse"
+            },
+            "title": "Messages",
+            "type": "array"
+          },
+          "has_more": {
+            "description": "Whether older messages remain.",
+            "title": "Has More",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "has_more"
+        ],
+        "title": "DiscussionMessageListResponse",
+        "type": "object"
+      },
+      "DiscussionMessagePostBody": {
+        "additionalProperties": false,
+        "description": "Request body for sending or editing a message.",
+        "properties": {
+          "text": {
+            "maxLength": 10000,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text"
+        ],
+        "title": "DiscussionMessagePostBody",
+        "type": "object"
+      },
+      "DiscussionMemberListResponse": {
+        "additionalProperties": false,
+        "description": "The users taking part in a discussion.",
+        "properties": {
+          "members": {
+            "items": {
+              "$ref": "#/components/schemas/DiscussionUserResponse"
+            },
+            "title": "Members",
+            "type": "array"
+          }
+        },
+        "title": "DiscussionMemberListResponse",
+        "type": "object"
+      },
+      "DiscussionMembersPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for adding users to a discussion.",
+        "properties": {
+          "user_ids": {
+            "items": {
+              "type": "integer"
+            },
+            "minItems": 1,
+            "title": "User Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "user_ids"
+        ],
+        "title": "DiscussionMembersPostBody",
+        "type": "object"
+      },
+      "DiscussionMembershipPatchBody": {
+        "additionalProperties": false,
+        "description": "Request body for the requesting user's own state in a discussion.",
+        "properties": {
+          "muted": {
+            "default": null,
+            "description": "Stop or resume notifications for this discussion.",
+            "title": "Muted",
+            "type": "boolean",
+            "nullable": true
+          },
+          "read": {
+            "default": null,
+            "description": "Mark every message as read.",
+            "title": "Read",
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "title": "DiscussionMembershipPatchBody",
+        "type": "object"
+      },
+      "CommentThreadLastCommentResponse": {
+        "additionalProperties": false,
+        "description": "The latest comment of a thread.",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "author": {
+            "$ref": "#/components/schemas/DiscussionUserResponse"
+          }
+        },
+        "required": [
+          "id",
+          "text",
+          "created_at",
+          "author"
+        ],
+        "title": "CommentThreadLastCommentResponse",
+        "type": "object"
+      },
+      "CommentThreadResponse": {
+        "additionalProperties": false,
+        "description": "A comment thread the requesting user wrote in.",
+        "properties": {
+          "resource_type": {
+            "enum": [
+              "sources",
+              "gcn_event",
+              "earthquake",
+              "shift"
+            ],
+            "title": "Resource Type",
+            "type": "string"
+          },
+          "resource_id": {
+            "title": "Resource Id",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "url": {
+            "title": "Url",
+            "type": "string"
+          },
+          "channel": {
+            "default": null,
+            "title": "Channel",
+            "type": "string",
+            "nullable": true
+          },
+          "last_comment": {
+            "$ref": "#/components/schemas/CommentThreadLastCommentResponse"
+          },
+          "dateobs": {
+            "default": null,
+            "description": "GCN events only.",
+            "title": "Dateobs",
+            "type": "string",
+            "nullable": true
+          },
+          "event_id": {
+            "default": null,
+            "description": "Earthquakes only.",
+            "title": "Event Id",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "resource_type",
+          "resource_id",
+          "label",
+          "url",
+          "last_comment"
+        ],
+        "title": "CommentThreadResponse",
+        "type": "object"
+      },
+      "CommentThreadListResponse": {
+        "additionalProperties": false,
+        "description": "Comment threads the requesting user is involved in, latest activity first.",
+        "properties": {
+          "threads": {
+            "items": {
+              "$ref": "#/components/schemas/CommentThreadResponse"
+            },
+            "title": "Threads",
+            "type": "array"
+          }
+        },
+        "title": "CommentThreadListResponse",
         "type": "object"
       },
       "AssistantConversationPatchBody": {
