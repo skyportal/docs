@@ -27279,7 +27279,7 @@
         ]
       },
       "patch": {
-        "summary": "Mark a message left to the admins as handled, or reopen it",
+        "summary": "Mark a message left to the admins as handled, reopen it, or assign it",
         "tags": [
           "system info"
         ],
@@ -42394,6 +42394,15 @@
             "description": "The User who wrote the message",
             "readOnly": true
           },
+          "assignee": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The admin working on the message",
+            "readOnly": true
+          },
           "replies": {
             "type": "array",
             "readOnly": true,
@@ -42416,6 +42425,11 @@
           "resolved": {
             "type": "boolean",
             "description": "Whether an admin has handled the message"
+          },
+          "assignee_id": {
+            "type": "integer",
+            "description": "ID of the admin working on the message",
+            "nullable": true
           },
           "id": {
             "type": "integer",
@@ -42486,6 +42500,15 @@
             "description": "The User who wrote the message",
             "readOnly": true
           },
+          "assignee": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The admin working on the message",
+            "readOnly": true
+          },
           "replies": {
             "type": "array",
             "readOnly": true,
@@ -42508,6 +42531,11 @@
           "resolved": {
             "type": "boolean",
             "description": "Whether an admin has handled the message"
+          },
+          "assignee_id": {
+            "type": "integer",
+            "description": "ID of the admin working on the message",
+            "nullable": true
           }
         },
         "required": [
@@ -97962,6 +97990,11 @@
           "author": {
             "$ref": "#/components/schemas/FeedbackAuthorResponse"
           },
+          "assignee": {
+            "default": null,
+            "$ref": "#/components/schemas/FeedbackAuthorResponse",
+            "nullable": true
+          },
           "replies": {
             "items": {
               "$ref": "#/components/schemas/FeedbackReplyResponse"
@@ -98027,16 +98060,22 @@
       },
       "FeedbackPatchBody": {
         "additionalProperties": false,
-        "description": "Request body for marking a message as handled.",
+        "description": "Request body for marking a message as handled, or assigning it to an admin.",
         "properties": {
           "resolved": {
+            "default": null,
             "title": "Resolved",
-            "type": "boolean"
+            "type": "boolean",
+            "nullable": true
+          },
+          "assignee_id": {
+            "default": null,
+            "description": "ID of the admin working on it; null to unassign",
+            "title": "Assignee Id",
+            "type": "integer",
+            "nullable": true
           }
         },
-        "required": [
-          "resolved"
-        ],
         "title": "FeedbackPatchBody",
         "type": "object"
       },
