@@ -48211,6 +48211,11 @@
             "description": "Admission request status. Can be one of either 'pending', 'accepted', or 'declined'.",
             "type": "string"
           },
+          "message": {
+            "type": "string",
+            "description": "Why the User wants to join the group",
+            "nullable": true
+          },
           "id": {
             "type": "integer",
             "description": "Unique object identifier."
@@ -48305,6 +48310,11 @@
             "maxLength": 8,
             "description": "Admission request status. Can be one of either 'pending', 'accepted', or 'declined'.",
             "type": "string"
+          },
+          "message": {
+            "type": "string",
+            "description": "Why the User wants to join the group",
+            "nullable": true
           }
         },
         "required": [
@@ -91968,6 +91978,14 @@
             "description": "ID of the user requesting admission",
             "title": "Userid",
             "type": "integer"
+          },
+          "message": {
+            "default": null,
+            "description": "Why the user wants to join the group",
+            "title": "Message",
+            "maxLength": 2000,
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
