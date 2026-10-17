@@ -15153,10 +15153,10 @@
             "in": "query",
             "name": "numPerPage",
             "required": false,
-            "description": "Number of invitations to return per paginated request. Defaults to 25.",
+            "description": "Number of invitations to return per paginated request. Defaults to all.",
             "schema": {
-              "default": 25,
-              "type": "integer"
+              "type": "integer",
+              "nullable": true
             }
           },
           {
@@ -27837,6 +27837,10 @@
                             "invitationsEnabled": {
                               "type": "boolean",
                               "description": "Boolean indicating whether new user invitation pipeline\nis enabled in current deployment.\n"
+                            },
+                            "invitationsDaysUntilExpiry": {
+                              "type": "integer",
+                              "description": "Number of days an invitation link stays valid."
                             },
                             "userApplicationsEnabled": {
                               "type": "boolean",
