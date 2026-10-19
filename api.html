@@ -30455,6 +30455,69 @@
         }
       }
     },
+    "/api/user/{user_id}/activity": {
+      "get": {
+        "summary": "Get a user's contributions",
+        "description": "The sources, comments, classifications, annotations, spectra and follow-up requests this user has to their name that the requester is allowed to see, newest first, with the totals by kind on the first page and the cutouts and detections of the sources on the page. Kinds the user hid from their public profile are left out for everyone else.\n",
+        "tags": [
+          "users"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Items per page, capped at 100."
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "schema": {
+              "type": "integer"
+            },
+            "description": "How many items to skip, for paging further back."
+          },
+          {
+            "in": "query",
+            "name": "kind",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Only list this kind of contribution."
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/user/{user_id}/profile": {
       "get": {
         "summary": "Get a user's public profile",
