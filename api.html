@@ -2806,7 +2806,7 @@
             "in": "path",
             "name": "alert_id",
             "required": true,
-            "description": "Alert identifier (e.g. candid) the provider keys cutouts on.",
+            "description": "Identifier the provider keys cutouts on: the candid for BOOM and Babamul, the objectId for ALeRCE, ANTARES, Fink and Lasair.",
             "schema": {
               "type": "string"
             }
@@ -2895,7 +2895,7 @@
         ]
       }
     },
-    "/api/brokers/{broker_id}/alerts/{alert_id}/photometry": {
+    "/api/brokers/{broker_id}/objects/{object_id}/photometry": {
       "get": {
         "summary": "Display photometry for an object (DB + on-demand broker)",
         "description": "Return an object's photometry for display: the persisted,\naccess-controlled photometry from the database merged with photometry\nfetched on demand from the broker (deduped by instrument/filter/mjd,\nso the broker only augments saved points). The broker half is cached\nper object and never written to the database. Returns a bare list of\npoints, matching GET /sources/{id}/photometry.\n",
@@ -2943,9 +2943,170 @@
           },
           {
             "in": "path",
-            "name": "alert_id",
+            "name": "object_id",
             "required": true,
-            "description": "Alert identifier (e.g. candid) the provider keys cutouts on.",
+            "description": "Survey object identifier, e.g. a ZTF objectId.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "survey",
+            "required": false,
+            "description": "Survey the photometry is fetched for.",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "format",
+            "required": false,
+            "description": "Photometry format.",
+            "schema": {
+              "default": "mag",
+              "enum": [
+                "mag",
+                "flux",
+                "both"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "magsys",
+            "required": false,
+            "description": "Magnitude system.",
+            "schema": {
+              "default": "ab",
+              "enum": [
+                "jla1",
+                "ab",
+                "vega",
+                "bd17",
+                "csp",
+                "ab-b12"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "includeSuperObjsPhotometry",
+            "required": false,
+            "description": "Also serve the objs sharing a SuperObj with this one.",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "includeOwnerInfo",
+            "required": false,
+            "description": "Include each saved point's owner.",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "includeStreamInfo",
+            "required": false,
+            "description": "Include each saved point's streams.",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "includeValidationInfo",
+            "required": false,
+            "description": "Include each saved point's validations.",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "includeAnnotationInfo",
+            "required": false,
+            "description": "Include each saved point's annotations.",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "includeExtinction",
+            "required": false,
+            "description": "Include Galactic extinction and extinction-corrected values.",
+            "schema": {
+              "default": false,
+              "type": "boolean"
+            }
+          }
+        ]
+      }
+    },
+    "/api/brokers/{broker_id}/alerts/{object_id}/photometry": {
+      "get": {
+        "summary": "Display photometry for an object (DB + on-demand broker)",
+        "description": "Return an object's photometry for display: the persisted,\naccess-controlled photometry from the database merged with photometry\nfetched on demand from the broker (deduped by instrument/filter/mjd,\nso the broker only augments saved points). The broker half is cached\nper object and never written to the database. Returns a bare list of\npoints, matching GET /sources/{id}/photometry.\n",
+        "tags": [
+          "brokers",
+          "photometry"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "object_id",
+            "required": true,
+            "description": "Survey object identifier, e.g. a ZTF objectId.",
             "schema": {
               "type": "string"
             }
@@ -3278,10 +3439,10 @@
         ]
       }
     },
-    "/api/brokers/{broker_id}/alerts/{alert_id}/save": {
+    "/api/brokers/{broker_id}/objects/{object_id}/save": {
       "post": {
-        "summary": "Save a broker alert as a source",
-        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Ingest an alert/object from a broker into skyportal as an Obj/Source with photometry, dispatched to the broker's provider.",
+        "summary": "Save a broker object as a source",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Ingest an object from a broker into skyportal as an Obj/Source with photometry, dispatched to the broker's provider.",
         "tags": [
           "brokers"
         ],
@@ -3326,9 +3487,9 @@
           },
           {
             "in": "path",
-            "name": "alert_id",
+            "name": "object_id",
             "required": true,
-            "description": "Alert identifier (e.g. candid) the provider keys cutouts on.",
+            "description": "Survey object identifier, e.g. a ZTF objectId.",
             "schema": {
               "type": "string"
             }
@@ -3336,10 +3497,68 @@
         ]
       }
     },
-    "/api/brokers/{broker_id}/alerts/{alert_id})?": {
+    "/api/brokers/{broker_id}/alerts/{object_id}/save": {
+      "post": {
+        "summary": "Save a broker object as a source",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Ingest an object from a broker into skyportal as an Obj/Source with photometry, dispatched to the broker's provider.",
+        "tags": [
+          "brokers"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BrokerSaveBody"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "object_id",
+            "required": true,
+            "description": "Survey object identifier, e.g. a ZTF objectId.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/brokers/{broker_id}/objects/{object_id}": {
       "get": {
-        "summary": "Query broker alerts",
-        "description": "Search alerts (or fetch one by id) from a broker, dispatched to the broker's registered provider.",
+        "summary": "Get an object from a broker",
+        "description": "Fetch one survey object as the broker's provider returns it, scoped to the programs the requester's streams grant.",
         "tags": [
           "brokers"
         ],
@@ -3374,10 +3593,193 @@
           },
           {
             "in": "path",
-            "name": "alert_id",
+            "name": "object_id",
             "required": true,
+            "description": "Survey object identifier, e.g. a ZTF objectId.",
             "schema": {
               "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/brokers/{broker_id}/alerts/{object_id}": {
+      "get": {
+        "summary": "Get an object from a broker",
+        "description": "Fetch one survey object as the broker's provider returns it, scoped to the programs the requester's streams grant.",
+        "tags": [
+          "brokers"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "object_id",
+            "required": true,
+            "description": "Survey object identifier, e.g. a ZTF objectId.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/brokers/{broker_id}/alerts": {
+      "get": {
+        "summary": "Query broker alerts",
+        "description": "Search a broker's alerts by objectId, candid or ra/dec/radius. Records come back as the broker's provider returns them, and jd_start/jd_end apply only where the provider supports them.",
+        "tags": [
+          "brokers"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "objectId",
+            "required": false,
+            "description": "Survey object id.",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "candid",
+            "required": false,
+            "description": "Id of a single alert.",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "ra",
+            "required": false,
+            "description": "RA in degrees.",
+            "schema": {
+              "type": "number",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "dec",
+            "required": false,
+            "description": "Declination in degrees.",
+            "schema": {
+              "type": "number",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "radius",
+            "required": false,
+            "description": "Search radius.",
+            "schema": {
+              "type": "number",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "radius_units",
+            "required": false,
+            "description": "Units of `radius`. Defaults to arcsec.",
+            "schema": {
+              "enum": [
+                "deg",
+                "arcmin",
+                "arcsec"
+              ],
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "jd_start",
+            "required": false,
+            "description": "Earliest alert JD.",
+            "schema": {
+              "type": "number",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "jd_end",
+            "required": false,
+            "description": "Latest alert JD.",
+            "schema": {
+              "type": "number",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "survey",
+            "required": false,
+            "description": "Survey to query.",
+            "schema": {
+              "type": "string",
+              "nullable": true
             }
           }
         ]

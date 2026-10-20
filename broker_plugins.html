@@ -484,8 +484,18 @@ filter’s conditions so scanning stays manageable.</p>
 <h2>Endpoints<a class="headerlink" href="#endpoints" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">GET/POST/PATCH/DELETE</span> <span class="pre">/api/brokers[/{id}]</span></code>, manage <code class="docutils literal notranslate"><span class="pre">Broker</span></code> records.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/brokers/{id}/alerts[/{alert_id}]</span></code>, query alerts (dispatched to the
-broker’s provider).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/brokers/{id}/alerts</span></code>, query alerts by <code class="docutils literal notranslate"><span class="pre">objectId</span></code>, <code class="docutils literal notranslate"><span class="pre">candid</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">ra</span></code>/<code class="docutils literal notranslate"><span class="pre">dec</span></code>/<code class="docutils literal notranslate"><span class="pre">radius</span></code>. Records come back as the provider returns them, and
+<code class="docutils literal notranslate"><span class="pre">jd_start</span></code>/<code class="docutils literal notranslate"><span class="pre">jd_end</span></code> apply only where the provider supports them.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/brokers/{id}/objects/{object_id}</span></code>, one object as the provider
+returns it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/brokers/{id}/objects/{object_id}/photometry</span></code> and
+<code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/brokers/{id}/objects/{object_id}/save</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/brokers/{id}/alerts/{alert_id}/cutouts</span></code>, the science, template and
+difference cutouts, keyed by the candid (BOOM, Babamul) or the objectId
+(ALeRCE, ANTARES, Fink, Lasair).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">/api/brokers/{id}/alerts/{object_id}</span></code> forms of the three object routes
+still work, for callers written against them.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/internal/broker_apis</span></code>, capabilities + config schema of every
 registered provider (for the frontend).</p></li>
 </ul>
