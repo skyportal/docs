@@ -43305,6 +43305,11 @@
             "description": "ID of the Broker this Filter runs on, if any.",
             "nullable": true
           },
+          "created_by_id": {
+            "type": "integer",
+            "description": "ID of the User who created the Filter.",
+            "nullable": true
+          },
           "autosave": {
             "type": "boolean",
             "description": "If set, objects passing this filter during broker ingestion are auto-saved as Sources to the Filter's Group (in addition to being registered as Candidates)."
@@ -43508,6 +43513,11 @@
           "broker_id": {
             "type": "integer",
             "description": "ID of the Broker this Filter runs on, if any.",
+            "nullable": true
+          },
+          "created_by_id": {
+            "type": "integer",
+            "description": "ID of the User who created the Filter.",
             "nullable": true
           },
           "autosave": {
