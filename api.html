@@ -44366,6 +44366,15 @@
       "Galaxy": {
         "type": "object",
         "properties": {
+          "catalog": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GalaxyCatalog"
+              }
+            ],
+            "description": "The catalog this galaxy belongs to.",
+            "readOnly": true
+          },
           "objects": {
             "type": "array",
             "readOnly": true,
@@ -44548,6 +44557,13 @@
       "GalaxyCatalog": {
         "type": "object",
         "properties": {
+          "groups": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/Group"
+            }
+          },
           "name": {
             "type": "string",
             "description": "Name of the catalog."
@@ -44620,6 +44636,13 @@
       "GalaxyCatalogNoID": {
         "type": "object",
         "properties": {
+          "groups": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/Group"
+            }
+          },
           "name": {
             "type": "string",
             "description": "Name of the catalog."
@@ -44688,6 +44711,15 @@
       "GalaxyNoID": {
         "type": "object",
         "properties": {
+          "catalog": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GalaxyCatalog"
+              }
+            ],
+            "description": "The catalog this galaxy belongs to.",
+            "readOnly": true
+          },
           "objects": {
             "type": "array",
             "readOnly": true,
@@ -50595,6 +50627,164 @@
         ],
         "additionalProperties": false
       },
+      "GroupGalaxyCatalog": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Group"
+              }
+            ],
+            "readOnly": true
+          },
+          "galaxycatalog": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GalaxyCatalog"
+              }
+            ],
+            "readOnly": true
+          },
+          "group_id": {
+            "type": "integer"
+          },
+          "galaxycatalog_id": {
+            "type": "integer"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "galaxycatalog_id",
+          "group_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGroupGalaxyCatalog": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GroupGalaxyCatalog"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGroupGalaxyCatalogs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupGalaxyCatalog"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "GroupGalaxyCatalogNoID": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Group"
+              }
+            ],
+            "readOnly": true
+          },
+          "galaxycatalog": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/GalaxyCatalog"
+              }
+            ],
+            "readOnly": true
+          },
+          "group_id": {
+            "type": "integer"
+          },
+          "galaxycatalog_id": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "galaxycatalog_id",
+          "group_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGroupGalaxyCatalogNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GroupGalaxyCatalogNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGroupGalaxyCatalogNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupGalaxyCatalogNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
       "GroupGcnEvent": {
         "type": "object",
         "properties": {
@@ -53961,6 +54151,164 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GroupSourceNotificationNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "GroupSpatialCatalog": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Group"
+              }
+            ],
+            "readOnly": true
+          },
+          "spatialcatalog": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpatialCatalog"
+              }
+            ],
+            "readOnly": true
+          },
+          "group_id": {
+            "type": "integer"
+          },
+          "spatial_catalog_id": {
+            "type": "integer"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "group_id",
+          "spatial_catalog_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGroupSpatialCatalog": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GroupSpatialCatalog"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGroupSpatialCatalogs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupSpatialCatalog"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "GroupSpatialCatalogNoID": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Group"
+              }
+            ],
+            "readOnly": true
+          },
+          "spatialcatalog": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SpatialCatalog"
+              }
+            ],
+            "readOnly": true
+          },
+          "group_id": {
+            "type": "integer"
+          },
+          "spatial_catalog_id": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "group_id",
+          "spatial_catalog_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleGroupSpatialCatalogNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GroupSpatialCatalogNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfGroupSpatialCatalogNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupSpatialCatalogNoID"
             }
           }
         },
@@ -78351,6 +78699,10 @@
             "type": "boolean",
             "description": "Whether to publish to TNS or not."
           },
+          "tns_report_type": {
+            "type": "string",
+            "description": "Which TNS report this submission files: 'at_report' announces a discovery, 'classification_report' classifies an object TNS already holds and requires a spectrum."
+          },
           "tns_status": {
             "type": "string",
             "description": "Status of the TNS submission.",
@@ -78579,6 +78931,10 @@
           "publish_to_tns": {
             "type": "boolean",
             "description": "Whether to publish to TNS or not."
+          },
+          "tns_report_type": {
+            "type": "string",
+            "description": "Which TNS report this submission files: 'at_report' announces a discovery, 'classification_report' classifies an object TNS already holds and requires a spectrum."
           },
           "tns_status": {
             "type": "string",
@@ -79897,6 +80253,13 @@
       "SpatialCatalog": {
         "type": "object",
         "properties": {
+          "groups": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/Group"
+            }
+          },
           "entries": {
             "type": "array",
             "readOnly": true,
@@ -80288,6 +80651,13 @@
       "SpatialCatalogNoID": {
         "type": "object",
         "properties": {
+          "groups": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/Group"
+            }
+          },
           "entries": {
             "type": "array",
             "readOnly": true,
@@ -90367,6 +90737,16 @@
             "title": "Catalogdata",
             "type": "string",
             "nullable": true
+          },
+          "group_ids": {
+            "default": null,
+            "description": "Groups that may see this catalog. Defaults to the sitewide public group.",
+            "title": "Group Ids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
           }
         },
         "title": "GalaxyASCIIFilePostBody",
@@ -90403,6 +90783,16 @@
             "title": "Catalog Data",
             "additionalProperties": true,
             "type": "object",
+            "nullable": true
+          },
+          "group_ids": {
+            "default": null,
+            "description": "Groups that may see this catalog. Defaults to the sitewide public group.",
+            "title": "Group Ids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
             "nullable": true
           }
         },
@@ -97303,6 +97693,16 @@
             "title": "Catalogname",
             "type": "string",
             "nullable": true
+          },
+          "group_ids": {
+            "default": null,
+            "description": "Groups that may see this catalog. Defaults to the sitewide public group.",
+            "title": "Group Ids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
           }
         },
         "title": "SpatialCatalogASCIIFilePostBody",
@@ -97336,6 +97736,16 @@
             "default": null,
             "description": "Spatial catalog data",
             "title": "Catalog Data"
+          },
+          "group_ids": {
+            "default": null,
+            "description": "Groups that may see this catalog. Defaults to the sitewide public group.",
+            "title": "Group Ids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
           }
         },
         "title": "SpatialCatalogPostBody",
@@ -99864,6 +100274,17 @@
             "description": "Flag to indicate if the submission should be published to TNS",
             "title": "Publish To Tns",
             "type": "boolean",
+            "nullable": true
+          },
+          "tns_report_type": {
+            "default": "at_report",
+            "description": "Which TNS report to file: 'at_report' announces a discovery, 'classification_report' classifies an object already on TNS and requires it to have a classification and a spectrum.",
+            "title": "Tns Report Type",
+            "enum": [
+              "at_report",
+              "classification_report"
+            ],
+            "type": "string",
             "nullable": true
           },
           "publish_to_hermes": {
