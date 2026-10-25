@@ -4279,7 +4279,7 @@
     "/api/candidates/bulk_delete": {
       "post": {
         "summary": "Bulk-delete old, unsaved candidates",
-        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Delete objects that appear as candidates, are not currently saved as\nan active source in any group, and whose most recent candidate\n`passed_at` is older than `maxAgeMonths`. Deleting the object cascades\nto its candidates, photometry, annotations, thumbnails, etc. System\nadmin only. Intended to be driven periodically via the Recurring API.\n",
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>Delete objects that appear as candidates, are not currently saved as\nan active source in any group, and whose most recent candidate\n`passed_at` is older than `maxAgeDays`. Deleting the object cascades\nto its candidates, photometry, annotations, thumbnails, etc. System\nadmin only. Intended to be driven periodically via the Recurring API.\n",
         "tags": [
           "candidates"
         ],
@@ -89022,11 +89022,12 @@
         "additionalProperties": false,
         "description": "Request body for bulk-deleting old, unsaved candidates.",
         "properties": {
-          "maxAgeMonths": {
-            "default": 6,
-            "description": "Delete objects whose most recent candidate `passed_at` is older than this many months. Defaults to 6.",
-            "title": "Maxagemonths",
-            "type": "integer"
+          "maxAgeDays": {
+            "default": null,
+            "description": "Delete objects whose most recent candidate `passed_at` is older than this many days. Defaults to the `days_to_keep_unsaved_candidates` config value.",
+            "title": "Maxagedays",
+            "type": "integer",
+            "nullable": true
           },
           "batchSize": {
             "default": 1000,
