@@ -67193,6 +67193,15 @@
             "description": "The Galaxy associated with this source.",
             "readOnly": true
           },
+          "withhold_from_tns_set_by": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "User who last set or cleared withhold_from_tns.",
+            "readOnly": true
+          },
           "comments": {
             "type": "array",
             "readOnly": true,
@@ -67448,6 +67457,21 @@
             "nullable": true,
             "type": "object",
             "additionalProperties": true
+          },
+          "withhold_from_tns": {
+            "type": "boolean",
+            "description": "Keep this object off TNS. Automatic sharing skips it silently and a manual submission is refused, so an object held back stays held back until someone clears this deliberately."
+          },
+          "withhold_from_tns_set_by_id": {
+            "type": "integer",
+            "description": "Who last set or cleared withhold_from_tns.",
+            "nullable": true
+          },
+          "withhold_from_tns_set_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When withhold_from_tns was last set or cleared, UTC.",
+            "nullable": true
           },
           "score": {
             "type": "number",
@@ -68045,6 +68069,15 @@
             "description": "The Galaxy associated with this source.",
             "readOnly": true
           },
+          "withhold_from_tns_set_by": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "User who last set or cleared withhold_from_tns.",
+            "readOnly": true
+          },
           "comments": {
             "type": "array",
             "readOnly": true,
@@ -68297,6 +68330,21 @@
             "type": "object",
             "additionalProperties": true
           },
+          "withhold_from_tns": {
+            "type": "boolean",
+            "description": "Keep this object off TNS. Automatic sharing skips it silently and a manual submission is refused, so an object held back stays held back until someone clears this deliberately."
+          },
+          "withhold_from_tns_set_by_id": {
+            "type": "integer",
+            "description": "Who last set or cleared withhold_from_tns.",
+            "nullable": true
+          },
+          "withhold_from_tns_set_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When withhold_from_tns was last set or cleared, UTC.",
+            "nullable": true
+          },
           "score": {
             "type": "number",
             "description": "Machine learning score.",
@@ -68418,6 +68466,15 @@
               }
             ],
             "description": "The Galaxy associated with this source.",
+            "readOnly": true
+          },
+          "withhold_from_tns_set_by": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "User who last set or cleared withhold_from_tns.",
             "readOnly": true
           },
           "comments": {
@@ -68669,6 +68726,21 @@
             "nullable": true,
             "type": "object",
             "additionalProperties": true
+          },
+          "withhold_from_tns": {
+            "type": "boolean",
+            "description": "Keep this object off TNS. Automatic sharing skips it silently and a manual submission is refused, so an object held back stays held back until someone clears this deliberately."
+          },
+          "withhold_from_tns_set_by_id": {
+            "type": "integer",
+            "description": "Who last set or cleared withhold_from_tns.",
+            "nullable": true
+          },
+          "withhold_from_tns_set_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When withhold_from_tns was last set or cleared, UTC.",
+            "nullable": true
           },
           "score": {
             "type": "number",
@@ -78193,6 +78265,9 @@
           "auto_share_to_tns": {
             "type": "boolean"
           },
+          "auto_share_classifications_to_tns": {
+            "type": "boolean"
+          },
           "auto_share_to_hermes": {
             "type": "boolean"
           },
@@ -78451,6 +78526,9 @@
             "type": "boolean"
           },
           "auto_share_to_tns": {
+            "type": "boolean"
+          },
+          "auto_share_classifications_to_tns": {
             "type": "boolean"
           },
           "auto_share_to_hermes": {
@@ -89258,6 +89336,13 @@
             "description": "TNS info in JSON format",
             "title": "Tns Info"
           },
+          "withhold_from_tns": {
+            "default": null,
+            "description": "Keep this object off TNS: automatic sharing skips it and a manual submission is refused.",
+            "title": "Withhold From Tns",
+            "type": "boolean",
+            "nullable": true
+          },
           "score": {
             "default": null,
             "description": "Machine learning score.",
@@ -97349,6 +97434,13 @@
             "description": "TNS info in JSON format",
             "title": "Tns Info"
           },
+          "withhold_from_tns": {
+            "default": null,
+            "description": "Keep this object off TNS: automatic sharing skips it and a manual submission is refused.",
+            "title": "Withhold From Tns",
+            "type": "boolean",
+            "nullable": true
+          },
           "score": {
             "default": null,
             "description": "Machine learning score.",
@@ -97587,6 +97679,13 @@
             "default": null,
             "description": "TNS info in JSON format",
             "title": "Tns Info"
+          },
+          "withhold_from_tns": {
+            "default": null,
+            "description": "Keep this object off TNS: automatic sharing skips it and a manual submission is refused.",
+            "title": "Withhold From Tns",
+            "type": "boolean",
+            "nullable": true
           },
           "score": {
             "default": null,
@@ -100440,6 +100539,20 @@
             "default": null,
             "description": "Whether to automatically publish to TNS",
             "title": "Auto Share To Tns",
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "nullable": true
+          },
+          "auto_share_classifications_to_tns": {
+            "default": null,
+            "description": "Whether to automatically report classifications of this group's sources to TNS",
+            "title": "Auto Share Classifications To Tns",
             "anyOf": [
               {
                 "type": "boolean"
