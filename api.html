@@ -55714,6 +55714,11 @@
             "description": "TNS API ID for this instrument",
             "nullable": true
           },
+          "default_observer": {
+            "type": "string",
+            "description": "Observer to credit on a TNS report when a spectrum from this instrument names none. A robotic instrument observes nothing by hand, so its spectra arrive without an observer, and TNS refuses a classification report that leaves the field empty.",
+            "nullable": true
+          },
           "across_id": {
             "type": "string",
             "description": "NASA ACROSS instrument UUID, used to route visibility queries to the ACROSS calculator. See https://across.sciencecloud.nasa.gov",
@@ -56628,6 +56633,11 @@
           "tns_id": {
             "type": "integer",
             "description": "TNS API ID for this instrument",
+            "nullable": true
+          },
+          "default_observer": {
+            "type": "string",
+            "description": "Observer to credit on a TNS report when a spectrum from this instrument names none. A robotic instrument observes nothing by hand, so its spectra arrive without an observer, and TNS refuses a classification report that leaves the field empty.",
             "nullable": true
           },
           "across_id": {
@@ -93171,6 +93181,13 @@
             "type": "integer",
             "nullable": true
           },
+          "default_observer": {
+            "default": null,
+            "description": "Observer credited on a TNS report when a spectrum from this instrument names none, e.g. 'SEDmRobot' for a robotic instrument. TNS refuses a classification report with the field empty.",
+            "title": "Default Observer",
+            "type": "string",
+            "nullable": true
+          },
           "across_id": {
             "default": null,
             "description": "NASA ACROSS instrument UUID.",
@@ -93405,6 +93422,13 @@
             "description": "TNS API ID for this instrument.",
             "title": "Tns Id",
             "type": "integer",
+            "nullable": true
+          },
+          "default_observer": {
+            "default": null,
+            "description": "Observer credited on a TNS report when a spectrum from this instrument names none, e.g. 'SEDmRobot' for a robotic instrument. TNS refuses a classification report with the field empty.",
+            "title": "Default Observer",
+            "type": "string",
             "nullable": true
           },
           "across_id": {
