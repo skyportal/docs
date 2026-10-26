@@ -78725,6 +78725,16 @@
             "type": "string",
             "description": "Which TNS report this submission files: 'at_report' announces a discovery, 'classification_report' classifies an object TNS already holds and requires a spectrum."
           },
+          "tns_report_spectrum_id": {
+            "type": "integer",
+            "description": "Spectrum to report a classification against. Left unset, the report takes the object's most recent spectrum, preferring a source spectrum over a host one.",
+            "nullable": true
+          },
+          "tns_report_classification_id": {
+            "type": "integer",
+            "description": "Classification to report. Left unset, the report takes the object's most recent human classification.",
+            "nullable": true
+          },
           "tns_status": {
             "type": "string",
             "description": "Status of the TNS submission.",
@@ -78957,6 +78967,16 @@
           "tns_report_type": {
             "type": "string",
             "description": "Which TNS report this submission files: 'at_report' announces a discovery, 'classification_report' classifies an object TNS already holds and requires a spectrum."
+          },
+          "tns_report_spectrum_id": {
+            "type": "integer",
+            "description": "Spectrum to report a classification against. Left unset, the report takes the object's most recent spectrum, preferring a source spectrum over a host one.",
+            "nullable": true
+          },
+          "tns_report_classification_id": {
+            "type": "integer",
+            "description": "Classification to report. Left unset, the report takes the object's most recent human classification.",
+            "nullable": true
           },
           "tns_status": {
             "type": "string",
@@ -100322,6 +100342,20 @@
               "classification_report"
             ],
             "type": "string",
+            "nullable": true
+          },
+          "tns_report_spectrum_id": {
+            "default": null,
+            "description": "Spectrum to report the classification against. Omit to use the object's most recent spectrum, preferring a source spectrum.",
+            "title": "Tns Report Spectrum Id",
+            "type": "integer",
+            "nullable": true
+          },
+          "tns_report_classification_id": {
+            "default": null,
+            "description": "Classification to report. Omit to use the object's most recent human classification.",
+            "title": "Tns Report Classification Id",
+            "type": "integer",
             "nullable": true
           },
           "publish_to_hermes": {
