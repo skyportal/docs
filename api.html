@@ -10254,7 +10254,7 @@
       },
       "post": {
         "summary": "Requeue the alert crossmatch for a GCN event",
-        "description": "<b>Permission(s) required:</b> <em>Manage GCNs (or System admin)</em><br><br>Reset this event's crossmatch progress so the next service pass\nre-queries every filter from the start of the window, including the\none-shot archival pass.\n\nExisting sources and annotations are left alone: the crossmatch\nupdates them in place, so re-running refreshes rather than\nduplicates. Use this after changing the quality-cut filter or the\nsearch parameters.\n",
+        "description": "<b>Permission(s) required:</b> <em>Manage GCNs (or System admin)</em><br><br>Reset this event's crossmatch progress so the next service pass\nre-queries it from the start of the window, including the one-shot\narchival pass. Give a ``filter_id`` to requeue one filter alone;\nwithout one every filter on the event is requeued, and each one\nre-queries the broker.\n\nExisting sources and annotations are left alone: the crossmatch\nupdates them in place, so re-running refreshes rather than\nduplicates. Use this after changing the quality-cut filter or the\nsearch parameters.\n",
         "tags": [
           "gcn events"
         ],
@@ -10274,6 +10274,16 @@
                 "schema": {
                   "$ref": "#/components/schemas/Error"
                 }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GcnEventCrossmatchRequeueBody"
               }
             }
           }
@@ -91558,6 +91568,21 @@
           "days"
         ],
         "title": "GcnAssociationRuleBody",
+        "type": "object"
+      },
+      "GcnEventCrossmatchRequeueBody": {
+        "additionalProperties": false,
+        "description": "Request body for requeueing the alert crossmatch of a GCN event.",
+        "properties": {
+          "filter_id": {
+            "default": null,
+            "description": "Requeue only this filter's crossmatch of the event. Omit to requeue every filter, which re-queries the broker for each.",
+            "title": "Filter Id",
+            "type": "integer",
+            "nullable": true
+          }
+        },
+        "title": "GcnEventCrossmatchRequeueBody",
         "type": "object"
       },
       "GcnReportPostBody": {
