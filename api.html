@@ -31354,6 +31354,16 @@
           },
           {
             "in": "query",
+            "name": "name",
+            "required": false,
+            "description": "Get users whose username or full name contains this string, ignoring case.",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
             "name": "email",
             "required": false,
             "description": "Get users whose email contains this string.",
