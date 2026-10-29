@@ -14888,7 +14888,7 @@
     "/api/instrument/{instrument_id}/fields": {
       "delete": {
         "summary": "Delete an instrument's fields",
-        "description": "<b>Permission(s) required:</b> <em>Manage instruments (or System admin)</em><br><br>Delete fields associated with an instrument",
+        "description": "Delete fields associated with an instrument",
         "tags": [
           "instruments"
         ],
@@ -14976,7 +14976,7 @@
       },
       "post": {
         "summary": "Add instrument logs",
-        "description": "Add log messages from an instrument",
+        "description": "<b>Permission(s) required:</b> <em>Manage instruments (or System admin)</em><br><br>Add log messages from an instrument",
         "tags": [
           "instruments"
         ],
@@ -15087,7 +15087,7 @@
     "/api/instrument/{instrument_id}/status": {
       "put": {
         "summary": "Update instrument status",
-        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Update the status of an instrument",
+        "description": "<b>Permission(s) required:</b> <em>Upload data, Manage instruments (or System admin)</em><br><br>Update the status of an instrument",
         "tags": [
           "instruments"
         ],
@@ -15254,7 +15254,7 @@
       },
       "put": {
         "summary": "Update an instrument",
-        "description": "<b>Permission(s) required:</b> <em>Manage instruments (or System admin)</em><br><br>Update instrument",
+        "description": "Update instrument",
         "tags": [
           "instruments"
         ],
@@ -15301,7 +15301,7 @@
       },
       "delete": {
         "summary": "Delete an instrument",
-        "description": "<b>Permission(s) required:</b> <em>Manage instruments (or System admin)</em><br><br>Delete an instrument",
+        "description": "Delete an instrument",
         "tags": [
           "instruments"
         ],
@@ -55744,6 +55744,11 @@
             "description": "NASA ACROSS instrument UUID, used to route visibility queries to the ACROSS calculator. See https://across.sciencecloud.nasa.gov",
             "nullable": true
           },
+          "created_by_id": {
+            "type": "integer",
+            "description": "ID of the User who created the Instrument.",
+            "nullable": true
+          },
           "region": {
             "type": "string",
             "description": "Instrument astropy.regions representation.",
@@ -56663,6 +56668,11 @@
           "across_id": {
             "type": "string",
             "description": "NASA ACROSS instrument UUID, used to route visibility queries to the ACROSS calculator. See https://across.sciencecloud.nasa.gov",
+            "nullable": true
+          },
+          "created_by_id": {
+            "type": "integer",
+            "description": "ID of the User who created the Instrument.",
             "nullable": true
           },
           "region": {
