@@ -2091,6 +2091,54 @@
         ]
       }
     },
+    "/api/brokers/{broker_id}/filters/{filter_id}/backfill": {
+      "post": {
+        "summary": "Backfill a filter from its broker",
+        "description": "<b>Permission(s) required:</b> <em>Upload data (or System admin)</em><br><br>Queues a one-off ingest of the objects the broker already holds for this filter, paced to the upstream call allowance. Returns once queued, not once finished.",
+        "tags": [
+          "brokers"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BrokerFilterBackfillBody"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "filter_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
     "/api/brokers/{broker_id}/filter_modules/{name})?": {
       "get": {
         "summary": "Broker filter-building vocabulary",
@@ -2449,6 +2497,42 @@
       "get": {
         "summary": "Get your credentials for a broker",
         "description": "Reports which fields are set and how the account is routed. The credentials themselves are never returned.",
+        "tags": [
+          "brokers"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "broker_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "action",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "post": {
+        "summary": "Replay a broker's stream from the start",
+        "description": "Bumps the replay epoch, which suffixes the consumer group. The upstream holds no offset for a group it has not seen, so the next run reads from the earliest message it still retains rather than from where the last one stopped. Resets the caller's own account, or the broker's shared one when they have no credentials and administer it.",
         "tags": [
           "brokers"
         ],
@@ -35064,6 +35148,10 @@
             "type": "object",
             "additionalProperties": true
           },
+          "stream_epoch": {
+            "type": "integer",
+            "description": "Suffixes the Kafka consumer group, so bumping it replays the stream: a group the upstream has not seen before starts at the earliest retained offset instead of a stored one."
+          },
           "_altdata": {
             "type": "string",
             "description": "The credentials themselves: the upstream API token and any stream username/password. Never serialized back to a client.",
@@ -35159,6 +35247,10 @@
             "description": "Per topic, what the ingestion loop last saw of it: whether its alerts can be ingested and, when they cannot, why. A topic absent from here has had nothing consumed from it yet. Shown on the pages of the filters the topic feeds.",
             "type": "object",
             "additionalProperties": true
+          },
+          "stream_epoch": {
+            "type": "integer",
+            "description": "Suffixes the Kafka consumer group, so bumping it replays the stream: a group the upstream has not seen before starts at the earliest retained offset instead of a stored one."
           },
           "_altdata": {
             "type": "string",
@@ -88722,6 +88814,21 @@
           }
         },
         "title": "BrokerFilterValidateBody",
+        "type": "object"
+      },
+      "BrokerFilterBackfillBody": {
+        "additionalProperties": false,
+        "description": "Request body for backfilling a filter from a broker's own store.",
+        "properties": {
+          "limit": {
+            "default": null,
+            "description": "Objects to pull at most. Defaults to the instance's `brokers.backfill.limit`, which also caps this.",
+            "title": "Limit",
+            "type": "integer",
+            "nullable": true
+          }
+        },
+        "title": "BrokerFilterBackfillBody",
         "type": "object"
       },
       "BrokerFilterModuleWriteBody": {

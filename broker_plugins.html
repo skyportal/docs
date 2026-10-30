@@ -342,6 +342,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-and-how-often">3. When and how often</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-results-land">4. Where results land</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-save">5. Auto-save</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catching-up-on-what-the-stream-missed">6. Catching up on what the stream missed</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#endpoints">Endpoints</a></li>
@@ -479,6 +480,30 @@ already saved to that group are skipped. Use it only when the filter is selectiv
 enough to trust everything it passes; otherwise keep it off and tighten the
 filter’s conditions so scanning stays manageable.</p>
 </section>
+<section id="catching-up-on-what-the-stream-missed">
+<h3>6. Catching up on what the stream missed<a class="headerlink" href="#catching-up-on-what-the-stream-missed" title="Link to this heading">#</a></h3>
+<p>A stream reaches back only as far as the broker retains it (Lasair keeps roughly
+seven days), and a consumer resumes from where it last stopped. Two controls on
+the filter page cover what that leaves out, and neither needs
+<code class="docutils literal notranslate"><span class="pre">brokers.ingest_enabled</span></code>:</p>
+<ul class="simple">
+<li><p><strong>Backfill from broker</strong> runs the filter’s own saved query against the broker’s
+database and ingests each match, so it reaches past the stream’s retention.
+Each object costs one upstream call, paced by
+<code class="docutils literal notranslate"><span class="pre">brokers.backfill.min_request_interval</span></code> (45s by default, under Lasair’s allowance
+of 100 an hour) and capped at <code class="docutils literal notranslate"><span class="pre">brokers.backfill.limit</span></code> objects, so a full run
+takes hours. The <code class="docutils literal notranslate"><span class="pre">broker_backfill</span></code> service runs one at a time. Offered by
+providers that set <code class="docutils literal notranslate"><span class="pre">supports_backfill</span></code>.</p></li>
+<li><p><strong>Replay stream</strong> bumps the credential’s <code class="docutils literal notranslate"><span class="pre">stream_epoch</span></code>, which suffixes the
+Kafka consumer group. The broker holds no offset for a group it has not seen,
+so the next run starts at the earliest message it still retains. Use it after
+fixing a topic that was delivering nothing usable; a filter whose topic was
+mis-routed or on the wrong stream has alerts still sitting in the broker’s
+cache.</p></li>
+</ul>
+<p>Neither moves an existing consumer offset, so both are safe to run while
+ingestion is consuming.</p>
+</section>
 </section>
 <section id="endpoints">
 <h2>Endpoints<a class="headerlink" href="#endpoints" title="Link to this heading">#</a></h2>
@@ -496,6 +521,11 @@ difference cutouts, keyed by the candid (BOOM, Babamul) or the objectId
 (ALeRCE, ANTARES, Fink, Lasair).</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">/api/brokers/{id}/alerts/{object_id}</span></code> forms of the three object routes
 still work, for callers written against them.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/brokers/{id}/filters/{filter_id}/backfill</span></code>, queue a one-off ingest
+of what the broker still holds for a filter. Returns once queued.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">POST</span> <span class="pre">/api/brokers/{id}/credentials/replay</span></code>, read the stream again from its
+earliest retained message. Resets the caller’s own account, or the broker’s
+shared one when they have no credentials and administer it.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">GET</span> <span class="pre">/api/internal/broker_apis</span></code>, capabilities + config schema of every
 registered provider (for the frontend).</p></li>
 </ul>
@@ -569,6 +599,7 @@ that talks to any REST broker via a configured <code class="docutils literal not
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-and-how-often">3. When and how often</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#where-results-land">4. Where results land</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-save">5. Auto-save</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#catching-up-on-what-the-stream-missed">6. Catching up on what the stream missed</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#endpoints">Endpoints</a></li>
