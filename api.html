@@ -27783,6 +27783,104 @@
         }
       }
     },
+    "/api/instance_managers": {
+      "get": {
+        "summary": "Get the users managing this instance",
+        "description": "Public, so that the login page can list them.",
+        "tags": [
+          "system info"
+        ],
+        "security": [
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/InstanceManagersResponse"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "List a user as managing this instance",
+        "tags": [
+          "system info"
+        ],
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InstanceManagerPostBody"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/instance_managers/{user_id}": {
+      "patch": {
+        "summary": "Change whether the login and About pages show a manager's email",
+        "tags": [
+          "system info"
+        ],
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InstanceManagerPatchBody"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Stop listing a user as managing this instance",
+        "tags": [
+          "system info"
+        ],
+        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
     "/api/feedback/{feedback_id}": {
       "get": {
         "summary": "Retrieve messages left to the admins",
@@ -55591,6 +55689,152 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/GroupUserNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "InstanceManager": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The managing User",
+            "readOnly": true
+          },
+          "user_id": {
+            "type": "integer",
+            "description": "ID of the managing User"
+          },
+          "show_email": {
+            "type": "boolean",
+            "description": "Whether the login and About pages show the manager's email"
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "user_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleInstanceManager": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/InstanceManager"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfInstanceManagers": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InstanceManager"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "InstanceManagerNoID": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The managing User",
+            "readOnly": true
+          },
+          "user_id": {
+            "type": "integer",
+            "description": "ID of the managing User"
+          },
+          "show_email": {
+            "type": "boolean",
+            "description": "Whether the login and About pages show the manager's email"
+          }
+        },
+        "required": [
+          "user_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleInstanceManagerNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/InstanceManagerNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfInstanceManagerNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InstanceManagerNoID"
             }
           }
         },
@@ -99156,6 +99400,117 @@
           "started_at"
         ],
         "title": "DeploymentsResponse",
+        "type": "object"
+      },
+      "InstanceManagerResponse": {
+        "additionalProperties": false,
+        "description": "A user listed as managing the instance.",
+        "properties": {
+          "user_id": {
+            "title": "User Id",
+            "type": "integer"
+          },
+          "username": {
+            "default": null,
+            "description": "Only returned to signed-in users",
+            "title": "Username",
+            "type": "string",
+            "nullable": true
+          },
+          "first_name": {
+            "default": null,
+            "title": "First Name",
+            "type": "string",
+            "nullable": true
+          },
+          "last_name": {
+            "default": null,
+            "title": "Last Name",
+            "type": "string",
+            "nullable": true
+          },
+          "affiliations": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Affiliations",
+            "type": "array"
+          },
+          "gravatar_url": {
+            "title": "Gravatar Url",
+            "type": "string"
+          },
+          "show_email": {
+            "title": "Show Email",
+            "type": "boolean"
+          },
+          "email": {
+            "default": null,
+            "description": "Only when show_email is set",
+            "title": "Email",
+            "type": "string",
+            "nullable": true
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "user_id",
+          "gravatar_url",
+          "show_email",
+          "created_at"
+        ],
+        "title": "InstanceManagerResponse",
+        "type": "object"
+      },
+      "InstanceManagersResponse": {
+        "additionalProperties": false,
+        "description": "The users listed as managing the instance.",
+        "properties": {
+          "managers": {
+            "items": {
+              "$ref": "#/components/schemas/InstanceManagerResponse"
+            },
+            "title": "Managers",
+            "type": "array"
+          }
+        },
+        "title": "InstanceManagersResponse",
+        "type": "object"
+      },
+      "InstanceManagerPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for listing a user as managing the instance.",
+        "properties": {
+          "user_id": {
+            "description": "ID of the user",
+            "title": "User Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "user_id"
+        ],
+        "title": "InstanceManagerPostBody",
+        "type": "object"
+      },
+      "InstanceManagerPatchBody": {
+        "additionalProperties": false,
+        "description": "Request body for changing how a manager is shown.",
+        "properties": {
+          "show_email": {
+            "description": "Whether the login and About pages show the manager's email",
+            "title": "Show Email",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "show_email"
+        ],
+        "title": "InstanceManagerPatchBody",
         "type": "object"
       },
       "FeedbackAuthorResponse": {
