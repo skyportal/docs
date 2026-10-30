@@ -7103,6 +7103,46 @@
         ]
       }
     },
+    "/api/followup_request/{followup_request_id}/script": {
+      "get": {
+        "summary": "Download a follow-up request's observing script",
+        "description": "Render the observing script for a request, for facilities whose API builds one. The script is built from the request's current payload rather than stored, so an edited request yields a corrected script.",
+        "tags": [
+          "followup requests"
+        ],
+        "responses": {
+          "200": {
+            "description": "The observing script",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "followup_request_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
     "/api/followup_request/prioritization": {
       "put": {
         "summary": "Reprioritize followup requests",
@@ -55661,6 +55701,7 @@
               "NEWFIRMAPI",
               "RUBINMMAAPI",
               "NGPSAPI",
+              "WENDELSTEINAPI",
               null
             ],
             "maxLength": 17,
@@ -55707,6 +55748,7 @@
               "NEWFIRMAPI",
               "RUBINMMAAPI",
               "NGPSAPI",
+              "WENDELSTEINAPI",
               null
             ],
             "maxLength": 17,
@@ -56587,6 +56629,7 @@
               "NEWFIRMAPI",
               "RUBINMMAAPI",
               "NGPSAPI",
+              "WENDELSTEINAPI",
               null
             ],
             "maxLength": 17,
@@ -56633,6 +56676,7 @@
               "NEWFIRMAPI",
               "RUBINMMAAPI",
               "NGPSAPI",
+              "WENDELSTEINAPI",
               null
             ],
             "maxLength": 17,
