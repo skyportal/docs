@@ -1430,16 +1430,11 @@ specified User (or Token instance, if a token is passed).</p>
 <tr class="row-odd"><td><p><a class="reference internal" href="#baselayer.app.models.User.is_authenticated" title="baselayer.app.models.User.is_authenticated"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_authenticated</span></code></a>()</p></td>
 <td><p>Boolean flag indicating whether the User is currently authenticated.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#baselayer.app.models.User.user_model" title="baselayer.app.models.User.user_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_model</span></code></a>()</p></td>
-<td><p>The base model for User subclasses.</p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#baselayer.app.models.User.to_dict" title="baselayer.app.models.User.to_dict"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_dict</span></code></a>([private])</p></td>
+<td><p>The user's columns minus preferences.</p></td>
 </tr>
-</tbody>
-</table>
-</div>
-<div class="pst-scrollable-table-container"><table class="table">
-<tbody>
-<tr class="row-odd"><td><p><strong>to_dict</strong></p></td>
-<td></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#baselayer.app.models.User.user_model" title="baselayer.app.models.User.user_model"><code class="xref py py-obj docutils literal notranslate"><span class="pre">user_model</span></code></a>()</p></td>
+<td><p>The base model for User subclasses.</p></td>
 </tr>
 </tbody>
 </table>
@@ -1835,8 +1830,10 @@ authenticated.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="baselayer.app.models.User.to_dict">
-<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.User.to_dict" title="Link to this definition">#</a></dt>
-<dd><p>Serialize this object to a Python dictionary.</p>
+<span class="sig-name descname"><span class="pre">to_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">private</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#baselayer.app.models.User.to_dict" title="Link to this definition">#</a></dt>
+<dd><p>The user’s columns minus preferences. Unless <cite>private</cite> (for the user
+themself, user managers and server-side senders), the OAuth UID and any
+field the user does not share on their public profile are left out too.</p>
 </dd></dl>
 
 <dl class="py attribute">
