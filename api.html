@@ -28456,6 +28456,312 @@
         }
       }
     },
+    "/api/topics/feed": {
+      "get": {
+        "summary": "Read a topic feed",
+        "description": "What happened lately to the sources of a topic, or of every topic the requesting user is subscribed to: posts, human classifications, object tags, comments and spectra. Only the data the user can already access is listed. Pass the time of the oldest item received as `before` to get the ones preceding it.\n",
+        "tags": [
+          "topics"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "topic_id",
+            "required": false,
+            "description": "One topic, instead of every subscribed topic.",
+            "schema": {
+              "type": "integer",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "before",
+            "required": false,
+            "description": "Only items older than this time.",
+            "schema": {
+              "format": "date-time",
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 20,
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/TopicFeedResponse"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/topics/{topic_id}": {
+      "get": {
+        "summary": "Retrieve topics",
+        "description": "Every topic, most followed first, with whether the requesting user is subscribed to it.\n",
+        "tags": [
+          "topics"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/TopicListResponse"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "topic_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "patch": {
+        "summary": "Edit a topic",
+        "description": "Restricted to the user who created it.",
+        "tags": [
+          "topics"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TopicPatchBody"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "topic_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Delete a topic",
+        "description": "Restricted to the user who created it.",
+        "tags": [
+          "topics"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "topic_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/topics": {
+      "post": {
+        "summary": "Create a topic",
+        "description": "Sources join the topic when they are posted to it, or when they get one of its classifications or object tags. Its creator is subscribed to it.\n",
+        "tags": [
+          "topics"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TopicPostBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/TopicIdResponse"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/topics/{topic_id}/subscription": {
+      "post": {
+        "summary": "Subscribe to a topic",
+        "tags": [
+          "topics"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "topic_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      },
+      "delete": {
+        "summary": "Unsubscribe from a topic",
+        "tags": [
+          "topics"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "topic_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/topics/{topic_id}/sources": {
+      "post": {
+        "summary": "Post a source to a topic",
+        "tags": [
+          "topics"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TopicSourcePostBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/TopicIdResponse"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "topic_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ]
+      }
+    },
+    "/api/topics/{topic_id}/sources/{obj_id}": {
+      "delete": {
+        "summary": "Remove a source posted to a topic",
+        "description": "Restricted to the user who posted it and the topic creator.",
+        "tags": [
+          "topics"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "topic_id",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "obj_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
     "/api/config": {
       "get": {
         "summary": "Retrieve instance config",
@@ -85780,6 +86086,590 @@
         ],
         "additionalProperties": false
       },
+      "Topic": {
+        "type": "object",
+        "properties": {
+          "creator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User who created the topic.",
+            "readOnly": true
+          },
+          "subscriptions": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/TopicSubscription"
+            }
+          },
+          "sources": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/TopicSource"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the topic."
+          },
+          "description": {
+            "type": "string",
+            "description": "What the topic is about.",
+            "nullable": true
+          },
+          "creator_id": {
+            "type": "integer",
+            "description": "ID of the User who created the topic.",
+            "nullable": true
+          },
+          "classifications": {
+            "type": "array",
+            "description": "Human classifications that bring a source into the topic.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tag_ids": {
+            "type": "array",
+            "description": "IDs of the object tags that bring a source into the topic.",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "SingleTopic": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Topic"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfTopics": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Topic"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "TopicNoID": {
+        "type": "object",
+        "properties": {
+          "creator": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User who created the topic.",
+            "readOnly": true
+          },
+          "subscriptions": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/TopicSubscription"
+            }
+          },
+          "sources": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/TopicSource"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the topic."
+          },
+          "description": {
+            "type": "string",
+            "description": "What the topic is about.",
+            "nullable": true
+          },
+          "creator_id": {
+            "type": "integer",
+            "description": "ID of the User who created the topic.",
+            "nullable": true
+          },
+          "classifications": {
+            "type": "array",
+            "description": "Human classifications that bring a source into the topic.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tag_ids": {
+            "type": "array",
+            "description": "IDs of the object tags that bring a source into the topic.",
+            "items": {
+              "type": "integer"
+            }
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "SingleTopicNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/TopicNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfTopicNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TopicNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "TopicSource": {
+        "type": "object",
+        "properties": {
+          "topic": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Topic"
+              }
+            ],
+            "description": "The Topic.",
+            "readOnly": true
+          },
+          "obj": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Obj"
+              }
+            ],
+            "description": "The posted Obj.",
+            "readOnly": true
+          },
+          "author": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User who posted the source.",
+            "readOnly": true
+          },
+          "topic_id": {
+            "type": "integer",
+            "description": "ID of the Topic."
+          },
+          "obj_id": {
+            "type": "string",
+            "description": "ID of the posted Obj."
+          },
+          "author_id": {
+            "type": "integer",
+            "description": "ID of the User who posted the source."
+          },
+          "text": {
+            "type": "string",
+            "description": "Why the source belongs in the topic.",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "author_id",
+          "obj_id",
+          "topic_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleTopicSource": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/TopicSource"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfTopicSources": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TopicSource"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "TopicSourceNoID": {
+        "type": "object",
+        "properties": {
+          "topic": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Topic"
+              }
+            ],
+            "description": "The Topic.",
+            "readOnly": true
+          },
+          "obj": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Obj"
+              }
+            ],
+            "description": "The posted Obj.",
+            "readOnly": true
+          },
+          "author": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The User who posted the source.",
+            "readOnly": true
+          },
+          "topic_id": {
+            "type": "integer",
+            "description": "ID of the Topic."
+          },
+          "obj_id": {
+            "type": "string",
+            "description": "ID of the posted Obj."
+          },
+          "author_id": {
+            "type": "integer",
+            "description": "ID of the User who posted the source."
+          },
+          "text": {
+            "type": "string",
+            "description": "Why the source belongs in the topic.",
+            "nullable": true
+          }
+        },
+        "required": [
+          "author_id",
+          "obj_id",
+          "topic_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleTopicSourceNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/TopicSourceNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfTopicSourceNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TopicSourceNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "TopicSubscription": {
+        "type": "object",
+        "properties": {
+          "topic": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Topic"
+              }
+            ],
+            "description": "The Topic.",
+            "readOnly": true
+          },
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The subscriber.",
+            "readOnly": true
+          },
+          "topic_id": {
+            "type": "integer",
+            "description": "ID of the Topic."
+          },
+          "user_id": {
+            "type": "integer",
+            "description": "ID of the subscriber."
+          },
+          "id": {
+            "type": "integer",
+            "description": "Unique object identifier."
+          }
+        },
+        "required": [
+          "topic_id",
+          "user_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleTopicSubscription": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/TopicSubscription"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfTopicSubscriptions": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TopicSubscription"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "TopicSubscriptionNoID": {
+        "type": "object",
+        "properties": {
+          "topic": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Topic"
+              }
+            ],
+            "description": "The Topic.",
+            "readOnly": true
+          },
+          "user": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User"
+              }
+            ],
+            "description": "The subscriber.",
+            "readOnly": true
+          },
+          "topic_id": {
+            "type": "integer",
+            "description": "ID of the Topic."
+          },
+          "user_id": {
+            "type": "integer",
+            "description": "ID of the subscriber."
+          }
+        },
+        "required": [
+          "topic_id",
+          "user_id"
+        ],
+        "additionalProperties": false
+      },
+      "SingleTopicSubscriptionNoID": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "$ref": "#/components/schemas/TopicSubscriptionNoID"
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "ArrayOfTopicSubscriptionNoIDs": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "enum": [
+              "success"
+            ],
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TopicSubscriptionNoID"
+            }
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      },
       "User": {
         "type": "object",
         "properties": {
@@ -100178,6 +101068,316 @@
           }
         },
         "title": "CommentThreadListResponse",
+        "type": "object"
+      },
+      "TopicFeedItemResponse": {
+        "additionalProperties": false,
+        "description": "Something that happened to a source of a topic.",
+        "properties": {
+          "type": {
+            "enum": [
+              "post",
+              "classification",
+              "tag",
+              "comment",
+              "spectrum"
+            ],
+            "title": "Type",
+            "type": "string"
+          },
+          "id": {
+            "description": "ID of the post, classification, tag, comment or spectrum.",
+            "title": "Id",
+            "type": "integer"
+          },
+          "time": {
+            "format": "date-time",
+            "title": "Time",
+            "type": "string"
+          },
+          "obj_id": {
+            "title": "Obj Id",
+            "type": "string"
+          },
+          "author": {
+            "default": null,
+            "$ref": "#/components/schemas/DiscussionUserResponse",
+            "nullable": true
+          },
+          "text": {
+            "default": null,
+            "description": "Posts and comments.",
+            "title": "Text",
+            "type": "string",
+            "nullable": true
+          },
+          "label": {
+            "default": null,
+            "description": "The classification, the tag, or the spectrum's instrument.",
+            "title": "Label",
+            "type": "string",
+            "nullable": true
+          },
+          "topic_ids": {
+            "description": "Requested topics the source belongs to.",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Topic Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "type",
+          "id",
+          "time",
+          "obj_id"
+        ],
+        "title": "TopicFeedItemResponse",
+        "type": "object"
+      },
+      "TopicFeedResponse": {
+        "additionalProperties": false,
+        "description": "A page of a topic feed, latest first.",
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/TopicFeedItemResponse"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "has_more": {
+            "description": "Whether older items remain.",
+            "title": "Has More",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "has_more"
+        ],
+        "title": "TopicFeedResponse",
+        "type": "object"
+      },
+      "TopicResponse": {
+        "additionalProperties": false,
+        "description": "A topic, as seen by the requesting user.",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "description": {
+            "default": null,
+            "title": "Description",
+            "type": "string",
+            "nullable": true
+          },
+          "creator": {
+            "default": null,
+            "$ref": "#/components/schemas/DiscussionUserResponse",
+            "nullable": true
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "classifications": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Classifications",
+            "type": "array"
+          },
+          "tags": {
+            "items": {
+              "$ref": "#/components/schemas/TopicTagResponse"
+            },
+            "title": "Tags",
+            "type": "array"
+          },
+          "subscriber_count": {
+            "title": "Subscriber Count",
+            "type": "integer"
+          },
+          "subscribed": {
+            "title": "Subscribed",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "created_at",
+          "subscriber_count",
+          "subscribed"
+        ],
+        "title": "TopicResponse",
+        "type": "object"
+      },
+      "TopicTagResponse": {
+        "additionalProperties": false,
+        "description": "An object tag that brings sources into a topic.",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "color": {
+            "default": null,
+            "title": "Color",
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "TopicTagResponse",
+        "type": "object"
+      },
+      "TopicListResponse": {
+        "additionalProperties": false,
+        "description": "Every topic, most followed first.",
+        "properties": {
+          "topics": {
+            "items": {
+              "$ref": "#/components/schemas/TopicResponse"
+            },
+            "title": "Topics",
+            "type": "array"
+          }
+        },
+        "title": "TopicListResponse",
+        "type": "object"
+      },
+      "TopicPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for creating a topic.",
+        "properties": {
+          "name": {
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Name",
+            "type": "string"
+          },
+          "description": {
+            "default": null,
+            "title": "Description",
+            "maxLength": 2000,
+            "type": "string",
+            "nullable": true
+          },
+          "classifications": {
+            "description": "Human classifications that bring a source into the topic.",
+            "items": {
+              "type": "string"
+            },
+            "title": "Classifications",
+            "type": "array"
+          },
+          "tag_ids": {
+            "description": "Object tags that bring a source into the topic.",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Tag Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "title": "TopicPostBody",
+        "type": "object"
+      },
+      "TopicIdResponse": {
+        "additionalProperties": false,
+        "description": "The ID of the created record.",
+        "properties": {
+          "id": {
+            "title": "Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "title": "TopicIdResponse",
+        "type": "object"
+      },
+      "TopicPatchBody": {
+        "additionalProperties": false,
+        "description": "Request body for editing a topic. Restricted to its creator.",
+        "properties": {
+          "name": {
+            "default": null,
+            "title": "Name",
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "default": null,
+            "title": "Description",
+            "maxLength": 2000,
+            "type": "string",
+            "nullable": true
+          },
+          "classifications": {
+            "default": null,
+            "title": "Classifications",
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "nullable": true
+          },
+          "tag_ids": {
+            "default": null,
+            "title": "Tag Ids",
+            "items": {
+              "type": "integer"
+            },
+            "type": "array",
+            "nullable": true
+          }
+        },
+        "title": "TopicPatchBody",
+        "type": "object"
+      },
+      "TopicSourcePostBody": {
+        "additionalProperties": false,
+        "description": "Request body for posting a source to a topic.",
+        "properties": {
+          "obj_id": {
+            "minLength": 1,
+            "title": "Obj Id",
+            "type": "string"
+          },
+          "text": {
+            "default": null,
+            "title": "Text",
+            "maxLength": 2000,
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "required": [
+          "obj_id"
+        ],
+        "title": "TopicSourcePostBody",
         "type": "object"
       },
       "AssistantConversationPatchBody": {
