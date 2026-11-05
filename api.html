@@ -36525,7 +36525,7 @@
           },
           "status": {
             "type": "string",
-            "description": "Status of the assignment [done, not done, pending]."
+            "description": "Status of the assignment [complete, not observed, pending]."
           },
           "priority": {
             "enum": [
@@ -36675,7 +36675,7 @@
           },
           "status": {
             "type": "string",
-            "description": "Status of the assignment [done, not done, pending]."
+            "description": "Status of the assignment [complete, not observed, pending]."
           },
           "priority": {
             "enum": [
@@ -56423,6 +56423,11 @@
             "description": "Observer to credit on a TNS report when a spectrum from this instrument names none. A robotic instrument observes nothing by hand, so its spectra arrive without an observer, and TNS refuses a classification report that leaves the field empty.",
             "nullable": true
           },
+          "tns_classification_authors": {
+            "type": "string",
+            "description": "Authors credited after the classifier on a TNS classification report of a spectrum from this instrument, e.g. 'Jesper Sollerman (SU)'.",
+            "nullable": true
+          },
           "across_id": {
             "type": "string",
             "description": "NASA ACROSS instrument UUID, used to route visibility queries to the ACROSS calculator. See https://across.sciencecloud.nasa.gov",
@@ -57349,6 +57354,11 @@
           "default_observer": {
             "type": "string",
             "description": "Observer to credit on a TNS report when a spectrum from this instrument names none. A robotic instrument observes nothing by hand, so its spectra arrive without an observer, and TNS refuses a classification report that leaves the field empty.",
+            "nullable": true
+          },
+          "tns_classification_authors": {
+            "type": "string",
+            "description": "Authors credited after the classifier on a TNS classification report of a spectrum from this instrument, e.g. 'Jesper Sollerman (SU)'.",
             "nullable": true
           },
           "across_id": {
@@ -94623,6 +94633,13 @@
             "type": "string",
             "nullable": true
           },
+          "tns_classification_authors": {
+            "default": null,
+            "description": "Authors credited after the classifier on a TNS classification report of a spectrum from this instrument, e.g. 'Jesper Sollerman (SU)'.",
+            "title": "Tns Classification Authors",
+            "type": "string",
+            "nullable": true
+          },
           "across_id": {
             "default": null,
             "description": "NASA ACROSS instrument UUID.",
@@ -94863,6 +94880,13 @@
             "default": null,
             "description": "Observer credited on a TNS report when a spectrum from this instrument names none, e.g. 'SEDmRobot' for a robotic instrument. TNS refuses a classification report with the field empty.",
             "title": "Default Observer",
+            "type": "string",
+            "nullable": true
+          },
+          "tns_classification_authors": {
+            "default": null,
+            "description": "Authors credited after the classifier on a TNS classification report of a spectrum from this instrument, e.g. 'Jesper Sollerman (SU)'.",
+            "title": "Tns Classification Authors",
             "type": "string",
             "nullable": true
           },
