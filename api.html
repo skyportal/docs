@@ -9647,6 +9647,55 @@
         ]
       }
     },
+    "/api/moving_object/track/{track_id}/known": {
+      "post": {
+        "summary": "Check a track against the known small bodies",
+        "description": "Start a JPL check of whether a track is an already-known small body\nand return at once, since JPL takes minutes to answer. The verdict is\npushed to the requester's browser as skyportal/TRACK_KNOWN_OBJECT.\n",
+        "tags": [
+          "moving objects"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MovingObjectTrackKnownPostBody"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "track_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
     "/api/moving_object/track/{track_id}": {
       "get": {
         "summary": "Get a linked track and its detections",
@@ -92846,6 +92895,28 @@
           "broker_id"
         ],
         "title": "MovingObjectTrackMPCPostBody",
+        "type": "object"
+      },
+      "MovingObjectTrackKnownPostBody": {
+        "additionalProperties": false,
+        "description": "Request body for checking a track against the known small bodies.",
+        "properties": {
+          "broker_id": {
+            "description": "Broker the track is fetched from.",
+            "title": "Broker Id",
+            "type": "integer"
+          },
+          "survey": {
+            "default": "ZTF",
+            "description": "Survey the track is from.",
+            "title": "Survey",
+            "type": "string"
+          }
+        },
+        "required": [
+          "broker_id"
+        ],
+        "title": "MovingObjectTrackKnownPostBody",
         "type": "object"
       },
       "EarthquakePostBody": {
