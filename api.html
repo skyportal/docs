@@ -28107,7 +28107,7 @@
     "/api/feedback/{feedback_id}/replies": {
       "post": {
         "summary": "Reply to a message left to the admins",
-        "description": "<b>Permission(s) required:</b> <em>System admin (or System admin)</em><br><br>The author of the message is notified.",
+        "description": "Admins can reply to any message, users to their own. The other side is notified.",
         "tags": [
           "system info"
         ],
@@ -43810,7 +43810,7 @@
                 "$ref": "#/components/schemas/User"
               }
             ],
-            "description": "The admin who replied",
+            "description": "The User who replied",
             "readOnly": true
           },
           "feedback_id": {
@@ -43819,7 +43819,7 @@
           },
           "author_id": {
             "type": "integer",
-            "description": "ID of the admin who replied"
+            "description": "ID of the User who replied"
           },
           "text": {
             "type": "string",
@@ -43900,7 +43900,7 @@
                 "$ref": "#/components/schemas/User"
               }
             ],
-            "description": "The admin who replied",
+            "description": "The User who replied",
             "readOnly": true
           },
           "feedback_id": {
@@ -43909,7 +43909,7 @@
           },
           "author_id": {
             "type": "integer",
-            "description": "ID of the admin who replied"
+            "description": "ID of the User who replied"
           },
           "text": {
             "type": "string",
@@ -100740,7 +100740,7 @@
       },
       "FeedbackReplyResponse": {
         "additionalProperties": false,
-        "description": "An admin's reply to a message.",
+        "description": "A reply to a message, from an admin or its author.",
         "properties": {
           "id": {
             "title": "Id",
@@ -100892,7 +100892,7 @@
       },
       "FeedbackReplyPostBody": {
         "additionalProperties": false,
-        "description": "Request body for an admin replying to a message.",
+        "description": "Request body for replying to a message, as an admin or its author.",
         "properties": {
           "text": {
             "description": "The reply",
