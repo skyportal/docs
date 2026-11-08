@@ -37708,6 +37708,11 @@
             },
             "nullable": true
           },
+          "private_version_id": {
+            "type": "integer",
+            "description": "ID of the comment this one is the public version of.",
+            "nullable": true
+          },
           "obj_id": {
             "type": "string",
             "description": "ID of the Comment's Obj."
@@ -37852,6 +37857,11 @@
             "items": {
               "type": "integer"
             },
+            "nullable": true
+          },
+          "private_version_id": {
+            "type": "integer",
+            "description": "ID of the comment this one is the public version of.",
             "nullable": true
           },
           "obj_id": {
@@ -92522,6 +92532,13 @@
               "type": "integer"
             },
             "type": "array",
+            "nullable": true
+          },
+          "public_text": {
+            "default": null,
+            "description": "Public version of the comment, posted with it for users who do not have access to all of stream_ids. Only used for comments on sources.",
+            "title": "Public Text",
+            "type": "string",
             "nullable": true
           },
           "origin": {
