@@ -24699,6 +24699,37 @@
           },
           {
             "in": "query",
+            "name": "analysisServiceIds",
+            "required": false,
+            "description": "If provided, return only sources with at least one analysis from one of these analysis services (IDs from /api/analysis_service)",
+            "schema": {
+              "items": {
+                "type": "integer"
+              },
+              "type": "array",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
+            "name": "analysisStatus",
+            "required": false,
+            "description": "If provided, return only sources with at least one analysis in this status, e.g. completed. Combines with analysisServiceIds: the same analysis must match both.",
+            "schema": {
+              "enum": [
+                "queued",
+                "pending",
+                "completed",
+                "failure",
+                "cancelled",
+                "timed_out"
+              ],
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "in": "query",
             "name": "createdOrModifiedAfter",
             "required": false,
             "description": "Arrow-parseable date-time string (e.g. 2020-01-01 or 2020-01-01T00:00:00 or 2020-01-01T00:00:00+00:00). If provided, filter by created_at or modified > createdOrModifiedAfter",
