@@ -92896,6 +92896,34 @@
             "title": "Objectid",
             "type": "string",
             "nullable": true
+          },
+          "residual_ra": {
+            "default": null,
+            "description": "Observed minus computed RA from the track's orbit, on a great circle, in arcsec.",
+            "title": "Residual Ra",
+            "type": "number",
+            "nullable": true
+          },
+          "residual_dec": {
+            "default": null,
+            "description": "Observed minus computed Dec from the track's orbit, in arcsec.",
+            "title": "Residual Dec",
+            "type": "number",
+            "nullable": true
+          },
+          "fwhm_ratio": {
+            "default": null,
+            "description": "Source FWHM over the PSF FWHM of its exposure, unset when trailed.",
+            "title": "Fwhm Ratio",
+            "type": "number",
+            "nullable": true
+          },
+          "classtar": {
+            "default": null,
+            "description": "SExtractor star/galaxy score of the detection.",
+            "title": "Classtar",
+            "type": "number",
+            "nullable": true
           }
         },
         "required": [
