@@ -420,9 +420,8 @@ and leaves the passthrough on for every other object.</p></li>
 photometry passthrough runs on every source page view under a 10s bound, so a
 provider whose object fetch cannot meet that sets <code class="docutils literal notranslate"><span class="pre">photometry_passthrough</span> <span class="pre">=</span> <span class="pre">False</span></code> and stops advertising the capability. ANTARES (walks its whole paginated
 alert history) and Pitt-Google (bills the deployment for a BigQuery job per view)
-opt out. Lasair advertises it, but its API is throttled per token per hour (100
-calls for a user token, 10,000 for a power user), so only pick it as the
-photometry default on a power-user token.</p>
+opt out. Lasair advertises it, and reads the object from BOOM rather than from
+Lasair.</p>
 <p>Ingestion (broker → SkyPortal): <code class="docutils literal notranslate"><span class="pre">run_ingestion</span></code>, a long-lived consumer/poller
 (see “Ingestion and filters” below).</p>
 </section>
@@ -489,11 +488,10 @@ the filter page cover what that leaves out, and neither needs
 <ul class="simple">
 <li><p><strong>Backfill from broker</strong> runs the filter’s own saved query against the broker’s
 database and ingests each match, so it reaches past the stream’s retention.
-Each object costs one upstream call, paced by
-<code class="docutils literal notranslate"><span class="pre">brokers.backfill.min_request_interval</span></code> (45s by default, under Lasair’s allowance
-of 100 an hour) and capped at <code class="docutils literal notranslate"><span class="pre">brokers.backfill.limit</span></code> objects, so a full run
-takes hours. The <code class="docutils literal notranslate"><span class="pre">broker_backfill</span></code> service runs one at a time. Offered by
-providers that set <code class="docutils literal notranslate"><span class="pre">supports_backfill</span></code>.</p></li>
+For Lasair that is one query on the requesting user’s own token, with each
+match’s photometry and cutouts read from BOOM, capped at
+<code class="docutils literal notranslate"><span class="pre">brokers.backfill.limit</span></code> objects. The <code class="docutils literal notranslate"><span class="pre">broker_backfill</span></code> service runs one at a
+time. Offered by providers that set <code class="docutils literal notranslate"><span class="pre">supports_backfill</span></code>.</p></li>
 <li><p><strong>Replay stream</strong> bumps the credential’s <code class="docutils literal notranslate"><span class="pre">stream_epoch</span></code>, which suffixes the
 Kafka consumer group. The broker holds no offset for a group it has not seen,
 so the next run starts at the earliest message it still retains. Use it after
