@@ -3523,6 +3523,46 @@
         ]
       }
     },
+    "/api/brokers/hosts": {
+      "get": {
+        "summary": "Get the host galaxies of objects via the default broker",
+        "description": "Best host galaxy the broker flagged ``default_crossmatch`` associated\nwith each object the requester can read, keyed by object id. Objects\nwithout a host are left out, and the result is null when no such\nbroker serves hosts or it cannot be reached.\n",
+        "tags": [
+          "brokers"
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "query",
+            "name": "objectIds",
+            "required": true,
+            "description": "Comma-separated object ids.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
     "/api/brokers/{broker_id}/objects/{object_id}/save": {
       "post": {
         "summary": "Save a broker object as a source",
