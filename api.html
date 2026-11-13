@@ -12875,6 +12875,72 @@
         ]
       }
     },
+    "/api/sources/{obj_id}/similar": {
+      "get": {
+        "summary": "Get an object's nearest neighbors",
+        "description": "Objects closest to this one in a broker's embedding space (BOOM's AppleCiDEr embeddings), limited to the programs the requester's streams grant. Each neighbor carries its redshift and latest human classification when the requester can read it here.",
+        "tags": [
+          "sources",
+          "brokers"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "obj_id",
+            "required": true,
+            "description": "Object whose neighbors to find.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "topK",
+            "required": false,
+            "description": "Neighbors to return.",
+            "schema": {
+              "default": 10,
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "brokerId",
+            "required": false,
+            "description": "Broker to search. Defaults to the first active broker that serves similarity search.",
+            "schema": {
+              "type": "integer",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/Success"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "data": {
+                          "$ref": "#/components/schemas/SimilarSourcesResponse"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/phot_stats": {
       "get": {
         "summary": "Get counts of sources w/ and w/o PhotStats",
@@ -93904,6 +93970,117 @@
           "status"
         ],
         "title": "GcnEventObjPatchBody",
+        "type": "object"
+      },
+      "NeighborClassification": {
+        "additionalProperties": false,
+        "description": "The most recent human classification of a neighbor.",
+        "properties": {
+          "classification": {
+            "title": "Classification",
+            "type": "string"
+          },
+          "probability": {
+            "default": null,
+            "title": "Probability",
+            "type": "number",
+            "nullable": true
+          },
+          "taxonomy_id": {
+            "title": "Taxonomy Id",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "classification",
+          "taxonomy_id"
+        ],
+        "title": "NeighborClassification",
+        "type": "object"
+      },
+      "SimilarSourceResponse": {
+        "additionalProperties": false,
+        "description": "One neighbor of an object in the broker's embedding space.",
+        "properties": {
+          "obj_id": {
+            "title": "Obj Id",
+            "type": "string"
+          },
+          "score": {
+            "description": "Cosine similarity, higher is closer.",
+            "title": "Score",
+            "type": "number"
+          },
+          "jd": {
+            "default": null,
+            "description": "JD of the alert the embedding came from.",
+            "title": "Jd",
+            "type": "number",
+            "nullable": true
+          },
+          "model_label": {
+            "default": null,
+            "description": "The broker model's class for the neighbor.",
+            "title": "Model Label",
+            "type": "string",
+            "nullable": true
+          },
+          "model_probability": {
+            "default": null,
+            "title": "Model Probability",
+            "type": "number",
+            "nullable": true
+          },
+          "in_skyportal": {
+            "description": "Whether the requester can read this object here.",
+            "title": "In Skyportal",
+            "type": "boolean"
+          },
+          "redshift": {
+            "default": null,
+            "title": "Redshift",
+            "type": "number",
+            "nullable": true
+          },
+          "classification": {
+            "default": null,
+            "$ref": "#/components/schemas/NeighborClassification",
+            "nullable": true
+          }
+        },
+        "required": [
+          "obj_id",
+          "score",
+          "in_skyportal"
+        ],
+        "title": "SimilarSourceResponse",
+        "type": "object"
+      },
+      "SimilarSourcesResponse": {
+        "additionalProperties": false,
+        "description": "An object's nearest neighbors, best first.",
+        "properties": {
+          "obj_id": {
+            "title": "Obj Id",
+            "type": "string"
+          },
+          "broker_id": {
+            "title": "Broker Id",
+            "type": "integer"
+          },
+          "neighbors": {
+            "items": {
+              "$ref": "#/components/schemas/SimilarSourceResponse"
+            },
+            "title": "Neighbors",
+            "type": "array"
+          }
+        },
+        "required": [
+          "obj_id",
+          "broker_id"
+        ],
+        "title": "SimilarSourcesResponse",
         "type": "object"
       },
       "LocalizationHandlerGet": {
