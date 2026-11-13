@@ -93106,6 +93106,17 @@
             "title": "Submitter",
             "type": "string",
             "nullable": true
+          },
+          "submission_type": {
+            "default": "regular",
+            "description": "MPC channel the track goes to: the regular one, NEO candidates or new comets.",
+            "enum": [
+              "regular",
+              "neo_candidate",
+              "new_comet"
+            ],
+            "title": "Submission Type",
+            "type": "string"
           }
         },
         "required": [
