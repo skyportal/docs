@@ -34823,6 +34823,16 @@
           "comment": {
             "type": "string",
             "description": "An optional comment describing the request."
+          },
+          "purpose": {
+            "type": "string",
+            "enum": [
+              "classification",
+              "follow-up",
+              null
+            ],
+            "description": "Purpose of the assignment.",
+            "nullable": true
           }
         },
         "required": [
@@ -36811,6 +36821,11 @@
             "description": "Priority of the request (1 = lowest, 5 = highest).",
             "type": "string"
           },
+          "purpose": {
+            "type": "string",
+            "description": "Purpose of the assignment [classification, follow-up].",
+            "nullable": true
+          },
           "run_id": {
             "type": "integer",
             "description": "ID of the ObservingRun this target was assigned to."
@@ -36960,6 +36975,11 @@
             "maxLength": 1,
             "description": "Priority of the request (1 = lowest, 5 = highest).",
             "type": "string"
+          },
+          "purpose": {
+            "type": "string",
+            "description": "Purpose of the assignment [classification, follow-up].",
+            "nullable": true
           },
           "run_id": {
             "type": "integer",
@@ -90171,6 +90191,17 @@
             "title": "Comment",
             "type": "string",
             "nullable": true
+          },
+          "purpose": {
+            "default": null,
+            "description": "Purpose of the assignment.",
+            "title": "Purpose",
+            "enum": [
+              "classification",
+              "follow-up"
+            ],
+            "type": "string",
+            "nullable": true
           }
         },
         "required": [
@@ -90232,6 +90263,17 @@
             "default": null,
             "description": "An optional comment describing the request.",
             "title": "Comment",
+            "type": "string",
+            "nullable": true
+          },
+          "purpose": {
+            "default": null,
+            "description": "Purpose of the assignment.",
+            "title": "Purpose",
+            "enum": [
+              "classification",
+              "follow-up"
+            ],
             "type": "string",
             "nullable": true
           }
@@ -93102,8 +93144,23 @@
           },
           "submitter": {
             "default": null,
-            "description": "Name the submission is filed under, as the MPC writes it (\"Q. Ye\"). Defaults to the requester's.",
+            "description": "Name the submission is filed under, as the MPC writes it (\"Q. Ye\"). Defaults to the sharing service's first MPC submitter, else the requester's.",
             "title": "Submitter",
+            "type": "string",
+            "nullable": true
+          },
+          "exclude_candids": {
+            "description": "Detections the reviewer left out of the submission.",
+            "items": {
+              "type": "string"
+            },
+            "title": "Exclude Candids",
+            "type": "array"
+          },
+          "psv": {
+            "default": null,
+            "description": "The PSV as the reviewer edited it, sent instead of the generated one.",
+            "title": "Psv",
             "type": "string",
             "nullable": true
           },
